@@ -1176,6 +1176,11 @@ components:
         name:
           description: The function name in the script project.
           type: string
+        parameters:
+          description: The ordered list of parameter names of the function in the script project.
+          items:
+            type: string
+          type: array
       type: object
     GoogleAppsScriptTypeFunctionSet:
       description: A set of functions. No duplicates are permitted.

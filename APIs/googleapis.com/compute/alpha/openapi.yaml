@@ -48660,6 +48660,7 @@ components:
             - RANDOM
             - RING_HASH
             - ROUND_ROBIN
+            - WEIGHTED_MAGLEV
           type: string
         logConfig:
           $ref: "#/components/schemas/BackendServiceLogConfig"
@@ -57593,7 +57594,7 @@ components:
     LocationPolicyLocation:
       properties:
         preference:
-          description: "Preference for a given location: ALLOW or DENY."
+          description: Preference for a given location.
           enum:
             - ALLOW
             - DENY
@@ -62218,6 +62219,7 @@ components:
             - COMMITTED_E2_CPUS
             - COMMITTED_LICENSES
             - COMMITTED_LOCAL_SSD_TOTAL_GB
+            - COMMITTED_M3_CPUS
             - COMMITTED_MEMORY_OPTIMIZED_CPUS
             - COMMITTED_N2A_CPUS
             - COMMITTED_N2D_CPUS
@@ -62267,6 +62269,7 @@ components:
             - LOCAL_SSD_TOTAL_GB
             - M1_CPUS
             - M2_CPUS
+            - M3_CPUS
             - MACHINE_IMAGES
             - N2A_CPUS
             - N2D_CPUS
@@ -64140,6 +64143,15 @@ components:
           description: The priority of this route. Priority is used to break ties in cases where there is more than one matching route of equal prefix length. In cases where multiple routes have equal prefix length, the one with the lowest-numbered priority value wins. The default value is `1000`. The priority value must be from `0` to `65535`, inclusive.
           format: uint32
           type: integer
+        routeStatus:
+          description: "[Output only] The status of the route."
+          enum:
+            - ACTIVE
+            - DROPPED
+            - INACTIVE
+            - PENDING
+            - UNKNOWN_ROUTE_STATUS
+          type: string
         routeType:
           description: "[Output Only] The type of this route, which can be one of the following values: - 'TRANSIT' for a transit route that this router learned from another Cloud Router and will readvertise to one of its BGP peers - 'SUBNET' for a route from a subnet of the VPC - 'BGP' for a route learned from a BGP peer of this router - 'STATIC' for a static route"
           enum:

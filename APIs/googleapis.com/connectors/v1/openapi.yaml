@@ -6,7 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: ""
+  description: Enables users to create and manage connections to Google Cloud services and third-party business applications using the Connectors interface.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -1112,6 +1112,15 @@ components:
           description: Output only. Resource labels to represent user-provided metadata. Refer to cloud documentation on labels for more details. https://cloud.google.com/compute/docs/labeling-resources
           readOnly: true
           type: object
+        launchStage:
+          description: Output only. Flag to mark the version indicating the launch stage.
+          enum:
+            - LAUNCH_STAGE_UNSPECIFIED
+            - PREVIEW
+            - GA
+            - DEPRECATED
+          readOnly: true
+          type: string
         name:
           description: "Output only. Resource name of the Connector. Format: projects/{project}/locations/{location}/providers/{provider}/connectors/{connector}"
           readOnly: true
@@ -1676,6 +1685,15 @@ components:
           description: Output only. Resource labels to represent user-provided metadata. Refer to cloud documentation on labels for more details. https://cloud.google.com/compute/docs/labeling-resources
           readOnly: true
           type: object
+        launchStage:
+          description: Output only. Flag to mark the version indicating the launch stage.
+          enum:
+            - LAUNCH_STAGE_UNSPECIFIED
+            - PREVIEW
+            - GA
+            - DEPRECATED
+          readOnly: true
+          type: string
         name:
           description: "Output only. Resource name of the Provider. Format: projects/{project}/locations/{location}/providers/{provider}"
           readOnly: true

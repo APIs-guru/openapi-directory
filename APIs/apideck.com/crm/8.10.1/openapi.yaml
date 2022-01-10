@@ -5083,6 +5083,29 @@ components:
         - operation
         - data
       type: object
+    CrmEventType:
+      enum:
+        - "*"
+        - crm.activity.created
+        - crm.activity.updated
+        - crm.activity.deleted
+        - crm.company.created
+        - crm.company.updated
+        - crm.company.deleted
+        - crm.contact.created
+        - crm.contact.updated
+        - crm.contact.deleted
+        - crm.lead.created
+        - crm.lead.updated
+        - crm.lead.deleted
+        - crm.note.created
+        - crm.note.updated
+        - crm.note.deleted
+        - crm.opportunity.created
+        - crm.opportunity.updated
+        - crm.opportunity.deleted
+      example: crm.company.created
+      type: string
     Currency:
       description: Indicates the associated currency for an amount of money. Values correspond to [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
       enum:
@@ -5949,29 +5972,6 @@ components:
       required:
         - email
       type: object
-    EventType:
-      enum:
-        - "*"
-        - crm.activity.created
-        - crm.activity.updated
-        - crm.activity.deleted
-        - crm.company.created
-        - crm.company.updated
-        - crm.company.deleted
-        - crm.contact.created
-        - crm.contact.updated
-        - crm.contact.deleted
-        - crm.lead.created
-        - crm.lead.updated
-        - crm.lead.deleted
-        - crm.note.created
-        - crm.note.updated
-        - crm.note.deleted
-        - crm.opportunity.created
-        - crm.opportunity.updated
-        - crm.opportunity.deleted
-      example: crm.company.created
-      type: string
     GetActivitiesResponse:
       properties:
         data:
@@ -7728,7 +7728,7 @@ components:
           type: object
         - properties:
             event_type:
-              $ref: "#/components/schemas/EventType"
+              $ref: "#/components/schemas/CrmEventType"
           type: object
       x-sdk-exclude: true
     Website:

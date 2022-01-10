@@ -790,7 +790,7 @@ components:
             $ref: "#/components/schemas/ManagedProperty"
           type: array
         name:
-          description: The name of the app in the form enterprises/{enterpriseId}/applications/{package_name}.
+          description: The name of the app in the form enterprises/{enterprise}/applications/{package_name}.
           type: string
         permissions:
           description: The permissions required by the app.
@@ -2216,6 +2216,14 @@ components:
         bluetoothDisabled:
           description: Whether bluetooth is disabled. Prefer this setting over bluetooth_config_disabled because bluetooth_config_disabled can be bypassed by the user.
           type: boolean
+        cameraAccess:
+          description: Controls the use of the camera and whether the user has access to the camera access toggle.
+          enum:
+            - CAMERA_ACCESS_UNSPECIFIED
+            - CAMERA_ACCESS_USER_CHOICE
+            - CAMERA_ACCESS_DISABLED
+            - CAMERA_ACCESS_ENFORCED
+          type: string
         cameraDisabled:
           description: Whether all cameras on the device are disabled.
           type: boolean
@@ -2329,6 +2337,14 @@ components:
         maximumTimeToLock:
           description: Maximum time in milliseconds for user activity until the device locks. A value of 0 means there is no restriction.
           format: int64
+          type: string
+        microphoneAccess:
+          description: Controls the use of the microphone and whether the user has access to the microphone access toggle. This applies only on fully managed devices.
+          enum:
+            - MICROPHONE_ACCESS_UNSPECIFIED
+            - MICROPHONE_ACCESS_USER_CHOICE
+            - MICROPHONE_ACCESS_DISABLED
+            - MICROPHONE_ACCESS_ENFORCED
           type: string
         minimumApiLevel:
           description: The minimum allowed Android API level.

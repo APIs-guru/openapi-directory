@@ -34,16 +34,16 @@ tags:
 paths:
   "/v2/{name}":
     delete:
-      description: Deletes a Service. This will cause the Service to stop serving traffic and will delete all revisions.
-      operationId: run.projects.locations.services.delete
+      description: Delete a Revision.
+      operationId: run.projects.locations.services.revisions.delete
       parameters:
-        - description: "Required. The full name of the Service. Format: projects/{projectnumber}/locations/{location}/services/{service}"
+        - description: "Required. The name of the Revision to delete. Format: projects/{project}/locations/{location}/services/{service}/revisions/{revision}"
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: A system-generated fingerprint for this version of the resource. May be used to detect modification conflict during updates.
+        - description: A system-generated fingerprint for this version of the resource. This may be used to detect modification conflict during updates.
           in: query
           name: etag
           schema:
@@ -68,10 +68,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets information about a Service.
-      operationId: run.projects.locations.services.get
+      description: Gets information about a Revision.
+      operationId: run.projects.locations.services.revisions.get
       parameters:
-        - description: "Required. The full name of the Service. Format: projects/{projectnumber}/locations/{location}/services/{service}"
+        - description: "Required. The full name of the Revision. Format: projects/{project}/locations/{location}/services/{service}/revisions/{revision}"
           in: path
           name: name
           required: true
@@ -82,7 +82,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudRunOpV2Service"
+                $ref: "#/components/schemas/GoogleCloudRunOpV2Revision"
           description: Successful response
       security:
         - Oauth2:
@@ -113,7 +113,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: / If set to true, and if the Service does not exist, it will create a new one. Caller must have both create and update permissions for this call if this is set to true.
+        - description: If set to true, and if the Service does not exist, it will create a new one. Caller must have both create and update permissions for this call if this is set to true.
           in: query
           name: allowMissing
           schema:
@@ -199,7 +199,46 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{name}:undelete":
+  "/v2/{parent}/revisions":
+    get:
+      description: List Revisions from a given Service, or from a given location.
+      operationId: run.projects.locations.services.revisions.list
+      parameters:
+        - description: 'Required. The Service from which the Revisions should be listed. To list all Revisions across Services, use "-" instead of Service name. Format: projects/{project}/locations/{location}/services/{service}'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of revisions to return in this call.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token received from a previous call to ListRevisions. All other parameters must match.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: If true, returns deleted (but unexpired) resources along with active ones.
+          in: query
+          name: showDeleted
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudRunOpV2ListRevisionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -212,35 +251,6 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Undeletes a Service.
-      operationId: run.projects.locations.services.undelete
-      parameters:
-        - description: "Required. The full name of the Service. Format: projects/{projectnumber}/locations/{location}/services/{service}"
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudRunOpV2UndeleteServiceRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleLongrunningOperation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
   "/v2/{parent}/services":
     get:
       description: List Services.
@@ -697,6 +707,16 @@ components:
           description: If specified, used to specify which protocol to use. Allowed values are "http1" and "h2c".
           type: string
       type: object
+    GoogleCloudRunOpV2ContainerStatus:
+      description: ContainerStatus holds the information of container name and image digest value.
+      properties:
+        imageDigest:
+          description: ImageDigest holds the resolved digest for the image specified, regardless of whether a tag or digest was originally specified in the Container object.
+          type: string
+        name:
+          description: The name of the container, if specified.
+          type: string
+      type: object
     GoogleCloudRunOpV2EnvVar:
       description: EnvVar represents an environment variable present in a Container.
       properties:
@@ -716,6 +736,18 @@ components:
         secretKeyRef:
           $ref: "#/components/schemas/GoogleCloudRunOpV2SecretKeySelector"
           description: Selects a secret and a specific version from Cloud Secret Manager.
+      type: object
+    GoogleCloudRunOpV2ListRevisionsResponse:
+      description: Response message containing a list of Revisions.
+      properties:
+        nextPageToken:
+          description: A token indicating there are more items than page_size. Use it in the next ListRevisions request to continue.
+          type: string
+        revisions:
+          description: The resulting list of Revisions.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRunOpV2Revision"
+          type: array
       type: object
     GoogleCloudRunOpV2ListServicesResponse:
       description: Response message containing a list of Services.
@@ -740,6 +772,138 @@ components:
             type: string
           description: "Only memory and CPU are supported. Note: The only supported values for CPU are '1', '2', and '4'. Setting 4 CPU requires at least 2Gi of memory. The values of the map is string form of the 'quantity' k8s type: https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/api/resource/quantity.go"
           type: object
+      type: object
+    GoogleCloudRunOpV2Revision:
+      description: A Revision is an immutable snapshot of code and configuration. A Revision references a container image. Revisions are only created by updates to its parent Service.
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: KRM-style annotations for the resource.
+          type: object
+        conditions:
+          description: Output only. The Condition of this Revision, containing its readiness status, and detailed error information in case it did not reach a serving state.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRunOpV2Condition"
+          readOnly: true
+          type: array
+        confidential:
+          description: Indicates whether Confidential Cloud Run is enabled in this Revision.
+          type: boolean
+        containerConcurrency:
+          description: Sets the maximum number of requests that each serving instance can receive.
+          format: int32
+          type: integer
+        containerStatuses:
+          description: Output only. Status information for each of the containers specified.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRunOpV2ContainerStatus"
+          readOnly: true
+          type: array
+        containers:
+          description: Holds the single container that defines the unit of execution for this Revision.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRunOpV2Container"
+          type: array
+        createTime:
+          description: Output only. The creation time.
+          format: google-datetime
+          readOnly: true
+          type: string
+        deleteTime:
+          description: Output only. For a deleted resource, the deletion time. It is only populated as a response to a Delete request.
+          format: google-datetime
+          readOnly: true
+          type: string
+        encryptionKey:
+          description: A reference to a customer managed encryption key (CMEK) to use to encrypt this container image. For more information, go to https://cloud.google.com/run/docs/securing/using-cmek
+          type: string
+        etag:
+          description: Output only. A system-generated fingerprint for this version of the resource. May be used to detect modification conflict during updates.
+          readOnly: true
+          type: string
+        executionEnvironment:
+          description: The execution environment being used to host this Revision.
+          enum:
+            - EXECUTION_ENVIRONMENT_UNSPECIFIED
+            - EXECUTION_ENVIRONMENT_DEFAULT
+            - EXECUTION_ENVIRONMENT_GEN2
+          type: string
+        expireTime:
+          description: Output only. For a deleted resource, the time after which it will be permamently deleted. It is only populated as a response to a Delete request.
+          format: google-datetime
+          readOnly: true
+          type: string
+        generation:
+          description: Output only. A number that monotonically increases every time the user modifies the desired state.
+          format: int64
+          readOnly: true
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: KRM-style labels for the resource. User-provided labels are shared with Google's billing system, so they can be used to filter, or break down billing charges by team, component, environment, state, etc. For more information, visit https://cloud.google.com/resource-manager/docs/creating-managing-labels or https://cloud.google.com/run/docs/configuring/labels Cloud Run will populate some labels with 'run.googleapis.com' or 'serving.knative.dev' namespaces. Those labels are read-only, and user changes will not be preserved.
+          type: object
+        launchStage:
+          description: Set the launch stage to a preview stage on write to allow use of preview features in that stage. On read, describes whether the resource uses preview features. Launch Stages are defined at [Google Cloud Platform Launch Stages](http://cloud.google.com/terms/launch-stages).
+          enum:
+            - LAUNCH_STAGE_UNSPECIFIED
+            - UNIMPLEMENTED
+            - PRELAUNCH
+            - EARLY_ACCESS
+            - ALPHA
+            - BETA
+            - GA
+            - DEPRECATED
+          type: string
+        logUri:
+          description: Output only. The Google Console URI to obtain logs for the Revision.
+          readOnly: true
+          type: string
+        name:
+          description: Output only. The unique name of this Revision.
+          readOnly: true
+          type: string
+        observedGeneration:
+          description: Output only. The generation of this Revision currently serving traffic. See comments in `reconciling` for additional information on reconciliation process in Cloud Run.
+          format: int64
+          readOnly: true
+          type: string
+        reconciling:
+          description: Output only. Indicates whether the resource's reconciliation is still in progress. See comments in `Service.reconciling` for additional information on reconciliation process in Cloud Run.
+          readOnly: true
+          type: boolean
+        scaling:
+          $ref: "#/components/schemas/GoogleCloudRunOpV2RevisionScaling"
+          description: Scaling settings for this revision.
+        service:
+          description: Output only. The name of the parent service.
+          readOnly: true
+          type: string
+        serviceAccount:
+          description: Email address of the IAM service account associated with the revision of the service. The service account represents the identity of the running revision, and determines what permissions the revision has.
+          type: string
+        timeout:
+          description: Max allowed time for an instance to respond to a request.
+          format: google-duration
+          type: string
+        uid:
+          description: Output only. Server assigned unique identifier for the Revision. The value is a UUID4 string and guaranteed to remain unchanged until the resource is deleted.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. The last-modified time.
+          format: google-datetime
+          readOnly: true
+          type: string
+        volumes:
+          description: A list of Volumes to make available to containers.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRunOpV2Volume"
+          type: array
+        vpcAccess:
+          $ref: "#/components/schemas/GoogleCloudRunOpV2VpcAccess"
+          description: VPC Access configuration for this Revision. For more information, visit https://cloud.google.com/run/docs/configuring/connecting-vpc.
       type: object
     GoogleCloudRunOpV2RevisionScaling:
       description: Settings for revision-level scaling settings.
@@ -1015,16 +1179,6 @@ components:
         uri:
           description: Displays the target URI.
           type: string
-      type: object
-    GoogleCloudRunOpV2UndeleteServiceRequest:
-      description: Request message to undelete a previously existing Service.
-      properties:
-        etag:
-          description: A system-generated fingerprint for this version of the resource. This may be used to detect modification conflict during updates.
-          type: string
-        validateOnly:
-          description: Indicates that the request should be validated without actually undeleting any resources.
-          type: boolean
       type: object
     GoogleCloudRunOpV2VersionToPath:
       description: VersionToPath maps a specific version of a secret to a relative file to mount to, relative to VolumeMount's mount_path.

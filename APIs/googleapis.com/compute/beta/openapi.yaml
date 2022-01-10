@@ -41276,6 +41276,9 @@ components:
         enableNestedVirtualization:
           description: Whether to enable nested virtualization or not (default is false).
           type: boolean
+        enableUefiNetworking:
+          description: Whether to enable UEFI networking for instance creation.
+          type: boolean
         threadsPerCore:
           description: The number of threads per physical core. To disable simultaneous multithreading (SMT) set this to 1. If unset, the maximum number of threads supported per core by the underlying processor is assumed.
           format: int32
@@ -41339,6 +41342,10 @@ components:
     AllocationSpecificSKUReservation:
       description: "This reservation type allows to pre allocate specific instance configuration. Next ID: 5"
       properties:
+        assuredCount:
+          description: "[Output Only] Indicates how many instances are actually usable currently."
+          format: int64
+          type: string
         count:
           description: Specifies the number of resources that are allocated.
           format: int64
@@ -47308,6 +47315,22 @@ components:
           description: "[Output Only] The number of instances in the managed instance group that are scheduled to be restarted or are currently being restarted."
           format: int32
           type: integer
+        resuming:
+          description: "[Output Only] The number of instances in the managed instance group that are scheduled to be resumed or are currently being resumed."
+          format: int32
+          type: integer
+        starting:
+          description: "[Output Only] The number of instances in the managed instance group that are scheduled to be started or are currently being started."
+          format: int32
+          type: integer
+        stopping:
+          description: "[Output Only] The number of instances in the managed instance group that are scheduled to be stopped or are currently being stopped."
+          format: int32
+          type: integer
+        suspending:
+          description: "[Output Only] The number of instances in the managed instance group that are scheduled to be suspended or are currently being suspended."
+          format: int32
+          type: integer
         verifying:
           description: "[Output Only] The number of instances in the managed instance group that are being verified. See the managedInstances[].currentAction property in the listManagedInstances method documentation."
           format: int32
@@ -48156,6 +48179,10 @@ components:
             - RECREATING
             - REFRESHING
             - RESTARTING
+            - RESUMING
+            - STARTING
+            - STOPPING
+            - SUSPENDING
             - VERIFYING
           type: string
         instance:
@@ -49711,7 +49738,7 @@ components:
     LocationPolicyLocation:
       properties:
         preference:
-          description: "Preference for a given location: ALLOW or DENY."
+          description: Preference for a given location.
           enum:
             - ALLOW
             - DENY
@@ -50199,6 +50226,10 @@ components:
             - RECREATING
             - REFRESHING
             - RESTARTING
+            - RESUMING
+            - STARTING
+            - STOPPING
+            - SUSPENDING
             - VERIFYING
           type: string
         id:
@@ -53723,6 +53754,7 @@ components:
             - COMMITTED_E2_CPUS
             - COMMITTED_LICENSES
             - COMMITTED_LOCAL_SSD_TOTAL_GB
+            - COMMITTED_M3_CPUS
             - COMMITTED_MEMORY_OPTIMIZED_CPUS
             - COMMITTED_N2A_CPUS
             - COMMITTED_N2D_CPUS
@@ -53766,6 +53798,7 @@ components:
             - LOCAL_SSD_TOTAL_GB
             - M1_CPUS
             - M2_CPUS
+            - M3_CPUS
             - MACHINE_IMAGES
             - N2A_CPUS
             - N2D_CPUS

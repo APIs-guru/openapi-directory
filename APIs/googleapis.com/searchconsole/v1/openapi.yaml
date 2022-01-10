@@ -276,7 +276,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/webmasters/v3/sites/{siteUrl}/sitemaps/{feedpath}":
     delete:
-      description: Deletes a sitemap from this site.
+      description: Deletes a sitemap from the Sitemaps report. Does not stop Google from crawling this sitemap or the URLs that were previously crawled in the deleted sitemap.
       operationId: webmasters.sitemaps.delete
       parameters:
         - description: "The site's URL, including protocol. For example: `http://www.example.com/`."

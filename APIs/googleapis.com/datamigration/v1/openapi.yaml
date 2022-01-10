@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://datamigration.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: datamigration
 externalDocs:
@@ -581,7 +581,7 @@ paths:
         - projects
   "/v1/{parent}/connectionProfiles":
     get:
-      description: Retrieve a list of all connection profiles in a given project and location.
+      description: Retrieves a list of all connection profiles in a given project and location.
       operationId: datamigration.projects.locations.connectionProfiles.list
       parameters:
         - description: Required. The parent, which owns this collection of connection profiles.
@@ -595,7 +595,7 @@ paths:
           name: filter
           schema:
             type: string
-        - description: the order by fields for the result.
+        - description: A comma-separated list of fields to order results according to.
           in: query
           name: orderBy
           schema:
