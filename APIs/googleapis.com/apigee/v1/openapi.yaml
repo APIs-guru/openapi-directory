@@ -7449,7 +7449,7 @@ components:
           description: Required if `client_auth_enabled` is true. The resource ID for the alias containing the private key and cert.
           type: string
         keyStore:
-          description: Required if `client_auth_enabled` is true. The resource ID of the keystore. References not yet supported.
+          description: Required if `client_auth_enabled` is true. The resource ID of the keystore.
           type: string
         protocols:
           description: The TLS versioins to be used.
@@ -7457,7 +7457,7 @@ components:
             type: string
           type: array
         trustStore:
-          description: The resource ID of the truststore. References not yet supported.
+          description: The resource ID of the truststore.
           type: string
       type: object
     GoogleCloudApigeeV1TlsInfoCommonName:
