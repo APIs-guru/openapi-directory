@@ -5082,6 +5082,9 @@ components:
         name:
           description: The name of this shared drive.
           type: string
+        orgUnitId:
+          description: The organizational unit of this shared drive. This field is only populated on drives.list responses when the useDomainAdminAccess parameter is set to true.
+          type: string
         restrictions:
           description: A set of restrictions that apply to this shared drive or items inside this shared drive.
           properties:
@@ -6127,6 +6130,9 @@ components:
           type: string
         name:
           description: The name of this Team Drive.
+          type: string
+        orgUnitId:
+          description: The organizational unit of this shared drive. This field is only populated on drives.list responses when the useDomainAdminAccess parameter is set to true.
           type: string
         restrictions:
           description: A set of restrictions that apply to this Team Drive or items inside this Team Drive.
