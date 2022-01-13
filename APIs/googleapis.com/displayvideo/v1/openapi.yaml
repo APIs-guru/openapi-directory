@@ -9774,12 +9774,11 @@ components:
           readOnly: true
           type: string
         firstAndThirdPartyAudienceType:
-          description: Output only. Whether the audience is a first or third party audience.
+          description: Whether the audience is a first or third party audience.
           enum:
             - FIRST_AND_THIRD_PARTY_AUDIENCE_TYPE_UNSPECIFIED
             - FIRST_AND_THIRD_PARTY_AUDIENCE_TYPE_FIRST_PARTY
             - FIRST_AND_THIRD_PARTY_AUDIENCE_TYPE_THIRD_PARTY
-          readOnly: true
           type: string
         gmailAudienceSize:
           description: Output only. The estimated audience size for Gmail network. If the size is less than 1000, the number will be hidden and 0 will be returned due to privacy reasons. Otherwise, the number will be rounded off to two significant digits. Only applicable to first party audiences. Only returned in GET request.

@@ -278,7 +278,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The output format of the public key requested. X509_PEM is the default output format.
+        - description: Optional. The output format of the public key. The default is `TYPE_NONE`, which means that the public key is not returned.
           in: query
           name: publicKeyType
           schema:

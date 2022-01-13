@@ -888,22 +888,6 @@ components:
     SasPortalDeployment:
       description: The Deployment.
       properties:
-        allowedBillingModes:
-          description: The allowed billing modes under this deployment.
-          items:
-            enum:
-              - BILLING_MODE_UNSPECIFIED
-              - MOBILE
-              - FIXED_WIRELESS
-            type: string
-          type: array
-        defaultBillingMode:
-          description: Default billing mode for the deployment and devices under it.
-          enum:
-            - BILLING_MODE_UNSPECIFIED
-            - MOBILE
-            - FIXED_WIRELESS
-          type: string
         displayName:
           description: The deployment's display name.
           type: string

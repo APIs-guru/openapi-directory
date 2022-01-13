@@ -282,10 +282,10 @@ paths:
         - accounts
   "/v1alpha/{name}":
     delete:
-      description: Deletes target MeasurementProtocolSecret.
-      operationId: analyticsadmin.properties.webDataStreams.measurementProtocolSecrets.delete
+      description: Deletes a web stream on a property.
+      operationId: analyticsadmin.properties.webDataStreams.delete
       parameters:
-        - description: "Required. The name of the MeasurementProtocolSecret to delete. Format: properties/{property}/webDataStreams/{webDataStream}/measurementProtocolSecrets/{measurementProtocolSecret} Note: Any type of stream (WebDataStream, IosAppDataStream, AndroidAppDataStream) may be a parent."
+        - description: 'Required. The name of the web data stream to delete. Format: properties/{property_id}/webDataStreams/{stream_id} Example: "properties/123/webDataStreams/456"'
           in: path
           name: name
           required: true
@@ -306,10 +306,10 @@ paths:
       tags:
         - properties
     get:
-      description: Lookup for a single "GA4" MeasurementProtocolSecret.
-      operationId: analyticsadmin.properties.webDataStreams.measurementProtocolSecrets.get
+      description: Returns the Site Tag for the specified web stream. Site Tags are immutable singletons.
+      operationId: analyticsadmin.properties.webDataStreams.getGlobalSiteTag
       parameters:
-        - description: "Required. The name of the measurement protocol secret to lookup. Format: properties/{property}/webDataStreams/{webDataStream}/measurementProtocolSecrets/{measurementProtocolSecret} Note: Any type of stream (WebDataStream, IosAppDataStream, AndroidAppDataStream) may be a parent."
+        - description: 'Required. The name of the site tag to lookup. Note that site tags are singletons and do not have unique IDs. Format: properties/{property_id}/webDataStreams/{stream_id}/globalSiteTag Example: "properties/123/webDataStreams/456/globalSiteTag"'
           in: path
           name: name
           required: true
@@ -320,7 +320,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaMeasurementProtocolSecret"
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaGlobalSiteTag"
           description: Successful response
       security:
         - Oauth2:
@@ -346,16 +346,16 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates a measurement protocol secret.
-      operationId: analyticsadmin.properties.webDataStreams.measurementProtocolSecrets.patch
+      description: Updates a web stream on a property.
+      operationId: analyticsadmin.properties.webDataStreams.patch
       parameters:
-        - description: "Output only. Resource name of this secret. This secret may be a child of any type of stream. Format: properties/{property}/webDataStreams/{webDataStream}/measurementProtocolSecrets/{measurementProtocolSecret}"
+        - description: 'Output only. Resource name of this Data Stream. Format: properties/{property_id}/webDataStreams/{stream_id} Example: "properties/1000/webDataStreams/2000"'
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: The list of fields to be updated. Omitted fields will not be updated.
+        - description: Required. The list of fields to be updated. Field names must be in snake case (e.g., "field_to_update"). Omitted fields will not be updated. To replace the entire entity, use one path with the string "*" to match all fields.
           in: query
           name: updateMask
           schema:
@@ -364,13 +364,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaMeasurementProtocolSecret"
+              $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaWebDataStream"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaMeasurementProtocolSecret"
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaWebDataStream"
           description: Successful response
       security:
         - Oauth2:
@@ -1250,9 +1250,9 @@ paths:
   "/v1alpha/{parent}/measurementProtocolSecrets":
     get:
       description: Returns child MeasurementProtocolSecrets under the specified parent Property.
-      operationId: analyticsadmin.properties.webDataStreams.measurementProtocolSecrets.list
+      operationId: analyticsadmin.properties.dataStreams.measurementProtocolSecrets.list
       parameters:
-        - description: "Required. The resource name of the parent stream. Any type of stream (WebDataStream, IosAppDataStream, AndroidAppDataStream) may be a parent. Format: properties/{property}/webDataStreams/{webDataStream}/measurementProtocolSecrets"
+        - description: "Required. The resource name of the parent stream. Format: properties/{property}/dataStreams/{dataStream}/measurementProtocolSecrets"
           in: path
           name: parent
           required: true
@@ -1300,9 +1300,9 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a measurement protocol secret.
-      operationId: analyticsadmin.properties.webDataStreams.measurementProtocolSecrets.create
+      operationId: analyticsadmin.properties.dataStreams.measurementProtocolSecrets.create
       parameters:
-        - description: "Required. The parent resource where this secret will be created. Any type of stream (WebDataStream, IosAppDataStream, AndroidAppDataStream) may be a parent. Format: properties/{property}/webDataStreams/{webDataStream}"
+        - description: "Required. The parent resource where this secret will be created. Format: properties/{property}/dataStreams/{dataStream}"
           in: path
           name: parent
           required: true
