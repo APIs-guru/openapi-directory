@@ -2025,23 +2025,6 @@ components:
           description: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
           type: string
       type: object
-    FailureTrace:
-      description: Added to the error payload.
-      properties:
-        frames:
-          items:
-            $ref: "#/components/schemas/Frame"
-          type: array
-      type: object
-    Frame:
-      properties:
-        targetName:
-          type: string
-        workflowGuid:
-          type: string
-        zoneId:
-          type: string
-      type: object
     GcRule:
       description: Rule for determining which cells to delete during garbage collection.
       properties:
@@ -2550,21 +2533,6 @@ components:
           items:
             type: string
           type: array
-      type: object
-    UndeleteTableMetadata:
-      description: Metadata type for the operation returned by google.bigtable.admin.v2.BigtableTableAdmin.UndeleteTable.
-      properties:
-        endTime:
-          description: If set, the time at which this operation finished or was cancelled.
-          format: google-datetime
-          type: string
-        name:
-          description: The name of the table being restored.
-          type: string
-        startTime:
-          description: The time at which this operation started.
-          format: google-datetime
-          type: string
       type: object
     Union:
       description: A GcRule which deletes cells matching any of the given rules.

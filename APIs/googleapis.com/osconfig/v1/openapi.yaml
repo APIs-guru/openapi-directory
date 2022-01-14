@@ -2067,6 +2067,9 @@ components:
         goo:
           $ref: "#/components/schemas/GooSettings"
           description: Goo update settings. Use this setting to override the default `goo` patch rules.
+        migInstancesAllowed:
+          description: Allows the patch job to run on Managed instance groups (MIGs).
+          type: boolean
         postStep:
           $ref: "#/components/schemas/ExecStep"
           description: The `ExecStep` to run after the patch update.

@@ -5,10 +5,10 @@ info:
   contact:
     email: hello@apideck.com
     url: https://developers.apideck.com
-  description: |
-    Welcome to the sms.
+  description: |+
+    Welcome to the pos.
 
-    You can use this API to access all sms endpoints.
+    You can use this API to access all pos endpoints.
 
     ## Base URL
 
@@ -254,12 +254,13 @@ info:
     ## Support
 
     If you have problems or need help with your case, you can always reach out to our Support.
+
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  title: sms
-  version: 8.10.1
-  x-apideck-api: sms
+  title: pos
+  version: 8.10.2
+  x-apideck-api: pos
   x-apideck-sdk-support: true
   x-apisguru-categories:
     - developer_tools
@@ -267,10 +268,10 @@ info:
     url: https://developers.apideck.com/icon.png
   x-origin:
     - format: openapi
-      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/sms.yml
+      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/pos.yml
       version: "3.0"
   x-providerName: apideck.com
-  x-serviceName: sms
+  x-serviceName: pos
   x-tags:
     - partner
 externalDocs:
@@ -280,14 +281,14 @@ security:
   - apiKey: []
 tags:
   - description: ""
-    name: Messages
+    name: Orders
     x-apideck-model:
-      $ref: "#/components/schemas/Message"
+      $ref: "#/components/schemas/Order"
 paths:
-  /sms/messages:
+  /pos/orders:
     get:
-      description: List Messages
-      operationId: messagesAll
+      description: List Orders
+      operationId: ordersAll
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
@@ -297,7 +298,7 @@ paths:
         - $ref: "#/components/parameters/limit"
       responses:
         "200":
-          $ref: "#/components/responses/GetMessagesResponse"
+          $ref: "#/components/responses/GetOrdersResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -312,10 +313,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: List Messages
+      summary: List Orders
       tags:
-        - Messages
-      x-apideck-api: sms
+        - Orders
+      x-apideck-api: pos
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -329,15 +330,15 @@ paths:
             })
 
             try {
-              const { data } = await apideck.sms.messagesAll({})
+              const { data } = await apideck.pos.ordersAll({})
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: messages
+      x-graphql-field-name: orders
     post:
-      description: Create Message
-      operationId: messagesAdd
+      description: Create Order
+      operationId: ordersAdd
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
@@ -347,11 +348,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Message"
+              $ref: "#/components/schemas/Order"
         required: true
       responses:
         "201":
-          $ref: "#/components/responses/CreateMessageResponse"
+          $ref: "#/components/responses/CreateOrderResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -366,10 +367,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Create Message
+      summary: Create Order
       tags:
-        - Messages
-      x-apideck-api: sms
+        - Orders
+      x-apideck-api: pos
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -383,29 +384,23 @@ paths:
             })
 
             const params = {
-              message: {
-                from: '+15017122661',
-                to: '+15017122662',
-                subject: 'Picture',
-                body: 'Hi! How are you doing?',
-                type: 'sms',
-                scheduled_at: '2020-09-30T07:43:32.000Z',
-                webhook_url: 'https://unify.apideck.com/webhook/webhooks/eyz329dkffdl4949/execute/sms',
-                reference: 'CUST001',
-                messaging_service_id: '123456'
+              order: {
+                merchant: {
+                  id: 'string'
+                }
               }
             }
 
             try {
-              const { data } = await apideck.sms.messagesAdd(params)
+              const { data } = await apideck.pos.ordersAdd(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  "/sms/messages/{id}":
+  "/pos/orders/{id}":
     delete:
-      description: Delete Message
-      operationId: messagesDelete
+      description: Delete Order
+      operationId: ordersDelete
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -414,7 +409,7 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/DeleteMessageResponse"
+          $ref: "#/components/responses/DeleteOrderResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -429,10 +424,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Delete Message
+      summary: Delete Order
       tags:
-        - Messages
-      x-apideck-api: sms
+        - Orders
+      x-apideck-api: pos
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -446,7 +441,7 @@ paths:
             })
 
             try {
-              const { data } = await apideck.sms.messagesDelete({
+              const { data } = await apideck.pos.ordersDelete({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
@@ -454,8 +449,8 @@ paths:
               console.error(error)
             }
     get:
-      description: Get Message
-      operationId: messagesOne
+      description: Get Order
+      operationId: ordersOne
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -464,7 +459,7 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/GetMessageResponse"
+          $ref: "#/components/responses/GetOrderResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -479,10 +474,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Get Message
+      summary: Get Order
       tags:
-        - Messages
-      x-apideck-api: sms
+        - Orders
+      x-apideck-api: pos
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -496,7 +491,7 @@ paths:
             })
 
             try {
-              const { data } = await apideck.sms.messagesOne({
+              const { data } = await apideck.pos.ordersOne({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
@@ -504,8 +499,8 @@ paths:
               console.error(error)
             }
     patch:
-      description: Update Message
-      operationId: messagesUpdate
+      description: Update Order
+      operationId: ordersUpdate
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -516,11 +511,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Message"
+              $ref: "#/components/schemas/Order"
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/UpdateMessageResponse"
+          $ref: "#/components/responses/UpdateOrderResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -535,10 +530,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Update Message
+      summary: Update Order
       tags:
-        - Messages
-      x-apideck-api: sms
+        - Orders
+      x-apideck-api: pos
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -553,21 +548,15 @@ paths:
 
             const params = {
               id: 'id_example',
-              message: {
-                from: '+15017122661',
-                to: '+15017122662',
-                subject: 'Picture',
-                body: 'Hi! How are you doing?',
-                type: 'sms',
-                scheduled_at: '2020-09-30T07:43:32.000Z',
-                webhook_url: 'https://unify.apideck.com/webhook/webhooks/eyz329dkffdl4949/execute/sms',
-                reference: 'CUST001',
-                messaging_service_id: '123456'
+              order: {
+                merchant: {
+                  id: 'string'
+                }
               }
             }
 
             try {
-              const { data } = await apideck.sms.messagesUpdate(params)
+              const { data } = await apideck.pos.ordersUpdate(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
@@ -631,30 +620,30 @@ components:
           schema:
             $ref: "#/components/schemas/BadRequestResponse"
       description: Bad Request
-    CreateMessageResponse:
+    CreateOrderResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CreateMessageResponse"
-      description: Messages
-    DeleteMessageResponse:
+            $ref: "#/components/schemas/CreateOrderResponse"
+      description: Orders
+    DeleteOrderResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/DeleteMessageResponse"
-      description: Messages
-    GetMessageResponse:
+            $ref: "#/components/schemas/DeleteOrderResponse"
+      description: Orders
+    GetOrderResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetMessageResponse"
-      description: Messages
-    GetMessagesResponse:
+            $ref: "#/components/schemas/GetOrderResponse"
+      description: Orders
+    GetOrdersResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetMessagesResponse"
-      description: Messages
+            $ref: "#/components/schemas/GetOrdersResponse"
+      description: Orders
     NotFoundResponse:
       content:
         application/json:
@@ -667,6 +656,12 @@ components:
           schema:
             $ref: "#/components/schemas/NotImplementedResponse"
       description: Not Implemented
+    Order:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Order"
+      description: Orders
     PaymentRequiredResponse:
       content:
         application/json:
@@ -691,13 +686,125 @@ components:
           schema:
             $ref: "#/components/schemas/UnprocessableResponse"
       description: Unprocessable
-    UpdateMessageResponse:
+    UpdateOrderResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UpdateMessageResponse"
-      description: Messages
+            $ref: "#/components/schemas/UpdateOrderResponse"
+      description: Orders
   schemas:
+    Address:
+      properties:
+        city:
+          description: Name of city.
+          example: San Francisco
+          nullable: true
+          type: string
+        contact_name:
+          example: Elon Musk
+          nullable: true
+          type: string
+        country:
+          description: country code according to ISO 3166-1 alpha-2.
+          example: US
+          nullable: true
+          type: string
+        county:
+          description: Address field that holds a sublocality, such as a county
+          example: Santa Clara
+          nullable: true
+          type: string
+        email:
+          example: elon@musk.com
+          nullable: true
+          type: string
+        fax:
+          example: 122-111-1111
+          nullable: true
+          type: string
+        id:
+          example: "123"
+          nullable: true
+          type: string
+        latitude:
+          example: "40.759211"
+          nullable: true
+          type: string
+        line1:
+          description: "Line 1 of the address e.g. number, street, suite, apt #, etc."
+          example: Main street
+          nullable: true
+          type: string
+        line2:
+          description: Line 2 of the address
+          example: "apt #"
+          nullable: true
+          type: string
+        line3:
+          description: Line 3 of the address
+          example: "Suite #"
+          nullable: true
+          type: string
+        line4:
+          description: Line 4 of the address
+          example: delivery instructions
+          nullable: true
+          type: string
+        longitude:
+          example: "-73.984638"
+          nullable: true
+          type: string
+        name:
+          example: HQ US
+          nullable: true
+          type: string
+        phone_number:
+          example: 111-111-1111
+          nullable: true
+          type: string
+        postal_code:
+          description: Zip code or equivalent.
+          example: "94104"
+          nullable: true
+          type: string
+        row_version:
+          $ref: "#/components/schemas/RowVersion"
+        salutation:
+          example: Mr
+          nullable: true
+          type: string
+        state:
+          description: Name of state
+          example: CA
+          nullable: true
+          type: string
+        street_number:
+          description: Street number
+          example: "25"
+          nullable: true
+          type: string
+        string:
+          example: 25 Spring Street, Blackburn, VIC 3130
+          nullable: true
+          title: The address string. Some APIs don't provide structured address data.
+          type: string
+        type:
+          enum:
+            - primary
+            - secondary
+            - home
+            - office
+            - shipping
+            - billing
+            - other
+          example: primary
+          type: string
+          x-graphql-type-name: AddressType
+        website:
+          example: https://elonmusk.com
+          nullable: true
+          type: string
+      type: object
     BadRequestResponse:
       properties:
         detail:
@@ -729,7 +836,7 @@ components:
           description: The type of error returned
           example: RequestValidationError
           type: string
-    CreateMessageResponse:
+    CreateOrderResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -739,11 +846,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Messages
+          example: Orders
           type: string
         service:
           description: Apideck ID of service provider
-          example: twilio
+          example: clover
           type: string
         status:
           description: HTTP Response Status
@@ -761,558 +868,6 @@ components:
         - operation
         - data
       type: object
-    Currency:
-      description: Indicates the associated currency for an amount of money. Values correspond to [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
-      enum:
-        - UNKNOWN_CURRENCY
-        - AED
-        - AFN
-        - ALL
-        - AMD
-        - ANG
-        - AOA
-        - ARS
-        - AUD
-        - AWG
-        - AZN
-        - BAM
-        - BBD
-        - BDT
-        - BGN
-        - BHD
-        - BIF
-        - BMD
-        - BND
-        - BOB
-        - BOV
-        - BRL
-        - BSD
-        - BTN
-        - BWP
-        - BYR
-        - BZD
-        - CAD
-        - CDF
-        - CHE
-        - CHF
-        - CHW
-        - CLF
-        - CLP
-        - CNY
-        - COP
-        - COU
-        - CRC
-        - CUC
-        - CUP
-        - CVE
-        - CZK
-        - DJF
-        - DKK
-        - DOP
-        - DZD
-        - EGP
-        - ERN
-        - ETB
-        - EUR
-        - FJD
-        - FKP
-        - GBP
-        - GEL
-        - GHS
-        - GIP
-        - GMD
-        - GNF
-        - GTQ
-        - GYD
-        - HKD
-        - HNL
-        - HRK
-        - HTG
-        - HUF
-        - IDR
-        - ILS
-        - INR
-        - IQD
-        - IRR
-        - ISK
-        - JMD
-        - JOD
-        - JPY
-        - KES
-        - KGS
-        - KHR
-        - KMF
-        - KPW
-        - KRW
-        - KWD
-        - KYD
-        - KZT
-        - LAK
-        - LBP
-        - LKR
-        - LRD
-        - LSL
-        - LTL
-        - LVL
-        - LYD
-        - MAD
-        - MDL
-        - MGA
-        - MKD
-        - MMK
-        - MNT
-        - MOP
-        - MRO
-        - MUR
-        - MVR
-        - MWK
-        - MXN
-        - MXV
-        - MYR
-        - MZN
-        - NAD
-        - NGN
-        - NIO
-        - NOK
-        - NPR
-        - NZD
-        - OMR
-        - PAB
-        - PEN
-        - PGK
-        - PHP
-        - PKR
-        - PLN
-        - PYG
-        - QAR
-        - RON
-        - RSD
-        - RUB
-        - RWF
-        - SAR
-        - SBD
-        - SCR
-        - SDG
-        - SEK
-        - SGD
-        - SHP
-        - SLL
-        - SOS
-        - SRD
-        - SSP
-        - STD
-        - SVC
-        - SYP
-        - SZL
-        - THB
-        - TJS
-        - TMT
-        - TND
-        - TOP
-        - TRC
-        - TRY
-        - TTD
-        - TWD
-        - TZS
-        - UAH
-        - UGX
-        - USD
-        - USN
-        - USS
-        - UYI
-        - UYU
-        - UZS
-        - VEF
-        - VND
-        - VUV
-        - WST
-        - XAF
-        - XAG
-        - XAU
-        - XBA
-        - XBB
-        - XBC
-        - XBD
-        - XCD
-        - XDR
-        - XOF
-        - XPD
-        - XPF
-        - XPT
-        - XTS
-        - XXX
-        - YER
-        - ZAR
-        - ZMK
-        - ZMW
-        - BTC
-      example: USD
-      nullable: true
-      title: Currency
-      type: string
-      x-enum-elements:
-        - description: Unknown currency
-          name: UNKNOWN_CURRENCY
-        - description: United Arab Emirates dirham
-          name: AED
-        - description: Afghan afghani
-          name: AFN
-        - description: Albanian lek
-          name: ALL
-        - description: Armenian dram
-          name: AMD
-        - description: Netherlands Antillean guilder
-          name: ANG
-        - description: Angolan kwanza
-          name: AOA
-        - description: Argentine peso
-          name: ARS
-        - description: Australian dollar
-          name: AUD
-        - description: Aruban florin
-          name: AWG
-        - description: Azerbaijani manat
-          name: AZN
-        - description: Bosnia and Herzegovina convertible mark
-          name: BAM
-        - description: Barbados dollar
-          name: BBD
-        - description: Bangladeshi taka
-          name: BDT
-        - description: Bulgarian lev
-          name: BGN
-        - description: Bahraini dinar
-          name: BHD
-        - description: Burundian franc
-          name: BIF
-        - description: Bermudian dollar
-          name: BMD
-        - description: Brunei dollar
-          name: BND
-        - description: Boliviano
-          name: BOB
-        - description: Bolivian Mvdol
-          name: BOV
-        - description: Brazilian real
-          name: BRL
-        - description: Bahamian dollar
-          name: BSD
-        - description: Bhutanese ngultrum
-          name: BTN
-        - description: Botswana pula
-          name: BWP
-        - description: Belarusian ruble
-          name: BYR
-        - description: Belize dollar
-          name: BZD
-        - description: Canadian dollar
-          name: CAD
-        - description: Congolese franc
-          name: CDF
-        - description: WIR Euro
-          name: CHE
-        - description: Swiss franc
-          name: CHF
-        - description: WIR Franc
-          name: CHW
-        - description: Unidad de Fomento
-          name: CLF
-        - description: Chilean peso
-          name: CLP
-        - description: Chinese yuan
-          name: CNY
-        - description: Colombian peso
-          name: COP
-        - description: Unidad de Valor Real
-          name: COU
-        - description: Costa Rican colon
-          name: CRC
-        - description: Cuban convertible peso
-          name: CUC
-        - description: Cuban peso
-          name: CUP
-        - description: Cape Verdean escudo
-          name: CVE
-        - description: Czech koruna
-          name: CZK
-        - description: Djiboutian franc
-          name: DJF
-        - description: Danish krone
-          name: DKK
-        - description: Dominican peso
-          name: DOP
-        - description: Algerian dinar
-          name: DZD
-        - description: Egyptian pound
-          name: EGP
-        - description: Eritrean nakfa
-          name: ERN
-        - description: Ethiopian birr
-          name: ETB
-        - description: Euro
-          name: EUR
-        - description: Fiji dollar
-          name: FJD
-        - description: Falkland Islands pound
-          name: FKP
-        - description: Pound sterling
-          name: GBP
-        - description: Georgian lari
-          name: GEL
-        - description: Ghanaian cedi
-          name: GHS
-        - description: Gibraltar pound
-          name: GIP
-        - description: Gambian dalasi
-          name: GMD
-        - description: Guinean franc
-          name: GNF
-        - description: Guatemalan quetzal
-          name: GTQ
-        - description: Guyanese dollar
-          name: GYD
-        - description: Hong Kong dollar
-          name: HKD
-        - description: Honduran lempira
-          name: HNL
-        - description: Croatian kuna
-          name: HRK
-        - description: Haitian gourde
-          name: HTG
-        - description: Hungarian forint
-          name: HUF
-        - description: Indonesian rupiah
-          name: IDR
-        - description: Israeli new shekel
-          name: ILS
-        - description: Indian rupee
-          name: INR
-        - description: Iraqi dinar
-          name: IQD
-        - description: Iranian rial
-          name: IRR
-        - description: Icelandic króna
-          name: ISK
-        - description: Jamaican dollar
-          name: JMD
-        - description: Jordanian dinar
-          name: JOD
-        - description: Japanese yen
-          name: JPY
-        - description: Kenyan shilling
-          name: KES
-        - description: Kyrgyzstani som
-          name: KGS
-        - description: Cambodian riel
-          name: KHR
-        - description: Comoro franc
-          name: KMF
-        - description: North Korean won
-          name: KPW
-        - description: South Korean won
-          name: KRW
-        - description: Kuwaiti dinar
-          name: KWD
-        - description: Cayman Islands dollar
-          name: KYD
-        - description: Kazakhstani tenge
-          name: KZT
-        - description: Lao kip
-          name: LAK
-        - description: Lebanese pound
-          name: LBP
-        - description: Sri Lankan rupee
-          name: LKR
-        - description: Liberian dollar
-          name: LRD
-        - description: Lesotho loti
-          name: LSL
-        - description: Lithuanian litas
-          name: LTL
-        - description: Latvian lats
-          name: LVL
-        - description: Libyan dinar
-          name: LYD
-        - description: Moroccan dirham
-          name: MAD
-        - description: Moldovan leu
-          name: MDL
-        - description: Malagasy ariary
-          name: MGA
-        - description: Macedonian denar
-          name: MKD
-        - description: Myanmar kyat
-          name: MMK
-        - description: Mongolian tögrög
-          name: MNT
-        - description: Macanese pataca
-          name: MOP
-        - description: Mauritanian ouguiya
-          name: MRO
-        - description: Mauritian rupee
-          name: MUR
-        - description: Maldivian rufiyaa
-          name: MVR
-        - description: Malawian kwacha
-          name: MWK
-        - description: Mexican peso
-          name: MXN
-        - description: Mexican Unidad de Inversion
-          name: MXV
-        - description: Malaysian ringgit
-          name: MYR
-        - description: Mozambican metical
-          name: MZN
-        - description: Namibian dollar
-          name: NAD
-        - description: Nigerian naira
-          name: NGN
-        - description: Nicaraguan córdoba
-          name: NIO
-        - description: Norwegian krone
-          name: NOK
-        - description: Nepalese rupee
-          name: NPR
-        - description: New Zealand dollar
-          name: NZD
-        - description: Omani rial
-          name: OMR
-        - description: Panamanian balboa
-          name: PAB
-        - description: Peruvian sol
-          name: PEN
-        - description: Papua New Guinean kina
-          name: PGK
-        - description: Philippine peso
-          name: PHP
-        - description: Pakistani rupee
-          name: PKR
-        - description: Polish złoty
-          name: PLN
-        - description: Paraguayan guaraní
-          name: PYG
-        - description: Qatari riyal
-          name: QAR
-        - description: Romanian leu
-          name: RON
-        - description: Serbian dinar
-          name: RSD
-        - description: Russian ruble
-          name: RUB
-        - description: Rwandan franc
-          name: RWF
-        - description: Saudi riyal
-          name: SAR
-        - description: Solomon Islands dollar
-          name: SBD
-        - description: Seychelles rupee
-          name: SCR
-        - description: Sudanese pound
-          name: SDG
-        - description: Swedish krona
-          name: SEK
-        - description: Singapore dollar
-          name: SGD
-        - description: Saint Helena pound
-          name: SHP
-        - description: Sierra Leonean leone
-          name: SLL
-        - description: Somali shilling
-          name: SOS
-        - description: Surinamese dollar
-          name: SRD
-        - description: South Sudanese pound
-          name: SSP
-        - description: São Tomé and Príncipe dobra
-          name: STD
-        - description: Salvadoran colón
-          name: SVC
-        - description: Syrian pound
-          name: SYP
-        - description: Swazi lilangeni
-          name: SZL
-        - description: Thai baht
-          name: THB
-        - description: Tajikstani somoni
-          name: TJS
-        - description: Turkmenistan manat
-          name: TMT
-        - description: Tunisian dinar
-          name: TND
-        - description: Tongan pa'anga
-          name: TOP
-        - description: Turkish lira
-          name: TRY
-        - description: Trinidad and Tobago dollar
-          name: TTD
-        - description: New Taiwan dollar
-          name: TWD
-        - description: Tanzanian shilling
-          name: TZS
-        - description: Ukrainian hryvnia
-          name: UAH
-        - description: Ugandan shilling
-          name: UGX
-        - description: United States dollar
-          name: USD
-        - description: United States dollar (next day)
-          name: USN
-        - description: United States dollar (same day)
-          name: USS
-        - description: Uruguay Peso en Unidedades Indexadas
-          name: UYI
-        - description: Uruguyan peso
-          name: UYU
-        - description: Uzbekistan som
-          name: UZS
-        - description: Venezuelan bolívar soberano
-          name: VEF
-        - description: Vietnamese đồng
-          name: VND
-        - description: Vanuatu vatu
-          name: VUV
-        - description: Samoan tala
-          name: WST
-        - description: CFA franc BEAC
-          name: XAF
-        - description: Silver
-          name: XAG
-        - description: Gold
-          name: XAU
-        - description: European Composite Unit
-          name: XBA
-        - description: European Monetary Unit
-          name: XBB
-        - description: European Unit of Account 9
-          name: XBC
-        - description: European Unit of Account 17
-          name: XBD
-        - description: East Caribbean dollar
-          name: XCD
-        - description: Special drawing rights (International Monetary Fund)
-          name: XDR
-        - description: CFA franc BCEAO
-          name: XOF
-        - description: Palladium
-          name: XPD
-        - description: CFP franc
-          name: XPF
-        - description: Platinum
-          name: XPT
-        - description: Code reserved for testing
-          name: XTS
-        - description: No currency
-          name: XXX
-        - description: Yemeni rial
-          name: YER
-        - description: South African rand
-          name: ZAR
-        - description: Zambian kwacha
-          name: ZMK
-        - description: Zambian kwacha
-          name: ZMW
-        - description: Bitcoin
-          name: BTC
     CustomField:
       additionalProperties: false
       properties:
@@ -1347,7 +902,7 @@ components:
       required:
         - id
       type: object
-    DeleteMessageResponse:
+    DeleteOrderResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -1357,11 +912,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Messages
+          example: Orders
           type: string
         service:
           description: Apideck ID of service provider
-          example: twilio
+          example: clover
           type: string
         status:
           description: HTTP Response Status
@@ -1403,21 +958,21 @@ components:
       required:
         - email
       type: object
-    GetMessageResponse:
+    GetOrderResponse:
       properties:
         data:
-          $ref: "#/components/schemas/Message"
+          $ref: "#/components/schemas/Order"
         operation:
           description: Operation performed
           example: one
           type: string
         resource:
           description: Unified API resource name
-          example: Messages
+          example: Orders
           type: string
         service:
           description: Apideck ID of service provider
-          example: twilio
+          example: clover
           type: string
         status:
           description: HTTP Response Status
@@ -1435,12 +990,12 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: Message
-    GetMessagesResponse:
+      x-graphql-type-name: Order
+    GetOrdersResponse:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/Message"
+            $ref: "#/components/schemas/Order"
           type: array
         links:
           $ref: "#/components/schemas/Links"
@@ -1452,11 +1007,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Messages
+          example: Orders
           type: string
         service:
           description: Apideck ID of service provider
-          example: twilio
+          example: clover
           type: string
         status:
           description: HTTP Response Status
@@ -1474,7 +1029,7 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: MessageList
+      x-graphql-type-name: OrderList
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:
@@ -1492,182 +1047,6 @@ components:
           example: https://unify.apideck.com/crm/companies?cursor=em9oby1jcm06OnBhZ2U6OjE%3D
           nullable: true
           type: string
-      type: object
-    Message:
-      additionalProperties: false
-      properties:
-        body:
-          description: The message text.
-          example: Hi! How are you doing?
-          maxLength: 1600
-          title: Message Body
-          type: string
-        created_at:
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          readOnly: true
-          title: Created at (timestamp)
-          type: string
-        created_by:
-          example: "12345"
-          nullable: true
-          readOnly: true
-          title: Created by
-          type: string
-        direction:
-          description: The direction of the message.
-          enum:
-            - inbound
-            - outbound-api
-            - outbound-call
-            - outbound-reply
-            - unknown
-          example: outbound-api
-          readOnly: true
-          title: Direction
-          type: string
-        error:
-          description: The error returned if your message status is failed or undelivered.
-          example:
-            code: X1
-            message: Something went wrong
-          properties:
-            code:
-              description: The error_code provides more information about the failure. If the message was successful, this value is null
-              example: X1
-              readOnly: true
-              title: Error Code
-              type: string
-            message:
-              example: Something went wrong
-              readOnly: true
-              title: Error Message
-              type: string
-          readOnly: true
-          title: Error
-          type: object
-        from:
-          description: The phone number that initiated the message.
-          example: "+15017122661"
-          title: From
-          type: string
-        id:
-          example: "12345"
-          readOnly: true
-          type: string
-        messaging_service_id:
-          description: The ID of the Messaging Service used with the message. In case of Plivo this links to the Powerpack ID.
-          example: "123456"
-          title: Messaging Service ID
-          type: string
-        number_of_media_files:
-          description: The number of media files associated with the message.
-          example: 1
-          readOnly: true
-          title: Number of media files
-          type: integer
-        number_of_units:
-          description: The number of units that make up the complete message. Messages can be split up due to the constraints of the message size.
-          example: 1
-          readOnly: true
-          title: Number of units
-          type: integer
-        price:
-          description: Price of the message.
-          example:
-            currency: USD
-            per_unit: "0.01"
-            total_amount: "0.01"
-          properties:
-            currency:
-              $ref: "#/components/schemas/Currency"
-            per_unit:
-              description: ""
-              example: "0.01"
-              readOnly: true
-              title: Price per unit
-              type: string
-            total_amount:
-              description: ""
-              example: "0.01"
-              readOnly: true
-              title: Price Amount
-              type: string
-          readOnly: true
-          title: Price
-          type: object
-        reference:
-          description: A client reference.
-          example: CUST001
-          title: Reference
-          type: string
-        scheduled_at:
-          description: The scheduled date and time of the message.
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          type: string
-        sent_at:
-          description: The date and time that the message was sent
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          readOnly: true
-          type: string
-        status:
-          description: Status of the delivery of the message.
-          enum:
-            - accepted
-            - scheduled
-            - canceled
-            - queued
-            - sending
-            - sent
-            - failed
-            - delivered
-            - undelivered
-            - receiving
-            - received
-            - read
-          example: sent
-          readOnly: true
-          title: Status
-          type: string
-        subject:
-          example: Picture
-          title: Message Subject
-          type: string
-        to:
-          description: The phone number that received the message.
-          example: "+15017122662"
-          title: Message Body
-          type: string
-        type:
-          description: Set to sms for SMS messages and mms for MMS messages.
-          enum:
-            - sms
-            - mms
-          example: sms
-          title: Message type
-          type: string
-        updated_at:
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          readOnly: true
-          title: Updated at (timestamp)
-          type: string
-        updated_by:
-          example: "12345"
-          nullable: true
-          readOnly: true
-          type: string
-        webhook_url:
-          description: Define a webhook to receive delivery notifications.
-          example: https://unify.apideck.com/webhook/webhooks/eyz329dkffdl4949/execute/sms
-          title: Webhook URL
-          type: string
-      required:
-        - from
-        - to
-        - body
       type: object
     Meta:
       description: Response metadata
@@ -1756,6 +1135,42 @@ components:
           description: The type of error returned
           example: MappingError
           type: string
+    Order:
+      additionalProperties: false
+      properties:
+        created_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          readOnly: true
+          title: Created at (timestamp)
+          type: string
+        created_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          title: Created by
+          type: string
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        merchant:
+          properties:
+            id:
+              type: string
+          type: object
+        updated_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          readOnly: true
+          title: Updated at (timestamp)
+          type: string
+        updated_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          type: string
+      type: object
     PaymentRequiredResponse:
       properties:
         detail:
@@ -1782,6 +1197,73 @@ components:
           description: The type of error returned
           example: RequestLimitError
           type: string
+    PhoneNumber:
+      properties:
+        area_code:
+          example: "323"
+          nullable: true
+          title: Area code
+          type: string
+        country_code:
+          example: "1"
+          nullable: true
+          title: Country code
+          type: string
+        extension:
+          example: "105"
+          nullable: true
+          title: Phone extension
+          type: string
+        id:
+          example: "12345"
+          nullable: true
+          type: string
+        number:
+          example: 111-111-1111
+          minLength: 1
+          title: Phone number
+          type: string
+        type:
+          enum:
+            - primary
+            - secondary
+            - home
+            - work
+            - office
+            - mobile
+            - assistant
+            - fax
+            - direct-dial-in
+            - personal
+            - other
+          example: primary
+          type: string
+          x-graphql-type-name: PhoneType
+      required:
+        - number
+      type: object
+    RowVersion:
+      example: 1-12345
+      nullable: true
+      title: Row version
+      type: string
+    SocialLink:
+      properties:
+        id:
+          example: "12345"
+          nullable: true
+          type: string
+        type:
+          example: twitter
+          nullable: true
+          type: string
+        url:
+          example: https://www.twitter.com/apideck-io
+          minLength: 1
+          type: string
+      required:
+        - url
+      type: object
     Tags:
       example:
         - New
@@ -1880,7 +1362,7 @@ components:
           description: The type of error returned
           example: InvalidStateError
           type: string
-    UpdateMessageResponse:
+    UpdateOrderResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -1890,11 +1372,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Messages
+          example: Orders
           type: string
         service:
           description: Apideck ID of service provider
-          example: twilio
+          example: clover
           type: string
         status:
           description: HTTP Response Status
@@ -1911,6 +1393,172 @@ components:
         - resource
         - operation
         - data
+      type: object
+    User:
+      properties:
+        addresses:
+          items:
+            $ref: "#/components/schemas/Address"
+          type: array
+        company_name:
+          example: SpaceX
+          nullable: true
+          title: Company name
+          type: string
+        created_at:
+          example: 2017-08-12T20:43:21.291Z
+          readOnly: true
+          type: string
+        department:
+          description: The department the user is currently in.
+          example: R&D
+          nullable: true
+          title: Department
+          type: string
+        description:
+          example: A description
+          nullable: true
+          title: Description
+          type: string
+        division:
+          description: The division the user is currently in.
+          example: Europe
+          nullable: true
+          title: Division
+          type: string
+        emails:
+          items:
+            $ref: "#/components/schemas/Email"
+          type: array
+        employee_number:
+          description: An Employee Number, Employee ID or Employee Code, is a unique number that has been assigned to each individual staff member within a company.
+          example: 123456-AB
+          nullable: true
+          title: Employee number
+          type: string
+        first_name:
+          example: Elon
+          nullable: true
+          title: First name
+          type: string
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        image:
+          example: https://logo.clearbit.com/spacex.com?s=128
+          nullable: true
+          type: string
+        language:
+          description: language code according to ISO 639-1. For the United States - EN
+          example: EN
+          nullable: true
+          type: string
+        last_name:
+          example: Musk
+          nullable: true
+          title: Last name
+          type: string
+        parent_id:
+          example: "54321"
+          nullable: true
+          type: string
+        password:
+          example: supersecretpassword
+          type: string
+          writeOnly: true
+        phone_numbers:
+          items:
+            $ref: "#/components/schemas/PhoneNumber"
+          type: array
+        status:
+          example: active
+          nullable: true
+          type: string
+        title:
+          example: CEO
+          nullable: true
+          title: Job title
+          type: string
+        updated_at:
+          example: 2017-08-12T20:43:21.291Z
+          readOnly: true
+          type: string
+        username:
+          example: masterofcoin
+          nullable: true
+          type: string
+      required:
+        - emails
+      x-pii:
+        - username
+        - first_name
+        - last_name
+        - email
+    WebhookEvent:
+      allOf:
+        - properties:
+            entity_id:
+              description: The service provider's ID of the entity that triggered this event
+              example: 123456ASDF
+              type: string
+            entity_type:
+              description: The type entity that triggered this event
+              example: Company
+              type: string
+            entity_url:
+              description: The url to retrieve entity detail.
+              example: https://unify.apideck.com/crm/contacts/123456
+              type: string
+            event_id:
+              description: Unique reference to this request event
+              example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
+              type: string
+            execution_attempt:
+              description: The current count this request event has been attempted
+              example: 2
+              type: number
+            occurred_at:
+              description: ISO Datetime for when the original event occurred
+              example: 2021-10-01T03:14:55.419Z
+              type: string
+            service_id:
+              description: Service provider identifier
+              example: close
+              type: string
+          type: object
+        - properties:
+            event_type:
+              enum:
+                - pos.order.created
+                - pos.order.updated
+                - pos.order.deleted
+              example: pos.order.created
+              type: string
+          type: object
+      x-sdk-exclude: true
+    Website:
+      properties:
+        id:
+          example: "12345"
+          nullable: true
+          type: string
+        type:
+          enum:
+            - primary
+            - secondary
+            - work
+            - personal
+            - other
+          example: primary
+          type: string
+          x-graphql-type-name: WebsiteType
+        url:
+          example: http://example.com
+          minLength: 1
+          type: string
+      required:
+        - url
       type: object
   securitySchemes:
     apiKey:
@@ -1934,3 +1582,56 @@ components:
       in: header
       name: Authorization
       type: apiKey
+x-webhooks:
+  OrderCreated:
+    post:
+      description: Order created
+      operationId: orderCreated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Order created
+      tags:
+        - Webhook Events
+      x-apideck-event-type: pos.order.created
+      x-apideck-upcoming: true
+  OrderDeleted:
+    post:
+      description: Order deleted
+      operationId: orderDeleted
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Order deleted
+      tags:
+        - Webhook Events
+      x-apideck-event-type: pos.order.deleted
+      x-apideck-upcoming: true
+  OrderUpdated:
+    post:
+      description: Order updated
+      operationId: orderUpdated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Order updated
+      tags:
+        - Webhook Events
+      x-apideck-event-type: pos.order.updated
+      x-apideck-upcoming: true
+  x-sdk-exclude: true

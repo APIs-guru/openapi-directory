@@ -106,7 +106,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. Create the stream without validating it.
+        - description: Optional. Update the stream without validating it.
           in: query
           name: force
           schema:
@@ -293,10 +293,10 @@ paths:
         - projects
   "/v1/{name}:fetchStaticIps":
     get:
-      description: The FetchStaticIps API call exposes the static ips used by Datastream. Typically, a request returns children data objects under a parent data object that's optionally supplied in the request.
+      description: The FetchStaticIps API call exposes the static IP addresses used by Datastream.
       operationId: datastream.projects.locations.fetchStaticIps
       parameters:
-        - description: Required. The name resource of the Response type. Must be in the format `projects/*/locations/*`.
+        - description: Required. The resource name for the location for which static IPs should be returned. Must be in the format `projects/*/locations/*`.
           in: path
           name: name
           required: true
@@ -352,7 +352,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Starts backfill job for the specified stream object.
+      description: Use this method to start a backfill job for the specified stream object.
       operationId: datastream.projects.locations.streams.objects.startBackfillJob
       parameters:
         - description: Required. The name of the stream object resource to start a backfill job for.
@@ -394,7 +394,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Stops the backfill job for the specified stream object.
+      description: Use this method to stop a backfill job for the specified stream object.
       operationId: datastream.projects.locations.streams.objects.stopBackfillJob
       parameters:
         - description: Required. The name of the stream object resource to stop the backfill job for.
@@ -504,6 +504,11 @@ paths:
           name: requestId
           schema:
             type: string
+        - description: Optional. Only validate the connection profile, but don't create any resources. The default is false.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
       requestBody:
         content:
           application/json:
@@ -537,7 +542,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Use this method to discover a connection profile. The discover API call exposes the data objects and metadata belonging to the profile. Typically, a request returns children data objects under a parent data object that's optionally supplied in the request.
+      description: Use this method to discover a connection profile. The discover API call exposes the data objects and metadata belonging to the profile. Typically, a request returns children data objects of a parent data object that's optionally supplied in the request.
       operationId: datastream.projects.locations.connectionProfiles.discover
       parameters:
         - description: Required. The parent resource of the connection profile type. Must be in the format `projects/*/locations/*`.
@@ -752,7 +757,7 @@ paths:
         - projects
   "/v1/{parent}/routes":
     get:
-      description: Use this method to list routes created for a private connectivity in a project and location.
+      description: Use this method to list routes created for a private connectivity configuration in a project and location.
       operationId: datastream.projects.locations.privateConnections.routes.list
       parameters:
         - description: Required. The parent that owns the collection of Routess.
@@ -808,7 +813,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Use this method to create a route for a private connectivity in a project and location.
+      description: Use this method to create a route for a private connectivity configuration in a project and location.
       operationId: datastream.projects.locations.privateConnections.routes.create
       parameters:
         - description: Required. The parent that owns the collection of Routes.
@@ -928,7 +933,7 @@ paths:
           name: streamId
           schema:
             type: string
-        - description: Optional. Only validate the stream, but do not create any resources. The default is false.
+        - description: Optional. Only validate the stream, but don't create any resources. The default is false.
           in: query
           name: validateOnly
           schema:
@@ -1460,10 +1465,10 @@ components:
       description: Mysql data source object identifier.
       properties:
         database:
-          description: The database name.
+          description: Required. The database name.
           type: string
         table:
-          description: The table name.
+          description: Required. The table name.
           type: string
       type: object
     MysqlProfile:
@@ -1642,10 +1647,10 @@ components:
       description: Oracle data source object identifier.
       properties:
         schema:
-          description: The schema name.
+          description: Required. The schema name.
           type: string
         table:
-          description: The table name.
+          description: Required. The table name.
           type: string
       type: object
     OracleProfile:

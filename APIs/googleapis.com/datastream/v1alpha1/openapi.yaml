@@ -293,7 +293,7 @@ paths:
         - projects
   "/v1alpha1/{name}:fetchStaticIps":
     get:
-      description: The FetchStaticIps API call exposes the static ips used by Datastream. Typically, a request returns children data objects under a parent data object that's optionally supplied in the request.
+      description: The FetchStaticIps API call exposes the static IP addresses used by Datastream.
       operationId: datastream.projects.locations.fetchStaticIps
       parameters:
         - description: Required. The name resource of the Response type. Must be in the format `projects/*/locations/*`.
@@ -1454,10 +1454,10 @@ components:
       description: Mysql data source object identifier.
       properties:
         database:
-          description: The database name.
+          description: Required. The database name.
           type: string
         table:
-          description: The table name.
+          description: Required. The table name.
           type: string
       type: object
     MysqlProfile:
@@ -1640,10 +1640,10 @@ components:
       description: Oracle data source object identifier.
       properties:
         schema:
-          description: The schema name.
+          description: Required. The schema name.
           type: string
         table:
-          description: The table name.
+          description: Required. The table name.
           type: string
       type: object
     OracleProfile:
