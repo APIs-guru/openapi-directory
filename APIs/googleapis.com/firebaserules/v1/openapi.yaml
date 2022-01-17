@@ -540,14 +540,14 @@ components:
       description: "`File` containing source content."
       properties:
         content:
-          description: Required. Textual Content.
+          description: Textual Content.
           type: string
         fingerprint:
           description: Fingerprint (e.g. github sha) associated with the `File`.
           format: byte
           type: string
         name:
-          description: Required. File name.
+          description: File name.
           type: string
       type: object
     FunctionCall:
@@ -707,13 +707,13 @@ components:
           type: string
         source:
           $ref: "#/components/schemas/Source"
-          description: Required. `Source` for the `Ruleset`.
+          description: "`Source` for the `Ruleset`."
       type: object
     Source:
       description: "`Source` is one or more `File` messages comprising a logical set of rules."
       properties:
         files:
-          description: Required. `File` set constituting the `Source` bundle.
+          description: "`File` set constituting the `Source` bundle."
           items:
             $ref: "#/components/schemas/File"
           type: array

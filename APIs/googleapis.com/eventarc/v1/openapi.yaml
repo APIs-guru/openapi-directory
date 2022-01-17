@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://eventarc.googleapis.com/$discovery/rest?version=v1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: eventarc
 externalDocs:
@@ -50,7 +50,7 @@ paths:
           name: etag
           schema:
             type: string
-        - description: Required. If set, validate the request and preview the review, but do not actually post it.
+        - description: Required. If set, validate the request and preview the review, but do not post it.
           in: query
           name: validateOnly
           schema:
@@ -120,12 +120,12 @@ paths:
           name: allowMissing
           schema:
             type: boolean
-        - description: The fields to be updated; only fields explicitly provided will be updated. If no field mask is provided, all provided fields in the request will be updated. To update all fields, provide a field mask of "*".
+        - description: The fields to be updated; only fields explicitly provided are updated. If no field mask is provided, all provided fields in the request are updated. To update all fields, provide a field mask of "*".
           in: query
           name: updateMask
           schema:
             type: string
-        - description: Required. If set, validate the request and preview the review, but do not actually post it.
+        - description: Required. If set, validate the request and preview the review, but do not post it.
           in: query
           name: validateOnly
           schema:
@@ -306,7 +306,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "The sorting order of the resources returned. Value should be a comma separated list of fields. The default sorting oder is ascending. To specify descending order for a field, append a ` desc` suffix; for example: `name desc, trigger_id`."
+        - description: "The sorting order of the resources returned. Value should be a comma-separated list of fields. The default sorting order is ascending. To specify descending order for a field, append a `desc` suffix; for example: `name desc, trigger_id`."
           in: query
           name: orderBy
           schema:
@@ -362,7 +362,7 @@ paths:
           name: triggerId
           schema:
             type: string
-        - description: Required. If set, validate the request and preview the review, but do not actually post it.
+        - description: Required. If set, validate the request and preview the review, but do not post it.
           in: query
           name: validateOnly
           schema:
@@ -648,6 +648,9 @@ components:
     Destination:
       description: Represents a target of an invocation over HTTP.
       properties:
+        cloudFunction:
+          description: "The Cloud Function resource name. Only Cloud Functions V2 is supported. Format: projects/{project}/locations/{location}/functions/{function}"
+          type: string
         cloudRun:
           $ref: "#/components/schemas/CloudRun"
           description: Cloud Run fully-managed resource that receives the events. The resource should be in the same project as the trigger.
@@ -774,7 +777,7 @@ components:
           type: string
       type: object
     ListTriggersResponse:
-      description: The response message for the ListTriggers method.
+      description: The response message for the `ListTriggers` method.
       properties:
         nextPageToken:
           description: A page token that can be sent to ListTriggers to request the next page. If this is empty, then there are no more pages.
