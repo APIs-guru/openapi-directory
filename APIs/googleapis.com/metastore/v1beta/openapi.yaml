@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://metastore.googleapis.com/$discovery/rest?version=v1beta
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: metastore
 externalDocs:
@@ -1433,6 +1433,13 @@ components:
           description: Output only. The time when the metastore service was created.
           format: google-datetime
           readOnly: true
+          type: string
+        databaseType:
+          description: Immutable. The database type that the Metastore service stores its data.
+          enum:
+            - DATABASE_TYPE_UNSPECIFIED
+            - MYSQL
+            - SPANNER
           type: string
         encryptionConfig:
           $ref: "#/components/schemas/EncryptionConfig"
