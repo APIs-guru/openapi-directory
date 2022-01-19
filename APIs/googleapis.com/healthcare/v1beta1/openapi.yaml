@@ -14,17 +14,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Healthcare API
   version: v1beta1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://healthcare.googleapis.com/$discovery/rest?version=v1beta1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: healthcare
 externalDocs:
@@ -3535,6 +3533,9 @@ components:
           description: An AES 128/192/256 bit key. Causes the hash to be computed based on this key. A default key is generated for each Deidentify operation and is used when neither `crypto_key` nor `kms_wrapped` is specified. Must not be set if `kms_wrapped` is set.
           format: byte
           type: string
+        kmsWrapped:
+          $ref: "#/components/schemas/KmsWrappedCryptoKey"
+          description: KMS wrapped key. Must not be set if `crypto_key` is set.
       type: object
     Dataset:
       description: A message representing a health dataset. A health dataset represents a collection of healthcare data pertaining to one or more patients. This may include multiple modalities of healthcare data, such as electronic medical records or medical imaging data.
@@ -3553,6 +3554,9 @@ components:
           description: An AES 128/192/256 bit key. Causes the shift to be computed based on this key and the patient ID. A default key is generated for each de-identification operation and is used when neither `crypto_key` nor `kms_wrapped` is specified. Must not be set if `kms_wrapped` is set.
           format: byte
           type: string
+        kmsWrapped:
+          $ref: "#/components/schemas/KmsWrappedCryptoKey"
+          description: KMS wrapped key. Must not be set if `crypto_key` is set.
       type: object
     DeidentifyConfig:
       description: Configures de-id options specific to different types of content. Each submessage customizes the handling of an https://tools.ietf.org/html/rfc6838 media type or subtype. Configs are applied in a nested manner at runtime.
@@ -4434,6 +4438,17 @@ components:
           $ref: "#/components/schemas/Message"
           description: Created message resource.
       type: object
+    KmsWrappedCryptoKey:
+      description: Include to use an existing data crypto key wrapped by KMS. The wrapped key must be a 128-, 192-, or 256-bit key. The key must grant the Cloud IAM permission `cloudkms.cryptoKeyVersions.useToDecrypt` to the project's Cloud Healthcare Service Agent service account. For more information, see [Creating a wrapped key] (https://cloud.google.com/dlp/docs/create-wrapped-key).
+      properties:
+        cryptoKey:
+          description: Required. The resource name of the KMS CryptoKey to use for unwrapping.
+          type: string
+        wrappedKey:
+          description: Required. The wrapped data crypto key.
+          format: byte
+          type: string
+      type: object
     LinkedEntity:
       description: EntityMentions can be linked to multiple entities using a LinkedEntity message lets us add other fields, e.g. confidence.
       properties:
@@ -5252,5 +5267,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

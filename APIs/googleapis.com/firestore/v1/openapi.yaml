@@ -1660,11 +1660,6 @@ components:
             - PESSIMISTIC
             - OPTIMISTIC_WITH_ENTITY_GROUPS
           type: string
-        earliestVersionTime:
-          description: "Output only. The earliest timestamp at which older versions of the data can be read from the database. See [version_retention_period] above; this field is populated with `now - version_retention_period`. This value is continuously updated, and becomes stale the moment it is queried. If you are using this value to recover data, make sure to account for the time from the moment when the value is queried to the moment when you initiate the recovery. Note that you should not need to query this field: if you know the `version_retention_period` then you can query within that time."
-          format: google-datetime
-          readOnly: true
-          type: string
         etag:
           description: This checksum is computed by the server based on the value of other fields, and may be sent on update and delete requests to ensure the client has an up-to-date value before proceeding.
           type: string
@@ -1997,6 +1992,10 @@ components:
           description: The amount of work estimated.
           format: int64
           type: string
+      type: object
+    GoogleFirestoreAdminV1UpdateDatabaseMetadata:
+      description: Metadata related to the update database operation.
+      properties: {}
       type: object
     GoogleLongrunningCancelOperationRequest:
       description: The request message for Operations.CancelOperation.

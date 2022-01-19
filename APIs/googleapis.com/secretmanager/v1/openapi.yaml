@@ -13,15 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Secret Manager API
   version: v1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://secretmanager.googleapis.com/$discovery/rest?version=v1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: secretmanager
 externalDocs:
@@ -1047,10 +1049,18 @@ components:
           description: The secret data. Must be no larger than 64KiB.
           format: byte
           type: string
+        dataCrc32c:
+          description: Optional. If specified, SecretManagerService will verify the integrity of the received data on SecretManagerService.AddSecretVersion calls using the crc32c checksum and store it to include in future SecretManagerService.AccessSecretVersion responses. If a checksum is not provided in the SecretManagerService.AddSecretVersion request, the SecretManagerService will generate and store one for you. The CRC32C value is encoded as a Int64 for compatibility, and can be safely downconverted to uint32 in languages that support this type. https://cloud.google.com/apis/design/design_patterns#integer_types
+          format: int64
+          type: string
       type: object
     SecretVersion:
       description: A secret version resource in the Secret Manager API.
       properties:
+        clientSpecifiedPayloadChecksum:
+          description: Output only. True if payload checksum specified in SecretPayload object has been received by SecretManagerService on SecretManagerService.AddSecretVersion.
+          readOnly: true
+          type: boolean
         createTime:
           description: Output only. The time at which the SecretVersion was created.
           format: google-datetime
@@ -1155,3 +1165,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

@@ -90,7 +90,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Accepts an App Attest CBOR attestation and verifies it with Apple using the developer's preconfigured team and bundle IDs. If valid, returns an attestation artifact that can later be exchanged for an AttestationTokenResponse using ExchangeAppAttestAssertion. For convenience and performance, this method's response object will also contain an App Check token encapsulated in an AttestationTokenResponse (if the verification is successful).
+      description: Accepts an App Attest CBOR attestation and verifies it with Apple using your preconfigured team and bundle IDs. If valid, returns an attestation artifact that can later be exchanged for an AttestationTokenResponse using ExchangeAppAttestAssertion. For convenience and performance, this method's response object will also contain an App Check token encapsulated in an AttestationTokenResponse (if the verification is successful).
       operationId: firebaseappcheck.projects.apps.exchangeAppAttestAttestation
       parameters:
         - description: "Required. The relative resource name of the iOS app, in the format: ``` projects/{project_number}/apps/{app_id} ``` If necessary, the `project_number` element can be replaced with the project ID of the Firebase project. Learn more about using project identifiers in Google's [AIP 2510](https://google.aip.dev/cloud/2510) standard."
@@ -553,7 +553,7 @@ paths:
         - projects
   "/v1beta/{parent}/apps/-/appAttestConfig:batchGet":
     get:
-      description: Gets the AppAttestConfigs for the specified list of apps atomically.
+      description: Atomically gets the AppAttestConfigs for the specified list of apps.
       operationId: firebaseappcheck.projects.apps.appAttestConfig.batchGet
       parameters:
         - description: Required. The parent project name shared by all AppAttestConfigs being retrieved, in the format ``` projects/{project_number} ``` The parent collection in the `name` field of any resource being retrieved must match this field, or the entire batch fails.
@@ -603,7 +603,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1beta/{parent}/apps/-/deviceCheckConfig:batchGet":
     get:
-      description: Gets the DeviceCheckConfigs for the specified list of apps atomically. For security reasons, the `private_key` field is never populated in the response.
+      description: Atomically gets the DeviceCheckConfigs for the specified list of apps. For security reasons, the `private_key` field is never populated in the response.
       operationId: firebaseappcheck.projects.apps.deviceCheckConfig.batchGet
       parameters:
         - description: Required. The parent project name shared by all DeviceCheckConfigs being retrieved, in the format ``` projects/{project_number} ``` The parent collection in the `name` field of any resource being retrieved must match this field, or the entire batch fails.
@@ -653,7 +653,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1beta/{parent}/apps/-/recaptchaConfig:batchGet":
     get:
-      description: Gets the RecaptchaConfigs for the specified list of apps atomically. For security reasons, the `site_secret` field is never populated in the response.
+      description: Atomically gets the RecaptchaConfigs for the specified list of apps. For security reasons, the `site_secret` field is never populated in the response.
       operationId: firebaseappcheck.projects.apps.recaptchaConfig.batchGet
       parameters:
         - description: Required. The parent project name shared by all RecaptchaConfigs being retrieved, in the format ``` projects/{project_number} ``` The parent collection in the `name` field of any resource being retrieved must match this field, or the entire batch fails.
@@ -703,7 +703,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1beta/{parent}/apps/-/recaptchaEnterpriseConfig:batchGet":
     get:
-      description: Gets the RecaptchaEnterpriseConfigs for the specified list of apps atomically.
+      description: Atomically gets the RecaptchaEnterpriseConfigs for the specified list of apps.
       operationId: firebaseappcheck.projects.apps.recaptchaEnterpriseConfig.batchGet
       parameters:
         - description: Required. The parent project name shared by all RecaptchaEnterpriseConfigs being retrieved, in the format ``` projects/{project_number} ``` The parent collection in the `name` field of any resource being retrieved must match this field, or the entire batch fails.
@@ -753,7 +753,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1beta/{parent}/apps/-/safetyNetConfig:batchGet":
     get:
-      description: Gets the SafetyNetConfigs for the specified list of apps atomically.
+      description: Atomically gets the SafetyNetConfigs for the specified list of apps.
       operationId: firebaseappcheck.projects.apps.safetyNetConfig.batchGet
       parameters:
         - description: Required. The parent project name shared by all SafetyNetConfigs being retrieved, in the format ``` projects/{project_number} ``` The parent collection in the `name` field of any resource being retrieved must match this field, or the entire batch fails.
@@ -950,7 +950,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Updates the specified Service configurations atomically.
+      description: Atomically updates the specified Service configurations.
       operationId: firebaseappcheck.projects.services.batchUpdate
       parameters:
         - description: Required. The parent project name shared by all Service configurations being updated, in the format ``` projects/{project_number} ``` The parent collection in the `name` field of any resource being updated must match this field, or the entire batch fails.

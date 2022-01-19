@@ -14,20 +14,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Container Analysis API
   version: v1beta1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://containeranalysis.googleapis.com/$discovery/rest?version=v1beta1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: containeranalysis
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/container-analysis/api/reference/rest/
 tags:
@@ -1438,6 +1435,25 @@ components:
         name:
           description: The `WorkerPool` resource to execute the build on. You must have `cloudbuild.workerpools.use` on the project hosting the WorkerPool. Format projects/{project}/locations/{location}/workerPools/{workerPoolId}
           type: string
+        workerConfig:
+          $ref: "#/components/schemas/ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptionsPoolOptionWorkerConfig"
+          description: Configuration per workload.
+      type: object
+    ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptionsPoolOptionWorkerConfig:
+      description: Configuration per workload for both Private Pools and Hybrid Pools.
+      properties:
+        diskSizeGb:
+          description: The disk size (in GB) which is requested for the build container. If unset, a value of 10 GB will be used.
+          format: int64
+          type: string
+        memoryGb:
+          description: The memory (in GB) which is requested for the build container. If unset, a value of 4 GB will be used.
+          format: float
+          type: number
+        vcpuCount:
+          description: The number of vCPUs which are requested for the build container. If unset, a value of 1 will be used.
+          format: float
+          type: number
       type: object
     ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep:
       description: A step in the build pipeline.
@@ -3264,5 +3280,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}
