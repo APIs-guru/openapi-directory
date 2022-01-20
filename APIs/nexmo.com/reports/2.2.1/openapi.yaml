@@ -19,7 +19,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://www.nexmo.com/terms-of-use
   title: Reports API
-  version: 2.2.0
+  version: 2.2.1
   x-label: Beta
   x-origin:
     - format: openapi
@@ -2271,3 +2271,6 @@ x-errors:
       text: View API reference
       url: /api/reports#create-report
     resolution: Modify your request to provide a valid payload
+  rate-limit:
+    description: The request was rate limited.
+    resolution: The Reports API supports 5 requests per second. Slow down your request rate.

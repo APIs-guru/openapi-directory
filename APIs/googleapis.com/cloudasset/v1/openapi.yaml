@@ -136,7 +136,7 @@ paths:
       description: Lists assets with time and resource types and returns paged results in response.
       operationId: cloudasset.assets.list
       parameters:
-        - description: 'Required. Name of the organization or project the assets belong to. Format: "organizations/[organization-number]" (such as "organizations/123"), "projects/[project-id]" (such as "projects/my-project-id"), or "projects/[project-number]" (such as "projects/12345").'
+        - description: 'Required. Name of the organization or project the assets belong to. Format: "organizations/[organization-number]" (such as "organizations/123"), "projects/[project-id]" (such as "projects/my-project-id"), "projects/[project-number]" (such as "projects/12345"), or "folders/[folder-number]" (such as "folders/12345").'
           in: path
           name: parent
           required: true
