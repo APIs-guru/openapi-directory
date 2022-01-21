@@ -1128,6 +1128,7 @@ components:
           type: string
         gcsDestinationConfig:
           $ref: "#/components/schemas/GcsDestinationConfig"
+          description: GCS destination configuration.
       type: object
     DiscoverConnectionProfileRequest:
       description: Request message for 'discover' ConnectionProfile request.

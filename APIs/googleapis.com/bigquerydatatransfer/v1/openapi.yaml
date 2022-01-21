@@ -317,7 +317,7 @@ paths:
       description: Lists supported data sources and returns their settings.
       operationId: bigquerydatatransfer.projects.locations.dataSources.list
       parameters:
-        - description: "Required. The BigQuery project id for which data sources should be returned. Must be in the form: `projects/{project_id}` or `projects/{project_id}/locations/{location_id}"
+        - description: "Required. The BigQuery project id for which data sources should be returned. Must be in the form: `projects/{project_id}` or `projects/{project_id}/locations/{location_id}`"
           in: path
           name: parent
           required: true
@@ -451,7 +451,7 @@ paths:
       description: Returns information about all transfer configs owned by a project in the specified location.
       operationId: bigquerydatatransfer.projects.transferConfigs.list
       parameters:
-        - description: "Required. The BigQuery project id for which data sources should be returned: `projects/{project_id}` or `projects/{project_id}/locations/{location_id}`"
+        - description: "Required. The BigQuery project id for which transfer configs should be returned: `projects/{project_id}` or `projects/{project_id}/locations/{location_id}`"
           in: path
           name: parent
           required: true

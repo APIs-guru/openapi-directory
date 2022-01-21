@@ -2770,7 +2770,7 @@ paths:
       description: Creates a key value map in an organization.
       operationId: apigee.organizations.keyvaluemaps.create
       parameters:
-        - description: Required. The name of the organization in which to create the key value map file. Must be of the form `organizations/{organization}`.
+        - description: "Required. Name of the organization in which to create the key value map file. Use the following structure in your request: `organizations/{org}`"
           in: path
           name: parent
           required: true
@@ -4130,7 +4130,7 @@ components:
       properties:
         adjustment:
           $ref: "#/components/schemas/GoogleTypeMoney"
-          description: "* A positive value of `adjustment` means that that the API provider wishes to adjust the balance for an over-charged developer i.e. the balance of the developer will increase. * A negative value of `adjustment` means that that the API provider wishes to adjust the balance for an under-charged developer i.e. the balance of the developer will decrease."
+          description: "* A positive value of `adjustment` means that that the API provider wants to adjust the balance for an under-charged developer i.e. the balance of the developer will decrease. * A negative value of `adjustment` means that that the API provider wants to adjust the balance for an over-charged developer i.e. the balance of the developer will increase."
       type: object
     GoogleCloudApigeeV1AdvancedApiOpsConfig:
       description: Configuration for the Advanced API Ops add-on.
@@ -5857,6 +5857,9 @@ components:
           description: Output only. Internal hostname or IP address of the Apigee endpoint used by clients to connect to the service.
           readOnly: true
           type: string
+        ipRange:
+          description: 'Optional. IP range represents the customer-provided CIDR block of length 22 that will be used for the Apigee instance creation. This optional range, if provided, should be freely available as part of larger named range the customer has allocated to the Service Networking peering. If this is not provided, Apigee will automatically request for any available /22 CIDR block from Service Networking. The customer should use this CIDR block for configuring their firewall needs to allow traffic from Apigee. Input format: "a.b.c.d/22", Output format: a.b.c.d/22, e.f.g.h/28"'
+          type: string
         lastModifiedAt:
           description: Output only. Time the instance was last modified in milliseconds since epoch.
           format: int64
@@ -5977,13 +5980,13 @@ components:
           type: string
       type: object
     GoogleCloudApigeeV1KeyValueMap:
-      description: A collection of key, value string pairs
+      description: Collection of key/value string pairs.
       properties:
         encrypted:
-          description: Optional. If `true` entry values will be encrypted.
+          description: Optional. Flag that specifies whether entry values will be encrypted. Enable to encrypt entry values.
           type: boolean
         name:
-          description: Required. The id of the key value map.
+          description: Required. ID of the key value map.
           type: string
       type: object
     GoogleCloudApigeeV1Keystore:
@@ -7426,7 +7429,7 @@ components:
           type: string
       type: object
     GoogleCloudApigeeV1TlsInfo:
-      description: TLS configuration information for VirtualHosts and TargetServers.
+      description: TLS configuration information for virtual hosts and TargetServers.
       properties:
         ciphers:
           description: "The SSL/TLS cipher suites to be used. Must be one of the cipher suite names listed in: http://docs.oracle.com/javase/8/docs/technotes/guides/security/StandardNames.html#ciphersuites"

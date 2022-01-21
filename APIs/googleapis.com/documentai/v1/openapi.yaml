@@ -2322,6 +2322,9 @@ components:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1CommonOperationMetadata"
           description: The basic metadata of the long running operation.
+        questionId:
+          description: The Crowd Compute question ID.
+          type: string
       type: object
     GoogleCloudDocumentaiV1ReviewDocumentRequest:
       description: Request message for review document method.
@@ -4157,6 +4160,9 @@ components:
         createTime:
           description: The creation time of the operation.
           format: google-datetime
+          type: string
+        questionId:
+          description: The Crowd Compute question ID.
           type: string
         state:
           description: Used only when Operation.done is false.

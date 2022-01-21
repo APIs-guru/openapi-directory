@@ -2899,7 +2899,7 @@ components:
       description: The configuration for continuous tests.
       properties:
         enableContinuousRun:
-          description: Whether to run test cases in TestCasesConfig.test_cases periodically. Default false. If set to ture, run once a day.
+          description: Whether to run test cases in TestCasesConfig.test_cases periodically. Default false. If set to true, run once a day.
           type: boolean
         enablePredeploymentRun:
           description: Whether to run test cases in TestCasesConfig.test_cases before deploying a flow version to the environment. Default false.
@@ -5153,6 +5153,15 @@ components:
             $ref: "#/components/schemas/GoogleCloudDialogflowV2SuggestionResult"
           type: array
       type: object
+    GoogleCloudDialogflowV2ImportDocumentsResponse:
+      description: Response message for Documents.ImportDocuments.
+      properties:
+        warnings:
+          description: Includes details about skipped documents or any other warnings.
+          items:
+            $ref: "#/components/schemas/GoogleRpcStatus"
+          type: array
+      type: object
     GoogleCloudDialogflowV2Intent:
       description: An intent categorizes an end-user's intention for one conversation turn. For each agent, you define many intents, where your combined intents can handle a complete conversation. When an end-user writes or says something, referred to as an end-user expression or end-user input, Dialogflow matches the end-user input to the best intent in your agent. Matching an intent is also known as intent classification. For more information, see the [intent guide](https://cloud.google.com/dialogflow/docs/intents-overview).
       properties:
@@ -5755,6 +5764,9 @@ components:
     GoogleCloudDialogflowV2KnowledgeOperationMetadata:
       description: Metadata in google::longrunning::Operation for Knowledge operations.
       properties:
+        knowledgeBase:
+          description: The name of the knowledge base interacted with during the operation.
+          type: string
         state:
           description: Output only. The current state of this operation.
           enum:
