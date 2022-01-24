@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://metastore.googleapis.com/$discovery/rest?version=v1beta
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: metastore
 externalDocs:
@@ -841,6 +841,22 @@ components:
             - DATA_READ
           type: string
       type: object
+    AuxiliaryVersionConfig:
+      description: Configuration information for the auxiliary service versions.
+      properties:
+        configOverrides:
+          additionalProperties:
+            type: string
+          description: A mapping of Hive metastore configuration key-value pairs to apply to the auxiliary Hive metastore (configured in hive-site.xml) in addition to the primary version's overrides. If keys are present in both the auxiliary version's overrides and the primary version's overrides, the value from the auxiliary version's overrides takes precedence.
+          type: object
+        networkConfig:
+          $ref: "#/components/schemas/NetworkConfig"
+          description: Output only. The network configuration contains the endpoint URI(s) of the auxiliary Hive metastore service.
+          readOnly: true
+        version:
+          description: The Hive metastore version of the auxiliary service. It must be less than the primary Hive metastore service's version.
+          type: string
+      type: object
     Backup:
       description: The details of a backup resource.
       properties:
@@ -994,6 +1010,11 @@ components:
     HiveMetastoreConfig:
       description: Specifies configuration information specific to running Hive metastore software as the metastore service.
       properties:
+        auxiliaryVersions:
+          additionalProperties:
+            $ref: "#/components/schemas/AuxiliaryVersionConfig"
+          description: A mapping of Hive metastore version to the auxiliary version configuration. When specified, a secondary Hive metastore service is created along with the primary service. All auxiliary versions must be less than the service's primary version. The key is the auxiliary service name and it must match the regular expression a-z?. This means that the first character must be a lowercase letter, and all the following characters must be hyphens, lowercase letters, or digits, except the last character, which cannot be a hyphen.
+          type: object
         configOverrides:
           additionalProperties:
             type: string
