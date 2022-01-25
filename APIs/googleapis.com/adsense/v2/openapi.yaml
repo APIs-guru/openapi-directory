@@ -1800,7 +1800,7 @@ components:
           description: Output only. For paid earnings, the date that the payment was credited. For unpaid earnings, this field is empty. Payment dates are always returned in the billing timezone (America/Los_Angeles).
           readOnly: true
         name:
-          description: "Resource name of the payment. Format: accounts/{account}/payments/unpaid for unpaid (current) earnings. accounts/{account}/payments/yyyy-MM-dd for paid earnings."
+          description: "Resource name of the payment. Format: - accounts/{account}/payments/unpaid for unpaid (current) AdSense earnings. - accounts/{account}/payments/youtube-unpaid for unpaid (current) YouTube earnings. - accounts/{account}/payments/yyyy-MM-dd for paid AdSense earnings. - accounts/{account}/payments/youtube-yyyy-MM-dd for paid YouTube earnings. "
           type: string
       type: object
     ReportResult:

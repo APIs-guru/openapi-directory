@@ -182,10 +182,10 @@ paths:
         - projects
   "/v2beta/{name}":
     delete:
-      description: Deletes a Product.
-      operationId: retail.projects.locations.catalogs.branches.products.delete
+      description: Deletes a ServingConfig. Returns a NotFound error if the ServingConfig does not exist.
+      operationId: retail.projects.locations.catalogs.servingConfigs.delete
       parameters:
-        - description: Required. Full resource name of Product, such as `projects/*/locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id`. If the caller does not have permission to delete the Product, regardless of whether or not it exists, a PERMISSION_DENIED error is returned. If the Product to delete does not exist, a NOT_FOUND error is returned. The Product to delete can neither be a Product.Type.COLLECTION Product member nor a Product.Type.PRIMARY Product with more than one variants. Otherwise, an INVALID_ARGUMENT error is returned. All inventory information for the named Product will be deleted.
+        - description: "Required. The resource name of the ServingConfig to delete. Format: projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}"
           in: path
           name: name
           required: true
@@ -242,21 +242,16 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates a Product.
-      operationId: retail.projects.locations.catalogs.branches.products.patch
+      description: Updates a ServingConfig.
+      operationId: retail.projects.locations.catalogs.servingConfigs.patch
       parameters:
-        - description: Immutable. Full resource name of the product, such as `projects/*/locations/global/catalogs/default_catalog/branches/default_branch/products/product_id`.
+        - description: Immutable. Fully qualified name projects/*/locations/global/catalogs/*/servingConfig/*
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: If set to true, and the Product is not found, a new Product will be created. In this situation, `update_mask` is ignored.
-          in: query
-          name: allowMissing
-          schema:
-            type: boolean
-        - description: Indicates which fields in the provided Product to update. The immutable and output only fields are NOT supported. If not set, all supported fields (the fields that are neither immutable nor output only) are updated. If an unsupported or unknown field is provided, an INVALID_ARGUMENT error is returned.
+        - description: "Indicates which fields in the provided ServingConfig to update. The following are NOT supported: * ServingConfig.name If not set, all supported fields are updated."
           in: query
           name: updateMask
           schema:
@@ -265,13 +260,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudRetailV2betaProduct"
+              $ref: "#/components/schemas/GoogleCloudRetailV2betaServingConfig"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudRetailV2betaProduct"
+                $ref: "#/components/schemas/GoogleCloudRetailV2betaServingConfig"
           description: Successful response
       security:
         - Oauth2:
@@ -463,6 +458,92 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v2beta/{parent}/controls":
+    get:
+      description: Lists all Controls linked to this catalog.
+      operationId: retail.projects.locations.catalogs.controls.list
+      parameters:
+        - description: "Required. The catalog resource name. Format: projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Optional. A filter to apply on the list results. Supported features: * List all the products under the parent branch if filter is unset. * List controls that are used in a single ServingConfig: 'serving_config = \"boosted_home_page_cvr\"'"
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Maximum number of results to return. If unspecified, defaults to 50. Max allowed value is 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A page token, received from a previous `ListControls` call. Provide this to retrieve the subsequent page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudRetailV2betaListControlsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a Control. If the Control to create already exists, an ALREADY_EXISTS error is returned.
+      operationId: retail.projects.locations.catalogs.controls.create
+      parameters:
+        - description: "Required. Full resource name of parent catalog. Format: projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID to use for the Control, which will become the final component of the Control's resource name. This value should be 4-63 characters, and valid characters are /a-z-_/.
+          in: query
+          name: controlId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudRetailV2betaControl"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudRetailV2betaControl"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v2beta/{parent}/products":
     get:
       description: Gets a list of Products.
@@ -588,6 +669,87 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2beta/{parent}/servingConfigs":
+    get:
+      description: Lists all ServingConfigs linked to this catalog.
+      operationId: retail.projects.locations.catalogs.servingConfigs.list
+      parameters:
+        - description: "Required. The catalog resource name. Format: projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Maximum number of results to return. If unspecified, defaults to 100. If a value greater than 100 is provided, at most 100 results are returned.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A page token, received from a previous `ListServingConfigs` call. Provide this to retrieve the subsequent page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudRetailV2betaListServingConfigsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a ServingConfig. A maximum of 100 ServingConfigs are allowed in a Catalog, otherwise a FAILED_PRECONDITION error is returned.
+      operationId: retail.projects.locations.catalogs.servingConfigs.create
+      parameters:
+        - description: "Required. Full resource name of parent. Format: projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID to use for the ServingConfig, which will become the final component of the ServingConfig's resource name. This value should be 4-63 characters, and valid characters are /a-z-_/.
+          in: query
+          name: servingConfigId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudRetailV2betaServingConfig"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudRetailV2betaServingConfig"
           description: Successful response
       security:
         - Oauth2:
@@ -976,6 +1138,90 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2beta/{servingConfig}:addControl":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Enables a Control on the specified ServingConfig. The control is added in the last position of the list of controls it belongs to (e.g. if it's a facet spec control it will be applied in the last position of servingConfig.facetSpecIds) Returns a ALREADY_EXISTS error if the control has already been applied. Returns a FAILED_PRECONDITION error if the addition could exceed maximum number of control allowed for that type of control.
+      operationId: retail.projects.locations.catalogs.servingConfigs.addControl
+      parameters:
+        - description: "Required. The source ServingConfig resource name . Format: projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}"
+          in: path
+          name: servingConfig
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudRetailV2betaAddControlRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudRetailV2betaServingConfig"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2beta/{servingConfig}:removeControl":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Disables a Control on the specified ServingConfig. The control is removed from the ServingConfig. Returns a NOT_FOUND error if the Control is not enabled for the ServingConfig.
+      operationId: retail.projects.locations.catalogs.servingConfigs.removeControl
+      parameters:
+        - description: "Required. The source ServingConfig resource name . Format: projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}"
+          in: path
+          name: servingConfig
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudRetailV2betaRemoveControlRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudRetailV2betaServingConfig"
           description: Successful response
       security:
         - Oauth2:
@@ -1478,6 +1724,13 @@ components:
           format: int64
           type: string
       type: object
+    GoogleCloudRetailV2betaAddControlRequest:
+      description: Request for AddControl method.
+      properties:
+        controlId:
+          description: Required. The id of the control to apply. Assumed to be in the same catalog as the serving config - if id is not found a NOT_FOUND error is returned.
+          type: string
+      type: object
     GoogleCloudRetailV2betaAddFulfillmentPlacesMetadata:
       description: Metadata related to the progress of the AddFulfillmentPlaces operation. Currently empty because there is no meaningful metadata populated from the AddFulfillmentPlaces method.
       properties: {}
@@ -1625,6 +1878,73 @@ components:
           description: End user selected CompleteQueryResponse.CompletionResult.suggestion.
           type: string
       type: object
+    GoogleCloudRetailV2betaCondition:
+      description: Metadata that is used to define a condition that triggers an action. A valid condition must specify at least one of 'query_terms' or 'products_filter'. If multiple fields are specified, the condition is met if all the fields are satisfied e.g. if a set of query terms and product_filter are set, then only items matching the product_filter for requests with a query matching the query terms wil get boosted.
+      properties:
+        activeTimeRange:
+          description: Range of time(s) specifying when Condition is active. Condition true if any time range matches.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRetailV2betaConditionTimeRange"
+          type: array
+        queryTerms:
+          description: A list (up to 10 entries) of terms to match the query on. If not specified, match all queries. If many query terms are specified, the condition is matched if any of the terms is a match (i.e. using the OR operator).
+          items:
+            $ref: "#/components/schemas/GoogleCloudRetailV2betaConditionQueryTerm"
+          type: array
+      type: object
+    GoogleCloudRetailV2betaConditionQueryTerm:
+      description: Query terms that we want to match on.
+      properties:
+        fullMatch:
+          description: Whether this is supposed to be a full or partial match.
+          type: boolean
+        value:
+          description: The value of the term to match on. Value cannot be empty. Value can have at most 3 terms if specified as a partial match. Each space separated string is considered as one term. Example) "a b c" is 3 terms and allowed, " a b c d" is 4 terms and not allowed for partial match.
+          type: string
+      type: object
+    GoogleCloudRetailV2betaConditionTimeRange:
+      description: "Used for time-dependent conditions. Example: Want to have rule applied for week long sale."
+      properties:
+        endTime:
+          description: End of time range. Range is inclusive.
+          format: google-datetime
+          type: string
+        startTime:
+          description: Start of time range. Range is inclusive.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudRetailV2betaControl:
+      description: Configures dynamic serving time metadata that is used to pre and post process search/recommendation model results.
+      properties:
+        associatedServingConfigIds:
+          description: Output only. List of serving configuration ids that that are associated with this control. Note the association is managed via the ServingConfig, this is an output only denormalizeed view. Assumed to be in the same catalog.
+          items:
+            type: string
+          readOnly: true
+          type: array
+        displayName:
+          description: Required. The human readable control display name. Used in Retail UI. This field must be a UTF-8 encoded string with a length limit of 128 characters. Otherwise, an INVALID_ARGUMENT error is thrown.
+          type: string
+        facetSpec:
+          $ref: "#/components/schemas/GoogleCloudRetailV2betaSearchRequestFacetSpec"
+          description: A facet specification to perform faceted search.
+        name:
+          description: Immutable. Fully qualified name projects/*/locations/global/catalogs/*/controls/*
+          type: string
+        rule:
+          $ref: "#/components/schemas/GoogleCloudRetailV2betaRule"
+          description: 'A rule control - a condition-action pair. Enacts a set action when the condition is triggered. For example: Boost "gShoe" when query full matches "Running Shoes".'
+        solutionTypes:
+          description: Required. Immutable. The solution types that the serving config is used for. Currently we support setting only one type of solution at creation time. Only `SOLUTION_TYPE_SEARCH` value is supported at the moment.
+          items:
+            enum:
+              - SOLUTION_TYPE_UNSPECIFIED
+              - SOLUTION_TYPE_RECOMMENDATION
+              - SOLUTION_TYPE_SEARCH
+            type: string
+          type: array
+      type: object
     GoogleCloudRetailV2betaCustomAttribute:
       description: A custom attribute that is not explicitly modeled in Product.
       properties:
@@ -1705,7 +2025,7 @@ components:
       description: Google Cloud Storage location for input content. format.
       properties:
         dataSchema:
-          description: "The schema to use when parsing the data from the source. Supported values for product imports: * `product` (default): One JSON Product per line. Each product must have a valid Product.id. * `product_merchant_center`: See [Importing catalog data from Merchant Center](https://cloud.google.com/retail/recommendations-ai/docs/upload-catalog#mc). Supported values for user events imports: * `user_event` (default): One JSON UserEvent per line. * `user_event_ga360`: Using https://support.google.com/analytics/answer/3437719. Supported values for control imports: * 'control' (default): One JSON Control per line."
+          description: "The schema to use when parsing the data from the source. Supported values for product imports: * `product` (default): One JSON Product per line. Each product must have a valid Product.id. * `product_merchant_center`: See [Importing catalog data from Merchant Center](https://cloud.google.com/retail/recommendations-ai/docs/upload-catalog#mc). Supported values for user events imports: * `user_event` (default): One JSON UserEvent per line. * `user_event_ga360`: Using https://support.google.com/analytics/answer/3437719. Supported values for control imports: * 'control' (default): One JSON Control per line. Supported values for catalog attribute imports: * 'catalog_attribute' (default): One CSV CatalogAttribute per line."
           type: string
         inputUris:
           description: Required. Google Cloud Storage URIs to input files. URI can be up to 2000 characters long. URIs can match the full object path (for example, `gs://bucket/directory/object.json`) or a pattern matching one or more files, such as `gs://bucket/directory/*.json`. A request can contain at most 100 files, and each file can be up to 2 GB. See [Importing product information](https://cloud.google.com/retail/recommendations-ai/docs/upload-catalog) for the expected file format and setup instructions.
@@ -1890,6 +2210,18 @@ components:
           description: A token that can be sent as ListCatalogsRequest.page_token to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
       type: object
+    GoogleCloudRetailV2betaListControlsResponse:
+      description: Response for ListControls method.
+      properties:
+        controls:
+          description: All the Controls for a given catalog.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRetailV2betaControl"
+          type: array
+        nextPageToken:
+          description: Pagination token, if not returned indicates the last page.
+          type: string
+      type: object
     GoogleCloudRetailV2betaListProductsResponse:
       description: Response message for ProductService.ListProducts method.
       properties:
@@ -1900,6 +2232,18 @@ components:
           description: The Products.
           items:
             $ref: "#/components/schemas/GoogleCloudRetailV2betaProduct"
+          type: array
+      type: object
+    GoogleCloudRetailV2betaListServingConfigsResponse:
+      description: Response for ListServingConfigs method.
+      properties:
+        nextPageToken:
+          description: Pagination token, if not returned indicates the last page.
+          type: string
+        servingConfigs:
+          description: All the ServingConfigs for a given catalog.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRetailV2betaServingConfig"
           type: array
       type: object
     GoogleCloudRetailV2betaPredictRequest:
@@ -2042,7 +2386,7 @@ components:
             type: string
           type: array
         collectionMemberIds:
-          description: The id of the collection members when type is Type.COLLECTION. Should not set it for other types. A maximum of 1000 values are allowed. Otherwise, an INVALID_ARGUMENT error is return.
+          description: The id of the collection members when type is Type.COLLECTION. Non-existent product ids are allowed. The type of the members must be either Type.PRIMARY or Type.VARIANT otherwise and INVALID_ARGUMENT error is thrown. Should not set it for other types. A maximum of 1000 values are allowed. Otherwise, an INVALID_ARGUMENT error is return.
           items:
             type: string
           type: array
@@ -2285,6 +2629,13 @@ components:
           format: int64
           type: string
       type: object
+    GoogleCloudRetailV2betaRemoveControlRequest:
+      description: Request for RemoveControl method.
+      properties:
+        controlId:
+          description: Required. The id of the control to apply. Assumed to be in the same catalog as the serving config.
+          type: string
+      type: object
     GoogleCloudRetailV2betaRemoveFulfillmentPlacesMetadata:
       description: Metadata related to the progress of the RemoveFulfillmentPlaces operation. Currently empty because there is no meaningful metadata populated from the RemoveFulfillmentPlaces method.
       properties: {}
@@ -2311,6 +2662,133 @@ components:
     GoogleCloudRetailV2betaRemoveFulfillmentPlacesResponse:
       description: Response of the RemoveFulfillmentPlacesRequest. Currently empty because there is no meaningful response populated from the RemoveFulfillmentPlaces method.
       properties: {}
+      type: object
+    GoogleCloudRetailV2betaRule:
+      description: A rule is a condition-action pair * A condition defines when a rule is to be triggered. * An action specifies what occurs on that trigger. Currently only boost rules are supported. Currently only supported by the search endpoint.
+      properties:
+        boostAction:
+          $ref: "#/components/schemas/GoogleCloudRetailV2betaRuleBoostAction"
+          description: A boost action.
+        condition:
+          $ref: "#/components/schemas/GoogleCloudRetailV2betaCondition"
+          description: Required. The condition that triggers the rule. If the condition is empty, the rule will always apply.
+        doNotAssociateAction:
+          $ref: "#/components/schemas/GoogleCloudRetailV2betaRuleDoNotAssociateAction"
+          description: Prevents term from being associated with other terms.
+        filterAction:
+          $ref: "#/components/schemas/GoogleCloudRetailV2betaRuleFilterAction"
+          description: Filters results.
+        ignoreAction:
+          $ref: "#/components/schemas/GoogleCloudRetailV2betaRuleIgnoreAction"
+          description: Ignores specific terms from query during search.
+        onewaySynonymsAction:
+          $ref: "#/components/schemas/GoogleCloudRetailV2betaRuleOnewaySynonymsAction"
+          description: Treats specific term as a synonym with a group of terms. Group of terms will not be treated as synonyms with the specific term.
+        redirectAction:
+          $ref: "#/components/schemas/GoogleCloudRetailV2betaRuleRedirectAction"
+          description: Redirects a shopper to a specific page.
+        replacementAction:
+          $ref: "#/components/schemas/GoogleCloudRetailV2betaRuleReplacementAction"
+          description: Replaces specific terms in the query.
+        twowaySynonymsAction:
+          $ref: "#/components/schemas/GoogleCloudRetailV2betaRuleTwowaySynonymsAction"
+          description: Treats a set of terms as synonyms of one another.
+      type: object
+    GoogleCloudRetailV2betaRuleBoostAction:
+      description: A boost action to apply to results matching condition specified above.
+      properties:
+        boost:
+          description: Strength of the condition boost, which must be in [-1, 1]. Negative boost means demotion. Default is 0.0. Setting to 1.0 gives the item a big promotion. However, it does not necessarily mean that the boosted item will be the top result at all times, nor that other items will be excluded. Results could still be shown even when none of them matches the condition. And results that are significantly more relevant to the search query can still trump your heavily favored but irrelevant items. Setting to -1.0 gives the item a big demotion. However, results that are deeply relevant might still be shown. The item will have an upstream battle to get a fairly high ranking, but it is not blocked out completely. Setting to 0.0 means no boost applied. The boosting condition is ignored.
+          format: float
+          type: number
+        productsFilter:
+          description: 'The filter can have a max size of 5000 characters. An expression which specifies which products to apply an action to. The syntax and supported fields are the same as a filter expression. See SearchRequest.filter for detail syntax and limitations. Examples: * To boost products with product ID "product_1" or "product_2", and color "Red" or "Blue": *(id: ANY("product_1", "product_2")) * *AND * *(colorFamilies: ANY("Red", "Blue")) *'
+          type: string
+      type: object
+    GoogleCloudRetailV2betaRuleDoNotAssociateAction:
+      description: "Prevents `query_term` from being associated with specified terms during search. Example: Don't associate \"gShoe\" and \"cheap\"."
+      properties:
+        doNotAssociateTerms:
+          description: Cannot contain duplicates or the query term. Can specify up to 100 terms.
+          items:
+            type: string
+          type: array
+        queryTerms:
+          description: Terms from the search query. Will not consider do_not_associate_terms for search if in search query. Can specify up to 100 terms.
+          items:
+            type: string
+          type: array
+        terms:
+          description: Will be [deprecated = true] post migration;
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudRetailV2betaRuleFilterAction:
+      description: "* Rule Condition: - No Condition provided is a global match. - 1 or more Condition provided is combined with OR operator. * Action Input: The request query and filter that will be applied to the retrieved products, in addition to any filters already provided with the SearchRequest. The AND operator is used to combine the query's existing filters with the filter rule(s). NOTE: May result in 0 results when filters conflict. * Action Result: Filters the returned objects to be ONLY those that passed the filter."
+      properties:
+        filter:
+          description: 'A filter to apply on the matching condition results. Supported features: * filter must be set. * Filter syntax is identical to SearchRequest.filter. See more details at the Retail Search [user guide](/retail/search/docs/filter-and-order#filter). * To filter products with product ID "product_1" or "product_2", and color "Red" or "Blue": *(id: ANY("product_1", "product_2")) * *AND * *(colorFamilies: ANY("Red", "Blue")) *'
+          type: string
+      type: object
+    GoogleCloudRetailV2betaRuleIgnoreAction:
+      description: "Prevents a term in the query from being used in search. Example: Don't search for \"shoddy\"."
+      properties:
+        ignoreTerms:
+          description: Terms to ignore in the search query.
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudRetailV2betaRuleOnewaySynonymsAction:
+      description: 'Maps a set of terms to a set of synonyms. Set of synonyms will be treated as synonyms of each query term only. `query_terms` will not be treated as synonyms of each other. Example: "sneakers" will use a synonym of "shoes". "shoes" will not use a synonym of "sneakers".'
+      properties:
+        onewayTerms:
+          description: Will be [deprecated = true] post migration;
+          items:
+            type: string
+          type: array
+        queryTerms:
+          description: Terms from the search query. Will treat synonyms as their synonyms. Not themselves synonyms of the synonyms. Can specify up to 100 terms.
+          items:
+            type: string
+          type: array
+        synonyms:
+          description: Defines a set of synonyms. Cannot contain duplicates. Can specify up to 100 synonyms.
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudRetailV2betaRuleRedirectAction:
+      description: "Redirects a shopper to a specific page. * Rule Condition: - Must specify Condition. * Action Input: Request Query * Action Result: Redirects shopper to provided uri."
+      properties:
+        redirectUri:
+          description: URL must have length equal or less than 2000 characters.
+          type: string
+      type: object
+    GoogleCloudRetailV2betaRuleReplacementAction:
+      description: 'Replaces a term in the query. Multiple replacement candidates can be specified. All `query_terms` will be replaced with the replacement term. Example: Replace "gShoe" with "google shoe".'
+      properties:
+        queryTerms:
+          description: Terms from the search query. Will be replaced by replacement term. Can specify up to 100 terms.
+          items:
+            type: string
+          type: array
+        replacementTerm:
+          description: Term that will be used for replacement.
+          type: string
+        term:
+          description: Will be [deprecated = true] post migration;
+          type: string
+      type: object
+    GoogleCloudRetailV2betaRuleTwowaySynonymsAction:
+      description: 'Creates a set of terms that will be treated as synonyms of each other. Example: synonyms of "sneakers" and "shoes". * "sneakers" will use a synonym of "shoes". * "shoes" will use a synonym of "sneakers".'
+      properties:
+        synonyms:
+          description: Defines a set of synonyms. Can specify up to 100 synonyms. Must specify at least 2 synonyms.
+          items:
+            type: string
+          type: array
       type: object
     GoogleCloudRetailV2betaSearchRequest:
       description: Request message for SearchService.Search method.
@@ -2577,6 +3055,85 @@ components:
           additionalProperties: {}
           description: 'The rollup matching variant Product attributes. The key is one of the SearchRequest.variant_rollup_keys. The values are the merged and de-duplicated Product attributes. Notice that the rollup values are respect filter. For example, when filtering by "colorFamilies:ANY(\"red\")" and rollup "colorFamilies", only "red" is returned. For textual and numerical attributes, the rollup values is a list of string or double values with type google.protobuf.ListValue. For example, if there are two variants with colors "red" and "blue", the rollup values are { key: "colorFamilies" value { list_value { values { string_value: "red" } values { string_value: "blue" } } } } For FulfillmentInfo, the rollup values is a double value with type google.protobuf.Value. For example, `{key: "pickupInStore.store1" value { number_value: 10 }}` means a there are 10 variants in this product are available in the store "store1".'
           type: object
+      type: object
+    GoogleCloudRetailV2betaServingConfig:
+      description: Configures metadata that is used to generate serving time results (e.g. search results or recommendation predictions). The ServingConfig is passed in the search and predict request and together with the Catalog.default_branch, generates results.
+      properties:
+        boostControlIds:
+          description: Condition boost specifications. If a product matches multiple conditions in the specifications, boost scores from these specifications are all applied and combined in a non-linear way. Maximum number of specifications is 10. Notice that if both ServingConfig.boost_control_ids and [SearchRequest.boost_spec] are set, the boost conditions from both places are evaluated. If a search request matches multiple boost conditions, the final boost score is equal to the sum of the boost scores from all matched boost conditions. Can only be set if solution_types is SOLUTION_TYPE_SEARCH.
+          items:
+            type: string
+          type: array
+        displayName:
+          description: Required. The human readable serving config display name. Used in Retail UI. This field must be a UTF-8 encoded string with a length limit of 128 characters. Otherwise, an INVALID_ARGUMENT error is returned.
+          type: string
+        diversityLevel:
+          description: "How much diversity to use in recommendation model results e.g. 'medium-diversity' or 'high-diversity'. Currently supported values: * 'no-diversity' * 'low-diversity' * 'medium-diversity' * 'high-diversity' * 'auto-diversity' If not specified, we choose default based on recommendation model type. Default value: 'no-diversity'. Can only be set if solution_types is SOLUTION_TYPE_RECOMMENDATION."
+          type: string
+        doNotAssociateControlIds:
+          description: Condition do not associate specifications. If multiple do not associate conditions match, all matching do not associate controls in the list will execute. - Order does not matter. - Maximum number of specifications is 100. Can only be set if solution_types is SOLUTION_TYPE_SEARCH.
+          items:
+            type: string
+          type: array
+        dynamicFacetSpec:
+          $ref: "#/components/schemas/GoogleCloudRetailV2betaSearchRequestDynamicFacetSpec"
+          description: The specification for dynamically generated facets. Notice that only textual facets can be dynamically generated. Can only be set if solution_types is SOLUTION_TYPE_SEARCH.
+        enableCategoryFilterLevel:
+          description: "Whether to add additional category filters on the 'similar-items' model. If not specified, we enable it by default. Allowed values are: * 'no-category-match': No additional filtering of original results from the model and the customer's filters. * 'relaxed-category-match': Only keep results with categories that match at least one item categories in the PredictRequests's context item. * If customer also sends filters in the PredictRequest, then the results will satisfy both conditions (user given and category match). Can only be set if solution_types is SOLUTION_TYPE_RECOMMENDATION."
+          type: string
+        facetControlIds:
+          description: Facet specifications for faceted search. If empty, no facets are returned. The ids refer to the ids of Control resources with only the Facet control set. These controls are assumed to be in the same Catalog as the ServingConfig. A maximum of 100 values are allowed. Otherwise, an INVALID_ARGUMENT error is returned. Can only be set if solution_types is SOLUTION_TYPE_SEARCH.
+          items:
+            type: string
+          type: array
+        filterControlIds:
+          description: Condition filter specifications. If a product matches multiple conditions in the specifications, filters from these specifications are all applied and combined via the AND operator. Maximum number of specifications is 100. Can only be set if solution_types is SOLUTION_TYPE_SEARCH.
+          items:
+            type: string
+          type: array
+        ignoreControlIds:
+          description: Condition ignore specifications. If multiple ignore conditions match, all matching ignore controls in the list will execute. - Order does not matter. - Maximum number of specifications is 100. Can only be set if solution_types is SOLUTION_TYPE_SEARCH.
+          items:
+            type: string
+          type: array
+        modelId:
+          description: "The id of the model to use at serving time. Currently only RecommendationModels are supported: https://cloud.google.com/retail/recommendations-ai/docs/create-models Can be changed but only to a compatible model (e.g. others-you-may-like CTR to others-you-may-like CVR). Required when solution_types is SOLUTION_TYPE_RECOMMENDATION."
+          type: string
+        name:
+          description: Immutable. Fully qualified name projects/*/locations/global/catalogs/*/servingConfig/*
+          type: string
+        onewaySynonymsControlIds:
+          description: Condition oneway synonyms specifications. If multiple oneway synonyms conditions match, all matching oneway synonyms controls in the list will execute. Order of controls in the list will not matter. Maximum number of specifications is 100. Can only be set if solution_types is SOLUTION_TYPE_SEARCH.
+          items:
+            type: string
+          type: array
+        priceRerankingLevel:
+          description: "How much price ranking we want in serving results. Price reranking causes product items with a similar recommendation probability to be ordered by price, with the highest-priced items first. This setting could result in a decrease in click-through and conversion rates. Allowed values are: * 'no-price-reranking' * 'low-price-raranking' * 'medium-price-reranking' * 'high-price-reranking' If not specified, we choose default based on model type. Default value: 'no-price-reranking'. Can only be set if solution_types is SOLUTION_TYPE_RECOMMENDATION."
+          type: string
+        redirectControlIds:
+          description: Condition redirect specifications. Only the first triggered redirect action is applied, even if multiple apply. Maximum number of specifications is 100. Can only be set if solution_types is SOLUTION_TYPE_SEARCH.
+          items:
+            type: string
+          type: array
+        replacementControlIds:
+          description: Condition replacement specifications. - Applied according to the order in the list. - A previously replaced term can not be re-replaced. - Maximum number of specifications is 100. Can only be set if solution_types is SOLUTION_TYPE_SEARCH.
+          items:
+            type: string
+          type: array
+        solutionTypes:
+          description: Required. Immutable. Specifies the solution types that a serving config can be associated with. Currently we support setting only one type of solution.
+          items:
+            enum:
+              - SOLUTION_TYPE_UNSPECIFIED
+              - SOLUTION_TYPE_RECOMMENDATION
+              - SOLUTION_TYPE_SEARCH
+            type: string
+          type: array
+        twowaySynonymsControlIds:
+          description: Condition synonyms specifications. If multiple syonyms conditions match, all matching synonyms control in the list will execute. Order of controls in the list will not matter. Maximum number of specifications is 100. Can only be set if solution_types is SOLUTION_TYPE_SEARCH.
+          items:
+            type: string
+          type: array
       type: object
     GoogleCloudRetailV2betaSetDefaultBranchRequest:
       description: Request message to set a specified branch as new default_branch.
