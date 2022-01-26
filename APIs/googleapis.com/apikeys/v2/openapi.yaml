@@ -230,7 +230,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Clones the existing key's restriction and display name to a new API key. The service account must have the `apikeys.keys.get` and `apikeys.keys.create` permissions in the project. NOTE: Key is a global resource; hence the only supported value for location is `global`."
+      description: "DEPRECATED: API customers can call `GetKey` and then `CreateKey` methods to create a copy of an existing key. Retire `CloneKey` method to eliminate the unnessary method from API Keys API. Clones the existing key's restriction and display name to a new API key. The service account must have the `apikeys.keys.get` and `apikeys.keys.create` permissions in the project. NOTE: Key is a global resource; hence the only supported value for location is `global`."
       operationId: apikeys.projects.locations.keys.clone
       parameters:
         - description: Required. The resource name of the API key to be cloned in the same project.
@@ -311,7 +311,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. Only list keys that conform to the specified filter. The allowed filter strings are `state:ACTIVE` and `state:DELETED`. By default, ListKeys returns only active keys.
+        - description: "Optional. Deprecated: Use `show_deleted` instead. Only list keys that conform to the specified filter. The allowed filter strings are `state:ACTIVE` and `state:DELETED`. By default, ListKeys returns only active keys."
           in: query
           name: filter
           schema:
@@ -326,6 +326,11 @@ paths:
           name: pageToken
           schema:
             type: string
+        - description: Optional. Indicate that keys are marked as deleted within 30 days should also be returned. Normally only active keys are returned.
+          in: query
+          name: showDeleted
+          schema:
+            type: boolean
       responses:
         "200":
           content:

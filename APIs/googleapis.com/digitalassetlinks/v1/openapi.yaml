@@ -35,6 +35,36 @@ tags:
   - name: assetlinks
   - name: statements
 paths:
+  /v1/assetlinks:bulkCheck:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Send a bundle of statement checks in a single RPC to minimize latency and service load. Statements need not be all for the same source and/or target. We recommend using this method when you need to check more than one statement in a short period of time.
+      operationId: digitalassetlinks.assetlinks.bulkCheck
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BulkCheckRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BulkCheckResponse"
+          description: Successful response
+      tags:
+        - assetlinks
   /v1/assetlinks:check:
     get:
       description: "Determines whether the specified (directional) relationship exists between the specified source and target assets. The relation describes the intent of the link between the two assets as claimed by the source asset. An example for such relationships is the delegation of privileges or permissions. This command is most often used by infrastructure systems to check preconditions for an action. For example, a client may want to know if it is OK to send a web URL to a particular mobile app instead. The client can check for the relevant asset link from the website to the mobile app to decide if the operation should be allowed. A note about security: if you specify a secure asset as the source, such as an HTTPS website or an Android app, the API will ensure that any statements used to generate the response have been made in a secure way by the owner of that asset. Conversely, if the source asset is an insecure HTTP website (that is, the URL starts with `http://` instead of `https://`), the API cannot verify its statements securely, and it is not possible to ensure that the website's statements have not been altered by a third party. For more information, see the [Digital Asset Links technical design specification](https://github.com/google/digitalassetlinks/blob/master/well-known/details.md)."
@@ -238,6 +268,54 @@ components:
           $ref: "#/components/schemas/WebAsset"
           description: Set if this is a web asset.
       type: object
+    BulkCheckRequest:
+      description: Message used to check for the existence of multiple digital asset links within a single RPC.
+      properties:
+        allowGoogleInternalDataSources:
+          description: Same configuration as in Check request, all statements checks will use same configurations.
+          type: boolean
+        defaultRelation:
+          description: If specified, will be used in any given template statement that doesn’t specify a relation.
+          type: string
+        defaultSource:
+          $ref: "#/components/schemas/Asset"
+          description: If specified, will be used in any given template statement that doesn’t specify a source.
+        defaultTarget:
+          $ref: "#/components/schemas/Asset"
+          description: If specified, will be used in any given template statement that doesn’t specify a target.
+        skipCacheLookup:
+          description: Same configuration as in Check request, all statements checks will use same configurations.
+          type: boolean
+        statements:
+          description: List of statements to check. For each statement, you can omit a field if the corresponding default_* field below was supplied. Minimum 1 statement; maximum 1,000 statements. Any additional statements will be ignored.
+          items:
+            $ref: "#/components/schemas/StatementTemplate"
+          type: array
+      type: object
+    BulkCheckResponse:
+      description: Response for BulkCheck call. Results are sent in a list in the same order in which they were sent. Individual check errors are described in the appropriate check_results entry. If the entire call fails, the response will include a bulk_error_code field describing the error.
+      properties:
+        bulkErrorCode:
+          description: Error code for the entire request. Present only if the entire request failed. Individual check errors will not trigger the presence of this field.
+          enum:
+            - ERROR_CODE_UNSPECIFIED
+            - ERROR_CODE_INVALID_QUERY
+            - ERROR_CODE_FETCH_ERROR
+            - ERROR_CODE_FAILED_SSL_VALIDATION
+            - ERROR_CODE_REDIRECT
+            - ERROR_CODE_TOO_LARGE
+            - ERROR_CODE_MALFORMED_HTTP_RESPONSE
+            - ERROR_CODE_WRONG_CONTENT_TYPE
+            - ERROR_CODE_MALFORMED_CONTENT
+            - ERROR_CODE_SECURE_ASSET_INCLUDES_INSECURE
+            - ERROR_CODE_FETCH_BUDGET_EXHAUSTED
+          type: string
+        checkResults:
+          description: List of results for each check request. Results are returned in the same order in which they were sent in the request.
+          items:
+            $ref: "#/components/schemas/CheckResponse"
+          type: array
+      type: object
     CertificateInfo:
       description: Describes an X509 certificate.
       properties:
@@ -321,6 +399,19 @@ components:
         target:
           $ref: "#/components/schemas/Asset"
           description: Every statement has a target asset. REQUIRED
+      type: object
+    StatementTemplate:
+      description: A single statement to check in a bulk call using BulkCheck. See CheckRequest for details about each field.
+      properties:
+        relation:
+          description: The relationship being asserted between the source and target. If omitted, you must specify a BulkCheckRequest.default_relation value to use here.
+          type: string
+        source:
+          $ref: "#/components/schemas/Asset"
+          description: The source asset that is asserting the statement. If omitted, you must specify a BulkCheckRequest.default_source value to use here.
+        target:
+          $ref: "#/components/schemas/Asset"
+          description: The target that the source is declaring the relationship with. If omitted, you must specify a BulkCheckRequest.default_target to use here.
       type: object
     WebAsset:
       description: Describes a web asset.
