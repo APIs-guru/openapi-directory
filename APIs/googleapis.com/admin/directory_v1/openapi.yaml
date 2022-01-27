@@ -2728,7 +2728,7 @@ paths:
           name: customer
           schema:
             type: string
-        - description: The domain name. Use this field to get fields from only one domain. To return all domains for a customer account, use the `customer` query parameter instead.
+        - description: The domain name. Use this field to get groups from only one domain. To return all domains for a customer account, use the `customer` query parameter instead.
           in: query
           name: domain
           schema:
@@ -3385,7 +3385,7 @@ paths:
           name: customer
           schema:
             type: string
-        - description: The domain name. Use this field to get fields from only one domain. To return all domains for a customer account, use the `customer` query parameter instead. Either the `customer` or the `domain` parameter must be provided.
+        - description: The domain name. Use this field to get groups from only one domain. To return all domains for a customer account, use the `customer` query parameter instead. Either the `customer` or the `domain` parameter must be provided.
           in: query
           name: domain
           schema:

@@ -2071,7 +2071,7 @@ components:
           description: 'Optional. Type of the boot disk (default is "pd-standard"). Valid values: "pd-balanced" (Persistent Disk Balanced Solid State Drive), "pd-ssd" (Persistent Disk Solid State Drive), or "pd-standard" (Persistent Disk Hard Disk Drive). See Disk types (https://cloud.google.com/compute/docs/disks#disk-types).'
           type: string
         localSsdInterface:
-          description: 'Optional. Interface type of local SSDs (default is "scsi"). Valid values: "scsi" (Small Computer System Interface), "nvme" (Non-Volatile Memory Express). See SSD Interface types (https://cloud.google.com/compute/docs/disks/local-ssd#performance).'
+          description: 'Optional. Interface type of local SSDs (default is "scsi"). Valid values: "scsi" (Small Computer System Interface), "nvme" (Non-Volatile Memory Express). See local SSD performance (https://cloud.google.com/compute/docs/disks/local-ssd#performance).'
           type: string
         numLocalSsds:
           description: Optional. Number of attached SSDs, from 0 to 4 (default is 0). If SSDs are not attached, the boot disk is used to store runtime logs and HDFS (https://hadoop.apache.org/docs/r1.2.1/hdfs_user_guide.html) data. If one or more SSDs are attached, this runtime bulk data is spread across them, and the boot disk contains only basic config and installed binaries.
@@ -3229,7 +3229,7 @@ components:
           type: object
       type: object
     SparkBatch:
-      description: A configuration for running an Apache Spark (http://spark.apache.org/) batch workload.
+      description: A configuration for running an Apache Spark (https://spark.apache.org/) batch workload.
       properties:
         archiveUris:
           description: "Optional. HCFS URIs of archives to be extracted into the working directory of each executor. Supported file types: .jar, .tar, .tar.gz, .tgz, and .zip."
@@ -3266,7 +3266,7 @@ components:
           type: string
       type: object
     SparkJob:
-      description: A Dataproc job for running Apache Spark (http://spark.apache.org/) applications on YARN.
+      description: A Dataproc job for running Apache Spark (https://spark.apache.org/) applications on YARN.
       properties:
         archiveUris:
           description: "Optional. HCFS URIs of archives to be extracted into the working directory of each executor. Supported file types: .jar, .tar, .tar.gz, .tgz, and .zip."
@@ -3356,7 +3356,7 @@ components:
           type: object
       type: object
     SparkSqlBatch:
-      description: A configuration for running Apache Spark SQL (http://spark.apache.org/sql/) queries as a batch workload.
+      description: A configuration for running Apache Spark SQL (https://spark.apache.org/sql/) queries as a batch workload.
       properties:
         jarFileUris:
           description: Optional. HCFS URIs of jar files to be added to the Spark CLASSPATH.
@@ -3373,7 +3373,7 @@ components:
           type: object
       type: object
     SparkSqlJob:
-      description: A Dataproc job for running Apache Spark SQL (http://spark.apache.org/sql/) queries.
+      description: A Dataproc job for running Apache Spark SQL (https://spark.apache.org/sql/) queries.
       properties:
         jarFileUris:
           description: Optional. HCFS URIs of jar files to be added to the Spark CLASSPATH.
