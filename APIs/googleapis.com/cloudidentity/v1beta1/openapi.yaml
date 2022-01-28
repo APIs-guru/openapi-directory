@@ -13,15 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Identity API
   version: v1beta1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://cloudidentity.googleapis.com/$discovery/rest?version=v1beta1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: cloudidentity
 externalDocs:
@@ -30,6 +32,7 @@ tags:
   - name: customers
   - name: devices
   - name: groups
+  - name: orgUnits
 paths:
   /v1beta1/devices:
     get:
@@ -655,6 +658,43 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - groups
+  "/v1beta1/{name}:move":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "Move an OrgMembership to a new OrgUnit. NOTE: This is an atomic copy-and-delete. The resource will have a new copy under the destination OrgUnit and be deleted from the source OrgUnit. The resource can only be searched under the destination OrgUnit afterwards."
+      operationId: cloudidentity.orgUnits.memberships.move
+      parameters:
+        - description: "Required. Immutable. The [resource name](https://cloud.google.com/apis/design/resource_names) of the OrgMembership. Format: orgUnits/{$orgUnitId}/memberships/{$membership} The `$orgUnitId` is the `orgUnitId` from the [Admin SDK `OrgUnit` resource](https://developers.google.com/admin-sdk/directory/reference/rest/v1/orgunits), The `$membership` shall be of the form `{$entityType};{$memberId}`, where `$entityType` is the enum value of OrgMembership.EntityType, and `memberId` is the `id` from [Drive API (V3) `Drive` resource](https://developers.google.com/drive/api/v3/reference/drives#resource) for OrgMembership.EntityType.SHARED_DRIVE."
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MoveOrgMembershipRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      tags:
+        - orgUnits
   "/v1beta1/{name}:send":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -783,39 +823,44 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1beta1/{parent}/memberships":
     get:
-      description: Lists the `Membership`s within a `Group`.
-      operationId: cloudidentity.groups.memberships.list
+      description: "List OrgMembership resources in an OrgUnit treated as 'parent'. Parent format: orgUnits/{$orgUnitId} where `$orgUnitId` is the `orgUnitId` from the [Admin SDK `OrgUnit` resource](https://developers.google.com/admin-sdk/directory/reference/rest/v1/orgunits)"
+      operationId: cloudidentity.orgUnits.memberships.list
       parameters:
-        - description: Required. The parent `Group` resource under which to lookup the `Membership` name. Must be of the form `groups/{group_id}`.
+        - description: "Required. Immutable. OrgUnit which is queried for a list of memberships. Format: orgUnits/{$orgUnitId} where `$orgUnitId` is the `orgUnitId` from the [Admin SDK `OrgUnit` resource](https://developers.google.com/admin-sdk/directory/reference/rest/v1/orgunits)."
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: The maximum number of results to return. Note that the number of results returned may be less than this value even if there are more available results. To fetch all results, clients must continue calling this method repeatedly until the response no longer contains a `next_page_token`. If unspecified, defaults to 200 for `GroupView.BASIC` and to 50 for `GroupView.FULL`. Must not be greater than 1000 for `GroupView.BASIC` or 500 for `GroupView.FULL`.
+        - description: "Required. Immutable. Customer that this OrgMembership belongs to. All authorization will happen on the role assignments of this customer. Format: customers/{$customerId} where `$customerId` is the `id` from the [Admin SDK `Customer` resource](https://developers.google.com/admin-sdk/directory/reference/rest/v1/customers). You may also use `customers/my_customer` to specify your own organization."
           in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: The `next_page_token` value returned from a previous search request, if any.
-          in: query
-          name: pageToken
+          name: customer
           schema:
             type: string
-        - description: The level of detail to be returned. If unspecified, defaults to `MembershipView.BASIC`.
+        - description: The search query. Must be specified in [Common Expression Language](https://opensource.google/projects/cel). May only contain equality operators on the `type` (e.g., `type == 'shared_drive'`).
           in: query
-          name: view
+          name: filter
+          schema:
+            type: string
+        - description: The maximum number of results to return. The service may return fewer than this value. If omitted (or defaulted to zero) the server will default to 50. The maximum allowed value is 100, though requests with page_size greater than that will be silently interpreted as 100.
+          in: query
+          name: pageSize
           schema:
             enum:
               - BASIC
               - FULL
+            type: integer
+        - description: A page token, received from a previous `OrgMembershipsService.ListOrgMemberships` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListOrgMembershipsRequest` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
             type: string
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ListMembershipsResponse"
+                $ref: "#/components/schemas/ListOrgMembershipsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -831,7 +876,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - groups
+        - orgUnits
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2289,7 +2334,7 @@ components:
           description: Optional. Dynamic group metadata like queries and status.
         groupKey:
           $ref: "#/components/schemas/EntityKey"
-          description: Required. Immutable. The `EntityKey` of the `Group`.
+          description: Required. The `EntityKey` of the `Group`.
         labels:
           additionalProperties:
             type: string
@@ -2410,6 +2455,18 @@ components:
         nextPageToken:
           description: A continuation token to retrieve the next page of results, or empty if there are no more results available.
           type: string
+      type: object
+    ListOrgMembershipsResponse:
+      description: The response message for OrgMembershipsService.ListOrgMemberships.
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is empty, there are no subsequent pages.
+          type: string
+        orgMemberships:
+          description: The non-vacuous membership in an orgUnit.
+          items:
+            $ref: "#/components/schemas/OrgMembership"
+          type: array
       type: object
     ListUserInvitationsResponse:
       description: Response message for UserInvitation listing request.
@@ -2593,6 +2650,16 @@ components:
           $ref: "#/components/schemas/Membership"
           description: The `Membership` resource after modifying its `MembershipRole`s.
       type: object
+    MoveOrgMembershipRequest:
+      description: The request message for OrgMembershipsService.MoveOrgMembership.
+      properties:
+        customer:
+          description: "Required. Immutable. Customer on whose membership change is made. All authorization will happen on the role assignments of this customer. Format: customers/{$customerId} where `$customerId` is the `id` from the [Admin SDK `Customer` resource](https://developers.google.com/admin-sdk/directory/reference/rest/v1/customers). You may also use `customers/my_customer` to specify your own organization."
+          type: string
+        destinationOrgUnit:
+          description: "Required. Immutable. OrgUnit where the membership will be moved to. Format: orgUnits/{$orgUnitId} where `$orgUnitId` is the `orgUnitId` from the [Admin SDK `OrgUnit` resource](https://developers.google.com/admin-sdk/directory/reference/rest/v1/orgunits)."
+          type: string
+      type: object
     Operation:
       description: This resource represents a long-running operation that is the result of a network API call.
       properties:
@@ -2615,6 +2682,25 @@ components:
             description: Properties of the object. Contains field @type with type URL.
           description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
+      type: object
+    OrgMembership:
+      description: A membership in an OrgUnit. An `OrgMembership` defines a relationship between an `OrgUnit` and an entity belonging to that `OrgUnit`, referred to as a "member".
+      properties:
+        member:
+          description: "Immutable. Org member id as full resource name. Format for shared drive resource: //drive.googleapis.com/drives/{$memberId} where `$memberId` is the `id` from [Drive API (V3) `Drive` resource](https://developers.google.com/drive/api/v3/reference/drives#resource)."
+          type: string
+        memberUri:
+          description: "Uri with which you can read the member. This follows https://aip.dev/122 Format for shared drive resource: https://drive.googleapis.com/drive/v3/drives/{$memberId} where `$memberId` is the `id` from [Drive API (V3) `Drive` resource](https://developers.google.com/drive/api/v3/reference/drives#resource)."
+          type: string
+        name:
+          description: "Required. Immutable. The [resource name](https://cloud.google.com/apis/design/resource_names) of the OrgMembership. Format: orgUnits/{$orgUnitId}/memberships/{$membership} The `$orgUnitId` is the `orgUnitId` from the [Admin SDK `OrgUnit` resource](https://developers.google.com/admin-sdk/directory/reference/rest/v1/orgunits). The `$membership` shall be of the form `{$entityType};{$memberId}`, where `$entityType` is the enum value of [OrgMembership.EntityType], and `memberId` is the `id` from [Drive API (V3) `Drive` resource](https://developers.google.com/drive/api/v3/reference/drives#resource) for OrgMembership.EntityType.SHARED_DRIVE."
+          type: string
+        type:
+          description: Immutable. Entity type for the org member.
+          enum:
+            - ENTITY_TYPE_UNSPECIFIED
+            - SHARED_DRIVE
+          type: string
       type: object
     PosixGroup:
       description: POSIX Group definition to represent a group in a POSIX compliant system.
@@ -2814,3 +2900,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

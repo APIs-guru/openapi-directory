@@ -3203,7 +3203,7 @@ components:
           $ref: "#/components/schemas/SearchQualityMetadata"
           description: Additional search quality metadata of the item
         sourceRepositoryUrl:
-          description: Link to the source repository serving the data. Seach results apply this link to the title. Whitespace or special characters may cause Cloud Seach result links to trigger a redirect notice; to avoid this, encode the URL. The maximum length is 2048 characters.
+          description: Link to the source repository serving the data. Search results apply this link to the title. Whitespace or special characters may cause Cloud Search result links to trigger a redirect notice; to avoid this, encode the URL. The maximum length is 2048 characters.
           type: string
         title:
           description: The title of the item. If given, this will be the displayed title of the Search result. The maximum length is 2048 characters.
@@ -4501,7 +4501,7 @@ components:
           type: boolean
       type: object
     UploadItemRef:
-      description: Represents an upload session reference. This reference is created via upload method. This reference is valid for 30 days after its creation. Updating of item content may refer to this uploaded content via contentDataRef.
+      description: Represents an upload session reference. This reference is created via upload method. UploadItemRef may be used upto 30 days since creation. Updating of item content may refer to this uploaded content via contentDataRef.
       properties:
         name:
           description: Name of the content reference. The maximum length is 2048 characters.
