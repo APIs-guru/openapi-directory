@@ -2671,6 +2671,10 @@ components:
           description: Maximum allowed number of networks per policy.
           format: int32
           type: integer
+        peeringZonesPerTargetNetwork:
+          description: Maximum allowed number of consumer peering zones per target network owned by this producer project
+          format: int32
+          type: integer
         policies:
           description: Maximum allowed number of policies per project.
           format: int32

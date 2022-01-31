@@ -114,7 +114,7 @@ paths:
       description: Updates the parameters of a single Target.
       operationId: clouddeploy.projects.locations.targets.patch
       parameters:
-        - description: Optional. Name of the `Target`. Format is projects/{project}/locations/{location}/ deliveryPipelines/{deliveryPipeline}/targets/a-z{0,62}.
+        - description: Optional. Name of the `Target`. Format is projects/{project}/locations/{location}/targets/a-z{0,62}.
           in: path
           name: name
           required: true
@@ -953,6 +953,13 @@ components:
       schema:
         type: string
   schemas:
+    AnthosCluster:
+      description: Information specifying an Anthos Cluster.
+      properties:
+        membership:
+          description: Membership of the GKE Hub registered cluster that the Skaffold configuration should be applied to. Format is `projects/{project}/locations/{location}/memberships/{membership_name}`.
+          type: string
+      type: object
     ApproveRolloutRequest:
       description: The request object used by `ApproveRollout`.
       properties:
@@ -1116,12 +1123,18 @@ components:
     ExecutionConfig:
       description: Configuration of the environment to use when calling Skaffold.
       properties:
+        artifactStorage:
+          description: Optional. Cloud Storage location where execution outputs should be stored. This can either be a bucket ("gs://my-bucket") or a path within a bucket ("gs://my-bucket/my-dir"). If unspecified, a default bucket located in the same region will be used.
+          type: string
         defaultPool:
           $ref: "#/components/schemas/DefaultPool"
           description: Optional. Use default Cloud Build pool.
         privatePool:
           $ref: "#/components/schemas/PrivatePool"
           description: Optional. Use private Cloud Build pool.
+        serviceAccount:
+          description: Optional. Google service account to use for execution. If unspecified, the project execution service account (-compute@developer.gserviceaccount.com) will be used.
+          type: string
         usages:
           description: Required. Usages when this configuration should be applied.
           items:
@@ -1131,6 +1144,9 @@ components:
               - DEPLOY
             type: string
           type: array
+        workerPool:
+          description: Optional. The resource name of the `WorkerPool`, with the format `projects/{project}/locations/{location}/workerPools/{worker_pool}`. If this optional field is unspecified, the default Cloud Build pool will be used.
+          type: string
       type: object
     Expr:
       description: "Represents a textual expression in the Common Expression Language (CEL) syntax. CEL is a C-like expression language. The syntax and semantics of CEL are documented at https://github.com/google/cel-spec. Example (Comparison): title: \"Summary size limit\" description: \"Determines if a summary is less than 100 chars\" expression: \"document.summary.size() < 100\" Example (Equality): title: \"Requestor is owner\" description: \"Determines if requestor is the document owner\" expression: \"document.owner == request.auth.claims.email\" Example (Logic): title: \"Public documents\" description: \"Determine whether the document should be publicly visible\" expression: \"document.type != 'private' && document.type != 'internal'\" Example (Data Manipulation): title: \"Notification string\" description: \"Create a notification string with a timestamp.\" expression: \"'New message received at ' + string(document.create_time)\" The exact variables and functions that may be referenced within an expression are determined by the service that evaluates it. See the service documentation for additional information."
@@ -1460,7 +1476,7 @@ components:
           readOnly: true
           type: object
         targetSnapshots:
-          description: Output only. Snapshot of the parent pipeline's targets taken at release creation time.
+          description: Output only. Snapshot of the targets taken at release creation time.
           items:
             $ref: "#/components/schemas/Target"
           readOnly: true
@@ -1605,7 +1621,7 @@ components:
             type: string
           type: array
         targetId:
-          description: The target_id to which this stage points. This field refers exclusively to the last segment of a target name. For example, this field would just be `my-target` (rather than `projects/project/deliveryPipelines/pipeline/targets/my-target`). The parent `DeliveryPipeline` of the `Target` is inferred to be the parent `DeliveryPipeline` of the `Release` in which this `Stage` lives.
+          description: The target_id to which this stage points. This field refers exclusively to the last segment of a target name. For example, this field would just be `my-target` (rather than `projects/project/locations/location/targets/my-target`). The location of the `Target` is inferred to be the same as the location of the `DeliveryPipeline` that contains this `Stage`.
           type: string
       type: object
     Status:
@@ -1634,6 +1650,9 @@ components:
             type: string
           description: Optional. User annotations. These attributes can only be set and used by the user, and not by Google Cloud Deploy. See https://google.aip.dev/128#annotations for more details such as format and size limitations.
           type: object
+        anthosCluster:
+          $ref: "#/components/schemas/AnthosCluster"
+          description: Information specifying an Anthos Cluster.
         createTime:
           description: Output only. Time at which the `Target` was created.
           format: google-datetime
@@ -1659,7 +1678,7 @@ components:
           description: "Optional. Labels are attributes that can be set and used by both the user and by Google Cloud Deploy. Labels must meet the following constraints: * Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. * All characters must use UTF-8 encoding, and international characters are allowed. * Keys must start with a lowercase letter or international character. * Each resource is limited to a maximum of 64 labels. Both keys and values are additionally constrained to be <= 128 bytes."
           type: object
         name:
-          description: Optional. Name of the `Target`. Format is projects/{project}/locations/{location}/ deliveryPipelines/{deliveryPipeline}/targets/a-z{0,62}.
+          description: Optional. Name of the `Target`. Format is projects/{project}/locations/{location}/targets/a-z{0,62}.
           type: string
         requireApproval:
           description: Optional. Whether or not the `Target` requires approval.

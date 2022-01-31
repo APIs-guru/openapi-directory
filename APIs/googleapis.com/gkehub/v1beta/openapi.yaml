@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://gkehub.googleapis.com/$discovery/rest?version=v1beta
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: gkehub
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/anthos/multicluster-management/connect/registering-a-cluster
 tags:
@@ -1364,6 +1365,9 @@ components:
     MembershipFeatureSpec:
       description: MembershipFeatureSpec contains configuration information for a single Membership.
       properties:
+        cloudbuild:
+          $ref: "#/components/schemas/MembershipSpec"
+          description: Cloud Build-specific spec
         configmanagement:
           $ref: "#/components/schemas/ConfigManagementMembershipSpec"
           description: Config Management-specific spec.
@@ -1386,9 +1390,26 @@ components:
         metering:
           $ref: "#/components/schemas/MeteringMembershipState"
           description: Metering-specific spec.
+        policycontroller:
+          $ref: "#/components/schemas/PolicyControllerMembershipState"
+          description: Policycontroller-specific state.
         state:
           $ref: "#/components/schemas/FeatureState"
           description: The high-level state of this Feature for a single membership.
+      type: object
+    MembershipSpec:
+      description: "**Cloud Build**: Configurations for each Cloud Build enabled cluster."
+      properties:
+        securityPolicy:
+          description: Whether it is allowed to run the privileged builds on the cluster or not.
+          enum:
+            - SECURITY_POLICY_UNSPECIFIED
+            - NON_PRIVILEGED
+            - PRIVILEGED
+          type: string
+        version:
+          description: Version of the cloud build software on the cluster.
+          type: string
       type: object
     MeteringMembershipState:
       description: "**Metering**: Per-Membership Feature State."
@@ -1494,6 +1515,102 @@ components:
           description: "Specifies the format of the policy. Valid values are `0`, `1`, and `3`. Requests that specify an invalid value are rejected. Any operation that affects conditional role bindings must specify version `3`. This requirement applies to the following operations: * Getting a policy that includes a conditional role binding * Adding a conditional role binding to a policy * Changing a conditional role binding in a policy * Removing any role binding, with or without a condition, from a policy that includes conditions **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost. If a policy does not include any conditions, operations on that policy may specify any valid version or leave the field unset. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies)."
           format: int32
           type: integer
+      type: object
+    PolicyControllerMembershipSpec:
+      description: "**Policy Controller**: Configuration for a single cluster. Intended to parallel the PolicyController CR."
+      properties:
+        policyControllerHubConfig:
+          $ref: "#/components/schemas/PolicyControllerPolicyControllerHubConfig"
+          description: Policy Controller configuration for the cluster.
+        version:
+          description: Version of Policy Controller installed.
+          type: string
+      type: object
+    PolicyControllerMembershipState:
+      description: "**Policy Controller**: State for a single cluster."
+      properties:
+        clusterName:
+          description: The user-defined name for the cluster used by ClusterSelectors to group clusters together. This should match Membership's membership_name, unless the user installed PC on the cluster manually prior to enabling the PC hub feature. Unique within a Policy Controller installation.
+          type: string
+        membershipSpec:
+          $ref: "#/components/schemas/PolicyControllerMembershipSpec"
+          description: Membership configuration in the cluster. This represents the actual state in the cluster, while the MembershipSpec in the FeatureSpec represents the intended state
+        policyControllerHubState:
+          $ref: "#/components/schemas/PolicyControllerPolicyControllerHubState"
+          description: Policy Controller state observed by the Policy Controller Hub
+        state:
+          description: The lifecycle state Policy Controller is in.
+          enum:
+            - LIFECYCLE_STATE_UNSPECIFIED
+            - NOT_INSTALLED
+            - INSTALLING
+            - ACTIVE
+            - UPDATING
+            - DECOMISSIONING
+            - CLUSTER_ERROR
+            - HUB_ERROR
+          type: string
+      type: object
+    PolicyControllerPolicyControllerHubConfig:
+      description: Configuration for Policy Controller
+      properties:
+        auditIntervalSeconds:
+          description: Sets the interval for Policy Controller Audit Scans (in seconds). When set to 0, this disables audit functionality altogether.
+          format: int64
+          type: string
+        exemptableNamespaces:
+          description: The set of namespaces that are excluded from Policy Controller checks. Namespaces do not need to currently exist on the cluster.
+          items:
+            type: string
+          type: array
+        installSpec:
+          description: The install_spec represents the intended state specified by the latest request that mutated install_spec in the feature spec, not the lifecycle state of the feature observed by the Hub feature controller that is reported in the feature state.
+          enum:
+            - INSTALL_SPEC_UNSPECIFIED
+            - INSTALL_SPEC_NOT_INSTALLED
+            - INSTALL_SPEC_ENABLED
+            - INSTALL_SPEC_DISABLED
+          type: string
+        logDeniesEnabled:
+          description: Logs all denies and dry run failures.
+          type: boolean
+        referentialRulesEnabled:
+          description: Enables the ability to use Constraint Templates that reference to objects other than the object currently being evaluated.
+          type: boolean
+        templateLibraryConfig:
+          $ref: "#/components/schemas/PolicyControllerTemplateLibraryConfig"
+          description: Configures the library templates to install along with Policy Controller.
+      type: object
+    PolicyControllerPolicyControllerHubState:
+      description: State of the Policy Controller.
+      properties:
+        deploymentStates:
+          additionalProperties:
+            enum:
+              - DEPLOYMENT_STATE_UNSPECIFIED
+              - DEPLOYMENT_STATE_NOT_INSTALLED
+              - DEPLOYMENT_STATE_INSTALLED
+              - DEPLOYMENT_STATE_ERROR
+            type: string
+          description: Map from deployment name to deployment state. Example deployments are gatekeeper-controller-manager, gatekeeper-audit deployment, and gatekeeper-mutation.
+          type: object
+        version:
+          $ref: "#/components/schemas/PolicyControllerPolicyControllerHubVersion"
+          description: The version of Gatekeeper Policy Controller deployed.
+      type: object
+    PolicyControllerPolicyControllerHubVersion:
+      description: The build version of Gatekeeper that Policy Controller is using.
+      properties:
+        version:
+          description: The gatekeeper image tag that is composed of ACM version, git tag, build number.
+          type: string
+      type: object
+    PolicyControllerTemplateLibraryConfig:
+      description: The config specifying which default library templates to install.
+      properties:
+        included:
+          description: Whether the standard template library should be installed or not.
+          type: boolean
       type: object
     SetIamPolicyRequest:
       description: Request message for `SetIamPolicy` method.

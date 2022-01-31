@@ -323,7 +323,7 @@ components:
           description: The disclosure date of the product. For more information, see https://support.google.com/manufacturers/answer/6124116#disclosure.
           type: string
         excludedDestination:
-          description: A list of excluded destinations.
+          description: A list of excluded destinations such as "ClientExport", "ClientShoppingCatalog" or "PartnerShoppingCatalog". For more information, see https://support.google.com/manufacturers/answer/7443550
           items:
             type: string
           type: array
@@ -350,7 +350,7 @@ components:
           $ref: "#/components/schemas/Image"
           description: The image of the product. For more information, see https://support.google.com/manufacturers/answer/6124116#image.
         includedDestination:
-          description: A list of included destinations.
+          description: A list of included destinations such as "ClientExport", "ClientShoppingCatalog" or "PartnerShoppingCatalog". For more information, see https://support.google.com/manufacturers/answer/7443550
           items:
             type: string
           type: array
@@ -416,7 +416,7 @@ components:
           $ref: "#/components/schemas/Price"
           description: The suggested retail price (MSRP) of the product. For more information, see https://support.google.com/manufacturers/answer/6124116#price.
         targetClientId:
-          description: The target client id. Should only be used in the accounts of the data partners.
+          description: The target client id. Should only be used in the accounts of the data partners. For more information, see https://support.google.com/manufacturers/answer/10857344
           type: string
         theme:
           description: The theme of the product. For more information, see https://support.google.com/manufacturers/answer/6124116#theme.

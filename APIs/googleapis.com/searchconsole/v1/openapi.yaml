@@ -35,8 +35,48 @@ tags:
   - name: searchanalytics
   - name: sitemaps
   - name: sites
+  - name: urlInspection
   - name: urlTestingTools
 paths:
+  /v1/urlInspection/index:inspect:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Index inspection.
+      operationId: searchconsole.urlInspection.index.inspect
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InspectUrlIndexRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InspectUrlIndexResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/webmasters
+          Oauth2c:
+            - https://www.googleapis.com/auth/webmasters
+        - Oauth2:
+            - https://www.googleapis.com/auth/webmasters.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/webmasters.readonly
+      tags:
+        - urlInspection
   /v1/urlTestingTools/mobileFriendlyTest:run:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -449,6 +489,85 @@ components:
       schema:
         type: string
   schemas:
+    AmpInspectionResult:
+      description: AMP inspection result of the live page or the current information from Google's index, depending on whether you requested a live inspection or not.
+      properties:
+        ampIndexStatusVerdict:
+          description: Index status of the AMP URL.
+          enum:
+            - VERDICT_UNSPECIFIED
+            - PASS
+            - PARTIAL
+            - FAIL
+            - NEUTRAL
+          type: string
+        ampUrl:
+          description: URL of the AMP that was inspected. If the submitted URL is a desktop page that refers to an AMP version, the AMP version will be inspected.
+          type: string
+        indexingState:
+          description: Whether or not the page blocks indexing through a noindex rule.
+          enum:
+            - AMP_INDEXING_STATE_UNSPECIFIED
+            - AMP_INDEXING_ALLOWED
+            - BLOCKED_DUE_TO_NOINDEX
+            - BLOCKED_DUE_TO_EXPIRED_UNAVAILABLE_AFTER
+          type: string
+        issues:
+          description: A list of zero or more AMP issues found for the inspected URL.
+          items:
+            $ref: "#/components/schemas/AmpIssue"
+          type: array
+        lastCrawlTime:
+          description: Last time this AMP version was crawled by Google. Absent if the URL was never crawled successfully.
+          format: google-datetime
+          type: string
+        pageFetchState:
+          description: Whether or not Google could fetch the AMP.
+          enum:
+            - PAGE_FETCH_STATE_UNSPECIFIED
+            - SUCCESSFUL
+            - SOFT_404
+            - BLOCKED_ROBOTS_TXT
+            - NOT_FOUND
+            - ACCESS_DENIED
+            - SERVER_ERROR
+            - REDIRECT_ERROR
+            - ACCESS_FORBIDDEN
+            - BLOCKED_4XX
+            - INTERNAL_CRAWL_ERROR
+            - INVALID_URL
+          type: string
+        robotsTxtState:
+          description: Whether or not the page is blocked to Google by a robots.txt rule.
+          enum:
+            - ROBOTS_TXT_STATE_UNSPECIFIED
+            - ALLOWED
+            - DISALLOWED
+          type: string
+        verdict:
+          description: The status of the most severe error on the page. If a page has both warnings and errors, the page status is error. Error status means the page cannot be shown in Search results.
+          enum:
+            - VERDICT_UNSPECIFIED
+            - PASS
+            - PARTIAL
+            - FAIL
+            - NEUTRAL
+          type: string
+      type: object
+    AmpIssue:
+      description: AMP issue.
+      properties:
+        issueMessage:
+          description: Brief description of this issue.
+          type: string
+        severity:
+          description: "Severity of this issue: WARNING or ERROR."
+          enum:
+            - SEVERITY_UNSPECIFIED
+            - WARNING
+            - ERROR
+          type: string
+      type: object
     ApiDataRow:
       properties:
         clicks:
@@ -510,6 +629,18 @@ components:
           description: URL of the blocked resource.
           type: string
       type: object
+    DetectedItems:
+      description: Rich Results items grouped by type.
+      properties:
+        items:
+          description: List of Rich Results items.
+          items:
+            $ref: "#/components/schemas/Item"
+          type: array
+        richResultType:
+          description: Rich Results type
+          type: string
+      type: object
     Image:
       description: Describe image data.
       properties:
@@ -519,6 +650,113 @@ components:
           type: string
         mimeType:
           description: The mime-type of the image data.
+          type: string
+      type: object
+    IndexStatusInspectionResult:
+      description: Results of index status inspection for either the live page or the version in Google's index, depending on whether you requested a live inspection or not. For more information, see the [Index coverage report documentation](https://support.google.com/webmasters/answer/7440203).
+      properties:
+        coverageState:
+          description: Could Google find and index the page. More details about page indexing appear in 'indexing_state'.
+          type: string
+        crawledAs:
+          description: Primary crawler that was used by Google to crawl your site.
+          enum:
+            - CRAWLING_USER_AGENT_UNSPECIFIED
+            - DESKTOP
+            - MOBILE
+          type: string
+        googleCanonical:
+          description: The URL of the page that Google selected as canonical. If the page was not indexed, this field is absent.
+          type: string
+        indexingState:
+          description: Whether or not the page blocks indexing through a noindex rule.
+          enum:
+            - INDEXING_STATE_UNSPECIFIED
+            - INDEXING_ALLOWED
+            - BLOCKED_BY_META_TAG
+            - BLOCKED_BY_HTTP_HEADER
+            - BLOCKED_BY_ROBOTS_TXT
+          type: string
+        lastCrawlTime:
+          description: Last time this URL was crawled by Google using the [primary crawler](https://support.google.com/webmasters/answer/7440203#primary_crawler). Absent if the URL was never crawled successfully.
+          format: google-datetime
+          type: string
+        pageFetchState:
+          description: Whether or not Google could retrieve the page from your server. Equivalent to ["page fetch"](https://support.google.com/webmasters/answer/9012289#index_coverage) in the URL inspection report.
+          enum:
+            - PAGE_FETCH_STATE_UNSPECIFIED
+            - SUCCESSFUL
+            - SOFT_404
+            - BLOCKED_ROBOTS_TXT
+            - NOT_FOUND
+            - ACCESS_DENIED
+            - SERVER_ERROR
+            - REDIRECT_ERROR
+            - ACCESS_FORBIDDEN
+            - BLOCKED_4XX
+            - INTERNAL_CRAWL_ERROR
+            - INVALID_URL
+          type: string
+        referringUrls:
+          description: URLs that link to the inspected URL, directly and indirectly.
+          items:
+            type: string
+          type: array
+        robotsTxtState:
+          description: Whether or not the page is blocked to Google by a robots.txt rule.
+          enum:
+            - ROBOTS_TXT_STATE_UNSPECIFIED
+            - ALLOWED
+            - DISALLOWED
+          type: string
+        sitemap:
+          description: Any sitemaps that this URL was listed in, as known by Google. Not guaranteed to be an exhaustive list, especially if Google did not discover this URL through a sitemap. Absent if no sitemaps were found.
+          items:
+            type: string
+          type: array
+        userCanonical:
+          description: The URL that your page or site [declares as canonical](https://developers.google.com/search/docs/advanced/crawling/consolidate-duplicate-urls?#define-canonical). If you did not declare a canonical URL, this field is absent.
+          type: string
+        verdict:
+          description: High level verdict about whether the URL *is* indexed (indexed status), or *can be* indexed (live inspection).
+          enum:
+            - VERDICT_UNSPECIFIED
+            - PASS
+            - PARTIAL
+            - FAIL
+            - NEUTRAL
+          type: string
+      type: object
+    InspectUrlIndexRequest:
+      description: Index inspection request.
+      properties:
+        inspectionUrl:
+          description: Required. URL to inspect. Must be under the property specified in "site_url".
+          type: string
+        languageCode:
+          description: Optional. An [IETF BCP-47](https://en.wikipedia.org/wiki/IETF_language_tag) language code representing the requested language for translated issue messages, e.g. "en-US", "or "de-CH". Default value is "en-US".
+          type: string
+        siteUrl:
+          description: Required. The URL of the property as defined in Search Console. **Examples:** `http://www.example.com/` for a URL-prefix property, or `sc-domain:example.com` for a Domain property.
+          type: string
+      type: object
+    InspectUrlIndexResponse:
+      description: Index-Status inspection response.
+      properties:
+        inspectionResult:
+          $ref: "#/components/schemas/UrlInspectionResult"
+          description: URL inspection results.
+      type: object
+    Item:
+      description: A specific rich result found on the page.
+      properties:
+        issues:
+          description: A list of zero or more rich result issues found for this instance.
+          items:
+            $ref: "#/components/schemas/RichResultsIssue"
+          type: array
+        name:
+          description: The user-provided name of this item.
           type: string
       type: object
     MobileFriendlyIssue:
@@ -536,12 +774,87 @@ components:
             - TAP_TARGETS_TOO_CLOSE
           type: string
       type: object
+    MobileUsabilityInspectionResult:
+      description: Mobile-usability inspection results.
+      properties:
+        issues:
+          description: A list of zero or more mobile-usability issues detected for this URL.
+          items:
+            $ref: "#/components/schemas/MobileUsabilityIssue"
+          type: array
+        verdict:
+          description: High-level mobile-usability inspection result for this URL.
+          enum:
+            - VERDICT_UNSPECIFIED
+            - PASS
+            - PARTIAL
+            - FAIL
+            - NEUTRAL
+          type: string
+      type: object
+    MobileUsabilityIssue:
+      description: Mobile-usability issue.
+      properties:
+        issueType:
+          description: Mobile-usability issue type.
+          enum:
+            - MOBILE_USABILITY_ISSUE_TYPE_UNSPECIFIED
+            - USES_INCOMPATIBLE_PLUGINS
+            - CONFIGURE_VIEWPORT
+            - FIXED_WIDTH_VIEWPORT
+            - SIZE_CONTENT_TO_VIEWPORT
+            - USE_LEGIBLE_FONT_SIZES
+            - TAP_TARGETS_TOO_CLOSE
+          type: string
+        message:
+          description: Additional information regarding the issue.
+          type: string
+        severity:
+          description: Not returned; reserved for future use.
+          enum:
+            - SEVERITY_UNSPECIFIED
+            - WARNING
+            - ERROR
+          type: string
+      type: object
     ResourceIssue:
       description: Information about a resource with issue.
       properties:
         blockedResource:
           $ref: "#/components/schemas/BlockedResource"
           description: Describes a blocked resource issue.
+      type: object
+    RichResultsInspectionResult:
+      description: Rich-Results inspection result, including any rich results found at this URL.
+      properties:
+        detectedItems:
+          description: A list of zero or more rich results detected on this page. Rich results that cannot even be parsed due to syntactic issues will not be listed here.
+          items:
+            $ref: "#/components/schemas/DetectedItems"
+          type: array
+        verdict:
+          description: High-level rich results inspection result for this URL.
+          enum:
+            - VERDICT_UNSPECIFIED
+            - PASS
+            - PARTIAL
+            - FAIL
+            - NEUTRAL
+          type: string
+      type: object
+    RichResultsIssue:
+      description: Severity and status of a single issue affecting a single rich result instance on a page.
+      properties:
+        issueMessage:
+          description: Rich Results issue type.
+          type: string
+        severity:
+          description: "Severity of this issue: WARNING, or ERROR. Items with an issue of status ERROR cannot appear with rich result features in Google Search results."
+          enum:
+            - SEVERITY_UNSPECIFIED
+            - WARNING
+            - ERROR
+          type: string
       type: object
     RunMobileFriendlyTestRequest:
       description: Mobile-friendly test request.
@@ -696,6 +1009,25 @@ components:
             - INTERNAL_ERROR
             - PAGE_UNREACHABLE
           type: string
+      type: object
+    UrlInspectionResult:
+      description: URL inspection result, including all inspection results.
+      properties:
+        ampResult:
+          $ref: "#/components/schemas/AmpInspectionResult"
+          description: Result of the AMP analysis. Absent if the page is not an AMP page.
+        indexStatusResult:
+          $ref: "#/components/schemas/IndexStatusInspectionResult"
+          description: Result of the index status analysis.
+        inspectionResultLink:
+          description: Link to Search Console URL inspection.
+          type: string
+        mobileUsabilityResult:
+          $ref: "#/components/schemas/MobileUsabilityInspectionResult"
+          description: Result of the Mobile usability analysis.
+        richResultsResult:
+          $ref: "#/components/schemas/RichResultsInspectionResult"
+          description: Result of the Rich Results analysis. Absent if there are no rich results found.
       type: object
     WmxSite:
       description: Contains permission level information about a Search Console site. For more information, see [Permissions in Search Console](https://support.google.com/webmasters/answer/2451999).
