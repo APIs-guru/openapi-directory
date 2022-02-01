@@ -552,13 +552,6 @@ components:
               - RELATED_ACCOUNTS_NUMBER_HIGH
             type: string
           type: array
-        recommendedAction:
-          description: Recommended action after this request.
-          enum:
-            - RECOMMENDED_ACTION_UNSPECIFIED
-            - REQUEST_2FA
-            - SKIP_2FA
-          type: string
       type: object
     GoogleCloudRecaptchaenterpriseV1AndroidKeySettings:
       description: Settings specific to keys that can be used by Android apps.

@@ -1774,6 +1774,27 @@ components:
           description: "Output only. Details of the VM to create as the target of this cutover job. Deprecated: Use compute_engine_target_details instead."
           readOnly: true
       type: object
+    CycleStep:
+      description: CycleStep hold information about a step progress.
+      properties:
+        endTime:
+          description: The time the cycle step has ended.
+          format: google-datetime
+          type: string
+        initializingReplication:
+          $ref: "#/components/schemas/InitializingReplicationStep"
+          description: Initializing replication step.
+        postProcessing:
+          $ref: "#/components/schemas/PostProcessingStep"
+          description: Post processing step.
+        replicating:
+          $ref: "#/components/schemas/ReplicatingStep"
+          description: Replicating step.
+        startTime:
+          description: The time the cycle step has started.
+          format: google-datetime
+          type: string
+      type: object
     DatacenterConnector:
       description: DatacenterConnector message describes a connector between the Source and GCP, which is installed on a vmware datacenter (an OVA vm installed by the user) to connect the Datacenter to GCP and support vm migration data transfer.
       properties:
@@ -1867,6 +1888,10 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+      type: object
+    InitializingReplicationStep:
+      description: InitializingReplicationStep contains specific step details.
+      properties: {}
       type: object
     Link:
       description: Describes a URL link.
@@ -2208,6 +2233,7 @@ components:
             - CLONE_ERROR
             - CUTOVER_ERROR
             - UTILIZATION_REPORT_ERROR
+            - APPLIANCE_UPGRADE_ERROR
           readOnly: true
           type: string
         errorMessage:
@@ -2303,6 +2329,10 @@ components:
       description: Request message for 'PauseMigration' request.
       properties: {}
       type: object
+    PostProcessingStep:
+      description: PostProcessingStep contains specific step details.
+      properties: {}
+      type: object
     RemoveGroupMigrationRequest:
       description: Request message for 'RemoveMigration' request.
       properties:
@@ -2310,9 +2340,33 @@ components:
           description: The MigratingVm to remove.
           type: string
       type: object
+    ReplicatingStep:
+      description: ReplicatingStep contains specific step details.
+      properties:
+        lastThirtyMinutesAverageBytesPerSecond:
+          description: The source disks replication rate for the last 30 minutes in bytes per second.
+          format: int64
+          type: string
+        lastTwoMinutesAverageBytesPerSecond:
+          description: The source disks replication rate for the last 2 minutes in bytes per second.
+          format: int64
+          type: string
+        replicatedBytes:
+          description: Replicated bytes in the step.
+          format: int64
+          type: string
+        totalBytes:
+          description: Total bytes to be handled in the step.
+          format: int64
+          type: string
+      type: object
     ReplicationCycle:
       description: ReplicationCycle contains information about the current replication cycle status.
       properties:
+        endTime:
+          description: The time the replication cycle has ended.
+          format: google-datetime
+          type: string
         progress:
           description: The current progress in percentage of this cycle.
           format: int32
@@ -2324,6 +2378,15 @@ components:
         startTime:
           description: The time the replication cycle has started.
           format: google-datetime
+          type: string
+        steps:
+          description: The cycle's steps list reflecting its progress.
+          items:
+            $ref: "#/components/schemas/CycleStep"
+          type: array
+        totalPauseDuration:
+          description: The accumulated duration the replication cycle was paused.
+          format: google-duration
           type: string
       type: object
     ReplicationSync:

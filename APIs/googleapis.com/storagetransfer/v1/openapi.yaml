@@ -316,7 +316,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Attempts to start a new TransferOperation for the current TransferJob. A TransferJob has a maximum of one active TransferOperation. If this method is called while a TransferOperation is active, an error wil be returned.
+      description: Attempts to start a new TransferOperation for the current TransferJob. A TransferJob has a maximum of one active TransferOperation. If this method is called while a TransferOperation is active, an error will be returned.
       operationId: storagetransfer.transferJobs.run
       parameters:
         - description: Required. The name of the transfer job.
@@ -898,12 +898,26 @@ components:
     MetadataOptions:
       description: Specifies the metadata options for running a transfer.
       properties:
+        acl:
+          description: Specifies how each object's ACLs should be preserved for transfers between Google Cloud Storage buckets. If unspecified, the default behavior is the same as ACL_DESTINATION_BUCKET_DEFAULT.
+          enum:
+            - ACL_UNSPECIFIED
+            - ACL_DESTINATION_BUCKET_DEFAULT
+            - ACL_PRESERVE
+          type: string
         gid:
           description: Specifies how each file's GID attribute should be handled by the transfer. If unspecified, the default behavior is the same as GID_SKIP when the source is a POSIX file system.
           enum:
             - GID_UNSPECIFIED
             - GID_SKIP
             - GID_NUMBER
+          type: string
+        kmsKey:
+          description: Specifies how each object's Cloud KMS customer-managed encryption key (CMEK) is preserved for transfers between Google Cloud Storage buckets. If unspecified, the default behavior is the same as KMS_KEY_DESTINATION_BUCKET_DEFAULT.
+          enum:
+            - KMS_KEY_UNSPECIFIED
+            - KMS_KEY_DESTINATION_BUCKET_DEFAULT
+            - KMS_KEY_PRESERVE
           type: string
         mode:
           description: Specifies how each file's mode attribute should be handled by the transfer. If unspecified, the default behavior is the same as MODE_SKIP when the source is a POSIX file system.
@@ -912,12 +926,30 @@ components:
             - MODE_SKIP
             - MODE_PRESERVE
           type: string
+        storageClass:
+          description: Specifies the storage class to set on objects being transferred to Google Cloud Storage buckets. If unspecified, the default behavior is the same as STORAGE_CLASS_DESTINATION_BUCKET_DEFAULT.
+          enum:
+            - STORAGE_CLASS_UNSPECIFIED
+            - STORAGE_CLASS_DESTINATION_BUCKET_DEFAULT
+            - STORAGE_CLASS_PRESERVE
+            - STORAGE_CLASS_STANDARD
+            - STORAGE_CLASS_NEARLINE
+            - STORAGE_CLASS_COLDLINE
+            - STORAGE_CLASS_ARCHIVE
+          type: string
         symlink:
           description: Specifies how symlinks should be handled by the transfer. If unspecified, the default behavior is the same as SYMLINK_SKIP when the source is a POSIX file system.
           enum:
             - SYMLINK_UNSPECIFIED
             - SYMLINK_SKIP
             - SYMLINK_PRESERVE
+          type: string
+        temporaryHold:
+          description: Specifies how each object's temporary hold status should be preserved for transfers between Google Cloud Storage buckets. If unspecified, the default behavior is the same as TEMPORARY_HOLD_PRESERVE.
+          enum:
+            - TEMPORARY_HOLD_UNSPECIFIED
+            - TEMPORARY_HOLD_SKIP
+            - TEMPORARY_HOLD_PRESERVE
           type: string
         uid:
           description: Specifies how each file's UID attribute should be handled by the transfer. If unspecified, the default behavior is the same as UID_SKIP when the source is a POSIX file system.

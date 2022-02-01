@@ -306,10 +306,10 @@ paths:
       tags:
         - properties
     get:
-      description: Returns the Site Tag for the specified web stream. Site Tags are immutable singletons.
-      operationId: analyticsadmin.properties.webDataStreams.getGlobalSiteTag
+      description: Lookup for a single WebDataStream
+      operationId: analyticsadmin.properties.webDataStreams.get
       parameters:
-        - description: 'Required. The name of the site tag to lookup. Note that site tags are singletons and do not have unique IDs. Format: properties/{property_id}/webDataStreams/{stream_id}/globalSiteTag Example: "properties/123/webDataStreams/456/globalSiteTag"'
+        - description: 'Required. The name of the web data stream to lookup. Format: properties/{property_id}/webDataStreams/{stream_id} Example: "properties/123/webDataStreams/456"'
           in: path
           name: name
           required: true
@@ -320,7 +320,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaGlobalSiteTag"
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaWebDataStream"
           description: Successful response
       security:
         - Oauth2:
@@ -2443,10 +2443,10 @@ components:
           type: string
       type: object
     GoogleAnalyticsAdminV1alphaGlobalSiteTag:
-      description: Read-only resource with the tag for sending data from a website to a WebDataStream.
+      description: Read-only resource with the tag for sending data from a website to a DataStream. Only present for web DataStream resources.
       properties:
         name:
-          description: "Output only. Resource name for this GlobalSiteTag resource. Format: properties/{propertyId}/globalSiteTag"
+          description: 'Output only. Resource name for this GlobalSiteTag resource. Format: properties/{property_id}/dataStreams/{stream_id}/globalSiteTag Example: "properties/123/dataStreams/456/globalSiteTag"'
           readOnly: true
           type: string
         snippet:

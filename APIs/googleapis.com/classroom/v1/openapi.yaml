@@ -2992,6 +2992,9 @@ components:
         enrollmentCode:
           description: Enrollment code to use when joining this course. Specifying this field in a course update mask results in an error. Read-only.
           type: string
+        gradebookSettings:
+          $ref: "#/components/schemas/GradebookSettings"
+          description: The gradebook settings that specify how a student's overall grade for the course will be calculated and who it will be displayed to. Read-only
         guardiansEnabled:
           description: Whether or not guardian notifications are enabled for this course. Read-only.
           type: boolean
@@ -3101,6 +3104,9 @@ components:
         dueTime:
           $ref: "#/components/schemas/TimeOfDay"
           description: Optional time of day, in UTC, that submissions for this course work are due. This must be specified if `due_date` is specified.
+        gradeCategory:
+          $ref: "#/components/schemas/GradeCategory"
+          description: The category that this coursework's grade contributes to. Present only when a category has been chosen for the coursework. May be used in calculating the overall grade. Read-only.
         id:
           description: Classroom-assigned identifier of this course work, unique per course. Read-only.
           type: string
@@ -3317,6 +3323,24 @@ components:
             - CREATE_COURSE
           type: string
       type: object
+    GradeCategory:
+      description: Details for a grade category in a course. Coursework may have zero or one grade category, and the category may be used in computing the overall grade. See the [help center article](https://support.google.com/edu/classroom/answer/9184995) for details.
+      properties:
+        defaultGradeDenominator:
+          description: Default value of denominator. Only applicable when grade calculation type is TOTAL_POINTS.
+          format: int32
+          type: integer
+        id:
+          description: ID of the grade category.
+          type: string
+        name:
+          description: Name of the grade category.
+          type: string
+        weight:
+          description: The weight of the category average as part of overall average. A weight of 12.34% is represented as 123400 (100% is 1,000,000). The last two digits should always be zero since we use two decimal precision. Only applicable when grade calculation type is WEIGHTED_CATEGORIES.
+          format: int32
+          type: integer
+      type: object
     GradeHistory:
       description: The history of each grade on this submission.
       properties:
@@ -3343,6 +3367,30 @@ components:
           description: The numerator of the grade at this time in the submission grade history.
           format: double
           type: number
+      type: object
+    GradebookSettings:
+      description: The gradebook settings for a course. See the [help center article](https://support.google.com/edu/classroom/answer/9184995) for details.
+      properties:
+        calculationType:
+          description: Indicates how the overall grade is calculated.
+          enum:
+            - CALCULATION_TYPE_UNSPECIFIED
+            - TOTAL_POINTS
+            - WEIGHTED_CATEGORIES
+          type: string
+        displaySetting:
+          description: Indicates who can see the overall grade..
+          enum:
+            - DISPLAY_SETTING_UNSPECIFIED
+            - SHOW_OVERALL_GRADE
+            - HIDE_OVERALL_GRADE
+            - SHOW_TEACHERS_ONLY
+          type: string
+        gradeCategories:
+          description: Grade categories that are available for coursework in the course.
+          items:
+            $ref: "#/components/schemas/GradeCategory"
+          type: array
       type: object
     Guardian:
       description: Association between a student and a guardian of that student. The guardian may receive information about the student's course work.
