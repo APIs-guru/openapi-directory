@@ -2730,6 +2730,11 @@ components:
     DatabaseInstance:
       description: A Cloud SQL instance resource.
       properties:
+        availableMaintenanceVersions:
+          description: List all maintenance versions applicable on the instance
+          items:
+            type: string
+          type: array
         backendType:
           description: "The backend type. `SECOND_GEN`: Cloud SQL database instance. `EXTERNAL`: A database server that is not managed by Google. This property is read-only; use the `tier` property in the `settings` object to determine the database type."
           enum:
@@ -2820,6 +2825,9 @@ components:
           type: string
         kind:
           description: This is always `sql#instance`.
+          type: string
+        maintenanceVersion:
+          description: The current software version on the instance.
           type: string
         masterInstanceName:
           description: The name of the instance which will act as primary in the replication setup.

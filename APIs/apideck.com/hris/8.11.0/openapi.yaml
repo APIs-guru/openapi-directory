@@ -673,7 +673,6 @@ paths:
                 salutation: 'Mr',
                 title: 'CEO',
                 marital_status: 'married',
-                picture_url: 'https://example.com/picture.jpg',
                 division: 'Europe',
                 department: 'R&D',
                 team: {
@@ -809,7 +808,8 @@ paths:
                     type: 'twitter'
                   }
                 ],
-                row_version: '1-12345'
+                row_version: '1-12345',
+                deleted: true
               }
             }
 
@@ -980,7 +980,6 @@ paths:
                 salutation: 'Mr',
                 title: 'CEO',
                 marital_status: 'married',
-                picture_url: 'https://example.com/picture.jpg',
                 division: 'Europe',
                 department: 'R&D',
                 team: {
@@ -1116,7 +1115,8 @@ paths:
                     type: 'twitter'
                   }
                 ],
-                row_version: '1-12345'
+                row_version: '1-12345',
+                deleted: true
               }
             }
 
@@ -2269,6 +2269,11 @@ components:
           items:
             $ref: "#/components/schemas/CustomField"
           type: array
+        deleted:
+          example: true
+          nullable: true
+          title: Deleted
+          type: boolean
         department:
           $ref: "#/components/schemas/Department"
         description:
@@ -2411,12 +2416,6 @@ components:
           type: array
         photo_url:
           $ref: "#/components/schemas/PhotoUrl"
-        picture_url:
-          description: The URL pointing to a picture.
-          example: https://example.com/picture.jpg
-          nullable: true
-          title: Picture URL
-          type: string
         preferred_language:
           $ref: "#/components/schemas/Language"
         preferred_name:

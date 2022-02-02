@@ -2444,7 +2444,7 @@ components:
           description: "Variant group identifier. Must be an id, with the same parent branch with this product. Otherwise, an error is thrown. For Type.PRIMARY Products, this field can only be empty or set to the same value as id. For VARIANT Products, this field cannot be empty. A maximum of 2,000 products are allowed to share the same Type.PRIMARY Product. Otherwise, an INVALID_ARGUMENT error is returned. Corresponding properties: Google Merchant Center property [item_group_id](https://support.google.com/merchants/answer/6324507). Schema.org property [Product.inProductGroupWithID](https://schema.org/inProductGroupWithID)."
           type: string
         promotions:
-          description: The promotions applied to the product. A maximum of 10 values are allowed per Product.
+          description: The promotions applied to the product. A maximum of 10 values are allowed per Product. Only Promotion.promotion_id will be used, other fields will be ignored if set.
           items:
             $ref: "#/components/schemas/GoogleCloudRetailV2betaPromotion"
           type: array
@@ -2541,7 +2541,7 @@ components:
       description: Promotion information.
       properties:
         promotionId:
-          description: 'ID of the promotion. For example, "free gift". The value value must be a UTF-8 encoded string with a length limit of 128 characters, and match the pattern: `a-zA-Z*`. For example, id0LikeThis or ID_1_LIKE_THIS. Otherwise, an INVALID_ARGUMENT error is returned. Google Merchant Center property [promotion](https://support.google.com/merchants/answer/7050148).'
+          description: 'ID of the promotion. For example, "free gift". The value must be a UTF-8 encoded string with a length limit of 128 characters, and match the pattern: `a-zA-Z*`. For example, id0LikeThis or ID_1_LIKE_THIS. Otherwise, an INVALID_ARGUMENT error is returned. Google Merchant Center property [promotion](https://support.google.com/merchants/answer/7050148).'
           type: string
       type: object
     GoogleCloudRetailV2betaPurchaseTransaction:
@@ -2832,6 +2832,9 @@ components:
         pageToken:
           description: A page token SearchResponse.next_page_token, received from a previous SearchService.Search call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to SearchService.Search must match the call that provided the page token. Otherwise, an INVALID_ARGUMENT error is returned.
           type: string
+        personalizationSpec:
+          $ref: "#/components/schemas/GoogleCloudRetailV2betaSearchRequestPersonalizationSpec"
+          description: The specification for personalization.
         query:
           description: Raw search query.
           type: string
@@ -2939,6 +2942,17 @@ components:
           items:
             type: string
           type: array
+      type: object
+    GoogleCloudRetailV2betaSearchRequestPersonalizationSpec:
+      description: The specification for personalization.
+      properties:
+        mode:
+          description: Defaults to Mode.AUTO.
+          enum:
+            - MODE_UNSPECIFIED
+            - AUTO
+            - DISABLED
+          type: string
       type: object
     GoogleCloudRetailV2betaSearchRequestQueryExpansionSpec:
       description: Specification to determine under which conditions query expansion should occur.
