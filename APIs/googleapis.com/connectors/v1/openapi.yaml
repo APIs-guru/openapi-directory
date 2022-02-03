@@ -1013,9 +1013,6 @@ components:
           description: "Output only. GCR location where the runtime image is stored. formatted like: gcr.io/{bucketName}/{imageName}"
           readOnly: true
           type: string
-        inactive:
-          description: Optional. Inactive indicates the connection is active to use or not.
-          type: boolean
         labels:
           additionalProperties:
             type: string
@@ -1039,6 +1036,9 @@ components:
           $ref: "#/components/schemas/ConnectionStatus"
           description: Output only. Current status of the connection.
           readOnly: true
+        suspended:
+          description: Optional. Suspended indicates if a user has suspended a connection or not.
+          type: boolean
         updateTime:
           description: Output only. Updated time.
           format: google-datetime

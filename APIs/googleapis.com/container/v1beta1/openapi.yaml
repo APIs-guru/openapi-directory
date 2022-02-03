@@ -598,7 +598,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The parent (project, location, cluster id) where the node pools will be listed. Specified in the format `projects/*/locations/*/clusters/*`.
+        - description: The parent (project, location, cluster name) where the node pools will be listed. Specified in the format `projects/*/locations/*/clusters/*`.
           in: query
           name: parent
           schema:
@@ -1836,7 +1836,7 @@ paths:
       description: Completes master IP rotation.
       operationId: container.projects.locations.clusters.completeIpRotation
       parameters:
-        - description: The name (project, location, cluster id) of the cluster to complete IP rotation. Specified in the format `projects/*/locations/*/clusters/*`.
+        - description: The name (project, location, cluster name) of the cluster to complete IP rotation. Specified in the format `projects/*/locations/*/clusters/*`.
           in: path
           name: name
           required: true
@@ -2004,7 +2004,7 @@ paths:
       description: Enables or disables the ABAC authorization mechanism on a cluster.
       operationId: container.projects.locations.clusters.setLegacyAbac
       parameters:
-        - description: The name (project, location, cluster id) of the cluster to set legacy abac. Specified in the format `projects/*/locations/*/clusters/*`.
+        - description: The name (project, location, cluster name) of the cluster to set legacy abac. Specified in the format `projects/*/locations/*/clusters/*`.
           in: path
           name: name
           required: true
@@ -2130,7 +2130,7 @@ paths:
       description: Sets the maintenance policy for a cluster.
       operationId: container.projects.locations.clusters.setMaintenancePolicy
       parameters:
-        - description: The name (project, location, cluster id) of the cluster to set maintenance policy. Specified in the format `projects/*/locations/*/clusters/*`.
+        - description: The name (project, location, cluster name) of the cluster to set maintenance policy. Specified in the format `projects/*/locations/*/clusters/*`.
           in: path
           name: name
           required: true
@@ -2298,7 +2298,7 @@ paths:
       description: Enables or disables Network Policy for a cluster.
       operationId: container.projects.locations.clusters.setNetworkPolicy
       parameters:
-        - description: The name (project, location, cluster id) of the cluster to set networking policy. Specified in the format `projects/*/locations/*/clusters/*`.
+        - description: The name (project, location, cluster name) of the cluster to set networking policy. Specified in the format `projects/*/locations/*/clusters/*`.
           in: path
           name: name
           required: true
@@ -2340,7 +2340,7 @@ paths:
       description: Sets labels on a cluster.
       operationId: container.projects.locations.clusters.setResourceLabels
       parameters:
-        - description: The name (project, location, cluster id) of the cluster to set labels. Specified in the format `projects/*/locations/*/clusters/*`.
+        - description: The name (project, location, cluster name) of the cluster to set labels. Specified in the format `projects/*/locations/*/clusters/*`.
           in: path
           name: name
           required: true
@@ -2424,7 +2424,7 @@ paths:
       description: Starts master IP rotation.
       operationId: container.projects.locations.clusters.startIpRotation
       parameters:
-        - description: The name (project, location, cluster id) of the cluster to start IP rotation. Specified in the format `projects/*/locations/*/clusters/*`.
+        - description: The name (project, location, cluster name) of the cluster to start IP rotation. Specified in the format `projects/*/locations/*/clusters/*`.
           in: path
           name: name
           required: true
@@ -2496,7 +2496,7 @@ paths:
       description: Gets the OIDC discovery document for the cluster. See the [OpenID Connect Discovery 1.0 specification](https://openid.net/specs/openid-connect-discovery-1_0.html) for details. This API is not yet intended for general use, and is not available for all clusters.
       operationId: container.projects.locations.clusters.well-known.getOpenid-configuration
       parameters:
-        - description: The cluster (project, location, cluster id) to get the discovery document for. Specified in the format `projects/*/locations/*/clusters/*`.
+        - description: The cluster (project, location, cluster name) to get the discovery document for. Specified in the format `projects/*/locations/*/clusters/*`.
           in: path
           name: parent
           required: true
@@ -2656,7 +2656,7 @@ paths:
       description: Gets the public component of the cluster signing keys in JSON Web Key format. This API is not yet intended for general use, and is not available for all clusters.
       operationId: container.projects.locations.clusters.getJwks
       parameters:
-        - description: The cluster (project, location, cluster id) to get keys for. Specified in the format `projects/*/locations/*/clusters/*`.
+        - description: The cluster (project, location, cluster name) to get keys for. Specified in the format `projects/*/locations/*/clusters/*`.
           in: path
           name: parent
           required: true
@@ -2725,7 +2725,7 @@ paths:
       description: Lists the node pools for a cluster.
       operationId: container.projects.locations.clusters.nodePools.list
       parameters:
-        - description: The parent (project, location, cluster id) where the node pools will be listed. Specified in the format `projects/*/locations/*/clusters/*`.
+        - description: The parent (project, location, cluster name) where the node pools will be listed. Specified in the format `projects/*/locations/*/clusters/*`.
           in: path
           name: parent
           required: true
@@ -2776,7 +2776,7 @@ paths:
       description: Creates a node pool for a cluster.
       operationId: container.projects.locations.clusters.nodePools.create
       parameters:
-        - description: The parent (project, location, cluster id) where the node pool will be created. Specified in the format `projects/*/locations/*/clusters/*`.
+        - description: The parent (project, location, cluster name) where the node pool will be created. Specified in the format `projects/*/locations/*/clusters/*`.
           in: path
           name: parent
           required: true
@@ -3152,7 +3152,7 @@ components:
           type: array
         confidentialNodes:
           $ref: "#/components/schemas/ConfidentialNodes"
-          description: Configuration of Confidential Nodes
+          description: Configuration of Confidential Nodes. All the nodes in the cluster will be Confidential VM once enabled.
         createTime:
           description: "[Output only] The time the cluster was created, in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format."
           type: string
@@ -3523,7 +3523,7 @@ components:
           description: Required. Deprecated. The name of the cluster. This field has been deprecated and replaced by the name field.
           type: string
         name:
-          description: The name (project, location, cluster id) of the cluster to complete IP rotation. Specified in the format `projects/*/locations/*/clusters/*`.
+          description: The name (project, location, cluster name) of the cluster to complete IP rotation. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
           description: Required. Deprecated. The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber). This field has been deprecated and replaced by the name field.
@@ -3536,7 +3536,7 @@ components:
       description: ConfidentialNodes is configuration for the confidential nodes feature, which makes nodes run on confidential VMs.
       properties:
         enabled:
-          description: Whether Confidential Nodes feature is enabled for all nodes in this cluster.
+          description: Whether Confidential Nodes feature is enabled.
           type: boolean
       type: object
     ConfigConnectorConfig:
@@ -3579,7 +3579,7 @@ components:
           $ref: "#/components/schemas/NodePool"
           description: Required. The node pool to create.
         parent:
-          description: The parent (project, location, cluster id) where the node pool will be created. Specified in the format `projects/*/locations/*/clusters/*`.
+          description: The parent (project, location, cluster name) where the node pool will be created. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
           description: Required. Deprecated. The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber). This field has been deprecated and replaced by the parent field.
@@ -4928,7 +4928,7 @@ components:
           description: Required. The fingerprint of the previous set of labels for this resource, used to detect conflicts. The fingerprint is initially generated by Kubernetes Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash when updating or changing labels. Make a `get()` request to the resource to get the latest fingerprint.
           type: string
         name:
-          description: The name (project, location, cluster id) of the cluster to set labels. Specified in the format `projects/*/locations/*/clusters/*`.
+          description: The name (project, location, cluster name) of the cluster to set labels. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
           description: Required. Deprecated. The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber). This field has been deprecated and replaced by the name field.
@@ -4952,7 +4952,7 @@ components:
           description: Required. Whether ABAC authorization will be enabled in the cluster.
           type: boolean
         name:
-          description: The name (project, location, cluster id) of the cluster to set legacy abac. Specified in the format `projects/*/locations/*/clusters/*`.
+          description: The name (project, location, cluster name) of the cluster to set legacy abac. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
           description: Required. Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
@@ -5011,7 +5011,7 @@ components:
           $ref: "#/components/schemas/MaintenancePolicy"
           description: Required. The maintenance policy to be set for the cluster. An empty field clears the existing maintenance policy.
         name:
-          description: The name (project, location, cluster id) of the cluster to set maintenance policy. Specified in the format `projects/*/locations/*/clusters/*`.
+          description: The name (project, location, cluster name) of the cluster to set maintenance policy. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
           description: Required. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840).
@@ -5073,7 +5073,7 @@ components:
           description: Required. Deprecated. The name of the cluster. This field has been deprecated and replaced by the name field.
           type: string
         name:
-          description: The name (project, location, cluster id) of the cluster to set networking policy. Specified in the format `projects/*/locations/*/clusters/*`.
+          description: The name (project, location, cluster name) of the cluster to set networking policy. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         networkPolicy:
           $ref: "#/components/schemas/NetworkPolicy"
@@ -5176,7 +5176,7 @@ components:
           description: Required. Deprecated. The name of the cluster. This field has been deprecated and replaced by the name field.
           type: string
         name:
-          description: The name (project, location, cluster id) of the cluster to start IP rotation. Specified in the format `projects/*/locations/*/clusters/*`.
+          description: The name (project, location, cluster name) of the cluster to start IP rotation. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
           description: Required. Deprecated. The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber). This field has been deprecated and replaced by the name field.
