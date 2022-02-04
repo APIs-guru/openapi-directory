@@ -1190,10 +1190,6 @@ components:
           items:
             $ref: "#/components/schemas/AuditLogConfig"
           type: array
-        exemptedMembers:
-          items:
-            type: string
-          type: array
         service:
           description: Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
           type: string
