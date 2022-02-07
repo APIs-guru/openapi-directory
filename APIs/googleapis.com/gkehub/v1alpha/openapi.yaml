@@ -964,6 +964,9 @@ components:
         multiclusteringress:
           $ref: "#/components/schemas/MultiClusterIngressFeatureSpec"
           description: Multicluster Ingress-specific spec.
+        workloadcertificate:
+          $ref: "#/components/schemas/FeatureSpec"
+          description: Workload Certificate spec.
       type: object
     CommonFeatureState:
       description: CommonFeatureState contains Hub-wide Feature status information.
@@ -1530,6 +1533,20 @@ components:
             - SERVICE_UPDATING
           type: string
       type: object
+    FeatureSpec:
+      description: "**Workload Certificate**: The Hub-wide input for the WorkloadCertificate feature."
+      properties:
+        defaultConfig:
+          $ref: "#/components/schemas/MembershipSpec"
+          description: Specifies default membership spec. Users can override the default in the member_configs for each member.
+        provisionGoogleCa:
+          description: Immutable. Specifies CA configuration.
+          enum:
+            - GOOGLE_CA_PROVISIONING_UNSPECIFIED
+            - DISABLED
+            - ENABLED
+          type: string
+      type: object
     FeatureState:
       description: FeatureState describes the high-level state of a Feature. It may be used to describe a Feature's state at the environ-level, or per-membershop, depending on the context.
       properties:
@@ -1944,6 +1961,9 @@ components:
         policycontroller:
           $ref: "#/components/schemas/PolicycontrollerMembershipSpec"
           description: Policy Controller spec.
+        workloadcertificate:
+          $ref: "#/components/schemas/MembershipSpec"
+          description: Workload Certificate spec.
       type: object
     MembershipFeatureState:
       description: MembershipFeatureState contains Feature status information for a single Membership.
@@ -1969,6 +1989,17 @@ components:
         state:
           $ref: "#/components/schemas/FeatureState"
           description: The high-level state of this Feature for a single membership.
+      type: object
+    MembershipSpec:
+      description: "**Workload Certificate**: The membership-specific input for WorkloadCertificate feature."
+      properties:
+        certificateManagement:
+          description: Specifies workload certificate management.
+          enum:
+            - CERTIFICATE_MANAGEMENT_UNSPECIFIED
+            - DISABLED
+            - ENABLED
+          type: string
       type: object
     MembershipState:
       description: MembershipState describes the state of a Membership resource.

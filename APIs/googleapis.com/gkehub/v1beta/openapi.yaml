@@ -19,12 +19,11 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://gkehub.googleapis.com/$discovery/rest?version=v1beta
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: gkehub
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/anthos/multicluster-management/connect/registering-a-cluster
 tags:
@@ -584,6 +583,16 @@ components:
       schema:
         type: string
   schemas:
+    AnthosObservabilityMembershipSpec:
+      description: "**Anthosobservability**: Per-Membership Feature spec."
+      properties:
+        doNotOptimizeMetrics:
+          description: use full of metrics rather than optimized metrics. See https://cloud.google.com/anthos/clusters/docs/on-prem/1.8/concepts/logging-and-monitoring#optimized_metrics_default_metrics
+          type: boolean
+        enableStackdriverOnApplications:
+          description: enable collecting and reporting metrics and logs from user apps See go/onyx-application-metrics-logs-user-guide
+          type: boolean
+      type: object
     AppDevExperienceFeatureSpec:
       description: Spec for App Dev Experience Feature.
       properties: {}
@@ -1365,6 +1374,9 @@ components:
     MembershipFeatureSpec:
       description: MembershipFeatureSpec contains configuration information for a single Membership.
       properties:
+        anthosobservability:
+          $ref: "#/components/schemas/AnthosObservabilityMembershipSpec"
+          description: Anthos Observability-specific spec
         cloudbuild:
           $ref: "#/components/schemas/MembershipSpec"
           description: Cloud Build-specific spec

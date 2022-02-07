@@ -527,7 +527,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The requested page size. The actual page size may be fixed to a min or max value.
+        - description: The requested page size. This is a hint and the actual page size in the response may be different.
           in: query
           name: pageSize
           schema:
