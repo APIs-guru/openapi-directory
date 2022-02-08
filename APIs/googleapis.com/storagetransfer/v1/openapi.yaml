@@ -741,7 +741,7 @@ components:
       properties: {}
       type: object
     Date:
-      description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values * A month and day value, with a zero year, such as an anniversary * A year on its own, with zero month and day values * A year and month value, with a zero day, such as a credit card expiration date Related types are google.type.TimeOfDay and `google.protobuf.Timestamp`."
+      description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values * A month and day, with a zero year (e.g., an anniversary) * A year on its own, with a zero month and a zero day * A year and month, with a zero day (e.g., a credit card expiration date) Related types: * google.type.TimeOfDay * google.type.DateTime * google.protobuf.Timestamp"
       properties:
         day:
           description: Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
@@ -896,7 +896,7 @@ components:
           type: array
       type: object
     MetadataOptions:
-      description: Specifies the metadata options for running a transfer.
+      description: Specifies the metadata options for running a transfer. These options only apply to transfers involving a POSIX filesystem and are ignored for other transfers.
       properties:
         acl:
           description: Specifies how each object's ACLs should be preserved for transfers between Google Cloud Storage buckets. If unspecified, the default behavior is the same as ACL_DESTINATION_BUCKET_DEFAULT.
@@ -906,7 +906,7 @@ components:
             - ACL_PRESERVE
           type: string
         gid:
-          description: Specifies how each file's GID attribute should be handled by the transfer. If unspecified, the default behavior is the same as GID_SKIP when the source is a POSIX file system.
+          description: Specifies how each file's POSIX group ID (GID) attribute should be handled by the transfer. By default, GID is not preserved.
           enum:
             - GID_UNSPECIFIED
             - GID_SKIP
@@ -920,7 +920,7 @@ components:
             - KMS_KEY_PRESERVE
           type: string
         mode:
-          description: Specifies how each file's mode attribute should be handled by the transfer. If unspecified, the default behavior is the same as MODE_SKIP when the source is a POSIX file system.
+          description: Specifies how each file's mode attribute should be handled by the transfer. By default, mode is not preserved.
           enum:
             - MODE_UNSPECIFIED
             - MODE_SKIP
@@ -938,7 +938,7 @@ components:
             - STORAGE_CLASS_ARCHIVE
           type: string
         symlink:
-          description: Specifies how symlinks should be handled by the transfer. If unspecified, the default behavior is the same as SYMLINK_SKIP when the source is a POSIX file system.
+          description: Specifies how symlinks should be handled by the transfer. By default, symlinks are not preserved.
           enum:
             - SYMLINK_UNSPECIFIED
             - SYMLINK_SKIP
@@ -952,7 +952,7 @@ components:
             - TEMPORARY_HOLD_PRESERVE
           type: string
         uid:
-          description: Specifies how each file's UID attribute should be handled by the transfer. If unspecified, the default behavior is the same as UID_SKIP when the source is a POSIX file system.
+          description: Specifies how each file's POSIX user ID (UID) attribute should be handled by the transfer. By default, UID is not preserved.
           enum:
             - UID_UNSPECIFIED
             - UID_SKIP
@@ -1319,7 +1319,7 @@ components:
           type: boolean
         metadataOptions:
           $ref: "#/components/schemas/MetadataOptions"
-          description: Represents the selected metadata options for a transfer job.
+          description: Represents the selected metadata options for a transfer job. This feature is in Preview.
         overwriteObjectsAlreadyExistingInSink:
           description: When to overwrite objects that already exist in the sink. The default is that only objects that are different from the source are ovewritten. If true, all objects in the sink whose name matches an object in the source are overwritten with the source object.
           type: boolean

@@ -161,7 +161,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Directly uploads an Apt artifact. The returned Operation will complete once the resources are uploaded. Package, Version, and File resources are created based on the imported artifact. Imported artifacts that conflict with existing resources are ignored.
-      operationId: artifactregistry.projects.locations.repositories.aptartifacts.upload
+      operationId: artifactregistry.projects.locations.repositories.aptArtifacts.upload
       parameters:
         - description: The name of the parent resource where the artifacts will be uploaded.
           in: path
@@ -394,7 +394,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Directly uploads a GooGet artifact. The returned Operation will complete once the resources are uploaded. Package, Version, and File resources are created based on the imported artifact. Imported artifacts that conflict with existing resources are ignored.
-      operationId: artifactregistry.projects.locations.repositories.googetartifacts.upload
+      operationId: artifactregistry.projects.locations.repositories.googetArtifacts.upload
       parameters:
         - description: The name of the parent resource where the artifacts will be uploaded.
           in: path
@@ -727,7 +727,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Directly uploads a Yum artifact. The returned Operation will complete once the resources are uploaded. Package, Version, and File resources are created based on the imported artifact. Imported artifacts that conflict with existing resources are ignored.
-      operationId: artifactregistry.projects.locations.repositories.yumartifacts.upload
+      operationId: artifactregistry.projects.locations.repositories.yumArtifacts.upload
       parameters:
         - description: The name of the parent resource where the artifacts will be uploaded.
           in: path
@@ -1351,7 +1351,7 @@ components:
             - PYTHON
           type: string
         kmsKeyName:
-          description: "The Cloud KMS resource name of the customer managed encryption key that’s used to encrypt the contents of the Repository. Has the form: `projects/my-project/locations/my-region/keyRings/my-kr/cryptoKeys/my-key`. This value may not be changed after the Repository has been created."
+          description: "The Cloud KMS resource name of the customer managed encryption key that's used to encrypt the contents of the Repository. Has the form: `projects/my-project/locations/my-region/keyRings/my-kr/cryptoKeys/my-key`. This value may not be changed after the Repository has been created."
           type: string
         labels:
           additionalProperties:

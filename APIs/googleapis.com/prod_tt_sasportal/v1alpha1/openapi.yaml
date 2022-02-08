@@ -1103,6 +1103,10 @@ components:
         interferenceCoordinationGroup:
           description: ICG. A group of CBSDs that manage their own interference with the group. See CBRSA-TS-2001 V3.0.0 for more details.
           type: string
+        nrqzValidated:
+          description: Output only. Whether a CPI has validated to have coordinated with the National Quiet Zone office.
+          readOnly: true
+          type: boolean
       type: object
     SasPortalDeviceModel:
       description: Information about the model of the device.

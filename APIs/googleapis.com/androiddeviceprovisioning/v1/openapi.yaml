@@ -46,7 +46,7 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: A token specifying which result page to return.
+        - description: A token specifying which result page to return. This field has custom validations in ListCustomersRequestValidator
           in: query
           name: pageToken
           schema:
@@ -532,7 +532,7 @@ paths:
       description: Creates a new configuration. Once created, a customer can apply the configuration to devices.
       operationId: androiddeviceprovisioning.customers.configurations.create
       parameters:
-        - description: Required. The customer that manages the configuration. An API resource name in the format `customers/[CUSTOMER_ID]`.
+        - description: Required. The customer that manages the configuration. An API resource name in the format `customers/[CUSTOMER_ID]`. This field has custom validation in CreateConfigurationRequestValidator
           in: path
           name: parent
           required: true
@@ -1055,7 +1055,7 @@ components:
           type: string
         device:
           $ref: "#/components/schemas/DeviceReference"
-          description: Required. The device the configuration is applied to.
+          description: Required. The device the configuration is applied to. There are custom validations in ApplyConfigurationRequestValidator
       type: object
     CustomerListConfigurationsResponse:
       description: Response message of customer's listing configuration.
@@ -1104,14 +1104,14 @@ components:
       properties:
         device:
           $ref: "#/components/schemas/DeviceReference"
-          description: Required. The device to remove the configuration from.
+          description: Required. The device to remove the configuration from. There are custom validations in RemoveConfigurationRequestValidator
       type: object
     CustomerUnclaimDeviceRequest:
       description: Request message for customer to unclaim a device.
       properties:
         device:
           $ref: "#/components/schemas/DeviceReference"
-          description: Required. The device to unclaim.
+          description: Required. The device to unclaim. There are custom validations in UnclaimDeviceRequestValidator.
       type: object
     Device:
       description: An Android device registered for zero-touch enrollment.
