@@ -2317,6 +2317,87 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
+  "/v1/{parent}/endpointAttachments":
+    get:
+      description: Lists the EndpointAttachments in the specified Organization.
+      operationId: apigee.organizations.endpointAttachments.list
+      parameters:
+        - description: "Required. Name of the Organization for which to list Endpoint Attachments in the format: `organizations/{organization}`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Maximum number of Endpoint Attachments to return. If unspecified, at most 25 attachments will be returned.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. Page token, returned from a previous ListEndpointAttachments call, that you can use to retrieve the next page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudApigeeV1ListEndpointAttachmentsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates an EndpointAttachment. **Note:** Not supported for Apigee hybrid.
+      operationId: apigee.organizations.endpointAttachments.create
+      parameters:
+        - description: Required. The Organization this EndpointAttachment will be created in.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The ID to use for the endpoint attachment. ID must be a 1-20 characters string with lowercase letters and numbers and must start with a letter.
+          in: query
+          name: endpointAttachmentId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudApigeeV1EndpointAttachment"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
   "/v1/{parent}/envgroups":
     get:
       description: Lists all environment groups.
@@ -5444,6 +5525,23 @@ components:
           description: Name of the dimension.
           type: string
       type: object
+    GoogleCloudApigeeV1EndpointAttachment:
+      description: Apigee Endpoint Attachment.
+      properties:
+        host:
+          description: Output only. Host that can be used in either HTTP Target Endpoint directly, or as the host in Target Server.
+          readOnly: true
+          type: string
+        location:
+          description: Required. Location of the endpoint attachment.
+          type: string
+        name:
+          description: "Name of the Endpoint Attachment in the following format: `organizations/{organization}/endpointAttachments/{endpoint_attachment}`."
+          type: string
+        serviceAttachment:
+          description: "Format: projects/*/regions/*/serviceAttachments/*"
+          type: string
+      type: object
     GoogleCloudApigeeV1EntityMetadata:
       description: Metadata common to many entities in this API.
       properties:
@@ -6148,6 +6246,18 @@ components:
           type: array
         nextStartKey:
           description: Value that can be sent as `startKey` to retrieve the next page of content. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
+    GoogleCloudApigeeV1ListEndpointAttachmentsResponse:
+      description: Response for ListEndpointAttachments method.
+      properties:
+        endpointAttachments:
+          description: Endpoint Attachments in the specified organization.
+          items:
+            $ref: "#/components/schemas/GoogleCloudApigeeV1EndpointAttachment"
+          type: array
+        nextPageToken:
+          description: Page token that you can include in a ListEndpointAttachments request to retrieve the next page. If omitted, no subsequent pages exist.
           type: string
       type: object
     GoogleCloudApigeeV1ListEnvironmentGroupAttachmentsResponse:

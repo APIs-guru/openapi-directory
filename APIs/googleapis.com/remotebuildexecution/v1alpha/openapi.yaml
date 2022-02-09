@@ -932,6 +932,8 @@ components:
             - WORKING_DIR_NOT_RELATIVE
             - DOCKER_MISSING_CONTAINER
             - DOCKER_MISSING_BLOB_IN_IMAGE
+            - DOCKER_INVALID_VOLUME
+            - DOCKER_CREATE_RUNTIME_CANNOT_MOUNT_TO_PROC
           type: string
         message:
           description: The error message.

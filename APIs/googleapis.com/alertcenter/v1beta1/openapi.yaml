@@ -798,6 +798,7 @@ components:
             - FALSE_POSITIVE
             - PARTIALLY_RESOLVED
             - MERGED
+            - DOWNGRADED
           type: string
       type: object
     Attachment:
@@ -1114,7 +1115,7 @@ components:
       description: New alert tracking numbers.
       properties:
         newAlertId:
-          description: New alert ID. Reference the [google.apps.alertcenter.Alert] with this ID for the current state.
+          description: Optional. New alert ID. Reference the [google.apps.alertcenter.Alert] with this ID for the current state.
           type: string
         newIncidentTrackingId:
           description: The new tracking ID from the parent incident.
