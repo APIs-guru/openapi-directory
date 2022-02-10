@@ -30,6 +30,48 @@ externalDocs:
 tags:
   - name: projects
 paths:
+  "/v1alpha1/{datacenterConnector}:upgradeAppliance":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Upgrades the appliance relate to this DatacenterConnector to the in-place updateable version.
+      operationId: vmmigration.projects.locations.sources.datacenterConnectors.upgradeAppliance
+      parameters:
+        - description: Required. The DatacenterConnector name.
+          in: path
+          name: datacenterConnector
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpgradeApplianceRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1alpha1/{group}:addGroupMigration":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -361,7 +403,7 @@ paths:
       description: "Updates the parameters of a single TargetProject. NOTE: TargetProject is a global resource; hence the only supported value for location is `global`."
       operationId: vmmigration.projects.locations.targetProjects.patch
       parameters:
-        - description: The name of the target project.
+        - description: Output only. The name of the target project.
           in: path
           name: name
           required: true
@@ -1453,6 +1495,22 @@ components:
           description: The full path name of the MigratingVm to add.
           type: string
       type: object
+    ApplianceVersion:
+      description: Describes an appliance version.
+      properties:
+        critical:
+          description: Determine whether it's critical to upgrade the appliance to this version.
+          type: boolean
+        releaseNotesUri:
+          description: Link to a page that contains the version release notes.
+          type: string
+        uri:
+          description: A link for downloading the version.
+          type: string
+        version:
+          description: The appliance version.
+          type: string
+      type: object
     AppliedLicense:
       description: AppliedLicense holds the license data returned by adaptation module report.
       properties:
@@ -1467,6 +1525,16 @@ components:
             - PAYG
             - BYOL
           type: string
+      type: object
+    AvailableUpdates:
+      description: Holds informatiom about the available versions for upgrade.
+      properties:
+        inPlaceUpdate:
+          $ref: "#/components/schemas/ApplianceVersion"
+          description: The latest version for in place update. The current appliance can be updated to this version using the API or m4c CLI.
+        newDeployableAppliance:
+          $ref: "#/components/schemas/ApplianceVersion"
+          description: The newest deployable version of the appliance. The current appliance can't be updated into this version, and the owner must manually deploy this OVA to a new appliance.
       type: object
     CancelCloneJobRequest:
       description: Request message for 'CancelCloneJob' request.
@@ -1501,7 +1569,8 @@ components:
           description: Output only. Provides details for the errors that led to the Clone Job's state.
           readOnly: true
         name:
-          description: The name of the clone.
+          description: Output only. The name of the clone.
+          readOnly: true
           type: string
         state:
           description: Output only. State of the clone job.
@@ -1774,30 +1843,21 @@ components:
           description: "Output only. Details of the VM to create as the target of this cutover job. Deprecated: Use compute_engine_target_details instead."
           readOnly: true
       type: object
-    CycleStep:
-      description: CycleStep hold information about a step progress.
-      properties:
-        endTime:
-          description: The time the cycle step has ended.
-          format: google-datetime
-          type: string
-        initializingReplication:
-          $ref: "#/components/schemas/InitializingReplicationStep"
-          description: Initializing replication step.
-        postProcessing:
-          $ref: "#/components/schemas/PostProcessingStep"
-          description: Post processing step.
-        replicating:
-          $ref: "#/components/schemas/ReplicatingStep"
-          description: Replicating step.
-        startTime:
-          description: The time the cycle step has started.
-          format: google-datetime
-          type: string
-      type: object
     DatacenterConnector:
       description: DatacenterConnector message describes a connector between the Source and GCP, which is installed on a vmware datacenter (an OVA vm installed by the user) to connect the Datacenter to GCP and support vm migration data transfer.
       properties:
+        applianceInfrastructureVersion:
+          description: Output only. Appliance OVA version. This is the OVA which is manually installed by the user and contains the infrastructure for the automatically updatable components on the appliance.
+          readOnly: true
+          type: string
+        applianceSoftwareVersion:
+          description: Output only. Appliance last installed update bundle version. This is the version of the automatically updatable components on the appliance.
+          readOnly: true
+          type: string
+        availableVersions:
+          $ref: "#/components/schemas/AvailableUpdates"
+          description: Output only. The available versions for updating this appliance.
+          readOnly: true
         bucket:
           description: Output only. The communication channel between the datacenter connector and GCP.
           readOnly: true
@@ -1841,6 +1901,10 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        upgradeStatus:
+          $ref: "#/components/schemas/UpgradeStatus"
+          description: Output only. The status of the current / last upgradeAppliance operation.
+          readOnly: true
         version:
           description: The version running in the DatacenterConnector. This is supplied by the OVA connector during the registration process and can not be modified.
           type: string
@@ -1859,8 +1923,7 @@ components:
           type: string
         vmwareVms:
           $ref: "#/components/schemas/VmwareVmsDetails"
-          description: Output only. The description of the VMs in a Source of type Vmware.
-          readOnly: true
+          description: The description of the VMs in a Source of type Vmware.
       type: object
     FinalizeMigrationRequest:
       description: Request message for 'FinalizeMigration' request.
@@ -1881,17 +1944,14 @@ components:
           description: Display name is a user defined name for this group which can be updated.
           type: string
         name:
-          description: The Group name.
+          description: Output only. The Group name.
+          readOnly: true
           type: string
         updateTime:
           description: Output only. The update time timestamp.
           format: google-datetime
           readOnly: true
           type: string
-      type: object
-    InitializingReplicationStep:
-      description: InitializingReplicationStep contains specific step details.
-      properties: {}
       type: object
     Link:
       description: Describes a URL link.
@@ -2329,10 +2389,6 @@ components:
       description: Request message for 'PauseMigration' request.
       properties: {}
       type: object
-    PostProcessingStep:
-      description: PostProcessingStep contains specific step details.
-      properties: {}
-      type: object
     RemoveGroupMigrationRequest:
       description: Request message for 'RemoveMigration' request.
       properties:
@@ -2340,33 +2396,9 @@ components:
           description: The MigratingVm to remove.
           type: string
       type: object
-    ReplicatingStep:
-      description: ReplicatingStep contains specific step details.
-      properties:
-        lastThirtyMinutesAverageBytesPerSecond:
-          description: The source disks replication rate for the last 30 minutes in bytes per second.
-          format: int64
-          type: string
-        lastTwoMinutesAverageBytesPerSecond:
-          description: The source disks replication rate for the last 2 minutes in bytes per second.
-          format: int64
-          type: string
-        replicatedBytes:
-          description: Replicated bytes in the step.
-          format: int64
-          type: string
-        totalBytes:
-          description: Total bytes to be handled in the step.
-          format: int64
-          type: string
-      type: object
     ReplicationCycle:
       description: ReplicationCycle contains information about the current replication cycle status.
       properties:
-        endTime:
-          description: The time the replication cycle has ended.
-          format: google-datetime
-          type: string
         progress:
           description: The current progress in percentage of this cycle.
           format: int32
@@ -2379,11 +2411,6 @@ components:
           description: The time the replication cycle has started.
           format: google-datetime
           type: string
-        steps:
-          description: The cycle's steps list reflecting its progress.
-          items:
-            $ref: "#/components/schemas/CycleStep"
-          type: array
         totalPauseDuration:
           description: The accumulated duration the replication cycle was paused.
           format: google-duration
@@ -2498,7 +2525,8 @@ components:
           description: The target project's description.
           type: string
         name:
-          description: The name of the target project.
+          description: Output only. The name of the target project.
+          readOnly: true
           type: string
         project:
           description: The target project ID (number) or project name.
@@ -2598,6 +2626,38 @@ components:
           type: string
         zone:
           description: The zone in which to create the VM.
+          type: string
+      type: object
+    UpgradeApplianceRequest:
+      description: Request message for 'UpgradeAppliance' request.
+      properties:
+        requestId:
+          description: A request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes after the first request. For example, consider a situation where you make an initial request and t he request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          type: string
+      type: object
+    UpgradeStatus:
+      description: UpgradeStatus contains information about upgradeAppliance operation.
+      properties:
+        error:
+          $ref: "#/components/schemas/Status"
+          description: Provides details on the state of the upgrade operation in case of an error.
+        previousVersion:
+          description: The version from which we upgraded.
+          type: string
+        startTime:
+          description: The time the operation was started.
+          format: google-datetime
+          type: string
+        state:
+          description: The state of the upgradeAppliance operation.
+          enum:
+            - STATE_UNSPECIFIED
+            - RUNNING
+            - FAILED
+            - SUCCEEDED
+          type: string
+        version:
+          description: The version to upgrade to.
           type: string
       type: object
     UtilizationReport:
@@ -2796,7 +2856,7 @@ components:
           description: The display name of the VM. Note that this is not necessarily unique.
           type: string
         guestDescription:
-          description: The VM's OS. See for example https://pubs.vmware.com/vi-sdk/visdk250/ReferenceGuide/vim.vm.GuestOsDescriptor.GuestOsIdentifier.html for types of strings this might hold.
+          description: The VM's OS. See for example https://vdc-repo.vmware.com/vmwb-repository/dcr-public/da47f910-60ac-438b-8b9b-6122f4d14524/16b7274a-bf8b-4b4c-a05e-746f2aa93c8c/doc/vim.vm.GuestOsDescriptor.GuestOsIdentifier.html for types of strings this might hold.
           type: string
         memoryMb:
           description: The size of the memory of the VM in MB.
