@@ -764,7 +764,7 @@ components:
           description: Google Cloud Storage location where input content is located.
       type: object
     Instance:
-      description: A Google Cloud Redis instance.
+      description: A Memorystore for Redis instance.
       properties:
         alternativeLocationId:
           description: Optional. If specified, at least one node will be provisioned in this zone in addition to the zone specified in location_id. Only applicable to standard tier. If provided, it must be a different zone from the one provided in [location_id]. Additional nodes beyond the first 2 will be placed in zones selected by the service.

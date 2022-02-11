@@ -2459,7 +2459,7 @@ components:
           description: Required. The hostname of the EKM replica used at TLS and HTTP layers.
           type: string
         serverCertificates:
-          description: Required. A list of leaf server certificates used to authenticate HTTPS connections to the EKM replica.
+          description: Required. A list of leaf server certificates used to authenticate HTTPS connections to the EKM replica. Currently, a maximum of 10 Certificate is supported.
           items:
             $ref: "#/components/schemas/Certificate"
           type: array

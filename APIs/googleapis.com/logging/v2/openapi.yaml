@@ -2220,6 +2220,9 @@ components:
         spanId:
           description: "Optional. The span ID within the trace associated with the log entry.For Trace spans, this is the same format that the Trace API v2 uses: a 16-character hexadecimal encoding of an 8-byte array, such as 000000000000004a."
           type: string
+        split:
+          $ref: "#/components/schemas/LogSplit"
+          description: Optional. Information indicating this LogEntry is part of a sequence of multiple log entries split from a single LogEntry.
         textPayload:
           description: The log entry payload, represented as a Unicode string (UTF-8).
           type: string
@@ -2412,6 +2415,21 @@ components:
         writerIdentity:
           description: Output only. An IAM identity—a service account or group—under which Cloud Logging writes the exported log entries to the sink's destination. This field is set by sinks.create and sinks.update based on the value of unique_writer_identity in those methods.Until you grant this identity write-access to the destination, log entry exports from this sink will fail. For more information, see Granting Access for a Resource (https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource). Consult the destination service's documentation to determine the appropriate IAM roles to assign to the identity.Sinks that have a destination that is a log bucket in the same project as the sink do not have a writer_identity and no additional permissions are required.
           readOnly: true
+          type: string
+      type: object
+    LogSplit:
+      description: Additional information used to correlate multiple log entries. Used when a single LogEntry would exceed the Google Cloud Logging size limit and is split across multiple log entries.
+      properties:
+        index:
+          description: The index of this LogEntry in the sequence of split log entries. Log entries are given |index| values 0, 1, ..., n-1 for a sequence of n log entries.
+          format: int32
+          type: integer
+        totalSplits:
+          description: The total number of log entries that the original LogEntry was split into.
+          format: int32
+          type: integer
+        uid:
+          description: A globally unique identifier for all log entries in a sequence of split log entries. All log entries with the same |LogSplit.uid| are assumed to be part of the same sequence of split log entries.
           type: string
       type: object
     LogView:

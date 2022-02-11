@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://eventarc.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: eventarc
 externalDocs:
@@ -706,7 +706,7 @@ components:
       description: Represents a target of an invocation over HTTP.
       properties:
         cloudFunction:
-          description: "The Cloud Function resource name. Only Cloud Functions V2 is supported. Format: projects/{project}/locations/{location}/functions/{function}"
+          description: "The Cloud Function resource name. Only Cloud Functions V2 is supported. Format: `projects/{project}/locations/{location}/functions/{function}`"
           type: string
         cloudRun:
           $ref: "#/components/schemas/CloudRun"
@@ -724,6 +724,9 @@ components:
       properties:
         attribute:
           description: Required. The name of a CloudEvents attribute. Currently, only a subset of attributes are supported for filtering. All triggers MUST provide a filter for the 'type' attribute.
+          type: string
+        operator:
+          description: Optional. The operator used for matching the events with the value of the filter. If not specified, only events that have an exact key-value pair specified in the filter are matched. The only allowed value is `match-path-pattern`.
           type: string
         value:
           description: Required. The value for the attribute.
@@ -747,7 +750,7 @@ components:
           readOnly: true
           type: array
         type:
-          description: Output only. The full name of the event type (for example, "google.cloud.storage.object.v1.finalized"). In the form of {provider-id}.{resource}.{version}.{verb}. Types MUST be versioned and event schemas are guaranteed to remain backward compatible within one version. Note that event type versions and API versions do not need to match.
+          description: Output only. The full name of the event type (for example, "google.cloud.storage.object.v1.finalized"). In the form of {provider-specific-prefix}.{resource}.{version}.{verb}. Types MUST be versioned and event schemas are guaranteed to remain backward compatible within one version. Note that event type versions and API versions do not need to match.
           readOnly: true
           type: string
       type: object
@@ -1002,7 +1005,7 @@ components:
           readOnly: true
           type: array
         name:
-          description: Output only. In `projects/{project}/locations/{location}/providers/{provider-id}` format.
+          description: Output only. In `projects/{project}/locations/{location}/providers/{provider_id}` format.
           readOnly: true
           type: string
       type: object
