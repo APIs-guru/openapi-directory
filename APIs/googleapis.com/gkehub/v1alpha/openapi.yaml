@@ -1688,9 +1688,17 @@ components:
         clientId:
           description: ID for OIDC client application.
           type: string
+        clientSecret:
+          description: Unencrypted OIDC client secret will be passed to the GKE Hub CLH.
+          type: string
         deployCloudConsoleProxy:
           description: Flag to denote if reverse proxy is used to connect to auth provider. This flag should be set to true when provider is not reachable by Google Cloud Console.
           type: boolean
+        encryptedClientSecret:
+          description: Output only. Encrypted OIDC Client secret
+          format: byte
+          readOnly: true
+          type: string
         extraParams:
           description: Comma-separated list of key-value pairs.
           type: string
@@ -1959,7 +1967,7 @@ components:
           $ref: "#/components/schemas/ServiceMeshMembershipSpec"
           description: Anthos Service Mesh-specific spec
         policycontroller:
-          $ref: "#/components/schemas/PolicycontrollerMembershipSpec"
+          $ref: "#/components/schemas/PolicyControllerMembershipSpec"
           description: Policy Controller spec.
         workloadcertificate:
           $ref: "#/components/schemas/MembershipSpec"
@@ -1981,7 +1989,7 @@ components:
           $ref: "#/components/schemas/MeteringMembershipState"
           description: Metering-specific spec.
         policycontroller:
-          $ref: "#/components/schemas/PolicycontrollerMembershipState"
+          $ref: "#/components/schemas/PolicyControllerMembershipState"
           description: Policycontroller-specific state.
         servicemesh:
           $ref: "#/components/schemas/ServiceMeshMembershipState"
@@ -2146,27 +2154,27 @@ components:
           format: int32
           type: integer
       type: object
-    PolicycontrollerMembershipSpec:
+    PolicyControllerMembershipSpec:
       description: "**Policy Controller**: Configuration for a single cluster. Intended to parallel the PolicyController CR."
       properties:
         policyControllerHubConfig:
-          $ref: "#/components/schemas/PolicycontrollerPolicyControllerHubConfig"
+          $ref: "#/components/schemas/PolicyControllerPolicyControllerHubConfig"
           description: Policy Controller configuration for the cluster.
         version:
           description: Version of Policy Controller installed.
           type: string
       type: object
-    PolicycontrollerMembershipState:
+    PolicyControllerMembershipState:
       description: "**Policy Controller**: State for a single cluster."
       properties:
         clusterName:
           description: The user-defined name for the cluster used by ClusterSelectors to group clusters together. This should match Membership's membership_name, unless the user installed PC on the cluster manually prior to enabling the PC hub feature. Unique within a Policy Controller installation.
           type: string
         membershipSpec:
-          $ref: "#/components/schemas/PolicycontrollerMembershipSpec"
+          $ref: "#/components/schemas/PolicyControllerMembershipSpec"
           description: Membership configuration in the cluster. This represents the actual state in the cluster, while the MembershipSpec in the FeatureSpec represents the intended state
         policyControllerHubState:
-          $ref: "#/components/schemas/PolicycontrollerPolicyControllerHubState"
+          $ref: "#/components/schemas/PolicyControllerPolicyControllerHubState"
           description: Policy Controller state observed by the Policy Controller Hub
         state:
           description: The lifecycle state Policy Controller is in.
@@ -2181,7 +2189,7 @@ components:
             - HUB_ERROR
           type: string
       type: object
-    PolicycontrollerPolicyControllerHubConfig:
+    PolicyControllerPolicyControllerHubConfig:
       description: Configuration for Policy Controller
       properties:
         auditIntervalSeconds:
@@ -2211,10 +2219,10 @@ components:
           description: Enables the ability to use Constraint Templates that reference to objects other than the object currently being evaluated.
           type: boolean
         templateLibraryConfig:
-          $ref: "#/components/schemas/PolicycontrollerTemplateLibraryConfig"
+          $ref: "#/components/schemas/PolicyControllerTemplateLibraryConfig"
           description: Configures the library templates to install along with Policy Controller.
       type: object
-    PolicycontrollerPolicyControllerHubState:
+    PolicyControllerPolicyControllerHubState:
       description: State of the Policy Controller.
       properties:
         deploymentStates:
@@ -2228,17 +2236,17 @@ components:
           description: Map from deployment name to deployment state. Example deployments are gatekeeper-controller-manager, gatekeeper-audit deployment, and gatekeeper-mutation.
           type: object
         version:
-          $ref: "#/components/schemas/PolicycontrollerPolicyControllerHubVersion"
+          $ref: "#/components/schemas/PolicyControllerPolicyControllerHubVersion"
           description: The version of Gatekeeper Policy Controller deployed.
       type: object
-    PolicycontrollerPolicyControllerHubVersion:
+    PolicyControllerPolicyControllerHubVersion:
       description: The build version of Gatekeeper that Policy Controller is using.
       properties:
         version:
           description: The gatekeeper image tag that is composed of ACM version, git tag, build number.
           type: string
       type: object
-    PolicycontrollerTemplateLibraryConfig:
+    PolicyControllerTemplateLibraryConfig:
       description: The config specifying which default library templates to install.
       properties:
         included:

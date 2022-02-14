@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://privateca.googleapis.com/$discovery/rest?version=v1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: privateca
 externalDocs:
@@ -1023,7 +1023,7 @@ paths:
   "/v1/{resource}:getIamPolicy":
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
-      operationId: privateca.projects.locations.managedPkis.getIamPolicy
+      operationId: privateca.projects.locations.certificateTemplates.getIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field."
           in: path
@@ -2276,7 +2276,7 @@ components:
       description: SubjectAltNames corresponds to a more modern way of listing what the asserted identity is in a certificate (i.e., compared to the "common name" in the distinguished name).
       properties:
         customSans:
-          description: Contains additional subject alternative name values.
+          description: Contains additional subject alternative name values. For each custom_san, the `value` field must contain an ASN.1 encoded UTF8String.
           items:
             $ref: "#/components/schemas/X509Extension"
           type: array
@@ -2437,3 +2437,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

@@ -1416,6 +1416,14 @@ components:
     CreativeRequirements:
       description: Message captures data about the creatives in the deal.
       properties:
+        creativeFormat:
+          description: Output only. The format of the creative, only applicable for programmatic guaranteed and preferred deals.
+          enum:
+            - CREATIVE_FORMAT_UNSPECIFIED
+            - DISPLAY
+            - VIDEO
+          readOnly: true
+          type: string
         creativePreApprovalPolicy:
           description: Output only. Specifies the creative pre-approval policy.
           enum:
@@ -1432,12 +1440,27 @@ components:
             - INCOMPATIBLE
           readOnly: true
           type: string
+        maxAdDurationMs:
+          description: Output only. The max duration of the video creative in milliseconds. only applicable for deals with video creatives.
+          format: int64
+          readOnly: true
+          type: string
         programmaticCreativeSource:
           description: Output only. Specifies the creative source for programmatic deals. PUBLISHER means creative is provided by seller and ADVERTISER means creative is provided by the buyer.
           enum:
             - PROGRAMMATIC_CREATIVE_SOURCE_UNSPECIFIED
             - ADVERTISER
             - PUBLISHER
+          readOnly: true
+          type: string
+        skippableAdType:
+          description: Output only. Skippable video ads allow viewers to skip ads after 5 seconds. Only applicable for deals with video creatives.
+          enum:
+            - SKIPPABLE_AD_TYPE_UNSPECIFIED
+            - SKIPPABLE
+            - INSTREAM_SELECT
+            - NOT_SKIPPABLE
+            - ANY
           readOnly: true
           type: string
       type: object

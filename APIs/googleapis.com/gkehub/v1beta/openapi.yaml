@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://gkehub.googleapis.com/$discovery/rest?version=v1beta
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: gkehub
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/anthos/multicluster-management/connect/registering-a-cluster
 tags:
@@ -1284,9 +1285,17 @@ components:
         clientId:
           description: ID for OIDC client application.
           type: string
+        clientSecret:
+          description: Unencrypted OIDC client secret will be passed to the GKE Hub CLH.
+          type: string
         deployCloudConsoleProxy:
           description: Flag to denote if reverse proxy is used to connect to auth provider. This flag should be set to true when provider is not reachable by Google Cloud Console.
           type: boolean
+        encryptedClientSecret:
+          description: Output only. Encrypted OIDC Client secret
+          format: byte
+          readOnly: true
+          type: string
         extraParams:
           description: Comma-separated list of key-value pairs.
           type: string
@@ -1386,6 +1395,9 @@ components:
         identityservice:
           $ref: "#/components/schemas/IdentityServiceMembershipSpec"
           description: Identity Service-specific spec.
+        policycontroller:
+          $ref: "#/components/schemas/PolicyControllerMembershipSpec"
+          description: Policy Controller spec.
       type: object
     MembershipFeatureState:
       description: MembershipFeatureState contains Feature status information for a single Membership.

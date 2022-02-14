@@ -30,6 +30,43 @@ externalDocs:
 tags:
   - name: projects
 paths:
+  "/v2/{location}/networks:listNetworkUsage":
+    get:
+      description: List all Networks (and used IPs for each Network) in the vendor account associated with the specified project.
+      operationId: baremetalsolution.projects.locations.networks.listNetworkUsage
+      parameters:
+        - description: Required. Parent value (project and location).
+          in: path
+          name: location
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListNetworkUsageResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v2/{name}":
     delete:
       description: Deletes a storage volume snapshot for a given volume.
@@ -101,7 +138,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "The list of fields to update. The only currently supported fields are: `snapshot_auto_delete_behavior` `snapshot_schedule_policy_name` 'labels'"
+        - description: "The list of fields to update. The only currently supported fields are: `snapshot_auto_delete_behavior` `snapshot_schedule_policy_name` 'labels' 'requested_size_gib'"
           in: query
           name: updateMask
           schema:
@@ -205,6 +242,48 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/ResetInstanceRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2/{name}:start":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Starts a server that was shutdown.
+      operationId: baremetalsolution.projects.locations.instances.start
+      parameters:
+        - description: Required. Name of the resource.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StartInstanceRequest"
       responses:
         "200":
           content:
@@ -350,6 +429,147 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListNetworksResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v2/{parent}/nfsShares":
+    get:
+      description: List NFS shares.
+      operationId: baremetalsolution.projects.locations.nfsShares.list
+      parameters:
+        - description: Required. Parent value for ListNfsSharesRequest.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: List filter.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Requested page size. The server might return fewer items than requested. If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results from the server.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListNfsSharesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v2/{parent}/provisioningConfigs:submit":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Submit a provisiong configuration for a given project.
+      operationId: baremetalsolution.projects.locations.provisioningConfigs.submit
+      parameters:
+        - description: Required. The parent project and location containing the ProvisioningConfig.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubmitProvisioningConfigRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubmitProvisioningConfigResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2/{parent}/provisioningQuotas":
+    get:
+      description: List the budget details to provision resources on a given project.
+      operationId: baremetalsolution.projects.locations.provisioningQuotas.list
+      parameters:
+        - description: Required. Parent value for ListProvisioningQuotasRequest.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Requested page size. The server might return fewer items than requested. If unspecified, server will pick an appropriate default. Notice that page_size field is not supported and won't be respected in the API request for now, will be updated when pagination is supported.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results from the server.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListProvisioningQuotasResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -702,6 +922,35 @@ components:
       schema:
         type: string
   schemas:
+    AllowedClient:
+      description: Represents an 'access point' for the share.
+      properties:
+        allowDev:
+          description: Allow dev flag. Which controls whether to allow creation of devices.
+          type: boolean
+        allowSuid:
+          description: Allow the setuid flag.
+          type: boolean
+        allowedClientsCidr:
+          description: The subnet of IP addresses permitted to access the share.
+          type: string
+        mountPermissions:
+          description: Mount permissions.
+          enum:
+            - MOUNT_PERMISSIONS_UNSPECIFIED
+            - READ
+            - READ_WRITE
+          type: string
+        network:
+          description: The network the access point sits on.
+          type: string
+        noRootSquash:
+          description: Disable root squashing, which is a feature of NFS. Root squash is a special mapping of the remote superuser (root) identity when using identity authentication.
+          type: boolean
+        shareIp:
+          description: The IP address of the share on this network.
+          type: string
+      type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
       properties: {}
@@ -759,6 +1008,63 @@ components:
           readOnly: true
           type: string
       type: object
+    InstanceConfig:
+      description: Configuration parameters for a new instance.
+      properties:
+        clientNetwork:
+          $ref: "#/components/schemas/NetworkAddress"
+          description: Client network address.
+        hyperthreading:
+          description: Whether the instance should be provisioned with Hyperthreading enabled.
+          type: boolean
+        id:
+          description: A transient unique identifier to idenfity an instance within an ProvisioningConfig request.
+          type: string
+        instanceType:
+          description: Instance type. [Available types](https://cloud.google.com/bare-metal/docs/bms-planning#server_configurations)
+          type: string
+        name:
+          description: Output only. The name of the instance config.
+          readOnly: true
+          type: string
+        osImage:
+          description: OS image to initialize the instance. [Available images](https://cloud.google.com/bare-metal/docs/bms-planning#server_configurations)
+          type: string
+        privateNetwork:
+          $ref: "#/components/schemas/NetworkAddress"
+          description: Private network address, if any.
+        userNote:
+          description: User note field, it can be used by customers to add additional information for the BMS Ops team .
+          type: string
+      type: object
+    InstanceQuota:
+      description: A resource budget.
+      properties:
+        availableMachineCount:
+          description: Number of machines than can be created for the given location and instance_type.
+          format: int32
+          type: integer
+        instanceType:
+          description: Instance type.
+          type: string
+        location:
+          description: Location where the quota applies.
+          type: string
+        name:
+          description: Output only. The name of the instance quota.
+          readOnly: true
+          type: string
+      type: object
+    IntakeVlanAttachment:
+      description: A GCP vlan attachment.
+      properties:
+        id:
+          description: Identifier of the VLAN attachment.
+          type: string
+        pairingKey:
+          description: Attachment pairing key.
+          type: string
+      type: object
     ListInstancesResponse:
       description: Response message for the list of servers.
       properties:
@@ -805,6 +1111,15 @@ components:
             type: string
           type: array
       type: object
+    ListNetworkUsageResponse:
+      description: Response with Networks with IPs
+      properties:
+        networks:
+          description: Networks with IPs.
+          items:
+            $ref: "#/components/schemas/NetworkUsage"
+          type: array
+      type: object
     ListNetworksResponse:
       description: Response message containing the list of networks.
       properties:
@@ -820,6 +1135,35 @@ components:
           description: Locations that could not be reached.
           items:
             type: string
+          type: array
+      type: object
+    ListNfsSharesResponse:
+      description: Response message containing the list of NFS shares.
+      properties:
+        nextPageToken:
+          description: A token identifying a page of results from the server.
+          type: string
+        nfsShares:
+          description: The list of NFS shares.
+          items:
+            $ref: "#/components/schemas/NfsShare"
+          type: array
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    ListProvisioningQuotasResponse:
+      description: Response message for the list of provisioning quotas.
+      properties:
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+        provisioningQuotas:
+          description: The provisioning quotas registered in this project.
+          items:
+            $ref: "#/components/schemas/ProvisioningQuota"
           type: array
       type: object
     ListSnapshotSchedulePoliciesResponse:
@@ -940,6 +1284,18 @@ components:
           description: The WWID for this LUN.
           type: string
       type: object
+    LunRange:
+      description: A LUN(Logical Unit Number) range.
+      properties:
+        quantity:
+          description: Number of LUNs to create.
+          format: int32
+          type: integer
+        sizeGb:
+          description: The requested size of each LUN, in GB.
+          format: int32
+          type: integer
+      type: object
     Network:
       description: A Network.
       properties:
@@ -990,6 +1346,138 @@ components:
           $ref: "#/components/schemas/VRF"
           description: The vrf for the Network.
       type: object
+    NetworkAddress:
+      description: A network.
+      properties:
+        address:
+          description: IPv4 address to be assigned to the server.
+          type: string
+        existingNetworkId:
+          description: Name of the existing network to use.
+          type: string
+        networkId:
+          description: Id of the network to use, within the same ProvisioningConfig request.
+          type: string
+      type: object
+    NetworkConfig:
+      description: Configuration parameters for a new network.
+      properties:
+        bandwidth:
+          description: Interconnect bandwidth. Set only when type is CLIENT.
+          enum:
+            - BANDWIDTH_UNSPECIFIED
+            - BW_1_GBPS
+            - BW_2_GBPS
+            - BW_5_GBPS
+            - BW_10_GBPS
+          type: string
+        cidr:
+          description: CIDR range of the network.
+          type: string
+        id:
+          description: A transient unique identifier to identify a volume within an ProvisioningConfig request.
+          type: string
+        name:
+          description: Output only. The name of the network config.
+          readOnly: true
+          type: string
+        serviceCidr:
+          description: Service CIDR, if any.
+          enum:
+            - SERVICE_CIDR_UNSPECIFIED
+            - DISABLED
+            - HIGH_26
+            - HIGH_27
+            - HIGH_28
+          type: string
+        type:
+          description: The type of this network, either Client or Private.
+          enum:
+            - TYPE_UNSPECIFIED
+            - CLIENT
+            - PRIVATE
+          type: string
+        userNote:
+          description: User note field, it can be used by customers to add additional information for the BMS Ops team (b/194021617).
+          type: string
+        vlanAttachments:
+          description: List of VLAN attachments. As of now there are always 2 attachments, but it is going to change in the future (multi vlan).
+          items:
+            $ref: "#/components/schemas/IntakeVlanAttachment"
+          type: array
+      type: object
+    NetworkUsage:
+      description: Network with all used IP addresses.
+      properties:
+        network:
+          $ref: "#/components/schemas/Network"
+          description: Network.
+        usedIps:
+          description: All used IP addresses in this network.
+          items:
+            type: string
+          type: array
+      type: object
+    NfsExport:
+      description: A NFS export entry.
+      properties:
+        allowDev:
+          description: Allow dev flag in NfsShare AllowedClientsRequest.
+          type: boolean
+        allowSuid:
+          description: Allow the setuid flag.
+          type: boolean
+        cidr:
+          description: A CIDR range.
+          type: string
+        machineId:
+          description: Either a single machine, identified by an ID, or a comma-separated list of machine IDs.
+          type: string
+        networkId:
+          description: Network to use to publish the export.
+          type: string
+        noRootSquash:
+          description: Disable root squashing, which is a feature of NFS. Root squash is a special mapping of the remote superuser (root) identity when using identity authentication.
+          type: boolean
+        permissions:
+          description: Export permissions.
+          enum:
+            - PERMISSIONS_UNSPECIFIED
+            - READ_ONLY
+            - READ_WRITE
+          type: string
+      type: object
+    NfsShare:
+      description: An NFS share.
+      properties:
+        allowedClients:
+          description: List of allowed access points.
+          items:
+            $ref: "#/components/schemas/AllowedClient"
+          type: array
+        labels:
+          additionalProperties:
+            type: string
+          description: Labels as key value pairs.
+          type: object
+        name:
+          description: Output only. The name of the NFS share.
+          readOnly: true
+          type: string
+        nfsShareId:
+          description: Output only. An identifier for the NFS share, generated by the backend.
+          readOnly: true
+          type: string
+        state:
+          description: The state of the NFS share.
+          enum:
+            - STATE_UNSPECIFIED
+            - PROVISIONED
+          type: string
+        volume:
+          description: The volume containing the share.
+          type: string
+      type: object
     Operation:
       description: This resource represents a long-running operation that is the result of a network API call.
       properties:
@@ -1012,6 +1500,64 @@ components:
             description: Properties of the object. Contains field @type with type URL.
           description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
+      type: object
+    ProvisioningConfig:
+      description: A provisioning configuration.
+      properties:
+        handoverServiceAccount:
+          description: A service account to enable customers to access instance credentials upon handover.
+          type: string
+        instances:
+          description: Instances to be created.
+          items:
+            $ref: "#/components/schemas/InstanceConfig"
+          type: array
+        name:
+          description: Output only. The name of the provisioning config.
+          readOnly: true
+          type: string
+        networks:
+          description: Networks to be created.
+          items:
+            $ref: "#/components/schemas/NetworkConfig"
+          type: array
+        ticketId:
+          description: A generated buganizer id to track provisioning request.
+          type: string
+        volumes:
+          description: Volumes to be created.
+          items:
+            $ref: "#/components/schemas/VolumeConfig"
+          type: array
+      type: object
+    ProvisioningQuota:
+      description: A provisioning quota for a given project.
+      properties:
+        assetType:
+          description: The asset type of this provisioning quota.
+          enum:
+            - ASSET_TYPE_UNSPECIFIED
+            - ASSET_TYPE_SERVER
+            - ASSET_TYPE_STORAGE
+            - ASSET_TYPE_NETWORK
+          type: string
+        availableCount:
+          description: The available count of the provisioning quota.
+          format: int32
+          type: integer
+        gcpService:
+          description: The gcp service of the provisioning quota.
+          type: string
+        instanceQuota:
+          $ref: "#/components/schemas/InstanceQuota"
+          description: Instance quota.
+        location:
+          description: The specific location of the provisioining quota.
+          type: string
+        name:
+          description: Output only. The name of the provisioning quota.
+          readOnly: true
+          type: string
       type: object
     QosPolicy:
       description: QOS policy parameters.
@@ -1082,6 +1628,16 @@ components:
           items:
             $ref: "#/components/schemas/Schedule"
           type: array
+        state:
+          description: The state of the snapshot schedule policy.
+          enum:
+            - STATE_UNSPECIFIED
+            - PROVISIONED
+          type: string
+      type: object
+    StartInstanceRequest:
+      description: Message requesting to start a server.
+      properties: {}
       type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
@@ -1100,6 +1656,23 @@ components:
         message:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
+      type: object
+    SubmitProvisioningConfigRequest:
+      description: Request for SubmitProvisioningConfig.
+      properties:
+        email:
+          description: Optional. Email provided to send a confirmation with provisioning config to.
+          type: string
+        provisioningConfig:
+          $ref: "#/components/schemas/ProvisioningConfig"
+          description: Required. The ProvisioningConfig to create.
+      type: object
+    SubmitProvisioningConfigResponse:
+      description: Response for SubmitProvisioningConfig.
+      properties:
+        provisioningConfig:
+          $ref: "#/components/schemas/ProvisioningConfig"
+          description: The submitted provisioning config.
       type: object
     VRF:
       description: A network VRF.
@@ -1196,6 +1769,56 @@ components:
             - STORAGE_TYPE_UNSPECIFIED
             - SSD
             - HDD
+          type: string
+      type: object
+    VolumeConfig:
+      description: Configuration parameters for a new volume.
+      properties:
+        id:
+          description: A transient unique identifier to identify a volume within an ProvisioningConfig request.
+          type: string
+        lunRanges:
+          description: LUN ranges to be configured. Set only when protocol is PROTOCOL_FC.
+          items:
+            $ref: "#/components/schemas/LunRange"
+          type: array
+        machineIds:
+          description: Machine ids connected to this volume. Set only when protocol is PROTOCOL_FC.
+          items:
+            type: string
+          type: array
+        name:
+          description: Output only. The name of the volume config.
+          readOnly: true
+          type: string
+        nfsExports:
+          description: NFS exports. Set only when protocol is PROTOCOL_NFS.
+          items:
+            $ref: "#/components/schemas/NfsExport"
+          type: array
+        protocol:
+          description: Volume protocol.
+          enum:
+            - PROTOCOL_UNSPECIFIED
+            - PROTOCOL_FC
+            - PROTOCOL_NFS
+          type: string
+        sizeGb:
+          description: The requested size of this volume, in GB.
+          format: int32
+          type: integer
+        snapshotsEnabled:
+          description: Whether snapshots should be enabled.
+          type: boolean
+        type:
+          description: The type of this Volume.
+          enum:
+            - TYPE_UNSPECIFIED
+            - FLASH
+            - DISK
+          type: string
+        userNote:
+          description: User note field, it can be used by customers to add additional information for the BMS Ops team (b/194021617).
           type: string
       type: object
     VolumeSnapshot:

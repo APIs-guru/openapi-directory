@@ -934,6 +934,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: Optional. Filters applied to the [CloudChannelService.ListCustomers] results. See https://cloud.google.com/channel/docs/concepts/google-cloud/filter-customers for more information.
+          in: query
+          name: filter
+          schema:
+            type: string
         - description: Optional. The maximum number of customers to return. The service may return fewer than this value. If unspecified, returns at most 10 customers. The maximum value is 50.
           in: query
           name: pageSize

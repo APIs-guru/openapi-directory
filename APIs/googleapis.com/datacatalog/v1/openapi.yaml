@@ -13,15 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Google Cloud Data Catalog API
   version: v1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://datacatalog.googleapis.com/$discovery/rest?version=v1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: datacatalog
 externalDocs:
@@ -1455,6 +1457,13 @@ components:
             - CLOUD_STORAGE
             - BIGQUERY
           type: string
+        sourceEntry:
+          description: Output only. Data Catalog entry name, if applicable.
+          readOnly: true
+          type: string
+        storageProperties:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1StorageProperties"
+          description: Detailed properties of the underlying storage.
       type: object
     GoogleCloudDatacatalogV1DataSourceConnectionSpec:
       description: Specification that applies to a data source connection. Valid only for entries with the `DATA_SOURCE_CONNECTION` type.
@@ -1466,6 +1475,9 @@ components:
     GoogleCloudDatacatalogV1DatabaseTableSpec:
       description: Specification that applies to a table resource. Valid only for entries with the `TABLE` type.
       properties:
+        dataplexTable:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1DataplexTableSpec"
+          description: Fields specific to a Dataplex table and present only in the Dataplex table entries.
         type:
           description: Type of this table.
           enum:
@@ -1473,6 +1485,66 @@ components:
             - NATIVE
             - EXTERNAL
           type: string
+      type: object
+    GoogleCloudDatacatalogV1DataplexExternalTable:
+      description: External table registered by Dataplex. Dataplex publishes data discovered from an asset into multiple other systems (BigQuery, DPMS) in form of tables. We call them "external tables". External tables are also synced into the Data Catalog. This message contains pointers to those external tables (fully qualified name, resource name et cetera) within the Data Catalog.
+      properties:
+        dataCatalogEntry:
+          description: Name of the Data Catalog entry representing the external table.
+          type: string
+        fullyQualifiedName:
+          description: Fully qualified name (FQN) of the external table.
+          type: string
+        googleCloudResource:
+          description: Google Cloud resource name of the external table.
+          type: string
+        system:
+          description: Service in which the external table is registered.
+          enum:
+            - INTEGRATED_SYSTEM_UNSPECIFIED
+            - BIGQUERY
+            - CLOUD_PUBSUB
+            - DATAPROC_METASTORE
+            - DATAPLEX
+          type: string
+      type: object
+    GoogleCloudDatacatalogV1DataplexFilesetSpec:
+      description: Entry specyfication for a Dataplex fileset.
+      properties:
+        dataplexSpec:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1DataplexSpec"
+          description: Common Dataplex fields.
+      type: object
+    GoogleCloudDatacatalogV1DataplexSpec:
+      description: Common Dataplex fields.
+      properties:
+        asset:
+          description: Fully qualified resource name of an asset in Dataplex, to which the underlying data source (Cloud Storage bucket or BigQuery dataset) of the entity is attached.
+          type: string
+        compressionFormat:
+          description: Compression format of the data, e.g., zip, gzip etc.
+          type: string
+        dataFormat:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1PhysicalSchema"
+          description: Format of the data.
+        projectId:
+          description: Project ID of the underlying Cloud Storage or BigQuery data. Note that this may not be the same project as the correspondingly Dataplex lake / zone / asset.
+          type: string
+      type: object
+    GoogleCloudDatacatalogV1DataplexTableSpec:
+      description: Entry specification for a Dataplex table.
+      properties:
+        dataplexSpec:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1DataplexSpec"
+          description: Common Dataplex fields.
+        externalTables:
+          description: List of external tables registered by Dataplex in other systems based on the same underlying data. External tables allow to query this data in those systems.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDatacatalogV1DataplexExternalTable"
+          type: array
+        userManaged:
+          description: Indicates if the table schema is managed by the user or not.
+          type: boolean
       type: object
     GoogleCloudDatacatalogV1Entry:
       description: Entry metadata. A Data Catalog entry represents another resource in Google Cloud Platform (such as a BigQuery dataset or a Pub/Sub topic) or outside of it. You can use the `linked_resource` field in the entry resource to refer to the original resource ID of the source system. An entry resource contains resource details, for example, its schema. Additionally, you can attach flexible metadata to an entry in the form of a Tag.
@@ -1502,6 +1574,9 @@ components:
         displayName:
           description: Display name of an entry. The name must contain only Unicode letters, numbers (0-9), underscores (_), dashes (-), spaces ( ), and can't start or end with spaces. The maximum size is 200 bytes when encoded in UTF-8. Default value is an empty string.
           type: string
+        filesetSpec:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1FilesetSpec"
+          description: Specification that applies to a fileset resource. Valid only for entries with the `FILESET` type.
         fullyQualifiedName:
           description: "Fully qualified name (FQN) of the resource. Set automatically for entries representing resources from synced systems. Settable only during creation and read-only afterwards. Can be used for search and lookup of the entries. FQNs take two forms: * For non-regionalized resources: `{SYSTEM}:{PROJECT}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}` * For regionalized resources: `{SYSTEM}:{PROJECT}.{LOCATION_ID}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}` Example for a DPMS table: `dataproc_metastore:{PROJECT_ID}.{LOCATION_ID}.{INSTANCE_ID}.{DATABASE_ID}.{TABLE_ID}`"
           type: string
@@ -1515,6 +1590,7 @@ components:
             - BIGQUERY
             - CLOUD_PUBSUB
             - DATAPROC_METASTORE
+            - DATAPLEX
           readOnly: true
           type: string
         labels:
@@ -1554,6 +1630,8 @@ components:
             - DATABASE
             - DATA_SOURCE_CONNECTION
             - ROUTINE
+            - LAKE
+            - ZONE
             - SERVICE
           type: string
         usageSignal:
@@ -1629,6 +1707,13 @@ components:
         displayName:
           description: Required. The display name of the enum value. Must not be an empty string. The name must contain only Unicode letters, numbers (0-9), underscores (_), dashes (-), spaces ( ), and can't start or end with spaces. The maximum length is 200 characters.
           type: string
+      type: object
+    GoogleCloudDatacatalogV1FilesetSpec:
+      description: Specification that applies to a fileset. Valid only for entries with the 'FILESET' type.
+      properties:
+        dataplexFileset:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1DataplexFilesetSpec"
+          description: Fields specific to a Dataplex fileset and present only in the Dataplex fileset entries.
       type: object
     GoogleCloudDatacatalogV1GcsFileSpec:
       description: Specification of a single file in Cloud Storage.
@@ -1773,6 +1858,61 @@ components:
         starred:
           description: True if the entry is starred by the user; false otherwise.
           type: boolean
+      type: object
+    GoogleCloudDatacatalogV1PhysicalSchema:
+      description: Native schema used by a resource represented as an entry. Used by query engines for deserializing and parsing source data.
+      properties:
+        avro:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1PhysicalSchemaAvroSchema"
+          description: Schema in Avro JSON format.
+        csv:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1PhysicalSchemaCsvSchema"
+          description: Marks a CSV-encoded data source.
+        orc:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1PhysicalSchemaOrcSchema"
+          description: Marks an ORC-encoded data source.
+        parquet:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1PhysicalSchemaParquetSchema"
+          description: Marks a Parquet-encoded data source.
+        protobuf:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1PhysicalSchemaProtobufSchema"
+          description: Schema in protocol buffer format.
+        thrift:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1PhysicalSchemaThriftSchema"
+          description: Schema in Thrift format.
+      type: object
+    GoogleCloudDatacatalogV1PhysicalSchemaAvroSchema:
+      description: Schema in Avro JSON format.
+      properties:
+        text:
+          description: JSON source of the Avro schema.
+          type: string
+      type: object
+    GoogleCloudDatacatalogV1PhysicalSchemaCsvSchema:
+      description: Marks a CSV-encoded data source.
+      properties: {}
+      type: object
+    GoogleCloudDatacatalogV1PhysicalSchemaOrcSchema:
+      description: Marks an ORC-encoded data source.
+      properties: {}
+      type: object
+    GoogleCloudDatacatalogV1PhysicalSchemaParquetSchema:
+      description: Marks a Parquet-encoded data source.
+      properties: {}
+      type: object
+    GoogleCloudDatacatalogV1PhysicalSchemaProtobufSchema:
+      description: Schema in protocol buffer format.
+      properties:
+        text:
+          description: Protocol buffer source of the schema.
+          type: string
+      type: object
+    GoogleCloudDatacatalogV1PhysicalSchemaThriftSchema:
+      description: Schema in Thrift format.
+      properties:
+        text:
+          description: Thrift IDL source of the schema.
+          type: string
       type: object
     GoogleCloudDatacatalogV1PolicyTag:
       description: 'Denotes one policy tag in a taxonomy, for example, SSN. Policy tags can be defined in a hierarchy. For example: ``` + Geolocation + LatLong + City + ZipCode ``` Where the "Geolocation" policy tag contains three children.'
@@ -1957,6 +2097,7 @@ components:
             - BIGQUERY
             - CLOUD_PUBSUB
             - DATAPROC_METASTORE
+            - DATAPLEX
           readOnly: true
           type: string
         linkedResource:
@@ -2032,6 +2173,18 @@ components:
     GoogleCloudDatacatalogV1StarEntryResponse:
       description: Response message for StarEntry. Empty for now
       properties: {}
+      type: object
+    GoogleCloudDatacatalogV1StorageProperties:
+      description: Details the properties of the underlying storage.
+      properties:
+        filePattern:
+          description: "Patterns to identify a set of files for this fileset. Examples of a valid `file_pattern`: * `gs://bucket_name/dir/*`: matches all files in the `bucket_name/dir` directory * `gs://bucket_name/dir/**`: matches all files in the `bucket_name/dir` and all subdirectories recursively * `gs://bucket_name/file*`: matches files prefixed by `file` in `bucket_name` * `gs://bucket_name/??.txt`: matches files with two characters followed by `.txt` in `bucket_name` * `gs://bucket_name/[aeiou].txt`: matches files that contain a single vowel character followed by `.txt` in `bucket_name` * `gs://bucket_name/[a-m].txt`: matches files that contain `a`, `b`, ... or `m` followed by `.txt` in `bucket_name` * `gs://bucket_name/a/*/b`: matches all files in `bucket_name` that match the `a/*/b` pattern, such as `a/c/b`, `a/d/b` * `gs://another_bucket/a.txt`: matches `gs://another_bucket/a.txt`"
+          items:
+            type: string
+          type: array
+        fileType:
+          description: File type in MIME format, for example, `text/plain`.
+          type: string
       type: object
     GoogleCloudDatacatalogV1SystemTimestamps:
       description: Timestamps associated with this resource in a particular system.
@@ -2302,3 +2455,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}
