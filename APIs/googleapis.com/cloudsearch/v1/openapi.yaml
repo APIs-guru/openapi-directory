@@ -2354,6 +2354,37 @@ components:
           format: int32
           type: integer
       type: object
+    AppId:
+      description: Identifier of an App.
+      properties:
+        appType:
+          description: Enum indicating the type of App this is.
+          enum:
+            - APP_TYPE_UNSPECIFIED
+            - APP
+            - GSUITE_APP
+            - INCOMING_WEBHOOK
+          type: string
+        gsuiteAppType:
+          description: Enum indicating which 1P App this is when app_type is GSUITE_APP. Determined & set by the 1P API as a convenience for all users of this identifier(Eg. clients, chime, backend etc.) to map to 1P properties.
+          enum:
+            - GSUITE_APP_TYPE_UNSPECIFIED
+            - TASKS_APP
+            - CALENDAR_APP
+            - DOCS_APP
+            - SHEETS_APP
+            - SLIDES_APP
+            - MEET_APP
+            - FILE_SUGGESTION_APP
+            - CONTACTS_APP
+            - ACTIVITY_FEED_APP
+            - DRIVE_APP
+          type: string
+        id:
+          description: Numeric identifier of the App. Set to Project number for 1/3P Apps. For Webhook, this is WebhookId. Determined & set by the 1P API from App credentials on the side channel.
+          format: int64
+          type: string
+      type: object
     AuditLoggingSettings:
       description: Represents the settings for Cloud audit logging
       properties:
@@ -2369,6 +2400,11 @@ components:
         project:
           description: "The resource name of the GCP Project to store audit logs. Cloud audit logging will be enabled after project_name has been updated through CustomerService. Format: projects/{project_id}"
           type: string
+      type: object
+    AvatarInfo:
+      properties:
+        emoji:
+          $ref: "#/components/schemas/Emoji"
       type: object
     BooleanOperatorOptions:
       description: Used to provide a search operator for boolean properties. This is optional. Search operators let users restrict the query to specific fields relevant to the type of item being searched.
@@ -2416,6 +2452,50 @@ components:
           items:
             type: string
           type: array
+      type: object
+    CustomEmoji:
+      description: "Proto representation of a custom emoji. May be used in both APIs and in Spanner, but certain fields should be restricted to one or the other. See the per-field documentation for details. NEXT_TAG: 11"
+      properties:
+        blobId:
+          description: ID for the underlying image data in Blobstore. This field should *only* be present in Spanner or within the server, but should not be exposed in public APIs.
+          type: string
+        createTimeMicros:
+          description: Time when the Emoji was created, in microseconds. This field may be present in Spanner, within the server, or in public APIs.
+          format: int64
+          type: string
+        creatorUserId:
+          $ref: "#/components/schemas/UserId"
+          description: This field should *never* be persisted to Spanner.
+        ownerCustomerId:
+          $ref: "#/components/schemas/CustomerId"
+          description: This field should *never* be persisted to Spanner.
+        readToken:
+          description: Opaque token that clients use to construct the URL for accessing the custom emoji’s image data. This field is intended for API consumption, and should *never* be persisted to Spanner.
+          type: string
+        shortcode:
+          description: User-provided, human-readable ID for the custom emoji. Users are expected to observe this field in the UI instead of the UUID. This shortcode should be unique within an organization, but has no global uniqueness guarantees, unlike the UUID. This field should *never* be persisted to Spanner.
+          type: string
+        state:
+          description: Snapshot of the current state of the emoji, which may differ from the source-of-truth in the CustomEmojis table. This field should *never* be persisted to Spanner.
+          enum:
+            - EMOJI_STATE_UNSPECIFIED
+            - EMOJI_ENABLED
+            - EMOJI_SYSTEM_DISABLED
+            - EMOJI_HIDDEN
+            - EMOJI_DELETED
+          type: string
+        updateTimeMicros:
+          format: int64
+          type: string
+        uuid:
+          description: Unique key for a custom emoji resource. Required. This field is *always* populated.
+          type: string
+      type: object
+    CustomerId:
+      description: Represents a GSuite customer ID. Obfuscated with CustomerIdObfuscator.
+      properties:
+        customerId:
+          type: string
       type: object
     CustomerIndexStats:
       description: Aggregation of items by status code as of the specified date.
@@ -2619,6 +2699,12 @@ components:
           description: The name of the top-level property as defined in a property definition for the object. If the name is not a defined property in the schema, an error is given when attempting to update the schema.
           type: string
       type: object
+    DmId:
+      properties:
+        dmId:
+          description: Unique server assigned Id, per Direct Message Space.
+          type: string
+      type: object
     DoubleOperatorOptions:
       description: Used to provide a search operator for double properties. This is optional. Search operators let users restrict the query to specific fields relevant to the type of item being searched.
       properties:
@@ -2702,6 +2788,15 @@ components:
       properties:
         emailAddress:
           description: The email address.
+          type: string
+      type: object
+    Emoji:
+      properties:
+        customEmoji:
+          $ref: "#/components/schemas/CustomEmoji"
+          description: A custom emoji.
+        unicode:
+          description: A basic emoji represented by a unicode string.
           type: string
       type: object
     EnumOperatorOptions:
@@ -3017,6 +3112,16 @@ components:
         shareScope:
           $ref: "#/components/schemas/ShareScope"
           description: The visibility indicator in the UI will be based upon this.
+      type: object
+    GroupId:
+      description: Id representing a group that could be a space, a chat, or a direct message space. Which ID is set here will determine which group
+      properties:
+        dmId:
+          $ref: "#/components/schemas/DmId"
+          description: Unique, immutable ID of the Direct Message Space
+        spaceId:
+          $ref: "#/components/schemas/SpaceId"
+          description: Unique, immutable ID of the Space
       type: object
     HtmlOperatorOptions:
       description: Used to provide a search operator for html properties. This is optional. Search operators let users restrict the query to specific fields relevant to the type of item being searched.
@@ -4220,7 +4325,7 @@ components:
           format: int32
           type: integer
         query:
-          description: The raw query string. See supported search operators in the [Cloud search Cheat Sheet](https://support.google.com/a/users/answer/9299929)
+          description: The raw query string. See supported search operators in the [Narrow your search with operators](https://support.google.com/cloudsearch/answer/6172299)
           type: string
         queryInterpretationOptions:
           $ref: "#/components/schemas/QueryInterpretationOptions"
@@ -4419,6 +4524,37 @@ components:
             - DEFAULT
             - LOW
             - HIGH
+          type: string
+      type: object
+    SpaceId:
+      description: Primary key for Space resource.
+      properties:
+        spaceId:
+          description: Unique, immutable ID of the Space
+          type: string
+      type: object
+    SpaceInfo:
+      description: Defines the representation of a single matching space.
+      properties:
+        avatarInfo:
+          $ref: "#/components/schemas/AvatarInfo"
+        description:
+          type: string
+        groupId:
+          $ref: "#/components/schemas/GroupId"
+        name:
+          type: string
+        numMembers:
+          format: int32
+          type: integer
+        userMembershipState:
+          description: searching user's membership state in this space
+          enum:
+            - MEMBER_UNKNOWN
+            - MEMBER_INVITED
+            - MEMBER_JOINED
+            - MEMBER_NOT_A_MEMBER
+            - MEMBER_FAILED
           type: string
       type: object
     SpellResult:
@@ -4629,6 +4765,22 @@ components:
       properties:
         name:
           description: Name of the content reference. The maximum length is 2048 characters.
+          type: string
+      type: object
+    UserId:
+      description: Primary key for User resource.
+      properties:
+        id:
+          description: Opaque, server-assigned ID of the User.
+          type: string
+        originAppId:
+          $ref: "#/components/schemas/AppId"
+          description: Optional. Identifier of the App involved (directly or on behalf of a human creator) in creating this message. This is not set if the user posted a message directly, but is used in the case of, for example, a message being generated by a 1P integration based on a user action (creating an event, creating a task etc). This should only be used on the BE. For clients, please use the field in the FE message proto instead (google3/apps/dynamite/v1/frontend/api/message.proto?q=origin_app_id).
+        type:
+          description: "Clients do not need to send UserType to Backend, but Backend will always send this field to clients per the following rule: 1. For HUMAN Ids, the field is empty but by default .getType() will return HUMAN. 2. For BOT Ids, the field is ALWAYS set to BOT."
+          enum:
+            - HUMAN
+            - BOT
           type: string
       type: object
     VPCSettings:

@@ -933,6 +933,9 @@ components:
           items:
             $ref: "#/components/schemas/Reference"
           type: array
+        upstreamFixAvailable:
+          description: Whether upstream fix is available for the CVE.
+          type: boolean
       type: object
     Cvssv3:
       description: Common Vulnerability Scoring System version 3.
@@ -1713,6 +1716,7 @@ components:
               - STEAL_WEB_SESSION_COOKIE
               - MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE
               - EXPLOIT_PUBLIC_FACING_APPLICATION
+              - MODIFY_AUTHENTICATION_PROCESS
             type: string
           type: array
         primaryTactic:
@@ -1766,6 +1770,7 @@ components:
               - STEAL_WEB_SESSION_COOKIE
               - MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE
               - EXPLOIT_PUBLIC_FACING_APPLICATION
+              - MODIFY_AUTHENTICATION_PROCESS
             type: string
           type: array
         version:

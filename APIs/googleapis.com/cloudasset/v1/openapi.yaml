@@ -31,6 +31,7 @@ externalDocs:
   url: https://cloud.google.com/asset-inventory/docs/quickstart
 tags:
   - name: assets
+  - name: effectiveIamPolicies
   - name: feeds
   - name: operations
   - name: savedQueries
@@ -525,6 +526,52 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - v1
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{scope}/effectiveIamPolicies:batchGet":
+    get:
+      description: Gets effective IAM policies for a batch of resources.
+      operationId: cloudasset.effectiveIamPolicies.batchGet
+      parameters:
+        - description: Required. Only IAM policies on or below the scope will be returned. This can only be an organization number (such as "organizations/123"), a folder number (such as "folders/123"), a project ID (such as "projects/my-project-id"), or a project number (such as "projects/12345"). To know how to get organization id, visit [here ](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id). To know how to get folder or project id, visit [here ](https://cloud.google.com/resource-manager/docs/creating-managing-folders#viewing_or_listing_folders_and_projects).
+          in: path
+          name: scope
+          required: true
+          schema:
+            type: string
+        - description: Required. The names refer to the [full_resource_names] (https://cloud.google.com/asset-inventory/docs/resource-name-format) of [searchable asset types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types). A maximum of 20 resources' effective policies can be retrieved in a batch.
+          explode: true
+          in: query
+          name: names
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchGetEffectiveIamPoliciesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - effectiveIamPolicies
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1061,6 +1108,15 @@ components:
             $ref: "#/components/schemas/TemporalAsset"
           type: array
       type: object
+    BatchGetEffectiveIamPoliciesResponse:
+      description: A response message for AssetService.BatchGetEffectiveIamPolicies.
+      properties:
+        policyResults:
+          description: The effective policies for a batch of resources. Note that the results order is the same as the order of BatchGetEffectiveIamPoliciesRequest.names. When a resource does not have any effective IAM policies, its corresponding policy_result will contain empty EffectiveIamPolicy.policies.
+          items:
+            $ref: "#/components/schemas/EffectiveIamPolicy"
+          type: array
+      type: object
     BigQueryDestination:
       description: A BigQuery destination for exporting assets to.
       properties:
@@ -1140,6 +1196,18 @@ components:
           description: Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
           format: int32
           type: integer
+      type: object
+    EffectiveIamPolicy:
+      description: The effective IAM policies on one resource.
+      properties:
+        fullResourceName:
+          description: The [full_resource_name] (https://cloud.google.com/asset-inventory/docs/resource-name-format) for which the policies are computed. This is one of the BatchGetEffectiveIamPoliciesRequest.names the caller provides in the request.
+          type: string
+        policies:
+          description: The effective policies for the full_resource_name. These policies include the policy set on the full_resource_name and those set on its parents and ancestors up to the BatchGetEffectiveIamPoliciesRequest.scope. Note that these policies are not filtered according to the resource type of the full_resource_name. These policies are hierarchically ordered by PolicyInfo.attached_resource starting from full_resource_name itself to its parents and ancestors, such that policies[i]'s PolicyInfo.attached_resource is the child of policies[i+1]'s PolicyInfo.attached_resource, if policies[i+1] exists.
+          items:
+            $ref: "#/components/schemas/PolicyInfo"
+          type: array
       type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
@@ -2267,6 +2335,16 @@ components:
           description: "Specifies the format of the policy. Valid values are `0`, `1`, and `3`. Requests that specify an invalid value are rejected. Any operation that affects conditional role bindings must specify version `3`. This requirement applies to the following operations: * Getting a policy that includes a conditional role binding * Adding a conditional role binding to a policy * Changing a conditional role binding in a policy * Removing any role binding, with or without a condition, from a policy that includes conditions **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost. If a policy does not include any conditions, operations on that policy may specify any valid version or leave the field unset. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies)."
           format: int32
           type: integer
+      type: object
+    PolicyInfo:
+      description: The IAM policy and its attached resource.
+      properties:
+        attachedResource:
+          description: The full resource name the policy is directly attached to.
+          type: string
+        policy:
+          $ref: "#/components/schemas/Policy"
+          description: The IAM policy that's directly attached to the attached_resource.
       type: object
     PubsubDestination:
       description: A Pub/Sub destination.
