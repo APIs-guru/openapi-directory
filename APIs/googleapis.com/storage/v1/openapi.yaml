@@ -121,6 +121,7 @@ paths:
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Creates a new bucket.
@@ -324,6 +325,7 @@ paths:
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     patch:
       description: Patches a bucket. Changes to the bucket will be readable immediately after writing, but configuration changes may take time to propagate.
@@ -539,6 +541,7 @@ paths:
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Creates a new ACL entry on the specified bucket.
@@ -675,6 +678,7 @@ paths:
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     patch:
       description: Patches an ACL entry on the specified bucket.
@@ -830,6 +834,7 @@ paths:
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Creates a new default object ACL entry on the specified bucket.
@@ -966,6 +971,7 @@ paths:
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     patch:
       description: Patches a default object ACL entry on the specified bucket.
@@ -1117,6 +1123,7 @@ paths:
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     put:
       description: Updates an IAM policy for the specified bucket.
@@ -1229,6 +1236,7 @@ paths:
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
   "/b/{bucket}/lockRetentionPolicy":
     parameters:
@@ -1238,6 +1246,7 @@ paths:
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Locks retention policy on a bucket.
@@ -1345,6 +1354,7 @@ paths:
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Creates a notification subscription for a given bucket.
@@ -1501,6 +1511,7 @@ paths:
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
   "/b/{bucket}/o":
     get:
@@ -1609,6 +1620,7 @@ paths:
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Stores a new object and metadata.
@@ -1720,6 +1732,7 @@ paths:
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Watch for changes on all objects in a bucket.
@@ -1991,6 +2004,7 @@ paths:
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     patch:
       description: Patches an object's metadata.
@@ -2237,6 +2251,7 @@ paths:
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Creates a new ACL entry on the specified object.
@@ -2406,6 +2421,7 @@ paths:
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     patch:
       description: Patches an ACL entry on the specified object.
@@ -2596,6 +2612,7 @@ paths:
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     put:
       description: Updates an IAM policy for the specified object.
@@ -2734,6 +2751,7 @@ paths:
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
   "/b/{destinationBucket}/o/{destinationObject}/compose":
     parameters:
@@ -2743,6 +2761,7 @@ paths:
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Concatenates a list of existing objects into a new object in the same bucket.
@@ -2832,6 +2851,7 @@ paths:
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Copies a source object to a destination object. Optionally overrides metadata.
@@ -2976,6 +2996,7 @@ paths:
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Rewrites a source object to a destination object. Optionally overrides metadata.
@@ -3130,6 +3151,7 @@ paths:
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Stop watching resources through this channel
@@ -3235,6 +3257,7 @@ paths:
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Creates a new HMAC key for the specified service account.
@@ -3369,6 +3392,7 @@ paths:
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     put:
       description: Updates the state of an HMAC key. See the HMAC Key resource descriptor for valid states.
@@ -3472,6 +3496,7 @@ paths:
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
 components:
   parameters:
@@ -3511,6 +3536,12 @@ components:
       description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
       in: query
       name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: Upload protocol for media (e.g. "media", "multipart", "resumable").
+      in: query
+      name: uploadType
       schema:
         type: string
     userIp:

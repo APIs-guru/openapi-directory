@@ -951,6 +951,13 @@ components:
             - TEMPORARY_HOLD_SKIP
             - TEMPORARY_HOLD_PRESERVE
           type: string
+        timeCreated:
+          description: Specifies how each object's `timeCreated` metadata is preserved for transfers between Google Cloud Storage buckets. If unspecified, the default behavior is the same as TIME_CREATED_SKIP.
+          enum:
+            - TIME_CREATED_UNSPECIFIED
+            - TIME_CREATED_SKIP
+            - TIME_CREATED_PRESERVE_AS_CUSTOM_TIME
+          type: string
         uid:
           description: Specifies how each file's POSIX user ID (UID) attribute should be handled by the transfer. By default, UID is not preserved.
           enum:
