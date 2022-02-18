@@ -1118,6 +1118,35 @@ components:
       description: Response of the import document operation.
       properties: {}
       type: object
+    GoogleCloudDocumentaiUiv1beta3ResyncDatasetMetadata:
+      description: The metadata proto of ResyncDataset method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+        newlyAddedDocuments:
+          description: Returns the newly added document Cloud Storage prefix if the documents are founded in Cloud Storage while not in Document Service storage.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3ResyncDatasetMetadataUpdatedDocument"
+          type: array
+      type: object
+    GoogleCloudDocumentaiUiv1beta3ResyncDatasetMetadataUpdatedDocument:
+      description: The proto for updated document in resync pipeline.
+      properties:
+        destinationPrefix:
+          description: The prefix of cloud storage, identifies the destination document which should be updated by resync pipeline.
+          type: string
+        sourcePrefix:
+          description: The prefix of cloud storage, identifies the original document which should be updated by resync pipeline.
+          type: string
+        status:
+          $ref: "#/components/schemas/GoogleRpcStatus"
+          description: The final status of the documents which should be updated by resync pipeline.
+      type: object
+    GoogleCloudDocumentaiUiv1beta3ResyncDatasetResponse:
+      description: The response proto of ResyncDataset method.
+      properties: {}
+      type: object
     GoogleCloudDocumentaiUiv1beta3RevisionReference:
       description: The revision reference specifies which revision on the document to read.
       properties:
@@ -1573,6 +1602,11 @@ components:
         provenance:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentProvenance"
           description: The history of this page.
+        symbols:
+          description: A list of visually detected symbols on the page.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentPageSymbol"
+          type: array
         tables:
           description: A list of visually detected tables on the page.
           items:
@@ -1656,7 +1690,7 @@ components:
           format: float
           type: number
         languageCode:
-          description: The BCP-47 language code, such as "en-US" or "sr-Latn". For more information, see http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+          description: The BCP-47 language code, such as "en-US" or "sr-Latn". For more information, see https://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
           type: string
       type: object
     GoogleCloudDocumentaiV1DocumentPageDimension:
@@ -1797,6 +1831,18 @@ components:
         provenance:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentProvenance"
           description: The history of this annotation.
+      type: object
+    GoogleCloudDocumentaiV1DocumentPageSymbol:
+      description: A detected symbol.
+      properties:
+        detectedLanguages:
+          description: A list of detected languages together with confidence.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentPageDetectedLanguage"
+          type: array
+        layout:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentPageLayout"
+          description: Layout for Symbol.
       type: object
     GoogleCloudDocumentaiV1DocumentPageTable:
       description: A table representation similar to HTML table structure.
@@ -2035,7 +2081,7 @@ components:
       description: Text reference indexing into the Document.text.
       properties:
         content:
-          description: Contains the content of the text span so that users do not have to look it up in the text_segments.
+          description: Contains the content of the text span so that users do not have to look it up in the text_segments. It is always populated for formFields.
           type: string
         textSegments:
           description: The text segments from the Document.text.
@@ -2632,6 +2678,11 @@ components:
         provenance:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentProvenance"
           description: The history of this page.
+        symbols:
+          description: A list of visually detected symbols on the page.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageSymbol"
+          type: array
         tables:
           description: A list of visually detected tables on the page.
           items:
@@ -2715,7 +2766,7 @@ components:
           format: float
           type: number
         languageCode:
-          description: The BCP-47 language code, such as "en-US" or "sr-Latn". For more information, see http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+          description: The BCP-47 language code, such as "en-US" or "sr-Latn". For more information, see https://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
           type: string
       type: object
     GoogleCloudDocumentaiV1beta1DocumentPageDimension:
@@ -2856,6 +2907,18 @@ components:
         provenance:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentProvenance"
           description: The history of this annotation.
+      type: object
+    GoogleCloudDocumentaiV1beta1DocumentPageSymbol:
+      description: A detected symbol.
+      properties:
+        detectedLanguages:
+          description: A list of detected languages together with confidence.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageDetectedLanguage"
+          type: array
+        layout:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageLayout"
+          description: Layout for Symbol.
       type: object
     GoogleCloudDocumentaiV1beta1DocumentPageTable:
       description: A table representation similar to HTML table structure.
@@ -3094,7 +3157,7 @@ components:
       description: Text reference indexing into the Document.text.
       properties:
         content:
-          description: Contains the content of the text span so that users do not have to look it up in the text_segments.
+          description: Contains the content of the text span so that users do not have to look it up in the text_segments. It is always populated for formFields.
           type: string
         textSegments:
           description: The text segments from the Document.text.
@@ -3444,6 +3507,11 @@ components:
         provenance:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentProvenance"
           description: The history of this page.
+        symbols:
+          description: A list of visually detected symbols on the page.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageSymbol"
+          type: array
         tables:
           description: A list of visually detected tables on the page.
           items:
@@ -3527,7 +3595,7 @@ components:
           format: float
           type: number
         languageCode:
-          description: The BCP-47 language code, such as "en-US" or "sr-Latn". For more information, see http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+          description: The BCP-47 language code, such as "en-US" or "sr-Latn". For more information, see https://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
           type: string
       type: object
     GoogleCloudDocumentaiV1beta2DocumentPageDimension:
@@ -3668,6 +3736,18 @@ components:
         provenance:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentProvenance"
           description: The history of this annotation.
+      type: object
+    GoogleCloudDocumentaiV1beta2DocumentPageSymbol:
+      description: A detected symbol.
+      properties:
+        detectedLanguages:
+          description: A list of detected languages together with confidence.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageDetectedLanguage"
+          type: array
+        layout:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageLayout"
+          description: Layout for Symbol.
       type: object
     GoogleCloudDocumentaiV1beta2DocumentPageTable:
       description: A table representation similar to HTML table structure.
@@ -3906,7 +3986,7 @@ components:
       description: Text reference indexing into the Document.text.
       properties:
         content:
-          description: Contains the content of the text span so that users do not have to look it up in the text_segments.
+          description: Contains the content of the text span so that users do not have to look it up in the text_segments. It is always populated for formFields.
           type: string
         textSegments:
           description: The text segments from the Document.text.

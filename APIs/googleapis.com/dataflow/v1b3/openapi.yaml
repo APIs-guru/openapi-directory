@@ -4269,6 +4269,10 @@ components:
           description: Instantenous memory limit in bytes.
           format: uint64
           type: string
+        currentOoms:
+          description: Number of Out of Memory (OOM) events recorded since the previous measurement.
+          format: int64
+          type: string
         currentRssBytes:
           description: Instantenous memory (RSS) size in bytes.
           format: uint64
