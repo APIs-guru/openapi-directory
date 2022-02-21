@@ -808,6 +808,13 @@ components:
             - STATS
           type: string
       type: object
+    CollapsibleGroup:
+      description: A widget that groups the other widgets. All widgets that are within the area spanned by the grouping widget are considered member widgets.
+      properties:
+        collapsed:
+          description: The collapsed state of the widget on first page load.
+          type: boolean
+      type: object
     Column:
       description: Defines the layout properties and content for a column.
       properties:
@@ -1522,6 +1529,9 @@ components:
         blank:
           $ref: "#/components/schemas/Empty"
           description: A blank space.
+        collapsibleGroup:
+          $ref: "#/components/schemas/CollapsibleGroup"
+          description: A widget that groups the other widgets. All widgets that are within the area spanned by the grouping widget are considered member widgets.
         logsPanel:
           $ref: "#/components/schemas/LogsPanel"
           description: A widget that shows a stream of logs.

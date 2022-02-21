@@ -988,14 +988,13 @@ components:
           description: Optional. The different phone numbers that customers can use to get in touch with the business.
         profile:
           $ref: "#/components/schemas/Profile"
-          description: Required. Describes your business in your own voice and shares with users the unique story of your business and offerings.
+          description: Optional. Describes your business in your own voice and shares with users the unique story of your business and offerings. This field is required for all categories except lodging categories (e.g. hotels, motels, inns).
         regularHours:
           $ref: "#/components/schemas/BusinessHours"
           description: Optional. Operating hours for the business.
         relationshipData:
           $ref: "#/components/schemas/RelationshipData"
-          description: Output only. All locations and chain related to this one.
-          readOnly: true
+          description: Optional. All locations and chain related to this one.
         serviceArea:
           $ref: "#/components/schemas/ServiceAreaBusiness"
           description: Optional. Service area businesses provide their service at the customer's location. If this business is a service area business, this field describes the area(s) serviced by the business.

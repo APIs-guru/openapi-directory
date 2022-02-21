@@ -1934,6 +1934,9 @@ components:
         serviceAccount:
           description: The email address of a service account to use when running the execution. You must have the `iam.serviceAccounts.actAs` permission for the specified service account.
           type: string
+        tensorboard:
+          description: "The name of a Vertex AI [Tensorboard] resource to which this execution will upload Tensorboard logs. Format: `projects/{project}/locations/{location}/tensorboards/{tensorboard}`"
+          type: string
         vertexAiParameters:
           $ref: "#/components/schemas/VertexAIParameters"
           description: Parameters used in Vertex AI JobType executions.
@@ -2661,7 +2664,7 @@ components:
           format: int32
           type: integer
         installGpuDriver:
-          description: Install Nvidia Driver automatically.
+          description: "Install Nvidia Driver automatically. Default: True"
           type: boolean
         kernels:
           description: Optional. Use a list of container images to use as Kernels in the notebook instance.
