@@ -79,28 +79,6 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Creates a new SAS customer.
-      operationId: prod_tt_sasportal.customers.create
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/SasPortalCustomer"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SasPortalCustomer"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
-      tags:
-        - customers
   /v1alpha1/installer:generateSecret:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1107,6 +1085,10 @@ components:
           description: Output only. Whether a CPI has validated to have coordinated with the National Quiet Zone office.
           readOnly: true
           type: boolean
+        nrqzValidation:
+          $ref: "#/components/schemas/SasPortalNrqzValidation"
+          description: Output only. National Radio Quiet Zone validation info.
+          readOnly: true
       type: object
     SasPortalDeviceModel:
       description: Information about the model of the device.
@@ -1314,6 +1296,24 @@ components:
           items:
             type: string
           type: array
+      type: object
+    SasPortalNrqzValidation:
+      description: Information about National Radio Quiet Zone validation. The presence of the field indicates the device has been validated.
+      properties:
+        caseId:
+          description: Validation case id.
+          type: string
+        cpiId:
+          description: CPI who signed the validation.
+          type: string
+        latitude:
+          description: Device latitude associated with the validation.
+          format: double
+          type: number
+        longitude:
+          description: Device longitude associated with the validation.
+          format: double
+          type: number
       type: object
     SasPortalOperation:
       description: This resource represents a long-running operation that is the result of a network API call.

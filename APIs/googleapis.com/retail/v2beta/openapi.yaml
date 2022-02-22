@@ -30,6 +30,132 @@ externalDocs:
 tags:
   - name: projects
 paths:
+  "/v2beta/{attributesConfig}:addCatalogAttribute":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Adds the specified CatalogAttribute to the AttributesConfig. If the CatalogAttribute to add already exists, an ALREADY_EXISTS error is returned.
+      operationId: retail.projects.locations.catalogs.attributesConfig.addCatalogAttribute
+      parameters:
+        - description: "Required. Full AttributesConfig resource name. Format: projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/attributesConfig"
+          in: path
+          name: attributesConfig
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudRetailV2betaAddCatalogAttributeRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudRetailV2betaAttributesConfig"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2beta/{attributesConfig}:removeCatalogAttribute":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Removes the specified CatalogAttribute from the AttributesConfig. If the CatalogAttribute to remove does not exist, a NOT_FOUND error is returned.
+      operationId: retail.projects.locations.catalogs.attributesConfig.removeCatalogAttribute
+      parameters:
+        - description: "Required. Full AttributesConfig resource name. Format: projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/attributesConfig"
+          in: path
+          name: attributesConfig
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudRetailV2betaRemoveCatalogAttributeRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudRetailV2betaAttributesConfig"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2beta/{attributesConfig}:replaceCatalogAttribute":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Replaces the specified CatalogAttribute in the AttributesConfig by updating the catalog attribute with the same CatalogAttribute.key. If the CatalogAttribute to replace does not exist, a NOT_FOUND error is returned.
+      operationId: retail.projects.locations.catalogs.attributesConfig.replaceCatalogAttribute
+      parameters:
+        - description: "Required. Full AttributesConfig resource name. Format: projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/attributesConfig"
+          in: path
+          name: attributesConfig
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudRetailV2betaReplaceCatalogAttributeRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudRetailV2betaAttributesConfig"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v2beta/{catalog}:completeQuery":
     get:
       description: Completes the specified prefix with keyword suggestions. This feature is only available for users who have Retail Search enabled. Please submit a form [here](https://cloud.google.com/contact) to contact cloud sales if you are interested in using Retail Search.
@@ -341,7 +467,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Updates inventory information for a Product while respecting the last update timestamps of each inventory field. This process is asynchronous and does not require the Product to exist before updating fulfillment information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, updates are not immediately manifested in the Product queried by GetProduct or ListProducts. When inventory is updated with CreateProduct and UpdateProduct, the specified inventory field value(s) will overwrite any existing value(s) while ignoring the last update time for this field. Furthermore, the last update time for the specified inventory fields will be overwritten to the time of the CreateProduct or UpdateProduct request. If no inventory fields are set in CreateProductRequest.product, then any pre-existing inventory information for this product will be used. If no inventory fields are set in UpdateProductRequest.set_mask, then any existing inventory information will be preserved. Pre-existing inventory information can only be updated with SetInventory, AddFulfillmentPlaces, and RemoveFulfillmentPlaces. This feature is only available for users who have Retail Search enabled. Please submit a form [here](https://cloud.google.com/contact) to contact cloud sales if you are interested in using Retail Search.
+      description: Updates inventory information for a Product while respecting the last update timestamps of each inventory field. This process is asynchronous and does not require the Product to exist before updating fulfillment information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, updates are not immediately manifested in the Product queried by GetProduct or ListProducts. When inventory is updated with CreateProduct and UpdateProduct, the specified inventory field value(s) will overwrite any existing value(s) while ignoring the last update time for this field. Furthermore, the last update time for the specified inventory fields will be overwritten to the time of the CreateProduct or UpdateProduct request. If no inventory fields are set in CreateProductRequest.product, then any pre-existing inventory information for this product will be used. If no inventory fields are set in SetInventoryRequest.set_mask, then any existing inventory information will be preserved. Pre-existing inventory information can only be updated with SetInventory, AddFulfillmentPlaces, and RemoveFulfillmentPlaces. This feature is only available for users who have Retail Search enabled. Please submit a form [here](https://cloud.google.com/contact) to contact cloud sales if you are interested in using Retail Search.
       operationId: retail.projects.locations.catalogs.branches.products.setInventory
       parameters:
         - description: Immutable. Full resource name of the product, such as `projects/*/locations/global/catalogs/default_catalog/branches/default_branch/products/product_id`.
@@ -1428,7 +1554,7 @@ components:
       description: Configuration of destination for Import related errors.
       properties:
         gcsPrefix:
-          description: Google Cloud Storage path for import errors. This must be an empty, existing Cloud Storage bucket. Import errors will be written to a file in this bucket, one per line, as a JSON-encoded `google.rpc.Status` message.
+          description: Google Cloud Storage prefix for import errors. This must be an empty, existing Cloud Storage directory. Import errors will be written to sharded files in this directory, one per line, as a JSON-encoded `google.rpc.Status` message.
           type: string
       type: object
     GoogleCloudRetailV2ImportMetadata:
@@ -1608,7 +1734,7 @@ components:
       description: Configuration of destination for Import related errors.
       properties:
         gcsPrefix:
-          description: Google Cloud Storage path for import errors. This must be an empty, existing Cloud Storage bucket. Import errors will be written to a file in this bucket, one per line, as a JSON-encoded `google.rpc.Status` message.
+          description: Google Cloud Storage prefix for import errors. This must be an empty, existing Cloud Storage directory. Import errors will be written to sharded files in this directory, one per line, as a JSON-encoded `google.rpc.Status` message.
           type: string
       type: object
     GoogleCloudRetailV2alphaImportMetadata:
@@ -1724,6 +1850,13 @@ components:
           format: int64
           type: string
       type: object
+    GoogleCloudRetailV2betaAddCatalogAttributeRequest:
+      description: Request for CatalogService.AddCatalogAttribute method.
+      properties:
+        catalogAttribute:
+          $ref: "#/components/schemas/GoogleCloudRetailV2betaCatalogAttribute"
+          description: Required. The CatalogAttribute to add.
+      type: object
     GoogleCloudRetailV2betaAddControlRequest:
       description: Request for AddControl method.
       properties:
@@ -1757,6 +1890,26 @@ components:
     GoogleCloudRetailV2betaAddFulfillmentPlacesResponse:
       description: Response of the AddFulfillmentPlacesRequest. Currently empty because there is no meaningful response populated from the AddFulfillmentPlaces method.
       properties: {}
+      type: object
+    GoogleCloudRetailV2betaAttributesConfig:
+      description: Catalog level attribute config.
+      properties:
+        attributeConfigLevel:
+          description: Output only. The AttributeConfigLevel used for this catalog.
+          enum:
+            - ATTRIBUTE_CONFIG_LEVEL_UNSPECIFIED
+            - PRODUCT_LEVEL_ATTRIBUTE_CONFIG
+            - CATALOG_LEVEL_ATTRIBUTE_CONFIG
+          readOnly: true
+          type: string
+        catalogAttributes:
+          additionalProperties:
+            $ref: "#/components/schemas/GoogleCloudRetailV2betaCatalogAttribute"
+          description: "Enable attribute(s) config at catalog level. For example, indexable, dynamic_facetable, or searchable for each attribute. The key is catalog attribute's name. For example: `color`, `brands`, `attributes.custom_attribute`, such as `attributes.xyz`. The maximum number of catalog attributes allowed in a request is 1000."
+          type: object
+        name:
+          description: 'Required. Immutable. The fully qualified resource name of the attribute config. Format: "projects/*/locations/*/catalogs/*/attributesConfig"'
+          type: string
       type: object
     GoogleCloudRetailV2betaAudience:
       description: An intended audience of the Product for whom it's sold.
@@ -1806,6 +1959,46 @@ components:
         productLevelConfig:
           $ref: "#/components/schemas/GoogleCloudRetailV2betaProductLevelConfig"
           description: Required. The product level configuration.
+      type: object
+    GoogleCloudRetailV2betaCatalogAttribute:
+      description: Catalog level attribute config for an attribute. For example, if customers want to enable/disable facet for a specific attribute.
+      properties:
+        dynamicFacetableOption:
+          description: If DYNAMIC_FACETABLE_ENABLED, attribute values are available for dynamic facet. Could only be DYNAMIC_FACETABLE_DISABLED if CatalogAttribute.indexable_option is INDEXABLE_DISABLED. Otherwise, an INVALID_ARGUMENT error is returned.
+          enum:
+            - DYNAMIC_FACETABLE_OPTION_UNSPECIFIED
+            - DYNAMIC_FACETABLE_ENABLED
+            - DYNAMIC_FACETABLE_DISABLED
+          type: string
+        inUse:
+          description: Output only. Indicates whether this attribute has been used by any products. `True` if at least one Product is using this attribute in Product.attributes. Otherwise, this field is `False`. CatalogAttribute can be pre-loaded by using AddCatalogAttribute, ImportCatalogAttributes, or UpdateAttributesConfig APIs. This field is `False` for pre-loaded CatalogAttributes. After catalog changes, it takes about 10 minutes for this field to update.
+          readOnly: true
+          type: boolean
+        indexableOption:
+          description: When AttributesConfig.attribute_config_level is CATALOG_LEVEL_ATTRIBUTE_CONFIG, if INDEXABLE_ENABLED attribute values are indexed so that it can be filtered, faceted, or boosted in SearchService.Search.
+          enum:
+            - INDEXABLE_OPTION_UNSPECIFIED
+            - INDEXABLE_ENABLED
+            - INDEXABLE_DISABLED
+          type: string
+        key:
+          description: "Required. Attribute name. For example: `color`, `brands`, `attributes.custom_attribute`, such as `attributes.xyz`."
+          type: string
+        searchableOption:
+          description: When AttributesConfig.attribute_config_level is CATALOG_LEVEL_ATTRIBUTE_CONFIG, if SEARCHABLE_ENABLED, attribute values are searchable by text queries in SearchService.Search. If SEARCHABLE_ENABLED but attribute type is numerical, attribute values will not be searchable by text queries in SearchService.Search, as there are no text values associated to numerical attributes.
+          enum:
+            - SEARCHABLE_OPTION_UNSPECIFIED
+            - SEARCHABLE_ENABLED
+            - SEARCHABLE_DISABLED
+          type: string
+        type:
+          description: Output only. The type of this attribute. This is derived from the attribute in Product.attributes.
+          enum:
+            - UNKNOWN
+            - TEXTUAL
+            - NUMERICAL
+          readOnly: true
+          type: string
       type: object
     GoogleCloudRetailV2betaColorInfo:
       description: The color information of a Product.
@@ -1961,7 +2154,7 @@ components:
           description: This field will only be used when AttributesConfig.attribute_config_level of the Catalog is 'PRODUCT_LEVEL_ATTRIBUTE_CONFIG', if true, custom attribute values are searchable by text queries in SearchService.Search. This field is ignored in a UserEvent. Only set if type text is set. Otherwise, a INVALID_ARGUMENT error is returned.
           type: boolean
         text:
-          description: The textual values of this custom attribute. For example, `["yellow", "green"]` when the key is "color". Exactly one of text or numbers should be set. Otherwise, an INVALID_ARGUMENT error is returned.
+          description: The textual values of this custom attribute. For example, `["yellow", "green"]` when the key is "color". Empty string is not allowed. Otherwise, an INVALID_ARGUMENT error is returned. Exactly one of text or numbers should be set. Otherwise, an INVALID_ARGUMENT error is returned.
           items:
             type: string
           type: array
@@ -2085,7 +2278,7 @@ components:
       description: Configuration of destination for Import related errors.
       properties:
         gcsPrefix:
-          description: Google Cloud Storage path for import errors. This must be an empty, existing Cloud Storage bucket. Import errors will be written to a file in this bucket, one per line, as a JSON-encoded `google.rpc.Status` message.
+          description: Google Cloud Storage prefix for import errors. This must be an empty, existing Cloud Storage directory. Import errors will be written to sharded files in this directory, one per line, as a JSON-encoded `google.rpc.Status` message.
           type: string
       type: object
     GoogleCloudRetailV2betaImportMetadata:
@@ -2353,7 +2546,7 @@ components:
         attributes:
           additionalProperties:
             $ref: "#/components/schemas/GoogleCloudRetailV2betaCustomAttribute"
-          description: 'Highly encouraged. Extra product attributes to be included. For example, for products, this could include the store name, vendor, style, color, etc. These are very strong signals for recommendation model, thus we highly recommend providing the attributes here. Features that can take on one of a limited number of possible values. Two types of features can be set are: Textual features. some examples would be the brand/maker of a product, or country of a customer. Numerical features. Some examples would be the height/weight of a product, or age of a customer. For example: `{ "vendor": {"text": ["vendor123", "vendor456"]}, "lengths_cm": {"numbers":[2.3, 15.4]}, "heights_cm": {"numbers":[8.1, 6.4]} }`. This field needs to pass all below criteria, otherwise an INVALID_ARGUMENT error is returned: * Max entries count: 200. * The key must be a UTF-8 encoded string with a length limit of 128 characters. * For indexable attribute, the key must match the pattern: `a-zA-Z0-9*`. For example, `key0LikeThis` or `KEY_1_LIKE_THIS`. * For text attributes, at most 400 values are allowed. Empty values are not allowed. Each value must be a UTF-8 encoded string with a length limit of 256 characters. * For number attributes, at most 400 values are allowed.'
+          description: 'Highly encouraged. Extra product attributes to be included. For example, for products, this could include the store name, vendor, style, color, etc. These are very strong signals for recommendation model, thus we highly recommend providing the attributes here. Features that can take on one of a limited number of possible values. Two types of features can be set are: Textual features. some examples would be the brand/maker of a product, or country of a customer. Numerical features. Some examples would be the height/weight of a product, or age of a customer. For example: `{ "vendor": {"text": ["vendor123", "vendor456"]}, "lengths_cm": {"numbers":[2.3, 15.4]}, "heights_cm": {"numbers":[8.1, 6.4]} }`. This field needs to pass all below criteria, otherwise an INVALID_ARGUMENT error is returned: * Max entries count: 200. * The key must be a UTF-8 encoded string with a length limit of 128 characters. * For indexable attribute, the key must match the pattern: `a-zA-Z0-9*`. For example, `key0LikeThis` or `KEY_1_LIKE_THIS`. * For text attributes, at most 400 values are allowed. Empty values are not allowed. Each value must be a non-empty UTF-8 encoded string with a length limit of 256 characters. * For number attributes, at most 400 values are allowed.'
           type: object
         audience:
           $ref: "#/components/schemas/GoogleCloudRetailV2betaAudience"
@@ -2629,6 +2822,13 @@ components:
           format: int64
           type: string
       type: object
+    GoogleCloudRetailV2betaRemoveCatalogAttributeRequest:
+      description: Request for CatalogService.RemoveCatalogAttribute method.
+      properties:
+        key:
+          description: Required. The attribute name key of the CatalogAttribute to remove.
+          type: string
+      type: object
     GoogleCloudRetailV2betaRemoveControlRequest:
       description: Request for RemoveControl method.
       properties:
@@ -2662,6 +2862,17 @@ components:
     GoogleCloudRetailV2betaRemoveFulfillmentPlacesResponse:
       description: Response of the RemoveFulfillmentPlacesRequest. Currently empty because there is no meaningful response populated from the RemoveFulfillmentPlaces method.
       properties: {}
+      type: object
+    GoogleCloudRetailV2betaReplaceCatalogAttributeRequest:
+      description: Request for CatalogService.ReplaceCatalogAttribute method.
+      properties:
+        catalogAttribute:
+          $ref: "#/components/schemas/GoogleCloudRetailV2betaCatalogAttribute"
+          description: Required. The updated CatalogAttribute.
+        updateMask:
+          description: "Indicates which fields in the provided CatalogAttribute to update. The following are NOT supported: * CatalogAttribute.key If not set, all supported fields are updated."
+          format: google-fieldmask
+          type: string
       type: object
     GoogleCloudRetailV2betaRule:
       description: A rule is a condition-action pair * A condition defines when a rule is to be triggered. * An action specifies what occurs on that trigger. Currently only boost rules are supported. Currently only supported by the search endpoint.
@@ -3082,7 +3293,7 @@ components:
       description: Configures metadata that is used to generate serving time results (e.g. search results or recommendation predictions). The ServingConfig is passed in the search and predict request and together with the Catalog.default_branch, generates results.
       properties:
         boostControlIds:
-          description: Condition boost specifications. If a product matches multiple conditions in the specifications, boost scores from these specifications are all applied and combined in a non-linear way. Maximum number of specifications is 10. Notice that if both ServingConfig.boost_control_ids and [SearchRequest.boost_spec] are set, the boost conditions from both places are evaluated. If a search request matches multiple boost conditions, the final boost score is equal to the sum of the boost scores from all matched boost conditions. Can only be set if solution_types is SOLUTION_TYPE_SEARCH.
+          description: Condition boost specifications. If a product matches multiple conditions in the specifications, boost scores from these specifications are all applied and combined in a non-linear way. Maximum number of specifications is 100. Notice that if both ServingConfig.boost_control_ids and [SearchRequest.boost_spec] are set, the boost conditions from both places are evaluated. If a search request matches multiple boost conditions, the final boost score is equal to the sum of the boost scores from all matched boost conditions. Can only be set if solution_types is SOLUTION_TYPE_SEARCH.
           items:
             type: string
           type: array
@@ -3133,7 +3344,7 @@ components:
           description: "How much price ranking we want in serving results. Price reranking causes product items with a similar recommendation probability to be ordered by price, with the highest-priced items first. This setting could result in a decrease in click-through and conversion rates. Allowed values are: * 'no-price-reranking' * 'low-price-raranking' * 'medium-price-reranking' * 'high-price-reranking' If not specified, we choose default based on model type. Default value: 'no-price-reranking'. Can only be set if solution_types is SOLUTION_TYPE_RECOMMENDATION."
           type: string
         redirectControlIds:
-          description: Condition redirect specifications. Only the first triggered redirect action is applied, even if multiple apply. Maximum number of specifications is 100. Can only be set if solution_types is SOLUTION_TYPE_SEARCH.
+          description: Condition redirect specifications. Only the first triggered redirect action is applied, even if multiple apply. Maximum number of specifications is 1000. Can only be set if solution_types is SOLUTION_TYPE_SEARCH.
           items:
             type: string
           type: array
@@ -3161,8 +3372,11 @@ components:
       description: Request message to set a specified branch as new default_branch.
       properties:
         branchId:
-          description: The final component of the resource name of a branch. This field must be one of "0", "1" or "2". Otherwise, an INVALID_ARGUMENT error is returned.
+          description: The final component of the resource name of a branch. This field must be one of "0", "1" or "2". Otherwise, an INVALID_ARGUMENT error is returned. If there are no sufficient active products in the targeted branch and force is not set, a FAILED_PRECONDITION error is returned.
           type: string
+        force:
+          description: If set to true, it permits switching to a branch with branch_id even if it has no sufficient active products.
+          type: boolean
         note:
           description: Some note on this request, this can be retrieved by CatalogService.GetDefaultBranch before next valid default branch set occurs. This field must be a UTF-8 encoded string with a length limit of 1,000 characters. Otherwise, an INVALID_ARGUMENT error is returned.
           type: string
@@ -3179,7 +3393,7 @@ components:
           type: boolean
         inventory:
           $ref: "#/components/schemas/GoogleCloudRetailV2betaProduct"
-          description: "Required. The inventory information to update. The allowable fields to update are: * Product.price_info * Product.availability * Product.available_quantity * Product.fulfillment_info The updated inventory fields must be specified in SetInventoryRequest.set_mask. If SetInventoryRequest.inventory.name is empty or invalid, an INVALID_ARGUMENT error is returned. If the caller does not have permission to update the Product named in Product.name, regardless of whether or not it exists, a PERMISSION_DENIED error is returned. If the Product to update does not have existing inventory information, the provided inventory information will be inserted. If the Product to update has existing inventory information, the provided inventory information will be merged while respecting the last update time for each inventory field, using the provided or default value for SetInventoryRequest.set_time. The last update time is recorded for the following inventory fields: * Product.price_info * Product.availability * Product.available_quantity * Product.fulfillment_info If a full overwrite of inventory information while ignoring timestamps is needed, UpdateProduct should be invoked instead."
+          description: 'Required. The inventory information to update. The allowable fields to update are: * Product.price_info * Product.availability * Product.available_quantity * Product.fulfillment_info The updated inventory fields must be specified in SetInventoryRequest.set_mask. If SetInventoryRequest.inventory.name is empty or invalid, an INVALID_ARGUMENT error is returned. If the caller does not have permission to update the Product named in Product.name, regardless of whether or not it exists, a PERMISSION_DENIED error is returned. If the Product to update does not have existing inventory information, the provided inventory information will be inserted. If the Product to update has existing inventory information, the provided inventory information will be merged while respecting the last update time for each inventory field, using the provided or default value for SetInventoryRequest.set_time. The caller can replace place IDs for a subset of fulfillment types in the following ways: * Adds "fulfillment_info" in SetInventoryRequest.set_mask * Specifies only the desired fulfillment types and corresponding place IDs to update in SetInventoryRequest.inventory.fulfillment_info The caller can clear all place IDs from a subset of fulfillment types in the following ways: * Adds "fulfillment_info" in SetInventoryRequest.set_mask * Specifies only the desired fulfillment types to clear in SetInventoryRequest.inventory.fulfillment_info * Checks that only the desired fulfillment info types have empty SetInventoryRequest.inventory.fulfillment_info.place_ids The last update time is recorded for the following inventory fields: * Product.price_info * Product.availability * Product.available_quantity * Product.fulfillment_info If a full overwrite of inventory information while ignoring timestamps is needed, UpdateProduct should be invoked instead.'
         setMask:
           description: Indicates which inventory fields in the provided Product to update. At least one field must be provided. If an unsupported or unknown field is provided, an INVALID_ARGUMENT error is returned and the entire update will be ignored.
           format: google-fieldmask

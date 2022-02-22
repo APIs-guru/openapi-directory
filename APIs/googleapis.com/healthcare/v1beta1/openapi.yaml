@@ -4924,6 +4924,7 @@ components:
             - SCHEMA_TYPE_UNSPECIFIED
             - LOSSLESS
             - ANALYTICS
+            - ANALYTICS_V2
           type: string
       type: object
     SchemaGroup:
@@ -5028,6 +5029,9 @@ components:
     SearchResourcesRequest:
       description: Request to search the resources in the specified FHIR store.
       properties:
+        requestBody:
+          $ref: "#/components/schemas/HttpBody"
+          description: Raw body of the request for POST searches.
         resourceType:
           description: The FHIR resource type to search, such as Patient or Observation. For a complete list, see the FHIR Resource Index ([DSTU2](https://hl7.org/implement/standards/fhir/DSTU2/resourcelist.html), [STU3](https://hl7.org/implement/standards/fhir/STU3/resourcelist.html), [R4](https://hl7.org/implement/standards/fhir/R4/resourcelist.html)).
           type: string
