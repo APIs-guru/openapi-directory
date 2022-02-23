@@ -412,7 +412,7 @@ components:
       properties:
         dialogAction:
           $ref: "#/components/schemas/DialogAction"
-          description: This response is for Dialog related events and must be accompanied by ResponseType.Dialog
+          description: A response to an event related to a [dialog](https://developers.google.com/chat/how-tos/bot-dialogs). Must be accompanied by `ResponseType.Dialog`.
         type:
           description: The type of bot response.
           enum:
@@ -421,13 +421,14 @@ components:
             - UPDATE_MESSAGE
             - UPDATE_USER_MESSAGE_CARDS
             - REQUEST_CONFIG
+            - DIALOG
           type: string
         url:
           description: URL for users to auth or config. (Only for REQUEST_CONFIG response types.)
           type: string
       type: object
     ActionStatus:
-      description: ActionStatus represents status of a request from the bot developer's side. In specific, for each request a bot gets, the bot developer will set both fields below in relation to what the response status and message related to status should be.
+      description: Represents the status of a request.
       properties:
         statusCode:
           description: The status code.
@@ -451,7 +452,7 @@ components:
             - DATA_LOSS
           type: string
         userFacingMessage:
-          description: This message will be the corresponding string to the above status_code. If unset, an appropriate generic message based on the status_code will be shown to the user. If this field is set then the message will be surfaced to the user for both successes and errors.
+          description: The message to send users about the status of their request. If unset, a generic message based on the `status_code` is sent.
           type: string
       type: object
     Annotation:
@@ -598,15 +599,15 @@ components:
           type: number
       type: object
     CommonEventObject:
-      description: Next available ID = 8
+      description: Represents information about the user's client, such as locale, host app, and platform. For Chat apps, `CommonEventObject` includes data submitted by users interacting with cards, like data entered in [dialogs](https://developers.google.com/chat/how-tos/bot-dialogs).
       properties:
         formInputs:
           additionalProperties:
             $ref: "#/components/schemas/Inputs"
-          description: The keys are the string IDs associated with the widget and the values are inputs with a widget in the card.
+          description: "A map containing the current values of the widgets in a card. The map keys are the string IDs assigned to each widget, and the values represent inputs to the widget. Depending on the input data type, a different object represents each input: For single-value widgets, `StringInput`. For multi-value widgets, an array of `StringInput` objects. For a date-time picker, a `DateTimeInput`. For a date-only picker, a `DateInput`. For a time-only picker, a `TimeInput`. Corresponds with the data entered by a user on a card in a [dialog](https://developers.google.com/chat/how-tos/bot-dialogs)."
           type: object
         hostApp:
-          description: The hostApp enum which indicates the app the add-on is invoked from
+          description: The hostApp enum which indicates the app the add-on is invoked from. Always `CHAT` for Chat apps.
           enum:
             - UNSPECIFIED_HOST_APP
             - GMAIL
@@ -618,18 +619,17 @@ components:
             - SLIDES
             - DRAWINGS
             - CHAT
-            - ALL_HOST_APPS
           type: string
         invokedFunction:
-          description: Name of the invoked function associated with the widget. This field is currently only set for chat.
+          description: Name of the invoked function associated with the widget. Only set for Chat apps.
           type: string
         parameters:
           additionalProperties:
             type: string
-          description: Any additional parameters.
+          description: Custom [parameters](/chat/api/reference/rest/v1/cards#ActionParameter) passed to the invoked function. Both keys and values must be strings.
           type: object
         platform:
-          description: The platform enum which indicates the platform where the add-on is running.
+          description: The platform enum which indicates the platform where the event originates (`WEB`, `IOS`, or `ANDROID`). Not supported by Chat apps.
           enum:
             - UNKNOWN_PLATFORM
             - WEB
@@ -638,25 +638,30 @@ components:
           type: string
         timeZone:
           $ref: "#/components/schemas/TimeZone"
+          description: The timezone ID and offset from Coordinated Universal Time (UTC).
         userLocale:
-          description: The full locale.displayName in the format of [ISO 639 language code]-[ISO 3166 country/region code] such as "en-US"
+          description: The full locale.displayName in the format of [ISO 639 language code]-[ISO 3166 country/region code] such as "en-US". Not supported by Chat apps.
           type: string
       type: object
     DateInput:
-      description: Input Parameter for Date Picker widget.
+      description: Date input values. Not supported by Chat apps.
       properties:
         msSinceEpoch:
+          description: Time since epoch time, in milliseconds.
           format: int64
           type: string
       type: object
     DateTimeInput:
-      description: Input Parameter for Date and Time Picker widget.
+      description: Date and time input values. Not supported by Chat apps.
       properties:
         hasDate:
+          description: Whether the `datetime` input includes a calendar date.
           type: boolean
         hasTime:
+          description: Whether the `datetime` input includes a timestamp.
           type: boolean
         msSinceEpoch:
+          description: Time since epoch time, in milliseconds.
           format: int64
           type: string
       type: object
@@ -668,12 +673,12 @@ components:
           description: The form action data associated with an interactive card that was clicked. Only populated for CARD_CLICKED events. See the [Interactive Cards guide](/chat/how-tos/cards-onclick) for more information.
         common:
           $ref: "#/components/schemas/CommonEventObject"
-          description: This will include form information for dialogs such as form inputs, action parameters.
+          description: Represents information about the user's client, such as locale, host app, and platform. For Chat apps, `CommonEventObject` includes information submitted by users interacting with [dialogs](https://developers.google.com/chat/how-tos/bot-dialogs), like data entered on a card.
         configCompleteRedirectUrl:
           description: The URL the bot should redirect the user to after they have completed an authorization or configuration flow outside of Google Chat. See the [Authorizing access to 3p services guide](/chat/how-tos/auth-3p) for more information.
           type: string
         dialogEventType:
-          description: The type of dialog event we have received.
+          description: The type of [dialog](https://developers.google.com/chat/how-tos/bot-dialogs) event received.
           enum:
             - TYPE_UNSPECIFIED
             - REQUEST_DIALOG
@@ -685,7 +690,7 @@ components:
           format: google-datetime
           type: string
         isDialogEvent:
-          description: Whether or not this event is related to dialogs request, submit or cancel. This will be set to true when we want a request/submit/cancel event.
+          description: True when the event is related to [dialogs](https://developers.google.com/chat/how-tos/bot-dialogs).
           type: boolean
         message:
           $ref: "#/components/schemas/Message"
@@ -717,17 +722,17 @@ components:
       properties:
         body:
           $ref: "#/components/schemas/GoogleAppsCardV1Card"
-          description: "Body of the dialog, which will be rendered in a modal. NOTE: The following fields within the objects are not supported: google.apps.card.v1.Widget.date_time_picker google.apps.card.v1.DecoratedText.SwitchControl.on_change_action google.apps.card.v1.TextInput.on_change_action google.apps.card.v1.SelectionInput.on_change_action google.apps.card.v1.DateTimePicker.on_change_action Setting the fields above will have no effect on the dialog."
+          description: "Body of the dialog, which is rendered in a modal. Google Chat apps do not support the following card entities: `DateTimePicker`, `OnChangeAction`."
       type: object
     DialogAction:
-      description: Contains dialog if present as well as the ActionStatus for the request sent from user.
+      description: Contains a [dialog](https://developers.google.com/chat/how-tos/bot-dialogs) and request status code.
       properties:
         actionStatus:
           $ref: "#/components/schemas/ActionStatus"
-          description: Status for either invoke dialog or submit dialog requests. This will be used to display a status and message to user if needed. For example in case of an error or success.
+          description: Status for a request to either invoke or submit a [dialog](https://developers.google.com/chat/how-tos/bot-dialogs). Displays a status and message to users, if necessary. For example, in case of an error or success.
         dialog:
           $ref: "#/components/schemas/Dialog"
-          description: Dialog for the request.
+          description: "[Dialog](https://developers.google.com/chat/how-tos/bot-dialogs) for the request."
       type: object
     DriveDataRef:
       description: A reference to the data of a drive attachment.
@@ -772,6 +777,7 @@ components:
           description: Apps Script function to invoke when the containing element is clicked/activated.
           type: string
         loadIndicator:
+          description: Specifies the loading indicator that the action displays while making the call to the action.
           enum:
             - SPINNER
             - NONE
@@ -823,7 +829,7 @@ components:
           $ref: "#/components/schemas/Color"
           description: If set, the button is filled with a solid background.
         disabled:
-          description: If true, the button is displayed in a disabled state and doesn't respond to user actions.
+          description: If `true`, the button is displayed in a disabled state and doesn't respond to user actions.
           type: boolean
         icon:
           $ref: "#/components/schemas/GoogleAppsCardV1Icon"
@@ -839,6 +845,7 @@ components:
       description: A list of buttons layed out horizontally.
       properties:
         buttons:
+          description: An array of buttons.
           items:
             $ref: "#/components/schemas/GoogleAppsCardV1Button"
           type: array
@@ -847,12 +854,12 @@ components:
       description: 'A card is a UI element that can contain UI widgets such as text and images. For more information, see Cards . For example, the following JSON creates a card that has a header with the name, position, icons, and link for a contact, followed by a section with contact information like email and phone number. ``` { "header": { "title": "Heba Salam", "subtitle": "Software Engineer", "imageStyle": "ImageStyle.AVATAR", "imageUrl": "https://example.com/heba_salam.png", "imageAltText": "Avatar for Heba Salam" }, "sections" : [ { "header": "Contact Info", "widgets": [ { "decorated_text": { "icon": { "knownIcon": "EMAIL" }, "content": "heba.salam@example.com" } }, { "decoratedText": { "icon": { "knownIcon": "PERSON" }, "content": "Online" } }, { "decoratedText": { "icon": { "knownIcon": "PHONE" }, "content": "+1 (555) 555-1234" } }, { "buttons": [ { "textButton": { "text": "Share", }, "onClick": { "openLink": { "url": "https://example.com/share" } } }, { "textButton": { "text": "Edit", }, "onClick": { "action": { "function": "goToView", "parameters": [ { "key": "viewType", "value": "EDIT" } ], "loadIndicator": "LoadIndicator.SPINNER" } } } ] } ], "collapsible": true, "uncollapsibleWidgetsCount": 3 } ], "cardActions": [ { "actionLabel": "Send Feedback", "onClick": { "openLink": { "url": "https://example.com/feedback" } } } ], "name": "contact-card-K3wB6arF2H9L" } ```'
       properties:
         cardActions:
-          description: "The actions of this card. They are added to a card's generated toolbar menu. For example, the following JSON constructs a card action menu with Settings and Send Feedback options: ``` \"card_actions\": [ { \"actionLabel\": \"Setting\", \"onClick\": { \"action\": { \"functionName\": \"goToView\", \"parameters\": [ { \"key\": \"viewType\", \"value\": \"SETTING\" } ], \"loadIndicator\": \"LoadIndicator.SPINNER\" } } }, { \"actionLabel\": \"Send Feedback\", \"onClick\": { \"openLink\": { \"url\": \"https://example.com/feedback\" } } } ] ```"
+          description: "The card's actions. Actions are added to the card's generated toolbar menu. For example, the following JSON constructs a card action menu with Settings and Send Feedback options: ``` \"card_actions\": [ { \"actionLabel\": \"Settings\", \"onClick\": { \"action\": { \"functionName\": \"goToView\", \"parameters\": [ { \"key\": \"viewType\", \"value\": \"SETTING\" } ], \"loadIndicator\": \"LoadIndicator.SPINNER\" } } }, { \"actionLabel\": \"Send Feedback\", \"onClick\": { \"openLink\": { \"url\": \"https://example.com/feedback\" } } } ] ```"
           items:
             $ref: "#/components/schemas/GoogleAppsCardV1CardAction"
           type: array
         displayStyle:
-          description: The display style for peekCardHeader.
+          description: The display style for `peekCardHeader`.
           enum:
             - DISPLAY_STYLE_UNSPECIFIED
             - PEEK
@@ -865,7 +872,7 @@ components:
           $ref: "#/components/schemas/GoogleAppsCardV1CardHeader"
           description: The header of the card. A header usually contains a title and an image.
         name:
-          description: Name of the card, which is used as a identifier for the card in card navigation.
+          description: Name of the card. Used as a card identifier in card navigation.
           type: string
         peekCardHeader:
           $ref: "#/components/schemas/GoogleAppsCardV1CardHeader"
@@ -884,7 +891,7 @@ components:
           type: string
         onClick:
           $ref: "#/components/schemas/GoogleAppsCardV1OnClick"
-          description: The onclick action for this action item.
+          description: The `onClick` action for this action item.
       type: object
     GoogleAppsCardV1CardFixedFooter:
       description: A persistent (sticky) footer that is added to the bottom of the card.
@@ -897,6 +904,7 @@ components:
           description: The secondary button of the fixed footer. The button must be a text button with text and color set. `primaryButton` must be set if `secondaryButton` is set.
       type: object
     GoogleAppsCardV1CardHeader:
+      description: Represents a card header.
       properties:
         imageAltText:
           description: The alternative text of this image which is used for accessibility.
@@ -914,17 +922,17 @@ components:
           description: The subtitle of the card header.
           type: string
         title:
-          description: "The title of the card header. The title must be specified. The header has a fixed height: if both a title and subtitle are specified, each takes up one line. If only the title is specified, it takes up both lines."
+          description: "Required. The title of the card header. The header has a fixed height: if both a title and subtitle are specified, each takes up one line. If only the title is specified, it takes up both lines."
           type: string
       type: object
     GoogleAppsCardV1DateTimePicker:
-      description: The widget that lets users to specify a date and time.
+      description: The widget that lets users to specify a date and time. Not supported by Google Chat apps.
       properties:
         label:
           description: The label for the field that displays to the user.
           type: string
         name:
-          description: The name of the text input that's used in formInput, and uniquely identifies this input.
+          description: The name of the text input that's used in `formInput`, and uniquely identifies this input.
           type: string
         onChangeAction:
           $ref: "#/components/schemas/GoogleAppsCardV1Action"
@@ -1051,11 +1059,11 @@ components:
             - CIRCLE
           type: string
         knownIcon:
-          description: The icon specified by the string name of a list of known icons
+          description: The icon specified by the string name of a list of known icons.
           type: string
       type: object
     GoogleAppsCardV1Image:
-      description: An image that is specified by a URL and can have an onClick action.
+      description: An image that is specified by a URL and can have an `onClick` action.
       properties:
         altText:
           description: The alternative text of this image, used for accessibility.
@@ -1065,8 +1073,10 @@ components:
           type: string
         onClick:
           $ref: "#/components/schemas/GoogleAppsCardV1OnClick"
+          description: The action triggered by an `onClick` event.
       type: object
     GoogleAppsCardV1ImageComponent:
+      description: Represents an image.
       properties:
         altText:
           description: The accessibility label for the image.
@@ -1099,28 +1109,32 @@ components:
           type: string
       type: object
     GoogleAppsCardV1OnClick:
+      description: Represents the response to an `onClick` event.
       properties:
         action:
           $ref: "#/components/schemas/GoogleAppsCardV1Action"
-          description: If specified, an action is triggered by this onClick.
+          description: If specified, an action is triggered by this `onClick`.
         card:
           $ref: "#/components/schemas/GoogleAppsCardV1Card"
           description: A new card is pushed to the card stack after clicking if specified.
         openDynamicLinkAction:
           $ref: "#/components/schemas/GoogleAppsCardV1Action"
-          description: An add-on triggers this action when the action needs to open a link. This differs from the open_link above in that this needs to talk to server to get the link. Thus some preparation work is required for web client to do before the open link action response comes back.
+          description: An add-on triggers this action when the action needs to open a link. This differs from the `open_link` above in that this needs to talk to server to get the link. Thus some preparation work is required for web client to do before the open link action response comes back.
         openLink:
           $ref: "#/components/schemas/GoogleAppsCardV1OpenLink"
-          description: If specified, this onClick triggers an open link action.
+          description: If specified, this `onClick` triggers an open link action.
       type: object
     GoogleAppsCardV1OpenLink:
+      description: Represents an `onClick` event that opens a hyperlink.
       properties:
         onClose:
+          description: Whether the client forgets about a link after opening it, or observes it until the window closes. Not supported by Chat apps.
           enum:
             - NOTHING
             - RELOAD
           type: string
         openAs:
+          description: How to open a link. Not supported by Chat apps.
           enum:
             - FULL_SIZE
             - OVERLAY
@@ -1139,7 +1153,7 @@ components:
           description: The header of the section. Formatted text is supported.
           type: string
         uncollapsibleWidgetsCount:
-          description: The number of uncollapsible widgets. For example, when a section contains five widgets and the `numUncollapsibleWidget` is set to `2`, the first two widgets are always shown and the last three are collapsed as default. The `numUncollapsibleWidget` is taken into account only when collapsible is set to `true`.
+          description: The number of uncollapsible widgets. For example, when a section contains five widgets and the `uncollapsibleWidgetsCount` is set to `2`, the first two widgets are always shown and the last three are collapsed as default. The `uncollapsibleWidgetsCount` is taken into account only when `collapsible` is `true`.
           format: int32
           type: integer
         widgets:
@@ -1149,9 +1163,10 @@ components:
           type: array
       type: object
     GoogleAppsCardV1SelectionInput:
-      description: A widget that creates a UI item (for example, a drop-down list) with options for users to select.
+      description: A widget that creates a UI item with options for users to select. For example, a dropdown menu.
       properties:
         items:
+          description: An array of the selected items.
           items:
             $ref: "#/components/schemas/GoogleAppsCardV1SelectionItem"
           type: array
@@ -1159,12 +1174,13 @@ components:
           description: The label displayed ahead of the switch control.
           type: string
         name:
-          description: The name of the text input which is used in formInput.
+          description: The name of the text input which is used in `formInput`.
           type: string
         onChangeAction:
           $ref: "#/components/schemas/GoogleAppsCardV1Action"
           description: If specified, the form is submitted when the selection changes. If not specified, you must specify a separate button.
         type:
+          description: The type of the selection.
           enum:
             - CHECK_BOX
             - RADIO_BUTTON
@@ -1173,7 +1189,7 @@ components:
           type: string
       type: object
     GoogleAppsCardV1SelectionItem:
-      description: The item in the switch control. A radio button, at most one of the items is selected.
+      description: A selectable item in the switch control.
       properties:
         selected:
           description: If more than one item is selected for `RADIO_BUTTON` and `DROPDOWN`, the first selected item is treated as selected and the ones after are ignored.
@@ -1186,21 +1202,23 @@ components:
           type: string
       type: object
     GoogleAppsCardV1SuggestionItem:
-      description: A suggestion item. Only supports text for now.
+      description: A suggestion item.
       properties:
         text:
+          description: The suggested autocomplete result.
           type: string
       type: object
     GoogleAppsCardV1Suggestions:
       description: A container wrapping elements necessary for showing suggestion items used in text input autocomplete.
       properties:
         items:
-          description: A list of suggestions items which will be used in are used in autocomplete.
+          description: A list of suggestions used for autocomplete recommendations.
           items:
             $ref: "#/components/schemas/GoogleAppsCardV1SuggestionItem"
           type: array
       type: object
     GoogleAppsCardV1SwitchControl:
+      description: Either a toggle-style switch or a checkbox.
       properties:
         controlType:
           description: The control type, either switch or checkbox.
@@ -1210,7 +1228,7 @@ components:
             - CHECK_BOX
           type: string
         name:
-          description: The name of the switch widget that's used in formInput.
+          description: The name of the switch widget that's used in `formInput`.
           type: string
         onChangeAction:
           $ref: "#/components/schemas/GoogleAppsCardV1Action"
@@ -1238,7 +1256,7 @@ components:
           description: At least one of label and hintText must be specified.
           type: string
         name:
-          description: The name of the text input which is used in formInput.
+          description: The name of the text input which is used in `formInput`.
           type: string
         onChangeAction:
           $ref: "#/components/schemas/GoogleAppsCardV1Action"
@@ -1362,16 +1380,20 @@ components:
           description: The onclick action.
       type: object
     Inputs:
-      description: The inputs with widgets.
+      description: Types of data inputs for widgets. Users enter data with these inputs.
       properties:
         dateInput:
           $ref: "#/components/schemas/DateInput"
+          description: Date input values. Not supported by Chat apps.
         dateTimeInput:
           $ref: "#/components/schemas/DateTimeInput"
+          description: Date and time input values. Not supported by Chat apps.
         stringInputs:
           $ref: "#/components/schemas/StringInputs"
+          description: Input parameter for regular widgets. For single-valued widgets, it is a single value list. For multi-valued widgets, such as checkbox, all the values are presented.
         timeInput:
           $ref: "#/components/schemas/TimeInput"
+          description: Time input values. Not supported by Chat apps.
       type: object
     KeyValue:
       description: A UI element contains a key (label) and a value (content). And this element may also contain some actions such as onclick button.
@@ -1584,7 +1606,7 @@ components:
           type: array
       type: object
     SlashCommand:
-      description: A Slash Command in Chat.
+      description: A [slash command](https://developers.google.com/chat/how-tos/slash-commands) in Google Chat.
       properties:
         commandId:
           description: The id of the slash command invoked.
@@ -1659,9 +1681,10 @@ components:
           type: string
       type: object
     StringInputs:
-      description: Input parameter for regular widgets. For single-valued widgets, it will be a single value list; for multi-valued widgets, such as checkbox, all the values are presented.
+      description: Input parameter for regular widgets. For single-valued widgets, it is a single value list. For multi-valued widgets, such as checkbox, all the values are presented.
       properties:
         value:
+          description: An array of strings entered by the user.
           items:
             type: string
           type: array
@@ -1690,21 +1713,25 @@ components:
           type: string
       type: object
     TimeInput:
-      description: Input Parameter for Time Picker widget.
+      description: Time input values. Not supported by Chat apps.
       properties:
         hours:
+          description: The hour on a 24-hour clock.
           format: int32
           type: integer
         minutes:
+          description: The number of minutes past the hour. Valid values are 0 to 59.
           format: int32
           type: integer
       type: object
     TimeZone:
-      description: The timezone id and offset. The id is the tz database time zones such as "America/Toronto". The user timezone offset, in milliseconds, from Coordinated Universal Time (UTC).
+      description: The timezone ID and offset from Coordinated Universal Time (UTC). Not supported by Chat apps.
       properties:
         id:
+          description: The [IANA TZ](https://www.iana.org/time-zones) time zone database code, such as "America/Toronto".
           type: string
         offset:
+          description: The user timezone offset, in milliseconds, from Coordinated Universal Time (UTC).
           format: int32
           type: integer
       type: object
@@ -1721,7 +1748,7 @@ components:
           description: True when the user is deleted or the user's profile is not visible.
           type: boolean
         name:
-          description: Resource name for a Google Chat user. Formatted as `users/AAAAAAAAAAA`. Represents a [person](https://developers.google.com/people/api/rest/v1/people#Person) in the People API.
+          description: Resource name for a Google Chat user. Formatted as `users/{user}`. Represents a [person](https://developers.google.com/people/api/rest/v1/people#Person) in the People API.
           type: string
         type:
           description: User type.

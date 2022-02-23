@@ -373,7 +373,7 @@ paths:
       description: Lists transfer operations. Operations are ordered by their creation time in reverse chronological order.
       operationId: storagetransfer.transferOperations.list
       parameters:
-        - description: Not used.
+        - description: Required. The name of the type being listed; must be `transferOperations`.
           in: path
           name: name
           required: true

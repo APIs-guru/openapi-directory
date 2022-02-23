@@ -1107,7 +1107,7 @@ paths:
           name: debugOptions.enableDebugging
           schema:
             type: boolean
-        - description: Maximum number of datasources to fetch in a request. The max value is 100. The default value is 10
+        - description: Maximum number of datasources to fetch in a request. The max value is 1000. The default value is 1000.
           in: query
           name: pageSize
           schema:
@@ -4538,6 +4538,8 @@ components:
       properties:
         avatarInfo:
           $ref: "#/components/schemas/AvatarInfo"
+        avatarUrl:
+          type: string
         description:
           type: string
         groupId:
