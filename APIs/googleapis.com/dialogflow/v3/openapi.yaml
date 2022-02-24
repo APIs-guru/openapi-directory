@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://dialogflow.googleapis.com/$discovery/rest?version=v3
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: dialogflow
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/dialogflow/
 tags:
@@ -6489,6 +6490,17 @@ components:
           description: The article URI.
           type: string
       type: object
+    GoogleCloudDialogflowV2ArticleSuggestionModelMetadata:
+      description: Metadata for article suggestion models.
+      properties:
+        trainingModelType:
+          description: Optional. Type of the article suggestion model. If not provided, model_type is used.
+          enum:
+            - MODEL_TYPE_UNSPECIFIED
+            - SMART_REPLY_DUAL_ENCODER_MODEL
+            - SMART_REPLY_BERT_MODEL
+          type: string
+      type: object
     GoogleCloudDialogflowV2BatchUpdateEntityTypesResponse:
       description: The response message for EntityTypes.BatchUpdateEntityTypes.
       properties:
@@ -6506,6 +6518,33 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudDialogflowV2Intent"
           type: array
+      type: object
+    GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata:
+      description: Metadata for a ConversationProfile.ClearSuggestionFeatureConfig operation.
+      properties:
+        conversationProfile:
+          description: "The resource name of the conversation profile. Format: `projects//locations//conversationProfiles/`"
+          type: string
+        createTime:
+          description: Timestamp whe the request was created. The time is measured on server side.
+          format: google-datetime
+          type: string
+        participantRole:
+          description: Required. The participant role to remove the suggestion feature config. Only HUMAN_AGENT or END_USER can be used.
+          enum:
+            - ROLE_UNSPECIFIED
+            - HUMAN_AGENT
+            - AUTOMATED_AGENT
+            - END_USER
+          type: string
+        suggestionFeatureType:
+          description: Required. The type of the suggestion feature to remove.
+          enum:
+            - TYPE_UNSPECIFIED
+            - ARTICLE_SUGGESTION
+            - FAQ
+            - SMART_REPLY
+          type: string
       type: object
     GoogleCloudDialogflowV2Context:
       description: Dialogflow contexts are similar to natural language context. If a person says to you "they are orange", you need context in order to understand what "they" is referring to. Similarly, for Dialogflow to handle an end-user expression like that, it needs to be provided with context in order to correctly match an intent. Using contexts, you can control the flow of a conversation. You can configure contexts for an intent by setting input and output contexts, which are identified by string names. When an intent is matched, any configured output contexts for that intent become active. While any contexts are active, Dialogflow is more likely to match intents that are configured with input contexts that correspond to the currently active contexts. For more information about context, see the [Contexts guide](https://cloud.google.com/dialogflow/docs/contexts-overview).
@@ -6544,6 +6583,125 @@ components:
             - HUMAN_INTERVENTION_NEEDED
             - NEW_MESSAGE
             - UNRECOVERABLE_ERROR
+          type: string
+      type: object
+    GoogleCloudDialogflowV2ConversationModel:
+      description: Represents a conversation model.
+      properties:
+        articleSuggestionModelMetadata:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2ArticleSuggestionModelMetadata"
+          description: Metadata for article suggestion models.
+        createTime:
+          description: Output only. Creation time of this model.
+          format: google-datetime
+          readOnly: true
+          type: string
+        datasets:
+          description: Required. Datasets used to create model.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowV2InputDataset"
+          type: array
+        displayName:
+          description: Required. The display name of the model. At most 64 bytes long.
+          type: string
+        languageCode:
+          description: 'Language code for the conversation model. If not specified, the language is en-US. Language at ConversationModel should be set for all non en-us languages. This should be a [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. Example: "en-US".'
+          type: string
+        name:
+          description: "ConversationModel resource name. Format: `projects//conversationModels/`"
+          type: string
+        smartReplyModelMetadata:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2SmartReplyModelMetadata"
+          description: Metadata for smart reply models.
+        state:
+          description: Output only. State of the model. A model can only serve prediction requests after it gets deployed.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - UNDEPLOYED
+            - DEPLOYING
+            - DEPLOYED
+            - UNDEPLOYING
+            - DELETING
+            - FAILED
+            - PENDING
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudDialogflowV2CreateConversationDatasetOperationMetadata:
+      description: Metadata for ConversationDatasets.
+      properties: {}
+      type: object
+    GoogleCloudDialogflowV2CreateConversationModelEvaluationOperationMetadata:
+      description: Metadata for a ConversationModels.CreateConversationModelEvaluation operation.
+      properties:
+        conversationModel:
+          description: "The resource name of the conversation model. Format: `projects//locations//conversationModels/`"
+          type: string
+        conversationModelEvaluation:
+          description: "The resource name of the conversation model. Format: `projects//locations//conversationModels//evaluations/`"
+          type: string
+        createTime:
+          description: Timestamp when the request to create conversation model was submitted. The time is measured on server side.
+          format: google-datetime
+          type: string
+        state:
+          description: State of CreateConversationModel operation.
+          enum:
+            - STATE_UNSPECIFIED
+            - INITIALIZING
+            - RUNNING
+            - CANCELLED
+            - SUCCEEDED
+            - FAILED
+          type: string
+      type: object
+    GoogleCloudDialogflowV2CreateConversationModelOperationMetadata:
+      description: Metadata for a ConversationModels.CreateConversationModel operation.
+      properties:
+        conversationModel:
+          description: "The resource name of the conversation model. Format: `projects//conversationModels/`"
+          type: string
+        createTime:
+          description: Timestamp when the request to create conversation model is submitted. The time is measured on server side.
+          format: google-datetime
+          type: string
+        state:
+          description: State of CreateConversationModel operation.
+          enum:
+            - STATE_UNSPECIFIED
+            - PENDING
+            - SUCCEEDED
+            - FAILED
+            - CANCELLED
+            - CANCELLING
+            - TRAINING
+          type: string
+      type: object
+    GoogleCloudDialogflowV2DeleteConversationDatasetOperationMetadata:
+      description: Metadata for ConversationDatasets.
+      properties: {}
+      type: object
+    GoogleCloudDialogflowV2DeleteConversationModelOperationMetadata:
+      description: Metadata for a ConversationModels.DeleteConversationModel operation.
+      properties:
+        conversationModel:
+          description: "The resource name of the conversation model. Format: `projects//conversationModels/`"
+          type: string
+        createTime:
+          description: Timestamp when delete conversation model request was created. The time is measured on server side.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDialogflowV2DeployConversationModelOperationMetadata:
+      description: Metadata for a ConversationModels.DeployConversationModel operation.
+      properties:
+        conversationModel:
+          description: "The resource name of the conversation model. Format: `projects//conversationModels/`"
+          type: string
+        createTime:
+          description: Timestamp when request to deploy conversation model was submitted. The time is measured on server side.
+          format: google-datetime
           type: string
       type: object
     GoogleCloudDialogflowV2EntityType:
@@ -6616,6 +6774,13 @@ components:
           description: The URI to a file containing the exported agent. This field is populated only if `agent_uri` is specified in `ExportAgentRequest`.
           type: string
       type: object
+    GoogleCloudDialogflowV2ExportOperationMetadata:
+      description: Metadata related to the Export Data Operations (e.g. ExportDocument).
+      properties:
+        exportedGcsDestination:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2GcsDestination"
+          description: Cloud Storage file path of the exported data.
+      type: object
     GoogleCloudDialogflowV2FaqAnswer:
       description: Represents answer from "frequently asked questions".
       properties:
@@ -6641,6 +6806,13 @@ components:
           description: "Indicates which Knowledge Document this answer was extracted from. Format: `projects//locations//agent/knowledgeBases//documents/`."
           type: string
       type: object
+    GoogleCloudDialogflowV2GcsDestination:
+      description: Google Cloud Storage location for the output.
+      properties:
+        uri:
+          description: 'The Google Cloud Storage URIs for the output. A URI is of the form: gs://bucket/object-prefix-or-name Whether a prefix or name is used depends on the use case. The requesting user must have "write-permission" to the bucket.'
+          type: string
+      type: object
     GoogleCloudDialogflowV2HumanAgentAssistantEvent:
       description: Represents a notification sent to Cloud Pub/Sub subscribers for human agent assistant events in a specific conversation.
       properties:
@@ -6656,6 +6828,33 @@ components:
             $ref: "#/components/schemas/GoogleCloudDialogflowV2SuggestionResult"
           type: array
       type: object
+    GoogleCloudDialogflowV2ImportConversationDataOperationMetadata:
+      description: Metadata for a ConversationDatasets.ImportConversationData operation.
+      properties:
+        conversationDataset:
+          description: "The resource name of the imported conversation dataset. Format: `projects//locations//conversationDatasets/`"
+          type: string
+        createTime:
+          description: Timestamp when import conversation data request was created. The time is measured on server side.
+          format: google-datetime
+          type: string
+        partialFailures:
+          description: Partial failures are failures that don't fail the whole long running operation, e.g. single files that couldn't be read.
+          items:
+            $ref: "#/components/schemas/GoogleRpcStatus"
+          type: array
+      type: object
+    GoogleCloudDialogflowV2ImportConversationDataOperationResponse:
+      description: Response used for ConversationDatasets.ImportConversationData long running operation.
+      properties:
+        conversationDataset:
+          description: "The resource name of the imported conversation dataset. Format: `projects//locations//conversationDatasets/`"
+          type: string
+        importCount:
+          description: Number of conversations imported successfully.
+          format: int32
+          type: integer
+      type: object
     GoogleCloudDialogflowV2ImportDocumentsResponse:
       description: Response message for Documents.ImportDocuments.
       properties:
@@ -6664,6 +6863,13 @@ components:
           items:
             $ref: "#/components/schemas/GoogleRpcStatus"
           type: array
+      type: object
+    GoogleCloudDialogflowV2InputDataset:
+      description: InputDataset used to create model or do evaluation. NextID:5
+      properties:
+        dataset:
+          description: "Required. ConversationDataset resource name. Format: `projects//locations//conversationDatasets/`"
+          type: string
       type: object
     GoogleCloudDialogflowV2Intent:
       description: An intent categorizes an end-user's intention for one conversation turn. For each agent, you define many intents, where your combined intents can handle a complete conversation. When an end-user writes or says something, referred to as an end-user expression or end-user input, Dialogflow matches the end-user input to the best intent in your agent. Matching an intent is also known as intent classification. For more information, see the [intent guide](https://cloud.google.com/dialogflow/docs/intents-overview).
@@ -7267,6 +7473,9 @@ components:
     GoogleCloudDialogflowV2KnowledgeOperationMetadata:
       description: Metadata in google::longrunning::Operation for Knowledge operations.
       properties:
+        exportOperationMetadata:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2ExportOperationMetadata"
+          description: Metadata for the Export Data Operation such as the destination of export.
         knowledgeBase:
           description: The name of the knowledge base interacted with during the operation.
           type: string
@@ -7452,6 +7661,33 @@ components:
           description: "Required. The unique identifier of this session entity type. Format: `projects//agent/sessions//entityTypes/`, or `projects//agent/environments//users//sessions//entityTypes/`. If `Environment ID` is not specified, we assume default 'draft' environment. If `User ID` is not specified, we assume default '-' user. `` must be the display name of an existing entity type in the same agent that will be overridden or supplemented."
           type: string
       type: object
+    GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata:
+      description: Metadata for a ConversationProfile.SetSuggestionFeatureConfig operation.
+      properties:
+        conversationProfile:
+          description: "The resource name of the conversation profile. Format: `projects//locations//conversationProfiles/`"
+          type: string
+        createTime:
+          description: Timestamp whe the request was created. The time is measured on server side.
+          format: google-datetime
+          type: string
+        participantRole:
+          description: Required. The participant role to add or update the suggestion feature config. Only HUMAN_AGENT or END_USER can be used.
+          enum:
+            - ROLE_UNSPECIFIED
+            - HUMAN_AGENT
+            - AUTOMATED_AGENT
+            - END_USER
+          type: string
+        suggestionFeatureType:
+          description: Required. The type of the suggestion feature to add or update.
+          enum:
+            - TYPE_UNSPECIFIED
+            - ARTICLE_SUGGESTION
+            - FAQ
+            - SMART_REPLY
+          type: string
+      type: object
     GoogleCloudDialogflowV2SmartReplyAnswer:
       description: Represents a smart reply answer.
       properties:
@@ -7464,6 +7700,17 @@ components:
           type: number
         reply:
           description: The content of the reply.
+          type: string
+      type: object
+    GoogleCloudDialogflowV2SmartReplyModelMetadata:
+      description: Metadata for smart reply models.
+      properties:
+        trainingModelType:
+          description: Optional. Type of the smart reply model. If not provided, model_type is used.
+          enum:
+            - MODEL_TYPE_UNSPECIFIED
+            - SMART_REPLY_DUAL_ENCODER_MODEL
+            - SMART_REPLY_BERT_MODEL
           type: string
       type: object
     GoogleCloudDialogflowV2SuggestArticlesResponse:
@@ -7530,6 +7777,17 @@ components:
         suggestSmartRepliesResponse:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2SuggestSmartRepliesResponse"
           description: SuggestSmartRepliesResponse if request is for SMART_REPLY.
+      type: object
+    GoogleCloudDialogflowV2UndeployConversationModelOperationMetadata:
+      description: Metadata for a ConversationModels.UndeployConversationModel operation.
+      properties:
+        conversationModel:
+          description: "The resource name of the conversation model. Format: `projects//conversationModels/`"
+          type: string
+        createTime:
+          description: Timestamp when the request to undeploy conversation model was submitted. The time is measured on server side.
+          format: google-datetime
+          type: string
       type: object
     GoogleCloudDialogflowV2WebhookRequest:
       description: The request message for a webhook call.
@@ -7632,6 +7890,33 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1Intent"
           type: array
+      type: object
+    GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata:
+      description: Metadata for a ConversationProfile.ClearSuggestionFeatureConfig operation.
+      properties:
+        conversationProfile:
+          description: "The resource name of the conversation profile. Format: `projects//locations//conversationProfiles/`"
+          type: string
+        createTime:
+          description: Timestamp whe the request was created. The time is measured on server side.
+          format: google-datetime
+          type: string
+        participantRole:
+          description: Required. The participant role to remove the suggestion feature config. Only HUMAN_AGENT or END_USER can be used.
+          enum:
+            - ROLE_UNSPECIFIED
+            - HUMAN_AGENT
+            - AUTOMATED_AGENT
+            - END_USER
+          type: string
+        suggestionFeatureType:
+          description: Required. The type of the suggestion feature to remove.
+          enum:
+            - TYPE_UNSPECIFIED
+            - ARTICLE_SUGGESTION
+            - FAQ
+            - SMART_REPLY
+          type: string
       type: object
     GoogleCloudDialogflowV2beta1Context:
       description: Dialogflow contexts are similar to natural language context. If a person says to you "they are orange", you need context in order to understand what "they" is referring to. Similarly, for Dialogflow to handle an end-user expression like that, it needs to be provided with context in order to correctly match an intent. Using contexts, you can control the flow of a conversation. You can configure contexts for an intent by setting input and output contexts, which are identified by string names. When an intent is matched, any configured output contexts for that intent become active. While any contexts are active, Dialogflow is more likely to match intents that are configured with input contexts that correspond to the currently active contexts. For more information about context, see the [Contexts guide](https://cloud.google.com/dialogflow/docs/contexts-overview).
@@ -7741,6 +8026,13 @@ components:
           description: The URI to a file containing the exported agent. This field is populated only if `agent_uri` is specified in `ExportAgentRequest`.
           type: string
       type: object
+    GoogleCloudDialogflowV2beta1ExportOperationMetadata:
+      description: Metadata related to the Export Data Operations (e.g. ExportDocument).
+      properties:
+        exportedGcsDestination:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1GcsDestination"
+          description: Cloud Storage file path of the exported data.
+      type: object
     GoogleCloudDialogflowV2beta1FaqAnswer:
       description: Represents answer from "frequently asked questions".
       properties:
@@ -7764,6 +8056,13 @@ components:
           type: string
         source:
           description: "Indicates which Knowledge Document this answer was extracted from. Format: `projects//locations//agent/knowledgeBases//documents/`."
+          type: string
+      type: object
+    GoogleCloudDialogflowV2beta1GcsDestination:
+      description: Google Cloud Storage location for the output.
+      properties:
+        uri:
+          description: 'Required. The Google Cloud Storage URIs for the output. A URI is of the form: gs://bucket/object-prefix-or-name Whether a prefix or name is used depends on the use case. The requesting user must have "write-permission" to the bucket.'
           type: string
       type: object
     GoogleCloudDialogflowV2beta1HumanAgentAssistantEvent:
@@ -8615,6 +8914,9 @@ components:
     GoogleCloudDialogflowV2beta1KnowledgeOperationMetadata:
       description: Metadata in google::longrunning::Operation for Knowledge operations.
       properties:
+        exportOperationMetadata:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1ExportOperationMetadata"
+          description: Metadata for the Export Data Operation such as the destination of export.
         knowledgeBase:
           description: The name of the knowledge base interacted with during the operation.
           type: string
@@ -8801,6 +9103,33 @@ components:
           type: string
         name:
           description: "Required. The unique identifier of this session entity type. Supported formats: - `projects//agent/sessions//entityTypes/` - `projects//locations//agent/sessions//entityTypes/` - `projects//agent/environments//users//sessions//entityTypes/` - `projects//locations//agent/environments/ /users//sessions//entityTypes/` If `Location ID` is not specified we assume default 'us' location. If `Environment ID` is not specified, we assume default 'draft' environment. If `User ID` is not specified, we assume default '-' user. `` must be the display name of an existing entity type in the same agent that will be overridden or supplemented."
+          type: string
+      type: object
+    GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata:
+      description: Metadata for a ConversationProfile.SetSuggestionFeatureConfig operation.
+      properties:
+        conversationProfile:
+          description: "The resource name of the conversation profile. Format: `projects//locations//conversationProfiles/`"
+          type: string
+        createTime:
+          description: Timestamp whe the request was created. The time is measured on server side.
+          format: google-datetime
+          type: string
+        participantRole:
+          description: Required. The participant role to add or update the suggestion feature config. Only HUMAN_AGENT or END_USER can be used.
+          enum:
+            - ROLE_UNSPECIFIED
+            - HUMAN_AGENT
+            - AUTOMATED_AGENT
+            - END_USER
+          type: string
+        suggestionFeatureType:
+          description: Required. The type of the suggestion feature to add or update.
+          enum:
+            - TYPE_UNSPECIFIED
+            - ARTICLE_SUGGESTION
+            - FAQ
+            - SMART_REPLY
           type: string
       type: object
     GoogleCloudDialogflowV2beta1SmartReplyAnswer:

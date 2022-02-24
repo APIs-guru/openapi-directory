@@ -138,7 +138,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "The list of fields to update. The only currently supported fields are: `snapshot_auto_delete_behavior` `snapshot_schedule_policy_name` 'labels' 'requested_size_gib'"
+        - description: "The list of fields to update. The only currently supported fields are: `snapshot_auto_delete_behavior` `snapshot_schedule_policy_name` 'labels' 'requested_size_gib' 'snapshot_enabled' 'snapshot_reservation_detail.reserved_space_percent'"
           in: query
           name: updateMask
           schema:
@@ -429,58 +429,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListNetworksResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}/nfsShares":
-    get:
-      description: List NFS shares.
-      operationId: baremetalsolution.projects.locations.nfsShares.list
-      parameters:
-        - description: Required. Parent value for ListNfsSharesRequest.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: List filter.
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: Requested page size. The server might return fewer items than requested. If unspecified, server will pick an appropriate default.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: A token identifying a page of results from the server.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListNfsSharesResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -922,35 +870,6 @@ components:
       schema:
         type: string
   schemas:
-    AllowedClient:
-      description: Represents an 'access point' for the share.
-      properties:
-        allowDev:
-          description: Allow dev flag. Which controls whether to allow creation of devices.
-          type: boolean
-        allowSuid:
-          description: Allow the setuid flag.
-          type: boolean
-        allowedClientsCidr:
-          description: The subnet of IP addresses permitted to access the share.
-          type: string
-        mountPermissions:
-          description: Mount permissions.
-          enum:
-            - MOUNT_PERMISSIONS_UNSPECIFIED
-            - READ
-            - READ_WRITE
-          type: string
-        network:
-          description: The network the access point sits on.
-          type: string
-        noRootSquash:
-          description: Disable root squashing, which is a feature of NFS. Root squash is a special mapping of the remote superuser (root) identity when using identity authentication.
-          type: boolean
-        shareIp:
-          description: The IP address of the share on this network.
-          type: string
-      type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
       properties: {}
@@ -1131,23 +1050,6 @@ components:
         nextPageToken:
           description: A token identifying a page of results from the server.
           type: string
-        unreachable:
-          description: Locations that could not be reached.
-          items:
-            type: string
-          type: array
-      type: object
-    ListNfsSharesResponse:
-      description: Response message containing the list of NFS shares.
-      properties:
-        nextPageToken:
-          description: A token identifying a page of results from the server.
-          type: string
-        nfsShares:
-          description: The list of NFS shares.
-          items:
-            $ref: "#/components/schemas/NfsShare"
-          type: array
         unreachable:
           description: Locations that could not be reached.
           items:
@@ -1374,6 +1276,9 @@ components:
         cidr:
           description: CIDR range of the network.
           type: string
+        gcpService:
+          description: The GCP service of the network. Available gcp_service are in https://cloud.google.com/bare-metal/docs/bms-planning.
+          type: string
         id:
           description: A transient unique identifier to identify a volume within an ProvisioningConfig request.
           type: string
@@ -1445,37 +1350,6 @@ components:
             - PERMISSIONS_UNSPECIFIED
             - READ_ONLY
             - READ_WRITE
-          type: string
-      type: object
-    NfsShare:
-      description: An NFS share.
-      properties:
-        allowedClients:
-          description: List of allowed access points.
-          items:
-            $ref: "#/components/schemas/AllowedClient"
-          type: array
-        labels:
-          additionalProperties:
-            type: string
-          description: Labels as key value pairs.
-          type: object
-        name:
-          description: Output only. The name of the NFS share.
-          readOnly: true
-          type: string
-        nfsShareId:
-          description: Output only. An identifier for the NFS share, generated by the backend.
-          readOnly: true
-          type: string
-        state:
-          description: The state of the NFS share.
-          enum:
-            - STATE_UNSPECIFIED
-            - PROVISIONED
-          type: string
-        volume:
-          description: The volume containing the share.
           type: string
       type: object
     Operation:
@@ -1596,6 +1470,10 @@ components:
           description: The space on this storage volume reserved for snapshots, shown in GiB.
           format: int64
           type: string
+        reservedSpacePercent:
+          description: Percent of the total Volume size reserved for snapshot copies. Enabling snapshots requires reserving 20% or more of the storage volume space for snapshots. Maximum reserved space for snapshots is 40%. Setting this field will effectively set snapshot_enabled to true.
+          format: int32
+          type: integer
         reservedSpaceRemainingGib:
           description: The amount, in GiB, of available space in this storage volume's reserved snapshot space.
           format: int64
@@ -1749,6 +1627,9 @@ components:
             - OLDEST_FIRST
             - NEWEST_FIRST
           type: string
+        snapshotEnabled:
+          description: Whether snapshots are enabled.
+          type: boolean
         snapshotReservationDetail:
           $ref: "#/components/schemas/SnapshotReservationDetail"
           description: Details about snapshot space reservation and usage on the storage volume.
@@ -1774,6 +1655,9 @@ components:
     VolumeConfig:
       description: Configuration parameters for a new volume.
       properties:
+        gcpService:
+          description: The GCP service of the storage volume. Available gcp_service are in https://cloud.google.com/bare-metal/docs/bms-planning.
+          type: string
         id:
           description: A transient unique identifier to identify a volume within an ProvisioningConfig request.
           type: string
