@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://documentai.googleapis.com/$discovery/rest?version=v1beta3
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: documentai
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/document-ai/docs/
 tags:
@@ -1359,7 +1360,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentEntity"
           type: array
         entityRelations:
-          description: Relationship among Document.entities.
+          description: Placeholder. Relationship among Document.entities.
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentEntityRelation"
           type: array
@@ -1375,7 +1376,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPage"
           type: array
         revisions:
-          description: Revision history of this document.
+          description: Placeholder. Revision history of this document.
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentRevision"
           type: array
@@ -1386,12 +1387,12 @@ components:
           description: Optional. UTF-8 encoded text in reading order from the document.
           type: string
         textChanges:
-          description: A list of text corrections made to [Document.text]. This is usually used for annotating corrections to OCR mistakes. Text changes for a given revision may not overlap with each other.
+          description: Placeholder. A list of text corrections made to [Document.text]. This is usually used for annotating corrections to OCR mistakes. Text changes for a given revision may not overlap with each other.
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentTextChange"
           type: array
         textStyles:
-          description: Styles for the Document.text.
+          description: Placeholder. Styles for the Document.text.
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentStyle"
           type: array
@@ -2169,7 +2170,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentEntity"
           type: array
         entityRelations:
-          description: Relationship among Document.entities.
+          description: Placeholder. Relationship among Document.entities.
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentEntityRelation"
           type: array
@@ -2190,7 +2191,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPage"
           type: array
         revisions:
-          description: Revision history of this document.
+          description: Placeholder. Revision history of this document.
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentRevision"
           type: array
@@ -2201,12 +2202,12 @@ components:
           description: Optional. UTF-8 encoded text in reading order from the document.
           type: string
         textChanges:
-          description: A list of text corrections made to [Document.text]. This is usually used for annotating corrections to OCR mistakes. Text changes for a given revision may not overlap with each other.
+          description: Placeholder. A list of text corrections made to [Document.text]. This is usually used for annotating corrections to OCR mistakes. Text changes for a given revision may not overlap with each other.
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentTextChange"
           type: array
         textStyles:
-          description: Styles for the Document.text.
+          description: Placeholder. Styles for the Document.text.
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentStyle"
           type: array
@@ -3167,7 +3168,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DocumentEntity"
           type: array
         entityRelations:
-          description: Relationship among Document.entities.
+          description: Placeholder. Relationship among Document.entities.
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DocumentEntityRelation"
           type: array
@@ -3183,7 +3184,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DocumentPage"
           type: array
         revisions:
-          description: Revision history of this document.
+          description: Placeholder. Revision history of this document.
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DocumentRevision"
           type: array
@@ -3194,12 +3195,12 @@ components:
           description: Optional. UTF-8 encoded text in reading order from the document.
           type: string
         textChanges:
-          description: A list of text corrections made to [Document.text]. This is usually used for annotating corrections to OCR mistakes. Text changes for a given revision may not overlap with each other.
+          description: Placeholder. A list of text corrections made to [Document.text]. This is usually used for annotating corrections to OCR mistakes. Text changes for a given revision may not overlap with each other.
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DocumentTextChange"
           type: array
         textStyles:
-          description: Styles for the Document.text.
+          description: Placeholder. Styles for the Document.text.
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DocumentStyle"
           type: array
@@ -4087,6 +4088,12 @@ components:
         displayName:
           description: The display name of the processor version.
           type: string
+        kmsKeyName:
+          description: The KMS key name used for encryption.
+          type: string
+        kmsKeyVersionName:
+          description: The KMS key version with which data is encrypted.
+          type: string
         name:
           description: "The resource name of the processor version. Format: `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processor_version}`"
           type: string
@@ -4427,7 +4434,7 @@ components:
             type: string
           type: array
         regionCode:
-          description: 'Required. CLDR region code of the country/region of the address. This is never inferred and it is up to the user to ensure the value is correct. See http://cldr.unicode.org/ and http://www.unicode.org/cldr/charts/30/supplemental/territory_information.html for details. Example: "CH" for Switzerland.'
+          description: 'Required. CLDR region code of the country/region of the address. This is never inferred and it is up to the user to ensure the value is correct. See https://cldr.unicode.org/ and https://www.unicode.org/cldr/charts/30/supplemental/territory_information.html for details. Example: "CH" for Switzerland.'
           type: string
         revision:
           description: The schema revision of the `PostalAddress`. This must be set to 0, which is the latest revision. All new revisions **must** be backward compatible with old revisions.

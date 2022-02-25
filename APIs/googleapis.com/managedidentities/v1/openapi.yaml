@@ -475,48 +475,6 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:restore":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: RestoreDomain restores domain backup mentioned in the RestoreDomainRequest
-      operationId: managedidentities.projects.locations.global.domains.restore
-      parameters:
-        - description: Required. Resource name for the domain to which the backup belongs
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/RestoreDomainRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
   "/v1/{name}:validateTrust":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -545,97 +503,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/ValidateTrustRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-  "/v1/{parent}/backups":
-    get:
-      description: Lists Backup in a given project.
-      operationId: managedidentities.projects.locations.global.domains.backups.list
-      parameters:
-        - description: "Required. The domain resource name using the form: `projects/{project_id}/locations/global/domains/{domain_name}`"
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: Optional. Filter specifying constraints of a list operation.
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: Optional. Specifies the ordering of results following syntax at https://cloud.google.com/apis/design/design_patterns#sorting_order.
-          in: query
-          name: orderBy
-          schema:
-            type: string
-        - description: Optional. The maximum number of items to return. If not specified, a default value of 1000 will be used by the service. Regardless of the page_size value, the response may include a partial list and a caller should only rely on response's next_page_token to determine if there are more instances left to be queried.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: Optional. The `next_page_token` value returned from a previous List request, if any.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListBackupsResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Creates a Backup for a domain.
-      operationId: managedidentities.projects.locations.global.domains.backups.create
-      parameters:
-        - description: "Required. The domain resource name using the form: `projects/{project_id}/locations/global/domains/{domain_name}`"
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: "Required. Backup Id, unique name to identify the backups with the following restrictions: * Must be lowercase letters, numbers, and hyphens * Must start with a letter. * Must contain between 1-63 characters. * Must end with a number or a letter. * Must be unique within the domain."
-          in: query
-          name: backupId
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Backup"
       responses:
         "200":
           content:
@@ -1098,51 +965,6 @@ components:
           $ref: "#/components/schemas/Trust"
           description: Required. The domain trust resource.
       type: object
-    Backup:
-      description: Represents a Managed Microsoft Identities backup.
-      properties:
-        createTime:
-          description: Output only. The time the backups was created.
-          format: google-datetime
-          readOnly: true
-          type: string
-        labels:
-          additionalProperties:
-            type: string
-          description: Optional. Resource labels to represent user provided metadata.
-          type: object
-        name:
-          description: Output only. The unique name of the Backup in the form of `projects/{project_id}/locations/global/domains/{domain_name}/backups/{name}`
-          readOnly: true
-          type: string
-        state:
-          description: Output only. The current state of the backup.
-          enum:
-            - STATE_UNSPECIFIED
-            - CREATING
-            - ACTIVE
-            - FAILED
-            - DELETING
-          readOnly: true
-          type: string
-        statusMessage:
-          description: Output only. Additional information about the current status of this backup, if available.
-          readOnly: true
-          type: string
-        type:
-          description: Output only. Indicates whether it’s an on-demand backup or scheduled.
-          enum:
-            - TYPE_UNSPECIFIED
-            - ON_DEMAND
-            - SCHEDULED
-          readOnly: true
-          type: string
-        updateTime:
-          description: Output only. Last update time.
-          format: google-datetime
-          readOnly: true
-          type: string
-      type: object
     Binding:
       description: Associates `members`, or principals, with a `role`.
       properties:
@@ -1196,7 +1018,7 @@ components:
           description: Time within the day to start the operations.
       type: object
     Date:
-      description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values * A month and day, with a zero year (e.g., an anniversary) * A year on its own, with a zero month and a zero day * A year and month, with a zero day (e.g., a credit card expiration date) Related types: * google.type.TimeOfDay * google.type.DateTime * google.protobuf.Timestamp"
+      description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values * A month and day value, with a zero year, such as an anniversary * A year on its own, with zero month and day values * A year and month value, with a zero day, such as a credit card expiration date Related types are google.type.TimeOfDay and `google.protobuf.Timestamp`."
       properties:
         day:
           description: Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
@@ -1419,9 +1241,6 @@ components:
           format: google-datetime
           readOnly: true
           type: string
-        instanceType:
-          description: "Optional. The instance_type of this instance of format: projects/{project_id}/locations/{location_id}/instanceTypes/{instance_type_id}. Instance Type represents a high-level tier or SKU of the service that this instance belong to. When enabled(eg: Maintenance Rollout), Rollout uses 'instance_type' along with 'software_versions' to determine whether instance needs an update or not."
-          type: string
         labels:
           additionalProperties:
             type: string
@@ -1443,11 +1262,6 @@ components:
         name:
           description: "Unique name of the resource. It uses the form: `projects/{project_id|project_number}/locations/{location_id}/instances/{instance_id}` Note: Either project_id or project_number can be used, but keep it consistent with other APIs (e.g. RescheduleUpdate)"
           type: string
-        notificationParameters:
-          additionalProperties:
-            type: string
-          description: Optional. notification_parameters are information that service producers may like to include that is not relevant to Rollout. This parameter will only be passed to Gamma and Cloud Logging for notification/logging purpose.
-          type: object
         producerMetadata:
           additionalProperties:
             type: string
@@ -1619,23 +1433,6 @@ components:
           format: google-datetime
           readOnly: true
           type: string
-      type: object
-    ListBackupsResponse:
-      description: ListBackupsResponse is the response message for ListBackups method.
-      properties:
-        backups:
-          description: A list of Cloud AD backups in the domain.
-          items:
-            $ref: "#/components/schemas/Backup"
-          type: array
-        nextPageToken:
-          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
-          type: string
-        unreachable:
-          description: Locations that could not be reached.
-          items:
-            type: string
-          type: array
       type: object
     ListDomainsResponse:
       description: Response message for ListDomains
@@ -1916,13 +1713,6 @@ components:
       properties:
         password:
           description: A random password. See admin for more information.
-          type: string
-      type: object
-    RestoreDomainRequest:
-      description: RestoreDomainRequest is the request received by RestoreDomain rpc
-      properties:
-        backupId:
-          description: Required. ID of the backup to be restored
           type: string
       type: object
     Schedule:
