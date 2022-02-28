@@ -2587,6 +2587,12 @@ components:
     GitFileSource:
       description: GitFileSource describes a file within a (possibly remote) code repository.
       properties:
+        bitbucketServerConfig:
+          description: "The full resource name of the bitbucket server config. Format: `projects/{project}/locations/{location}/bitbucketServerConfigs/{id}`."
+          type: string
+        githubEnterpriseConfig:
+          description: "The full resource name of the github enterprise config. Format: `projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}`. `projects/{project}/githubEnterpriseConfigs/{id}`."
+          type: string
         path:
           description: The path of the file, with the repo root as the root of the path.
           type: string
@@ -2596,6 +2602,7 @@ components:
             - UNKNOWN
             - CLOUD_SOURCE_REPOSITORIES
             - GITHUB
+            - BITBUCKET_SERVER
           type: string
         revision:
           description: "The branch, tag, arbitrary ref, or SHA version of the repo to use when resolving the filename (optional). This field respects the same syntax/resolution as described here: https://git-scm.com/docs/gitrevisions If unspecified, the revision from which the trigger invocation originated is assumed to be the revision from which to read the specified path."
@@ -2692,6 +2699,12 @@ components:
     GitRepoSource:
       description: GitRepoSource describes a repo and ref of a code repository.
       properties:
+        bitbucketServerConfig:
+          description: "The full resource name of the bitbucket server config. Format: `projects/{project}/locations/{location}/bitbucketServerConfigs/{id}`."
+          type: string
+        githubEnterpriseConfig:
+          description: "The full resource name of the github enterprise config. Format: `projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}`. `projects/{project}/githubEnterpriseConfigs/{id}`."
+          type: string
         ref:
           description: The branch or tag to use. Must start with "refs/" (required).
           type: string
@@ -2701,6 +2714,7 @@ components:
             - UNKNOWN
             - CLOUD_SOURCE_REPOSITORIES
             - GITHUB
+            - BITBUCKET_SERVER
           type: string
         uri:
           description: The URI of the repo (required).
@@ -3189,6 +3203,40 @@ components:
           description: Source to build against this trigger. Branch and tag names cannot consist of regular expressions.
         triggerId:
           description: Required. ID of the trigger.
+          type: string
+      type: object
+    RunWorkflowCustomOperationMetadata:
+      description: Represents the custom metadata of the RunWorkflow long-running operation.
+      properties:
+        apiVersion:
+          description: Output only. API version used to start the operation.
+          readOnly: true
+          type: string
+        createTime:
+          description: Output only. The time the operation was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        endTime:
+          description: Output only. The time the operation finished running.
+          format: google-datetime
+          readOnly: true
+          type: string
+        pipelineRunId:
+          description: Output only. ID of the pipeline run created by RunWorkflow.
+          readOnly: true
+          type: string
+        requestedCancellation:
+          description: Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+          readOnly: true
+          type: boolean
+        target:
+          description: Output only. Server-defined resource path for the target of the operation.
+          readOnly: true
+          type: string
+        verb:
+          description: Output only. Name of the verb executed by the operation.
+          readOnly: true
           type: string
       type: object
     SMTPDelivery:

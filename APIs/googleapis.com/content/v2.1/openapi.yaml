@@ -7382,6 +7382,10 @@ components:
           description: Output only. The effective value of allow_availability_updates. If account_item_updates_settings is present, then this value is the same. Otherwise, it represents the inherited value of the parent account. Read-only.
           readOnly: true
           type: boolean
+        effectiveAllowConditionUpdates:
+          description: Output only. The effective value of allow_condition_updates. If account_item_updates_settings is present, then this value is the same. Otherwise, it represents the inherited value of the parent account. Read-only.
+          readOnly: true
+          type: boolean
         effectiveAllowPriceUpdates:
           description: Output only. The effective value of allow_price_updates. If account_item_updates_settings is present, then this value is the same. Otherwise, it represents the inherited value of the parent account. Read-only.
           readOnly: true
@@ -7396,6 +7400,9 @@ components:
       properties:
         allowAvailabilityUpdates:
           description: If availability updates are enabled, any previous availability values get overwritten if Google finds an out-of-stock annotation on the offer's page. If additionally `allow_availability_updates` field is set to true, values get overwritten if Google finds an in-stock annotation on the offer’s page.
+          type: boolean
+        allowConditionUpdates:
+          description: If condition updates are enabled, Google always updates item condition with the condition detected from the details of your product.
           type: boolean
         allowPriceUpdates:
           description: If price updates are enabled, Google always updates the active price with the crawled information.

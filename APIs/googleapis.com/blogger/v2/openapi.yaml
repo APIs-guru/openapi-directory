@@ -13,15 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Blogger API v3
   version: v2
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://blogger.googleapis.com/$discovery/rest?version=v2
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: blogger
 externalDocs:
@@ -766,6 +768,7 @@ components:
           enum:
             - LIVE
             - DRAFT
+            - SOFT_TRASHED
           type: string
         title:
           description: The title of this entity. This is the name displayed in the Admin user interface.
@@ -904,6 +907,7 @@ components:
             - LIVE
             - DRAFT
             - SCHEDULED
+            - SOFT_TRASHED
           type: string
         title:
           description: The title of the Post.
@@ -1000,3 +1004,5 @@ components:
             https://www.googleapis.com/auth/blogger: Manage your Blogger account
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}
