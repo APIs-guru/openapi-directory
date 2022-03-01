@@ -6,24 +6,27 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: "Sends application trace data to Cloud Trace for viewing. Trace data is collected for all App Engine applications by default. Trace data from other applications can be provided using this API. This library is used to interact with the Cloud Trace API directly. If you are looking to instrument your application for Cloud Trace, we recommend using OpenTelemetry. "
+  description: "Sends application trace data to Cloud Trace for viewing. Trace data is collected for all App Engine applications by default. Trace data from other applications can be provided using this API. This library is used to interact with the Cloud Trace API directly. If you are looking to instrument your application for Cloud Trace, we recommend using OpenCensus. "
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
   title: Cloud Trace API
   version: v2beta1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://cloudtrace.googleapis.com/$discovery/rest?version=v2beta1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: cloudtrace
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/trace
 tags:
@@ -108,7 +111,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Required. Field mask that specifies the fields in `trace_sink` that are to be updated. A sink field is overwritten if, and only if, it is in the update mask. `name` and `writer_identity` fields cannot be updated. An empty `update_mask` is considered an error. For a detailed `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask Example: `updateMask=output_config`."
+        - description: "Required. Field mask that specifies the fields in `trace_sink` that are to be updated. A sink field is overwritten if, and only if, it is in the update mask. `name` and `writer_identity` fields cannot be updated. An empty updateMask is considered an error. For a detailed `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask Example: `updateMask=output_config`."
           in: query
           name: updateMask
           schema:
@@ -147,12 +150,12 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of `next_page_token` in the response indicates that more results might be available.
+        - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of `nextPageToken` in the response indicates that more results might be available.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: Optional. If present, then retrieve the next batch of results from the preceding call to this method. `page_token` must be the value of `next_page_token` from the previous response. The values of other method parameters should be identical to those in the previous call.
+        - description: Optional. If present, then retrieve the next batch of results from the preceding call to this method. `pageToken` must be the value of `nextPageToken` from the previous response. The values of other method parameters should be identical to those in the previous call.
           in: query
           name: pageToken
           schema:
@@ -304,7 +307,7 @@ components:
       description: Result returned from `ListTraceSinks`.
       properties:
         nextPageToken:
-          description: A paginated response where more pages might be available has `next_page_token` set. To get the next set of results, call the same method again using the value of `next_page_token` as `page_token`.
+          description: If there might be more results than appear in this response, then `nextPageToken` is included. To get the next set of results, call the same method again using the value of `nextPageToken` as `pageToken`.
           type: string
         sinks:
           description: A list of sinks.
@@ -323,13 +326,13 @@ components:
       description: Describes a sink used to export traces to a BigQuery dataset. The sink must be created within a project.
       properties:
         name:
-          description: 'Required. The canonical sink resource name, unique within the project. Must be of the form: projects/[PROJECT_NUMBER]/traceSinks/[SINK_ID]. E.g.: `"projects/12345/traceSinks/my-project-trace-sink"`. Sink identifiers are limited to 256 characters and can include only the following characters: upper and lower-case alphanumeric characters, underscores, hyphens, and periods.'
+          description: 'Required. The canonical sink resource name, unique within the project. Must be of the form: project/[PROJECT_NUMBER]/traceSinks/[SINK_ID]. E.g.: `"projects/12345/traceSinks/my-project-trace-sink"`. Sink identifiers are limited to 256 characters and can include only the following characters: upper and lower-case alphanumeric characters, underscores, hyphens, and periods.'
           type: string
         outputConfig:
           $ref: "#/components/schemas/OutputConfig"
           description: Required. The export destination.
         writerIdentity:
-          description: 'Output only. A service account name for exporting the data. This field is set by sinks.create and sinks.update. The service account will need to be granted write access to the destination specified in the output configuration, see [Granting access for a resource](/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource). To create tables and to write data, this account needs the `dataEditor` role. Read more about roles in the [BigQuery documentation](https://cloud.google.com/bigquery/docs/access-control). E.g.: "service-00000001@00000002.iam.gserviceaccount.com"'
+          description: 'Output only. A service account name for exporting the data. This field is set by sinks.create and sinks.update. The service account will need to be granted write access to the destination specified in the output configuration, see [Granting access for a resource](/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource). To create tables and write data this account will need the dataEditor role. Read more about roles in the [BigQuery documentation](https://cloud.google.com/bigquery/docs/access-control). E.g.: "service-00000001@00000002.iam.gserviceaccount.com"'
           readOnly: true
           type: string
       type: object
@@ -355,3 +358,5 @@ components:
             https://www.googleapis.com/auth/trace.readonly: Read Trace data for a project or application
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}
