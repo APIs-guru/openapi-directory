@@ -1971,7 +1971,7 @@ components:
             - DYNAMIC_FACETABLE_DISABLED
           type: string
         inUse:
-          description: Output only. Indicates whether this attribute has been used by any products. `True` if at least one Product is using this attribute in Product.attributes. Otherwise, this field is `False`. CatalogAttribute can be pre-loaded by using AddCatalogAttribute, ImportCatalogAttributes, or UpdateAttributesConfig APIs. This field is `False` for pre-loaded CatalogAttributes. After catalog changes, it takes about 10 minutes for this field to update.
+          description: Output only. Indicates whether this attribute has been used by any products. `True` if at least one Product is using this attribute in Product.attributes. Otherwise, this field is `False`. CatalogAttribute can be pre-loaded by using AddCatalogAttribute, ImportCatalogAttributes, or UpdateAttributesConfig APIs. This field is `False` for pre-loaded CatalogAttributes. Only CatalogAttributes that are not in use by products can be deleted. CatalogAttributes that are in use by products cannot be deleted; however, their configuration properties will reset to default values upon removal request. After catalog changes, it takes about 10 minutes for this field to update.
           readOnly: true
           type: boolean
         indexableOption:
@@ -2129,7 +2129,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudRetailV2betaRule"
           description: 'A rule control - a condition-action pair. Enacts a set action when the condition is triggered. For example: Boost "gShoe" when query full matches "Running Shoes".'
         solutionTypes:
-          description: Required. Immutable. The solution types that the serving config is used for. Currently we support setting only one type of solution at creation time. Only `SOLUTION_TYPE_SEARCH` value is supported at the moment.
+          description: Required. Immutable. The solution types that the serving config is used for. Currently we support setting only one type of solution at creation time. Only `SOLUTION_TYPE_SEARCH` value is supported at the moment. If no solution type is provided at creation time, will default to SOLUTION_TYPE_SEARCH.
           items:
             enum:
               - SOLUTION_TYPE_UNSPECIFIED

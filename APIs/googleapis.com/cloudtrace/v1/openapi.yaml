@@ -6,7 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: "Sends application trace data to Cloud Trace for viewing. Trace data is collected for all App Engine applications by default. Trace data from other applications can be provided using this API. This library is used to interact with the Cloud Trace API directly. If you are looking to instrument your application for Cloud Trace, we recommend using OpenCensus. "
+  description: "Sends application trace data to Cloud Trace for viewing. Trace data is collected for all App Engine applications by default. Trace data from other applications can be provided using this API. This library is used to interact with the Cloud Trace API directly. If you are looking to instrument your application for Cloud Trace, we recommend using OpenTelemetry. "
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -34,7 +34,7 @@ tags:
 paths:
   "/v1/projects/{projectId}/traces":
     get:
-      description: Returns of a list of traces that match the specified filter conditions.
+      description: Returns a list of traces that match the specified filter conditions.
       operationId: cloudtrace.projects.traces.list
       parameters:
         - description: Required. ID of the Cloud project where the trace data is stored.
