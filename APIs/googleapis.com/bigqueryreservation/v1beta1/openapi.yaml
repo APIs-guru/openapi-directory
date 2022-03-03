@@ -849,6 +849,10 @@ components:
     Reservation:
       description: A reservation is a mechanism used to guarantee slots to users.
       properties:
+        concurrency:
+          description: Maximum number of queries that are allowed to run concurrently in this reservation. This is a soft limit due to asynchronous nature of the system and various optimizations for small queries. Default value is 0 which means that concurrency will be automatically set based on the reservation size.
+          format: int64
+          type: string
         creationTime:
           description: Output only. Creation time of the reservation.
           format: google-datetime

@@ -679,6 +679,7 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/employeesFilter"
       responses:
         "200":
           $ref: "#/components/responses/GetEmployeesResponse"
@@ -1253,6 +1254,14 @@ components:
       schema:
         nullable: true
         type: string
+    employeesFilter:
+      description: Apply filters (beta)
+      explode: true
+      in: query
+      name: filter
+      schema:
+        $ref: "#/components/schemas/EmployeesFilter"
+      style: deepObject
     id:
       description: ID of the record you are acting upon.
       in: path
@@ -2590,6 +2599,17 @@ components:
       nullable: true
       title: Employee number
       type: string
+    EmployeesFilter:
+      additionalProperties: false
+      example:
+        company_id: "1234"
+      properties:
+        company_id:
+          description: Company ID to filter on
+          example: "1234"
+          type: string
+      type: object
+      x-graphql-type-name: EmployeesFilter
     FirstName:
       example: Elon
       nullable: true

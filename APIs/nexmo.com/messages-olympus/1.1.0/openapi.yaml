@@ -8,7 +8,7 @@ info:
     url: https://developer.nexmo.com/
   description: The Messages API consolidates and normalises exchanges across all messaging channels. It allows you to use a single API to interact with our various channels such as SMS, MMS, WhatsApp, Viber and Facebook Messenger
   title: Messages API
-  version: 1.0.5
+  version: 1.1.0
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/messages-olympus.yml
@@ -84,18 +84,68 @@ paths:
                         - properties:
                             vcard:
                               properties:
-                                caption:
-                                  description: Additional text to accompany the vCard.
-                                  example: Additional text to accompany the image.
-                                  maxLength: 2000
-                                  minLength: 1
-                                  type: string
                                 url:
                                   description: |
                                     The URL of the vCard attachment.
 
                                     Supports `.vcf` only.
                                   example: https://example.com/contact.vcf
+                                  type: string
+                              required:
+                                - url
+                        - $ref: "#/components/schemas/channelOptionsMms"
+                    - allOf:
+                        - $ref: "#/components/schemas/Audio"
+                        - properties:
+                            audio:
+                              properties:
+                                caption:
+                                  description: Additional text to accompany the audio file.
+                                  example: Additional text to accompany the audio file.
+                                  maxLength: 2000
+                                  minLength: 1
+                                  type: string
+                                url:
+                                  description: |
+                                    The URL of the audio attachment.
+                                  example: https://example.com/audio.mp3
+                                  type: string
+                              required:
+                                - url
+                            message_type:
+                              description: |
+                                The type of message to send. You must provide `audio` in this field.
+
+                                For best device and network support .mp3 is recommended. Not supported for US short codes.
+                              enum:
+                                - audio
+                              example: audio
+                              type: string
+                        - $ref: "#/components/schemas/channelOptionsMms"
+                    - allOf:
+                        - $ref: "#/components/schemas/Video"
+                        - properties:
+                            message_type:
+                              description: |
+                                The type of message to send. You must provide `video` in this field.
+
+                                For best device and network support .mp4 is recommended. Not supported for US short codes.
+                              enum:
+                                - video
+                              example: video
+                              type: string
+                            video:
+                              properties:
+                                caption:
+                                  description: Additional text to accompany the video file.
+                                  example: Additional text to accompany the video file.
+                                  maxLength: 2000
+                                  minLength: 1
+                                  type: string
+                                url:
+                                  description: |
+                                    The URL of the video attachment.
+                                  example: https://example.com/video.mp4
                                   type: string
                               required:
                                 - url
@@ -141,6 +191,8 @@ paths:
                                     The URL of the audio attachment.
 
                                     Supports `.aac`, `.m4a`, `.amr`, `.mp3` and `.opus`.
+                                  maxLength: 2000
+                                  minLength: 10
                               required:
                                 - url
                         - $ref: "#/components/schemas/channelOptionsWhatsapp"
@@ -239,6 +291,8 @@ paths:
                                     The URL of the audio attachment.
 
                                     Only supports `.mp3` files
+                                  maxLength: 2000
+                                  minLength: 10
                         - $ref: "#/components/schemas/channelOptionsMessenger"
                     - allOf:
                         - $ref: "#/components/schemas/Video"
@@ -382,8 +436,7 @@ components:
               properties:
                 url:
                   example: https://example.com/audio.mp3
-                  maxLength: 2000
-                  minLength: 10
+                  format: url
                   type: string
               required:
                 - url
@@ -1171,7 +1224,7 @@ components:
           description: The channel the message came in on
           enum:
             - mms
-          example: mm
+          example: mms
           type: string
         from:
           $ref: "#/components/schemas/FromNumber"
@@ -1578,6 +1631,30 @@ x-webhooks:
                       - allOf:
                           - $ref: "#/components/schemas/inboundMessageMMS"
                           - $ref: "#/components/schemas/vCard"
+                      - allOf:
+                          - $ref: "#/components/schemas/inboundMessageMMS"
+                          - $ref: "#/components/schemas/Audio"
+                          - properties:
+                              audio:
+                                properties:
+                                  url:
+                                    description: Publicly accessible URL of the audio attachment.
+                                    maxLength: 2000
+                                    minLength: 10
+                                    type: string
+                                required:
+                                  - url
+                      - allOf:
+                          - $ref: "#/components/schemas/inboundMessageMMS"
+                          - $ref: "#/components/schemas/Video"
+                          - properties:
+                              video:
+                                properties:
+                                  url:
+                                    description: Publicly accessible URL of the video attachment.
+                                    type: string
+                                required:
+                                  - url
                     title: MMS
                     x-tab-id: MMS
                   - oneOf:
@@ -1596,6 +1673,14 @@ x-webhooks:
                       - allOf:
                           - $ref: "#/components/schemas/inboundWhatsAppMessageCommon"
                           - $ref: "#/components/schemas/Audio"
+                          - properties:
+                              audio:
+                                properties:
+                                  url:
+                                    maxLength: 2000
+                                    minLength: 10
+                                required:
+                                  - url
                       - allOf:
                           - $ref: "#/components/schemas/inboundWhatsAppMessageCommon"
                           - $ref: "#/components/schemas/Reply"
@@ -1620,6 +1705,14 @@ x-webhooks:
                       - allOf:
                           - $ref: "#/components/schemas/InboundMessengerMessageCommon"
                           - $ref: "#/components/schemas/Audio"
+                          - properties:
+                              audio:
+                                properties:
+                                  url:
+                                    maxLength: 2000
+                                    minLength: 10
+                                required:
+                                  - url
                       - allOf:
                           - $ref: "#/components/schemas/InboundMessengerMessageCommon"
                           - $ref: "#/components/schemas/Unsupported"

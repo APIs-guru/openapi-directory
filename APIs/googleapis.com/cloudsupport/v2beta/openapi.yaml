@@ -641,10 +641,6 @@ components:
           description: Output only. Whether the actor is a Google support actor.
           readOnly: true
           type: boolean
-        principalId:
-          description: Output only. An ID representing the user that was authenticated when the corresponding action was taken. This will be an email address, if one is available, or some other unique ID. See https://cloud.google.com/docs/authentication for more information on types of authentication.
-          readOnly: true
-          type: string
       type: object
     Attachment:
       description: Represents a file attached to a support case.
@@ -967,21 +963,8 @@ components:
     Escalation:
       description: An escalation of a support case.
       properties:
-        actor:
-          $ref: "#/components/schemas/Actor"
-          description: Output only. The user or Google Support agent initiated this escalation.
-          readOnly: true
-        createTime:
-          description: Output only. The time when this escalation event was created.
-          format: google-datetime
-          readOnly: true
-          type: string
         justification:
           description: Required. A free text description to accompany the `reason` field above. Provides additional context on why the case is being escalated.
-          type: string
-        name:
-          description: Output only. The resource name for the escalation event.
-          readOnly: true
           type: string
         reason:
           description: Required. The reason why the Case is being escalated.

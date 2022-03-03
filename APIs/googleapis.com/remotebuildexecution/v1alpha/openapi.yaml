@@ -1148,6 +1148,11 @@ components:
           items:
             $ref: "#/components/schemas/GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance"
           type: array
+        unreachable:
+          description: Unreachable regions.
+          items:
+            type: string
+          type: array
       type: object
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest:
       properties:

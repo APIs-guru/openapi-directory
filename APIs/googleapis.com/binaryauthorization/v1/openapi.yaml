@@ -13,17 +13,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Binary Authorization API
   version: v1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://binaryauthorization.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: binaryauthorization
 externalDocs:
@@ -502,9 +500,6 @@ components:
         description:
           description: Optional. A descriptive comment. This field may be updated. The field may be displayed in chooser dialogs.
           type: string
-        etag:
-          description: Optional. Used to prevent updating the attestor when another request has updated it since it was retrieved.
-          type: string
         name:
           description: "Required. The resource name, in the format: `projects/*/attestors/*`. This field may not be updated."
           type: string
@@ -614,13 +609,9 @@ components:
           enum:
             - SIGNATURE_ALGORITHM_UNSPECIFIED
             - RSA_PSS_2048_SHA256
-            - RSA_SIGN_PSS_2048_SHA256
             - RSA_PSS_3072_SHA256
-            - RSA_SIGN_PSS_3072_SHA256
             - RSA_PSS_4096_SHA256
-            - RSA_SIGN_PSS_4096_SHA256
             - RSA_PSS_4096_SHA512
-            - RSA_SIGN_PSS_4096_SHA512
             - RSA_SIGN_PKCS1_2048_SHA256
             - RSA_SIGN_PKCS1_3072_SHA256
             - RSA_SIGN_PKCS1_4096_SHA256
@@ -651,9 +642,6 @@ components:
           description: Required. Default admission rule for a cluster without a per-cluster, per- kubernetes-service-account, or per-istio-service-identity admission rule.
         description:
           description: Optional. A descriptive comment.
-          type: string
-        etag:
-          description: Optional. Used to prevent updating the policy when another request has updated it since it was retrieved.
           type: string
         globalPolicyEvaluationMode:
           description: Optional. Controls the evaluation of a Google-maintained global admission policy for common system-level images. Images not covered by the global policy will be subject to the project admission policy. This setting has no effect when specified inside a global admission policy.
@@ -784,5 +772,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

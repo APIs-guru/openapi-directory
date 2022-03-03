@@ -927,7 +927,7 @@ components:
           format: float
           type: number
         transcript:
-          description: Transcript text representing the words that the user spoke.
+          description: Transcript text representing the words that the user spoke. In languages that use spaces to separate words, the transcript might have a leading space if it isn't the first result. You can concatenate each result to obtain the full transcript without using a separator.
           type: string
         words:
           description: "A list of word-specific information for each recognized word. Note: When `enable_speaker_diarization` is true, you will see all the words from the beginning of the audio."

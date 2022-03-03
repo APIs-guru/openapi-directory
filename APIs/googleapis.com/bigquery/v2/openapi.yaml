@@ -2650,7 +2650,7 @@ components:
         dataset:
           $ref: "#/components/schemas/DatasetReference"
           description: "[Required] The dataset this entry applies to."
-        target_types:
+        targetTypes:
           items:
             enum:
               - TARGET_TYPE_UNSPECIFIED
@@ -3289,6 +3289,9 @@ components:
         parquetOptions:
           $ref: "#/components/schemas/ParquetOptions"
           description: "[Optional] Options to configure parquet support."
+        preserveAsciiControlCharacters:
+          description: "[Optional] Preserves the embedded ASCII control characters (the first 32 characters in the ASCII-table, from '\\x00' to '\\x1F') when loading from CSV. Only applicable to CSV, ignored for other formats."
+          type: boolean
         projectionFields:
           description: If sourceFormat is set to "DATASTORE_BACKUP", indicates which entity properties to load into BigQuery from a Cloud Datastore backup. Property names are case sensitive and must be top-level properties. If no properties are specified, BigQuery loads all properties. If any named property isn't found in the Cloud Datastore backup, an invalid error is returned in the job result.
           items:
