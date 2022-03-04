@@ -2319,21 +2319,21 @@ paths:
         - organizations
   "/v1/{parent}/endpointAttachments":
     get:
-      description: Lists the EndpointAttachments in the specified Organization.
+      description: Lists the endpoint attachments in an organization.
       operationId: apigee.organizations.endpointAttachments.list
       parameters:
-        - description: "Required. Name of the Organization for which to list Endpoint Attachments in the format: `organizations/{organization}`."
+        - description: "Required. Name of the organization for which to list endpoint attachments. Use the following structure in your request: `organizations/{org}`"
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: Optional. Maximum number of Endpoint Attachments to return. If unspecified, at most 25 attachments will be returned.
+        - description: Optional. Maximum number of endpoint attachments to return. If unspecified, at most 25 attachments will be returned.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: Optional. Page token, returned from a previous ListEndpointAttachments call, that you can use to retrieve the next page.
+        - description: Optional. Page token, returned from a previous `ListEndpointAttachments` call, that you can use to retrieve the next page.
           in: query
           name: pageToken
           schema:
@@ -2365,16 +2365,16 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates an EndpointAttachment. **Note:** Not supported for Apigee hybrid.
+      description: Creates an endpoint attachment. **Note:** Not supported for Apigee hybrid.
       operationId: apigee.organizations.endpointAttachments.create
       parameters:
-        - description: Required. The Organization this EndpointAttachment will be created in.
+        - description: Required. Organization the endpoint attachment will be created in.
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: The ID to use for the endpoint attachment. ID must be a 1-20 characters string with lowercase letters and numbers and must start with a letter.
+        - description: ID to use for the endpoint attachment. The ID can contain lowercase letters and numbers, must start with a letter, and must be 1-20 characters in length.
           in: query
           name: endpointAttachmentId
           schema:
@@ -5542,17 +5542,17 @@ components:
           type: string
       type: object
     GoogleCloudApigeeV1EndpointAttachment:
-      description: Apigee Endpoint Attachment.
+      description: Apigee endpoint attachment. For more information, see Southbound networking patterns.
       properties:
         host:
-          description: Output only. Host that can be used in either HTTP Target Endpoint directly, or as the host in Target Server.
+          description: Output only. Host that can be used in either the HTTP target endpoint directly or as the host in target server.
           readOnly: true
           type: string
         location:
           description: Required. Location of the endpoint attachment.
           type: string
         name:
-          description: "Name of the Endpoint Attachment in the following format: `organizations/{organization}/endpointAttachments/{endpoint_attachment}`."
+          description: "Name of the endpoint attachment. Use the following structure in your request: `organizations/{org}/endpointAttachments/{endpoint_attachment}`"
           type: string
         serviceAttachment:
           description: "Format: projects/*/regions/*/serviceAttachments/*"
@@ -6268,12 +6268,12 @@ components:
       description: Response for ListEndpointAttachments method.
       properties:
         endpointAttachments:
-          description: Endpoint Attachments in the specified organization.
+          description: Endpoint attachments in the specified organization.
           items:
             $ref: "#/components/schemas/GoogleCloudApigeeV1EndpointAttachment"
           type: array
         nextPageToken:
-          description: Page token that you can include in a ListEndpointAttachments request to retrieve the next page. If omitted, no subsequent pages exist.
+          description: Page token that you can include in an `ListEndpointAttachments` request to retrieve the next page. If omitted, no subsequent pages exist.
           type: string
       type: object
     GoogleCloudApigeeV1ListEnvironmentGroupAttachmentsResponse:

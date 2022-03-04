@@ -8,7 +8,7 @@ info:
     url: https://developer.nexmo.com/
   description: The Voice API lets you create outbound calls, control in-progress calls and get information about historical calls. More information about the Voice API can be found at <https://developer.nexmo.com/voice/voice-api/overview>.
   title: Voice API
-  version: 1.3.7
+  version: 1.3.8
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/voice.yml
@@ -891,7 +891,7 @@ components:
         - yue-CN
       type: string
     network:
-      description: The Mobile Country Code Mobile Network Code ([MCCMNC](https://en.wikipedia.org/wiki/Mobile_country_code)) for the carrier network used to make this call.
+      description: The Mobile Country Code Mobile Network Code ([MCCMNC](https://en.wikipedia.org/wiki/Mobile_country_code)) for the carrier network used to make this call. This is only sent if `status` is `completed`.
       example: "65512"
       title: "The Network ID of the destination "
       type: string
@@ -913,7 +913,7 @@ components:
       type: string
     status:
       description: The status of the call. [See possible values](https://developer.nexmo.com/voice/voice-api/guides/call-flow#event-objects)
-      example: started
+      example: completed
       title: The State of the call
       type: string
     style:

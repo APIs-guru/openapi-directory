@@ -3033,7 +3033,7 @@ components:
           $ref: "#/components/schemas/NodeManagement"
           description: NodeManagement configuration for this NodePool.
         minCpuPlatform:
-          description: 'Minimum CPU platform to be used by this instance. The instance may be scheduled on the specified or newer CPU platform. Applicable values are the friendly names of CPU platforms, such as `minCpuPlatform: "Intel Haswell"` or `minCpuPlatform: "Intel Sandy Bridge"`. For more information, read [how to specify min CPU platform](https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform) To unset the min cpu platform field pass "automatic" as field value.'
+          description: 'Deprecated. Minimum CPU platform to be used for NAP created node pools. The instance may be scheduled on the specified or newer CPU platform. Applicable values are the friendly names of CPU platforms, such as minCpuPlatform: Intel Haswell or minCpuPlatform: Intel Sandy Bridge. For more information, read [how to specify min CPU platform](https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform) This field is deprecated, min_cpu_platform should be specified using cloud.google.com/requested-min-cpu-platform label selector on the pod. To unset the min cpu platform field pass "automatic" as field value.'
           type: string
         oauthScopes:
           description: 'The set of Google API scopes to be made available on all of the node VMs under the "default" service account. The following scopes are recommended, but not required, and by default are not included: * `https://www.googleapis.com/auth/compute` is required for mounting persistent storage on your nodes. * `https://www.googleapis.com/auth/devstorage.read_only` is required for communicating with **gcr.io** (the [Google Container Registry](https://cloud.google.com/container-registry/)). If unspecified, no scopes are added, unless Cloud Logging or Cloud Monitoring are enabled, in which case their required scopes will be added.'
@@ -3272,6 +3272,9 @@ components:
           description: "[Output only] The size of the address space on each node for hosting containers. This is provisioned from within the `container_ipv4_cidr` range. This field will only be set when cluster is in route-based network mode."
           format: int32
           type: integer
+        nodePoolAutoConfig:
+          $ref: "#/components/schemas/NodePoolAutoConfig"
+          description: Node pool configs that apply to all auto-provisioned node pools in autopilot clusters and node auto-provisioning enabled clusters.
         nodePoolDefaults:
           $ref: "#/components/schemas/NodePoolDefaults"
           description: Default NodePool settings for the entire cluster. These settings are overridden if specified on the specific NodePool object.
@@ -3338,6 +3341,9 @@ components:
         verticalPodAutoscaling:
           $ref: "#/components/schemas/VerticalPodAutoscaling"
           description: Cluster-level Vertical Pod Autoscaling configuration.
+        workloadAltsConfig:
+          $ref: "#/components/schemas/WorkloadALTSConfig"
+          description: Configuration for direct-path (via ALTS) with workload identity.
         workloadCertificates:
           $ref: "#/components/schemas/WorkloadCertificates"
           description: Configuration for issuance of mTLS keys and certificates to Kubernetes pods.
@@ -3465,6 +3471,9 @@ components:
         desiredMonitoringService:
           description: 'The monitoring service the cluster should use to write metrics. Currently available options: * "monitoring.googleapis.com/kubernetes" - The Cloud Monitoring service with a Kubernetes-native resource model * `monitoring.googleapis.com` - The legacy Cloud Monitoring service (no longer available as of GKE 1.15). * `none` - No metrics will be exported from the cluster. If left as an empty string,`monitoring.googleapis.com/kubernetes` will be used for GKE 1.14+ or `monitoring.googleapis.com` for earlier versions.'
           type: string
+        desiredNodePoolAutoConfigNetworkTags:
+          $ref: "#/components/schemas/NetworkTags"
+          description: The desired network tags that apply to all auto-provisioned node pools in autopilot clusters and node auto-provisioning enabled clusters.
         desiredNodePoolAutoscaling:
           $ref: "#/components/schemas/NodePoolAutoscaling"
           description: Autoscaler configuration for the node pool specified in desired_node_pool_id. If there is only one pool in the cluster and desired_node_pool_id is not provided then the change applies to that single node pool.
@@ -3509,6 +3518,9 @@ components:
         desiredVerticalPodAutoscaling:
           $ref: "#/components/schemas/VerticalPodAutoscaling"
           description: Cluster-level Vertical Pod Autoscaling configuration.
+        desiredWorkloadAltsConfig:
+          $ref: "#/components/schemas/WorkloadALTSConfig"
+          description: Configuration for direct-path (via ALTS) with workload identity.
         desiredWorkloadCertificates:
           $ref: "#/components/schemas/WorkloadCertificates"
           description: Configuration for issuance of mTLS keys and certificates to Kubernetes pods.
@@ -3634,7 +3646,7 @@ components:
           type: string
       type: object
     Date:
-      description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values * A month and day value, with a zero year, such as an anniversary * A year on its own, with zero month and day values * A year and month value, with a zero day, such as a credit card expiration date Related types are google.type.TimeOfDay and `google.protobuf.Timestamp`."
+      description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values * A month and day, with a zero year (e.g., an anniversary) * A year on its own, with a zero month and a zero day * A year and month, with a zero day (e.g., a credit card expiration date) Related types: * google.type.TimeOfDay * google.type.DateTime * google.protobuf.Timestamp"
       properties:
         day:
           description: Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
@@ -4463,6 +4475,13 @@ components:
         version:
           description: The version of the Kubernetes of this node.
           type: string
+      type: object
+    NodePoolAutoConfig:
+      description: node pool configs that apply to all auto-provisioned node pools in autopilot clusters and node auto-provisioning enabled clusters
+      properties:
+        networkTags:
+          $ref: "#/components/schemas/NetworkTags"
+          description: The list of instance tags applied to all nodes. Tags are used to identify valid sources or targets for network firewalls and are specified by the client during cluster creation. Each tag within the list must comply with RFC1035.
       type: object
     NodePoolAutoscaling:
       description: NodePoolAutoscaling contains information required by cluster autoscaler to adjust the size of the node pool to the current cluster usage.
@@ -5504,6 +5523,13 @@ components:
           items:
             $ref: "#/components/schemas/WindowsVersion"
           type: array
+      type: object
+    WorkloadALTSConfig:
+      description: Configuration for direct-path (via ALTS) with workload identity.
+      properties:
+        enableAlts:
+          description: enable_alts controls whether the alts handshaker should be enabled or not for direct-path. Requires Workload Identity (workload_pool must be non-empty).
+          type: boolean
       type: object
     WorkloadCertificates:
       description: Configuration for issuance of mTLS keys and certificates to Kubernetes pods.
