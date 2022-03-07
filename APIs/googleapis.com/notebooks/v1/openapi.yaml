@@ -1701,6 +1701,10 @@ components:
           description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
           type: string
       type: object
+    BootImage:
+      description: Definition of the boot image used by the Runtime. Used to facilitate runtime upgradeability.
+      properties: {}
+      type: object
     CancelOperationRequest:
       description: The request message for Operations.CancelOperation.
       properties: {}
@@ -1826,6 +1830,7 @@ components:
             - IDLE
             - HEARTBEAT
             - HEALTH
+            - MAINTENANCE
           type: string
       type: object
     Execution:
@@ -2002,6 +2007,9 @@ components:
             - PD_SSD
             - PD_BALANCED
           type: string
+        canIpForward:
+          description: Optional. Flag to enable ip forwarding or not, default false/off. https://cloud.google.com/vpc/docs/using-routes#canipforward
+          type: boolean
         containerImage:
           $ref: "#/components/schemas/ContainerImage"
           description: Use a container image to start the notebook instance.
@@ -3017,6 +3025,9 @@ components:
         acceleratorConfig:
           $ref: "#/components/schemas/RuntimeAcceleratorConfig"
           description: Optional. The Compute Engine accelerator configuration for this runtime.
+        bootImage:
+          $ref: "#/components/schemas/BootImage"
+          description: Optional. Boot image metadata used for runtime upgradeability.
         containerImages:
           description: Optional. Use a list of container images to use as Kernels in the notebook instance.
           items:

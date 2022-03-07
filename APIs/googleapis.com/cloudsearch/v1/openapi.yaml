@@ -2379,6 +2379,7 @@ components:
             - CONTACTS_APP
             - ACTIVITY_FEED_APP
             - DRIVE_APP
+            - ASSISTIVE_SUGGESTION_APP
           type: string
         id:
           description: Numeric identifier of the App. Set to Project number for 1/3P Apps. For Webhook, this is WebhookId. Determined & set by the 1P API from App credentials on the side channel.
@@ -2782,6 +2783,25 @@ components:
             - LAST_30_DAYS
             - LAST_90_DAYS
           type: string
+      type: object
+    DynamiteSpacesScoringInfo:
+      description: This is the proto for holding space level scoring information. This data is used for logging in query-api server and for testing purposes.
+      properties:
+        finalScore:
+          format: double
+          type: number
+        freshnessScore:
+          format: double
+          type: number
+        messageScore:
+          format: double
+          type: number
+        spaceAgeInDays:
+          format: double
+          type: number
+        topicalityScore:
+          format: double
+          type: number
       type: object
     EmailAddress:
       description: A person's email address.
@@ -4544,6 +4564,9 @@ components:
           type: string
         groupId:
           $ref: "#/components/schemas/GroupId"
+        isExternal:
+          description: Whether this is an external space outside of user's organization
+          type: boolean
         name:
           type: string
         numMembers:
