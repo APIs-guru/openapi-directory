@@ -390,6 +390,7 @@ paths:
               company: {
                 legal_name: 'SpaceX',
                 display_name: 'SpaceX',
+                subdomain: 'company',
                 company_number: '123456-AB',
                 addresses: [
                   {
@@ -606,6 +607,7 @@ paths:
               company: {
                 legal_name: 'SpaceX',
                 display_name: 'SpaceX',
+                subdomain: 'company',
                 company_number: '123456-AB',
                 addresses: [
                   {
@@ -2811,6 +2813,10 @@ components:
           items:
             $ref: "#/components/schemas/PhoneNumber"
           type: array
+        subdomain:
+          example: company
+          minLength: 1
+          type: string
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         updated_by:

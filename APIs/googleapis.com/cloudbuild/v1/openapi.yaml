@@ -62,7 +62,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: "The parent of the collection of `Builds`. Format: `projects/{project}/locations/location`"
+        - description: "The parent of the collection of `Builds`. Format: `projects/{project}/locations/{location}`"
           in: query
           name: parent
           schema:
@@ -1174,7 +1174,7 @@ paths:
       description: Lists previously requested builds. Previously requested builds may still be in-progress, or may have finished successfully or unsuccessfully.
       operationId: cloudbuild.projects.locations.builds.list
       parameters:
-        - description: "The parent of the collection of `Builds`. Format: `projects/{project}/locations/location`"
+        - description: "The parent of the collection of `Builds`. Format: `projects/{project}/locations/{location}`"
           in: path
           name: parent
           required: true
