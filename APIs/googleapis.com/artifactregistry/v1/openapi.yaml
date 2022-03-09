@@ -285,7 +285,7 @@ paths:
       description: Lists files.
       operationId: artifactregistry.projects.locations.repositories.files.list
       parameters:
-        - description: The name of the parent resource whose files will be listed.
+        - description: 'The name of the repository whose files will be listed. For example: "projects/p1/locations/us-central1/repositories/repo1'
           in: path
           name: parent
           required: true
@@ -341,90 +341,6 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/gooGetArtifacts:import":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Imports GooGet artifacts. The returned Operation will complete once the resources are imported. Package, Version, and File resources are created based on the imported artifacts. Imported artifacts that conflict with existing resources are ignored.
-      operationId: artifactregistry.projects.locations.repositories.gooGetArtifacts.import
-      parameters:
-        - description: The name of the parent resource where the artifacts will be imported.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ImportGooGetArtifactsRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-  "/v1/{parent}/googetArtifacts:create":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Directly uploads a GooGet artifact. The returned Operation will complete once the resources are uploaded. Package, Version, and File resources are created based on the imported artifact. Imported artifacts that conflict with existing resources are ignored.
-      operationId: artifactregistry.projects.locations.repositories.googetArtifacts.upload
-      parameters:
-        - description: The name of the parent resource where the artifacts will be uploaded.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/octet-stream:
-            schema:
-              $ref: "#/components/schemas/UploadGooGetArtifactRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UploadGooGetArtifactMediaResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
   "/v1/{parent}/packages":
     get:
       description: Lists packages.
@@ -1136,25 +1052,6 @@ components:
           $ref: "#/components/schemas/ImportAptArtifactsGcsSource"
           description: Google Cloud Storage location where input content is located.
       type: object
-    ImportGooGetArtifactsGcsSource:
-      description: Google Cloud Storage location where the artifacts currently reside.
-      properties:
-        uris:
-          description: Cloud Storage paths URI (e.g., gs://my_bucket/my_object).
-          items:
-            type: string
-          type: array
-        useWildcards:
-          description: Supports URI wildcards for matching multiple objects from a single URI.
-          type: boolean
-      type: object
-    ImportGooGetArtifactsRequest:
-      description: The request to import new googet artifacts.
-      properties:
-        gcsSource:
-          $ref: "#/components/schemas/ImportGooGetArtifactsGcsSource"
-          description: Google Cloud Storage location where input content is located.
-      type: object
     ImportYumArtifactsGcsSource:
       description: Google Cloud Storage location where the artifacts currently reside.
       properties:
@@ -1434,17 +1331,6 @@ components:
           description: Operation to be returned to the user.
       type: object
     UploadAptArtifactRequest:
-      description: The request to upload an artifact.
-      properties: {}
-      type: object
-    UploadGooGetArtifactMediaResponse:
-      description: The response to upload an artifact.
-      properties:
-        operation:
-          $ref: "#/components/schemas/Operation"
-          description: Operation to be returned to the user.
-      type: object
-    UploadGooGetArtifactRequest:
       description: The request to upload an artifact.
       properties: {}
       type: object

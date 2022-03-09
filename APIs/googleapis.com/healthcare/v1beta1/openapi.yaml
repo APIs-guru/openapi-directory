@@ -3576,6 +3576,9 @@ components:
         image:
           $ref: "#/components/schemas/ImageConfig"
           description: Configures de-identification of image pixels wherever they are found in the source_dataset.
+        operationMetadata:
+          $ref: "#/components/schemas/DeidentifyOperationMetadata"
+          description: Details about the work the de-identify operation performed.
         text:
           $ref: "#/components/schemas/TextConfig"
           description: Configures de-identification of text wherever it is found in the source_dataset.
@@ -3615,6 +3618,13 @@ components:
         resourceFilter:
           $ref: "#/components/schemas/FhirFilter"
           description: A filter specifying the resources to include in the output. If not specified, all resources are included in the output.
+      type: object
+    DeidentifyOperationMetadata:
+      description: Details about the work the de-identify operation performed.
+      properties:
+        fhirOutput:
+          $ref: "#/components/schemas/FhirOutput"
+          description: Details about the FHIR store to write the output to.
       type: object
     DeidentifySummary:
       description: Contains a detailed summary of the Deidentify operation.
@@ -3923,6 +3933,13 @@ components:
         resources:
           $ref: "#/components/schemas/Resources"
           description: List of resources to include in the output. If this list is empty or not specified, all resources are included in the output.
+      type: object
+    FhirOutput:
+      description: Details about the FHIR store to write the output to.
+      properties:
+        fhirStore:
+          description: Name of the output FHIR store, which must already exist. You must grant the healthcare.fhirResources.update permission on the destination store to your project's **Cloud Healthcare Service Agent** [service account](https://cloud.google.com/healthcare/docs/how-tos/permissions-healthcare-api-gcp-products#the_cloud_healthcare_service_agent). The destination store must set `enable_update_create` to true. The destination store must use FHIR version R4. Writing these resources will consume FHIR operations quota from the project containing the source data. De-identify operation metadata is only generated for DICOM de-identification operations.
+          type: string
       type: object
     FhirStore:
       description: Represents a FHIR store.
@@ -4782,6 +4799,7 @@ components:
             - PARSER_VERSION_UNSPECIFIED
             - V1
             - V2
+            - V3
           type: string
       type: object
     PatientId:

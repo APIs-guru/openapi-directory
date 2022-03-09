@@ -1104,6 +1104,16 @@ components:
           description: The sender email address.
           type: string
       type: object
+    MandatoryServiceAnnouncement:
+      description: Alert Created by the MSA team for communications necessary for continued use of Google Workspace Products.
+      properties:
+        description:
+          description: Detailed, freeform text describing the announcement
+          type: string
+        title:
+          description: One line summary of the announcement
+          type: string
+      type: object
     MatchInfo:
       description: Proto that contains match information from the condition part of the rule.
       properties:
