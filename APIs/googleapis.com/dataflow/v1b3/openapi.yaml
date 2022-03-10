@@ -4824,6 +4824,11 @@ components:
     SdkHarnessContainerImage:
       description: Defines a SDK harness container for executing Dataflow pipelines.
       properties:
+        capabilities:
+          description: The set of capabilities enumerated in the above Environment proto. See also https://github.com/apache/beam/blob/master/model/pipeline/src/main/proto/beam_runner_api.proto
+          items:
+            type: string
+          type: array
         containerImage:
           description: A docker container image that resides in Google Container Registry.
           type: string
@@ -4854,13 +4859,22 @@ components:
           type: string
       type: object
     SendDebugCaptureRequest:
-      description: Request to send encoded debug information.
+      description: "Request to send encoded debug information. Next ID: 8"
       properties:
         componentId:
           description: The internal component id for which debug information is sent.
           type: string
         data:
           description: The encoded debug information.
+          type: string
+        dataFormat:
+          description: Format for the data field above (id=5).
+          enum:
+            - DATA_FORMAT_UNSPECIFIED
+            - RAW
+            - JSON
+            - ZLIB
+            - BROTLI
           type: string
         location:
           description: The [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that contains the job specified by job_id.

@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://dialogflow.googleapis.com/$discovery/rest?version=v3
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: dialogflow
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/dialogflow/
 tags:
@@ -3341,7 +3342,7 @@ components:
       description: The request message for Agents.ExportAgent.
       properties:
         agentUri:
-          description: Optional. The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to export the agent to. The format of this URI must be `gs:///`. If left unspecified, the serialized agent is returned inline.
+          description: Optional. The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to export the agent to. The format of this URI must be `gs:///`. If left unspecified, the serialized agent is returned inline. Dialogflow performs a write operation for the Cloud Storage object on the caller's behalf, so your request authentication must have write permissions for the object. For more information, see [Dialogflow access control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
           type: string
         environment:
           description: "Optional. Environment name. If not set, draft environment is assumed. Format: `projects//locations//agents//environments/`."
@@ -3362,7 +3363,7 @@ components:
       description: The request message for Flows.ExportFlow.
       properties:
         flowUri:
-          description: Optional. The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to export the flow to. The format of this URI must be `gs:///`. If left unspecified, the serialized flow is returned inline.
+          description: Optional. The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to export the flow to. The format of this URI must be `gs:///`. If left unspecified, the serialized flow is returned inline. Dialogflow performs a write operation for the Cloud Storage object on the caller's behalf, so your request authentication must have write permissions for the object. For more information, see [Dialogflow access control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
           type: string
         includeReferencedFlows:
           description: Optional. Whether to export flows referenced by the specified flow.
@@ -3397,7 +3398,7 @@ components:
           description: 'The filter expression used to filter exported test cases, see [API Filtering](https://aip.dev/160). The expression is case insensitive and supports the following syntax: name = [OR name = ] ... For example: * "name = t1 OR name = t2" matches the test case with the exact resource name "t1" or "t2".'
           type: string
         gcsUri:
-          description: The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to export the test cases to. The format of this URI must be `gs:///`. If unspecified, the serialized test cases is returned inline.
+          description: The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to export the test cases to. The format of this URI must be `gs:///`. If unspecified, the serialized test cases is returned inline. Dialogflow performs a write operation for the Cloud Storage object on the caller's behalf, so your request authentication must have write permissions for the object. For more information, see [Dialogflow access control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
           type: string
       type: object
     GoogleCloudDialogflowCxV3ExportTestCasesResponse:
@@ -3638,7 +3639,7 @@ components:
           format: byte
           type: string
         flowUri:
-          description: The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to import flow from. The format of this URI must be `gs:///`.
+          description: The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to import flow from. The format of this URI must be `gs:///`. Dialogflow performs a read operation for the Cloud Storage object on the caller's behalf, so your request authentication must have read permissions for the object. For more information, see [Dialogflow access control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
           type: string
         importOption:
           description: Flow import mode. If not specified, `KEEP` is assumed.
@@ -3672,7 +3673,7 @@ components:
           format: byte
           type: string
         gcsUri:
-          description: The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to import test cases from. The format of this URI must be `gs:///`.
+          description: The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to import test cases from. The format of this URI must be `gs:///`. Dialogflow performs a read operation for the Cloud Storage object on the caller's behalf, so your request authentication must have read permissions for the object. For more information, see [Dialogflow access control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
           type: string
       type: object
     GoogleCloudDialogflowCxV3ImportTestCasesResponse:
@@ -4524,7 +4525,7 @@ components:
           format: byte
           type: string
         agentUri:
-          description: The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to restore agent from. The format of this URI must be `gs:///`.
+          description: The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to restore agent from. The format of this URI must be `gs:///`. Dialogflow performs a read operation for the Cloud Storage object on the caller's behalf, so your request authentication must have read permissions for the object. For more information, see [Dialogflow access control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
           type: string
         restoreOption:
           description: Agent restore mode. If not specified, `KEEP` is assumed.
@@ -4822,7 +4823,10 @@ components:
       description: Represents configurations for a test case.
       properties:
         flow:
-          description: "Flow name. If not set, default start flow is assumed. Format: `projects//locations//agents//flows/`."
+          description: "Flow name to start the test case with. Format: `projects//locations//agents//flows/`. Only one of `flow` and `page` should be set to indicate the starting point of the test case. If both are set, `page` takes precedence over `flow`. If neither is set, the test case will start with start page on the default start flow."
+          type: string
+        page:
+          description: "The page to start the test case with. Format: `projects//locations//agents//flows//pages/`. Only one of `flow` and `page` should be set to indicate the starting point of the test case. If both are set, `page` takes precedence over `flow`. If neither is set, the test case will start with start page on the default start flow."
           type: string
         trackingParameters:
           description: Session parameters to be compared when calculating differences.
@@ -6241,7 +6245,10 @@ components:
       description: Represents configurations for a test case.
       properties:
         flow:
-          description: "Flow name. If not set, default start flow is assumed. Format: `projects//locations//agents//flows/`."
+          description: "Flow name to start the test case with. Format: `projects//locations//agents//flows/`. Only one of `flow` and `page` should be set to indicate the starting point of the test case. If both are set, `page` takes precedence over `flow`. If neither is set, the test case will start with start page on the default start flow."
+          type: string
+        page:
+          description: "The page to start the test case with. Format: `projects//locations//agents//flows//pages/`. Only one of `flow` and `page` should be set to indicate the starting point of the test case. If both are set, `page` takes precedence over `flow`. If neither is set, the test case will start with start page on the default start flow."
           type: string
         trackingParameters:
           description: Session parameters to be compared when calculating differences.
@@ -6751,7 +6758,7 @@ components:
       description: 'Events allow for matching intents by event name instead of the natural language input. For instance, input `` can trigger a personalized welcome response. The parameter `name` may be used by the agent in the response: `"Hello #welcome_event.name! What can I do for you today?"`.'
       properties:
         languageCode:
-          description: Required. The language of this query. See [Language Support](https://cloud.google.com/dialogflow/docs/reference/language) for a list of the currently supported language codes. Note that queries in the same session do not necessarily need to specify the same language.
+          description: Required. The language of this query. See [Language Support](https://cloud.google.com/dialogflow/docs/reference/language) for a list of the currently supported language codes. Note that queries in the same session do not necessarily need to specify the same language. This field is ignored when used in the context of a WebhookResponse.followup_event_input field, because the language was already defined in the originating detect intent request.
           type: string
         name:
           description: Required. The unique identifier of the event.
@@ -7951,6 +7958,7 @@ components:
             - TYPE_UNSPECIFIED
             - CONVERSATION_STARTED
             - CONVERSATION_FINISHED
+            - HUMAN_INTERVENTION_NEEDED
             - NEW_MESSAGE
             - UNRECOVERABLE_ERROR
           type: string
@@ -8003,7 +8011,7 @@ components:
       description: 'Events allow for matching intents by event name instead of the natural language input. For instance, input `` can trigger a personalized welcome response. The parameter `name` may be used by the agent in the response: `"Hello #welcome_event.name! What can I do for you today?"`.'
       properties:
         languageCode:
-          description: Required. The language of this query. See [Language Support](https://cloud.google.com/dialogflow/docs/reference/language) for a list of the currently supported language codes. Note that queries in the same session do not necessarily need to specify the same language.
+          description: Required. The language of this query. See [Language Support](https://cloud.google.com/dialogflow/docs/reference/language) for a list of the currently supported language codes. Note that queries in the same session do not necessarily need to specify the same language. This field is ignored when used in the context of a WebhookResponse.followup_event_input field, because the language was already defined in the originating detect intent request.
           type: string
         name:
           description: Required. The unique identifier of the event.

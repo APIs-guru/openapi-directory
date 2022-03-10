@@ -3270,7 +3270,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/gmail/v1/users/{userId}/threads/{id}":
     delete:
-      description: Immediately and permanently deletes the specified thread. This operation cannot be undone. Prefer `threads.trash` instead.
+      description: Immediately and permanently deletes the specified thread. Any messages that belong to the thread are also deleted. This operation cannot be undone. Prefer `threads.trash` instead.
       operationId: gmail.users.threads.delete
       parameters:
         - description: The user's email address. The special value `me` can be used to indicate the authenticated user.
@@ -3445,7 +3445,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Moves the specified thread to the trash.
+      description: Moves the specified thread to the trash. Any messages that belong to the thread are also moved to the trash.
       operationId: gmail.users.threads.trash
       parameters:
         - description: The user's email address. The special value `me` can be used to indicate the authenticated user.
@@ -3492,7 +3492,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Removes the specified thread from the trash.
+      description: Removes the specified thread from the trash. Any messages that belong to the thread are also removed from the trash.
       operationId: gmail.users.threads.untrash
       parameters:
         - description: The user's email address. The special value `me` can be used to indicate the authenticated user.
@@ -4157,12 +4157,12 @@ components:
     ModifyMessageRequest:
       properties:
         addLabelIds:
-          description: A list of IDs of labels to add to this message.
+          description: A list of IDs of labels to add to this message. You can add up to 100 labels with each update.
           items:
             type: string
           type: array
         removeLabelIds:
-          description: A list IDs of labels to remove from this message.
+          description: A list IDs of labels to remove from this message. You can remove up to 100 labels with each update.
           items:
             type: string
           type: array
@@ -4170,12 +4170,12 @@ components:
     ModifyThreadRequest:
       properties:
         addLabelIds:
-          description: A list of IDs of labels to add to this thread.
+          description: A list of IDs of labels to add to this thread. You can add up to 100 labels with each update.
           items:
             type: string
           type: array
         removeLabelIds:
-          description: A list of IDs of labels to remove from this thread.
+          description: A list of IDs of labels to remove from this thread. You can remove up to 100 labels with each update.
           items:
             type: string
           type: array

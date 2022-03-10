@@ -82,7 +82,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudRunOpV2Revision"
+                $ref: "#/components/schemas/GoogleCloudRunV2Revision"
           description: Successful response
       security:
         - Oauth2:
@@ -132,7 +132,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudRunOpV2Service"
+              $ref: "#/components/schemas/GoogleCloudRunV2Service"
       responses:
         "200":
           content:
@@ -230,7 +230,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudRunOpV2ListRevisionsResponse"
+                $ref: "#/components/schemas/GoogleCloudRunV2ListRevisionsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -282,7 +282,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudRunOpV2ListServicesResponse"
+                $ref: "#/components/schemas/GoogleCloudRunV2ListServicesResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -327,7 +327,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudRunOpV2Service"
+              $ref: "#/components/schemas/GoogleCloudRunV2Service"
       responses:
         "200":
           content:
@@ -544,7 +544,7 @@ components:
       schema:
         type: string
   schemas:
-    GoogleCloudRunOpV2BinaryAuthorization:
+    GoogleCloudRunV2BinaryAuthorization:
       description: Settings for Binary Authorization feature.
       properties:
         breakglassJustification:
@@ -554,7 +554,7 @@ components:
           description: If True, indicates to use the default project's binary authorization policy. If False, binary authorization will be disabled.
           type: boolean
       type: object
-    GoogleCloudRunOpV2CloudSqlInstance:
+    GoogleCloudRunV2CloudSqlInstance:
       description: Represents a specific Cloud SQL instance.
       properties:
         connections:
@@ -563,7 +563,7 @@ components:
             type: string
           type: array
       type: object
-    GoogleCloudRunOpV2Condition:
+    GoogleCloudRunV2Condition:
       description: Defines a status condition for a resource.
       properties:
         domainMappingReason:
@@ -660,7 +660,7 @@ components:
           description: 'type is used to communicate the status of the reconciliation process. See also: https://github.com/knative/serving/blob/main/docs/spec/errors.md#error-conditions-and-reporting Types common to all resources include: * "Ready": True when the Resource is ready.'
           type: string
       type: object
-    GoogleCloudRunOpV2Container:
+    GoogleCloudRunV2Container:
       description: A single application container. This specifies both the container to run, the command to run in the container and the arguments to supply to it. Note that additional arguments may be supplied by the system to the container at runtime.
       properties:
         args:
@@ -676,7 +676,7 @@ components:
         env:
           description: List of environment variables to set in the container.
           items:
-            $ref: "#/components/schemas/GoogleCloudRunOpV2EnvVar"
+            $ref: "#/components/schemas/GoogleCloudRunV2EnvVar"
           type: array
         image:
           description: "Required. URL of the Container image in Google Container Registry or Docker More info: https://kubernetes.io/docs/concepts/containers/images"
@@ -687,18 +687,18 @@ components:
         ports:
           description: List of ports to expose from the container. Only a single port can be specified. The specified ports must be listening on all interfaces (0.0.0.0) within the container to be accessible. If omitted, a port number will be chosen and passed to the container through the PORT environment variable for the container to listen on.
           items:
-            $ref: "#/components/schemas/GoogleCloudRunOpV2ContainerPort"
+            $ref: "#/components/schemas/GoogleCloudRunV2ContainerPort"
           type: array
         resources:
-          $ref: "#/components/schemas/GoogleCloudRunOpV2ResourceRequirements"
+          $ref: "#/components/schemas/GoogleCloudRunV2ResourceRequirements"
           description: "Compute Resource requirements by this container. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources"
         volumeMounts:
           description: Volume to mount into the container's filesystem.
           items:
-            $ref: "#/components/schemas/GoogleCloudRunOpV2VolumeMount"
+            $ref: "#/components/schemas/GoogleCloudRunV2VolumeMount"
           type: array
       type: object
-    GoogleCloudRunOpV2ContainerPort:
+    GoogleCloudRunV2ContainerPort:
       description: ContainerPort represents a network port in a single container.
       properties:
         containerPort:
@@ -709,7 +709,7 @@ components:
           description: If specified, used to specify which protocol to use. Allowed values are "http1" and "h2c".
           type: string
       type: object
-    GoogleCloudRunOpV2EnvVar:
+    GoogleCloudRunV2EnvVar:
       description: EnvVar represents an environment variable present in a Container.
       properties:
         name:
@@ -719,17 +719,17 @@ components:
           description: 'Variable references $(VAR_NAME) are expanded using the previous defined environment variables in the container and any route environment variables. If a variable cannot be resolved, the reference in the input string will be unchanged. The $(VAR_NAME) syntax can be escaped with a double $$, ie: $$(VAR_NAME). Escaped references will never be expanded, regardless of whether the variable exists or not. Defaults to "", and the maximum length is 32768 bytes.'
           type: string
         valueSource:
-          $ref: "#/components/schemas/GoogleCloudRunOpV2EnvVarSource"
+          $ref: "#/components/schemas/GoogleCloudRunV2EnvVarSource"
           description: Source for the environment variable's value.
       type: object
-    GoogleCloudRunOpV2EnvVarSource:
+    GoogleCloudRunV2EnvVarSource:
       description: EnvVarSource represents a source for the value of an EnvVar.
       properties:
         secretKeyRef:
-          $ref: "#/components/schemas/GoogleCloudRunOpV2SecretKeySelector"
+          $ref: "#/components/schemas/GoogleCloudRunV2SecretKeySelector"
           description: Selects a secret and a specific version from Cloud Secret Manager.
       type: object
-    GoogleCloudRunOpV2ListRevisionsResponse:
+    GoogleCloudRunV2ListRevisionsResponse:
       description: Response message containing a list of Revisions.
       properties:
         nextPageToken:
@@ -738,10 +738,10 @@ components:
         revisions:
           description: The resulting list of Revisions.
           items:
-            $ref: "#/components/schemas/GoogleCloudRunOpV2Revision"
+            $ref: "#/components/schemas/GoogleCloudRunV2Revision"
           type: array
       type: object
-    GoogleCloudRunOpV2ListServicesResponse:
+    GoogleCloudRunV2ListServicesResponse:
       description: Response message containing a list of Services.
       properties:
         nextPageToken:
@@ -750,10 +750,10 @@ components:
         services:
           description: The resulting list of Services.
           items:
-            $ref: "#/components/schemas/GoogleCloudRunOpV2Service"
+            $ref: "#/components/schemas/GoogleCloudRunV2Service"
           type: array
       type: object
-    GoogleCloudRunOpV2ResourceRequirements:
+    GoogleCloudRunV2ResourceRequirements:
       description: ResourceRequirements describes the compute resource requirements.
       properties:
         cpuIdle:
@@ -765,7 +765,7 @@ components:
           description: "Only memory and CPU are supported. Note: The only supported values for CPU are '1', '2', and '4'. Setting 4 CPU requires at least 2Gi of memory. The values of the map is string form of the 'quantity' k8s type: https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/api/resource/quantity.go"
           type: object
       type: object
-    GoogleCloudRunOpV2Revision:
+    GoogleCloudRunV2Revision:
       description: A Revision is an immutable snapshot of code and configuration. A Revision references a container image. Revisions are only created by updates to its parent Service.
       properties:
         annotations:
@@ -776,7 +776,7 @@ components:
         conditions:
           description: Output only. The Condition of this Revision, containing its readiness status, and detailed error information in case it did not reach a serving state.
           items:
-            $ref: "#/components/schemas/GoogleCloudRunOpV2Condition"
+            $ref: "#/components/schemas/GoogleCloudRunV2Condition"
           readOnly: true
           type: array
         confidential:
@@ -789,7 +789,7 @@ components:
         containers:
           description: Holds the single container that defines the unit of execution for this Revision.
           items:
-            $ref: "#/components/schemas/GoogleCloudRunOpV2Container"
+            $ref: "#/components/schemas/GoogleCloudRunV2Container"
           type: array
         createTime:
           description: Output only. The creation time.
@@ -860,7 +860,7 @@ components:
           readOnly: true
           type: boolean
         scaling:
-          $ref: "#/components/schemas/GoogleCloudRunOpV2RevisionScaling"
+          $ref: "#/components/schemas/GoogleCloudRunV2RevisionScaling"
           description: Scaling settings for this revision.
         service:
           description: Output only. The name of the parent service.
@@ -885,13 +885,13 @@ components:
         volumes:
           description: A list of Volumes to make available to containers.
           items:
-            $ref: "#/components/schemas/GoogleCloudRunOpV2Volume"
+            $ref: "#/components/schemas/GoogleCloudRunV2Volume"
           type: array
         vpcAccess:
-          $ref: "#/components/schemas/GoogleCloudRunOpV2VpcAccess"
+          $ref: "#/components/schemas/GoogleCloudRunV2VpcAccess"
           description: VPC Access configuration for this Revision. For more information, visit https://cloud.google.com/run/docs/configuring/connecting-vpc.
       type: object
-    GoogleCloudRunOpV2RevisionScaling:
+    GoogleCloudRunV2RevisionScaling:
       description: Settings for revision-level scaling settings.
       properties:
         maxInstanceCount:
@@ -903,7 +903,7 @@ components:
           format: int32
           type: integer
       type: object
-    GoogleCloudRunOpV2RevisionTemplate:
+    GoogleCloudRunV2RevisionTemplate:
       description: RevisionTemplate describes the data a revision should have when created from a template.
       properties:
         annotations:
@@ -921,7 +921,7 @@ components:
         containers:
           description: Holds the single container that defines the unit of execution for this Revision.
           items:
-            $ref: "#/components/schemas/GoogleCloudRunOpV2Container"
+            $ref: "#/components/schemas/GoogleCloudRunV2Container"
           type: array
         encryptionKey:
           description: A reference to a customer managed encryption key (CMEK) to use to encrypt this container image. For more information, go to https://cloud.google.com/run/docs/securing/using-cmek
@@ -942,7 +942,7 @@ components:
           description: The unique name for the revision. If this field is omitted, it will be automatically generated based on the Service name.
           type: string
         scaling:
-          $ref: "#/components/schemas/GoogleCloudRunOpV2RevisionScaling"
+          $ref: "#/components/schemas/GoogleCloudRunV2RevisionScaling"
           description: Scaling settings for this Revision.
         serviceAccount:
           description: Email address of the IAM service account associated with the revision of the service. The service account represents the identity of the running revision, and determines what permissions the revision has. If not provided, the revision will use the project's default service account.
@@ -954,13 +954,13 @@ components:
         volumes:
           description: A list of Volumes to make available to containers.
           items:
-            $ref: "#/components/schemas/GoogleCloudRunOpV2Volume"
+            $ref: "#/components/schemas/GoogleCloudRunV2Volume"
           type: array
         vpcAccess:
-          $ref: "#/components/schemas/GoogleCloudRunOpV2VpcAccess"
+          $ref: "#/components/schemas/GoogleCloudRunV2VpcAccess"
           description: VPC Access configuration to use for this Revision. For more information, visit https://cloud.google.com/run/docs/configuring/connecting-vpc.
       type: object
-    GoogleCloudRunOpV2SecretKeySelector:
+    GoogleCloudRunV2SecretKeySelector:
       description: SecretEnvVarSource represents a source for the value of an EnvVar.
       properties:
         secret:
@@ -970,7 +970,7 @@ components:
           description: The Cloud Secret Manager secret version. Can be 'latest' for the latest value or an integer for a specific version.
           type: string
       type: object
-    GoogleCloudRunOpV2SecretVolumeSource:
+    GoogleCloudRunV2SecretVolumeSource:
       description: The secret's value will be presented as the content of a file whose name is defined in the item path. If no items are defined, the name of the file is the secret.
       properties:
         defaultMode:
@@ -980,13 +980,13 @@ components:
         items:
           description: If unspecified, the volume will expose a file whose name is the secret, relative to VolumeMount.mount_path. If specified, the key will be used as the version to fetch from Cloud Secret Manager and the path will be the name of the file exposed in the volume. When items are defined, they must specify a path and a version.
           items:
-            $ref: "#/components/schemas/GoogleCloudRunOpV2VersionToPath"
+            $ref: "#/components/schemas/GoogleCloudRunV2VersionToPath"
           type: array
         secret:
           description: "Required. The name of the secret in Cloud Secret Manager. Format: {secret} if the secret is in the same project. projects/{project}/secrets/{secret} if the secret is in a different project."
           type: string
       type: object
-    GoogleCloudRunOpV2Service:
+    GoogleCloudRunV2Service:
       description: Service acts as a top-level container that manages a set of configurations and revision templates which implement a network service. Service exists to provide a singular abstraction which can be access controlled, reasoned about, and which encapsulates software lifecycle decisions such as rollout policy and team resource ownership.
       properties:
         annotations:
@@ -995,7 +995,7 @@ components:
           description: "Unstructured key value map that may be set by external tools to store and arbitrary metadata. They are not queryable and should be preserved when modifying objects. Cloud Run will populate some annotations using 'run.googleapis.com' or 'serving.knative.dev' namespaces. This field follows Kubernetes annotations' namespacing, limits, and rules. More info: https://kubernetes.io/docs/user-guide/annotations"
           type: object
         binaryAuthorization:
-          $ref: "#/components/schemas/GoogleCloudRunOpV2BinaryAuthorization"
+          $ref: "#/components/schemas/GoogleCloudRunV2BinaryAuthorization"
           description: Settings for the Binary Authorization feature.
         client:
           description: Arbitrary identifier for the API client.
@@ -1006,7 +1006,7 @@ components:
         conditions:
           description: Output only. The Conditions of all other associated sub-resources. They contain additional diagnostics information in case the Service does not reach its Serving state. See comments in `reconciling` for additional information on reconciliation process in Cloud Run.
           items:
-            $ref: "#/components/schemas/GoogleCloudRunOpV2Condition"
+            $ref: "#/components/schemas/GoogleCloudRunV2Condition"
           readOnly: true
           type: array
         createTime:
@@ -1090,21 +1090,21 @@ components:
           readOnly: true
           type: boolean
         template:
-          $ref: "#/components/schemas/GoogleCloudRunOpV2RevisionTemplate"
+          $ref: "#/components/schemas/GoogleCloudRunV2RevisionTemplate"
           description: Required. The template used to create revisions for this Service.
         terminalCondition:
-          $ref: "#/components/schemas/GoogleCloudRunOpV2Condition"
+          $ref: "#/components/schemas/GoogleCloudRunV2Condition"
           description: Output only. The Condition of this Service, containing its readiness status, and detailed error information in case it did not reach a serving state. See comments in `reconciling` for additional information on reconciliation process in Cloud Run.
           readOnly: true
         traffic:
           description: Specifies how to distribute traffic over a collection of Revisions belonging to the Service. If traffic is empty or not provided, defaults to 100% traffic to the latest `Ready` Revision.
           items:
-            $ref: "#/components/schemas/GoogleCloudRunOpV2TrafficTarget"
+            $ref: "#/components/schemas/GoogleCloudRunV2TrafficTarget"
           type: array
         trafficStatuses:
           description: Output only. Detailed status information for corresponding traffic targets. See comments in `reconciling` for additional information on reconciliation process in Cloud Run.
           items:
-            $ref: "#/components/schemas/GoogleCloudRunOpV2TrafficTargetStatus"
+            $ref: "#/components/schemas/GoogleCloudRunV2TrafficTargetStatus"
           readOnly: true
           type: array
         uid:
@@ -1121,7 +1121,7 @@ components:
           readOnly: true
           type: string
       type: object
-    GoogleCloudRunOpV2TrafficTarget:
+    GoogleCloudRunV2TrafficTarget:
       description: Holds a single traffic routing entry for the Service. Allocations can be done to a specific Revision name, or pointing to the latest Ready Revision.
       properties:
         percent:
@@ -1142,7 +1142,7 @@ components:
             - TRAFFIC_TARGET_ALLOCATION_TYPE_REVISION
           type: string
       type: object
-    GoogleCloudRunOpV2TrafficTargetStatus:
+    GoogleCloudRunV2TrafficTargetStatus:
       description: Represents the observed state of a single `TrafficTarget` entry.
       properties:
         percent:
@@ -1166,7 +1166,7 @@ components:
           description: Displays the target URI.
           type: string
       type: object
-    GoogleCloudRunOpV2VersionToPath:
+    GoogleCloudRunV2VersionToPath:
       description: VersionToPath maps a specific version of a secret to a relative file to mount to, relative to VolumeMount's mount_path.
       properties:
         mode:
@@ -1180,20 +1180,20 @@ components:
           description: The Cloud Secret Manager secret version. Can be 'latest' for the latest value or an integer for a specific version.
           type: string
       type: object
-    GoogleCloudRunOpV2Volume:
+    GoogleCloudRunV2Volume:
       description: Volume represents a named volume in a container.
       properties:
         cloudSqlInstance:
-          $ref: "#/components/schemas/GoogleCloudRunOpV2CloudSqlInstance"
+          $ref: "#/components/schemas/GoogleCloudRunV2CloudSqlInstance"
           description: For Cloud SQL volumes, contains the specific instances that should be mounted. Visit https://cloud.google.com/sql/docs/mysql/connect-run for more information on how to connect Cloud SQL and Cloud Run.
         name:
           description: Required. Volume's name.
           type: string
         secret:
-          $ref: "#/components/schemas/GoogleCloudRunOpV2SecretVolumeSource"
+          $ref: "#/components/schemas/GoogleCloudRunV2SecretVolumeSource"
           description: "Secret represents a secret that should populate this volume. More info: https://kubernetes.io/docs/concepts/storage/volumes#secret"
       type: object
-    GoogleCloudRunOpV2VolumeMount:
+    GoogleCloudRunV2VolumeMount:
       description: VolumeMount describes a mounting of a Volume within a container.
       properties:
         mountPath:
@@ -1203,7 +1203,7 @@ components:
           description: Required. This must match the Name of a Volume.
           type: string
       type: object
-    GoogleCloudRunOpV2VpcAccess:
+    GoogleCloudRunV2VpcAccess:
       description: VPC Access settings. For more information on creating a VPC Connector, visit https://cloud.google.com/vpc/docs/configure-serverless-vpc-access For information on how to configure Cloud Run with an existing VPC Connector, visit https://cloud.google.com/run/docs/configuring/connecting-vpc
       properties:
         connector:
