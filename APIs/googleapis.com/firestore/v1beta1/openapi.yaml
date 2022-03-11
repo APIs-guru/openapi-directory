@@ -696,7 +696,7 @@ paths:
   "/v1beta1/{parent}/{collectionId}":
     get:
       description: Lists documents.
-      operationId: firestore.projects.databases.documents.listDocuments
+      operationId: firestore.projects.databases.documents.list
       parameters:
         - description: "Required. The parent resource name. In the format: `projects/{project_id}/databases/{database_id}/documents` or `projects/{project_id}/databases/{database_id}/documents/{document_path}`. For example: `projects/my-project/databases/my-database/documents` or `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`"
           in: path
@@ -1833,9 +1833,6 @@ components:
         document:
           $ref: "#/components/schemas/Document"
           description: A query result, not set when reporting partial progress.
-        done:
-          description: If present, Firestore has completely finished the request and no more documents will be returned.
-          type: boolean
         readTime:
           description: The time at which the document was read. This may be monotonically increasing; in this case, the previous documents in the result stream are guaranteed not to have changed between their `read_time` and this one. If the query returns no results, a response with `read_time` and no `document` will be sent, and this represents the time at which the query was run.
           format: google-datetime

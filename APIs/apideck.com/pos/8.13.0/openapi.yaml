@@ -6,9 +6,9 @@ info:
     email: hello@apideck.com
     url: https://developers.apideck.com
   description: |+
-    Welcome to the pos.
+    Welcome to the POS API.
 
-    You can use this API to access all pos endpoints.
+    You can use this API to access all POS endpoints.
 
     ## Base URL
 
@@ -255,7 +255,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: pos
-  version: 8.12.1
+  version: 8.13.0
   x-apideck-api: pos
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -281,10 +281,6 @@ tags:
     x-apideck-model:
       $ref: "#/components/schemas/Order"
   - description: ""
-    name: Products
-    x-apideck-model:
-      $ref: "#/components/schemas/Product"
-  - description: ""
     name: Payments
     x-apideck-model:
       $ref: "#/components/schemas/Payment"
@@ -309,6 +305,336 @@ tags:
     x-apideck-model:
       $ref: "#/components/schemas/ModifierGroup"
 paths:
+  /pos/items:
+    get:
+      description: List Items
+      operationId: itemsAll
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetItemsResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: List Items
+      tags:
+        - Items
+      x-apideck-api: pos
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.pos.itemsAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: items
+    post:
+      description: Create Item
+      operationId: itemsAdd
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Item"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateItemResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Create Item
+      tags:
+        - Items
+      x-apideck-api: pos
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              item: {
+                id: '#cocoa',
+                idempotency_key: 'random_string',
+                name: 'Cocoa',
+                description: 'Hot Chocolate',
+                abbreviation: 'Ch',
+                product_type: 'regular',
+                tax_ids: ['12345', '67890'],
+                absent_at_location_ids: ['12345', '67890'],
+                present_at_all_locations: false,
+                categories: [
+                  {
+                    id: '12345',
+                    name: 'Food',
+                    image_ids: ['12345', '67890']
+                  }
+                ],
+                variations: [
+                  {
+                    id: '12345',
+                    name: 'Food',
+                    sku: '11910345',
+                    item_id: '12345',
+                    ordinal: 0,
+                    pricing_type: 'fixed',
+                    price_amount: 10,
+                    price_currency: 'USD',
+                    image_ids: ['12345', '67890']
+                  }
+                ],
+                deleted: true
+              }
+            }
+
+            try {
+              const { data } = await apideck.pos.itemsAdd(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/pos/items/{id}":
+    delete:
+      description: Delete Item
+      operationId: itemsDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeleteItemResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Delete Item
+      tags:
+        - Items
+      x-apideck-api: pos
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.pos.itemsDelete({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    get:
+      description: Get Item
+      operationId: itemsOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetItemResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get Item
+      tags:
+        - Items
+      x-apideck-api: pos
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.pos.itemsOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    patch:
+      description: Update Item
+      operationId: itemsUpdate
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Item"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdateItemResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Update Item
+      tags:
+        - Items
+      x-apideck-api: pos
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              id: 'id_example',
+              item: {
+                id: '#cocoa',
+                idempotency_key: 'random_string',
+                name: 'Cocoa',
+                description: 'Hot Chocolate',
+                abbreviation: 'Ch',
+                product_type: 'regular',
+                tax_ids: ['12345', '67890'],
+                absent_at_location_ids: ['12345', '67890'],
+                present_at_all_locations: false,
+                categories: [
+                  {
+                    id: '12345',
+                    name: 'Food',
+                    image_ids: ['12345', '67890']
+                  }
+                ],
+                variations: [
+                  {
+                    id: '12345',
+                    name: 'Food',
+                    sku: '11910345',
+                    item_id: '12345',
+                    ordinal: 0,
+                    pricing_type: 'fixed',
+                    price_amount: 10,
+                    price_currency: 'USD',
+                    image_ids: ['12345', '67890']
+                  }
+                ],
+                deleted: true
+              }
+            }
+
+            try {
+              const { data } = await apideck.pos.itemsUpdate(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
   /pos/locations:
     get:
       description: List Locations
@@ -1550,6 +1876,7 @@ paths:
                 total_tax: 2.75,
                 total_discount: 3,
                 total_refund: 0,
+                total_service_charge: 0,
                 customers: [
                   {
                     first_name: 'Elon',
@@ -1634,7 +1961,8 @@ paths:
                 line_items: [
                   {
                     name: 'New York Strip Steak',
-                    tax_amount: 27500,
+                    total_tax: 2000,
+                    total_discount: 3000,
                     total_amount: 27500,
                     quantity: 1,
                     unit_price: 27500.5,
@@ -1685,14 +2013,76 @@ paths:
                 discounts: [
                   {
                     name: '10% off',
-                    type: 'FIXED_PERCENTAGE',
+                    type: 'fixed_percentage',
                     amount: 27500,
                     currency: 'USD',
-                    scope: 'ORDER'
+                    scope: 'order'
                   }
                 ],
-                source: 'api',
-                voided: false
+                tenders: [
+                  {
+                    name: '10% off',
+                    type: 'cash',
+                    note: 'An optional note associated with the tender at the time of payment.',
+                    amount: 27500,
+                    currency: 'USD',
+                    total_amount: 27.5,
+                    total_tip: 7,
+                    total_processing_fee: 0,
+                    total_tax: 2.75,
+                    total_discount: 3,
+                    total_refund: 0,
+                    total_service_charge: 0,
+                    buyer_tendered_cash_amount: 27500,
+                    change_back_cash_amount: 27500,
+                    card: {
+                      billing_address: {
+                        id: '123',
+                        type: 'primary',
+                        string: '25 Spring Street, Blackburn, VIC 3130',
+                        name: 'HQ US',
+                        line1: 'Main street',
+                        line2: 'apt #',
+                        line3: 'Suite #',
+                        line4: 'delivery instructions',
+                        street_number: '25',
+                        city: 'San Francisco',
+                        state: 'CA',
+                        postal_code: '94104',
+                        country: 'US',
+                        latitude: '40.759211',
+                        longitude: '-73.984638',
+                        county: 'Santa Clara',
+                        contact_name: 'Elon Musk',
+                        salutation: 'Mr',
+                        phone_number: '111-111-1111',
+                        fax: '122-111-1111',
+                        email: 'elon@musk.com',
+                        website: 'https://elonmusk.com',
+                        row_version: '1-12345'
+                      },
+                      bin: '41111',
+                      card_brand: 'visa',
+                      card_type: 'credit',
+                      prepaid_type: 'prepaid',
+                      cardholder_name: 'John Doe',
+                      customer_id: '12345',
+                      merchant_id: '12345',
+                      exp_month: 1,
+                      exp_year: 2022,
+                      fingerprint:
+                        ' Intended as a POS-assigned identifier, based on the card number, to identify the card across multiple locations within a single application.',
+                      last_4: 'The last 4 digits of the card number.',
+                      enabled: true,
+                      reference_id: 'card-001',
+                      version: '230320320320'
+                    },
+                    card_status: 'authorized',
+                    card_entry_method: 'swiped'
+                  }
+                ],
+                voided: false,
+                version: '230320320320'
               }
             }
 
@@ -1871,6 +2261,7 @@ paths:
                 total_tax: 2.75,
                 total_discount: 3,
                 total_refund: 0,
+                total_service_charge: 0,
                 customers: [
                   {
                     first_name: 'Elon',
@@ -1955,7 +2346,8 @@ paths:
                 line_items: [
                   {
                     name: 'New York Strip Steak',
-                    tax_amount: 27500,
+                    total_tax: 2000,
+                    total_discount: 3000,
                     total_amount: 27500,
                     quantity: 1,
                     unit_price: 27500.5,
@@ -2006,14 +2398,76 @@ paths:
                 discounts: [
                   {
                     name: '10% off',
-                    type: 'FIXED_PERCENTAGE',
+                    type: 'fixed_percentage',
                     amount: 27500,
                     currency: 'USD',
-                    scope: 'ORDER'
+                    scope: 'order'
                   }
                 ],
-                source: 'api',
-                voided: false
+                tenders: [
+                  {
+                    name: '10% off',
+                    type: 'cash',
+                    note: 'An optional note associated with the tender at the time of payment.',
+                    amount: 27500,
+                    currency: 'USD',
+                    total_amount: 27.5,
+                    total_tip: 7,
+                    total_processing_fee: 0,
+                    total_tax: 2.75,
+                    total_discount: 3,
+                    total_refund: 0,
+                    total_service_charge: 0,
+                    buyer_tendered_cash_amount: 27500,
+                    change_back_cash_amount: 27500,
+                    card: {
+                      billing_address: {
+                        id: '123',
+                        type: 'primary',
+                        string: '25 Spring Street, Blackburn, VIC 3130',
+                        name: 'HQ US',
+                        line1: 'Main street',
+                        line2: 'apt #',
+                        line3: 'Suite #',
+                        line4: 'delivery instructions',
+                        street_number: '25',
+                        city: 'San Francisco',
+                        state: 'CA',
+                        postal_code: '94104',
+                        country: 'US',
+                        latitude: '40.759211',
+                        longitude: '-73.984638',
+                        county: 'Santa Clara',
+                        contact_name: 'Elon Musk',
+                        salutation: 'Mr',
+                        phone_number: '111-111-1111',
+                        fax: '122-111-1111',
+                        email: 'elon@musk.com',
+                        website: 'https://elonmusk.com',
+                        row_version: '1-12345'
+                      },
+                      bin: '41111',
+                      card_brand: 'visa',
+                      card_type: 'credit',
+                      prepaid_type: 'prepaid',
+                      cardholder_name: 'John Doe',
+                      customer_id: '12345',
+                      merchant_id: '12345',
+                      exp_month: 1,
+                      exp_year: 2022,
+                      fingerprint:
+                        ' Intended as a POS-assigned identifier, based on the card number, to identify the card across multiple locations within a single application.',
+                      last_4: 'The last 4 digits of the card number.',
+                      enabled: true,
+                      reference_id: 'card-001',
+                      version: '230320320320'
+                    },
+                    card_status: 'authorized',
+                    card_entry_method: 'swiped'
+                  }
+                ],
+                voided: false,
+                version: '230320320320'
               }
             }
 
@@ -2092,6 +2546,7 @@ paths:
                 total_tax: 2.75,
                 total_discount: 3,
                 total_refund: 0,
+                total_service_charge: 0,
                 customers: [
                   {
                     first_name: 'Elon',
@@ -2176,7 +2631,8 @@ paths:
                 line_items: [
                   {
                     name: 'New York Strip Steak',
-                    tax_amount: 27500,
+                    total_tax: 2000,
+                    total_discount: 3000,
                     total_amount: 27500,
                     quantity: 1,
                     unit_price: 27500.5,
@@ -2227,14 +2683,76 @@ paths:
                 discounts: [
                   {
                     name: '10% off',
-                    type: 'FIXED_PERCENTAGE',
+                    type: 'fixed_percentage',
                     amount: 27500,
                     currency: 'USD',
-                    scope: 'ORDER'
+                    scope: 'order'
                   }
                 ],
-                source: 'api',
-                voided: false
+                tenders: [
+                  {
+                    name: '10% off',
+                    type: 'cash',
+                    note: 'An optional note associated with the tender at the time of payment.',
+                    amount: 27500,
+                    currency: 'USD',
+                    total_amount: 27.5,
+                    total_tip: 7,
+                    total_processing_fee: 0,
+                    total_tax: 2.75,
+                    total_discount: 3,
+                    total_refund: 0,
+                    total_service_charge: 0,
+                    buyer_tendered_cash_amount: 27500,
+                    change_back_cash_amount: 27500,
+                    card: {
+                      billing_address: {
+                        id: '123',
+                        type: 'primary',
+                        string: '25 Spring Street, Blackburn, VIC 3130',
+                        name: 'HQ US',
+                        line1: 'Main street',
+                        line2: 'apt #',
+                        line3: 'Suite #',
+                        line4: 'delivery instructions',
+                        street_number: '25',
+                        city: 'San Francisco',
+                        state: 'CA',
+                        postal_code: '94104',
+                        country: 'US',
+                        latitude: '40.759211',
+                        longitude: '-73.984638',
+                        county: 'Santa Clara',
+                        contact_name: 'Elon Musk',
+                        salutation: 'Mr',
+                        phone_number: '111-111-1111',
+                        fax: '122-111-1111',
+                        email: 'elon@musk.com',
+                        website: 'https://elonmusk.com',
+                        row_version: '1-12345'
+                      },
+                      bin: '41111',
+                      card_brand: 'visa',
+                      card_type: 'credit',
+                      prepaid_type: 'prepaid',
+                      cardholder_name: 'John Doe',
+                      customer_id: '12345',
+                      merchant_id: '12345',
+                      exp_month: 1,
+                      exp_year: 2022,
+                      fingerprint:
+                        ' Intended as a POS-assigned identifier, based on the card number, to identify the card across multiple locations within a single application.',
+                      last_4: 'The last 4 digits of the card number.',
+                      enabled: true,
+                      reference_id: 'card-001',
+                      version: '230320320320'
+                    },
+                    card_status: 'authorized',
+                    card_entry_method: 'swiped'
+                  }
+                ],
+                voided: false,
+                version: '230320320320'
               }
             }
 
@@ -2617,605 +3135,6 @@ paths:
               console.error(error)
             }
       x-graphql-exclude: true
-  /pos/products:
-    get:
-      description: List Products
-      operationId: productsAll
-      parameters:
-        - $ref: "#/components/parameters/raw"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/cursor"
-        - $ref: "#/components/parameters/limit"
-      responses:
-        "200":
-          $ref: "#/components/responses/GetProductsResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: List Products
-      tags:
-        - Products
-      x-apideck-api: pos
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.pos.productsAll({})
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-      x-graphql-field-name: products
-    post:
-      description: Create Product
-      operationId: productsAdd
-      parameters:
-        - $ref: "#/components/parameters/raw"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Product"
-        required: true
-      responses:
-        "201":
-          $ref: "#/components/responses/CreateProductResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Create Product
-      tags:
-        - Products
-      x-apideck-api: pos
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.pos.productsAdd({
-                product: {}
-              })
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-  "/pos/products/{id}":
-    delete:
-      description: Delete Product
-      operationId: productsDelete
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
-      responses:
-        "200":
-          $ref: "#/components/responses/DeleteProductResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Delete Product
-      tags:
-        - Products
-      x-apideck-api: pos
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.pos.productsDelete({
-                id: 'id_example'
-              })
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-    get:
-      description: Get Product
-      operationId: productsOne
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
-      responses:
-        "200":
-          $ref: "#/components/responses/GetProductResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Get Product
-      tags:
-        - Products
-      x-apideck-api: pos
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.pos.productsOne({
-                id: 'id_example'
-              })
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-    patch:
-      description: Update Product
-      operationId: productsUpdate
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Product"
-        required: true
-      responses:
-        "200":
-          $ref: "#/components/responses/UpdateProductResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Update Product
-      tags:
-        - Products
-      x-apideck-api: pos
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.pos.productsUpdate({
-                id: 'id_example',
-                product: {}
-              })
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-  "/pos/{merchantId}/items":
-    get:
-      description: List Items
-      operationId: itemsAll
-      parameters:
-        - $ref: "#/components/parameters/raw"
-        - $ref: "#/components/parameters/merchantId"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/cursor"
-        - $ref: "#/components/parameters/limit"
-      responses:
-        "200":
-          $ref: "#/components/responses/GetItemsResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: List Items
-      tags:
-        - Items
-      x-apideck-api: pos
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.pos.itemsAll({
-                merchantId: 'merchantId_example'
-              })
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-      x-graphql-field-name: items
-    post:
-      description: Create Item
-      operationId: itemsAdd
-      parameters:
-        - $ref: "#/components/parameters/raw"
-        - $ref: "#/components/parameters/merchantId"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Item"
-        required: true
-      responses:
-        "201":
-          $ref: "#/components/responses/CreateItemResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Create Item
-      tags:
-        - Items
-      x-apideck-api: pos
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            const params = {
-              merchantId: 'merchantId_example',
-              item: {
-                name: 'Product',
-                product_type: 'regular',
-                tax_ids: ['12345', '67890'],
-                absent_at_location_ids: ['12345', '67890'],
-                present_at_all_locations: false,
-                categories: [
-                  {
-                    id: '12345',
-                    name: 'Food',
-                    image_ids: ['12345', '67890']
-                  }
-                ],
-                variations: [
-                  {
-                    id: '12345',
-                    name: 'Food',
-                    sku: '11910345',
-                    item_id: '12345',
-                    ordinal: 0,
-                    pricing_type: 'fixed',
-                    price_amount: 10,
-                    price_currency: 'USD',
-                    image_ids: ['12345', '67890']
-                  }
-                ]
-              }
-            }
-
-            try {
-              const { data } = await apideck.pos.itemsAdd(params)
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-  "/pos/{merchantId}/items/{id}":
-    delete:
-      description: Delete Item
-      operationId: itemsDelete
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/merchantId"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
-      responses:
-        "200":
-          $ref: "#/components/responses/DeleteItemResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Delete Item
-      tags:
-        - Items
-      x-apideck-api: pos
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            const params = {
-              id: 'id_example',
-              merchantId: 'merchantId_example'
-            }
-
-            try {
-              const { data } = await apideck.pos.itemsDelete(params)
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-    get:
-      description: Get Item
-      operationId: itemsOne
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/merchantId"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
-      responses:
-        "200":
-          $ref: "#/components/responses/GetItemResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Get Item
-      tags:
-        - Items
-      x-apideck-api: pos
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            const params = {
-              id: 'id_example',
-              merchantId: 'merchantId_example'
-            }
-
-            try {
-              const { data } = await apideck.pos.itemsOne(params)
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-    patch:
-      description: Update Item
-      operationId: itemsUpdate
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/merchantId"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Item"
-        required: true
-      responses:
-        "200":
-          $ref: "#/components/responses/UpdateItemResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Update Item
-      tags:
-        - Items
-      x-apideck-api: pos
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            const params = {
-              id: 'id_example',
-              merchantId: 'merchantId_example',
-              item: {
-                name: 'Product',
-                product_type: 'regular',
-                tax_ids: ['12345', '67890'],
-                absent_at_location_ids: ['12345', '67890'],
-                present_at_all_locations: false,
-                categories: [
-                  {
-                    id: '12345',
-                    name: 'Food',
-                    image_ids: ['12345', '67890']
-                  }
-                ],
-                variations: [
-                  {
-                    id: '12345',
-                    name: 'Food',
-                    sku: '11910345',
-                    item_id: '12345',
-                    ordinal: 0,
-                    pricing_type: 'fixed',
-                    price_amount: 10,
-                    price_currency: 'USD',
-                    image_ids: ['12345', '67890']
-                  }
-                ]
-              }
-            }
-
-            try {
-              const { data } = await apideck.pos.itemsUpdate(params)
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
 components:
   parameters:
     applicationId:
@@ -3324,12 +3243,6 @@ components:
           schema:
             $ref: "#/components/schemas/CreatePaymentResponse"
       description: Payments
-    CreateProductResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/CreateProductResponse"
-      description: Products
     DeleteItemResponse:
       content:
         application/json:
@@ -3372,12 +3285,6 @@ components:
           schema:
             $ref: "#/components/schemas/DeletePaymentResponse"
       description: Payments
-    DeleteProductResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/DeleteProductResponse"
-      description: Products
     GetItemResponse:
       content:
         application/json:
@@ -3462,18 +3369,6 @@ components:
           schema:
             $ref: "#/components/schemas/GetPaymentsResponse"
       description: Payments
-    GetProductResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/GetProductResponse"
-      description: Products
-    GetProductsResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/GetProductsResponse"
-      description: Products
     Item:
       content:
         application/json:
@@ -3534,12 +3429,6 @@ components:
           schema:
             $ref: "#/components/schemas/PaymentRequiredResponse"
       description: Payment Required
-    Product:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/Product"
-      description: Products
     UnauthorizedResponse:
       content:
         application/json:
@@ -3600,12 +3489,6 @@ components:
           schema:
             $ref: "#/components/schemas/UpdatePaymentResponse"
       description: Payments
-    UpdateProductResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/UpdateProductResponse"
-      description: Products
   schemas:
     Address:
       properties:
@@ -3974,38 +3857,6 @@ components:
         - operation
         - data
       type: object
-    CreateProductResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/UnifiedId"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Products
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: square-pos
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
     CustomField:
       additionalProperties: false
       properties:
@@ -4247,38 +4098,6 @@ components:
         service:
           description: Apideck ID of service provider
           example: square
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-    DeleteProductResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/UnifiedId"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Products
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: square-pos
           type: string
         status:
           description: HTTP Response Status
@@ -4824,78 +4643,6 @@ components:
         - data
       type: object
       x-graphql-type-name: PaymentList
-    GetProductResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/Product"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Products
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: square-pos
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-      x-graphql-type-name: Product
-    GetProductsResponse:
-      properties:
-        data:
-          items:
-            $ref: "#/components/schemas/Product"
-          type: array
-        links:
-          $ref: "#/components/schemas/Links"
-        meta:
-          $ref: "#/components/schemas/Meta"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Products
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: square-pos
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-      x-graphql-type-name: ProductList
     Id:
       example: "12345"
       readOnly: true
@@ -4903,6 +4650,10 @@ components:
     Item:
       additionalProperties: false
       properties:
+        abbreviation:
+          example: Ch
+          title: Abbreviation
+          type: string
         absent_at_location_ids:
           description: A list of locations where the object is not present, even if present_at_all_locations is true. This can include locations that are deactivated.
           example:
@@ -4942,11 +4693,27 @@ components:
           readOnly: true
           title: Created by
           type: string
+        deleted:
+          example: true
+          nullable: true
+          title: Deleted
+          type: boolean
+        description:
+          example: Hot Chocolate
+          title: Description
+          type: string
         id:
-          $ref: "#/components/schemas/Id"
+          example: "#cocoa"
+          type: string
+        idempotency_key:
+          description: A value you specify that uniquely identifies this request among requests you have sent.
+          example: random_string
+          maxLength: 45
+          minLength: 1
+          type: string
         name:
-          example: Product
-          title: name
+          example: Cocoa
+          title: Name
           type: string
         present_at_all_locations:
           example: false
@@ -5027,6 +4794,10 @@ components:
                 example: "11910345"
                 title: SKU
                 type: string
+              stockable:
+                example: false
+                title: Stockable
+                type: boolean
               updated_at:
                 $ref: "#/components/schemas/Item/properties/updated_at"
               version:
@@ -5038,6 +4809,8 @@ components:
           nullable: true
           readOnly: true
           type: string
+      required:
+        - idempotency_key
       type: object
     Links:
       description: Links to navigate to previous or next pages through the API
@@ -5844,14 +5617,14 @@ components:
                 $ref: "#/components/schemas/Id"
               scope:
                 enum:
-                  - ORDER
-                  - LINE_ITEM
-                example: ORDER
+                  - order
+                  - line_item
+                example: order
                 type: string
               type:
                 enum:
-                  - FIXED_PERCENTAGE
-                example: FIXED_PERCENTAGE
+                  - fixed_percentage
+                example: fixed_percentage
                 type: string
             type: object
           type: array
@@ -5944,15 +5717,20 @@ components:
                 nullable: true
                 title: Quantity
                 type: number
-              tax_amount:
-                example: 27500
-                nullable: true
-                title: Tax amount
-                type: number
               total_amount:
                 example: 27500
                 nullable: true
                 title: Total amount
+                type: number
+              total_discount:
+                example: 3000
+                nullable: true
+                title: Total discount amount
+                type: number
+              total_tax:
+                example: 2000
+                nullable: true
+                title: Tax amount
                 type: number
               unit_price:
                 example: 27500.5
@@ -5988,7 +5766,10 @@ components:
             type: object
           type: array
         reference_id:
+          description: An optional user-defined reference ID that associates this record with another entity in an external system. For example, a customer ID from an external customer management system.
           example: my-order-001
+          nullable: true
+          title: Reference ID
           type: string
         refunds:
           items:
@@ -6049,6 +5830,8 @@ components:
             - google
             - invoice
           example: api
+          nullable: true
+          readOnly: true
           type: string
         status:
           enum:
@@ -6062,6 +5845,198 @@ components:
         table:
           example: 1F
           type: string
+        tenders:
+          items:
+            properties:
+              amount:
+                example: 27500
+                type: number
+              buyer_tendered_cash_amount:
+                description: The amount of cash tendered by the buyer. Only applicable when the tender type is cash.
+                example: 27500
+                nullable: true
+                type: number
+              card:
+                description: The card's non-confidential details. Only applicable when the tender type is card.
+                nullable: true
+                properties:
+                  billing_address:
+                    $ref: "#/components/schemas/Address"
+                  bin:
+                    description: The first six digits of the card number, known as the Bank Identification Number (BIN).
+                    example: "41111"
+                    nullable: true
+                    type: string
+                  card_brand:
+                    description: The first six digits of the card number, known as the Bank Identification Number (BIN).
+                    enum:
+                      - visa
+                      - mastercard
+                      - amex
+                      - discover
+                      - discover-diners
+                      - jcb
+                      - china-unionpay
+                      - square-gift-card
+                      - square-capital-card
+                      - interac
+                      - eftpos
+                      - felica
+                      - ebt
+                      - other
+                    nullable: true
+                    type: string
+                  card_type:
+                    enum:
+                      - credit
+                      - debit
+                      - prepaid
+                      - other
+                    example: credit
+                    nullable: true
+                    type: string
+                  cardholder_name:
+                    example: John Doe
+                    nullable: true
+                    type: string
+                  customer_id:
+                    example: "12345"
+                    nullable: true
+                    type: string
+                  enabled:
+                    description: Indicates whether or not a card can be used for payments.
+                    example: true
+                    nullable: true
+                    type: boolean
+                  exp_month:
+                    description: The expiration month of the associated card as an integer between 1 and 12.
+                    example: 1
+                    maximum: 12
+                    minimum: 1
+                    nullable: true
+                    type: integer
+                  exp_year:
+                    description: The four-digit year of the card's expiration date.
+                    example: 2022
+                    nullable: true
+                    type: integer
+                  fingerprint:
+                    example: " Intended as a POS-assigned identifier, based on the card number, to identify the card across multiple locations within a single application."
+                    nullable: true
+                    type: string
+                  id:
+                    $ref: "#/components/schemas/Id"
+                  last_4:
+                    example: The last 4 digits of the card number.
+                    nullable: true
+                    type: string
+                  merchant_id:
+                    example: "12345"
+                    type: string
+                  prepaid_type:
+                    enum:
+                      - non-prepaid
+                      - prepaid
+                      - unknown
+                    example: prepaid
+                    nullable: true
+                    type: string
+                  reference_id:
+                    description: An optional user-defined reference ID that associates this record with another entity in an external system. For example, a customer ID from an external customer management system.
+                    example: card-001
+                    nullable: true
+                    title: Reference ID
+                    type: string
+                  version:
+                    $ref: "#/components/schemas/Order/properties/version"
+                type: object
+              card_entry_method:
+                description: The entry method of the card. Only applicable when the tender type is card.
+                enum:
+                  - evm
+                  - swiped
+                  - keyed
+                  - on-file
+                  - contactless
+                example: swiped
+                nullable: true
+                type: string
+              card_status:
+                description: The status of the card. Only applicable when the tender type is card.
+                enum:
+                  - authorized
+                  - captured
+                  - failed
+                  - voided
+                example: authorized
+                nullable: true
+                type: string
+              change_back_cash_amount:
+                description: The amount of cash returned to the buyer. Only applicable when the tender type is cash.
+                example: 27500
+                nullable: true
+                type: number
+              currency:
+                $ref: "#/components/schemas/Order/properties/currency"
+              id:
+                $ref: "#/components/schemas/Id"
+              location_id:
+                $ref: "#/components/schemas/Id"
+              name:
+                example: 10% off
+                type: string
+              note:
+                example: An optional note associated with the tender at the time of payment.
+                title: Note
+                type: string
+              payment_id:
+                $ref: "#/components/schemas/Id"
+              total_amount:
+                example: 27.5
+                nullable: true
+                title: Total amount
+                type: number
+              total_discount:
+                example: 3
+                nullable: true
+                title: Total discount
+                type: number
+              total_processing_fee:
+                example: 0
+                nullable: true
+                title: Total processing fee
+                type: number
+              total_refund:
+                example: 0
+                nullable: true
+                title: Total refund
+                type: number
+              total_service_charge:
+                example: 0
+                nullable: true
+                title: Total service charge
+                type: number
+              total_tax:
+                example: 2.75
+                nullable: true
+                title: Total tax
+                type: number
+              total_tip:
+                example: 7
+                nullable: true
+                title: Total tax
+                type: number
+              transaction_id:
+                $ref: "#/components/schemas/Id"
+              type:
+                enum:
+                  - cash
+                  - card
+                  - other
+                example: cash
+                type: string
+            type: object
+          type: array
         total_amount:
           example: 27.5
           nullable: true
@@ -6077,6 +6052,11 @@ components:
           nullable: true
           title: Total refund
           type: number
+        total_service_charge:
+          example: 0
+          nullable: true
+          title: Total service charge
+          type: number
         total_tax:
           example: 2.75
           nullable: true
@@ -6091,6 +6071,11 @@ components:
           $ref: "#/components/schemas/Item/properties/updated_at"
         updated_by:
           $ref: "#/components/schemas/Item/properties/version"
+        version:
+          example: "230320320320"
+          nullable: true
+          title: Version
+          type: string
         voided:
           example: false
           type: boolean
@@ -6256,11 +6241,7 @@ components:
         id:
           $ref: "#/components/schemas/Id"
         idempotency_key:
-          description: A value you specify that uniquely identifies this request among requests you have sent.
-          example: random_string
-          maxLength: 45
-          minLength: 1
-          type: string
+          $ref: "#/components/schemas/Item/properties/idempotency_key"
         location_id:
           example: "12345"
           type: string
@@ -6426,20 +6407,6 @@ components:
           x-graphql-type-name: PhoneType
       required:
         - number
-      type: object
-    Product:
-      additionalProperties: false
-      properties:
-        created_at:
-          $ref: "#/components/schemas/Item/properties/created_at"
-        created_by:
-          $ref: "#/components/schemas/Item/properties/created_by"
-        id:
-          $ref: "#/components/schemas/Id"
-        updated_at:
-          $ref: "#/components/schemas/Item/properties/updated_at"
-        updated_by:
-          $ref: "#/components/schemas/Item/properties/version"
       type: object
     RowVersion:
       example: 1-12345
@@ -6785,38 +6752,6 @@ components:
         - operation
         - data
       type: object
-    UpdateProductResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/UnifiedId"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Products
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: square-pos
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
     User:
       properties:
         addresses:
@@ -6953,9 +6888,6 @@ components:
                 - pos.order.created
                 - pos.order.updated
                 - pos.order.deleted
-                - pos.product.created
-                - pos.product.updated
-                - pos.product.deleted
                 - pos.payment.created
                 - pos.payment.updated
                 - pos.payment.deleted
@@ -7364,51 +7296,3 @@ x-webhooks:
       tags:
         - Webhook Events
       x-apideck-event-type: pos.payment.updated
-  ProductCreated:
-    post:
-      description: Product created
-      operationId: productCreated
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/WebhookEvent"
-      responses:
-        "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      summary: Product created
-      tags:
-        - Webhook Events
-      x-apideck-event-type: pos.product.created
-  ProductDeleted:
-    post:
-      description: Product deleted
-      operationId: productDeleted
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/WebhookEvent"
-      responses:
-        "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      summary: Product deleted
-      tags:
-        - Webhook Events
-      x-apideck-event-type: pos.product.deleted
-  ProductUpdated:
-    post:
-      description: Product updated
-      operationId: productUpdated
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/WebhookEvent"
-      responses:
-        "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      summary: Product updated
-      tags:
-        - Webhook Events
-      x-apideck-event-type: pos.product.updated

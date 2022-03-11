@@ -19,12 +19,11 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://gkehub.googleapis.com/$discovery/rest?version=v1beta
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: gkehub
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/anthos/multicluster-management/connect/registering-a-cluster
 tags:
@@ -584,6 +583,13 @@ components:
       schema:
         type: string
   schemas:
+    AnthosObservabilityFeatureSpec:
+      description: "**Anthos Observability**: Spec"
+      properties:
+        defaultMembershipSpec:
+          $ref: "#/components/schemas/AnthosObservabilityMembershipSpec"
+          description: default membership spec for unconfigured memberships
+      type: object
     AnthosObservabilityMembershipSpec:
       description: "**Anthosobservability**: Per-Membership Feature spec."
       properties:
@@ -593,6 +599,9 @@ components:
         enableStackdriverOnApplications:
           description: enable collecting and reporting metrics and logs from user apps See go/onyx-application-metrics-logs-user-guide
           type: boolean
+        version:
+          description: the version of stackdriver operator used by this feature
+          type: string
       type: object
     AppDevExperienceFeatureSpec:
       description: Spec for App Dev Experience Feature.
@@ -656,6 +665,9 @@ components:
     CommonFeatureSpec:
       description: CommonFeatureSpec contains Hub-wide configuration information
       properties:
+        anthosobservability:
+          $ref: "#/components/schemas/AnthosObservabilityFeatureSpec"
+          description: Anthos Observability spec
         appdevexperience:
           $ref: "#/components/schemas/AppDevExperienceFeatureSpec"
           description: Appdevexperience specific spec.
@@ -1540,42 +1552,7 @@ components:
           format: int32
           type: integer
       type: object
-    PolicyControllerMembershipSpec:
-      description: "**Policy Controller**: Configuration for a single cluster. Intended to parallel the PolicyController CR."
-      properties:
-        policyControllerHubConfig:
-          $ref: "#/components/schemas/PolicyControllerPolicyControllerHubConfig"
-          description: Policy Controller configuration for the cluster.
-        version:
-          description: Version of Policy Controller installed.
-          type: string
-      type: object
-    PolicyControllerMembershipState:
-      description: "**Policy Controller**: State for a single cluster."
-      properties:
-        clusterName:
-          description: The user-defined name for the cluster used by ClusterSelectors to group clusters together. This should match Membership's membership_name, unless the user installed PC on the cluster manually prior to enabling the PC hub feature. Unique within a Policy Controller installation.
-          type: string
-        membershipSpec:
-          $ref: "#/components/schemas/PolicyControllerMembershipSpec"
-          description: Membership configuration in the cluster. This represents the actual state in the cluster, while the MembershipSpec in the FeatureSpec represents the intended state
-        policyControllerHubState:
-          $ref: "#/components/schemas/PolicyControllerPolicyControllerHubState"
-          description: Policy Controller state observed by the Policy Controller Hub
-        state:
-          description: The lifecycle state Policy Controller is in.
-          enum:
-            - LIFECYCLE_STATE_UNSPECIFIED
-            - NOT_INSTALLED
-            - INSTALLING
-            - ACTIVE
-            - UPDATING
-            - DECOMISSIONING
-            - CLUSTER_ERROR
-            - HUB_ERROR
-          type: string
-      type: object
-    PolicyControllerPolicyControllerHubConfig:
+    PolicyControllerHubConfig:
       description: Configuration for Policy Controller
       properties:
         auditIntervalSeconds:
@@ -1605,7 +1582,7 @@ components:
           $ref: "#/components/schemas/PolicyControllerTemplateLibraryConfig"
           description: Configures the library templates to install along with Policy Controller.
       type: object
-    PolicyControllerPolicyControllerHubState:
+    PolicyControllerHubState:
       description: State of the Policy Controller.
       properties:
         deploymentStates:
@@ -1619,14 +1596,49 @@ components:
           description: Map from deployment name to deployment state. Example deployments are gatekeeper-controller-manager, gatekeeper-audit deployment, and gatekeeper-mutation.
           type: object
         version:
-          $ref: "#/components/schemas/PolicyControllerPolicyControllerHubVersion"
+          $ref: "#/components/schemas/PolicyControllerHubVersion"
           description: The version of Gatekeeper Policy Controller deployed.
       type: object
-    PolicyControllerPolicyControllerHubVersion:
+    PolicyControllerHubVersion:
       description: The build version of Gatekeeper that Policy Controller is using.
       properties:
         version:
           description: The gatekeeper image tag that is composed of ACM version, git tag, build number.
+          type: string
+      type: object
+    PolicyControllerMembershipSpec:
+      description: "**Policy Controller**: Configuration for a single cluster. Intended to parallel the PolicyController CR."
+      properties:
+        policyControllerHubConfig:
+          $ref: "#/components/schemas/PolicyControllerHubConfig"
+          description: Policy Controller configuration for the cluster.
+        version:
+          description: Version of Policy Controller installed.
+          type: string
+      type: object
+    PolicyControllerMembershipState:
+      description: "**Policy Controller**: State for a single cluster."
+      properties:
+        clusterName:
+          description: The user-defined name for the cluster used by ClusterSelectors to group clusters together. This should match Membership's membership_name, unless the user installed PC on the cluster manually prior to enabling the PC hub feature. Unique within a Policy Controller installation.
+          type: string
+        membershipSpec:
+          $ref: "#/components/schemas/PolicyControllerMembershipSpec"
+          description: Membership configuration in the cluster. This represents the actual state in the cluster, while the MembershipSpec in the FeatureSpec represents the intended state
+        policyControllerHubState:
+          $ref: "#/components/schemas/PolicyControllerHubState"
+          description: Policy Controller state observed by the Policy Controller Hub
+        state:
+          description: The lifecycle state Policy Controller is in.
+          enum:
+            - LIFECYCLE_STATE_UNSPECIFIED
+            - NOT_INSTALLED
+            - INSTALLING
+            - ACTIVE
+            - UPDATING
+            - DECOMISSIONING
+            - CLUSTER_ERROR
+            - HUB_ERROR
           type: string
       type: object
     PolicyControllerTemplateLibraryConfig:

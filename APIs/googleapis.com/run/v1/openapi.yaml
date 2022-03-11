@@ -2337,6 +2337,10 @@ components:
     ExecutionStatus:
       description: ExecutionStatus represents the current state of a Execution.
       properties:
+        cancelledCount:
+          description: Optional. The number of tasks which reached phase Cancelled. +optional
+          format: int32
+          type: integer
         completionTime:
           description: Optional. Represents time when the execution was completed. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC. +optional
           format: google-datetime
@@ -2355,6 +2359,10 @@ components:
           type: string
         observedGeneration:
           description: Optional. The 'generation' of the execution that was last processed by the controller.
+          format: int32
+          type: integer
+        retriedCount:
+          description: Optional. The number of tasks which have retried at least once. +optional
           format: int32
           type: integer
         runningCount:

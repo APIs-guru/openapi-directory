@@ -1539,7 +1539,7 @@ components:
       description: MySQL table.
       properties:
         mysqlColumns:
-          description: MySQL columns in the database. When unspecified as part of include/exclude lists, includes/excludes everything.
+          description: MySQL columns in the database. When unspecified as part of include/exclude objects, includes/excludes everything.
           items:
             $ref: "#/components/schemas/MysqlColumn"
           type: array
@@ -1713,7 +1713,7 @@ components:
       description: Oracle table.
       properties:
         oracleColumns:
-          description: Oracle columns in the schema. When unspecified as part of inclue/exclude lists, includes/excludes everything.
+          description: Oracle columns in the schema. When unspecified as part of include/exclude objects, includes/excludes everything.
           items:
             $ref: "#/components/schemas/OracleColumn"
           type: array
@@ -1810,10 +1810,10 @@ components:
       properties:
         mysqlSourceConfig:
           $ref: "#/components/schemas/MysqlSourceConfig"
-          description: MySQL data source configuration
+          description: MySQL data source configuration.
         oracleSourceConfig:
           $ref: "#/components/schemas/OracleSourceConfig"
-          description: Oracle data source configuration
+          description: Oracle data source configuration.
         sourceConnectionProfile:
           description: "Required. Source connection profile resoource. Format: `projects/{project}/locations/{location}/connectionProfiles/{name}`"
           type: string
