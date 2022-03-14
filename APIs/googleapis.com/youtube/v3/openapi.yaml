@@ -6456,6 +6456,7 @@ components:
             - mibacVap
             - mibacVm12
             - mibacVm14
+            - mibacVm16
             - mibacVm18
             - mibacUnrated
           type: string
@@ -7279,6 +7280,18 @@ components:
           description: The comment added by the user to this fan funding event.
           type: string
       type: object
+    LiveChatGiftMembershipReceivedDetails:
+      properties:
+        associatedMembershipGiftingMessageId:
+          description: The ID of the membership gifting message that is related to this gift membership. This ID will always refer to a message whose type is 'membershipGiftingEvent'.
+          type: string
+        gifterChannelId:
+          description: The ID of the user that made the membership gifting purchase. This matches the `snippet.authorChannelId` of the associated membership gifting message.
+          type: string
+        memberLevelName:
+          description: The name of the Level at which the viewer is a member. This matches the `snippet.membershipGiftingDetails.giftMembershipsLevelName` of the associated membership gifting message. The Level names are defined by the YouTube channel offering the Membership. In some situations this field isn't filled.
+          type: string
+      type: object
     LiveChatMemberMilestoneChatDetails:
       properties:
         memberLevelName:
@@ -7290,6 +7303,16 @@ components:
           type: integer
         userComment:
           description: The comment added by the member to this Member Milestone Chat. This field is empty for messages without a comment from the member.
+          type: string
+      type: object
+    LiveChatMembershipGiftingDetails:
+      properties:
+        giftMembershipsCount:
+          description: The number of gift memberships purchased by the user.
+          format: int32
+          type: integer
+        giftMembershipsLevelName:
+          description: The name of the level of the gift memberships purchased by the user. The Level names are defined by the YouTube channel offering the Membership. In some situations this field isn't filled.
           type: string
       type: object
     LiveChatMessage:
@@ -7385,10 +7408,10 @@ components:
           type: string
       type: object
     LiveChatMessageSnippet:
-      description: "Next ID: 31"
+      description: "Next ID: 33"
       properties:
         authorChannelId:
-          description: The ID of the user that authored this message, this field is not always filled. textMessageEvent - the user that wrote the message fanFundingEvent - the user that funded the broadcast newSponsorEvent - the user that just became a sponsor memberMilestoneChatEvent - the member that sent the message messageDeletedEvent - the moderator that took the action messageRetractedEvent - the author that retracted their message userBannedEvent - the moderator that took the action superChatEvent - the user that made the purchase superStickerEvent - the user that made the purchase
+          description: The ID of the user that authored this message, this field is not always filled. textMessageEvent - the user that wrote the message fanFundingEvent - the user that funded the broadcast newSponsorEvent - the user that just became a sponsor memberMilestoneChatEvent - the member that sent the message membershipGiftingEvent - the user that made the purchase giftMembershipReceivedEvent - the user that received the gift membership messageDeletedEvent - the moderator that took the action messageRetractedEvent - the author that retracted their message userBannedEvent - the moderator that took the action superChatEvent - the user that made the purchase superStickerEvent - the user that made the purchase
           type: string
         displayMessage:
           description: Contains a string that can be displayed to the user. If this field is not present the message is silent, at the moment only messages of type TOMBSTONE and CHAT_ENDED_EVENT are silent.
@@ -7396,6 +7419,9 @@ components:
         fanFundingEventDetails:
           $ref: "#/components/schemas/LiveChatFanFundingEventDetails"
           description: Details about the funding event, this is only set if the type is 'fanFundingEvent'.
+        giftMembershipReceivedDetails:
+          $ref: "#/components/schemas/LiveChatGiftMembershipReceivedDetails"
+          description: Details about the Gift Membership Received event, this is only set if the type is 'giftMembershipReceivedEvent'.
         hasDisplayContent:
           description: Whether the message has display content that should be displayed to users.
           type: boolean
@@ -7404,6 +7430,9 @@ components:
         memberMilestoneChatDetails:
           $ref: "#/components/schemas/LiveChatMemberMilestoneChatDetails"
           description: Details about the Member Milestone Chat event, this is only set if the type is 'memberMilestoneChatEvent'.
+        membershipGiftingDetails:
+          $ref: "#/components/schemas/LiveChatMembershipGiftingDetails"
+          description: Details about the Membership Gifting event, this is only set if the type is 'membershipGiftingEvent'.
         messageDeletedDetails:
           $ref: "#/components/schemas/LiveChatMessageDeletedDetails"
         messageRetractedDetails:
@@ -7436,6 +7465,8 @@ components:
             - sponsorOnlyModeEndedEvent
             - newSponsorEvent
             - memberMilestoneChatEvent
+            - membershipGiftingEvent
+            - giftMembershipReceivedEvent
             - messageDeletedEvent
             - messageRetractedEvent
             - userBannedEvent

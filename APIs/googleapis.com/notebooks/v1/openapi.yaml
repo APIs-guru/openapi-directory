@@ -40,6 +40,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: Idempotent request UUID.
+          in: query
+          name: requestId
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -1345,6 +1350,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: Idempotent request UUID.
+          in: query
+          name: requestId
+          schema:
+            type: string
         - description: Required. User-defined unique ID of this Runtime.
           in: query
           name: runtimeId
@@ -2519,7 +2529,10 @@ components:
       type: object
     ResetRuntimeRequest:
       description: Request for resetting a Managed Notebook Runtime.
-      properties: {}
+      properties:
+        requestId:
+          description: Idempotent request UUID.
+          type: string
       type: object
     RollbackInstanceRequest:
       description: Request for rollbacking a notebook instance
@@ -2827,7 +2840,10 @@ components:
       type: object
     StartRuntimeRequest:
       description: Request for starting a Managed Notebook Runtime.
-      properties: {}
+      properties:
+        requestId:
+          description: Idempotent request UUID.
+          type: string
       type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
@@ -2853,7 +2869,10 @@ components:
       type: object
     StopRuntimeRequest:
       description: Request for stopping a Managed Notebook Runtime.
-      properties: {}
+      properties:
+        requestId:
+          description: Idempotent request UUID.
+          type: string
       type: object
     SwitchRuntimeRequest:
       description: Request for switching a Managed Notebook Runtime.
@@ -2863,6 +2882,9 @@ components:
           description: accelerator config.
         machineType:
           description: machine type.
+          type: string
+        requestId:
+          description: Idempotent request UUID.
           type: string
       type: object
     TestIamPermissionsRequest:
