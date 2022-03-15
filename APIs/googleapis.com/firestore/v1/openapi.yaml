@@ -952,7 +952,7 @@ paths:
   "/v1/{parent}/{collectionId}":
     get:
       description: Lists documents.
-      operationId: firestore.projects.databases.documents.list
+      operationId: firestore.projects.databases.documents.listDocuments
       parameters:
         - description: "Required. The parent resource name. In the format: `projects/{project_id}/databases/{database_id}/documents` or `projects/{project_id}/databases/{database_id}/documents/{document_path}`. For example: `projects/my-project/databases/my-database/documents` or `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`"
           in: path
@@ -1652,6 +1652,13 @@ components:
     GoogleFirestoreAdminV1Database:
       description: A Cloud Firestore Database. Currently only one database is allowed per cloud project; this database must have a `database_id` of '(default)'.
       properties:
+        appEngineIntegrationMode:
+          description: The App Engine integration mode to use for this database.
+          enum:
+            - APP_ENGINE_INTEGRATION_MODE_UNSPECIFIED
+            - ENABLED
+            - DISABLED
+          type: string
         concurrencyMode:
           description: The concurrency control mode to use for this database.
           enum:
@@ -1662,6 +1669,10 @@ components:
           type: string
         etag:
           description: This checksum is computed by the server based on the value of other fields, and may be sent on update and delete requests to ensure the client has an up-to-date value before proceeding.
+          type: string
+        keyPrefix:
+          description: 'Output only. The key_prefix for this database. This key_prefix is used, in combination with the project id ("~") to construct the application id that is returned from the Cloud Datastore APIs in Google App Engine first generation runtimes. This value may be empty in which case the appid to use for URL-encoded keys is the project_id (eg: foo instead of v~foo).'
+          readOnly: true
           type: string
         locationId:
           description: The location of the database. Available databases are listed at https://cloud.google.com/firestore/docs/locations.
@@ -2284,6 +2295,9 @@ components:
         document:
           $ref: "#/components/schemas/Document"
           description: A query result, not set when reporting partial progress.
+        done:
+          description: If present, Firestore has completely finished the request and no more documents will be returned.
+          type: boolean
         readTime:
           description: The time at which the document was read. This may be monotonically increasing; in this case, the previous documents in the result stream are guaranteed not to have changed between their `read_time` and this one. If the query returns no results, a response with `read_time` and no `document` will be sent, and this represents the time at which the query was run.
           format: google-datetime

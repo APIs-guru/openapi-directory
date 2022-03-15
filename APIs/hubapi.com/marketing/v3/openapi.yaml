@@ -32,7 +32,7 @@ paths:
   /marketing/v3/marketing-events/events:
     post:
       description: Creates a new marketing event in HubSpot
-      operationId: post-/marketing/v3/marketing-events/events
+      operationId: post-/marketing/v3/marketing-events/events_create
       requestBody:
         content:
           application/json:
@@ -59,7 +59,7 @@ paths:
   /marketing/v3/marketing-events/events/delete:
     post:
       description: Bulk delete a number of marketing events in HubSpot
-      operationId: post-/marketing/v3/marketing-events/events/delete
+      operationId: post-/marketing/v3/marketing-events/events/delete_archive
       requestBody:
         content:
           application/json:
@@ -80,7 +80,7 @@ paths:
   /marketing/v3/marketing-events/events/search:
     get:
       description: Search for marketing events that have an event id that starts with the query string
-      operationId: get-/marketing/v3/marketing-events/events/search
+      operationId: get-/marketing/v3/marketing-events/events/search_doSearch
       parameters:
         - description: The partial event id to search for
           explode: true
@@ -109,7 +109,7 @@ paths:
   /marketing/v3/marketing-events/events/upsert:
     post:
       description: Upset multiple Marketing Event. If there is an existing Marketing event with the specified id, it will be updated; otherwise a new event will be created.
-      operationId: post-/marketing/v3/marketing-events/events/upsert
+      operationId: post-/marketing/v3/marketing-events/events/upsert_doUpsert
       requestBody:
         content:
           application/json:
@@ -136,7 +136,7 @@ paths:
   "/marketing/v3/marketing-events/events/{externalEventId}":
     delete:
       description: Deletes an existing Marketing Event with the specified id, if one exists.
-      operationId: delete-/marketing/v3/marketing-events/events/{externalEventId}
+      operationId: delete-/marketing/v3/marketing-events/events/{externalEventId}_archive
       parameters:
         - description: The id of the marketing event to delete
           explode: false
@@ -169,7 +169,7 @@ paths:
         - Basic
     get:
       description: Returns the details of the Marketing Event with the specified id, if one exists.
-      operationId: get-/marketing/v3/marketing-events/events/{externalEventId}
+      operationId: get-/marketing/v3/marketing-events/events/{externalEventId}_getById
       parameters:
         - description: The id of the marketing event to return
           explode: false
@@ -205,7 +205,7 @@ paths:
         - Basic
     patch:
       description: Updates an existing Marketing Event with the specified id, if one exists.
-      operationId: patch-/marketing/v3/marketing-events/events/{externalEventId}
+      operationId: patch-/marketing/v3/marketing-events/events/{externalEventId}_update
       parameters:
         - description: The id of the marketing event to update
           explode: false
@@ -248,7 +248,7 @@ paths:
         - Basic
     put:
       description: Upsets a Marketing Event. If there is an existing Marketing event with the specified id, it will be updated; otherwise a new event will be created.
-      operationId: put-/marketing/v3/marketing-events/events/{externalEventId}
+      operationId: put-/marketing/v3/marketing-events/events/{externalEventId}_replace
       parameters:
         - description: The id of the marketing event to upsert
           explode: false
@@ -284,7 +284,7 @@ paths:
   "/marketing/v3/marketing-events/events/{externalEventId}/cancel":
     post:
       description: Mark a marketing event as cancelled.
-      operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/cancel
+      operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/cancel_doCancel
       parameters:
         - description: The id of the marketing event to mark as cancelled
           explode: false
@@ -321,7 +321,7 @@ paths:
   "/marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/email-upsert":
     post:
       description: Record a subscription state between multiple HubSpot contacts and a marketing event, using contact email addresses.
-      operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/email-upsert
+      operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/email-upsert_doEmailUpsertById
       parameters:
         - description: The id of the marketing event
           explode: false
@@ -367,7 +367,7 @@ paths:
   "/marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/upsert":
     post:
       description: Record a subscription state between multiple HubSpot contacts and a marketing event, using HubSpot contact ids.
-      operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/upsert
+      operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/upsert_doUpsertById
       parameters:
         - description: The id of the marketing event
           explode: false
@@ -413,7 +413,7 @@ paths:
   "/marketing/v3/marketing-events/{appId}/settings":
     get:
       description: Retrieve the current settings for the application.
-      operationId: get-/marketing/v3/marketing-events/{appId}/settings
+      operationId: get-/marketing/v3/marketing-events/{appId}/settings_getAll
       parameters:
         - description: The id of the application to retrieve the settings for.
           explode: false
@@ -441,7 +441,7 @@ paths:
         - Settings
     post:
       description: Create or update the current settings for the application.
-      operationId: post-/marketing/v3/marketing-events/{appId}/settings
+      operationId: post-/marketing/v3/marketing-events/{appId}/settings_create
       parameters:
         - description: The id of the application to update the settings for.
           explode: false

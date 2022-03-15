@@ -2560,7 +2560,15 @@ components:
           readOnly: true
           type: string
         parent:
-          description: "Immutable. Resource name of this property's logical parent. Note: The Property-Moving UI can be used to change the parent. Format: accounts/{account} Example: \"accounts/100\""
+          description: "Immutable. Resource name of this property's logical parent. Note: The Property-Moving UI can be used to change the parent. Format: accounts/{account}, properties/{property} Example: \"accounts/100\", \"properties/101\""
+          type: string
+        propertyType:
+          description: Immutable. The property type for this Property resource. When creating a property, if the type is "PROPERTY_TYPE_UNSPECIFIED", then "ORDINARY_PROPERTY" will be implied. "SUBPROPERTY" and "ROLLUP_PROPERTY" types cannot yet be created via Google Analytics Admin API.
+          enum:
+            - PROPERTY_TYPE_UNSPECIFIED
+            - PROPERTY_TYPE_ORDINARY
+            - PROPERTY_TYPE_SUBPROPERTY
+            - PROPERTY_TYPE_ROLLUP
           type: string
         serviceLevel:
           description: Output only. The Google Analytics service level that applies to this property.
@@ -2585,8 +2593,19 @@ components:
         displayName:
           description: Display name for the property referred to in this property summary.
           type: string
+        parent:
+          description: "Resource name of this property's logical parent. Note: The Property-Moving UI can be used to change the parent. Format: accounts/{account}, properties/{property} Example: \"accounts/100\", \"properties/200\""
+          type: string
         property:
           description: 'Resource name of property referred to by this property summary Format: properties/{property_id} Example: "properties/1000"'
+          type: string
+        propertyType:
+          description: The property's property type.
+          enum:
+            - PROPERTY_TYPE_UNSPECIFIED
+            - PROPERTY_TYPE_ORDINARY
+            - PROPERTY_TYPE_SUBPROPERTY
+            - PROPERTY_TYPE_ROLLUP
           type: string
       type: object
     GoogleAnalyticsAdminV1alphaProvisionAccountTicketRequest:
