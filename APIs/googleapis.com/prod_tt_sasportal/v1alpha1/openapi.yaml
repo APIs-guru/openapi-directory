@@ -1298,7 +1298,7 @@ components:
           type: array
       type: object
     SasPortalNrqzValidation:
-      description: Information about National Radio Quiet Zone validation.
+      description: Information about National Radio Quiet Zone validation. The presence of the field indicates the device has been validated.
       properties:
         caseId:
           description: Validation case id.
@@ -1314,13 +1314,6 @@ components:
           description: Device longitude associated with the validation.
           format: double
           type: number
-        state:
-          description: State of the NRQZ validation info.
-          enum:
-            - STATE_UNSPECIFIED
-            - DRAFT
-            - FINAL
-          type: string
       type: object
     SasPortalOperation:
       description: This resource represents a long-running operation that is the result of a network API call.

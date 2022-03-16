@@ -145,6 +145,62 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{name}/locations":
+    get:
+      description: Lists information about the supported locations for this service.
+      operationId: artifactregistry.projects.locations.list
+      parameters:
+        - description: The resource that owns the locations collection, if applicable.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: A filter to narrow down results to a preferred subset. The filtering language accepts strings like "displayName=tokyo", and is documented in more detail in [AIP-160](https://google.aip.dev/160).
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The maximum number of results to return. If not set, the service selects a default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token received from the `next_page_token` field in the response. Send that page token to receive the subsequent page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListLocationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/aptArtifacts:create":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1095,6 +1151,18 @@ components:
           description: The token to retrieve the next page of files, or empty if there are no more files to return.
           type: string
       type: object
+    ListLocationsResponse:
+      description: The response message for Locations.ListLocations.
+      properties:
+        locations:
+          description: A list of locations that matches the specified filter in the request.
+          items:
+            $ref: "#/components/schemas/Location"
+          type: array
+        nextPageToken:
+          description: The standard List next-page token.
+          type: string
+      type: object
     ListPackagesResponse:
       description: The response from listing packages.
       properties:
@@ -1142,6 +1210,29 @@ components:
           items:
             $ref: "#/components/schemas/Version"
           type: array
+      type: object
+    Location:
+      description: A resource that represents Google Cloud Platform location.
+      properties:
+        displayName:
+          description: The friendly name for this location, typically a nearby city name. For example, "Tokyo".
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Cross-service attributes for the location. For example {"cloud.googleapis.com/region": "us-east1"}'
+          type: object
+        locationId:
+          description: 'The canonical id for this location. For example: `"us-east1"`.'
+          type: string
+        metadata:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: Service-specific metadata. For example the available capacity at the given location.
+          type: object
+        name:
+          description: 'Resource name for the location, which may vary between implementations. For example: `"projects/example-project/locations/us-east1"`'
+          type: string
       type: object
     MavenRepositoryConfig:
       description: MavenRepositoryConfig is maven related repository details. Provides additional configuration details for repositories of the maven format type.

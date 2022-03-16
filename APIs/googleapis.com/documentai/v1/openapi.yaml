@@ -933,6 +933,14 @@ components:
             - DATASET_SPLIT_TEST
             - DATASET_SPLIT_UNASSIGNED
           type: string
+        destSplitType:
+          description: The destination dataset split type.
+          enum:
+            - DATASET_SPLIT_TYPE_UNSPECIFIED
+            - DATASET_SPLIT_TRAIN
+            - DATASET_SPLIT_TEST
+            - DATASET_SPLIT_UNASSIGNED
+          type: string
         individualBatchMoveStatuses:
           description: The list of response details of each document.
           items:
