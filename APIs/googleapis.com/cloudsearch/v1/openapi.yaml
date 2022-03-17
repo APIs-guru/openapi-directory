@@ -2787,13 +2787,31 @@ components:
     DynamiteSpacesScoringInfo:
       description: This is the proto for holding space level scoring information. This data is used for logging in query-api server and for testing purposes.
       properties:
+        affinityScore:
+          format: double
+          type: number
+        commonContactCountAffinityScore:
+          format: double
+          type: number
+        contactsIntersectionCount:
+          format: double
+          type: number
         finalScore:
           format: double
           type: number
         freshnessScore:
           format: double
           type: number
+        joinedSpacesAffinityScore:
+          format: double
+          type: number
         messageScore:
+          format: double
+          type: number
+        smallContactListAffinityScore:
+          format: double
+          type: number
+        smallUnjoinedSpacesAffinityScore:
           format: double
           type: number
         spaceAgeInDays:
@@ -4565,7 +4583,7 @@ components:
         groupId:
           $ref: "#/components/schemas/GroupId"
         isExternal:
-          description: Whether this is an external space outside of user's organization
+          description: Whether this is a space that enables guest access
           type: boolean
         name:
           type: string

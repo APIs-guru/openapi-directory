@@ -13,20 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Speech-to-Text API
   version: v1p1beta1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://speech.googleapis.com/$discovery/rest?version=v1p1beta1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: speech
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/speech-to-text/docs/quickstart-protocol
 tags:
@@ -529,7 +526,7 @@ components:
           $ref: "#/components/schemas/CustomClass"
           description: Required. The custom class to create.
         customClassId:
-          description: Required. The ID to use for the custom class, which will become the final component of the custom class' resource name. This value should be 4-63 characters, and valid characters are /a-z-/.
+          description: Required. The ID to use for the custom class, which will become the final component of the custom class' resource name. This value should restrict to letters, numbers, and hyphens, with the first character a letter, the last a letter or a number, and be 4-63 characters.
           type: string
       type: object
     CreatePhraseSetRequest:
@@ -539,7 +536,7 @@ components:
           $ref: "#/components/schemas/PhraseSet"
           description: Required. The phrase set to create.
         phraseSetId:
-          description: Required. The ID to use for the phrase set, which will become the final component of the phrase set's resource name. This value should be 4-63 characters, and valid characters are /a-z-/.
+          description: Required. The ID to use for the phrase set, which will become the final component of the phrase set's resource name. This value should restrict to letters, numbers, and hyphens, with the first character a letter, the last a letter or a number, and be 4-63 characters.
           type: string
       type: object
     CustomClass:
@@ -1064,5 +1061,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

@@ -5744,6 +5744,10 @@ components:
         environment:
           description: Required. ID of the attached environment.
           type: string
+        environmentGroupId:
+          description: Output only. ID of the environment group.
+          readOnly: true
+          type: string
         name:
           description: ID of the environment group attachment.
           type: string

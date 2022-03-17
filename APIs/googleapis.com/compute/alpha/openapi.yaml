@@ -14721,112 +14721,6 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - publicAdvertisedPrefixes
-  "/projects/{project}/global/publicAdvertisedPrefixes/{publicAdvertisedPrefix}/announce":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/userIp"
-    post:
-      description: Announces the specified PublicAdvertisedPrefix
-      operationId: compute.publicAdvertisedPrefixes.announce
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: The name of the public advertised prefix. It should comply with RFC1035.
-          in: path
-          name: publicAdvertisedPrefix
-          required: true
-          schema:
-            type: string
-        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-          in: query
-          name: requestId
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-      tags:
-        - publicAdvertisedPrefixes
-  "/projects/{project}/global/publicAdvertisedPrefixes/{publicAdvertisedPrefix}/withdraw":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/userIp"
-    post:
-      description: Withdraws the specified PublicAdvertisedPrefix
-      operationId: compute.publicAdvertisedPrefixes.withdraw
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: The name of the public advertised prefix. It should comply with RFC1035.
-          in: path
-          name: publicAdvertisedPrefix
-          required: true
-          schema:
-            type: string
-        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-          in: query
-          name: requestId
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-      tags:
-        - publicAdvertisedPrefixes
   "/projects/{project}/global/publicDelegatedPrefixes":
     get:
       description: Lists the global PublicDelegatedPrefixes for a project.
@@ -22073,7 +21967,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "[Input Only] Specifies to create an application consistent snapshot by informing the OS to prepare for the snapshot process."
+        - description: "[Input Only] Specifies to create an application consistent snapshot by informing the OS to prepare for the snapshot process. Currently only supported on Windows instances using the Volume Shadow Copy Service (VSS)."
           in: query
           name: guestFlush
           schema:
@@ -30435,124 +30329,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/PublicDelegatedPrefix"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-      tags:
-        - publicDelegatedPrefixes
-  "/projects/{project}/regions/{region}/publicDelegatedPrefixes/{publicDelegatedPrefix}/announce":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/userIp"
-    post:
-      description: Announces the specified PublicDelegatedPrefix in the given region.
-      operationId: compute.publicDelegatedPrefixes.announce
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: The name of the region where the public delegated prefix is located. It should comply with RFC1035.
-          in: path
-          name: region
-          required: true
-          schema:
-            type: string
-        - description: The name of the public delegated prefix. It should comply with RFC1035.
-          in: path
-          name: publicDelegatedPrefix
-          required: true
-          schema:
-            type: string
-        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-          in: query
-          name: requestId
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-      tags:
-        - publicDelegatedPrefixes
-  "/projects/{project}/regions/{region}/publicDelegatedPrefixes/{publicDelegatedPrefix}/withdraw":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/userIp"
-    post:
-      description: Withdraws the specified PublicDelegatedPrefix in the given region.
-      operationId: compute.publicDelegatedPrefixes.withdraw
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: The name of the region where the public delegated prefix is located. It should comply with RFC1035.
-          in: path
-          name: region
-          required: true
-          schema:
-            type: string
-        - description: The name of the public delegated prefix. It should comply with RFC1035.
-          in: path
-          name: publicDelegatedPrefix
-          required: true
-          schema:
-            type: string
-        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-          in: query
-          name: requestId
-          schema:
-            type: string
       responses:
         "200":
           content:
@@ -43058,7 +42834,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Performs a reset on the instance. This is a hard reset. The VM does not do a graceful shutdown. For more information, see Resetting an instance.
+      description: Performs a reset on the instance. This is a hard reset the VM does not do a graceful shutdown. For more information, see Resetting an instance.
       operationId: compute.instances.reset
       parameters:
         - description: Project ID for this request.
@@ -48909,13 +48685,6 @@ components:
     AttachedDisk:
       description: An instance-attached disk resource.
       properties:
-        architecture:
-          description: "[Output Only] The architecture of the attached disk. Valid values are ARM64 or X86_64."
-          enum:
-            - ARCHITECTURE_UNSPECIFIED
-            - ARM64
-            - X86_64
-          type: string
         autoDelete:
           description: Specifies whether the disk will be auto-deleted when the instance is deleted (but not when the disk is detached from the instance).
           type: boolean
@@ -50036,7 +49805,7 @@ components:
         subsetting:
           $ref: "#/components/schemas/Subsetting"
         timeoutSec:
-          description: The backend service timeout has a different meaning depending on the type of load balancer. For more information see, Backend service settings. The default is 30 seconds. The full range of timeout values allowed goes from 1 through 2,147,483,647 seconds. This value can be overridden in the PathMatcher configuration of the UrlMap that references this backend service. Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true. Instead, use maxStreamDuration.
+          description: The backend service timeout has a different meaning depending on the type of load balancer. For more information see, Backend service settings The default is 30 seconds. The full range of timeout values allowed is 1 - 2,147,483,647 seconds. This value can be overridden in the PathMatcher configuration of the UrlMap that references this backend service. Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true. Instead, use maxStreamDuration.
           format: int32
           type: integer
       type: object
@@ -50844,7 +50613,6 @@ components:
           description: "[Output Only] Status of the commitment with regards to eventual expiration (each commitment has an end date defined). One of the following values: NOT_YET_ACTIVE, ACTIVE, EXPIRED."
           enum:
             - ACTIVE
-            - CANCELLED
             - CREATING
             - EXPIRED
             - NOT_YET_ACTIVE
@@ -52901,9 +52669,6 @@ components:
             - STANDARD
             - STANDARD_OVERRIDES_FIXED_STANDARD
           type: string
-        noAutomateDnsZone:
-          description: This is used in PSC consumer ForwardingRule to control whether it should try to auto-generate a DNS zone or not. Non-PSC forwarding rules do not use this field.
-          type: boolean
         portRange:
           description: "This field can be used only if: - Load balancing scheme is one of EXTERNAL, INTERNAL_SELF_MANAGED or INTERNAL_MANAGED - IPProtocol is one of TCP, UDP, or SCTP. Packets addressed to ports in the specified range will be forwarded to target or backend_service. You can only use one of ports, port_range, or allPorts. The three are mutually exclusive. Forwarding rules with the same [IPAddress, IPProtocol] pair must have disjoint ports. Some types of forwarding target have constraints on the acceptable ports. For more information, see [Port specifications](https://cloud.google.com/load-balancing/docs/forwarding-rule-concepts#port_specifications). @pattern: \\\\d+(?:-\\\\d+)?"
           type: string
@@ -53189,7 +52954,6 @@ components:
           type: string
         kind:
           default: compute#futureReservation
-          description: "[Output Only] Type of the resource. Always compute#futureReservation for future reservations."
           type: string
         name:
           description: The name of the resource, provided by the client when initially creating the resource. The resource name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
@@ -53287,7 +53051,6 @@ components:
           type: object
         kind:
           default: compute#futureReservationsAggregatedListResponse
-          description: "[Output Only] Type of resource. Always compute#futureReservationsAggregatedListResponse for future resevation aggregated list response."
           type: string
         nextPageToken:
           description: "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results."
@@ -53363,7 +53126,6 @@ components:
           type: array
         kind:
           default: compute#futureReservationsListResponse
-          description: "[Output Only] Type of resource.Always compute#FutureReservationsListResponse for lists of reservations"
           type: string
         nextPageToken:
           description: "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results."
@@ -59236,13 +58998,6 @@ components:
                 type: string
             type: object
           type: array
-        architecture:
-          description: "[Output Only] The architecture of the machine type."
-          enum:
-            - ARCHITECTURE_UNSPECIFIED
-            - ARM64
-            - X86_64
-          type: string
         creationTimestamp:
           description: "[Output Only] Creation timestamp in RFC3339 text format."
           type: string
@@ -59806,7 +59561,6 @@ components:
           type: string
         kind:
           default: compute#networkEdgeSecurityService
-          description: "[Output only] Type of the resource. Always compute#networkEdgeSecurityService for NetworkEdgeSecurityServices"
           type: string
         name:
           description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
@@ -59840,7 +59594,6 @@ components:
           type: object
         kind:
           default: compute#networkEdgeSecurityServiceAggregatedList
-          description: "[Output Only] Type of resource. Always compute#networkEdgeSecurityServiceAggregatedList for lists of Network Edge Security Services."
           type: string
         nextPageToken:
           description: "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results."
@@ -60488,7 +60241,7 @@ components:
           description: "[Output Only] Type of the resource. Always compute#networkInterface for network interfaces."
           type: string
         name:
-          description: "[Output Only] The name of the network interface, which is generated by the server. For a VM, the network interface uses the nicN naming format. Where N is a value between 0 and 7. The default interface value is nic0."
+          description: "[Output Only] The name of the network interface, which is generated by the server. For network devices, these are eth0, eth1, etc."
           type: string
         network:
           description: "URL of the VPC network resource for this instance. When creating an instance, if neither the network nor the subnetwork is specified, the default network global/networks/default is used. If the selected project doesn't have the default network, you must specify a network or subnet. If the network is not specified but the subnetwork is specified, the network is inferred. If you specify this property, you can specify the network as a full or partial URL. For example, the following are all valid URLs: - https://www.googleapis.com/compute/v1/projects/project/global/networks/ network - projects/project/global/networks/network - global/networks/default "
@@ -65602,6 +65355,7 @@ components:
             - DROPPED
             - INACTIVE
             - PENDING
+            - UNKNOWN_ROUTE_STATUS
           type: string
         routeType:
           description: "[Output Only] The type of this route, which can be one of the following values: - 'TRANSIT' for a transit route that this router learned from another Cloud Router and will readvertise to one of its BGP peers - 'SUBNET' for a route from a subnet of the VPC - 'BGP' for a route learned from a BGP peer of this router - 'STATIC' for a static route"
@@ -68073,12 +67827,6 @@ components:
           type: string
         sourceInstantSnapshotId:
           description: "[Output Only] The unique ID of the instant snapshot used to create this snapshot. This value identifies the exact instant snapshot that was used to create this persistent disk. For example, if you created the persistent disk from an instant snapshot that was later deleted and recreated under the same name, the source instant snapshot ID would identify the exact instant snapshot that was used."
-          type: string
-        sourceSnapshotSchedulePolicy:
-          description: "[Output Only] URL of the resource policy which created this scheduled snapshot."
-          type: string
-        sourceSnapshotSchedulePolicyId:
-          description: "[Output Only] ID of the resource policy which created this scheduled snapshot."
           type: string
         status:
           description: "[Output Only] The status of the snapshot. This can be CREATING, DELETING, FAILED, READY, or UPLOADING."
