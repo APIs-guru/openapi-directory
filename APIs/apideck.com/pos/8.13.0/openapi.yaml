@@ -8,7 +8,7 @@ info:
   description: |+
     Welcome to the POS API.
 
-    You can use this API to access all POS endpoints.
+    You can use this API to access all POS API endpoints.
 
     ## Base URL
 
@@ -164,6 +164,10 @@ info:
     #### OAuthCodeExchangeError
 
     When attempting to exchange the authorization code for an `access_token` during an OAuth flow, an error occurred. This may be temporary. You can reattempt authorization or contact our team to resolve the issue.
+
+    #### OAuthConnectorError
+
+    It seems something went wrong on the connector side. It's possible this connector is in `beta` or still under development. We've been notified and are working to fix this issue.
 
     #### MappingError
 

@@ -748,7 +748,7 @@ paths:
       description: Deletes a `WorkerPool`.
       operationId: cloudbuild.projects.locations.workerPools.delete
       parameters:
-        - description: "Required. The name of the `WorkerPool` to delete. Format: `projects/{project}/locations/{workerPool}/workerPools/{workerPool}`."
+        - description: "Required. The name of the `WorkerPool` to delete. Format: `projects/{project}/locations/{location}/workerPools/{workerPool}`."
           in: path
           name: name
           required: true

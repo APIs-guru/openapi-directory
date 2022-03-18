@@ -5,10 +5,10 @@ info:
   contact:
     email: hello@apideck.com
     url: https://developers.apideck.com
-  description: |
+  description: |+
     Welcome to the Connector API.
 
-    You can use this API to access all connector endpoints.
+    You can use this API to access all Connector API endpoints.
 
     ## Base URL
 
@@ -117,10 +117,6 @@ info:
 
     A Unified API request made via one of our downstream connectors returned an unexpected error. The `status_code` returned is proxied through to error response along with their original response via the error detail.
 
-    #### ConnectorProcessingError
-
-    A Unified API request made via one of our downstream connectors returned a status code that was less than 400, along with a description of why the request could not be processed. Often this is due to the shape of request data being valid, but unable to be processed due to internal business logic - for example: an invalid relationship or `ID` present in your request.
-
     #### UnauthorizedError
 
     We were unable to authorize the request as made. This can happen for a number of reasons, from missing header params to passing an incorrect authorization token. Verify your Api Key is being set correctly in the authorization header. ie: `Authorization: 'Bearer sk_live_***'`
@@ -168,6 +164,10 @@ info:
     #### OAuthCodeExchangeError
 
     When attempting to exchange the authorization code for an `access_token` during an OAuth flow, an error occurred. This may be temporary. You can reattempt authorization or contact our team to resolve the issue.
+
+    #### OAuthConnectorError
+
+    It seems something went wrong on the connector side. It's possible this connector is in `beta` or still under development. We've been notified and are working to fix this issue.
 
     #### MappingError
 
@@ -254,6 +254,7 @@ info:
     ## Support
 
     If you have problems or need help with your case, you can always reach out to our Support.
+
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html

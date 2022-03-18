@@ -6,7 +6,7 @@ info:
   contact:
     email: hello@apideck.com
     url: https://developers.apideck.com
-  description: |
+  description: |+
     Welcome to the Vault API 👋
 
     When you're looking to connect to an API, the first step is authentication.
@@ -46,7 +46,7 @@ info:
     - Search for integrations (upcoming)
     - Give integration suggestions based on provided metadata (email or website) when creating the session (upcoming)
 
-    To use Hosted Vault, you will need to first [__create a session__](https://developers.apideck.com/apis/vault/reference#operation/sessionsCreate). This can be achieved by making a POST request to the Vault API to create a valid session for a user, hereafter referred to as the consumer ID.
+    To use Hosted Vault, you will need to first [**create a session**](https://developers.apideck.com/apis/vault/reference#operation/sessionsCreate). This can be achieved by making a POST request to the Vault API to create a valid session for a user, hereafter referred to as the consumer ID.
 
     Example using curl:
 
@@ -159,6 +159,7 @@ info:
     #### Basic auth
 
     Basic authentication is a simple authentication scheme built into the HTTP protocol. The required fields to complete basic auth are handled by Hosted Vault or by updating the connection through the Vault API below.
+
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
