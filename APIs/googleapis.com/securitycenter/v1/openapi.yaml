@@ -1349,7 +1349,7 @@ components:
           type: string
       type: object
     Empty:
-      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
       type: object
     Expr:
@@ -1414,7 +1414,7 @@ components:
           $ref: "#/components/schemas/MitreAttack"
           description: "MITRE ATT&CK tactics and techniques related to this finding. See: https://attack.mitre.org"
         mute:
-          description: Indicates the mute state of a finding (either unspecified, muted, unmuted or undefined). Unlike other attributes of a finding, a finding provider shouldn't set the value of mute.
+          description: Indicates the mute state of a finding (either muted, unmuted or undefined). Unlike other attributes of a finding, a finding provider shouldn't set the value of mute.
           enum:
             - MUTE_UNSPECIFIED
             - MUTED
@@ -1626,7 +1626,7 @@ components:
           description: The full resource name of project that the resource belongs to.
           type: string
         projectDisplayName:
-          description: The project id that the resource belongs to.
+          description: The project ID that the resource belongs to.
           type: string
         type:
           description: The full resource type of the resource.
@@ -2281,7 +2281,7 @@ components:
           description: The full resource name of resource's parent.
           type: string
         projectDisplayName:
-          description: The project id that the resource belongs to.
+          description: The project ID that the resource belongs to.
           type: string
         projectName:
           description: The full resource name of project that the resource belongs to.

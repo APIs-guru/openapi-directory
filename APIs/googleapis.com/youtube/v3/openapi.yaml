@@ -5637,6 +5637,10 @@ components:
     ChannelToStoreLinkDetails:
       description: Information specific to a store on a merchandising platform linked to a YouTube channel.
       properties:
+        merchantId:
+          description: Google Merchant Center id of the store.
+          format: uint64
+          type: string
         storeName:
           description: Name of the store.
           type: string

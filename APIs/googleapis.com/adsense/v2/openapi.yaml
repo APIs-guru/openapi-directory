@@ -1508,10 +1508,10 @@ components:
           $ref: "#/components/schemas/ContentAdsSettings"
           description: Settings specific to content ads (AFC).
         displayName:
-          description: Display name of the ad unit, as provided when the ad unit was created.
+          description: Required. Display name of the ad unit, as provided when the ad unit was created.
           type: string
         name:
-          description: "Resource name of the ad unit. Format: accounts/{account}/adclients/{adclient}/adunits/{adunit}"
+          description: "Required. Resource name of the ad unit. Format: accounts/{account}/adclients/{adclient}/adunits/{adunit}"
           type: string
         reportingDimensionId:
           description: Output only. Unique ID of the ad unit as used in the `AD_UNIT_ID` reporting dimension.

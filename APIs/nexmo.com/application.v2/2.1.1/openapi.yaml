@@ -84,7 +84,7 @@ paths:
                     example: Invalid credentials supplied
                     type: string
                   type:
-                    example: https://developer.nexmo.com/api-errors#unauthorized
+                    example: https://developer.vonage.com/api-errors#unauthorized
                     type: string
           description: Credential is missing or invalid
         "405":
@@ -101,7 +101,7 @@ paths:
                     example: Request method not allowed
                     type: string
                   type:
-                    example: https://developer.nexmo.com/api-errors#wrong-verb
+                    example: https://developer.vonage.com/api-errors#wrong-verb
                     type: string
           description: Invalid Request Method
         "406":
@@ -118,7 +118,7 @@ paths:
                     example: Invalid Accept header
                     type: string
                   type:
-                    example: https://developer.nexmo.com/api-errors#accept-header
+                    example: https://developer.vonage.com/api-errors#accept-header
                     type: string
           description: Invalid Accept Header
       summary: List available applications
@@ -383,7 +383,7 @@ paths:
                     example: Unsupported Content-Type header
                     type: string
                   type:
-                    example: https://developer.nexmo.com/api-errors#content-type-header
+                    example: https://developer.vonage.com/api-errors#content-type-header
                     type: string
           description: Unsupported Content Type Header
       summary: Create an application
@@ -428,7 +428,7 @@ paths:
                     example: Not Found
                     type: string
                   type:
-                    example: https://developer.nexmo.com/api-errors#not-found
+                    example: https://developer.vonage.com/api-errors#not-found
                     type: string
           description: Resource Not Found
         "405":

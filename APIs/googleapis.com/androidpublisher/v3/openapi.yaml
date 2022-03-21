@@ -1324,7 +1324,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/androidpublisher/v3/applications/{packageName}/edits/{editId}/testers/{track}":
     get:
-      description: Gets testers.
+      description: "Gets testers. Note: Testers resource does not support email lists."
       operationId: androidpublisher.edits.testers.get
       parameters:
         - description: Package name of the app.
@@ -1372,7 +1372,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Patches testers.
+      description: "Patches testers. Note: Testers resource does not support email lists."
       operationId: androidpublisher.edits.testers.patch
       parameters:
         - description: Package name of the app.
@@ -1413,7 +1413,7 @@ paths:
       tags:
         - edits
     put:
-      description: Updates testers.
+      description: "Updates testers. Note: Testers resource does not support email lists."
       operationId: androidpublisher.edits.testers.update
       parameters:
         - description: Package name of the app.
@@ -4201,7 +4201,7 @@ components:
           type: array
       type: object
     Testers:
-      description: The testers of an app. The resource for TestersService.
+      description: "The testers of an app. The resource for TestersService. Note: while it is possible in the Play Console UI to add testers via email lists, email lists are not supported by this resource."
       properties:
         googleGroups:
           description: All testing Google Groups, as email addresses.

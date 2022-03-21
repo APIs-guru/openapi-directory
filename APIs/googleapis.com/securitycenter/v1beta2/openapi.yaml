@@ -466,7 +466,7 @@ components:
           $ref: "#/components/schemas/MitreAttack"
           description: "MITRE ATT&CK tactics and techniques related to this finding. See: https://attack.mitre.org"
         mute:
-          description: Indicates the mute state of a finding (either unspecified, muted, unmuted or undefined). Unlike other attributes of a finding, a finding provider shouldn't set the value of mute.
+          description: Indicates the mute state of a finding (either muted, unmuted or undefined). Unlike other attributes of a finding, a finding provider shouldn't set the value of mute.
           enum:
             - MUTE_UNSPECIFIED
             - MUTED
@@ -663,7 +663,7 @@ components:
           description: The full resource name of project that the resource belongs to.
           type: string
         projectDisplayName:
-          description: The project id that the resource belongs to.
+          description: The project ID that the resource belongs to.
           type: string
         type:
           description: The full resource type of the resource.

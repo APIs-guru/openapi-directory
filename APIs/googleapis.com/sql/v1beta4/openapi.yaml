@@ -3926,6 +3926,7 @@ components:
             - PRIMARY_ALREADY_SETUP
             - UNSUPPORTED_BINLOG_FORMAT
             - BINLOG_RETENTION_SETTING
+            - UNSUPPORTED_STORAGE_ENGINE
           type: string
       type: object
     SqlInstancesRescheduleMaintenanceRequestBody:
@@ -4027,6 +4028,14 @@ components:
           type: string
         kind:
           description: This is always sql#sqlServerAuditConfig
+          type: string
+        retentionInterval:
+          description: How long to keep generated audit files.
+          format: google-duration
+          type: string
+        uploadInterval:
+          description: How often to upload generated audit files.
+          format: google-duration
           type: string
       type: object
     SqlServerDatabaseDetails:

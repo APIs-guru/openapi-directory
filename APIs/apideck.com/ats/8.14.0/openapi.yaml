@@ -1,15 +1,14 @@
-openapi: 3.0.3
+openapi: 3.0.0
 servers:
-  - description: Production
-    url: https://unify.apideck.com
+  - url: https://unify.apideck.com
 info:
   contact:
     email: hello@apideck.com
     url: https://developers.apideck.com
   description: |+
-    Welcome to the Lead API.
+    Welcome to the ATS API.
 
-    You can use this API to access all Lead API endpoints.
+    You can use this API to access all ATS API endpoints.
 
     ## Base URL
 
@@ -259,9 +258,9 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  title: Lead API
-  version: 8.13.0
-  x-apideck-api: lead
+  title: ats
+  version: 8.14.0
+  x-apideck-api: ats
   x-apideck-sdk-support: true
   x-apisguru-categories:
     - developer_tools
@@ -269,10 +268,10 @@ info:
     url: https://developers.apideck.com/icon.png
   x-origin:
     - format: openapi
-      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/lead.yml
+      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/ats.yml
       version: "3.0"
   x-providerName: apideck.com
-  x-serviceName: lead
+  x-serviceName: ats
   x-tags:
     - partner
 externalDocs:
@@ -280,18 +279,23 @@ externalDocs:
   url: https://developers.apideck.com
 security:
   - apiKey: []
-    applicationId: []
-    consumerId: []
 tags:
   - description: ""
-    name: Leads
+    name: Jobs
     x-apideck-model:
-      $ref: "#/components/schemas/Lead"
+      $ref: "#/components/schemas/Job"
+  - description: ""
+    name: Applicants
+    x-apideck-model:
+      $ref: "#/components/schemas/Applicant"
+  - description: ""
+    name: Employees
+    x-apideck-upcoming: true
 paths:
-  /lead/leads:
+  /ats/applicants:
     get:
-      description: List leads
-      operationId: leadsAll
+      description: List applicants
+      operationId: applicantsAll
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
@@ -299,11 +303,10 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
-        - $ref: "#/components/parameters/leadsFilter"
-        - $ref: "#/components/parameters/leadsSort"
+        - $ref: "#/components/parameters/jobsFilter"
       responses:
         "200":
-          $ref: "#/components/responses/GetLeadsResponse"
+          $ref: "#/components/responses/GetApplicantsResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -318,10 +321,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: List leads
+      summary: List applicants
       tags:
-        - Leads
-      x-apideck-api: lead
+        - Applicants
+      x-apideck-api: ats
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -335,15 +338,15 @@ paths:
             })
 
             try {
-              const { data } = await apideck.lead.leadsAll({})
+              const { data } = await apideck.ats.applicantsAll({})
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: leads
+      x-graphql-field-name: applicants
     post:
-      description: Create lead
-      operationId: leadsAdd
+      description: Create applicant
+      operationId: applicantsAdd
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
@@ -353,11 +356,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Lead"
+              $ref: "#/components/schemas/Applicant"
         required: true
       responses:
         "201":
-          $ref: "#/components/responses/CreateLeadResponse"
+          $ref: "#/components/responses/CreateApplicantResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -372,10 +375,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Create lead
+      summary: Create applicant
       tags:
-        - Leads
-      x-apideck-api: lead
+        - Applicants
+      x-apideck-api: ats
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -389,27 +392,26 @@ paths:
             })
 
             const params = {
-              lead: {
+              applicant: {
+                position_id: '123',
                 name: 'Elon Musk',
-                company_name: 'Spacex',
-                owner_id: '54321',
-                company_id: '2',
-                contact_id: '2',
-                lead_source: 'Cold Call',
                 first_name: 'Elon',
                 last_name: 'Musk',
-                description: 'A thinker',
-                prefix: 'Sir',
-                title: 'CEO',
-                language: 'EN',
-                status: 'New',
-                monetary_amount: 75000,
-                currency: 'USD',
-                fax: '+12129876543',
-                websites: [
+                headline: 'PepsiCo, Inc, Central Perk',
+                emails: [
+                  {
+                    id: '123',
+                    email: 'elon@musk.com',
+                    type: 'primary'
+                  }
+                ],
+                phone_numbers: [
                   {
                     id: '12345',
-                    url: 'http://example.com',
+                    country_code: '1',
+                    area_code: '323',
+                    number: '111-111-1111',
+                    extension: '105',
                     type: 'primary'
                   }
                 ],
@@ -440,102 +442,27 @@ paths:
                     row_version: '1-12345'
                   }
                 ],
-                social_links: [
-                  {
-                    id: '12345',
-                    url: 'https://www.twitter.com/apideck-io',
-                    type: 'twitter'
-                  }
-                ],
-                phone_numbers: [
-                  {
-                    id: '12345',
-                    country_code: '1',
-                    area_code: '323',
-                    number: '111-111-1111',
-                    extension: '105',
-                    type: 'primary'
-                  }
-                ],
-                emails: [
-                  {
-                    id: '123',
-                    email: 'elon@musk.com',
-                    type: 'primary'
-                  }
-                ],
-                custom_fields: [
-                  {
-                    id: '2389328923893298',
-                    name: 'employee_level',
-                    description: 'Employee Level',
-                    value: 'Uses Salesforce and Marketo'
-                  }
-                ],
-                tags: ['New']
+                applications: ['a0d636c6-43b3-4bde-8c70-85b707d992f4', 'a98lfd96-43b3-4bde-8c70-85b707d992e6'],
+                followers: ['a0d636c6-43b3-4bde-8c70-85b707d992f4', 'a98lfd96-43b3-4bde-8c70-85b707d992e6'],
+                sources: ['Job site'],
+                confidential: false,
+                anonymized: true,
+                tags: ['New'],
+                archived: false,
+                owner_id: '54321'
               }
             }
 
             try {
-              const { data } = await apideck.lead.leadsAdd(params)
+              const { data } = await apideck.ats.applicantsAdd(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  "/lead/leads/{id}":
-    delete:
-      description: Delete lead
-      operationId: leadsDelete
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
-      responses:
-        "200":
-          $ref: "#/components/responses/DeleteLeadResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Delete lead
-      tags:
-        - Leads
-      x-apideck-api: lead
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.lead.leadsDelete({
-                id: 'id_example'
-              })
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
+  "/ats/applicants/{id}":
     get:
-      description: Get lead
-      operationId: leadsOne
+      description: Get applicant
+      operationId: applicantsOne
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -544,7 +471,7 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/GetLeadResponse"
+          $ref: "#/components/responses/GetApplicantResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -559,10 +486,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Get lead
+      summary: Get applicant
       tags:
-        - Leads
-      x-apideck-api: lead
+        - Applicants
+      x-apideck-api: ats
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -576,31 +503,27 @@ paths:
             })
 
             try {
-              const { data } = await apideck.lead.leadsOne({
+              const { data } = await apideck.ats.applicantsOne({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-    patch:
-      description: Update lead
-      operationId: leadsUpdate
+  /ats/jobs:
+    get:
+      description: List jobs
+      operationId: jobsAll
       parameters:
-        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Lead"
-        required: true
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
       responses:
         "200":
-          $ref: "#/components/responses/UpdateLeadResponse"
+          $ref: "#/components/responses/GetJobsResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -615,10 +538,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Update lead
+      summary: List jobs
       tags:
-        - Leads
-      x-apideck-api: lead
+        - Jobs
+      x-apideck-api: ats
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -631,97 +554,60 @@ paths:
               consumerId: 'REPLACE_WITH_CONSUMER_ID'
             })
 
-            const params = {
-              id: 'id_example',
-              lead: {
-                name: 'Elon Musk',
-                company_name: 'Spacex',
-                owner_id: '54321',
-                company_id: '2',
-                contact_id: '2',
-                lead_source: 'Cold Call',
-                first_name: 'Elon',
-                last_name: 'Musk',
-                description: 'A thinker',
-                prefix: 'Sir',
-                title: 'CEO',
-                language: 'EN',
-                status: 'New',
-                monetary_amount: 75000,
-                currency: 'USD',
-                fax: '+12129876543',
-                websites: [
-                  {
-                    id: '12345',
-                    url: 'http://example.com',
-                    type: 'primary'
-                  }
-                ],
-                addresses: [
-                  {
-                    id: '123',
-                    type: 'primary',
-                    string: '25 Spring Street, Blackburn, VIC 3130',
-                    name: 'HQ US',
-                    line1: 'Main street',
-                    line2: 'apt #',
-                    line3: 'Suite #',
-                    line4: 'delivery instructions',
-                    street_number: '25',
-                    city: 'San Francisco',
-                    state: 'CA',
-                    postal_code: '94104',
-                    country: 'US',
-                    latitude: '40.759211',
-                    longitude: '-73.984638',
-                    county: 'Santa Clara',
-                    contact_name: 'Elon Musk',
-                    salutation: 'Mr',
-                    phone_number: '111-111-1111',
-                    fax: '122-111-1111',
-                    email: 'elon@musk.com',
-                    website: 'https://elonmusk.com',
-                    row_version: '1-12345'
-                  }
-                ],
-                social_links: [
-                  {
-                    id: '12345',
-                    url: 'https://www.twitter.com/apideck-io',
-                    type: 'twitter'
-                  }
-                ],
-                phone_numbers: [
-                  {
-                    id: '12345',
-                    country_code: '1',
-                    area_code: '323',
-                    number: '111-111-1111',
-                    extension: '105',
-                    type: 'primary'
-                  }
-                ],
-                emails: [
-                  {
-                    id: '123',
-                    email: 'elon@musk.com',
-                    type: 'primary'
-                  }
-                ],
-                custom_fields: [
-                  {
-                    id: '2389328923893298',
-                    name: 'employee_level',
-                    description: 'Employee Level',
-                    value: 'Uses Salesforce and Marketo'
-                  }
-                ],
-                tags: ['New']
-              }
+            try {
+              const { data } = await apideck.ats.jobsAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
             }
+      x-graphql-field-name: jobs
+  "/ats/jobs/{id}":
+    get:
+      description: Get job
+      operationId: jobsOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetJobResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get job
+      tags:
+        - Jobs
+      x-apideck-api: ats
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
 
             try {
-              const { data } = await apideck.lead.leadsUpdate(params)
+              const { data } = await apideck.ats.jobsOne({
+                id: 'id_example'
+              })
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
@@ -756,21 +642,13 @@ components:
       required: true
       schema:
         type: string
-    leadsFilter:
+    jobsFilter:
       description: Apply filters (beta)
       explode: true
       in: query
       name: filter
       schema:
-        $ref: "#/components/schemas/LeadsFilter"
-      style: deepObject
-    leadsSort:
-      description: Apply sorting (beta)
-      explode: true
-      in: query
-      name: sort
-      schema:
-        $ref: "#/components/schemas/LeadsSort"
+        $ref: "#/components/schemas/JobsFilter"
       style: deepObject
     limit:
       description: Number of records to return
@@ -801,30 +679,36 @@ components:
           schema:
             $ref: "#/components/schemas/BadRequestResponse"
       description: Bad Request
-    CreateLeadResponse:
+    CreateApplicantResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CreateLeadResponse"
-      description: Lead created
-    DeleteLeadResponse:
+            $ref: "#/components/schemas/CreateApplicantResponse"
+      description: Applicants
+    GetApplicantResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/DeleteLeadResponse"
-      description: Lead deleted
-    GetLeadResponse:
+            $ref: "#/components/schemas/GetApplicantResponse"
+      description: Applicants
+    GetApplicantsResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetLeadResponse"
-      description: Lead
-    GetLeadsResponse:
+            $ref: "#/components/schemas/GetApplicantsResponse"
+      description: Applicants
+    GetJobResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetLeadsResponse"
-      description: Leads
+            $ref: "#/components/schemas/GetJobResponse"
+      description: Jobs
+    GetJobsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetJobsResponse"
+      description: Jobs
     NotFoundResponse:
       content:
         application/json:
@@ -861,12 +745,6 @@ components:
           schema:
             $ref: "#/components/schemas/UnprocessableResponse"
       description: Unprocessable
-    UpdateLeadResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/UpdateLeadResponse"
-      description: Lead updated
   schemas:
     Address:
       properties:
@@ -980,6 +858,111 @@ components:
           nullable: true
           type: string
       type: object
+    Anonymized:
+      example: true
+      title: Anonymized
+      type: boolean
+    Applicant:
+      additionalProperties: false
+      properties:
+        addresses:
+          items:
+            $ref: "#/components/schemas/Address"
+          type: array
+        anonymized:
+          $ref: "#/components/schemas/Anonymized"
+        applications:
+          example:
+            - a0d636c6-43b3-4bde-8c70-85b707d992f4
+            - a98lfd96-43b3-4bde-8c70-85b707d992e6
+          items:
+            type: string
+          nullable: true
+          type: array
+        archived:
+          $ref: "#/components/schemas/Archived"
+        confidential:
+          example: false
+          title: Confidential
+          type: boolean
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        deleted_at:
+          $ref: "#/components/schemas/DeletedAt"
+        deleted_by:
+          $ref: "#/components/schemas/DeletedBy"
+        emails:
+          items:
+            $ref: "#/components/schemas/Email"
+          type: array
+        first_name:
+          example: Elon
+          nullable: true
+          title: First name
+          type: string
+        followers:
+          example:
+            - a0d636c6-43b3-4bde-8c70-85b707d992f4
+            - a98lfd96-43b3-4bde-8c70-85b707d992e6
+          items:
+            type: string
+          nullable: true
+          type: array
+        headline:
+          description: Typically a list of previous companies where the contact has worked or schools that the contact has attended
+          example: PepsiCo, Inc, Central Perk
+          title: Headline
+          type: string
+        id:
+          $ref: "#/components/schemas/Id"
+        last_interaction_at:
+          $ref: "#/components/schemas/LastInteractionAt"
+        last_name:
+          example: Musk
+          nullable: true
+          title: Last name
+          type: string
+        name:
+          description: The name of an applicant.
+          example: Elon Musk
+          type: string
+        owner_id:
+          $ref: "#/components/schemas/OwnerId"
+        phone_numbers:
+          items:
+            $ref: "#/components/schemas/PhoneNumber"
+          type: array
+        position_id:
+          description: The PositionId the applicant applied for.
+          example: "123"
+          type: string
+        sourced_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          title: Sourced by
+          type: string
+        sources:
+          example:
+            - Job site
+          items:
+            type: string
+          nullable: true
+          type: array
+        stage_id:
+          example: "12345"
+          readOnly: true
+          title: Stage
+          type: string
+        tags:
+          $ref: "#/components/schemas/Tags"
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+      type: object
+    Archived:
+      example: false
+      title: Archived
+      type: boolean
     BadRequestResponse:
       properties:
         detail:
@@ -1011,54 +994,11 @@ components:
           description: The type of error returned
           example: RequestValidationError
           type: string
-    BankAccount:
-      properties:
-        account_name:
-          description: The name which you used in opening your bank account.
-          example: SPACEX LLC
-          nullable: true
-          title: Bank Account Name
-          type: string
-        account_number:
-          description: A bank account number is a number that is tied to your bank account. If you have several bank accounts, such as personal, joint, business (and so on), each account will have a different account number.
-          example: "123456789"
-          nullable: true
-          title: Bank Account Number
-          type: string
-        account_type:
-          description: The type of bank account.
-          enum:
-            - bank_account
-            - credit_card
-            - other
-          example: credit_card
-          nullable: true
-          title: Account Type
-          type: string
-        bank_code:
-          description: A bank code is a code assigned by a central bank, a bank supervisory body or a Bankers Association in a country to all its licensed member banks or financial institutions.
-          example: BNH
-          nullable: true
-          title: Bank Code
-          type: string
-        bic:
-          example: AUDSCHGGXXX
-          nullable: true
-          type: string
-        bsb_number:
-          description: A BSB is a 6 digit numeric code used for identifying the branch of an Australian or New Zealand bank or financial institution.
-          example: 062-001
-          nullable: true
-          title: BSB Number
-          type: string
-        currency:
-          $ref: "#/components/schemas/Currency"
-        iban:
-          example: CH2989144532982975332
-          nullable: true
-          type: string
-      type: object
-    CreateLeadResponse:
+    Code:
+      description: The code of the job.
+      example: 123-OC
+      type: string
+    CreateApplicantResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -1068,11 +1008,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: companies
+          example: Applicants
           type: string
         service:
           description: Apideck ID of service provider
-          example: zoho-crm
+          example: lever
           type: string
         status:
           description: HTTP Response Status
@@ -1090,6 +1030,18 @@ components:
         - operation
         - data
       type: object
+    CreatedAt:
+      example: 2020-09-30T07:43:32.000Z
+      format: date-time
+      readOnly: true
+      title: Created at (timestamp)
+      type: string
+    CreatedBy:
+      example: "12345"
+      nullable: true
+      readOnly: true
+      title: Created by
+      type: string
     Currency:
       description: Indicates the associated currency for an amount of money. Values correspond to [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
       enum:
@@ -1676,38 +1628,24 @@ components:
       required:
         - id
       type: object
-    DeleteLeadResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/UnifiedId"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: companies
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: zoho-crm
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
+    DeletedAt:
+      example: 2020-09-30T07:43:32.000Z
+      format: date-time
+      nullable: true
+      readOnly: true
+      title: Deleted at (timestamp)
+      type: string
+    DeletedBy:
+      example: "12345"
+      nullable: true
+      readOnly: true
+      title: Deleted by
+      type: string
+    Description:
+      example: A description
+      nullable: true
+      title: Description
+      type: string
     Email:
       properties:
         email:
@@ -1732,21 +1670,21 @@ components:
       required:
         - email
       type: object
-    GetLeadResponse:
+    GetApplicantResponse:
       properties:
         data:
-          $ref: "#/components/schemas/Lead"
+          $ref: "#/components/schemas/Applicant"
         operation:
           description: Operation performed
           example: one
           type: string
         resource:
           description: Unified API resource name
-          example: companies
+          example: Applicants
           type: string
         service:
           description: Apideck ID of service provider
-          example: zoho-crm
+          example: lever
           type: string
         status:
           description: HTTP Response Status
@@ -1764,11 +1702,12 @@ components:
         - operation
         - data
       type: object
-    GetLeadsResponse:
+      x-graphql-type-name: Applicant
+    GetApplicantsResponse:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/Lead"
+            $ref: "#/components/schemas/Applicant"
           type: array
         links:
           $ref: "#/components/schemas/Links"
@@ -1780,11 +1719,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: companies
+          example: Applicants
           type: string
         service:
           description: Apideck ID of service provider
-          example: zoho-crm
+          example: lever
           type: string
         status:
           description: HTTP Response Status
@@ -1802,175 +1741,194 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: LeadList
-    Lead:
+      x-graphql-type-name: ApplicantList
+    GetJobResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/Job"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Jobs
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: lever
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: Job
+    GetJobsResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Job"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Jobs
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: lever
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: JobList
+    Id:
+      example: "12345"
+      readOnly: true
+      type: string
+    Job:
       additionalProperties: false
       properties:
-        addresses:
+        blocks:
           items:
-            $ref: "#/components/schemas/Address"
+            properties:
+              content:
+                type: string
+              title:
+                type: string
           type: array
-        company_id:
-          example: "2"
+        closing:
+          example: The closing section of the job description
           nullable: true
+          title: Closing
           type: string
-        company_name:
-          example: Spacex
+        closing_html:
+          description: The closing section of the job description in HTML format
           nullable: true
+          title: Closing
           type: string
-        contact_id:
-          example: "2"
-          nullable: true
-          type: string
+        code:
+          $ref: "#/components/schemas/Code"
+        confidential:
+          example: false
+          title: Confidential
+          type: boolean
         created_at:
-          example: 2020-09-30T07:43:32.000Z
-          readOnly: true
-          type: string
-        currency:
-          $ref: "#/components/schemas/Currency"
-        custom_fields:
-          items:
-            $ref: "#/components/schemas/CustomField"
-          type: array
+          $ref: "#/components/schemas/CreatedAt"
+        created_by:
+          $ref: "#/components/schemas/CreatedBy"
         description:
-          example: A thinker
+          $ref: "#/components/schemas/Description"
+        description_html:
+          description: The job description in HTML format
           nullable: true
+          title: Description (HTML)
           type: string
-        emails:
+        hiring_managers:
+          example:
+            - "123456"
           items:
-            $ref: "#/components/schemas/Email"
+            properties:
+              id:
+                example: "12345"
+                readOnly: true
+                type: string
           type: array
-        fax:
-          example: "+12129876543"
-          nullable: true
-          type: string
-        first_name:
-          example: Elon
-          nullable: true
-          type: string
         id:
-          example: "12345"
-          readOnly: true
-          type: string
-        language:
-          description: language code according to ISO 639-1. For the United States - EN
-          example: EN
+          $ref: "#/components/schemas/Id"
+        job_portal_url:
+          description: URL of the job portal
           nullable: true
-          type: string
-        last_name:
-          example: Musk
-          nullable: true
-          type: string
-        lead_source:
-          example: Cold Call
-          nullable: true
-          type: string
-        monetary_amount:
-          example: 75000
-          nullable: true
-          type: number
-        name:
-          example: Elon Musk
-          minLength: 1
+          title: URL
           type: string
         owner_id:
-          example: "54321"
+          $ref: "#/components/schemas/OwnerId"
+        requisition_id:
+          description: A job's Requisition ID (Req ID) allows your organization to identify and track a job based on alphanumeric naming conventions unique to your company's internal processes.
+          example: abc123
+          title: Requisition ID
           type: string
-        phone_numbers:
-          items:
-            $ref: "#/components/schemas/PhoneNumber"
-          type: array
-        prefix:
-          example: Sir
-          nullable: true
-          type: string
-        social_links:
-          items:
-            $ref: "#/components/schemas/SocialLink"
-          type: array
         status:
-          example: New
-          nullable: true
-          type: string
+          $ref: "#/components/schemas/JobStatus"
         tags:
           $ref: "#/components/schemas/Tags"
         title:
-          example: CEO
-          nullable: true
-          type: string
+          $ref: "#/components/schemas/Title"
         updated_at:
-          example: 2020-09-30T07:43:32.000Z
-          readOnly: true
+          $ref: "#/components/schemas/UpdatedAt"
+        updated_by:
+          $ref: "#/components/schemas/UpdatedBy"
+        url:
+          description: URL of the job description
+          nullable: true
+          title: URL
           type: string
-        websites:
+        visibility:
           items:
-            $ref: "#/components/schemas/Website"
+            enum:
+              - public
+              - internal
+            type: string
           type: array
-      required:
-        - name
-        - company_name
-      x-pii:
-        - name
-        - email
-        - first_name
-        - last_name
-    LeadEventType:
+      type: object
+    JobStatus:
+      description: The status of the job.
       enum:
-        - "*"
-        - lead.lead.created
-        - lead.lead.updated
-        - lead.lead.deleted
-      example: lead.lead.created
+        - draft
+        - internal
+        - published
+        - completed
+      example: completed
       type: string
-    LeadsFilter:
+    JobsFilter:
       additionalProperties: false
       example:
-        email: elon@tesla.com
-        first_name: Elon
-        last_name: Musk
+        job_id: "1234"
       properties:
-        email:
-          description: E-mail of the lead to filter on
-          example: elon@tesla.com
-          type: string
-        first_name:
-          description: First name of the lead to filter on
-          example: Elon
-          type: string
-        last_name:
-          description: Last name of the lead to filter on
-          example: Musk
-          type: string
-        name:
-          description: Name of the lead to filter on
-          example: Elon Musk
+        job_id:
+          description: Id of the job to filter on
+          example: "1234"
           type: string
       type: object
-      x-graphql-type-name: LeadsFilter
-    LeadsSort:
-      additionalProperties: false
-      example:
-        by: created_at
-        direction: desc
-      properties:
-        by:
-          description: The field on which to sort the Leads
-          enum:
-            - created_at
-            - updated_at
-            - name
-            - first_name
-            - last_name
-            - email
-          example: created_at
-          type: string
-          x-graphql-type-name: LeadsSortBy
-        direction:
-          $ref: "#/components/schemas/SortDirection"
-      required:
-        - by
-      type: object
-      x-graphql-type-name: LeadsSort
+      x-graphql-type-name: JobsFilter
+    LastInteractionAt:
+      example: 2020-09-30T07:43:32.000Z
+      format: date-time
+      readOnly: true
+      title: Last interaction at (timestamp)
+      type: string
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:
@@ -2076,6 +2034,10 @@ components:
           description: The type of error returned
           example: MappingError
           type: string
+    OwnerId:
+      example: "54321"
+      title: Owner ID
+      type: string
     PaymentRequiredResponse:
       properties:
         detail:
@@ -2152,37 +2114,17 @@ components:
       nullable: true
       title: Row version
       type: string
-    SocialLink:
-      properties:
-        id:
-          example: "12345"
-          nullable: true
-          type: string
-        type:
-          example: twitter
-          nullable: true
-          type: string
-        url:
-          example: https://www.twitter.com/apideck-io
-          minLength: 1
-          type: string
-      required:
-        - url
-      type: object
-    SortDirection:
-      default: asc
-      description: The direction in which to sort the results
-      enum:
-        - asc
-        - desc
-      type: string
-      x-graphql-type-name: SortDirection
     Tags:
       example:
         - New
       items:
         type: string
       type: array
+    Title:
+      example: CEO
+      nullable: true
+      title: Job title
+      type: string
     UnauthorizedResponse:
       properties:
         detail:
@@ -2275,38 +2217,23 @@ components:
           description: The type of error returned
           example: InvalidStateError
           type: string
-    UpdateLeadResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/UnifiedId"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: companies
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: zoho-crm
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
+    UpdatedAt:
+      example: 2020-09-30T07:43:32.000Z
+      format: date-time
+      readOnly: true
+      title: Updated at (timestamp)
+      type: string
+    UpdatedBy:
+      example: "12345"
+      nullable: true
+      readOnly: true
+      type: string
+    Url:
+      description: The url pointing to the job.
+      example: https://downstreamconnector.com/job?id=123
+      format: uri
+      pattern: ^(https?)://
+      type: string
     WebhookEvent:
       allOf:
         - properties:
@@ -2341,32 +2268,17 @@ components:
           type: object
         - properties:
             event_type:
-              $ref: "#/components/schemas/LeadEventType"
+              enum:
+                - ats.job.created
+                - ats.job.updated
+                - ats.job.deleted
+                - ats.applicant.created
+                - ats.applicant.updated
+                - ats.applicant.deleted
+              example: ats.job.created
+              type: string
           type: object
       x-sdk-exclude: true
-    Website:
-      properties:
-        id:
-          example: "12345"
-          nullable: true
-          type: string
-        type:
-          enum:
-            - primary
-            - secondary
-            - work
-            - personal
-            - other
-          example: primary
-          type: string
-          x-graphql-type-name: WebsiteType
-        url:
-          example: http://example.com
-          minLength: 1
-          type: string
-      required:
-        - url
-      type: object
   securitySchemes:
     apiKey:
       description: |
@@ -2389,29 +2301,11 @@ components:
       in: header
       name: Authorization
       type: apiKey
-    applicationId:
-      description: The ID of your Unify application
-      in: header
-      name: x-apideck-app-id
-      type: apiKey
-    consumerId:
-      description: The ID of the consumer which you want to get or push data from
-      in: header
-      name: x-apideck-consumer-id
-      type: apiKey
 x-webhooks:
-  LeadCreated:
+  ApplicantCreated:
     post:
-      description: Lead Created
-      operationId: leadCreated
-      parameters:
-        - description: The type of event that was triggered
-          in: header
-          name: x-apideck-event-type
-          required: true
-          schema:
-            example: lead.lead.created
-            type: string
+      description: Applicant created
+      operationId: applicantCreated
       requestBody:
         content:
           application/json:
@@ -2420,21 +2314,15 @@ x-webhooks:
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
-      summary: Lead Created
+      summary: Applicant created
       tags:
-        - Lead
-  LeadDeleted:
+        - Webhook Events
+      x-apideck-event-type: ats.applicant.created
+      x-apideck-upcoming: true
+  ApplicantDeleted:
     post:
-      description: Lead Deleted
-      operationId: leadDeleted
-      parameters:
-        - description: The type of event that was triggered
-          in: header
-          name: x-apideck-event-type
-          required: true
-          schema:
-            example: lead.lead.deleted
-            type: string
+      description: Applicant deleted
+      operationId: applicantDeleted
       requestBody:
         content:
           application/json:
@@ -2443,21 +2331,15 @@ x-webhooks:
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
-      summary: Lead Deleted
+      summary: Applicant deleted
       tags:
-        - Lead
-  LeadUpdated:
+        - Webhook Events
+      x-apideck-event-type: ats.applicant.deleted
+      x-apideck-upcoming: true
+  ApplicantUpdated:
     post:
-      description: Lead Updated
-      operationId: leadUpdated
-      parameters:
-        - description: The type of event that was triggered
-          in: header
-          name: x-apideck-event-type
-          required: true
-          schema:
-            example: lead.lead.updated
-            type: string
+      description: Applicant updated
+      operationId: applicantUpdated
       requestBody:
         content:
           application/json:
@@ -2466,7 +2348,57 @@ x-webhooks:
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
-      summary: Lead Updated
+      summary: Applicant updated
       tags:
-        - Lead
+        - Webhook Events
+      x-apideck-event-type: ats.applicant.updated
+      x-apideck-upcoming: true
+  JobCreated:
+    post:
+      description: Job created
+      operationId: jobCreated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Job created
+      tags:
+        - Webhook Events
+      x-apideck-event-type: ats.job.created
+  JobDeleted:
+    post:
+      description: Job deleted
+      operationId: jobDeleted
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Job deleted
+      tags:
+        - Webhook Events
+      x-apideck-event-type: ats.job.deleted
+  JobUpdated:
+    post:
+      description: Job updated
+      operationId: jobUpdated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Job updated
+      tags:
+        - Webhook Events
+      x-apideck-event-type: ats.job.updated
   x-sdk-exclude: true

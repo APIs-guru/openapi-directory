@@ -944,6 +944,13 @@ components:
           items:
             type: string
           type: array
+        alwaysOnVpnLockdownExemption:
+          description: Specifies whether the app is allowed networking when the VPN is not connected and alwaysOnVpnPackage.lockdownEnabled is enabled. If set to VPN_LOCKDOWN_ENFORCED, the app is not allowed networking, and if set to VPN_LOCKDOWN_EXEMPTION, the app is allowed networking. Only supported on devices running Android 10 and above. If this is not supported by the device, the device will contain a NonComplianceDetail with non_compliance_reason set to API_LEVEL and a fieldPath. If this is not applicable to the app, the device will contain a NonComplianceDetail with non_compliance_reason set to UNSUPPORTED and a fieldPath. The fieldPath is set to applications[i].alwaysOnVpnLockdownExemption, where i is the index of the package in the applications policy.
+          enum:
+            - ALWAYS_ON_VPN_LOCKDOWN_EXEMPTION_UNSPECIFIED
+            - VPN_LOCKDOWN_ENFORCED
+            - VPN_LOCKDOWN_EXEMPTION
+          type: string
         autoUpdateMode:
           description: Controls the auto-update mode for the app.
           enum:
@@ -2173,13 +2180,6 @@ components:
             - USE_DEFAULT_DEVICE_TIMEOUT
             - REQUIRE_EVERY_DAY
           type: string
-        unifiedLockSettings:
-          description: Controls whether a unified lock is allowed for the device and the work profile, on devices running Android 9 and above with a work profile. This has no effect on other devices. This can be set only if password_scope is set to SCOPE_PROFILE, the policy will be rejected otherwise. If user has not set a separate work lock and this field is set to REQUIRE_SEPARATE_WORK_LOCK, a NonComplianceDetail is reported with nonComplianceReason set to USER_ACTION.
-          enum:
-            - UNIFIED_LOCK_SETTINGS_UNSPECIFIED
-            - ALLOW_UNIFIED_WORK_AND_PERSONAL_LOCK
-            - REQUIRE_SEPARATE_WORK_LOCK
-          type: string
       type: object
     PermissionGrant:
       description: Configuration for an Android permission and its grant state.
@@ -2499,7 +2499,7 @@ components:
           type: array
         passwordRequirements:
           $ref: "#/components/schemas/PasswordRequirements"
-          description: Password requirements. The field password_requirements.require_password_unlock must not be set. DEPRECATED - Use passwordPolicies.Note:Complexity-based values of PasswordQuality, that is, COMPLEXITY_LOW, COMPLEXITY_MEDIUM, and COMPLEXITY_HIGH, cannot be used here. unified_lock_settings cannot be used here
+          description: Password requirements. The field password_requirements.require_password_unlock must not be set. DEPRECATED - Use passwordPolicies.Note:Complexity-based values of PasswordQuality, that is, COMPLEXITY_LOW, COMPLEXITY_MEDIUM, and COMPLEXITY_HIGH, cannot be used here.
         permissionGrants:
           description: Explicit permission or group grants or denials for all apps. These values override the default_permission_policy.
           items:

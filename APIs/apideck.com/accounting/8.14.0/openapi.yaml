@@ -259,7 +259,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 8.13.0
+  version: 8.14.0
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -2054,6 +2054,7 @@ paths:
                 currency_rate: 0.69,
                 total_amount: 49.99,
                 reference: '123456',
+                payment_method: 'Credit Card',
                 payment_method_reference: '123456',
                 accounts_receivable_account_type: 'Account',
                 accounts_receivable_account_id: '123456',
@@ -2243,6 +2244,7 @@ paths:
                 currency_rate: 0.69,
                 total_amount: 49.99,
                 reference: '123456',
+                payment_method: 'Credit Card',
                 payment_method_reference: '123456',
                 accounts_receivable_account_type: 'Account',
                 accounts_receivable_account_id: '123456',
@@ -2945,6 +2947,7 @@ components:
           description: Customer status
           enum:
             - active
+            - inactive
             - archived
             - gdpr-erasure-request
             - unknown
@@ -5355,6 +5358,20 @@ components:
           type: boolean
         bank_account:
           $ref: "#/components/schemas/BankAccount"
+        categories:
+          items:
+            properties:
+              id:
+                example: "12345"
+                readOnly: true
+                type: string
+              name:
+                example: Finance Charges Expense
+                readOnly: true
+                title: Category name
+                type: string
+          readOnly: true
+          type: array
         classification:
           enum:
             - asset
@@ -5487,6 +5504,7 @@ components:
             - fixed_asset
             - non_current_asset
             - other_asset
+            - balancesheet
             - equity
             - expense
             - other_expense
@@ -5777,6 +5795,12 @@ components:
           example: Some notes about this payment
           nullable: true
           title: Note
+          type: string
+        payment_method:
+          description: Payment method
+          example: Credit Card
+          nullable: true
+          title: Payment method
           type: string
         payment_method_reference:
           description: Optional reference message returned by payment method on processing
