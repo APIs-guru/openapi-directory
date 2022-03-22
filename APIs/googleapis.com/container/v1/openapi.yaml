@@ -4044,7 +4044,7 @@ components:
           type: array
       type: object
     NodeConfig:
-      description: Parameters that describe the nodes in a cluster.
+      description: "Parameters that describe the nodes in a cluster. *Note: *GKE Autopilot clusters do not recognize parameters in `NodeConfig`. Use AutoprovisioningNodePoolDefaults instead."
       properties:
         accelerators:
           description: A list of hardware accelerators to be attached to each node. See https://cloud.google.com/compute/docs/gpus for more information about support for GPUs.

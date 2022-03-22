@@ -1640,7 +1640,7 @@ components:
           description: Output only. The matter ID.
           type: string
         name:
-          description: The export name.
+          description: The export name. Don't use special characters (~!$'(),;@:/?) in the name, they can prevent you from downloading exports.
           type: string
         query:
           $ref: "#/components/schemas/Query"

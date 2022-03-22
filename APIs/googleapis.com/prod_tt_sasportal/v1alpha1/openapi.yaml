@@ -1044,6 +1044,10 @@ components:
         grantId:
           description: Grant Id.
           type: string
+        lastHeartbeatTransmitExpireTime:
+          description: The transmit expiration time of the last heartbeat.
+          format: google-datetime
+          type: string
         maxEirp:
           description: Maximum Equivalent Isotropically Radiated Power (EIRP) permitted by the grant. The maximum EIRP is in units of dBm/MHz. The value of `maxEirp` represents the average (RMS) EIRP that would be measured by the procedure defined in FCC part 96.41(e)(3).
           format: double
@@ -1120,7 +1124,7 @@ components:
           description: The frequency range that the move list affects.
       type: object
     SasPortalEmpty:
-      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
       type: object
     SasPortalFrequencyRange:
