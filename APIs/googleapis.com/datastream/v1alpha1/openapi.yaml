@@ -1637,10 +1637,6 @@ components:
           format: int32
           type: integer
       type: object
-    OracleDropLargeObjects:
-      description: Configuration to drop large object values.
-      properties: {}
-      type: object
     OracleObjectIdentifier:
       description: Oracle data source object identifier.
       properties:
@@ -1703,9 +1699,6 @@ components:
         allowlist:
           $ref: "#/components/schemas/OracleRdbms"
           description: Oracle objects to include in the stream.
-        dropLargeObjects:
-          $ref: "#/components/schemas/OracleDropLargeObjects"
-          description: Drop large object values.
         rejectlist:
           $ref: "#/components/schemas/OracleRdbms"
           description: Oracle objects to exclude from the stream.

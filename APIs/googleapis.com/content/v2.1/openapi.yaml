@@ -2694,7 +2694,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Requests a review for Free Listings program in the provided region. Important: This method is only whitelisted for selected merchants."
+      description: "Requests a review for free listings program in a specific region. Important: This method is only whitelisted for selected merchants."
       operationId: content.freelistingsprogram.requestreview
       parameters:
         - description: Required. The ID of the account.
@@ -6776,7 +6776,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Requests a review for Shopping Ads program in the provided country.
+      description: Requests a review for Shopping Ads program in a specific region.
       operationId: content.shoppingadsprogram.requestreview
       parameters:
         - description: Required. The ID of the account.
@@ -8633,7 +8633,7 @@ components:
           type: array
       type: object
     Date:
-      description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values * A month and day, with a zero year (e.g., an anniversary) * A year on its own, with a zero month and a zero day * A year and month, with a zero day (e.g., a credit card expiration date) Related types: * google.type.TimeOfDay * google.type.DateTime * google.protobuf.Timestamp"
+      description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values. * A month and day, with a zero year (for example, an anniversary). * A year on its own, with a zero month and a zero day. * A year and month, with a zero day (for example, a credit card expiration date). Related types: * google.type.TimeOfDay * google.type.DateTime * google.protobuf.Timestamp"
       properties:
         day:
           description: Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
@@ -8767,24 +8767,25 @@ components:
     FreeListingsProgramStatus:
       description: Response message for GetFreeListingsProgramStatus.
       properties:
+        globalState:
+          description: State of the program. `ENABLED` if there are offers for at least one region.
+          enum:
+            - PROGRAM_STATE_UNSPECIFIED
+            - NOT_ENABLED
+            - NO_OFFERS_UPLOADED
+            - ENABLED
+          type: string
         regionStatuses:
           description: Status of the program in each region. Regions with the same status and review eligibility are grouped together in `regionCodes`.
           items:
             $ref: "#/components/schemas/FreeListingsProgramStatusRegionStatus"
           type: array
-        state:
-          description: If program is successfully onboarded for at least one region.
-          enum:
-            - PROGRAM_STATE_UNSPECIFIED
-            - ENABLED
-            - NOT_ENABLED
-          type: string
       type: object
     FreeListingsProgramStatusRegionStatus:
       description: Status of program and region.
       properties:
         disapprovalDate:
-          description: Date by which `eligibility_status` will go from `WARNING` to `DISAPPROVED`. It will be present when `eligibility_status` is `WARNING`. Date will be provided in ISO 8601 format i.e. YYYY-MM-DD
+          description: "Date your `eligibilityStatus` will become `DISAPPROVED`. Only visible when your `eligibilityStatus` is `WARNING`. In [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DD`."
           type: string
         eligibilityStatus:
           description: Eligibility status of the standard free listing program.
@@ -8797,37 +8798,52 @@ components:
             - PENDING_REVIEW
             - ONBOARDING
           type: string
-        enhancedEligibilityStatus:
-          description: Eligibility status of the enhanced free listing program.
-          enum:
-            - STATE_UNSPECIFIED
-            - APPROVED
-            - DISAPPROVED
-            - WARNING
-            - UNDER_REVIEW
-            - PENDING_REVIEW
-            - ONBOARDING
-          type: string
-        ineligibilityReason:
-          description: Reason if a program in a given country is not eligible for review. Populated only if `review_eligibility_status` is `INELIGIBLE`.
-          type: string
+        onboardingIssues:
+          description: Must be fixed to be eligible for review.
+          items:
+            type: string
+          type: array
         regionCodes:
           description: The two-letter [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) codes for all the regions with the same `eligibilityStatus` and `reviewEligibility`.
           items:
             type: string
           type: array
         reviewEligibilityStatus:
-          description: If a program in a given country is eligible for review. It will be present only if eligibility status is `DISAPPROVED`.
+          description: If a program is eligible for review in a specific region. Only visible if `eligibilityStatus` is `DISAPPROVED`.
           enum:
             - REVIEW_ELIGIBILITY_UNSPECIFIED
             - ELIGIBLE
             - INELIGIBLE
           type: string
+        reviewIneligibilityReason:
+          description: Review ineligibility reason if account is not eligible for review.
+          enum:
+            - REVIEW_INELIGIBILITY_REASON_UNSPECIFIED
+            - ONBOARDING_ISSUES
+            - NOT_ENOUGH_OFFERS
+            - IN_COOLDOWN_PERIOD
+            - ALREADY_UNDER_REVIEW
+            - NO_REVIEW_REQUIRED
+          type: string
+        reviewIneligibilityReasonDescription:
+          description: Reason a program in a specific region isn’t eligible for review. Only visible if `reviewEligibilityStatus` is `INELIGIBLE`.
+          type: string
+        reviewIneligibilityReasonDetails:
+          $ref: "#/components/schemas/FreeListingsProgramStatusReviewIneligibilityReasonDetails"
+          description: Additional information for ineligibility. If `reviewIneligibilityReason` is `IN_COOLDOWN_PERIOD`, a timestamp for the end of the cooldown period is provided.
         reviewIssues:
-          description: These issues will be evaluated in review process. Fix all the issues before requesting the review.
+          description: Issues evaluated in the review process. Fix all issues before requesting a review.
           items:
             type: string
           type: array
+      type: object
+    FreeListingsProgramStatusReviewIneligibilityReasonDetails:
+      description: Additional details for review ineligibility reasons.
+      properties:
+        cooldownTime:
+          description: This timestamp represents end of cooldown period for review ineligbility reason `IN_COOLDOWN_PERIOD`.
+          format: google-datetime
+          type: string
       type: object
     GmbAccounts:
       properties:
@@ -11687,6 +11703,9 @@ components:
         expirationDate:
           description: Date on which the item should expire, as specified upon insertion, in ISO 8601 format. The actual expiration date in Google Shopping is exposed in `productstatuses` as `googleExpirationDate` and might be earlier if `expirationDate` is too far in the future.
           type: string
+        externalSellerId:
+          description: Used by a marketplace to externally identify a seller.
+          type: string
         gender:
           description: Target gender of the item.
           type: string
@@ -12235,6 +12254,7 @@ components:
             type: string
           type: array
         includeAttributes:
+          description: "Deprecated: Setting this field has no effect and attributes are never included."
           type: boolean
         merchantId:
           description: The ID of the managing account.
@@ -12289,7 +12309,7 @@ components:
           type: array
       type: object
     Promotion:
-      description: " The Promotions feature is currently in alpha and is not yet publicly available via Content API for Shopping. This documentation is provided for reference only may be subject to change. Represents a promotion. See the following articles for more details. * [Promotions feed specification](https://support.google.com/merchants/answer/2906014) * [Local promotions feed specification](https://support.google.com/merchants/answer/10146130) * [Promotions on Buy on Google product data specification](https://support.google.com/merchants/answer/9173673)"
+      description: " The Promotions feature is currently in alpha and is not yet publicly available in Content API for Shopping. This documentation is provided for reference only may be subject to change. Represents a promotion. See the following articles for more details. * [Promotions feed specification](https://support.google.com/merchants/answer/2906014) * [Local promotions feed specification](https://support.google.com/merchants/answer/10146130) * [Promotions on Buy on Google product data specification](https://support.google.com/merchants/answer/9173673)"
       properties:
         brand:
           description: Product filter by brand for the promotion.
@@ -12422,13 +12442,13 @@ components:
             type: string
           type: array
         promotionDisplayDates:
-          description: String representation of the promotion display dates.
+          description: "String representation of the promotion display dates (deprecated: Use promotion_display_time_period instead)."
           type: string
         promotionDisplayTimePeriod:
           $ref: "#/components/schemas/TimePeriod"
           description: TimePeriod representation of the promotion display dates.
         promotionEffectiveDates:
-          description: Required. String representation of the promotion effective dates.
+          description: "String representation of the promotion effective dates (deprecated: Use promotion_effective_time_period instead)."
           type: string
         promotionEffectiveTimePeriod:
           $ref: "#/components/schemas/TimePeriod"
@@ -13815,24 +13835,25 @@ components:
     ShoppingAdsProgramStatus:
       description: Response message for GetShoppingAdsProgramStatus.
       properties:
+        globalState:
+          description: State of the program. `ENABLED` if there are offers for at least one region.
+          enum:
+            - PROGRAM_STATE_UNSPECIFIED
+            - NOT_ENABLED
+            - NO_OFFERS_UPLOADED
+            - ENABLED
+          type: string
         regionStatuses:
           description: Status of the program in each region. Regions with the same status and review eligibility are grouped together in `regionCodes`.
           items:
             $ref: "#/components/schemas/ShoppingAdsProgramStatusRegionStatus"
           type: array
-        state:
-          description: If program is successfully onboarded for at least one region.
-          enum:
-            - PROGRAM_STATE_UNSPECIFIED
-            - ENABLED
-            - NOT_ENABLED
-          type: string
       type: object
     ShoppingAdsProgramStatusRegionStatus:
       description: Status of program and region.
       properties:
         disapprovalDate:
-          description: Date by which `eligibility_status` will go from `WARNING` to `DISAPPROVED`. It will be present when `eligibility_status` is `WARNING`. Date will be provided in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format i.e. YYYY-MM-DD
+          description: "Date your `eligibilityStatus` will become `DISAPPROVED`. Only visible when your `eligibilityStatus` is `WARNING`. In [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DD`."
           type: string
         eligibilityStatus:
           description: Eligibility status of the Shopping Ads program.
@@ -13845,26 +13866,52 @@ components:
             - PENDING_REVIEW
             - ONBOARDING
           type: string
-        ineligibilityReason:
-          description: Reason if a program in a given country is not eligible for review. Populated only if `review_eligibility_status` is `INELIGIBLE`.
-          type: string
+        onboardingIssues:
+          description: Must be fixed to be eligible for review.
+          items:
+            type: string
+          type: array
         regionCodes:
           description: The two-letter [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) codes for all the regions with the same `eligibilityStatus` and `reviewEligibility`.
           items:
             type: string
           type: array
         reviewEligibilityStatus:
-          description: If a program in a given country is eligible for review. It will be present only if eligibility status is `DISAPPROVED`.
+          description: If a program is eligible for review in a specific region. Only visible if `eligibilityStatus` is `DISAPPROVED`.
           enum:
             - REVIEW_ELIGIBILITY_UNSPECIFIED
             - ELIGIBLE
             - INELIGIBLE
           type: string
+        reviewIneligibilityReason:
+          description: Review ineligibility reason if account is not eligible for review.
+          enum:
+            - REVIEW_INELIGIBILITY_REASON_UNSPECIFIED
+            - ONBOARDING_ISSUES
+            - NOT_ENOUGH_OFFERS
+            - IN_COOLDOWN_PERIOD
+            - ALREADY_UNDER_REVIEW
+            - NO_REVIEW_REQUIRED
+          type: string
+        reviewIneligibilityReasonDescription:
+          description: Reason a program in a specific region isn’t eligible for review. Only visible if `reviewEligibilityStatus` is `INELIGIBLE`.
+          type: string
+        reviewIneligibilityReasonDetails:
+          $ref: "#/components/schemas/ShoppingAdsProgramStatusReviewIneligibilityReasonDetails"
+          description: Additional information for ineligibility. If `reviewIneligibilityReason` is `IN_COOLDOWN_PERIOD`, a timestamp for the end of the cooldown period is provided.
         reviewIssues:
-          description: These issues will be evaluated in review process. Fix all the issues before requesting the review.
+          description: Issues evaluated in the review process. Fix all issues before requesting a review.
           items:
             type: string
           type: array
+      type: object
+    ShoppingAdsProgramStatusReviewIneligibilityReasonDetails:
+      description: Additional details for review ineligibility reasons.
+      properties:
+        cooldownTime:
+          description: This timestamp represents end of cooldown period for review ineligbility reason `IN_COOLDOWN_PERIOD`.
+          format: google-datetime
+          type: string
       type: object
     Table:
       properties:

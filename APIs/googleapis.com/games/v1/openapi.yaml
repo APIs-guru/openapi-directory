@@ -1009,6 +1009,11 @@ paths:
           name: language
           schema:
             type: string
+        - description: Consistency token of the player id. The call returns a 'not found' result when the token is present and invalid. Empty value is ignored. See also GlobalPlayerIdConsistencyTokenProto
+          in: query
+          name: playerIdConsistencyToken
+          schema:
+            type: string
       responses:
         "200":
           content:
