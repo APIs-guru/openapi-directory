@@ -948,7 +948,7 @@ components:
           type: string
       type: object
     Empty:
-      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
       type: object
     Entity:
@@ -1597,7 +1597,10 @@ components:
             - GREATER_THAN
             - GREATER_THAN_OR_EQUAL
             - EQUAL
+            - IN
+            - NOT_EQUAL
             - HAS_ANCESTOR
+            - NOT_IN
           type: string
         property:
           $ref: "#/components/schemas/PropertyReference"

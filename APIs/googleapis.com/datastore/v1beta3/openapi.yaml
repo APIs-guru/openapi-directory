@@ -1038,7 +1038,10 @@ components:
             - GREATER_THAN
             - GREATER_THAN_OR_EQUAL
             - EQUAL
+            - IN
+            - NOT_EQUAL
             - HAS_ANCESTOR
+            - NOT_IN
           type: string
         property:
           $ref: "#/components/schemas/PropertyReference"

@@ -271,9 +271,6 @@ components:
           description: The number of items returned from a List or Query API method, if applicable.
           format: int64
           type: string
-        policyViolationInfo:
-          $ref: "#/components/schemas/PolicyViolationInfo"
-          description: Indicates the policy violations for this request. If the request is denied by the policy, violation information will be logged here.
         request:
           additionalProperties:
             description: Properties of the object.
@@ -405,7 +402,7 @@ components:
           type: object
         status:
           $ref: "#/components/schemas/Status"
-          description: Operation is allowed when this field is not set. Any non-'OK' status indicates a denial; google.rpc.Status.details would contain additional details about the denial.
+          description: Operation is allowed when this field is not set. Any non-'OK' status indicates a denial; [google.rpc.Status.details]() would contain additional details about the denial.
       type: object
     FirstPartyPrincipal:
       description: First party identity principal.
@@ -418,28 +415,6 @@ components:
             description: Properties of the object.
           description: Metadata about the service that uses the service account. .
           type: object
-      type: object
-    OrgPolicyViolationInfo:
-      description: Represents OrgPolicy Violation information.
-      properties:
-        payload:
-          additionalProperties:
-            description: Properties of the object.
-          description: Optional. Resource payload that is currently in scope and is subjected to orgpolicy conditions. This payload may be the subset of the actual Resource that may come in the request. This payload should not contain any core content.
-          type: object
-        resourceTags:
-          additionalProperties:
-            type: string
-          description: Optional. Tags referenced on the resource at the time of evaluation. These also include the federated tags, if they are supplied in the CheckOrgPolicy or CheckCustomConstraints Requests. Optional field as of now. These tags are the Cloud tags that are available on the resource during the policy evaluation and will be available as part of the OrgPolicy check response for logging purposes.
-          type: object
-        resourceType:
-          description: "Optional. Resource type that the orgpolicy is checked against. Example: compute.googleapis.com/Instance, store.googleapis.com/bucket"
-          type: string
-        violationInfo:
-          description: Optional. Policy violations
-          items:
-            $ref: "#/components/schemas/ViolationInfo"
-          type: array
       type: object
     Peer:
       description: This message defines attributes for a node that handles a network request. The node can be either a service or an application that sends, forwards, or receives the request. Service peers should fill in `principal` and `labels` as appropriate.
@@ -462,13 +437,6 @@ components:
         regionCode:
           description: The CLDR country/region code associated with the above IP address. If the IP address is private, the `region_code` should reflect the physical location where this peer is running.
           type: string
-      type: object
-    PolicyViolationInfo:
-      description: Information related to policy violations for this request.
-      properties:
-        orgPolicyViolationInfo:
-          $ref: "#/components/schemas/OrgPolicyViolationInfo"
-          description: Indicates the orgpolicy violations for this resource.
       type: object
     ReportRequest:
       description: Request message for the Report method.
@@ -845,27 +813,6 @@ components:
         line:
           description: Optional. Line within the source file. 1-based; 0 indicates no line number available.
           format: int64
-          type: string
-      type: object
-    ViolationInfo:
-      description: Provides information about the Policy violation info for this request.
-      properties:
-        checkedValue:
-          description: Optional. Value that is being checked for the policy. This could be in encrypted form (if pii sensitive). This field will only be emitted in LIST_POLICY types
-          type: string
-        constraint:
-          description: Optional. Constraint name
-          type: string
-        errorMessage:
-          description: Optional. Error message that policy is indicating.
-          type: string
-        policyType:
-          description: Optional. Indicates the type of the policy.
-          enum:
-            - POLICY_TYPE_UNSPECIFIED
-            - BOOLEAN_CONSTRAINT
-            - LIST_CONSTRAINT
-            - CUSTOM_CONSTRAINT
           type: string
       type: object
   securitySchemes:
