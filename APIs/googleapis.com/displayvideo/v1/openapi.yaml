@@ -7550,12 +7550,21 @@ components:
         channelDetails:
           $ref: "#/components/schemas/ChannelAssignedTargetingOptionDetails"
           description: Channel details. This field will be populated when the targeting_type is `TARGETING_TYPE_CHANNEL`.
+        contentDurationDetails:
+          $ref: "#/components/schemas/ContentDurationAssignedTargetingOptionDetails"
+          description: Content duration details. This field will be populated when the targeting_type is `TARGETING_TYPE_CONTENT_DURATION`.
+        contentGenreDetails:
+          $ref: "#/components/schemas/ContentGenreAssignedTargetingOptionDetails"
+          description: Content genre details. This field will be populated when the targeting_type is `TARGETING_TYPE_CONTENT_GENRE`.
         contentInstreamPositionDetails:
           $ref: "#/components/schemas/ContentInstreamPositionAssignedTargetingOptionDetails"
           description: Content instream position details. This field will be populated when the targeting_type is `TARGETING_TYPE_CONTENT_INSTREAM_POSITION`.
         contentOutstreamPositionDetails:
           $ref: "#/components/schemas/ContentOutstreamPositionAssignedTargetingOptionDetails"
           description: Content outstream position details. This field will be populated when the targeting_type is `TARGETING_TYPE_CONTENT_OUTSTREAM_POSITION`.
+        contentStreamTypeDetails:
+          $ref: "#/components/schemas/ContentStreamTypeAssignedTargetingOptionDetails"
+          description: Content duration details. This field will be populated when the TargetingType is `TARGETING_TYPE_CONTENT_STREAM_TYPE`.
         dayAndTimeDetails:
           $ref: "#/components/schemas/DayAndTimeAssignedTargetingOptionDetails"
           description: Day and time details. This field will be populated when the targeting_type is `TARGETING_TYPE_DAY_AND_TIME`.
@@ -8577,6 +8586,65 @@ components:
             $ref: "#/components/schemas/ContactInfo"
           type: array
       type: object
+    ContentDurationAssignedTargetingOptionDetails:
+      description: Details for content duration assigned targeting option. This will be populated in the content_duration_details field when targeting_type is `TARGETING_TYPE_CONTENT_DURATION`. Explicitly targeting all options is not supported. Remove all content duration targeting options to achieve this effect.
+      properties:
+        contentDuration:
+          description: Output only. The content duration.
+          enum:
+            - CONTENT_DURATION_UNSPECIFIED
+            - CONTENT_DURATION_UNKNOWN
+            - CONTENT_DURATION_0_TO_1_MIN
+            - CONTENT_DURATION_1_TO_5_MIN
+            - CONTENT_DURATION_5_TO_15_MIN
+            - CONTENT_DURATION_15_TO_30_MIN
+            - CONTENT_DURATION_30_TO_60_MIN
+            - CONTENT_DURATION_OVER_60_MIN
+          readOnly: true
+          type: string
+        targetingOptionId:
+          description: Required. The targeting_option_id field when targeting_type is `TARGETING_TYPE_CONTENT_DURATION`.
+          type: string
+      type: object
+    ContentDurationTargetingOptionDetails:
+      description: Represents a targetable content duration. This will be populated in the content_duration_details field when targeting_type is `TARGETING_TYPE_CONTENT_DURATION`.
+      properties:
+        contentDuration:
+          description: Output only. The content duration.
+          enum:
+            - CONTENT_DURATION_UNSPECIFIED
+            - CONTENT_DURATION_UNKNOWN
+            - CONTENT_DURATION_0_TO_1_MIN
+            - CONTENT_DURATION_1_TO_5_MIN
+            - CONTENT_DURATION_5_TO_15_MIN
+            - CONTENT_DURATION_15_TO_30_MIN
+            - CONTENT_DURATION_30_TO_60_MIN
+            - CONTENT_DURATION_OVER_60_MIN
+          readOnly: true
+          type: string
+      type: object
+    ContentGenreAssignedTargetingOptionDetails:
+      description: Details for content genre assigned targeting option. This will be populated in the content_genre_details field when targeting_type is `TARGETING_TYPE_CONTENT_GENRE`. Explicitly targeting all options is not supported. Remove all content genre targeting options to achieve this effect.
+      properties:
+        displayName:
+          description: Output only. The display name of the content genre.
+          readOnly: true
+          type: string
+        negative:
+          description: Indicates if this option is being negatively targeted.
+          type: boolean
+        targetingOptionId:
+          description: Required. The targeting_option_id field when targeting_type is `TARGETING_TYPE_CONTENT_GENRE`.
+          type: string
+      type: object
+    ContentGenreTargetingOptionDetails:
+      description: Represents a targetable content genre. This will be populated in the content_genre_details field when targeting_type is `TARGETING_TYPE_CONTENT_GENRE`.
+      properties:
+        displayName:
+          description: Output only. The display name of the content genre
+          readOnly: true
+          type: string
+      type: object
     ContentInstreamPositionAssignedTargetingOptionDetails:
       description: Assigned content instream position targeting option details. This will be populated in the content_instream_position_details field when targeting_type is `TARGETING_TYPE_CONTENT_INSTREAM_POSITION`.
       properties:
@@ -8654,6 +8722,33 @@ components:
             - CONTENT_OUTSTREAM_POSITION_IN_BANNER
             - CONTENT_OUTSTREAM_POSITION_IN_FEED
             - CONTENT_OUTSTREAM_POSITION_INTERSTITIAL
+          readOnly: true
+          type: string
+      type: object
+    ContentStreamTypeAssignedTargetingOptionDetails:
+      description: Details for content stream type assigned targeting option. This will be populated in the content_stream_type_details field when targeting_type is `TARGETING_TYPE_CONTENT_STREAM_TYPE`. Explicitly targeting all options is not supported. Remove all content stream type targeting options to achieve this effect.
+      properties:
+        contentStreamType:
+          description: Output only. The content stream type.
+          enum:
+            - CONTENT_STREAM_TYPE_UNSPECIFIED
+            - CONTENT_LIVE_STREAM
+            - CONTENT_ON_DEMAND
+          readOnly: true
+          type: string
+        targetingOptionId:
+          description: Required. The targeting_option_id field when targeting_type is `TARGETING_TYPE_CONTENT_STREAM_TYPE`.
+          type: string
+      type: object
+    ContentStreamTypeTargetingOptionDetails:
+      description: Represents a targetable content stream type. This will be populated in the content_stream_type_details field when targeting_type is `TARGETING_TYPE_CONTENT_STREAM_TYPE`.
+      properties:
+        contentStreamType:
+          description: Output only. The content stream type.
+          enum:
+            - CONTENT_STREAM_TYPE_UNSPECIFIED
+            - CONTENT_LIVE_STREAM
+            - CONTENT_ON_DEMAND
           readOnly: true
           type: string
       type: object
@@ -9626,7 +9721,7 @@ components:
           type: string
       type: object
     Empty:
-      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
       type: object
     EnvironmentAssignedTargetingOptionDetails:
@@ -10448,6 +10543,14 @@ components:
         bidStrategy:
           $ref: "#/components/schemas/BiddingStrategy"
           description: The bidding strategy of the insertion order. By default, fixed_bid is set.
+        billableOutcome:
+          description: Immutable. The billable outcome of the insertion order.
+          enum:
+            - BILLABLE_OUTCOME_UNSPECIFIED
+            - BILLABLE_OUTCOME_PAY_PER_IMPRESSION
+            - BILLABLE_OUTCOME_PAY_PER_CLICK
+            - BILLABLE_OUTCOME_PAY_PER_VIEWABLE_IMPRESSION
+          type: string
         budget:
           $ref: "#/components/schemas/InsertionOrderBudget"
           description: Required. The budget allocation settings of the insertion order.
@@ -12715,12 +12818,21 @@ components:
         categoryDetails:
           $ref: "#/components/schemas/CategoryTargetingOptionDetails"
           description: Category resource details.
+        contentDurationDetails:
+          $ref: "#/components/schemas/ContentDurationTargetingOptionDetails"
+          description: Content duration resource details.
+        contentGenreDetails:
+          $ref: "#/components/schemas/ContentGenreTargetingOptionDetails"
+          description: Content genre resource details.
         contentInstreamPositionDetails:
           $ref: "#/components/schemas/ContentInstreamPositionTargetingOptionDetails"
           description: Content instream position details.
         contentOutstreamPositionDetails:
           $ref: "#/components/schemas/ContentOutstreamPositionTargetingOptionDetails"
           description: Content outstream position details.
+        contentStreamTypeDetails:
+          $ref: "#/components/schemas/ContentStreamTypeTargetingOptionDetails"
+          description: Content stream type resource details.
         deviceMakeModelDetails:
           $ref: "#/components/schemas/DeviceMakeModelTargetingOptionDetails"
           description: Device make and model resource details.

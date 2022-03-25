@@ -2665,6 +2665,8 @@ components:
             - MYSQL_8_0
             - MYSQL_8_0_18
             - MYSQL_8_0_26
+            - MYSQL_8_0_27
+            - MYSQL_8_0_28
             - POSTGRES_13
             - POSTGRES_14
             - SQLSERVER_2019_STANDARD
@@ -2778,6 +2780,8 @@ components:
             - MYSQL_8_0
             - MYSQL_8_0_18
             - MYSQL_8_0_26
+            - MYSQL_8_0_27
+            - MYSQL_8_0_28
             - POSTGRES_13
             - POSTGRES_14
             - SQLSERVER_2019_STANDARD
@@ -3113,6 +3117,8 @@ components:
               - MYSQL_8_0
               - MYSQL_8_0_18
               - MYSQL_8_0_26
+              - MYSQL_8_0_27
+              - MYSQL_8_0_28
               - POSTGRES_13
               - POSTGRES_14
               - SQLSERVER_2019_STANDARD
@@ -3694,6 +3700,9 @@ components:
           type: string
         disallowUsernameSubstring:
           description: Disallow username as a part of the password.
+          type: boolean
+        enablePasswordPolicy:
+          description: Whether the password policy is enabled or not.
           type: boolean
         minLength:
           description: Minimum number of characters allowed.

@@ -259,7 +259,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Connector API
-  version: 8.16.0
+  version: 8.17.0
   x-apideck-api: connector
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1083,6 +1083,10 @@ components:
       x-graphql-type-name: ApisFilter
     Connector:
       properties:
+        auth_only:
+          example: true
+          readOnly: true
+          type: boolean
         auth_type:
           description: Type of authorization used by the connector
           enum:
@@ -1107,6 +1111,10 @@ components:
           nullable: true
           title: Description
           type: string
+        has_sandbox_credentials:
+          description: Indicates whether Apideck Sandbox OAuth credentials are available.
+          example: true
+          type: boolean
         icon_url:
           description: Link to a small square icon for the connector.
           example: https://res.cloudinary.com/apideck/image/upload/v1529456047/catalog/salesforce/icon128x128.png
@@ -1125,6 +1133,22 @@ components:
         name:
           description: Name of the connector.
           example: Salesforce
+          type: string
+        oauth_credentials_source:
+          description: Location of the OAuth client credentials. For most connectors the OAuth client credentials are stored on integration and managed by the application owner. For others they are stored on connection and managed by the consumer in Vault.
+          enum:
+            - integration
+            - connection
+          example: integration
+          readOnly: true
+          type: string
+        oauth_grant_type:
+          description: "OAuth grant type used by the connector. More info: https://oauth.net/2/grant-types"
+          enum:
+            - authorization_code
+            - client_credentials
+          example: authorization_code
+          readOnly: true
           type: string
         service_id:
           description: Service provider identifier

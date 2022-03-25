@@ -617,48 +617,6 @@ paths:
           description: Successful response
       tags:
         - v1
-  "/v1/{config}:addBitbucketServerConnectedRepository":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Add a Bitbucket Server repository to a given BitbucketServerConfig's connected repositories. This API is experimental.
-      operationId: cloudbuild.projects.locations.bitbucketServerConfigs.addBitbucketServerConnectedRepository
-      parameters:
-        - description: "Required. The name of the `BitbucketServerConfig` to add a connected repository. Format: `projects/{project}/locations/{location}/bitbucketServerConfigs/{config}`"
-          in: path
-          name: config
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/AddBitbucketServerConnectedRepositoryRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AddBitbucketServerConnectedRepositoryResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
   "/v1/{config}:removeBitbucketServerConnectedRepository":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1730,23 +1688,6 @@ components:
       schema:
         type: string
   schemas:
-    AddBitbucketServerConnectedRepositoryRequest:
-      description: RPC request object accepted by the AddBitbucketServerConnectedRepository RPC method.
-      properties:
-        connectedRepository:
-          $ref: "#/components/schemas/BitbucketServerRepositoryId"
-          description: The connected repository to add.
-      type: object
-    AddBitbucketServerConnectedRepositoryResponse:
-      description: RPC request object returned by the AddBitbucketServerConnectedRepository RPC method.
-      properties:
-        config:
-          description: "The name of the `BitbucketServerConfig` that added connected repository. Format: `projects/{project}/locations/{location}/bitbucketServerConfigs/{config}`"
-          type: string
-        connectedRepository:
-          $ref: "#/components/schemas/BitbucketServerRepositoryId"
-          description: The connected repository.
-      type: object
     ApprovalConfig:
       description: ApprovalConfig describes configuration for manual approval of a build.
       properties:
@@ -2554,7 +2495,7 @@ components:
           type: string
       type: object
     Empty:
-      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
       type: object
     FailureInfo:
@@ -2608,7 +2549,7 @@ components:
           description: "The branch, tag, arbitrary ref, or SHA version of the repo to use when resolving the filename (optional). This field respects the same syntax/resolution as described here: https://git-scm.com/docs/gitrevisions If unspecified, the revision from which the trigger invocation originated is assumed to be the revision from which to read the specified path."
           type: string
         uri:
-          description: The URI of the repo (optional). If unspecified, the repo from which the trigger invocation originated is assumed to be the repo from which to read the specified path.
+          description: The URI of the repo. Either uri or repository can be specified. If unspecified, the repo from which the trigger invocation originated is assumed to be the repo from which to read the specified path.
           type: string
       type: object
     GitHubEnterpriseConfig:
@@ -2717,7 +2658,7 @@ components:
             - BITBUCKET_SERVER
           type: string
         uri:
-          description: The URI of the repo (required).
+          description: The URI of the repo. Either uri or repository can be specified and is required.
           type: string
       type: object
     GoogleDevtoolsCloudbuildV2OperationMetadata:

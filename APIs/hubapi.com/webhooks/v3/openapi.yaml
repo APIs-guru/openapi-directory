@@ -24,7 +24,15 @@ paths:
   "/webhooks/v3/{appId}/settings":
     delete:
       operationId: delete-/webhooks/v3/{appId}/settings_clear
-      parameters: []
+      parameters:
+        - explode: false
+          in: path
+          name: appId
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: simple
       responses:
         "204":
           content: {}
@@ -37,7 +45,15 @@ paths:
         - Settings
     get:
       operationId: get-/webhooks/v3/{appId}/settings_getAll
-      parameters: []
+      parameters:
+        - explode: false
+          in: path
+          name: appId
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: simple
       responses:
         "200":
           content:
@@ -53,7 +69,15 @@ paths:
         - Settings
     put:
       operationId: put-/webhooks/v3/{appId}/settings_configure
-      parameters: []
+      parameters:
+        - explode: false
+          in: path
+          name: appId
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: simple
       requestBody:
         content:
           application/json:
@@ -76,7 +100,15 @@ paths:
   "/webhooks/v3/{appId}/subscriptions":
     get:
       operationId: get-/webhooks/v3/{appId}/subscriptions_getAll
-      parameters: []
+      parameters:
+        - explode: false
+          in: path
+          name: appId
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: simple
       responses:
         "200":
           content:
@@ -92,7 +124,15 @@ paths:
         - Subscriptions
     post:
       operationId: post-/webhooks/v3/{appId}/subscriptions_create
-      parameters: []
+      parameters:
+        - explode: false
+          in: path
+          name: appId
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: simple
       requestBody:
         content:
           application/json:
@@ -115,7 +155,15 @@ paths:
   "/webhooks/v3/{appId}/subscriptions/batch/update":
     post:
       operationId: post-/webhooks/v3/{appId}/subscriptions/batch/update_updateBatch
-      parameters: []
+      parameters:
+        - explode: false
+          in: path
+          name: appId
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: simple
       requestBody:
         content:
           application/json:
@@ -153,6 +201,14 @@ paths:
             format: int32
             type: integer
           style: simple
+        - explode: false
+          in: path
+          name: appId
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: simple
       responses:
         "204":
           content: {}
@@ -169,6 +225,14 @@ paths:
         - explode: false
           in: path
           name: subscriptionId
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: simple
+        - explode: false
+          in: path
+          name: appId
           required: true
           schema:
             format: int32
@@ -193,6 +257,14 @@ paths:
         - explode: false
           in: path
           name: subscriptionId
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: simple
+        - explode: false
+          in: path
+          name: appId
           required: true
           schema:
             format: int32
