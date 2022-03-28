@@ -797,6 +797,56 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1beta/{parent}/apps/-/recaptchaV3Config:batchGet":
+    get:
+      description: Atomically gets the RecaptchaV3Configs for the specified list of apps. For security reasons, the `site_secret` field is never populated in the response.
+      operationId: firebaseappcheck.projects.apps.recaptchaV3Config.batchGet
+      parameters:
+        - description: Required. The parent project name shared by all RecaptchaV3Configs being retrieved, in the format ``` projects/{project_number} ``` The parent collection in the `name` field of any resource being retrieved must match this field, or the entire batch fails.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Required. The relative resource names of the RecaptchaV3Configs to retrieve, in the format: ``` projects/{project_number}/apps/{app_id}/recaptchaV3Config ``` A maximum of 100 objects can be retrieved in a batch."
+          explode: true
+          in: query
+          name: names
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaBatchGetRecaptchaV3ConfigsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1beta/{parent}/apps/-/safetyNetConfig:batchGet":
     get:
       description: Atomically gets the SafetyNetConfigs for the specified list of apps.
@@ -1176,6 +1226,15 @@ components:
             $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaRecaptchaEnterpriseConfig"
           type: array
       type: object
+    GoogleFirebaseAppcheckV1betaBatchGetRecaptchaV3ConfigsResponse:
+      description: Response message for the BatchGetRecaptchaV3Configs method.
+      properties:
+        configs:
+          description: RecaptchaV3Configs retrieved.
+          items:
+            $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaRecaptchaV3Config"
+          type: array
+      type: object
     GoogleFirebaseAppcheckV1betaBatchGetSafetyNetConfigsResponse:
       description: Response message for the BatchGetSafetyNetConfigs method.
       properties:
@@ -1436,6 +1495,24 @@ components:
           type: string
         tokenTtl:
           description: Specifies the duration for which App Check tokens exchanged from reCAPTCHA Enterprise tokens will be valid. If unset, a default value of 1 hour is assumed. Must be between 30 minutes and 7 days, inclusive.
+          format: google-duration
+          type: string
+      type: object
+    GoogleFirebaseAppcheckV1betaRecaptchaV3Config:
+      description: An app's reCAPTCHA v3 configuration object. This configuration is used by ExchangeRecaptchaV3Token to validate reCAPTCHA tokens issued to apps by reCAPTCHA v3. It also controls certain properties of the returned App Check token, such as its ttl.
+      properties:
+        name:
+          description: "Required. The relative resource name of the reCAPTCHA v3 configuration object, in the format: ``` projects/{project_number}/apps/{app_id}/recaptchaV3Config ```"
+          type: string
+        siteSecret:
+          description: Required. Input only. The site secret used to identify your service for reCAPTCHA v3 verification. For security reasons, this field will never be populated in any response.
+          type: string
+        siteSecretSet:
+          description: Output only. Whether the `site_secret` field was previously set. Since we will never return the `site_secret` field, this field is the only way to find out whether it was previously set.
+          readOnly: true
+          type: boolean
+        tokenTtl:
+          description: Specifies the duration for which App Check tokens exchanged from reCAPTCHA tokens will be valid. If unset, a default value of 1 day is assumed. Must be between 30 minutes and 7 days, inclusive.
           format: google-duration
           type: string
       type: object

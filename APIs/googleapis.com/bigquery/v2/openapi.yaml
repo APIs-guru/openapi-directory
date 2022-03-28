@@ -2639,6 +2639,10 @@ components:
         location:
           description: The geographic location where the dataset should reside. The default value is US. See details at https://cloud.google.com/bigquery/docs/locations.
           type: string
+        maxTimeTravelHours:
+          description: "[Optional] Number of hours for the max time travel for all tables in the dataset."
+          format: int64
+          type: string
         satisfiesPZS:
           description: "[Output-only] Reserved for future use."
           type: boolean

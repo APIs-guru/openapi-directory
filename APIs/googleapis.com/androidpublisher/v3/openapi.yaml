@@ -30,6 +30,7 @@ info:
 externalDocs:
   url: https://developers.google.com/android-publisher
 tags:
+  - name: applications
   - name: edits
   - name: generatedapks
   - name: grants
@@ -116,6 +117,125 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - internalappsharingartifacts
+  "/androidpublisher/v3/applications/{packageName}/deviceTierConfigs":
+    get:
+      description: Returns created device tier configs, ordered by descending creation time.
+      operationId: androidpublisher.applications.deviceTierConfigs.list
+      parameters:
+        - description: Package name of the app.
+          in: path
+          name: packageName
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of device tier configs to return. The service may return fewer than this value. If unspecified, at most 10 device tier configs will be returned. The maximum value for this field is 100; values above 100 will be coerced to 100. Device tier configs will be ordered by descending creation time.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListDeviceTierConfigs` call. Provide this to retrieve the subsequent page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListDeviceTierConfigsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - applications
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new device tier config for an app.
+      operationId: androidpublisher.applications.deviceTierConfigs.create
+      parameters:
+        - description: Package name of the app.
+          in: path
+          name: packageName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeviceTierConfig"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceTierConfig"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - applications
+  "/androidpublisher/v3/applications/{packageName}/deviceTierConfigs/{deviceTierConfigId}":
+    get:
+      description: Returns a particular device tier config.
+      operationId: androidpublisher.applications.deviceTierConfigs.get
+      parameters:
+        - description: Package name of the app.
+          in: path
+          name: packageName
+          required: true
+          schema:
+            type: string
+        - description: Required. Id of an existing device tier config.
+          in: path
+          name: deviceTierConfigId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceTierConfig"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - applications
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/androidpublisher/v3/applications/{packageName}/edits":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -3365,6 +3485,28 @@ components:
           description: The content of the comment, i.e. reply body.
           type: string
       type: object
+    DeviceGroup:
+      description: LINT.IfChange A group of devices. A group is defined by a set of device selectors. A device belongs to the group if it matches any selector (logical OR).
+      properties:
+        deviceSelectors:
+          description: Device selectors for this group. A device matching any of the selectors is included in this group.
+          items:
+            $ref: "#/components/schemas/DeviceSelector"
+          type: array
+        name:
+          description: The name of the group.
+          type: string
+      type: object
+    DeviceId:
+      description: Identifier of a device.
+      properties:
+        buildBrand:
+          description: Value of Build.BRAND.
+          type: string
+        buildDevice:
+          description: Value of Build.DEVICE.
+          type: string
+      type: object
     DeviceMetadata:
       description: Characteristics of the user's device.
       properties:
@@ -3407,6 +3549,45 @@ components:
           format: int32
           type: integer
       type: object
+    DeviceRam:
+      description: Conditions about a device's RAM capabilities.
+      properties:
+        maxBytes:
+          description: Maximum RAM in bytes (bound excluded).
+          format: int64
+          type: string
+        minBytes:
+          description: Minimum RAM in bytes (bound included).
+          format: int64
+          type: string
+      type: object
+    DeviceSelector:
+      description: "Selector for a device group. A selector consists of a set of conditions on the device that should all match (logical AND) to determine a device group eligibility. For instance, if a selector specifies RAM conditions, device model inclusion and device model exclusion, a device is considered to match if: device matches RAM conditions AND device matches one of the included device models AND device doesn't match excluded device models"
+      properties:
+        deviceRam:
+          $ref: "#/components/schemas/DeviceRam"
+          description: Conditions on the device's RAM.
+        excludedDeviceIds:
+          description: Device models excluded by this selector, even if they match all other conditions.
+          items:
+            $ref: "#/components/schemas/DeviceId"
+          type: array
+        forbiddenSystemFeatures:
+          description: A device that has any of these system features is excluded by this selector, even if it matches all other conditions.
+          items:
+            $ref: "#/components/schemas/SystemFeature"
+          type: array
+        includedDeviceIds:
+          description: Device models included by this selector.
+          items:
+            $ref: "#/components/schemas/DeviceId"
+          type: array
+        requiredSystemFeatures:
+          description: A device needs to have all these system features to be included by the selector.
+          items:
+            $ref: "#/components/schemas/SystemFeature"
+          type: array
+      type: object
     DeviceSpec:
       description: The device spec used to generate a system APK.
       properties:
@@ -3423,6 +3604,45 @@ components:
           description: All installed locales represented as BCP-47 strings, e.g. "en-US".
           items:
             type: string
+          type: array
+      type: object
+    DeviceTier:
+      description: A single device tier. Devices matching any of the device groups in device_group_names are considered to match the tier.
+      properties:
+        deviceGroupNames:
+          description: Groups of devices included in this tier. These groups must be defined explicitly under device_groups in this configuration.
+          items:
+            type: string
+          type: array
+        level:
+          description: "The priority level of the tier. Tiers are evaluated in descending order of level: the highest level tier has the highest priority. The highest tier matching a given device is selected for that device. You should use a contiguous range of levels for your tiers in a tier set; tier levels in a tier set must be unique. For instance, if your tier set has 4 tiers (including the global fallback), you should define tiers 1, 2 and 3 in this configuration. Note: tier 0 is implicitly defined as a global fallback and selected for devices that don't match any of the tiers explicitly defined here. You mustn't define level 0 explicitly in this configuration."
+          format: int32
+          type: integer
+      type: object
+    DeviceTierConfig:
+      description: LINT.IfChange Configuration describing device targeting criteria for the content of an app.
+      properties:
+        deviceGroups:
+          description: Definition of device groups for the app.
+          items:
+            $ref: "#/components/schemas/DeviceGroup"
+          type: array
+        deviceTierConfigId:
+          description: Output only. The device tier config ID.
+          format: int64
+          readOnly: true
+          type: string
+        deviceTierSet:
+          $ref: "#/components/schemas/DeviceTierSet"
+          description: Definition of the set of device tiers for the app.
+      type: object
+    DeviceTierSet:
+      description: A set of device tiers. A tier set determines what variation of app content gets served to a specific device, for device-targeted content. You should assign a priority level to each tier, which determines the ordering by which they are evaluated by Play. See the documentation of DeviceTier.level for more details.
+      properties:
+        deviceTiers:
+          description: Device tiers belonging to the set.
+          items:
+            $ref: "#/components/schemas/DeviceTier"
           type: array
       type: object
     ExpansionFile:
@@ -3776,6 +3996,18 @@ components:
           type: integer
         introductoryPricePeriod:
           description: Introductory price period, specified in ISO 8601 format. Common values are (but not limited to) "P1W" (one week), "P1M" (one month), "P3M" (three months), "P6M" (six months), and "P1Y" (one year).
+          type: string
+      type: object
+    ListDeviceTierConfigsResponse:
+      description: Response listing existing device tier configs.
+      properties:
+        deviceTierConfigs:
+          description: Device tier configs created by the developer.
+          items:
+            $ref: "#/components/schemas/DeviceTierConfig"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
       type: object
     ListUsersResponse:
@@ -4199,6 +4431,13 @@ components:
           items:
             $ref: "#/components/schemas/Variant"
           type: array
+      type: object
+    SystemFeature:
+      description: Representation of a system feature.
+      properties:
+        name:
+          description: The name of the feature.
+          type: string
       type: object
     Testers:
       description: "The testers of an app. The resource for TestersService. Note: while it is possible in the Play Console UI to add testers via email lists, email lists are not supported by this resource."
