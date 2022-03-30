@@ -757,7 +757,7 @@ components:
           type: integer
       type: object
     Empty:
-      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
       type: object
     ErrorLogEntry:
@@ -896,7 +896,7 @@ components:
           type: array
       type: object
     MetadataOptions:
-      description: Specifies the metadata options for running a transfer. These options only apply to transfers involving a POSIX filesystem and are ignored for other transfers.
+      description: Specifies the metadata options for running a transfer.
       properties:
         acl:
           description: Specifies how each object's ACLs should be preserved for transfers between Google Cloud Storage buckets. If unspecified, the default behavior is the same as ACL_DESTINATION_BUCKET_DEFAULT.
@@ -906,7 +906,7 @@ components:
             - ACL_PRESERVE
           type: string
         gid:
-          description: Specifies how each file's POSIX group ID (GID) attribute should be handled by the transfer. By default, GID is not preserved.
+          description: Specifies how each file's POSIX group ID (GID) attribute should be handled by the transfer. By default, GID is not preserved. Only applicable to transfers involving POSIX file systems, and ignored for other transfers.
           enum:
             - GID_UNSPECIFIED
             - GID_SKIP
@@ -920,7 +920,7 @@ components:
             - KMS_KEY_PRESERVE
           type: string
         mode:
-          description: Specifies how each file's mode attribute should be handled by the transfer. By default, mode is not preserved.
+          description: Specifies how each file's mode attribute should be handled by the transfer. By default, mode is not preserved. Only applicable to transfers involving POSIX file systems, and ignored for other transfers.
           enum:
             - MODE_UNSPECIFIED
             - MODE_SKIP
@@ -938,7 +938,7 @@ components:
             - STORAGE_CLASS_ARCHIVE
           type: string
         symlink:
-          description: Specifies how symlinks should be handled by the transfer. By default, symlinks are not preserved.
+          description: Specifies how symlinks should be handled by the transfer. By default, symlinks are not preserved. Only applicable to transfers involving POSIX file systems, and ignored for other transfers.
           enum:
             - SYMLINK_UNSPECIFIED
             - SYMLINK_SKIP
@@ -959,7 +959,7 @@ components:
             - TIME_CREATED_PRESERVE_AS_CUSTOM_TIME
           type: string
         uid:
-          description: Specifies how each file's POSIX user ID (UID) attribute should be handled by the transfer. By default, UID is not preserved.
+          description: Specifies how each file's POSIX user ID (UID) attribute should be handled by the transfer. By default, UID is not preserved. Only applicable to transfers involving POSIX file systems, and ignored for other transfers.
           enum:
             - UID_UNSPECIFIED
             - UID_SKIP
@@ -1330,6 +1330,14 @@ components:
         overwriteObjectsAlreadyExistingInSink:
           description: When to overwrite objects that already exist in the sink. The default is that only objects that are different from the source are ovewritten. If true, all objects in the sink whose name matches an object in the source are overwritten with the source object.
           type: boolean
+        overwriteWhen:
+          description: When to overwrite objects that already exist in the sink. If not set overwrite behavior is determined by overwrite_objects_already_existing_in_sink.
+          enum:
+            - OVERWRITE_WHEN_UNSPECIFIED
+            - DIFFERENT
+            - NEVER
+            - ALWAYS
+          type: string
       type: object
     TransferSpec:
       description: Configuration for running a transfer.

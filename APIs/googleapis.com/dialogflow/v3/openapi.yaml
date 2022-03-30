@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://dialogflow.googleapis.com/$discovery/rest?version=v3
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: dialogflow
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/dialogflow/
 tags:
@@ -2677,6 +2678,9 @@ components:
         enableStackdriverLogging:
           description: Indicates if stackdriver logging is enabled for the agent. Please use agent.advanced_settings instead.
           type: boolean
+        locked:
+          description: Indiciates whether the agent is locked for changes. If the agent is locked, modifications to the agent will be rejected except for RestoreAgent.
+          type: boolean
         name:
           description: "The unique identifier of the agent. Required for the Agents.UpdateAgent method. Agents.CreateAgent populates the name automatically. Format: `projects//locations//agents/`."
           type: string
@@ -3342,6 +3346,12 @@ components:
       properties:
         agentUri:
           description: Optional. The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to export the agent to. The format of this URI must be `gs:///`. If left unspecified, the serialized agent is returned inline. Dialogflow performs a write operation for the Cloud Storage object on the caller's behalf, so your request authentication must have write permissions for the object. For more information, see [Dialogflow access control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+          type: string
+        dataFormat:
+          description: Optional. The data format of the exported agent. If not specified, `BLOB` is assumed.
+          enum:
+            - DATA_FORMAT_UNSPECIFIED
+            - BLOB
           type: string
         environment:
           description: "Optional. Environment name. If not set, draft environment is assumed. Format: `projects//locations//agents//environments/`."
@@ -9404,7 +9414,7 @@ components:
           type: object
       type: object
     GoogleProtobufEmpty:
-      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
       type: object
     GoogleRpcStatus:

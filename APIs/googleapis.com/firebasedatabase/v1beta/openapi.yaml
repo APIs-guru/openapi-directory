@@ -219,6 +219,11 @@ paths:
           name: pageToken
           schema:
             type: string
+        - description: Indicate that DatabaseInstances in the `DELETED` state should also be returned.
+          in: query
+          name: showDeleted
+          schema:
+            type: boolean
       responses:
         "200":
           content:
