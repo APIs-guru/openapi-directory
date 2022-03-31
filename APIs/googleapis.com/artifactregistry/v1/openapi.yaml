@@ -982,6 +982,39 @@ components:
       schema:
         type: string
   schemas:
+    AptArtifact:
+      description: A detailed representation of an Apt artifact. Information in the record is derived from the archive's control file. See https://www.debian.org/doc/debian-policy/ch-controlfields.html
+      properties:
+        architecture:
+          description: Output only. Operating system architecture of the artifact.
+          readOnly: true
+          type: string
+        component:
+          description: Output only. Repository component of the artifact.
+          readOnly: true
+          type: string
+        controlFile:
+          description: Output only. Contents of the artifact's control metadata file.
+          format: byte
+          readOnly: true
+          type: string
+        name:
+          description: Output only. The Artifact Registry resource name of the artifact.
+          readOnly: true
+          type: string
+        packageName:
+          description: Output only. The Apt package name of the artifact.
+          readOnly: true
+          type: string
+        packageType:
+          description: Output only. An artifact is a binary or source package.
+          enum:
+            - PACKAGE_TYPE_UNSPECIFIED
+            - BINARY
+            - SOURCE
+          readOnly: true
+          type: string
+      type: object
     Binding:
       description: Associates `members`, or principals, with a `role`.
       properties:
@@ -1028,7 +1061,7 @@ components:
           type: string
       type: object
     Empty:
-      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
       type: object
     Expr:
@@ -1089,6 +1122,16 @@ components:
           format: byte
           type: string
       type: object
+    ImportAptArtifactsErrorInfo:
+      description: Error information explaining why a package was not imported.
+      properties:
+        error:
+          $ref: "#/components/schemas/Status"
+          description: The detailed error status.
+        gcsSource:
+          $ref: "#/components/schemas/ImportAptArtifactsGcsSource"
+          description: Google Cloud Storage location requested.
+      type: object
     ImportAptArtifactsGcsSource:
       description: Google Cloud Storage location where the artifacts currently reside.
       properties:
@@ -1101,12 +1144,40 @@ components:
           description: Supports URI wildcards for matching multiple objects from a single URI.
           type: boolean
       type: object
+    ImportAptArtifactsMetadata:
+      description: The operation metadata for importing artifacts.
+      properties: {}
+      type: object
     ImportAptArtifactsRequest:
       description: The request to import new apt artifacts.
       properties:
         gcsSource:
           $ref: "#/components/schemas/ImportAptArtifactsGcsSource"
           description: Google Cloud Storage location where input content is located.
+      type: object
+    ImportAptArtifactsResponse:
+      description: The response message from importing APT artifacts.
+      properties:
+        aptArtifacts:
+          description: The Apt artifacts imported.
+          items:
+            $ref: "#/components/schemas/AptArtifact"
+          type: array
+        errors:
+          description: Detailed error info for packages that were not imported.
+          items:
+            $ref: "#/components/schemas/ImportAptArtifactsErrorInfo"
+          type: array
+      type: object
+    ImportYumArtifactsErrorInfo:
+      description: Error information explaining why a package was not imported.
+      properties:
+        error:
+          $ref: "#/components/schemas/Status"
+          description: The detailed error status.
+        gcsSource:
+          $ref: "#/components/schemas/ImportYumArtifactsGcsSource"
+          description: Google Cloud Storage location requested.
       type: object
     ImportYumArtifactsGcsSource:
       description: Google Cloud Storage location where the artifacts currently reside.
@@ -1120,12 +1191,30 @@ components:
           description: Supports URI wildcards for matching multiple objects from a single URI.
           type: boolean
       type: object
+    ImportYumArtifactsMetadata:
+      description: The operation metadata for importing artifacts.
+      properties: {}
+      type: object
     ImportYumArtifactsRequest:
       description: The request to import new yum artifacts.
       properties:
         gcsSource:
           $ref: "#/components/schemas/ImportYumArtifactsGcsSource"
           description: Google Cloud Storage location where input content is located.
+      type: object
+    ImportYumArtifactsResponse:
+      description: The response message from importing YUM artifacts.
+      properties:
+        errors:
+          description: Detailed error info for packages that were not imported.
+          items:
+            $ref: "#/components/schemas/ImportYumArtifactsErrorInfo"
+          type: array
+        yumArtifacts:
+          description: The yum artifacts imported.
+          items:
+            $ref: "#/components/schemas/YumArtifact"
+          type: array
       type: object
     ListDockerImagesResponse:
       description: The response from listing docker images.
@@ -1271,6 +1360,10 @@ components:
           description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
       type: object
+    OperationMetadata:
+      description: Metadata type for longrunning-operations, currently empty.
+      properties: {}
+      type: object
     Package:
       description: Packages are named collections of versions.
       properties:
@@ -1356,6 +1449,11 @@ components:
         name:
           description: 'The name of the repository, for example: "projects/p1/locations/us-central1/repositories/repo1".'
           type: string
+        sizeBytes:
+          description: Output only. The size, in bytes, of all artifact storage in this repository. Repositories that are generally available or in public preview use this to calculate storage costs.
+          format: int64
+          readOnly: true
+          type: string
         updateTime:
           description: The time when the repository was last updated.
           format: google-datetime
@@ -1425,6 +1523,15 @@ components:
       description: The request to upload an artifact.
       properties: {}
       type: object
+    UploadAptArtifactResponse:
+      description: The response of the completed artifact upload operation. This response is contained in the Operation and available to users.
+      properties:
+        aptArtifacts:
+          description: The Apt artifacts updated.
+          items:
+            $ref: "#/components/schemas/AptArtifact"
+          type: array
+      type: object
     UploadYumArtifactMediaResponse:
       description: The response to upload an artifact.
       properties:
@@ -1435,6 +1542,15 @@ components:
     UploadYumArtifactRequest:
       description: The request to upload an artifact.
       properties: {}
+      type: object
+    UploadYumArtifactResponse:
+      description: The response of the completed artifact upload operation. This response is contained in the Operation and available to users.
+      properties:
+        yumArtifacts:
+          description: The Apt artifacts updated.
+          items:
+            $ref: "#/components/schemas/YumArtifact"
+          type: array
       type: object
     Version:
       description: The body of a version resource. A version resource represents a collection of components, such as files and other data. This may correspond to a version in many package management schemes.
@@ -1463,6 +1579,30 @@ components:
         updateTime:
           description: The time when the version was last updated.
           format: google-datetime
+          type: string
+      type: object
+    YumArtifact:
+      description: A detailed representation of a Yum artifact.
+      properties:
+        architecture:
+          description: Output only. Operating system architecture of the artifact.
+          readOnly: true
+          type: string
+        name:
+          description: Output only. The Artifact Registry resource name of the artifact.
+          readOnly: true
+          type: string
+        packageName:
+          description: Output only. The yum package name of the artifact.
+          readOnly: true
+          type: string
+        packageType:
+          description: Output only. An artifact is a binary or source package.
+          enum:
+            - PACKAGE_TYPE_UNSPECIFIED
+            - BINARY
+            - SOURCE
+          readOnly: true
           type: string
       type: object
   securitySchemes:

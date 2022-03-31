@@ -5557,6 +5557,16 @@ components:
         serviceAttachment:
           description: "Format: projects/*/regions/*/serviceAttachments/*"
           type: string
+        state:
+          description: Output only. State of the endpoint attachment. Values other than `ACTIVE` mean the resource is not ready to use.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - ACTIVE
+            - DELETING
+            - UPDATING
+          readOnly: true
+          type: string
       type: object
     GoogleCloudApigeeV1EntityMetadata:
       description: Metadata common to many entities in this API.
@@ -7883,7 +7893,7 @@ components:
           type: object
       type: object
     GoogleProtobufEmpty:
-      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
       type: object
     GoogleRpcPreconditionFailure:

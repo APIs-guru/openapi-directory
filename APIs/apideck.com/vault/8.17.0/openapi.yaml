@@ -208,7 +208,7 @@ paths:
       description: |
         __In most cases the authorize link is provided in the ``/connections`` endpoint. Normally you don't need to manually generate these links.__
 
-        Use this endpoint to authenticate a user with a connector. It will return a 302 redirect to the downstream connector endpoints.
+        Use this endpoint to authenticate a user with a connector. It will return a 301 redirect to the downstream connector endpoints.
 
         Auth links will have a state parameter included to verify the validity of the request. This is the url your users will use to activate OAuth supported integration providers.
 

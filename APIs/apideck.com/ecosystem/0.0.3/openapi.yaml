@@ -11,7 +11,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Ecosystem API
-  version: 0.0.1
+  version: 0.0.3
   x-apisguru-categories:
     - developer_tools
   x-logo:
@@ -42,14 +42,14 @@ tags:
 paths:
   "/ecosystems/{ecosystem_id}":
     get:
-      description: List ecosystems
-      operationId: ecosystemsAll
+      description: Get ecosystem
+      operationId: ecosystemsOne
       parameters:
         - $ref: "#/components/parameters/ecosystem_id"
       responses:
         "200":
           $ref: "#/components/responses/GetEcosystemResponse"
-      summary: List ecosystems
+      summary: Get ecosystem
       tags:
         - Ecosystem
   "/ecosystems/{ecosystem_id}/categories":
@@ -84,12 +84,13 @@ paths:
       parameters:
         - $ref: "#/components/parameters/ecosystem_id"
         - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
       responses:
         "200":
           $ref: "#/components/responses/GetListingsResponse"
       summary: List category listings
       tags:
-        - Listing
         - Category
   "/ecosystems/{ecosystem_id}/collections":
     get:
@@ -123,24 +124,39 @@ paths:
       parameters:
         - $ref: "#/components/parameters/ecosystem_id"
         - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
       responses:
         "200":
           $ref: "#/components/responses/GetListingsResponse"
       summary: List collection listings
       tags:
-        - Listing
         - Collection
-  "/ecosystems/{ecosystem_id}/listings/{id}":
+  "/ecosystems/{ecosystem_id}/listings":
     get:
       description: List listings
       operationId: listingsAll
       parameters:
         - $ref: "#/components/parameters/ecosystem_id"
-        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
       responses:
         "200":
           $ref: "#/components/responses/GetListingsResponse"
       summary: List listings
+      tags:
+        - Listing
+  "/ecosystems/{ecosystem_id}/listings/{id}":
+    get:
+      description: Get listing
+      operationId: listingsOne
+      parameters:
+        - $ref: "#/components/parameters/ecosystem_id"
+        - $ref: "#/components/parameters/id"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetListingResponse"
+      summary: Get listing
       tags:
         - Listing
   "/ecosystems/{ecosystem_id}/products":
@@ -175,15 +191,23 @@ paths:
       parameters:
         - $ref: "#/components/parameters/ecosystem_id"
         - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
       responses:
         "200":
           $ref: "#/components/responses/GetListingsResponse"
       summary: List product listings
       tags:
-        - Listing
         - Product
 components:
   parameters:
+    cursor:
+      description: Cursor to start from. You can find cursors for next/previous pages in the meta.cursors property of the response.
+      in: query
+      name: cursor
+      schema:
+        nullable: true
+        type: string
     ecosystem_id:
       in: path
       name: ecosystem_id
@@ -197,6 +221,15 @@ components:
       required: true
       schema:
         type: string
+    limit:
+      description: Number of records to return
+      in: query
+      name: limit
+      schema:
+        default: 50
+        maximum: 200
+        minimum: 1
+        type: integer
   responses:
     GetCategoriesResponse:
       content:
@@ -769,6 +802,10 @@ components:
           items:
             $ref: "#/components/schemas/Listing"
           type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
         status:
           description: HTTP Response Status
           example: OK
@@ -936,6 +973,24 @@ components:
         work_email_validation:
           nullable: true
           type: boolean
+      type: object
+    Links:
+      description: Links to navigate to previous or next pages through the API
+      properties:
+        current:
+          description: Link to navigate to the current page through the API
+          example: https://api.apideck.com/ecosystem/123abc/listings
+          type: string
+        next:
+          description: Link to navigate to the previous page through the API
+          example: https://api.apideck.com/ecosystem/123abc/listings?cursor=em9oby1jcm06OnBhZ2U6OjM
+          nullable: true
+          type: string
+        previous:
+          description: Link to navigate to the previous page through the API
+          example: https://api.apideck.com/ecosystem/123abc/listings?cursor=em9oby1jcm06OnBhZ2U6OjE%3D
+          nullable: true
+          type: string
       type: object
     Listing:
       additionalProperties: false
@@ -1180,6 +1235,33 @@ components:
           type: string
         url:
           type: string
+      type: object
+    Meta:
+      description: Response metadata
+      properties:
+        cursors:
+          description: Cursors to navigate to previous or next pages through the API
+          properties:
+            current:
+              description: Cursor to navigate to the current page of results through the API
+              example: em9oby1jcm06OnBhZ2U6OjI=
+              nullable: true
+              type: string
+            next:
+              description: Cursor to navigate to the next page of results through the API
+              example: em9oby1jcm06OnBhZ2U6OjM=
+              nullable: true
+              type: string
+            previous:
+              description: Cursor to navigate to the previous page of results through the API
+              example: em9oby1jcm06OnBhZ2U6OjE=
+              nullable: true
+              type: string
+          type: object
+        items_on_page:
+          description: Number of items returned in the data property of the response
+          example: 50
+          type: integer
       type: object
     MetaTagSettings:
       additionalProperties: false

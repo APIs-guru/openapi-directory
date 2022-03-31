@@ -13,17 +13,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Recommender API
   version: v1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://recommender.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: recommender
 externalDocs:
@@ -71,45 +69,6 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-    patch:
-      description: Updates a Recommender Config. This will create a new revision of the config.
-      operationId: recommender.projects.locations.recommenders.updateConfig
-      parameters:
-        - description: Name of recommender config. Eg, projects/[PROJECT_NUMBER]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]/config
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-        - description: The list of fields to be updated.
-          in: query
-          name: updateMask
-          schema:
-            type: string
-        - description: If true, validate the request and preview the change, but do not actually update it.
-          in: query
-          name: validateOnly
-          schema:
-            type: boolean
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudRecommenderV1RecommenderConfig"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudRecommenderV1RecommenderConfig"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
   "/v1/{name}:markAccepted":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -572,44 +531,6 @@ components:
           description: A map of metadata for the state, provided by user or automations systems.
           type: object
       type: object
-    GoogleCloudRecommenderV1InsightTypeConfig:
-      description: Configuration for an InsightType.
-      properties:
-        annotations:
-          additionalProperties:
-            type: string
-          description: "Allows clients to store small amounts of arbitrary data. Annotations must follow the Kubernetes syntax. The total size of all keys and values combined is limited to 256k. Key can have 2 segments: prefix (optional) and name (required), separated by a slash (/). Prefix must be a DNS subdomain. Name must be 63 characters or less, begin and end with alphanumerics, with dashes (-), underscores (_), dots (.), and alphanumerics between."
-          type: object
-        displayName:
-          description: A user-settable field to provide a human-readable name to be used in user interfaces.
-          type: string
-        etag:
-          description: Fingerprint of the InsightTypeConfig. Provides optimistic locking when updating.
-          type: string
-        insightTypeGenerationConfig:
-          $ref: "#/components/schemas/GoogleCloudRecommenderV1InsightTypeGenerationConfig"
-          description: InsightTypeGenerationConfig which configures the generation of insights for this insight type.
-        name:
-          description: Name of insight type config. Eg, projects/[PROJECT_NUMBER]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]/config
-          type: string
-        revisionId:
-          description: Output only. Immutable. The revision ID of the config. A new revision is committed whenever the config is changed in any way. The format is an 8-character hexadecimal string.
-          readOnly: true
-          type: string
-        updateTime:
-          description: Last time when the config was updated.
-          format: google-datetime
-          type: string
-      type: object
-    GoogleCloudRecommenderV1InsightTypeGenerationConfig:
-      description: A configuration to customize the generation of insights. Eg, customizing the lookback period considered when generating a insight.
-      properties:
-        params:
-          additionalProperties:
-            description: Properties of the object.
-          description: Parameters for this InsightTypeGenerationConfig. These configs can be used by or are applied to all subtypes.
-          type: object
-      type: object
     GoogleCloudRecommenderV1ListInsightsResponse:
       description: Response to the `ListInsights` method.
       properties:
@@ -818,44 +739,6 @@ components:
           description: A map of metadata for the state, provided by user or automations systems.
           type: object
       type: object
-    GoogleCloudRecommenderV1RecommenderConfig:
-      description: Configuration for a Recommender.
-      properties:
-        annotations:
-          additionalProperties:
-            type: string
-          description: "Allows clients to store small amounts of arbitrary data. Annotations must follow the Kubernetes syntax. The total size of all keys and values combined is limited to 256k. Key can have 2 segments: prefix (optional) and name (required), separated by a slash (/). Prefix must be a DNS subdomain. Name must be 63 characters or less, begin and end with alphanumerics, with dashes (-), underscores (_), dots (.), and alphanumerics between."
-          type: object
-        displayName:
-          description: A user-settable field to provide a human-readable name to be used in user interfaces.
-          type: string
-        etag:
-          description: Fingerprint of the RecommenderConfig. Provides optimistic locking when updating.
-          type: string
-        name:
-          description: Name of recommender config. Eg, projects/[PROJECT_NUMBER]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]/config
-          type: string
-        recommenderGenerationConfig:
-          $ref: "#/components/schemas/GoogleCloudRecommenderV1RecommenderGenerationConfig"
-          description: RecommenderGenerationConfig which configures the Generation of recommendations for this recommender.
-        revisionId:
-          description: Output only. Immutable. The revision ID of the config. A new revision is committed whenever the config is changed in any way. The format is an 8-character hexadecimal string.
-          readOnly: true
-          type: string
-        updateTime:
-          description: Last time when the config was updated.
-          format: google-datetime
-          type: string
-      type: object
-    GoogleCloudRecommenderV1RecommenderGenerationConfig:
-      description: A Configuration to customize the generation of recommendations. Eg, customizing the lookback period considered when generating a recommendation.
-      properties:
-        params:
-          additionalProperties:
-            description: Properties of the object.
-          description: Parameters for this RecommenderGenerationConfig. These configs can be used by or are applied to all subtypes.
-          type: object
-      type: object
     GoogleCloudRecommenderV1SecurityProjection:
       description: Contains various ways of describing the impact on Security.
       properties:
@@ -905,5 +788,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

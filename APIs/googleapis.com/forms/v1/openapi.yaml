@@ -66,6 +66,10 @@ paths:
             - https://www.googleapis.com/auth/drive.file
           Oauth2c:
             - https://www.googleapis.com/auth/drive.file
+        - Oauth2:
+            - https://www.googleapis.com/auth/forms.body
+          Oauth2c:
+            - https://www.googleapis.com/auth/forms.body
       tags:
         - forms
   "/v1/forms/{formId}":
@@ -99,6 +103,14 @@ paths:
             - https://www.googleapis.com/auth/drive.readonly
           Oauth2c:
             - https://www.googleapis.com/auth/drive.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/forms.body
+          Oauth2c:
+            - https://www.googleapis.com/auth/forms.body
+        - Oauth2:
+            - https://www.googleapis.com/auth/forms.body.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/forms.body.readonly
       tags:
         - forms
     parameters:
@@ -155,6 +167,10 @@ paths:
             - https://www.googleapis.com/auth/drive.file
           Oauth2c:
             - https://www.googleapis.com/auth/drive.file
+        - Oauth2:
+            - https://www.googleapis.com/auth/forms.responses.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/forms.responses.readonly
       tags:
         - forms
     parameters:
@@ -202,6 +218,10 @@ paths:
             - https://www.googleapis.com/auth/drive.file
           Oauth2c:
             - https://www.googleapis.com/auth/drive.file
+        - Oauth2:
+            - https://www.googleapis.com/auth/forms.responses.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/forms.responses.readonly
       tags:
         - forms
     parameters:
@@ -247,6 +267,18 @@ paths:
             - https://www.googleapis.com/auth/drive.readonly
           Oauth2c:
             - https://www.googleapis.com/auth/drive.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/forms.body
+          Oauth2c:
+            - https://www.googleapis.com/auth/forms.body
+        - Oauth2:
+            - https://www.googleapis.com/auth/forms.body.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/forms.body.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/forms.responses.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/forms.responses.readonly
       tags:
         - forms
     parameters:
@@ -296,6 +328,18 @@ paths:
             - https://www.googleapis.com/auth/drive.readonly
           Oauth2c:
             - https://www.googleapis.com/auth/drive.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/forms.body
+          Oauth2c:
+            - https://www.googleapis.com/auth/forms.body
+        - Oauth2:
+            - https://www.googleapis.com/auth/forms.body.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/forms.body.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/forms.responses.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/forms.responses.readonly
       tags:
         - forms
   "/v1/forms/{formId}/watches/{watchId}":
@@ -335,6 +379,18 @@ paths:
             - https://www.googleapis.com/auth/drive.readonly
           Oauth2c:
             - https://www.googleapis.com/auth/drive.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/forms.body
+          Oauth2c:
+            - https://www.googleapis.com/auth/forms.body
+        - Oauth2:
+            - https://www.googleapis.com/auth/forms.body.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/forms.body.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/forms.responses.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/forms.responses.readonly
       tags:
         - forms
     parameters:
@@ -403,6 +459,18 @@ paths:
             - https://www.googleapis.com/auth/drive.readonly
           Oauth2c:
             - https://www.googleapis.com/auth/drive.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/forms.body
+          Oauth2c:
+            - https://www.googleapis.com/auth/forms.body
+        - Oauth2:
+            - https://www.googleapis.com/auth/forms.body.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/forms.body.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/forms.responses.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/forms.responses.readonly
       tags:
         - forms
   "/v1/forms/{formId}:batchUpdate":
@@ -449,6 +517,10 @@ paths:
             - https://www.googleapis.com/auth/drive.file
           Oauth2c:
             - https://www.googleapis.com/auth/drive.file
+        - Oauth2:
+            - https://www.googleapis.com/auth/forms.body
+          Oauth2c:
+            - https://www.googleapis.com/auth/forms.body
       tags:
         - forms
 components:
@@ -1334,6 +1406,9 @@ components:
             https://www.googleapis.com/auth/drive: See, edit, create, and delete all of your Google Drive files
             https://www.googleapis.com/auth/drive.file: See, edit, create, and delete only the specific Google Drive files you use with this app
             https://www.googleapis.com/auth/drive.readonly: See and download all your Google Drive files
+            https://www.googleapis.com/auth/forms.body: See, edit, create, and delete all your Google Forms forms
+            https://www.googleapis.com/auth/forms.body.readonly: See all your Google Forms forms
+            https://www.googleapis.com/auth/forms.responses.readonly: See all responses to your Google Forms forms
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -1344,5 +1419,8 @@ components:
             https://www.googleapis.com/auth/drive: See, edit, create, and delete all of your Google Drive files
             https://www.googleapis.com/auth/drive.file: See, edit, create, and delete only the specific Google Drive files you use with this app
             https://www.googleapis.com/auth/drive.readonly: See and download all your Google Drive files
+            https://www.googleapis.com/auth/forms.body: See, edit, create, and delete all your Google Forms forms
+            https://www.googleapis.com/auth/forms.body.readonly: See all your Google Forms forms
+            https://www.googleapis.com/auth/forms.responses.readonly: See all responses to your Google Forms forms
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

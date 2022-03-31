@@ -49950,11 +49950,6 @@ components:
             - INTERNAL_SELF_MANAGED
             - INVALID_LOAD_BALANCING_SCHEME
           type: string
-        localityLbPolicies:
-          description: A list of locality load balancing policies to be used in order of preference. Either the policy or the customPolicy field should be set. Overrides any value set in the localityLbPolicy field. localityLbPolicies is only supported when the BackendService is referenced by a URL Map that is referenced by a target gRPC proxy that has the validateForProxyless field set to true.
-          items:
-            $ref: "#/components/schemas/BackendServiceLocalityLoadBalancingPolicyConfig"
-          type: array
         localityLbPolicy:
           description: "The load balancing algorithm used within the scope of the locality. The possible values are: - ROUND_ROBIN: This is a simple policy in which each healthy backend is selected in round robin order. This is the default. - LEAST_REQUEST: An O(1) algorithm which selects two random healthy hosts and picks the host which has fewer active requests. - RING_HASH: The ring/modulo hash load balancer implements consistent hashing to backends. The algorithm has the property that the addition/removal of a host from a set of N hosts only affects 1/N of the requests. - RANDOM: The load balancer selects a random healthy host. - ORIGINAL_DESTINATION: Backend host is selected based on the client connection metadata, i.e., connections are opened to the same address as the destination address of the incoming connection before the connection was redirected to the load balancer. - MAGLEV: used as a drop in replacement for the ring hash load balancer. Maglev is not as stable as ring hash but has faster table lookup build times and host selection times. For more information about Maglev, see https://ai.google/research/pubs/pub44824 This field is applicable to either: - A regional backend service with the service_protocol set to HTTP, HTTPS, or HTTP2, and load_balancing_scheme set to INTERNAL_MANAGED. - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED. If sessionAffinity is not NONE, and this field is not set to MAGLEV or RING_HASH, session affinity settings will not take effect. Only ROUND_ROBIN and RING_HASH are supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true."
           enum:
@@ -50352,40 +50347,6 @@ components:
               description: "[Output Only] A human-readable description of the warning code."
               type: string
           type: object
-      type: object
-    BackendServiceLocalityLoadBalancingPolicyConfig:
-      description: Container for either a built-in LB policy supported by gRPC or Envoy or a custom one implemented by the end user.
-      properties:
-        customPolicy:
-          $ref: "#/components/schemas/BackendServiceLocalityLoadBalancingPolicyConfigCustomPolicy"
-        policy:
-          $ref: "#/components/schemas/BackendServiceLocalityLoadBalancingPolicyConfigPolicy"
-      type: object
-    BackendServiceLocalityLoadBalancingPolicyConfigCustomPolicy:
-      description: The configuration for a custom policy implemented by the user and deployed with the client.
-      properties:
-        data:
-          description: An optional, arbitrary JSON object with configuration data, understood by a locally installed custom policy implementation.
-          type: string
-        name:
-          description: Identifies the custom policy. The value should match the type the custom implementation is registered with on the gRPC clients. It should follow protocol buffer message naming conventions and include the full path (e.g. myorg.CustomLbPolicy). The maximum length is 256 characters. Note that specifying the same custom policy more than once for a backend is not a valid configuration and will be rejected.
-          type: string
-      type: object
-    BackendServiceLocalityLoadBalancingPolicyConfigPolicy:
-      description: The configuration for a built-in load balancing policy.
-      properties:
-        name:
-          description: The name of a locality load balancer policy to be used. The value should be one of the predefined ones as supported by localityLbPolicy, although at the moment only ROUND_ROBIN is supported. This field should only be populated when the customPolicy field is not used. Note that specifying the same policy more than once for a backend is not a valid configuration and will be rejected.
-          enum:
-            - INVALID_LB_POLICY
-            - LEAST_REQUEST
-            - MAGLEV
-            - ORIGINAL_DESTINATION
-            - RANDOM
-            - RING_HASH
-            - ROUND_ROBIN
-            - WEIGHTED_MAGLEV
-          type: string
       type: object
     BackendServiceLogConfig:
       description: The available logging options for the load balancer traffic served by this backend service.
@@ -55256,7 +55217,7 @@ components:
           $ref: "#/components/schemas/CustomerEncryptionKey"
           description: Encrypts or decrypts data for an instance with a customer-supplied encryption key. If you are creating a new instance, this field encrypts the local SSD and in-memory contents of the instance using a key that you provide. If you are restarting an instance protected with a customer-supplied encryption key, you must provide the correct key in order to successfully restart the instance. If you do not provide an encryption key when creating the instance, then the local SSD and in-memory contents will be encrypted using an automatically generated key and you do not need to provide a key to start the instance later. Instance templates do not store customer-supplied encryption keys, so you cannot use your own keys to encrypt local SSDs and in-memory content in a managed instance group.
         keyRevocationActionType:
-          description: KeyRevocationActionType of the instance. Supported options are "STOP" and "NONE". The default value is "NONE" if it is not specified.
+          description: KeyRevocationActionType of the instance.
           enum:
             - KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED
             - NONE
@@ -56896,7 +56857,7 @@ components:
             $ref: "#/components/schemas/AcceleratorConfig"
           type: array
         keyRevocationActionType:
-          description: KeyRevocationActionType of the instance. Supported options are "STOP" and "NONE". The default value is "NONE" if it is not specified.
+          description: KeyRevocationActionType of the instance.
           enum:
             - KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED
             - NONE
@@ -67119,7 +67080,6 @@ components:
           enum:
             - CLOUD_ARMOR
             - CLOUD_ARMOR_EDGE
-            - CLOUD_ARMOR_INTERNAL_SERVICE
             - CLOUD_ARMOR_NETWORK
             - FIREWALL
           type: string
@@ -68270,7 +68230,7 @@ components:
             $ref: "#/components/schemas/AcceleratorConfig"
           type: array
         keyRevocationActionType:
-          description: KeyRevocationActionType of the instance. Supported options are "STOP" and "NONE". The default value is "NONE" if it is not specified.
+          description: KeyRevocationActionType of the instance.
           enum:
             - KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED
             - NONE
@@ -69017,7 +68977,7 @@ components:
           description: Deprecated in favor of enable in PrivateIpv6GoogleAccess. Whether the VMs in this subnet can directly access Google services via internal IPv6 addresses. This field can be both set at resource creation time and updated using patch.
           type: boolean
         externalIpv6Prefix:
-          description: "[Output Only] The external IPv6 address range that is assigned to this subnetwork."
+          description: "[Output Only] The range of external IPv6 addresses that are owned by this subnetwork."
           type: string
         fingerprint:
           description: Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a Subnetwork. An up-to-date fingerprint must be provided in order to update the Subnetwork, otherwise the request will fail with error 412 conditionNotMet. To see the latest fingerprint, make a get() request to retrieve a Subnetwork.
@@ -69035,19 +68995,19 @@ components:
           format: uint64
           type: string
         internalIpv6Prefix:
-          description: "[Output Only] The internal IPv6 address range that is assigned to this subnetwork."
+          description: "[Output Only] The range of internal IPv6 addresses that are owned by this subnetwork. Note this is for general VM to VM communication, not to be confused with the ipv6_cidr_range field."
           type: string
         ipCidrRange:
           description: The range of internal addresses that are owned by this subnetwork. Provide this property when you create the subnetwork. For example, 10.0.0.0/8 or 100.64.0.0/10. Ranges must be unique and non-overlapping within a network. Only IPv4 is supported. This field is set at resource creation time. The range can be any range listed in the Valid ranges list. The range can be expanded after creation using expandIpCidrRange.
           type: string
         ipv6AccessType:
-          description: The access type of IPv6 address this subnet holds. It's immutable and can only be specified during creation or the first time the subnet is updated into IPV4_IPV6 dual stack.
+          description: The access type of IPv6 address this subnet holds. It's immutable and can only be specified during creation or the first time the subnet is updated into IPV4_IPV6 dual stack. If the ipv6_type is EXTERNAL then this subnet cannot enable direct path.
           enum:
             - EXTERNAL
             - INTERNAL
           type: string
         ipv6CidrRange:
-          description: "[Output Only] This field is for internal use."
+          description: "[Output Only] The range of internal IPv6 addresses that are owned by this subnetwork. Note this will be for private google access only eventually."
           type: string
         kind:
           default: compute#subnetwork
@@ -69073,7 +69033,7 @@ components:
           description: Whether the VMs in this subnet can access Google services without assigned external IP addresses. This field can be both set at resource creation time and updated using setPrivateIpGoogleAccess.
           type: boolean
         privateIpv6GoogleAccess:
-          description: This field is for internal use. This field can be both set at resource creation time and updated using patch.
+          description: The private IPv6 google access type for the VMs in this subnet. This is an expanded field of enablePrivateV6Access. If both fields are set, privateIpv6GoogleAccess will take priority. This field can be both set at resource creation time and updated using patch.
           enum:
             - DISABLE_GOOGLE_ACCESS
             - ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE

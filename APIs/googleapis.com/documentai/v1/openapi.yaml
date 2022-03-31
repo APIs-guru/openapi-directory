@@ -1509,7 +1509,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentTextAnchor"
           description: Optional. Provenance of the entity. Text anchor indexing into the Document.text.
         type:
-          description: Entity type from a schema e.g. `Address`.
+          description: Required. Entity type from a schema e.g. `Address`.
           type: string
       type: object
     GoogleCloudDocumentaiV1DocumentEntityNormalizedValue:
@@ -2346,6 +2346,9 @@ components:
         displayName:
           description: The display name of the processor version.
           type: string
+        googleManaged:
+          description: Denotes that this ProcessorVersion is managed by google.
+          type: boolean
         kmsKeyName:
           description: The KMS key name used for encryption.
           type: string
@@ -2608,7 +2611,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentTextAnchor"
           description: Optional. Provenance of the entity. Text anchor indexing into the Document.text.
         type:
-          description: Entity type from a schema e.g. `Address`.
+          description: Required. Entity type from a schema e.g. `Address`.
           type: string
       type: object
     GoogleCloudDocumentaiV1beta1DocumentEntityNormalizedValue:
@@ -3426,7 +3429,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentTextAnchor"
           description: Optional. Provenance of the entity. Text anchor indexing into the Document.text.
         type:
-          description: Entity type from a schema e.g. `Address`.
+          description: Required. Entity type from a schema e.g. `Address`.
           type: string
       type: object
     GoogleCloudDocumentaiV1beta2DocumentEntityNormalizedValue:

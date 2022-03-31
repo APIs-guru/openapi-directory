@@ -1466,6 +1466,15 @@ components:
           description: Output only. Whether this account is premium.
           readOnly: true
           type: boolean
+        state:
+          description: Output only. State of the account.
+          enum:
+            - STATE_UNSPECIFIED
+            - READY
+            - NEEDS_ATTENTION
+            - CLOSED
+          readOnly: true
+          type: string
         timeZone:
           $ref: "#/components/schemas/TimeZone"
           description: The account time zone, as used by reporting. For more information, see [changing the time zone of your reports](https://support.google.com/adsense/answer/9830725).
@@ -1482,6 +1491,15 @@ components:
           type: string
         reportingDimensionId:
           description: Output only. Unique ID of the ad client as used in the `AD_CLIENT_ID` reporting dimension. Present only if the ad client supports reporting.
+          readOnly: true
+          type: string
+        state:
+          description: Output only. State of the ad client.
+          enum:
+            - STATE_UNSPECIFIED
+            - READY
+            - GETTING_READY
+            - REQUIRES_REVIEW
           readOnly: true
           type: string
       type: object
