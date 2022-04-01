@@ -198,6 +198,52 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
+  "/v1beta/{name}:undelete":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Restores a DatabaseInstance that was previously marked to be deleted. This may only be used on a DatabaseInstance in the DELETED state. Purged DatabaseInstance's may not be recovered.
+      operationId: firebasedatabase.projects.locations.instances.undelete
+      parameters:
+        - description: "The fully qualified resource name of the database instance, in the form: `projects/{project-number}/locations/{location-id}/instances/{database-id}`"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UndeleteDatabaseInstanceRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DatabaseInstance"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+      tags:
+        - projects
   "/v1beta/{parent}/instances":
     get:
       description: Lists each DatabaseInstance associated with the specified parent project. The list items are returned in no particular order, but will be a consistent view of the database instances when additional requests are made with a `pageToken`. The resulting list contains instances in any STATE. The list results may be stale by a few seconds. Use GetDatabaseInstance for consistent reads.
@@ -427,6 +473,10 @@ components:
       type: object
     ReenableDatabaseInstanceRequest:
       description: The request sent to the ReenableDatabaseInstance method.
+      properties: {}
+      type: object
+    UndeleteDatabaseInstanceRequest:
+      description: The request sent to UndeleteDatabaseInstance method.
       properties: {}
       type: object
   securitySchemes:
