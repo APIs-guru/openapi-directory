@@ -164,7 +164,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 8.17.0
+  version: 8.19.0
   x-apideck-api: vault
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -639,6 +639,87 @@ paths:
 
             try {
               const { data } = await apideck.vault.connectionsAdd(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-exclude: true
+      x-sdk-exclude: true
+  "/vault/connections/{unified_api}/{service_id}/import":
+    post:
+      description: |
+        Import an authorized connection.
+      operationId: connectionsImport
+      parameters:
+        - $ref: "#/components/parameters/x-apideck-consumer-id"
+        - $ref: "#/components/parameters/x-apideck-app-id"
+        - $ref: "#/components/parameters/service_id"
+        - $ref: "#/components/parameters/unified_api"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConnectionImportData"
+        description: Fields that need to be persisted on the resource
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/CreateConnectionResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Import connection
+      tags:
+        - Connections
+      x-apideck-api: vault
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              serviceId: 'pipedrive',
+              unifiedApi: 'crm',
+              connectionsImport: {
+                credentials: {
+                  access_token:
+                    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+                  refresh_token:
+                    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.cThIIoDvwdueQB468K5xDc5633seEFoqwxjF_xSJyQQ'
+                },
+                settings: {
+                  instance_url: 'https://eu28.salesforce.com'
+                },
+                metadata: {
+                  account: {
+                    name: 'My Company',
+                    id: 'c01458a5-7276-41ce-bc19-639906b0450a'
+                  },
+                  plan: 'enterprise'
+                }
+              }
+            }
+
+            try {
+              const { data } = await apideck.vault.connectionsImport(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
@@ -1691,6 +1772,10 @@ components:
             $ref: "#/components/schemas/FormField"
           readOnly: true
           type: array
+        has_guide:
+          example: true
+          readOnly: true
+          type: boolean
         icon:
           example: https://res.cloudinary.com/apideck/image/upload/v1529456047/catalog/salesforce/icon128x128.png
           readOnly: true
@@ -1815,6 +1900,56 @@ components:
           type: string
       type: object
       x-sdk-exclude: true
+    ConnectionImportData:
+      properties:
+        credentials:
+          additionalProperties: false
+          example:
+            access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+            refresh_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.cThIIoDvwdueQB468K5xDc5633seEFoqwxjF_xSJyQQ
+          properties:
+            access_token:
+              description: Access token
+              example: 1234567890abcdefghijklmnopqrstuvwxyz
+              minLength: 1
+              type: string
+            expires_in:
+              description: The number of seconds until the token expires. If omitted the token will be queued for refresh.
+              example: 3600
+              nullable: true
+              type: integer
+            issued_at:
+              description: The datetime at which the token was issued. If omitted the token will be queued for refresh.
+              example: 2020-01-01T00:00:00Z
+              format: date-time
+              nullable: true
+              type: string
+            refresh_token:
+              description: The refresh token can be used to obtain a new access token.
+              example: 1234567890abcdefghijklmnopqrstuvwxyz
+              minLength: 1
+              type: string
+          required:
+            - refresh_token
+          type: object
+        metadata:
+          additionalProperties: true
+          description: Attach your own consumer specific metadata
+          example:
+            account:
+              id: c01458a5-7276-41ce-bc19-639906b0450a
+              name: My Company
+            plan: enterprise
+          nullable: true
+          properties: {}
+          type: object
+        settings:
+          description: Connection settings. Values will persist to `form_fields` with corresponding id
+          example:
+            instance_url: https://eu28.salesforce.com
+          nullable: true
+          type: object
+      type: object
     ConnectionMetadata:
       properties:
         id:
@@ -2043,6 +2178,7 @@ components:
               - vault.connection.updated
               - vault.connection.deleted
               - vault.connection.callable
+              - vault.connection.token_refresh.failed
               - ats.job.created
               - ats.job.updated
               - ats.job.deleted
@@ -2960,6 +3096,7 @@ components:
         - vault.connection.updated
         - vault.connection.deleted
         - vault.connection.callable
+        - vault.connection.token_refresh.failed
       example: vault.connection.created
       type: string
   securitySchemes:

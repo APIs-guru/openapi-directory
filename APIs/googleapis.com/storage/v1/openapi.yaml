@@ -74,11 +74,6 @@ paths:
               - full
               - noAcl
             type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
-            type: string
         - description: The project to be billed for this request.
           in: query
           name: userProject
@@ -164,11 +159,6 @@ paths:
               - full
               - noAcl
             type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
-            type: string
         - description: The project to be billed for this request.
           in: query
           name: userProject
@@ -222,11 +212,6 @@ paths:
           name: ifMetagenerationNotMatch
           schema:
             type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
-            type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -277,11 +262,6 @@ paths:
             enum:
               - full
               - noAcl
-            type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
             type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
@@ -378,11 +358,6 @@ paths:
               - full
               - noAcl
             type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
-            type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -462,11 +437,6 @@ paths:
               - full
               - noAcl
             type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
-            type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -504,11 +474,6 @@ paths:
           in: path
           name: bucket
           required: true
-          schema:
-            type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
           schema:
             type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
@@ -551,11 +516,6 @@ paths:
           in: path
           name: bucket
           required: true
-          schema:
-            type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
           schema:
             type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
@@ -603,11 +563,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
-            type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -641,11 +596,6 @@ paths:
           in: path
           name: entity
           required: true
-          schema:
-            type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
           schema:
             type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
@@ -696,11 +646,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
-            type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -743,11 +688,6 @@ paths:
           in: path
           name: entity
           required: true
-          schema:
-            type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
           schema:
             type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
@@ -799,11 +739,6 @@ paths:
           name: ifMetagenerationNotMatch
           schema:
             type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
-            type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -844,11 +779,6 @@ paths:
           in: path
           name: bucket
           required: true
-          schema:
-            type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
           schema:
             type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
@@ -896,11 +826,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
-            type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -934,11 +859,6 @@ paths:
           in: path
           name: entity
           required: true
-          schema:
-            type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
           schema:
             type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
@@ -989,11 +909,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
-            type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -1036,11 +951,6 @@ paths:
           in: path
           name: entity
           required: true
-          schema:
-            type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
           schema:
             type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
@@ -1088,11 +998,6 @@ paths:
           schema:
             minimum: 1
             type: integer
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
-            type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -1133,11 +1038,6 @@ paths:
           in: path
           name: bucket
           required: true
-          schema:
-            type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
           schema:
             type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
@@ -1189,11 +1089,6 @@ paths:
               type: string
             type: array
           style: form
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
-            type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -1264,11 +1159,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
-            type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -1305,11 +1195,6 @@ paths:
           in: path
           name: bucket
           required: true
-          schema:
-            type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
           schema:
             type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
@@ -1366,11 +1251,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
-            type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -1420,11 +1300,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
-            type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -1462,11 +1337,6 @@ paths:
           in: path
           name: notification
           required: true
-          schema:
-            type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
           schema:
             type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
@@ -1562,11 +1432,6 @@ paths:
             enum:
               - full
               - noAcl
-            type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
             type: string
         - description: Filter results to objects whose names are lexicographically equal to or after startOffset. If endOffset is also set, the objects listed will have names between startOffset (inclusive) and endOffset (exclusive).
           in: query
@@ -1687,11 +1552,6 @@ paths:
               - full
               - noAcl
             type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
-            type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -1782,11 +1642,6 @@ paths:
             enum:
               - full
               - noAcl
-            type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
             type: string
         - description: Filter results to objects whose names are lexicographically equal to or after startOffset. If endOffset is also set, the objects listed will have names between startOffset (inclusive) and endOffset (exclusive).
           in: query
@@ -1880,11 +1735,6 @@ paths:
           name: ifMetagenerationNotMatch
           schema:
             type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
-            type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -1956,11 +1806,6 @@ paths:
             enum:
               - full
               - noAcl
-            type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
             type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
@@ -2067,11 +1912,6 @@ paths:
               - full
               - noAcl
             type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
-            type: string
         - description: The project to be billed for this request, for Requester Pays buckets.
           in: query
           name: userProject
@@ -2161,11 +2001,6 @@ paths:
               - full
               - noAcl
             type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
-            type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -2214,11 +2049,6 @@ paths:
         - description: If present, selects a specific revision of this object (as opposed to the latest version, the default).
           in: query
           name: generation
-          schema:
-            type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
           schema:
             type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
@@ -2272,11 +2102,6 @@ paths:
         - description: If present, selects a specific revision of this object (as opposed to the latest version, the default).
           in: query
           name: generation
-          schema:
-            type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
           schema:
             type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
@@ -2335,11 +2160,6 @@ paths:
           name: generation
           schema:
             type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
-            type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -2384,11 +2204,6 @@ paths:
         - description: If present, selects a specific revision of this object (as opposed to the latest version, the default).
           in: query
           name: generation
-          schema:
-            type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
           schema:
             type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
@@ -2450,11 +2265,6 @@ paths:
           name: generation
           schema:
             type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
-            type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -2510,11 +2320,6 @@ paths:
           name: generation
           schema:
             type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
-            type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -2563,11 +2368,6 @@ paths:
         - description: If present, selects a specific revision of this object (as opposed to the latest version, the default).
           in: query
           name: generation
-          schema:
-            type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
           schema:
             type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
@@ -2635,11 +2435,6 @@ paths:
           name: generation
           schema:
             type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
-            type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -2702,11 +2497,6 @@ paths:
         - description: If present, selects a specific revision of this object (as opposed to the latest version, the default).
           in: query
           name: generation
-          schema:
-            type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
           schema:
             type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
@@ -2804,11 +2594,6 @@ paths:
         - description: Resource name of the Cloud KMS key, of the form projects/my-project/locations/global/keyRings/my-kr/cryptoKeys/my-key, that will be used to encrypt the object. Overrides the object metadata's kms_key_name value, if any.
           in: query
           name: kmsKeyName
-          schema:
-            type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
           schema:
             type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
@@ -2945,11 +2730,6 @@ paths:
             enum:
               - full
               - noAcl
-            type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
             type: string
         - description: If present, selects a specific revision of the source object (as opposed to the latest version, the default).
           in: query
@@ -3095,11 +2875,6 @@ paths:
             enum:
               - full
               - noAcl
-            type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
-          schema:
             type: string
         - description: Include this field (from the previous rewrite response) on each rewrite request after the first one, until the rewrite response 'done' flag is true. Calls that provide a rewriteToken can omit all other request fields, but if included those fields must match the values provided in the first rewrite request.
           in: query
@@ -3447,11 +3222,6 @@ paths:
           in: path
           name: projectId
           required: true
-          schema:
-            type: string
-        - description: The project to be billed for this request if the target bucket is requester-pays bucket.
-          in: query
-          name: provisionalUserProject
           schema:
             type: string
         - description: The project to be billed for this request.

@@ -259,7 +259,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Connector API
-  version: 8.17.0
+  version: 8.19.0
   x-apideck-api: connector
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -284,6 +284,10 @@ tags:
     name: Connectors
     x-apideck-model:
       $ref: "#/components/schemas/Connector"
+  - description: ""
+    name: Connector Docs
+    x-apideck-model:
+      $ref: "#/components/schemas/ConnectorDoc"
   - description: ""
     name: APIs
     x-apideck-model:
@@ -565,6 +569,51 @@ paths:
             } catch (error) {
               console.error(error)
             }
+  "/connector/connectors/{id}/docs/{doc_id}":
+    get:
+      description: Get Connector Doc content
+      operationId: connectorDocsOne
+      parameters:
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/doc_id"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetConnectorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get Connector Doc content
+      tags:
+        - Connector Docs
+      x-apideck-api: connector
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID'
+            })
+
+            try {
+              const { data } = await apideck.connector.connectorDocsOne({
+                id: 'id_example',
+                docId: 'doc_id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
   "/connector/connectors/{id}/resources/{resource_id}":
     get:
       description: Get Connector Resource
@@ -643,6 +692,13 @@ components:
       name: cursor
       schema:
         nullable: true
+        type: string
+    doc_id:
+      description: ID of the Doc
+      in: path
+      name: doc_id
+      required: true
+      schema:
         type: string
     id:
       description: ID of the record you are acting upon.
@@ -727,6 +783,13 @@ components:
           schema:
             $ref: "#/components/schemas/GetApisResponse"
       description: Apis
+    GetConnectorDocResponse:
+      content:
+        text/markdown:
+          schema:
+            format: markdown
+            type: string
+      description: Connectors
     GetConnectorResourceResponse:
       content:
         application/json:
@@ -898,6 +961,14 @@ components:
           example: Manage API keys, access tokens, OAuth flows and integrations.
           nullable: true
           type: string
+        events:
+          description: List of event types this API supports.
+          example:
+            - crm.contact.updated
+            - accounting.invoice.created
+          items:
+            type: string
+          type: array
         id:
           description: ID of the API.
           example: file-storage
@@ -1111,6 +1182,10 @@ components:
           nullable: true
           title: Description
           type: string
+        docs:
+          items:
+            $ref: "#/components/schemas/ConnectorDoc"
+          type: array
         has_sandbox_credentials:
           description: Indicates whether Apideck Sandbox OAuth credentials are available.
           example: true
@@ -1222,6 +1297,31 @@ components:
         website_url:
           description: Link to the connector's website.
           example: https://www.salesforce.com
+          format: uri
+          type: string
+      type: object
+    ConnectorDoc:
+      properties:
+        audience:
+          description: Audience for the doc.
+          enum:
+            - application_owner
+            - consumer
+          type: string
+        format:
+          description: Format of the doc.
+          enum:
+            - markdown
+          type: string
+        id:
+          $ref: "#/components/schemas/Id"
+        name:
+          description: Name of the doc.
+          example: connection
+          type: string
+        url:
+          description: Link to fetch the content of the doc.
+          example: https://unify.apideck.com/connector/connectors/workday/docs/consumer+connection
           format: uri
           type: string
       type: object
@@ -1480,6 +1580,10 @@ components:
         - data
       type: object
       x-graphql-type-name: ConnectorList
+    Id:
+      example: "12345"
+      readOnly: true
+      type: string
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:
