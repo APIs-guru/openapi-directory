@@ -2291,6 +2291,9 @@ components:
             - NO_RELATIONSHIP
             - FRIEND
           type: string
+        gamePlayerId:
+          description: Per-application unique player identifier.
+          type: string
         kind:
           description: Uniquely identifies the type of this resource. Value is always the fixed string `games#player`
           type: string

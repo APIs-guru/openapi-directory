@@ -459,6 +459,11 @@ components:
             - OBSERVATION
             - SCC_ERROR
           type: string
+        iamBindings:
+          description: Represents IAM bindings associated with the Finding.
+          items:
+            $ref: "#/components/schemas/IamBinding"
+          type: array
         indicator:
           $ref: "#/components/schemas/Indicator"
           description: "Represents what's commonly known as an Indicator of compromise (IoC) in computer forensics. This is an artifact observed on a network or in an operating system that, with high confidence, indicates a computer intrusion. Reference: https://en.wikipedia.org/wiki/Indicator_of_compromise"
@@ -483,6 +488,9 @@ components:
           type: string
         name:
           description: 'The relative resource name of this finding. See: https://cloud.google.com/apis/design/resource_names#relative_resource_name Example: "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}"'
+          type: string
+        nextSteps:
+          description: Next steps associate to the finding.
           type: string
         parent:
           description: 'The relative resource name of the source the finding belongs to. See: https://cloud.google.com/apis/design/resource_names#relative_resource_name This field is immutable after creation time. For example: "organizations/{organization_id}/sources/{source_id}"'
@@ -834,6 +842,23 @@ components:
           description: 'The relative resource name of the SecurityMarks. See: https://cloud.google.com/apis/design/resource_names#relative_resource_name Examples: "organizations/{organization_id}/assets/{asset_id}/securityMarks" "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}/securityMarks".'
           type: string
       type: object
+    IamBinding:
+      description: Represents a particular IAM binding, which captures a member's role addition, removal, or state.
+      properties:
+        action:
+          description: The action that was performed on a Binding.
+          enum:
+            - ACTION_UNSPECIFIED
+            - ADD
+            - REMOVE
+          type: string
+        member:
+          description: A single identity requesting access for a Cloud Platform resource, e.g. "foo@google.com".
+          type: string
+        role:
+          description: Role that is assigned to "members". For example, "roles/viewer", "roles/editor", or "roles/owner".
+          type: string
+      type: object
     Indicator:
       description: "Represents what's commonly known as an Indicator of compromise (IoC) in computer forensics. This is an artifact observed on a network or in an operating system that, with high confidence, indicates a computer intrusion. Reference: https://en.wikipedia.org/wiki/Indicator_of_compromise"
       properties:
@@ -965,6 +990,20 @@ components:
           type: array
         version:
           description: The MITRE ATT&CK version referenced by the above fields. E.g. "8".
+          type: string
+      type: object
+    OnboardingState:
+      description: Resource capturing onboarding information for a given CRM resource.
+      properties:
+        name:
+          description: "The resource name of the OnboardingState. Format: organizations/{organization}/onboardingState Format: folders/{folder}/onboardingState Format: projects/{project}/onboardingState"
+          type: string
+        onboardingLevel:
+          description: Describes the level a given organization, folder, or project is onboarded with SCC. If the resource wasn't onboarded, NOT_FOUND would have been thrown.
+          enum:
+            - ONBOARDING_LEVEL_UNSPECIFIED
+            - ONBOARDING_LEVEL_PROJECT
+            - ONBOARDING_LEVEL_ORGANIZATION
           type: string
       type: object
     Reference:

@@ -31,7 +31,9 @@ externalDocs:
   url: https://developers.google.com/shopping-content/v2/
 tags:
   - name: accounts
+  - name: accountsbyexternalsellerid
   - name: accountstatuses
+  - name: accountstatusesbyexternalsellerid
   - name: accounttax
   - name: buyongoogleprograms
   - name: collections
@@ -1588,6 +1590,49 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - accounts
+  "/{merchantId}/accountsbyexternalsellerid/{externalSellerId}":
+    get:
+      description: Gets data of the account with the specified external_seller_id belonging to the MCA with the specified merchant_id.
+      operationId: content.accountsbyexternalsellerid.get
+      parameters:
+        - description: Required. The ID of the MCA containing the seller.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: Required. The External Seller ID of the seller account to be retrieved.
+          in: path
+          name: externalSellerId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Account"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - accountsbyexternalsellerid
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/{merchantId}/accountstatuses":
     get:
       description: Lists the statuses of the sub-accounts in your Merchant Center account.
@@ -1689,6 +1734,58 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - accountstatuses
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/{merchantId}/accountstatusesbyexternalsellerid/{externalSellerId}":
+    get:
+      description: Gets status of the account with the specified external_seller_id belonging to the MCA with the specified merchant_id.
+      operationId: content.accountstatusesbyexternalsellerid.get
+      parameters:
+        - description: Required. The ID of the MCA containing the seller.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: Required. The External Seller ID of the seller account to be retrieved.
+          in: path
+          name: externalSellerId
+          required: true
+          schema:
+            type: string
+        - description: If set, only issues for the specified destinations are returned, otherwise only issues for the Shopping destination.
+          explode: true
+          in: query
+          name: destinations
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountStatus"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - accountstatusesbyexternalsellerid
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1923,7 +2020,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Reactivates the BoG program in your Merchant Center account. Moves the program to the active state when allowed, e.g. when paused. Important: This method is only whitelisted for selected merchants."
+      description: Reactivates the BoG program in your Merchant Center account. Moves the program to the active state when allowed, for example, when paused. This method is only available to selected merchants.
       operationId: content.buyongoogleprograms.activate
       parameters:
         - description: Required. The ID of the account.
@@ -2011,7 +2108,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Pauses the BoG program in your Merchant Center account. Important: This method is only whitelisted for selected merchants."
+      description: Pauses the BoG program in your Merchant Center account. This method is only available to selected merchants.
       operationId: content.buyongoogleprograms.pause
       parameters:
         - description: Required. The ID of the account.
@@ -2055,7 +2152,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Requests review and then activates the BoG program in your Merchant Center account for the first time. Moves the program to the REVIEW_PENDING state. Important: This method is only whitelisted for selected merchants."
+      description: Requests review and then activates the BoG program in your Merchant Center account for the first time. Moves the program to the REVIEW_PENDING state. This method is only available to selected merchants.
       operationId: content.buyongoogleprograms.requestreview
       parameters:
         - description: Required. The ID of the account.
@@ -2694,7 +2791,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Requests a review of free listings in a specific region Important: This method is only whitelisted for selected merchants."
+      description: Requests a review of free listings in a specific region. This method is only available to selected merchants.
       operationId: content.freelistingsprogram.requestreview
       parameters:
         - description: Required. The ID of the account.
@@ -6776,7 +6873,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Requests a review of Shopping ads in a specific region.
+      description: Requests a review of Shopping ads in a specific region. This method is only available to selected merchants.
       operationId: content.shoppingadsprogram.requestreview
       parameters:
         - description: Required. The ID of the account.
