@@ -2997,7 +2997,7 @@ components:
           format: double
           type: number
         featureName:
-          description: Full name of the feature. For non-numerical features, will be formatted like .. Overall size of feature name will always be truncated to first 120 characters.
+          description: The full feature name. For non-numerical features, will be formatted like `.`. Overall size of feature name will always be truncated to first 120 characters.
           type: string
       type: object
     Expr:
@@ -3260,7 +3260,7 @@ components:
           description: Hyperparameter for matrix factoration when implicit feedback type is specified.
       type: object
     HparamTuningTrial:
-      description: Training info of a trial in hyperparameter tuning.
+      description: Training info of a trial in [hyperparameter tuning](/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-hp-tuning-overview) models.
       properties:
         endTimeMs:
           description: Ending time of the trial.
@@ -4122,7 +4122,7 @@ components:
           readOnly: true
           type: string
         defaultTrialId:
-          description: Output only. The default trial_id to use in TVFs when the trial_id is not passed in. For single-objective hyperparameter tuning, this is the best trial id. For multi-objective hyperparameter tuning, this is the smallest trial id among all Pareto optimal trials.
+          description: Output only. The default trial_id to use in TVFs when the trial_id is not passed in. For single-objective [hyperparameter tuning](/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-hp-tuning-overview) models, this is the best trial ID. For multi-objective [hyperparameter tuning](/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-hp-tuning-overview) models, this is the smallest trial ID among all Pareto optimal trials.
           format: int64
           readOnly: true
           type: string
@@ -4154,7 +4154,7 @@ components:
           description: Output only. All hyperparameter search spaces in this model.
           readOnly: true
         hparamTrials:
-          description: Output only. Trials of a hyperparameter tuning model sorted by trial_id.
+          description: Output only. Trials of a [hyperparameter tuning](/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-hp-tuning-overview) model sorted by trial_id.
           items:
             $ref: "#/components/schemas/HparamTuningTrial"
           readOnly: true
@@ -4204,7 +4204,7 @@ components:
           readOnly: true
           type: string
         optimalTrialIds:
-          description: Output only. For single-objective hyperparameter tuning, it only contains the best trial. For multi-objective hyperparameter tuning, it contains all Pareto optimal trials sorted by trial_id.
+          description: Output only. For single-objective [hyperparameter tuning](/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-hp-tuning-overview) models, it only contains the best trial. For multi-objective [hyperparameter tuning](/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-hp-tuning-overview) models, it contains all Pareto optimal trials sorted by trial_id.
           items:
             format: int64
             type: string
@@ -4970,6 +4970,38 @@ components:
         numRows:
           description: "[Output-only] The number of rows of data in this table, excluding any data in the streaming buffer."
           format: uint64
+          type: string
+        num_active_logical_bytes:
+          description: "[Output-only] Number of logical bytes that are less than 90 days old."
+          format: int64
+          type: string
+        num_active_physical_bytes:
+          description: "[Output-only] Number of physical bytes less than 90 days old. This data is not kept in real time, and might be delayed by a few seconds to a few minutes."
+          format: int64
+          type: string
+        num_long_term_logical_bytes:
+          description: "[Output-only] Number of logical bytes that are more than 90 days old."
+          format: int64
+          type: string
+        num_long_term_physical_bytes:
+          description: "[Output-only] Number of physical bytes more than 90 days old. This data is not kept in real time, and might be delayed by a few seconds to a few minutes."
+          format: int64
+          type: string
+        num_partitions:
+          description: "[Output-only] The number of partitions present in the table or materialized view. This data is not kept in real time, and might be delayed by a few seconds to a few minutes."
+          format: int64
+          type: string
+        num_time_travel_physical_bytes:
+          description: "[Output-only] Number of physical bytes used by time travel storage (deleted or changed data). This data is not kept in real time, and might be delayed by a few seconds to a few minutes."
+          format: int64
+          type: string
+        num_total_logical_bytes:
+          description: "[Output-only] Total number of logical bytes in the table or materialized view."
+          format: int64
+          type: string
+        num_total_physical_bytes:
+          description: "[Output-only] The physical size of this table in bytes. This also includes storage used for time travel. This data is not kept in real time, and might be delayed by a few seconds to a few minutes."
+          format: int64
           type: string
         rangePartitioning:
           $ref: "#/components/schemas/RangePartitioning"

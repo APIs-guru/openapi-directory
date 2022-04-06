@@ -184,7 +184,7 @@ paths:
       description: Deletes a managed service. This method will change the service to the `Soft-Delete` state for 30 days. Within this period, service producers may call UndeleteService to restore the service. After 30 days, the service will be permanently deleted. Operation
       operationId: servicemanagement.services.delete
       parameters:
-        - description: "Required. The name of the service. See the [overview](/service-management/overview) for naming requirements. For example: `example.googleapis.com`."
+        - description: "Required. The name of the service. See the [overview](https://cloud.google.com/service-management/overview) for naming requirements. For example: `example.googleapis.com`."
           in: path
           name: serviceName
           required: true
@@ -261,7 +261,7 @@ paths:
       description: Gets a service configuration (version) for a managed service.
       operationId: servicemanagement.services.getConfig
       parameters:
-        - description: "Required. The name of the service. See the [overview](/service-management/overview) for naming requirements. For example: `example.googleapis.com`."
+        - description: "Required. The name of the service. See the [overview](https://cloud.google.com/service-management/overview) for naming requirements. For example: `example.googleapis.com`."
           in: path
           name: serviceName
           required: true
@@ -323,7 +323,7 @@ paths:
       description: Lists the history of the service configuration for a managed service, from the newest to the oldest.
       operationId: servicemanagement.services.configs.list
       parameters:
-        - description: "Required. The name of the service. See the [overview](/service-management/overview) for naming requirements. For example: `example.googleapis.com`."
+        - description: "Required. The name of the service. See the [overview](https://cloud.google.com/service-management/overview) for naming requirements. For example: `example.googleapis.com`."
           in: path
           name: serviceName
           required: true
@@ -381,7 +381,7 @@ paths:
       description: Creates a new service configuration (version) for a managed service. This method only stores the service configuration. To roll out the service configuration to backend systems please call CreateServiceRollout. Only the 100 most recent service configurations and ones referenced by existing rollouts are kept for each service. The rest will be deleted eventually.
       operationId: servicemanagement.services.configs.create
       parameters:
-        - description: "Required. The name of the service. See the [overview](/service-management/overview) for naming requirements. For example: `example.googleapis.com`."
+        - description: "Required. The name of the service. See the [overview](https://cloud.google.com/service-management/overview) for naming requirements. For example: `example.googleapis.com`."
           in: path
           name: serviceName
           required: true
@@ -415,7 +415,7 @@ paths:
       description: Gets a service configuration (version) for a managed service.
       operationId: servicemanagement.services.configs.get
       parameters:
-        - description: "Required. The name of the service. See the [overview](/service-management/overview) for naming requirements. For example: `example.googleapis.com`."
+        - description: "Required. The name of the service. See the [overview](https://cloud.google.com/service-management/overview) for naming requirements. For example: `example.googleapis.com`."
           in: path
           name: serviceName
           required: true
@@ -490,7 +490,7 @@ paths:
       description: "Creates a new service configuration (version) for a managed service based on user-supplied configuration source files (for example: OpenAPI Specification). This method stores the source configurations as well as the generated service configuration. To rollout the service configuration to other services, please call CreateServiceRollout. Only the 100 most recent configuration sources and ones referenced by existing service configurtions are kept for each service. The rest will be deleted eventually. Operation"
       operationId: servicemanagement.services.configs.submit
       parameters:
-        - description: "Required. The name of the service. See the [overview](/service-management/overview) for naming requirements. For example: `example.googleapis.com`."
+        - description: "Required. The name of the service. See the [overview](https://cloud.google.com/service-management/overview) for naming requirements. For example: `example.googleapis.com`."
           in: path
           name: serviceName
           required: true
@@ -524,13 +524,13 @@ paths:
       description: Lists the history of the service configuration rollouts for a managed service, from the newest to the oldest.
       operationId: servicemanagement.services.rollouts.list
       parameters:
-        - description: "Required. The name of the service. See the [overview](/service-management/overview) for naming requirements. For example: `example.googleapis.com`."
+        - description: "Required. The name of the service. See the [overview](https://cloud.google.com/service-management/overview) for naming requirements. For example: `example.googleapis.com`."
           in: path
           name: serviceName
           required: true
           schema:
             type: string
-        - description: "Required. Use `filter` to return subset of rollouts. The following filters are supported: -- To limit the results to only those in [status](google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS', use filter='status=SUCCESS' -- To limit the results to those in [status](google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED' or 'FAILED', use filter='status=CANCELLED OR status=FAILED'"
+        - description: "Required. Use `filter` to return subset of rollouts. The following filters are supported: -- To limit the results to only those in status 'SUCCESS', use filter='status=SUCCESS' -- To limit the results to those in status 'CANCELLED' or 'FAILED', use filter='status=CANCELLED OR status=FAILED'"
           in: query
           name: filter
           schema:
@@ -587,7 +587,7 @@ paths:
       description: Creates a new service configuration rollout. Based on rollout, the Google Service Management will roll out the service configurations to different backend services. For example, the logging configuration will be pushed to Google Cloud Logging. Please note that any previous pending and running Rollouts and associated Operations will be automatically cancelled so that the latest Rollout will not be blocked by previous Rollouts. Only the 100 most recent (in any state) and the last 10 successful (if not already part of the set of 100 most recent) rollouts are kept for each service. The rest will be deleted eventually. Operation
       operationId: servicemanagement.services.rollouts.create
       parameters:
-        - description: "Required. The name of the service. See the [overview](/service-management/overview) for naming requirements. For example: `example.googleapis.com`."
+        - description: "Required. The name of the service. See the [overview](https://cloud.google.com/service-management/overview) for naming requirements. For example: `example.googleapis.com`."
           in: path
           name: serviceName
           required: true
@@ -621,7 +621,7 @@ paths:
       description: Gets a service configuration rollout.
       operationId: servicemanagement.services.rollouts.get
       parameters:
-        - description: "Required. The name of the service. See the [overview](/service-management/overview) for naming requirements. For example: `example.googleapis.com`."
+        - description: "Required. The name of the service. See the [overview](https://cloud.google.com/service-management/overview) for naming requirements. For example: `example.googleapis.com`."
           in: path
           name: serviceName
           required: true
@@ -688,7 +688,7 @@ paths:
       description: Revives a previously deleted managed service. The method restores the service using the configuration at the time the service was deleted. The target service must exist and must have been deleted within the last 30 days. Operation
       operationId: servicemanagement.services.undelete
       parameters:
-        - description: "Required. The name of the service. See the [overview](/service-management/overview) for naming requirements. For example: `example.googleapis.com`."
+        - description: "Required. The name of the service. See the [overview](https://cloud.google.com/service-management/overview) for naming requirements. For example: `example.googleapis.com`."
           in: path
           name: serviceName
           required: true
@@ -1817,7 +1817,7 @@ components:
           description: ID of the project that produces and owns this service.
           type: string
         serviceName:
-          description: The name of the service. See the [overview](/service-management/overview) for naming requirements.
+          description: The name of the service. See the [overview](https://cloud.google.com/service-management/overview) for naming requirements.
           type: string
       type: object
     Method:

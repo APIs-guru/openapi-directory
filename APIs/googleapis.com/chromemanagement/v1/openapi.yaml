@@ -697,7 +697,7 @@ components:
           readOnly: true
           type: string
         sample:
-          description: Output only. Sampling data for the battery.
+          description: Output only. Sampling data for the battery sorted in a decreasing order of report_time.
           items:
             $ref: "#/components/schemas/GoogleChromeManagementV1BatterySampleReport"
           readOnly: true
@@ -1351,7 +1351,7 @@ components:
       description: Telemetry data collected from a managed device.
       properties:
         audioStatusReport:
-          description: Output only. Audio reports collected periodically.
+          description: Output only. Audio reports collected periodically sorted in a decreasing order of report_time.
           items:
             $ref: "#/components/schemas/GoogleChromeManagementV1AudioStatusReport"
           readOnly: true
@@ -1375,7 +1375,7 @@ components:
           readOnly: true
           type: array
         cpuStatusReport:
-          description: Output only. CPU status reports collected periodically.
+          description: Output only. CPU status reports collected periodically sorted in a decreasing order of report_time.
           items:
             $ref: "#/components/schemas/GoogleChromeManagementV1CpuStatusReport"
           readOnly: true
@@ -1403,7 +1403,7 @@ components:
           description: Output only. Information regarding memory specs for the device.
           readOnly: true
         memoryStatusReport:
-          description: Output only. Memory status reports collected periodically.
+          description: Output only. Memory status reports collected periodically sorted decreasing by report_time.
           items:
             $ref: "#/components/schemas/GoogleChromeManagementV1MemoryStatusReport"
           readOnly: true
