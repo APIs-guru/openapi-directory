@@ -1096,7 +1096,8 @@ paths:
                 jobs: [
                   {
                     title: 'CEO',
-                    compensation_rate: '72000',
+                    compensation_rate: 72000,
+                    currency: 'USD',
                     payment_unit: 'year',
                     hired_at: '2020-08-12',
                     is_primary: true,
@@ -1403,7 +1404,8 @@ paths:
                 jobs: [
                   {
                     title: 'CEO',
-                    compensation_rate: '72000',
+                    compensation_rate: 72000,
+                    currency: 'USD',
                     payment_unit: 'year',
                     hired_at: '2020-08-12',
                     is_primary: true,
@@ -2191,6 +2193,134 @@ components:
               rate: "50.00"
             properties:
               currency:
+                $ref: "#/components/schemas/Employee/properties/jobs/items/properties/currency"
+              effective_date:
+                description: The effective date for this compensation.
+                readOnly: false
+                type: string
+              flsa_status:
+                description: The FLSA status for this compensation.
+                enum:
+                  - exempt
+                  - salaried-nonexempt
+                  - nonexempt
+                  - owner
+                readOnly: false
+                type: string
+              id:
+                $ref: "#/components/schemas/Id"
+              job_id:
+                description: The ID of the job to which the compensation belongs.
+                example: "12345"
+                readOnly: true
+                type: string
+              payment_unit:
+                $ref: "#/components/schemas/PaymentUnit"
+              rate:
+                description: The amount paid per payment unit.
+                readOnly: false
+                type: number
+            type: object
+          type: array
+        country_of_birth:
+          description: country code according to ISO 3166-1 alpha-2.
+          example: US
+          maxLength: 2
+          minLength: 2
+          nullable: true
+          type: string
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        created_by:
+          $ref: "#/components/schemas/CreatedBy"
+        custom_fields:
+          items:
+            $ref: "#/components/schemas/CustomField"
+          type: array
+        deleted:
+          example: true
+          nullable: true
+          title: Deleted
+          type: boolean
+        department:
+          description: The department the user is currently in.
+          example: R&D
+          nullable: true
+          title: Department
+          type: string
+        description:
+          $ref: "#/components/schemas/Description"
+        display_name:
+          example: Technoking
+          nullable: true
+          title: Display name
+          type: string
+        division:
+          $ref: "#/components/schemas/Division"
+        emails:
+          items:
+            $ref: "#/components/schemas/Email"
+          type: array
+        employee_number:
+          $ref: "#/components/schemas/EmployeeNumber"
+        employment_end_date:
+          description: A Start Date is the date that the employee ended working at the company
+          example: 2028-10-26
+          nullable: true
+          title: Employee end date
+          type: string
+        employment_role:
+          properties:
+            sub_type:
+              enum:
+                - full_time
+                - part_time
+                - hourly
+              nullable: true
+              type: string
+            type:
+              enum:
+                - contractor
+                - employee
+                - freelance
+                - temp
+              nullable: true
+              type: string
+          type: object
+        employment_start_date:
+          description: A Start Date is the date that the employee started working at the company
+          example: 2021-10-26
+          nullable: true
+          title: Employee start date
+          type: string
+        employment_status:
+          enum:
+            - active
+            - inactive
+            - terminated
+            - other
+          example: active
+          nullable: true
+          type: string
+        first_name:
+          $ref: "#/components/schemas/FirstName"
+        gender:
+          $ref: "#/components/schemas/Gender"
+        id:
+          $ref: "#/components/schemas/Id"
+        initials:
+          example: EM
+          nullable: true
+          title: Initials
+          type: string
+        jobs:
+          items:
+            properties:
+              compensation_rate:
+                example: 72000
+                title: The compensation rate of the job.
+                type: number
+              currency:
                 description: Indicates the associated currency for an amount of money. Values correspond to [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
                 enum:
                   - UNKNOWN_CURRENCY
@@ -2742,132 +2872,6 @@ components:
                     name: ZMW
                   - description: Bitcoin
                     name: BTC
-              effective_date:
-                description: The effective date for this compensation.
-                readOnly: false
-                type: string
-              flsa_status:
-                description: The FLSA status for this compensation.
-                enum:
-                  - exempt
-                  - salaried-nonexempt
-                  - nonexempt
-                  - owner
-                readOnly: false
-                type: string
-              id:
-                $ref: "#/components/schemas/Id"
-              job_id:
-                description: The ID of the job to which the compensation belongs.
-                example: "12345"
-                readOnly: true
-                type: string
-              payment_unit:
-                $ref: "#/components/schemas/PaymentUnit"
-              rate:
-                description: The amount paid per payment unit.
-                readOnly: false
-                type: string
-            type: object
-          type: array
-        country_of_birth:
-          description: country code according to ISO 3166-1 alpha-2.
-          example: US
-          maxLength: 2
-          minLength: 2
-          nullable: true
-          type: string
-        created_at:
-          $ref: "#/components/schemas/CreatedAt"
-        created_by:
-          $ref: "#/components/schemas/CreatedBy"
-        custom_fields:
-          items:
-            $ref: "#/components/schemas/CustomField"
-          type: array
-        deleted:
-          example: true
-          nullable: true
-          title: Deleted
-          type: boolean
-        department:
-          description: The department the user is currently in.
-          example: R&D
-          nullable: true
-          title: Department
-          type: string
-        description:
-          $ref: "#/components/schemas/Description"
-        display_name:
-          example: Technoking
-          nullable: true
-          title: Display name
-          type: string
-        division:
-          $ref: "#/components/schemas/Division"
-        emails:
-          items:
-            $ref: "#/components/schemas/Email"
-          type: array
-        employee_number:
-          $ref: "#/components/schemas/EmployeeNumber"
-        employment_end_date:
-          description: A Start Date is the date that the employee ended working at the company
-          example: 2028-10-26
-          nullable: true
-          title: Employee end date
-          type: string
-        employment_role:
-          properties:
-            sub_type:
-              enum:
-                - full_time
-                - part_time
-                - hourly
-              nullable: true
-              type: string
-            type:
-              enum:
-                - contractor
-                - employee
-                - freelance
-                - temp
-              nullable: true
-              type: string
-          type: object
-        employment_start_date:
-          description: A Start Date is the date that the employee started working at the company
-          example: 2021-10-26
-          nullable: true
-          title: Employee start date
-          type: string
-        employment_status:
-          enum:
-            - active
-            - inactive
-            - terminated
-            - other
-          example: active
-          nullable: true
-          type: string
-        first_name:
-          $ref: "#/components/schemas/FirstName"
-        gender:
-          $ref: "#/components/schemas/Gender"
-        id:
-          $ref: "#/components/schemas/Id"
-        initials:
-          example: EM
-          nullable: true
-          title: Initials
-          type: string
-        jobs:
-          items:
-            properties:
-              compensation_rate:
-                example: "72000"
-                title: The compensation rate of the job.
-                type: string
               employee_id:
                 $ref: "#/components/schemas/Id"
               hired_at:

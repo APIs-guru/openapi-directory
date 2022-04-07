@@ -2071,7 +2071,7 @@ paths:
         - users
   "/gmail/v1/users/{userId}/settings/filters/{id}":
     delete:
-      description: Deletes a filter.
+      description: Immediately and permanently deletes the specified filter.
       operationId: gmail.users.settings.filters.delete
       parameters:
         - description: User's email address. The special value "me" can be used to indicate the authenticated user.

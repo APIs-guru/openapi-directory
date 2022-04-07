@@ -91,10 +91,10 @@ paths:
           description: Successful response
       tags:
         - locations
-  "/v1/{name}/answers":
+  "/v1/{name}/answers:delete":
     delete:
       description: Deletes the answer written by the current user to a question.
-      operationId: mybusinessqanda.locations.questions.deleteAnswers
+      operationId: mybusinessqanda.locations.questions.answers.delete
       parameters:
         - description: Required. The name of the question to delete an answer for.
           in: path
@@ -124,6 +124,87 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}":
+    get:
+      description: Returns the paginated list of questions and some of its answers for a specified location. This operation is only valid if the specified location is verified.
+      operationId: mybusinessqanda.locations.questions.list
+      parameters:
+        - description: Required. The name of the location to fetch questions for.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. How many answers to fetch per question. The default and maximum `answers_per_question` values are 10.
+          in: query
+          name: answersPerQuestion
+          schema:
+            type: integer
+        - description: Optional. A filter constraining the questions to return. The only filter currently supported is "ignore_answered=true"
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. The order to return the questions. Valid options include 'update_time desc' and 'upvote_count desc', which will return the questions sorted descendingly by the requested field. The default sort order is 'update_time desc'.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. How many questions to fetch per page. The default and maximum `page_size` values are 10.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. If specified, the next page of questions is retrieved.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListQuestionsResponse"
+          description: Successful response
+      tags:
+        - locations
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Adds a question for the specified location.
+      operationId: mybusinessqanda.locations.questions.create
+      parameters:
+        - description: Required. The name of the location to write a question for.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Question"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Question"
+          description: Successful response
+      tags:
+        - locations
+  "/v1/{parent}/answers":
     get:
       description: Returns the paginated list of answers for a specified question.
       operationId: mybusinessqanda.locations.questions.answers.list
@@ -170,30 +251,6 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Adds a question for the specified location.
-      operationId: mybusinessqanda.locations.questions.create
-      parameters:
-        - description: Required. The name of the location to write a question for.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Question"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Question"
-          description: Successful response
-      tags:
-        - locations
   "/v1/{parent}/answers:upsert":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
