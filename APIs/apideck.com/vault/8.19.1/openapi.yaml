@@ -164,7 +164,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 8.19.0
+  version: 8.19.1
   x-apideck-api: vault
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1385,7 +1385,7 @@ components:
       in: query
       name: raw
       schema:
-        default: true
+        default: false
         type: boolean
     redirect_uri:
       description: URL to redirect back to after authorization. When left empty the default configured redirect uri will be used.
@@ -1911,7 +1911,6 @@ components:
             access_token:
               description: Access token
               example: 1234567890abcdefghijklmnopqrstuvwxyz
-              minLength: 1
               type: string
             expires_in:
               description: The number of seconds until the token expires. If omitted the token will be queued for refresh.
@@ -1927,7 +1926,6 @@ components:
             refresh_token:
               description: The refresh token can be used to obtain a new access token.
               example: 1234567890abcdefghijklmnopqrstuvwxyz
-              minLength: 1
               type: string
           required:
             - refresh_token

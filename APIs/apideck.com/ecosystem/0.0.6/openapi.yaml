@@ -11,7 +11,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Ecosystem API
-  version: 0.0.4
+  version: 0.0.6
   x-apisguru-categories:
     - developer_tools
   x-logo:
@@ -358,6 +358,9 @@ components:
     Category:
       additionalProperties: false
       properties:
+        count:
+          example: 1
+          type: integer
         created_at:
           format: date-time
           readOnly: true
@@ -399,6 +402,9 @@ components:
           type: integer
         card_style:
           type: string
+        count:
+          example: 1
+          type: integer
         description:
           type: string
         hidden_from_homepage:
@@ -915,6 +921,8 @@ components:
           type: string
         card_background_color:
           type: string
+        card_background_image:
+          $ref: "#/components/schemas/File"
         categories:
           items:
             $ref: "#/components/schemas/Category"
@@ -1244,16 +1252,21 @@ components:
         translations:
           $ref: "#/components/schemas/Translations"
       type: object
+    Translation:
+      properties:
+        key:
+          type: string
+        locale:
+          type: string
+        value:
+          type: string
+      required:
+        - key
+        - locale
+      type: object
     Translations:
       items:
-        properties:
-          key:
-            type: string
-          locale:
-            type: string
-          value:
-            type: string
-        type: object
+        $ref: "#/components/schemas/Translation"
       nullable: true
       required:
         - key

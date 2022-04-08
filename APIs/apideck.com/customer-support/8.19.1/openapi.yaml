@@ -259,7 +259,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Customer Support
-  version: 8.19.0
+  version: 8.19.1
   x-apideck-api: customer-support
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -723,7 +723,7 @@ components:
       in: query
       name: raw
       schema:
-        default: true
+        default: false
         type: boolean
     serviceId:
       description: Provide the service id you want to call (e.g., pipedrive). [See the full list in the connector section.](#section/Connectors) Only needed when a consumer has activated multiple integrations for a Unified API.
@@ -1132,7 +1132,6 @@ components:
           type: array
         status:
           example: Open
-          minLength: 1
           nullable: true
           type: string
         tags:
@@ -1272,7 +1271,6 @@ components:
           type: string
         lead_source:
           example: Cold Call
-          minLength: 1
           nullable: true
           type: string
         middle_name:
@@ -2452,7 +2450,6 @@ components:
           type: boolean
         description:
           example: Opportunities are created for People and Companies that are interested in buying your products or services. Create Opportunities for People and Companies to move them through one of your Pipelines.
-          minLength: 1
           nullable: true
           type: string
         expected_revenue:
@@ -2514,7 +2511,6 @@ components:
           type: string
         priority:
           example: None
-          minLength: 1
           nullable: true
           type: string
         source_id:
@@ -2528,7 +2524,6 @@ components:
           type: string
         status:
           example: Open
-          minLength: 1
           nullable: true
           type: string
         status_id:
@@ -2543,7 +2538,6 @@ components:
           type: string
         type:
           example: Existing Customer - Upgrade
-          minLength: 1
           nullable: true
           type: string
         updated_at:

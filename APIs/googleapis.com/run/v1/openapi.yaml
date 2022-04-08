@@ -38,7 +38,7 @@ paths:
       description: Delete a domain mapping.
       operationId: run.namespaces.domainmappings.delete
       parameters:
-        - description: The name of the domain mapping to delete. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
+        - description: "The name of the domain mapping to delete. For Cloud Run (fully managed), replace {namespace} with the project ID or number. It takes the form namespaces/{namespace}. For example: namespaces/PROJECT_ID"
           in: path
           name: name
           required: true
@@ -82,7 +82,7 @@ paths:
       description: Get information about a domain mapping.
       operationId: run.namespaces.domainmappings.get
       parameters:
-        - description: The name of the domain mapping to retrieve. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
+        - description: "The name of the domain mapping to retrieve. For Cloud Run (fully managed), replace {namespace} with the project ID or number. It takes the form namespaces/{namespace}. For example: namespaces/PROJECT_ID"
           in: path
           name: name
           required: true
@@ -166,7 +166,7 @@ paths:
       description: List domain mappings.
       operationId: run.namespaces.domainmappings.list
       parameters:
-        - description: The namespace from which the domain mappings should be listed. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
+        - description: "The namespace from which the domain mappings should be listed. For Cloud Run (fully managed), replace {namespace} with the project ID or number. It takes the form namespaces/{namespace}. For example: namespaces/PROJECT_ID"
           in: path
           name: parent
           required: true
@@ -237,7 +237,7 @@ paths:
       description: Create a new domain mapping.
       operationId: run.namespaces.domainmappings.create
       parameters:
-        - description: The namespace in which the domain mapping should be created. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
+        - description: "The namespace in which the domain mapping should be created. For Cloud Run (fully managed), replace {namespace} with the project ID or number. It takes the form namespaces/{namespace}. For example: namespaces/PROJECT_ID"
           in: path
           name: parent
           required: true
@@ -272,7 +272,7 @@ paths:
       description: Delete a job.
       operationId: run.namespaces.jobs.delete
       parameters:
-        - description: Required. The name of the job to delete. Replace {namespace_id} with the project ID or number.
+        - description: "Required. The name of the job to delete. Replace {namespace} with the project ID or number. It takes the form namespaces/{namespace}. For example: namespaces/PROJECT_ID"
           in: path
           name: name
           required: true
@@ -311,7 +311,7 @@ paths:
       description: Get information about a task.
       operationId: run.namespaces.tasks.get
       parameters:
-        - description: Required. The name of the task to retrieve. Replace {namespace_id} with the project ID or number.
+        - description: "Required. The name of the task to retrieve. Replace {namespace} with the project ID or number. It takes the form namespaces/{namespace}. For example: namespaces/PROJECT_ID"
           in: path
           name: name
           required: true
@@ -347,7 +347,7 @@ paths:
       description: Replace a job. Only the spec and metadata labels and annotations are modifiable. After the Replace request, Cloud Run will work to make the 'status' match the requested 'spec'. May provide metadata.resourceVersion to enforce update from last read for optimistic concurrency control.
       operationId: run.namespaces.jobs.replaceJob
       parameters:
-        - description: Required. The name of the service being replaced. Replace {namespace_id} with the project ID or number.
+        - description: "Required. The name of the service being replaced. Replace {namespace} with the project ID or number. It takes the form namespaces/{namespace}. For example: namespaces/PROJECT_ID"
           in: path
           name: name
           required: true
@@ -389,7 +389,7 @@ paths:
       description: Trigger creation of a new execution of this job.
       operationId: run.namespaces.jobs.run
       parameters:
-        - description: Required. The name of the job to run. Replace {namespace_id} with the project ID or number.
+        - description: "Required. The name of the job to run. Replace {namespace} with the project ID or number. It takes the form namespaces/{namespace}. For example: namespaces/PROJECT_ID"
           in: path
           name: name
           required: true
@@ -419,7 +419,7 @@ paths:
       description: List executions.
       operationId: run.namespaces.executions.list
       parameters:
-        - description: Required. The namespace from which the executions should be listed. Replace {namespace_id} with the project ID or number.
+        - description: "Required. The namespace from which the executions should be listed. Replace {namespace} with the project ID or number. It takes the form namespaces/{namespace}. For example: namespaces/PROJECT_ID"
           in: path
           name: parent
           required: true
@@ -491,7 +491,7 @@ paths:
       description: List jobs.
       operationId: run.namespaces.jobs.list
       parameters:
-        - description: Required. The namespace from which the jobs should be listed. Replace {namespace_id} with the project ID or number.
+        - description: "Required. The namespace from which the jobs should be listed. Replace {namespace} with the project ID or number. It takes the form namespaces/{namespace}. For example: namespaces/PROJECT_ID"
           in: path
           name: parent
           required: true
@@ -562,7 +562,7 @@ paths:
       description: Create a job.
       operationId: run.namespaces.jobs.create
       parameters:
-        - description: Required. The namespace in which the job should be created. Replace {namespace_id} with the project ID or number.
+        - description: "Required. The namespace in which the job should be created. Replace {namespace} with the project ID or number. It takes the form namespaces/{namespace}. For example: namespaces/PROJECT_ID"
           in: path
           name: parent
           required: true
@@ -592,7 +592,7 @@ paths:
       description: List tasks.
       operationId: run.namespaces.tasks.list
       parameters:
-        - description: Required. The namespace from which the tasks should be listed. Replace {namespace_id} with the project ID or number.
+        - description: "Required. The namespace from which the tasks should be listed. Replace {namespace} with the project ID or number. It takes the form namespaces/{namespace}. For example: namespaces/PROJECT_ID"
           in: path
           name: parent
           required: true
@@ -664,7 +664,7 @@ paths:
       description: Delete a service. This will cause the Service to stop serving traffic and will delete the child entities like Routes, Configurations and Revisions.
       operationId: run.namespaces.services.delete
       parameters:
-        - description: The name of the service to delete. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
+        - description: "The name of the service to delete. For Cloud Run (fully managed), replace {namespace} with the project ID or number. It takes the form namespaces/{namespace}. For example: namespaces/PROJECT_ID"
           in: path
           name: name
           required: true
@@ -708,7 +708,7 @@ paths:
       description: Get information about a service.
       operationId: run.namespaces.services.get
       parameters:
-        - description: The name of the service to retrieve. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
+        - description: "The name of the service to retrieve. For Cloud Run (fully managed), replace {namespace} with the project ID or number. It takes the form namespaces/{namespace}. For example: namespaces/PROJECT_ID"
           in: path
           name: name
           required: true
@@ -744,13 +744,13 @@ paths:
       description: Replace a service. Only the spec and metadata labels and annotations are modifiable. After the Update request, Cloud Run will work to make the 'status' match the requested 'spec'. May provide metadata.resourceVersion to enforce update from last read for optimistic concurrency control.
       operationId: run.namespaces.services.replaceService
       parameters:
-        - description: The name of the service being replaced. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
+        - description: "LINT.IfChange() The name of the service being replaced. For Cloud Run (fully managed), replace {namespace} with the project ID or number. It takes the form namespaces/{namespace}. For example: namespaces/PROJECT_ID"
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: "Indicates that the server should validate the request and populate default values without persisting the request. Supported values: `all`"
+        - description: "Indicates that the server should validate the request and populate default values without persisting the request. Supported values: `all` LINT.ThenChange(//depot/google3/google/cloud/serverless/v1/internal_service.proto:replace_internal_service_request)"
           in: query
           name: dryRun
           schema:
@@ -851,7 +851,7 @@ paths:
       description: List revisions.
       operationId: run.namespaces.revisions.list
       parameters:
-        - description: The namespace from which the revisions should be listed. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
+        - description: "The namespace from which the revisions should be listed. For Cloud Run (fully managed), replace {namespace} with the project ID or number. It takes the form namespaces/{namespace}. For example: namespaces/PROJECT_ID"
           in: path
           name: parent
           required: true
@@ -923,7 +923,7 @@ paths:
       description: List routes.
       operationId: run.namespaces.routes.list
       parameters:
-        - description: The namespace from which the routes should be listed. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
+        - description: "The namespace from which the routes should be listed. For Cloud Run (fully managed), replace {namespace} with the project ID or number. It takes the form namespaces/{namespace}. For example: namespaces/PROJECT_ID"
           in: path
           name: parent
           required: true
@@ -995,7 +995,7 @@ paths:
       description: List services.
       operationId: run.namespaces.services.list
       parameters:
-        - description: The namespace from which the services should be listed. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
+        - description: "The namespace from which the services should be listed. For Cloud Run (fully managed), replace {namespace} with the project ID or number. It takes the form namespaces/{namespace}. For example: namespaces/PROJECT_ID"
           in: path
           name: parent
           required: true
@@ -1066,13 +1066,13 @@ paths:
       description: Create a service.
       operationId: run.namespaces.services.create
       parameters:
-        - description: The namespace in which the service should be created. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
+        - description: "LINT.IfChange() The namespace in which the service should be created. For Cloud Run (fully managed), replace {namespace} with the project ID or number. It takes the form namespaces/{namespace}. For example: namespaces/PROJECT_ID"
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: "Indicates that the server should validate the request and populate default values without persisting the request. Supported values: `all`"
+        - description: "Indicates that the server should validate the request and populate default values without persisting the request. Supported values: `all` LINT.ThenChange(//depot/google3/google/cloud/serverless/v1/internal_service.proto:create_internal_service_request)"
           in: query
           name: dryRun
           schema:
@@ -1101,7 +1101,7 @@ paths:
       description: Delete a service. This will cause the Service to stop serving traffic and will delete the child entities like Routes, Configurations and Revisions.
       operationId: run.projects.locations.services.delete
       parameters:
-        - description: The name of the service to delete. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
+        - description: "The name of the service to delete. For Cloud Run (fully managed), replace {namespace} with the project ID or number. It takes the form namespaces/{namespace}. For example: namespaces/PROJECT_ID"
           in: path
           name: name
           required: true
@@ -1145,7 +1145,7 @@ paths:
       description: Get information about a service.
       operationId: run.projects.locations.services.get
       parameters:
-        - description: The name of the service to retrieve. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
+        - description: "The name of the service to retrieve. For Cloud Run (fully managed), replace {namespace} with the project ID or number. It takes the form namespaces/{namespace}. For example: namespaces/PROJECT_ID"
           in: path
           name: name
           required: true
@@ -1181,13 +1181,13 @@ paths:
       description: Replace a service. Only the spec and metadata labels and annotations are modifiable. After the Update request, Cloud Run will work to make the 'status' match the requested 'spec'. May provide metadata.resourceVersion to enforce update from last read for optimistic concurrency control.
       operationId: run.projects.locations.services.replaceService
       parameters:
-        - description: The name of the service being replaced. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
+        - description: "LINT.IfChange() The name of the service being replaced. For Cloud Run (fully managed), replace {namespace} with the project ID or number. It takes the form namespaces/{namespace}. For example: namespaces/PROJECT_ID"
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: "Indicates that the server should validate the request and populate default values without persisting the request. Supported values: `all`"
+        - description: "Indicates that the server should validate the request and populate default values without persisting the request. Supported values: `all` LINT.ThenChange(//depot/google3/google/cloud/serverless/v1/internal_service.proto:replace_internal_service_request)"
           in: query
           name: dryRun
           schema:
@@ -1222,7 +1222,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: A filter to narrow down results to a preferred subset. The filtering language accepts strings like "displayName=tokyo", and is documented in more detail in [AIP-160](https://google.aip.dev/160).
+        - description: A filter to narrow down results to a preferred subset. The filtering language accepts strings like `"displayName=tokyo"`, and is documented in more detail in [AIP-160](https://google.aip.dev/160).
           in: query
           name: filter
           schema:
@@ -1387,7 +1387,7 @@ paths:
       description: List domain mappings.
       operationId: run.projects.locations.domainmappings.list
       parameters:
-        - description: The namespace from which the domain mappings should be listed. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
+        - description: "The namespace from which the domain mappings should be listed. For Cloud Run (fully managed), replace {namespace} with the project ID or number. It takes the form namespaces/{namespace}. For example: namespaces/PROJECT_ID"
           in: path
           name: parent
           required: true
@@ -1458,7 +1458,7 @@ paths:
       description: Create a new domain mapping.
       operationId: run.projects.locations.domainmappings.create
       parameters:
-        - description: The namespace in which the domain mapping should be created. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
+        - description: "The namespace in which the domain mapping should be created. For Cloud Run (fully managed), replace {namespace} with the project ID or number. It takes the form namespaces/{namespace}. For example: namespaces/PROJECT_ID"
           in: path
           name: parent
           required: true
@@ -1493,7 +1493,7 @@ paths:
       description: List revisions.
       operationId: run.projects.locations.revisions.list
       parameters:
-        - description: The namespace from which the revisions should be listed. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
+        - description: "The namespace from which the revisions should be listed. For Cloud Run (fully managed), replace {namespace} with the project ID or number. It takes the form namespaces/{namespace}. For example: namespaces/PROJECT_ID"
           in: path
           name: parent
           required: true
@@ -1565,7 +1565,7 @@ paths:
       description: List routes.
       operationId: run.projects.locations.routes.list
       parameters:
-        - description: The namespace from which the routes should be listed. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
+        - description: "The namespace from which the routes should be listed. For Cloud Run (fully managed), replace {namespace} with the project ID or number. It takes the form namespaces/{namespace}. For example: namespaces/PROJECT_ID"
           in: path
           name: parent
           required: true
@@ -1637,7 +1637,7 @@ paths:
       description: List services.
       operationId: run.projects.locations.services.list
       parameters:
-        - description: The namespace from which the services should be listed. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
+        - description: "The namespace from which the services should be listed. For Cloud Run (fully managed), replace {namespace} with the project ID or number. It takes the form namespaces/{namespace}. For example: namespaces/PROJECT_ID"
           in: path
           name: parent
           required: true
@@ -1708,13 +1708,13 @@ paths:
       description: Create a service.
       operationId: run.projects.locations.services.create
       parameters:
-        - description: The namespace in which the service should be created. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
+        - description: "LINT.IfChange() The namespace in which the service should be created. For Cloud Run (fully managed), replace {namespace} with the project ID or number. It takes the form namespaces/{namespace}. For example: namespaces/PROJECT_ID"
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: "Indicates that the server should validate the request and populate default values without persisting the request. Supported values: `all`"
+        - description: "Indicates that the server should validate the request and populate default values without persisting the request. Supported values: `all` LINT.ThenChange(//depot/google3/google/cloud/serverless/v1/internal_service.proto:create_internal_service_request)"
           in: query
           name: dryRun
           schema:
@@ -2323,7 +2323,7 @@ components:
       description: ExecutionSpec describes how the execution will look.
       properties:
         parallelism:
-          description: Optional. Specifies the maximum desired number of tasks the execution should run at any given time. Must be <= task_count. If not specified, defaults to -1. When the job is run, this field is passed to the execution, and if -1 it will be set to the maximum possible value. The actual number of tasks running in steady state will be less than this number when there are fewer tasks waiting to be completed remaining, i.e. when the work left to do is less than max parallelism. +optional
+          description: Optional. Specifies the maximum desired number of tasks the execution should run at given time. Must be <= task_count. When the job is run, if this field is 0 or unset, the maximum possible value will be used for that execution. The actual number of tasks running in steady state will be less than this number when there are fewer tasks waiting to be completed remaining, i.e. when the work left to do is less than max parallelism. +optional
           format: int32
           type: integer
         taskCount:

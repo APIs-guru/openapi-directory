@@ -259,7 +259,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: POS API
-  version: 8.19.0
+  version: 8.19.1
   x-apideck-api: pos
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -3256,7 +3256,7 @@ components:
       in: query
       name: raw
       schema:
-        default: true
+        default: false
         type: boolean
     serviceId:
       description: Provide the service id you want to call (e.g., pipedrive). [See the full list in the connector section.](#section/Connectors) Only needed when a consumer has activated multiple integrations for a Unified API.
@@ -4779,7 +4779,6 @@ components:
           description: A value you specify that uniquely identifies this request among requests you have sent.
           example: random_string
           maxLength: 45
-          minLength: 1
           type: string
         name:
           example: Cocoa
@@ -6220,7 +6219,6 @@ components:
                 account_number_suffix:
                   description: The last few digits of the bank account number.
                   maxLength: 4
-                  minLength: 1
                   type: string
                 account_type:
                   description: |-

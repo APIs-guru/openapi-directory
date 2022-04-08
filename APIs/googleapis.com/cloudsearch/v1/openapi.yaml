@@ -101,7 +101,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Checks whether an item is accessible by specified principal. **Note:** This API requires an admin account to execute.
+      description: Checks whether an item is accessible by specified principal. Principal must be a user; groups and domain values aren't supported. **Note:** This API requires an admin account to execute.
       operationId: cloudsearch.debug.datasources.items.checkAccess
       parameters:
         - description: "Item name, format: datasources/{source_id}/items/{item_id}"
@@ -2375,11 +2375,10 @@ components:
             - SHEETS_APP
             - SLIDES_APP
             - MEET_APP
-            - FILE_SUGGESTION_APP
+            - ASSISTIVE_SUGGESTION_APP
             - CONTACTS_APP
             - ACTIVITY_FEED_APP
             - DRIVE_APP
-            - ASSISTIVE_SUGGESTION_APP
           type: string
         id:
           description: Numeric identifier of the App. Set to Project number for 1/3P Apps. For Webhook, this is WebhookId. Determined & set by the 1P API from App credentials on the side channel.
