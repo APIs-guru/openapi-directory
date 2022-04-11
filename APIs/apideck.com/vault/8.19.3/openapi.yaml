@@ -164,7 +164,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 8.19.1
+  version: 8.19.3
   x-apideck-api: vault
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -3211,6 +3211,28 @@ x-webhooks:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
       summary: Connection Updated
+      tags:
+        - Webhook Events
+  TokenRefreshFailed:
+    post:
+      description: Attempt to refresh the connections access_token failed.
+      operationId: connectionTokenRefreshFailed
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/VaultEventType"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConnectionEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Token Refresh Failed
       tags:
         - Webhook Events
   x-sdk-exclude: true

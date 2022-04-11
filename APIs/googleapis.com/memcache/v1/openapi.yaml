@@ -13,15 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Memorystore for Memcached API
   version: v1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://memcache.googleapis.com/$discovery/rest?version=v1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: memcache
 externalDocs:
@@ -686,8 +688,8 @@ components:
           type: string
         notificationParameters:
           additionalProperties:
-            type: string
-          description: Optional. notification_parameters are information that service producers may like to include that is not relevant to Rollout. This parameter will only be passed to Gamma and Cloud Logging for notification/logging purpose.
+            $ref: "#/components/schemas/GoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter"
+          description: Optional. notification_parameter are information that service producers may like to include that is not relevant to Rollout. This parameter will only be passed to Gamma and Cloud Logging for notification/logging purpose.
           type: object
         producerMetadata:
           additionalProperties:
@@ -784,6 +786,15 @@ components:
         perSliEligibility:
           $ref: "#/components/schemas/GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility"
           description: If present, this will override eligibility for the node coming from instance or exclusions for specified SLIs.
+      type: object
+    GoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter:
+      description: Contains notification related data.
+      properties:
+        values:
+          description: Optional. Array of string values. e.g. instance's replica information.
+          items:
+            type: string
+          type: array
       type: object
     GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility:
       description: PerSliSloEligibility is a mapping from an SLI name to eligibility.
@@ -1321,3 +1332,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

@@ -3549,6 +3549,13 @@ components:
           description: The email address of the service account.
           type: string
       type: object
+    EnterpriseAuthenticationAppLinkConfig:
+      description: An authentication URL configuration for the authenticator app of an identity provider.
+      properties:
+        uri:
+          description: An authentication url.
+          type: string
+      type: object
     EnterprisesListResponse:
       properties:
         enterprise:
@@ -4170,6 +4177,11 @@ components:
             - autoUpdatePostponed
             - autoUpdateHighPriority
           type: string
+        enterpriseAuthenticationAppLinkConfigs:
+          description: An authentication URL configuration for the authenticator app of an identity provider. This helps to launch the identity provider's authenticator app during the authentication happening in a private app using Android WebView. Authenticator app should already be the [default handler](https://developer.android.com/training/app-links/verify-site-associations) for the authentication url on the device.
+          items:
+            $ref: "#/components/schemas/EnterpriseAuthenticationAppLinkConfig"
+          type: array
         managedConfiguration:
           $ref: "#/components/schemas/ManagedConfiguration"
           description: The managed configuration for the product.
