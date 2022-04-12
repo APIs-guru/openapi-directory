@@ -3102,9 +3102,7 @@ components:
           type: string
         limits:
           description: An object that describes the limits of the service instance
-          format: object
           nullable: true
-          type: object
         links:
           description: The absolute URLs of the Service's Channels, Roles, and Users
           format: object
@@ -3112,14 +3110,10 @@ components:
           type: object
         media:
           description: The properties of the media that the service supports
-          format: object
           nullable: true
-          type: object
         notifications:
           description: The notification configuration for the Service instance
-          format: object
           nullable: true
-          type: object
         post_webhook_retry_count:
           description: The number of times calls to the `post_webhook_url` will be retried
           nullable: true
@@ -3337,9 +3331,7 @@ components:
           type: string
         configuration:
           description: The JSON string that describes the configuration object for the channel webhook
-          format: object
           nullable: true
-          type: object
         date_created:
           description: The ISO 8601 date and time in GMT when the resource was created
           format: date-time
@@ -3553,9 +3545,7 @@ components:
           type: string
         media:
           description: A Media object that describes the Message's media if attached; otherwise, null
-          format: object
           nullable: true
-          type: object
         service_sid:
           description: The SID of the Service that the resource is associated with
           maxLength: 34

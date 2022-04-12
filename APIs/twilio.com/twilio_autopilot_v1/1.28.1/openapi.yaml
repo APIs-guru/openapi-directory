@@ -93,8 +93,6 @@ paths:
                   type: string
                 Defaults:
                   description: A JSON object that defines the Assistant's [default tasks](https://www.twilio.com/docs/autopilot/api/assistant/defaults) for various scenarios, including initiation actions and fallback tasks.
-                  format: object
-                  type: object
                 FriendlyName:
                   description: A descriptive string that you create to describe the new resource. It is not unique and can be up to 255 characters long.
                   type: string
@@ -103,8 +101,6 @@ paths:
                   type: boolean
                 StyleSheet:
                   description: The JSON string that defines the Assistant's [style sheet](https://www.twilio.com/docs/autopilot/api/assistant/stylesheet)
-                  format: object
-                  type: object
                 UniqueName:
                   description: An application-defined string that uniquely identifies the new resource. It can be used as an alternative to the `sid` in the URL path to address the resource. The first 64 characters must be unique.
                   type: string
@@ -206,8 +202,6 @@ paths:
               properties:
                 Defaults:
                   description: A JSON string that describes the default task links for the `assistant_initiation`, `collect`, and `fallback` situations.
-                  format: object
-                  type: object
               title: UpdateDefaultsRequest
               type: object
       responses:
@@ -1133,8 +1127,6 @@ paths:
               properties:
                 StyleSheet:
                   description: The JSON string that describes the style sheet object.
-                  format: object
-                  type: object
               title: UpdateStyleSheetRequest
               type: object
       responses:
@@ -1228,8 +1220,6 @@ paths:
               properties:
                 Actions:
                   description: The JSON string that specifies the [actions](https://www.twilio.com/docs/autopilot/actions) that instruct the Assistant on how to perform the task. It is optional and not unique.
-                  format: object
-                  type: object
                 ActionsUrl:
                   description: The URL from which the Assistant can fetch actions.
                   format: uri
@@ -1338,8 +1328,6 @@ paths:
               properties:
                 Actions:
                   description: The JSON string that specifies the [actions](https://www.twilio.com/docs/autopilot/actions) that instruct the Assistant on how to perform the task.
-                  format: object
-                  type: object
                 ActionsUrl:
                   description: The URL from which the Assistant can fetch actions.
                   format: uri
@@ -1423,8 +1411,6 @@ paths:
               properties:
                 Actions:
                   description: The JSON string that specifies the [actions](https://www.twilio.com/docs/autopilot/actions) that instruct the Assistant on how to perform the task.
-                  format: object
-                  type: object
               title: UpdateTaskActionsRequest
               type: object
       responses:
@@ -2205,8 +2191,6 @@ paths:
                   type: string
                 Defaults:
                   description: A JSON object that defines the Assistant's [default tasks](https://www.twilio.com/docs/autopilot/api/assistant/defaults) for various scenarios, including initiation actions and fallback tasks.
-                  format: object
-                  type: object
                 DevelopmentStage:
                   description: A string describing the state of the assistant.
                   type: string
@@ -2218,8 +2202,6 @@ paths:
                   type: boolean
                 StyleSheet:
                   description: The JSON string that defines the Assistant's [style sheet](https://www.twilio.com/docs/autopilot/api/assistant/stylesheet)
-                  format: object
-                  type: object
                 UniqueName:
                   description: An application-defined string that uniquely identifies the resource. It can be used as an alternative to the `sid` in the URL path to address the resource. The first 64 characters must be unique.
                   type: string
@@ -2337,9 +2319,7 @@ components:
           type: string
         data:
           description: The JSON string that describes the default task links
-          format: object
           nullable: true
-          type: object
         url:
           description: The absolute URL of the Defaults resource
           format: uri
@@ -2364,9 +2344,7 @@ components:
           type: string
         data:
           description: The JSON string that describes the dialogue session object
-          format: object
           nullable: true
-          type: object
         sid:
           description: The unique string that identifies the resource
           maxLength: 34
@@ -2604,9 +2582,7 @@ components:
           type: string
         results:
           description: The natural language analysis results that include the Task recognized and a list of identified Fields
-          format: object
           nullable: true
-          type: object
         sample_sid:
           description: The SID of an optional reference to the Sample created from the query
           maxLength: 34
@@ -2653,9 +2629,7 @@ components:
           type: string
         data:
           description: The JSON string that describes the style sheet object
-          format: object
           nullable: true
-          type: object
         url:
           description: The absolute URL of the StyleSheet resource
           format: uri
@@ -2849,9 +2823,7 @@ components:
           type: string
         data:
           description: The JSON string that specifies the actions that instruct the Assistant on how to perform the task
-          format: object
           nullable: true
-          type: object
         task_sid:
           description: The SID of the Task associated with the resource
           maxLength: 34

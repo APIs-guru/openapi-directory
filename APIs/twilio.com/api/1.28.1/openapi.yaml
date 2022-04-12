@@ -3145,8 +3145,6 @@ paths:
                   type: integer
                 Parameter:
                   description: A single-level JSON object used to pass custom parameters to payment processors. (Required for ACH payments). The information that has to be included here depends on the <Pay> Connector. [Read more](https://www.twilio.com/console/voice/pay-connectors).
-                  format: object
-                  type: object
                 PaymentConnector:
                   description: This is the unique name corresponding to the Payment Gateway Connector installed in the Twilio Add-ons. Learn more about [<Pay> Connectors](https://www.twilio.com/console/voice/pay-connectors). The default value is `Default`.
                   type: string
@@ -17439,9 +17437,7 @@ components:
           type: string
         capabilities:
           description: Indicate if a phone can receive calls or messages
-          format: object
           nullable: true
-          type: object
         date_created:
           description: The RFC 2822 date and time in GMT that the resource was created
           format: date-time-rfc-2822
@@ -18461,14 +18457,10 @@ components:
       properties:
         request:
           description: Call Request.
-          format: object
           nullable: true
-          type: object
         response:
           description: Call Response with Events.
-          format: object
           nullable: true
-          type: object
       type: object
     api.v2010.account.call.call_feedback:
       properties:
@@ -18554,9 +18546,7 @@ components:
           type: boolean
         issues:
           description: Issues experienced during the call
-          items:
-            format: object
-            type: object
+          items: {}
           nullable: true
           type: array
         quality_score_average:
@@ -18816,9 +18806,7 @@ components:
           type: string
         encryption_details:
           description: How to decrypt the recording.
-          format: object
           nullable: true
-          type: object
         error_code:
           description: More information about why the recording is missing, if status is `absent`.
           nullable: true
@@ -19126,9 +19114,7 @@ components:
           type: string
         encryption_details:
           description: How to decrypt the recording.
-          format: object
           nullable: true
-          type: object
         error_code:
           description: More information about why the recording is missing, if status is `absent`.
           nullable: true
@@ -19584,9 +19570,7 @@ components:
           type: string
         configuration:
           description: A JSON string that represents the current configuration
-          format: object
           nullable: true
-          type: object
         date_created:
           description: The RFC 2822 date and time in GMT that the resource was created
           format: date-time-rfc-2822
@@ -21034,9 +21018,7 @@ components:
           type: string
         encryption_details:
           description: How to decrypt the recording.
-          format: object
           nullable: true
-          type: object
         error_code:
           description: More information about why the recording is missing, if status is `absent`.
           nullable: true

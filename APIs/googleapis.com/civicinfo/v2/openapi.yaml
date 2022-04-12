@@ -786,7 +786,7 @@ components:
             - typeTransitDeparture
             - typeTransitLeg
             - typeTransitLine
-            - typeTransitAgency
+            - typeTransitAgencyDeprecatedValue
             - typeTransitTransfer
             - typeSegmentPath
             - typeRoadSign
@@ -1042,6 +1042,8 @@ components:
             - typePhoneNumberAreaCode
             - typeBusinessCorridor
             - typeAddressTemplate
+            - typeTransitAgency
+            - typeFutureGeometry
             - typeEvent
             - typeEarthquake
             - typeHurricane
@@ -1260,6 +1262,64 @@ components:
           description: The services provided by this early vote site or drop off location. This field is not populated for polling locations.
           type: string
       type: object
+    Precinct:
+      properties:
+        administrationRegionId:
+          description: ID of the AdministrationRegion message for this precinct. Corresponds to LocalityId xml tag.
+          type: string
+        contestId:
+          description: ID(s) of the Contest message(s) for this precinct.
+          items:
+            type: string
+          type: array
+        datasetId:
+          description: Required. Dataset ID. What datasets our Precincts come from.
+          format: int64
+          type: string
+        earlyVoteSiteId:
+          description: ID(s) of the PollingLocation message(s) for this precinct.
+          items:
+            type: string
+          type: array
+        electoralDistrictId:
+          description: ID(s) of the ElectoralDistrict message(s) for this precinct.
+          items:
+            type: string
+          type: array
+        id:
+          description: Required. A unique identifier for this precinct.
+          type: string
+        mailOnly:
+          description: Specifies if the precinct runs mail-only elections.
+          type: boolean
+        name:
+          description: Required. The name of the precinct.
+          type: string
+        number:
+          description: The number of the precinct.
+          type: string
+        ocdId:
+          description: Encouraged. The OCD ID of the precinct
+          items:
+            type: string
+          type: array
+        pollingLocationId:
+          description: ID(s) of the PollingLocation message(s) for this precinct.
+          items:
+            type: string
+          type: array
+        spatialBoundaryId:
+          description: ID(s) of the SpatialBoundary message(s) for this precinct. Used to specify a geometrical boundary of the precinct.
+          items:
+            type: string
+          type: array
+        splitName:
+          description: If present, this proto corresponds to one portion of split precinct. Other portions of this precinct are guaranteed to have the same `name`. If not present, this proto represents a full precicnt.
+          type: string
+        ward:
+          description: Specifies the ward the precinct is contained within.
+          type: string
+      type: object
     RepresentativeInfoData:
       properties:
         divisions:
@@ -1382,6 +1442,11 @@ components:
           type: array
         precinctId:
           type: string
+        precincts:
+          description: The precincts that match this voter's address. Will only be returned for project IDs which have been whitelisted as "partner projects".
+          items:
+            $ref: "#/components/schemas/Precinct"
+          type: array
         state:
           description: Local Election Information for the state that the voter votes in. For the US, there will only be one element in this array.
           items:

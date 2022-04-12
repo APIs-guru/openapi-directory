@@ -2034,9 +2034,7 @@ components:
           type: string
         asset_versions:
           description: The list of Asset Version resource SIDs that are included in the Build
-          items:
-            format: object
-            type: object
+          items: {}
           nullable: true
           type: array
         date_created:
@@ -2051,16 +2049,12 @@ components:
           type: string
         dependencies:
           description: A list of objects that describe the Dependencies included in the Build
-          items:
-            format: object
-            type: object
+          items: {}
           nullable: true
           type: array
         function_versions:
           description: The list of Function Version resource SIDs that are included in the Build
-          items:
-            format: object
-            type: object
+          items: {}
           nullable: true
           type: array
         links:

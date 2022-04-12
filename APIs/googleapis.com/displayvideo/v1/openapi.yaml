@@ -2025,7 +2025,7 @@ paths:
           name: filter
           schema:
             type: string
-        - description: 'Field by which to sort the list. Acceptable values are: * "displayName" (default) * "entityStatus" * “flight.dateRange.endDate” * "updateTime" The default sorting order is ascending. To specify descending order for a field, a suffix "desc" should be added to the field name. Example: `displayName desc`.'
+        - description: 'Field by which to sort the list. Acceptable values are: * `displayName` (default) * `entityStatus` * `flight.dateRange.endDate` * `updateTime` The default sorting order is ascending. To specify descending order for a field, a suffix "desc" should be added to the field name. Example: `displayName desc`.'
           in: query
           name: orderBy
           schema:
@@ -7356,7 +7356,7 @@ components:
       description: Represents a targetable age range. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_AGE_RANGE`.
       properties:
         ageRange:
-          description: The age range of an audience. We only support targeting a continuous age range of an audience. Thus, the age range represented in this field can be 1) targeted solely, or, 2) part of a larger continuous age range. The reach of a continuous age range targeting can be expanded by also targeting an audience of an unknown age. Output only in v1. Required in v2.
+          description: The age range of an audience. We only support targeting a continuous age range of an audience. Thus, the age range represented in this field can be 1) targeted solely, or, 2) part of a larger continuous age range. The reach of a continuous age range targeting can be expanded by also targeting an audience of an unknown age. Output only in v1.
           enum:
             - AGE_RANGE_UNSPECIFIED
             - AGE_RANGE_18_24
@@ -7777,7 +7777,7 @@ components:
       description: Details for audio content type assigned targeting option. This will be populated in the audio_content_type_details field when targeting_type is `TARGETING_TYPE_AUDIO_CONTENT_TYPE`. Explicitly targeting all options is not supported. Remove all audio content type targeting options to achieve this effect.
       properties:
         audioContentType:
-          description: The audio content type. Output only in v1. Required in v2.
+          description: The audio content type. Output only in v1.
           enum:
             - AUDIO_CONTENT_TYPE_UNSPECIFIED
             - AUDIO_CONTENT_TYPE_UNKNOWN
@@ -8658,7 +8658,7 @@ components:
           readOnly: true
           type: string
         contentInstreamPosition:
-          description: The content instream position for video or audio ads. Output only in v1. Required in v2.
+          description: The content instream position for video or audio ads. Output only in v1.
           enum:
             - CONTENT_INSTREAM_POSITION_UNSPECIFIED
             - CONTENT_INSTREAM_POSITION_PRE_ROLL
@@ -8697,7 +8697,7 @@ components:
           readOnly: true
           type: string
         contentOutstreamPosition:
-          description: The content outstream position. Output only in v1. Required in v2.
+          description: The content outstream position. Output only in v1.
           enum:
             - CONTENT_OUTSTREAM_POSITION_UNSPECIFIED
             - CONTENT_OUTSTREAM_POSITION_UNKNOWN
@@ -9440,7 +9440,7 @@ components:
       description: Targeting details for device type. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_DEVICE_TYPE`.
       properties:
         deviceType:
-          description: The display name of the device type. Output only in v1. Required in v2.
+          description: The display name of the device type. Output only in v1.
           enum:
             - DEVICE_TYPE_UNSPECIFIED
             - DEVICE_TYPE_COMPUTER
@@ -9728,7 +9728,7 @@ components:
       description: Assigned environment targeting option details. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_ENVIRONMENT`.
       properties:
         environment:
-          description: The serving environment. Output only in v1. Required in v2.
+          description: The serving environment. Output only in v1.
           enum:
             - ENVIRONMENT_UNSPECIFIED
             - ENVIRONMENT_WEB_OPTIMIZED
@@ -10228,7 +10228,7 @@ components:
       description: Settings that control the number of times a user may be shown with the same ad during a given time period.
       properties:
         maxImpressions:
-          description: The maximum number of times a user may be shown the same ad during this period. Must be greater than 0. Required when unlimited is `false` and max_views is not set.
+          description: The maximum number of times a user may be shown the same ad during this period. Must be greater than 0. Required when unlimited is `false`.
           format: int32
           type: integer
         timeUnit:
@@ -10254,7 +10254,7 @@ components:
       description: Details for assigned gender targeting option. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARTGETING_TYPE_GENDER`.
       properties:
         gender:
-          description: The gender of the audience. Output only in v1. Required in v2.
+          description: The gender of the audience. Output only in v1.
           enum:
             - GENDER_UNSPECIFIED
             - GENDER_MALE
@@ -11746,7 +11746,7 @@ components:
             - BIDDING_STRATEGY_PERFORMANCE_GOAL_TYPE_AV_VIEWED
           type: string
         raiseBidForDeals:
-          description: Controls whether the strategy takes deal floor prices into account.
+          description: Whether the strategy takes deal floor prices into account.
           type: boolean
       type: object
     MeasurementConfig:
@@ -11810,7 +11810,7 @@ components:
       description: Details for native content position assigned targeting option. This will be populated in the native_content_position_details field when targeting_type is `TARGETING_TYPE_NATIVE_CONTENT_POSITION`. Explicitly targeting all options is not supported. Remove all native content position targeting options to achieve this effect.
       properties:
         contentPosition:
-          description: The content position. Output only in v1. Required in v2.
+          description: The content position. Output only in v1.
           enum:
             - NATIVE_CONTENT_POSITION_UNSPECIFIED
             - NATIVE_CONTENT_POSITION_UNKNOWN
@@ -11921,7 +11921,7 @@ components:
       description: Represents a targetable Open Measurement enabled inventory type. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_OMID`.
       properties:
         omid:
-          description: The type of Open Measurement enabled inventory. Output only in v1. Required in v2.
+          description: The type of Open Measurement enabled inventory. Output only in v1.
           enum:
             - OMID_UNSPECIFIED
             - OMID_FOR_MOBILE_DISPLAY_ADS
@@ -12680,7 +12680,7 @@ components:
           description: Required. ID of the sensitive category to be EXCLUDED.
           type: string
         sensitiveCategory:
-          description: An enum for the DV360 Sensitive category content classifier. Output only in v1. Required in v2.
+          description: An enum for the DV360 Sensitive category content classifier. Output only in v1.
           enum:
             - SENSITIVE_CATEGORY_UNSPECIFIED
             - SENSITIVE_CATEGORY_ADULT
@@ -13159,7 +13159,7 @@ components:
           description: Required. The targeting_option_id field when targeting_type is `TARGETING_TYPE_VIDEO_PLAYER_SIZE`.
           type: string
         videoPlayerSize:
-          description: The video player size. Output only in v1. Required in v2.
+          description: The video player size. Output only in v1.
           enum:
             - VIDEO_PLAYER_SIZE_UNSPECIFIED
             - VIDEO_PLAYER_SIZE_SMALL
@@ -13189,7 +13189,7 @@ components:
           description: Required. The targeting_option_id of a TargetingOption of type `TARGETING_TYPE_VIEWABILITY` (e.g., "509010" for targeting the `VIEWABILITY_10_PERCENT_OR_MORE` option).
           type: string
         viewability:
-          description: The predicted viewability percentage. Output only in v1. Required in v2.
+          description: The predicted viewability percentage. Output only in v1.
           enum:
             - VIEWABILITY_UNSPECIFIED
             - VIEWABILITY_10_PERCENT_OR_MORE

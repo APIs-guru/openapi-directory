@@ -4136,9 +4136,7 @@ components:
           type: string
         event_data:
           description: Data about the event
-          format: object
           nullable: true
-          type: object
         event_date:
           description: The time the event was sent
           format: date-time
@@ -4573,9 +4571,7 @@ components:
           type: integer
         split_by_wait_time:
           description: A list of objects that describe the Tasks canceled and reservations accepted above and below the specified thresholds
-          format: object
           nullable: true
-          type: object
         start_time:
           description: The beginning of the interval during which these statistics were calculated
           format: date-time
@@ -4615,19 +4611,13 @@ components:
           type: string
         wait_duration_in_queue_until_accepted:
           description: The relative wait duration statistics for Tasks accepted while in the TaskQueue
-          format: object
           nullable: true
-          type: object
         wait_duration_until_accepted:
           description: The wait duration statistics for Tasks accepted while in the TaskQueue
-          format: object
           nullable: true
-          type: object
         wait_duration_until_canceled:
           description: The wait duration statistics for Tasks canceled while in the TaskQueue
-          format: object
           nullable: true
-          type: object
         workspace_sid:
           description: The SID of the Workspace that contains the TaskQueue
           maxLength: 34
@@ -4647,9 +4637,7 @@ components:
           type: string
         activity_statistics:
           description: The number of current Workers by Activity
-          items:
-            format: object
-            type: object
+          items: {}
           nullable: true
           type: array
         longest_relative_task_age_in_queue:
@@ -4683,14 +4671,10 @@ components:
           type: string
         tasks_by_priority:
           description: The number of Tasks by priority
-          format: object
           nullable: true
-          type: object
         tasks_by_status:
           description: The number of Tasks by their current status
-          format: object
           nullable: true
-          type: object
         total_available_workers:
           description: The total number of Workers available for Tasks in the TaskQueue
           nullable: true
@@ -4727,14 +4711,10 @@ components:
           type: string
         cumulative:
           description: An object that contains the cumulative statistics for the TaskQueue
-          format: object
           nullable: true
-          type: object
         realtime:
           description: An object that contains the real-time statistics for the TaskQueue
-          format: object
           nullable: true
-          type: object
         task_queue_sid:
           description: The SID of the TaskQueue from which these statistics were calculated
           maxLength: 34
@@ -4766,14 +4746,10 @@ components:
           type: string
         cumulative:
           description: An object that contains the cumulative statistics for the TaskQueues
-          format: object
           nullable: true
-          type: object
         realtime:
           description: An object that contains the real-time statistics for the TaskQueues
-          format: object
           nullable: true
-          type: object
         task_queue_sid:
           description: The SID of the TaskQueue from which these statistics were calculated
           maxLength: 34
@@ -4945,9 +4921,7 @@ components:
           type: string
         cumulative:
           description: An object that contains the cumulative statistics for the Worker
-          format: object
           nullable: true
-          type: object
         url:
           description: The absolute URL of the WorkerChannel statistics resource
           format: uri
@@ -5054,14 +5028,10 @@ components:
           type: string
         cumulative:
           description: An object that contains the cumulative statistics for the Worker
-          format: object
           nullable: true
-          type: object
         realtime:
           description: An object that contains the real-time statistics for the Worker
-          format: object
           nullable: true
-          type: object
         url:
           description: The absolute URL of the Worker statistics resource
           format: uri
@@ -5086,9 +5056,7 @@ components:
           type: string
         activity_durations:
           description: The minimum, average, maximum, and total time that Workers spent in each Activity
-          items:
-            format: object
-            type: object
+          items: {}
           nullable: true
           type: array
         end_time:
@@ -5149,9 +5117,7 @@ components:
           type: string
         activity_statistics:
           description: The number of current Workers by Activity
-          items:
-            format: object
-            type: object
+          items: {}
           nullable: true
           type: array
         total_workers:
@@ -5285,9 +5251,7 @@ components:
           type: integer
         split_by_wait_time:
           description: A list of objects that describe the Tasks canceled and reservations accepted above and below the specified thresholds
-          format: object
           nullable: true
-          type: object
         start_time:
           description: The beginning of the interval during which these statistics were calculated
           format: date-time
@@ -5324,14 +5288,10 @@ components:
           type: string
         wait_duration_until_accepted:
           description: The wait duration statistics for Tasks that were accepted
-          format: object
           nullable: true
-          type: object
         wait_duration_until_canceled:
           description: The wait duration statistics for Tasks that were canceled
-          format: object
           nullable: true
-          type: object
         workflow_sid:
           description: Returns the list of Tasks that are being controlled by the Workflow with the specified Sid value
           maxLength: 34
@@ -5369,14 +5329,10 @@ components:
           type: string
         tasks_by_priority:
           description: The number of Tasks by priority
-          format: object
           nullable: true
-          type: object
         tasks_by_status:
           description: The number of Tasks by their current status
-          format: object
           nullable: true
-          type: object
         total_tasks:
           description: The total number of Tasks
           nullable: true
@@ -5412,14 +5368,10 @@ components:
           type: string
         cumulative:
           description: An object that contains the cumulative statistics for the Workflow
-          format: object
           nullable: true
-          type: object
         realtime:
           description: An object that contains the real-time statistics for the Workflow
-          format: object
           nullable: true
-          type: object
         url:
           description: The absolute URL of the Workflow statistics resource
           format: uri
@@ -5484,9 +5436,7 @@ components:
           type: integer
         split_by_wait_time:
           description: A list of objects that describe the Tasks canceled and reservations accepted above and below the specified thresholds
-          format: object
           nullable: true
-          type: object
         start_time:
           description: The beginning of the interval during which these statistics were calculated
           format: date-time
@@ -5523,14 +5473,10 @@ components:
           type: string
         wait_duration_until_accepted:
           description: The wait duration statistics for Tasks that were accepted
-          format: object
           nullable: true
-          type: object
         wait_duration_until_canceled:
           description: The wait duration statistics for Tasks that were canceled
-          format: object
           nullable: true
-          type: object
         workspace_sid:
           description: The SID of the Workspace
           maxLength: 34
@@ -5550,9 +5496,7 @@ components:
           type: string
         activity_statistics:
           description: The number of current Workers by Activity
-          items:
-            format: object
-            type: object
+          items: {}
           nullable: true
           type: array
         longest_task_waiting_age:
@@ -5568,14 +5512,10 @@ components:
           type: string
         tasks_by_priority:
           description: The number of Tasks by priority
-          format: object
           nullable: true
-          type: object
         tasks_by_status:
           description: The number of Tasks by their current status
-          format: object
           nullable: true
-          type: object
         total_tasks:
           description: The total number of Tasks
           nullable: true
@@ -5608,14 +5548,10 @@ components:
           type: string
         cumulative:
           description: An object that contains the cumulative statistics for the Workspace
-          format: object
           nullable: true
-          type: object
         realtime:
           description: n object that contains the real-time statistics for the Workspace
-          format: object
           nullable: true
-          type: object
         url:
           description: The absolute URL of the Workspace statistics resource
           format: uri

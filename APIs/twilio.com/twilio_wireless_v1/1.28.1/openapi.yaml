@@ -963,19 +963,13 @@ components:
           type: string
         commands:
           description: An object that describes the aggregated Commands usage for all SIMs during the specified period
-          format: object
           nullable: true
-          type: object
         data:
           description: An object that describes the aggregated Data usage for all SIMs over the period
-          format: object
           nullable: true
-          type: object
         period:
           description: The time period for which usage is reported
-          format: object
           nullable: true
-          type: object
       type: object
     wireless.v1.command:
       properties:
@@ -1316,9 +1310,7 @@ components:
           type: string
         cell_location_estimate:
           description: An object with the estimated location where the device's Data Session took place
-          format: object
           nullable: true
-          type: object
         end:
           description: The date that the record ended, given as GMT in ISO 8601 format
           format: date-time
@@ -1386,19 +1378,13 @@ components:
           type: string
         commands:
           description: An object that describes the SIM's usage of Commands during the specified period
-          format: object
           nullable: true
-          type: object
         data:
           description: An object that describes the SIM's data usage during the specified period
-          format: object
           nullable: true
-          type: object
         period:
           description: The time period for which the usage is reported
-          format: object
           nullable: true
-          type: object
         sim_sid:
           description: The SID of the Sim resource that this Usage Record is for
           nullable: true

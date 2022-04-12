@@ -166,8 +166,6 @@ paths:
                   type: boolean
                 VideoLayout:
                   description: An object that describes the video layout of the composition hook in terms of regions. See [Specifying Video Layouts](https://www.twilio.com/docs/video/api/compositions-resource#specifying-video-layouts) for more info.
-                  format: object
-                  type: object
               required:
                 - FriendlyName
               title: CreateCompositionHookRequest
@@ -315,8 +313,6 @@ paths:
                   type: boolean
                 VideoLayout:
                   description: A JSON object that describes the video layout of the composition hook in terms of regions. See [Specifying Video Layouts](https://www.twilio.com/docs/video/api/compositions-resource#specifying-video-layouts) for more info.
-                  format: object
-                  type: object
               required:
                 - FriendlyName
               title: UpdateCompositionHookRequest
@@ -562,8 +558,6 @@ paths:
                   type: boolean
                 VideoLayout:
                   description: An object that describes the video layout of the composition in terms of regions. See [Specifying Video Layouts](https://www.twilio.com/docs/video/api/compositions-resource#specifying-video-layouts) for more info. Please, be aware that either video_layout or audio_sources have to be provided to get a valid creation request
-                  format: object
-                  type: object
               required:
                 - RoomSid
               title: CreateCompositionRequest
@@ -991,8 +985,6 @@ paths:
                   type: boolean
                 RecordingRules:
                   description: A collection of Recording Rules that describe how to include or exclude matching tracks for recording
-                  format: object
-                  type: object
                 StatusCallback:
                   description: The URL we should call using the `status_callback_method` to send status information to your application on every room event. See [Status Callbacks](https://www.twilio.com/docs/video/api/status-callbacks) for more info.
                   format: uri
@@ -1309,8 +1301,6 @@ paths:
               properties:
                 Rules:
                   description: A JSON-encoded array of subscribe rules. See the [Specifying Subscribe Rules](https://www.twilio.com/docs/video/api/track-subscriptions#specifying-sr) section for further information.
-                  format: object
-                  type: object
               title: UpdateRoomParticipantSubscribeRuleRequest
               type: object
       responses:
@@ -1568,8 +1558,6 @@ paths:
               properties:
                 Rules:
                   description: A JSON-encoded array of recording rules.
-                  format: object
-                  type: object
               title: UpdateRoomRecordingRuleRequest
               type: object
       responses:
@@ -1957,9 +1945,7 @@ components:
           type: string
         video_layout:
           description: An object that describes the video layout of the composition
-          format: object
           nullable: true
-          type: object
       type: object
     video.v1.composition_hook:
       properties:
@@ -2046,9 +2032,7 @@ components:
           type: string
         video_layout:
           description: A JSON object that describes the video layout of the Composition
-          format: object
           nullable: true
-          type: object
       type: object
     video.v1.composition_settings:
       properties:
@@ -2132,9 +2116,7 @@ components:
           type: integer
         grouping_sids:
           description: A list of SIDs related to the recording
-          format: object
           nullable: true
-          type: object
         links:
           description: The URLs of related resources
           format: object
@@ -2642,9 +2624,7 @@ components:
           type: integer
         grouping_sids:
           description: A list of SIDs related to the Recording
-          format: object
           nullable: true
-          type: object
         links:
           description: The URLs of related resources
           format: object

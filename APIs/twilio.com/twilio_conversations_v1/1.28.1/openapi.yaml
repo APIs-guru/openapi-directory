@@ -5299,9 +5299,7 @@ components:
           type: string
         auto_creation:
           description: Auto Creation configuration for the address.
-          format: object
           nullable: true
-          type: object
         date_created:
           description: The date that this resource was created.
           format: date-time
@@ -5347,9 +5345,7 @@ components:
           nullable: true
           type: string
         bindings:
-          format: object
           nullable: true
-          type: object
         chat_service_sid:
           description: The unique ID of the Conversation Service this conversation belongs to.
           maxLength: 34
@@ -5400,9 +5396,7 @@ components:
           type: string
         timers:
           description: Timer date values for this conversation.
-          format: object
           nullable: true
-          type: object
         unique_name:
           description: An application-defined string that uniquely identifies the resource
           nullable: true
@@ -5453,9 +5447,7 @@ components:
           type: string
         delivery:
           description: An object that contains the summary of delivery statuses for the message to non-chat participants.
-          format: object
           nullable: true
-          type: object
         index:
           description: The index of the message within the Conversation.
           nullable: true
@@ -5467,9 +5459,7 @@ components:
           type: object
         media:
           description: An array of objects that describe the Message's media if attached, otherwise, null.
-          items:
-            format: object
-            type: object
+          items: {}
           nullable: true
           type: array
         participant_sid:
@@ -5610,9 +5600,7 @@ components:
           type: string
         messaging_binding:
           description: Information about how this participant exchanges messages with the conversation.
-          format: object
           nullable: true
-          type: object
         role_sid:
           description: The SID of a conversation-level Role to assign to the participant
           maxLength: 34
@@ -5644,9 +5632,7 @@ components:
           type: string
         configuration:
           description: The configuration of this webhook.
-          format: object
           nullable: true
-          type: object
         conversation_sid:
           description: The unique ID of the Conversation for this webhook.
           maxLength: 34
@@ -5784,9 +5770,7 @@ components:
           type: string
         conversation_timers:
           description: Timer date values for this conversation.
-          format: object
           nullable: true
-          type: object
         conversation_unique_name:
           description: An application-defined string that uniquely identifies the Conversation resource
           nullable: true
@@ -5802,9 +5786,7 @@ components:
           type: string
         participant_messaging_binding:
           description: Information about how this participant exchanges messages with the conversation.
-          format: object
           nullable: true
-          type: object
         participant_sid:
           description: The unique ID of the Participant.
           maxLength: 34
@@ -6041,9 +6023,7 @@ components:
           type: string
         added_to_conversation:
           description: The Push Notification configuration for being added to a Conversation.
-          format: object
           nullable: true
-          type: object
         chat_service_sid:
           description: The SID of the Conversation Service that the Configuration applies to.
           maxLength: 34
@@ -6057,14 +6037,10 @@ components:
           type: boolean
         new_message:
           description: The Push Notification configuration for New Messages.
-          format: object
           nullable: true
-          type: object
         removed_from_conversation:
           description: The Push Notification configuration for being removed from a Conversation.
-          format: object
           nullable: true
-          type: object
         url:
           description: An absolute URL for this configuration.
           format: uri
@@ -6130,9 +6106,7 @@ components:
           nullable: true
           type: string
         bindings:
-          format: object
           nullable: true
-          type: object
         chat_service_sid:
           description: The unique ID of the Conversation Service this conversation belongs to.
           maxLength: 34
@@ -6183,9 +6157,7 @@ components:
           type: string
         timers:
           description: Timer date values for this conversation.
-          format: object
           nullable: true
-          type: object
         unique_name:
           description: An application-defined string that uniquely identifies the resource
           nullable: true
@@ -6243,9 +6215,7 @@ components:
           type: string
         delivery:
           description: An object that contains the summary of delivery statuses for the message to non-chat participants.
-          format: object
           nullable: true
-          type: object
         index:
           description: The index of the message within the Conversation.
           nullable: true
@@ -6257,9 +6227,7 @@ components:
           type: object
         media:
           description: An array of objects that describe the Message's media if attached, otherwise, null.
-          items:
-            format: object
-            type: object
+          items: {}
           nullable: true
           type: array
         participant_sid:
@@ -6414,9 +6382,7 @@ components:
           type: string
         messaging_binding:
           description: Information about how this participant exchanges messages with the conversation.
-          format: object
           nullable: true
-          type: object
         role_sid:
           description: The SID of a conversation-level Role to assign to the participant
           maxLength: 34
@@ -6455,9 +6421,7 @@ components:
           type: string
         configuration:
           description: The configuration of this webhook.
-          format: object
           nullable: true
-          type: object
         conversation_sid:
           description: The unique ID of the Conversation for this webhook.
           maxLength: 34
@@ -6547,9 +6511,7 @@ components:
           type: string
         conversation_timers:
           description: Timer date values for this conversation.
-          format: object
           nullable: true
-          type: object
         conversation_unique_name:
           description: An application-defined string that uniquely identifies the Conversation resource.
           nullable: true
@@ -6565,9 +6527,7 @@ components:
           type: string
         participant_messaging_binding:
           description: Information about how this participant exchanges messages with the conversation.
-          format: object
           nullable: true
-          type: object
         participant_sid:
           description: The unique ID of the Participant.
           maxLength: 34
@@ -6787,9 +6747,7 @@ components:
           type: string
         timers:
           description: Timer date values for this conversation.
-          format: object
           nullable: true
-          type: object
         unique_name:
           description: An application-defined string that uniquely identifies the Conversation resource.
           nullable: true
@@ -6958,9 +6916,7 @@ components:
           type: string
         timers:
           description: Timer date values for this conversation.
-          format: object
           nullable: true
-          type: object
         unique_name:
           description: An application-defined string that uniquely identifies the Conversation resource.
           nullable: true

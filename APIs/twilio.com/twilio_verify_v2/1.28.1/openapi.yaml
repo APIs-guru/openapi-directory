@@ -823,9 +823,7 @@ paths:
                   type: string
                 Details.Fields:
                   description: A list of objects that describe the Fields included in the Challenge. Each object contains the label and value of the field, the label can be up to 36 characters in length and the value can be up to 128 characters in length. Used when `factor_type` is `push`. There can be up to 20 details fields.
-                  items:
-                    format: object
-                    type: object
+                  items: {}
                   type: array
                 Details.Message:
                   description: Shown to the user when the push notification arrives. Required when `factor_type` is `push`. Can be up to 256 characters in length
@@ -842,8 +840,6 @@ paths:
                   type: string
                 HiddenDetails:
                   description: 'Details provided to give context about the Challenge. Not shown to the end user. It must be a stringified JSON with only strings values eg. `{"ip": "172.168.1.234"}`. Can be up to 1024 characters in length'
-                  format: object
-                  type: object
               required:
                 - FactorSid
               title: CreateChallengeRequest
@@ -1007,8 +1003,6 @@ paths:
                   type: string
                 Metadata:
                   description: 'Custom metadata associated with the challenge. This is added by the Device/SDK directly to allow for the inclusion of device information. It must be a stringified JSON with only strings values eg. `{"os": "Android"}`. Can be up to 1024 characters in length.'
-                  format: object
-                  type: object
               title: UpdateChallengeRequest
               type: object
       responses:
@@ -1207,8 +1201,6 @@ paths:
                   type: string
                 Metadata:
                   description: 'Custom metadata associated with the factor. This is added by the Device/SDK directly to allow for the inclusion of device information. It must be a stringified JSON with only strings values eg. `{"os": "Android"}`. Can be up to 1024 characters in length.'
-                  format: object
-                  type: object
               required:
                 - FriendlyName
                 - FactorType
@@ -2233,8 +2225,6 @@ paths:
                   type: string
                 ChannelConfiguration:
                   description: "[`email`](https://www.twilio.com/docs/verify/email) channel configuration in json format. The fields 'from' and 'from_name' are optional but if included the 'from' field must have a valid email address."
-                  format: object
-                  type: object
                 CustomCode:
                   description: A pre-generated code to use for verification. The code can be between 4 and 10 characters, inclusive.
                   type: string
@@ -2252,8 +2242,6 @@ paths:
                   type: string
                 RateLimits:
                   description: The custom key-value pairs of Programmable Rate Limits. Keys correspond to `unique_name` fields defined when [creating your Rate Limit](https://www.twilio.com/docs/verify/api/service-rate-limits). Associated value pairs represent values in the request that you are rate limiting on. You may include multiple Rate Limit values in each request.
-                  format: object
-                  type: object
                 SendDigits:
                   description: The digits to send after a phone call is answered, for example, to dial an extension. For more information, see the Programmable Voice documentation of [sendDigits](https://www.twilio.com/docs/voice/twiml/number#attributes-sendDigits).
                   type: string
@@ -2869,9 +2857,7 @@ components:
       properties:
         form_meta:
           description: Additional information for the available forms for this type.
-          format: object
           nullable: true
-          type: object
         form_type:
           description: The Type of this Form
           enum:
@@ -2880,9 +2866,7 @@ components:
           type: string
         forms:
           description: Object that contains the available forms for this type.
-          format: object
           nullable: true
-          type: object
         url:
           description: The URL to access the forms for this type.
           format: uri
@@ -2949,9 +2933,7 @@ components:
           type: boolean
         push:
           description: The service level configuration of factor push type.
-          format: object
           nullable: true
-          type: object
         sid:
           description: The unique string that identifies the resource
           maxLength: 34
@@ -2965,9 +2947,7 @@ components:
           type: boolean
         totp:
           description: The service level configuration of factor TOTP type.
-          format: object
           nullable: true
-          type: object
         tts_name:
           description: The name of an alternative text-to-speech service to use in phone calls
           nullable: true
@@ -3108,9 +3088,7 @@ components:
           type: string
         details:
           description: Details about the Challenge.
-          format: object
           nullable: true
-          type: object
         entity_sid:
           description: Entity Sid.
           maxLength: 34
@@ -3139,9 +3117,7 @@ components:
           type: string
         hidden_details:
           description: Hidden details about the Challenge
-          format: object
           nullable: true
-          type: object
         identity:
           description: Unique external identifier of the Entity
           nullable: true
@@ -3153,9 +3129,7 @@ components:
           type: object
         metadata:
           description: Metadata of the challenge.
-          format: object
           nullable: true
-          type: object
         responded_reason:
           description: The Reason of this Challenge `status`
           enum:
@@ -3259,9 +3233,7 @@ components:
           type: string
         config:
           description: Configurations for a `factor_type`.
-          format: object
           nullable: true
-          type: object
         date_created:
           description: The date this Factor was created
           format: date-time
@@ -3296,9 +3268,7 @@ components:
           type: string
         metadata:
           description: Metadata of the factor.
-          format: object
           nullable: true
-          type: object
         service_sid:
           description: Service Sid.
           maxLength: 34
@@ -3337,14 +3307,10 @@ components:
           type: string
         binding:
           description: Binding of the factor
-          format: object
           nullable: true
-          type: object
         config:
           description: Configurations for a `factor_type`.
-          format: object
           nullable: true
-          type: object
         date_created:
           description: The date this Factor was created
           format: date-time
@@ -3379,9 +3345,7 @@ components:
           type: string
         metadata:
           description: Metadata of the factor.
-          format: object
           nullable: true
-          type: object
         service_sid:
           description: Service Sid.
           maxLength: 34
@@ -3592,18 +3556,14 @@ components:
           type: string
         lookup:
           description: Information about the phone number being verified
-          format: object
           nullable: true
-          type: object
         payee:
           description: The payee of the associated PSD2 compliant transaction
           nullable: true
           type: string
         send_code_attempts:
           description: An array of verification attempt objects.
-          items:
-            format: object
-            type: object
+          items: {}
           nullable: true
           type: array
         service_sid:
@@ -3796,9 +3756,7 @@ components:
           type: string
         channel_data:
           description: An object containing the channel specific information for an attempt.
-          format: object
           nullable: true
-          type: object
         conversion_status:
           description: Status of the conversion for the verification.
           enum:
@@ -3818,9 +3776,7 @@ components:
           type: string
         price:
           description: An object containing the charge for this verification attempt.
-          format: object
           nullable: true
-          type: object
         service_sid:
           description: The SID of the verify service that generated this attempt.
           maxLength: 34
@@ -3892,9 +3848,7 @@ components:
           type: string
         translations:
           description: Object with the template translations.
-          format: object
           nullable: true
-          type: object
       type: object
   securitySchemes:
     accountSid_authToken:

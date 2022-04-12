@@ -1213,13 +1213,9 @@ components:
           pattern: ^CA[0-9a-fA-F]{32}$
           type: string
         carrier_edge:
-          format: object
           nullable: true
-          type: object
         client_edge:
-          format: object
           nullable: true
-          type: object
         edge:
           enum:
             - unknown_edge
@@ -1245,13 +1241,9 @@ components:
           nullable: true
           type: string
         sdk_edge:
-          format: object
           nullable: true
-          type: object
         sip_edge:
-          format: object
           nullable: true
-          type: object
         timestamp:
           nullable: true
           type: string
@@ -1271,13 +1263,9 @@ components:
           pattern: ^CA[0-9a-fA-F]{32}$
           type: string
         carrier_edge:
-          format: object
           nullable: true
-          type: object
         client_edge:
-          format: object
           nullable: true
-          type: object
         direction:
           enum:
             - unknown
@@ -1296,13 +1284,9 @@ components:
           nullable: true
           type: string
         sdk_edge:
-          format: object
           nullable: true
-          type: object
         sip_edge:
-          format: object
           nullable: true
-          type: object
         timestamp:
           nullable: true
           type: string
@@ -1316,9 +1300,7 @@ components:
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         attributes:
-          format: object
           nullable: true
-          type: object
         call_sid:
           maxLength: 34
           minLength: 34
@@ -1346,13 +1328,9 @@ components:
           nullable: true
           type: string
         carrier_edge:
-          format: object
           nullable: true
-          type: object
         client_edge:
-          format: object
           nullable: true
-          type: object
         connect_duration:
           nullable: true
           type: integer
@@ -1368,9 +1346,7 @@ components:
           nullable: true
           type: string
         from:
-          format: object
           nullable: true
-          type: object
         processing_state:
           enum:
             - complete
@@ -1378,17 +1354,11 @@ components:
           nullable: true
           type: string
         properties:
-          format: object
           nullable: true
-          type: object
         sdk_edge:
-          format: object
           nullable: true
-          type: object
         sip_edge:
-          format: object
           nullable: true
-          type: object
         start_time:
           format: date-time
           nullable: true
@@ -1399,13 +1369,9 @@ components:
           nullable: true
           type: array
         to:
-          format: object
           nullable: true
-          type: object
         trust:
-          format: object
           nullable: true
-          type: object
         url:
           format: uri
           nullable: true
@@ -1420,9 +1386,7 @@ components:
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         attributes:
-          format: object
           nullable: true
-          type: object
         call_sid:
           maxLength: 34
           minLength: 34
@@ -1450,13 +1414,9 @@ components:
           nullable: true
           type: string
         carrier_edge:
-          format: object
           nullable: true
-          type: object
         client_edge:
-          format: object
           nullable: true
-          type: object
         connect_duration:
           nullable: true
           type: integer
@@ -1472,9 +1432,7 @@ components:
           nullable: true
           type: string
         from:
-          format: object
           nullable: true
-          type: object
         processing_state:
           enum:
             - complete
@@ -1482,17 +1440,11 @@ components:
           nullable: true
           type: string
         properties:
-          format: object
           nullable: true
-          type: object
         sdk_edge:
-          format: object
           nullable: true
-          type: object
         sip_edge:
-          format: object
           nullable: true
-          type: object
         start_time:
           format: date-time
           nullable: true
@@ -1503,13 +1455,9 @@ components:
           nullable: true
           type: array
         to:
-          format: object
           nullable: true
-          type: object
         trust:
-          format: object
           nullable: true
-          type: object
         url:
           format: uri
           nullable: true
@@ -1542,9 +1490,7 @@ components:
           type: string
         detected_issues:
           description: Potential issues detected during the conference.
-          format: object
           nullable: true
-          type: object
         duration_seconds:
           description: Conference duration in seconds.
           nullable: true
@@ -1640,9 +1586,7 @@ components:
           type: string
         tag_info:
           description: Object. Contains details about conference tags.
-          format: object
           nullable: true
-          type: object
         tags:
           description: Tags for detected conference conditions and participant behaviors.
           items:
@@ -1750,9 +1694,7 @@ components:
           type: integer
         events:
           description: Object containing information of actions taken by participants. Nested resource URLs.
-          format: object
           nullable: true
-          type: object
         from:
           description: Caller ID of the calling party.
           nullable: true
@@ -1790,9 +1732,7 @@ components:
           type: string
         metrics:
           description: Object. Contains participant quality metrics.
-          format: object
           nullable: true
-          type: object
         outbound_queue_length:
           description: Estimated time in queue at call creation.
           nullable: true
@@ -1831,9 +1771,7 @@ components:
           type: string
         properties:
           description: Participant properties and metadata.
-          format: object
           nullable: true
-          type: object
         to:
           description: Called party.
           nullable: true
@@ -2102,14 +2040,10 @@ components:
           type: string
         properties:
           description: Object containing information about the participant's data from the room.
-          format: object
           nullable: true
-          type: object
         publisher_info:
           description: Object containing information about the SDK name and version.
-          format: object
           nullable: true
-          type: object
         room_sid:
           description: Unique identifier for the room.
           maxLength: 34

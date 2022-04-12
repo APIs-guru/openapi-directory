@@ -2079,9 +2079,7 @@ components:
           type: boolean
         rate_limits:
           description: Rate limit and/or classification set by each carrier
-          format: object
           nullable: true
-          type: object
         sid:
           description: The unique string that identifies a US A2P Compliance resource
           maxLength: 34
@@ -2103,9 +2101,7 @@ components:
       properties:
         us_app_to_person_usecases:
           description: Human readable A2P Use Case details
-          items:
-            format: object
-            type: object
+          items: {}
           nullable: true
           type: array
       type: object
@@ -2113,9 +2109,7 @@ components:
       properties:
         usecases:
           description: Human readable Messaging Service Use Case details
-          items:
-            format: object
-            type: object
+          items: {}
           nullable: true
           type: array
       type: object

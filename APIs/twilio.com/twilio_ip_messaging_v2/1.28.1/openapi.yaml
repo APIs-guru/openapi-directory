@@ -3061,21 +3061,15 @@ components:
           nullable: true
           type: string
         limits:
-          format: object
           nullable: true
-          type: object
         links:
           format: object
           nullable: true
           type: object
         media:
-          format: object
           nullable: true
-          type: object
         notifications:
-          format: object
           nullable: true
-          type: object
         post_webhook_retry_count:
           nullable: true
           type: integer
@@ -3253,9 +3247,7 @@ components:
           pattern: ^CH[0-9a-fA-F]{32}$
           type: string
         configuration:
-          format: object
           nullable: true
-          type: object
         date_created:
           format: date-time
           nullable: true
@@ -3431,9 +3423,7 @@ components:
           nullable: true
           type: string
         media:
-          format: object
           nullable: true
-          type: object
         service_sid:
           maxLength: 34
           minLength: 34
