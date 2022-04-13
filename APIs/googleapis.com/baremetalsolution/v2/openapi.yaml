@@ -30,43 +30,6 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v2/{location}/instanceProvisioningSettings:fetch":
-    get:
-      description: Get instance provisioning settings for a given project. This is hidden method used by UI only.
-      operationId: baremetalsolution.projects.locations.instanceProvisioningSettings.fetch
-      parameters:
-        - description: Required. The parent project and location containing the ProvisioningSettings.
-          in: path
-          name: location
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/FetchInstanceProvisioningSettingsResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
   "/v2/{location}/networks:listNetworkUsage":
     get:
       description: List all Networks (and used IPs for each Network) in the vendor account associated with the specified project.
@@ -210,7 +173,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: A filter to narrow down results to a preferred subset. The filtering language accepts strings like `"displayName=tokyo"`, and is documented in more detail in [AIP-160](https://google.aip.dev/160).
+        - description: A filter to narrow down results to a preferred subset. The filtering language accepts strings like "displayName=tokyo", and is documented in more detail in [AIP-160](https://google.aip.dev/160).
           in: query
           name: filter
           schema:
@@ -1039,15 +1002,6 @@ components:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
       type: object
-    FetchInstanceProvisioningSettingsResponse:
-      description: Response with all provisioning settings.
-      properties:
-        images:
-          description: The OS images available.
-          items:
-            $ref: "#/components/schemas/OSImage"
-          type: array
-      type: object
     Instance:
       description: A server.
       properties:
@@ -1331,23 +1285,6 @@ components:
           description: 'Resource name for the location, which may vary between implementations. For example: `"projects/example-project/locations/us-east1"`'
           type: string
       type: object
-    LogicalInterface:
-      description: Logical interface.
-      properties:
-        name:
-          description: Interface name. This is not a globally unique identifier. Name is unique only inside the ServerNetworkTemplate.
-          type: string
-        required:
-          description: If true, interface must have network connected.
-          type: boolean
-        type:
-          description: Interface type.
-          enum:
-            - INTERFACE_TYPE_UNSPECIFIED
-            - BOND
-            - NIC
-          type: string
-      type: object
     Lun:
       description: A storage volume logical unit number (LUN).
       properties:
@@ -1597,30 +1534,6 @@ components:
           description: The volume containing the share.
           type: string
       type: object
-    OSImage:
-      description: Operation System image.
-      properties:
-        applicableInstanceTypes:
-          description: Instance types this image is applicable to. [Available types](https://cloud.google.com/bare-metal/docs/bms-planning#server_configurations)
-          items:
-            type: string
-          type: array
-        code:
-          description: OS Image code.
-          type: string
-        description:
-          description: OS Image description.
-          type: string
-        name:
-          description: Output only. OS Image's unique name.
-          readOnly: true
-          type: string
-        supportedNetworkTemplates:
-          description: Network templates that can be used with this OS Image.
-          items:
-            $ref: "#/components/schemas/ServerNetworkTemplate"
-          type: array
-      type: object
     Operation:
       description: This resource represents a long-running operation that is the result of a network API call.
       properties:
@@ -1766,24 +1679,6 @@ components:
           description: The maximum number of snapshots to retain in this schedule.
           format: int32
           type: integer
-      type: object
-    ServerNetworkTemplate:
-      description: Network template.
-      properties:
-        applicableInstanceTypes:
-          description: Instance types this template is applicable to.
-          items:
-            type: string
-          type: array
-        logicalInterfaces:
-          description: Logical interfaces.
-          items:
-            $ref: "#/components/schemas/LogicalInterface"
-          type: array
-        name:
-          description: Output only. Template's unique name.
-          readOnly: true
-          type: string
       type: object
     SnapshotReservationDetail:
       description: Details about snapshot space reservation and usage on the storage volume.

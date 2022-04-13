@@ -3724,7 +3724,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Subscribe to changes on a file
+      description: Subscribes to changes to a file. While you can establish a channel for changes to a file on a shared drive, a change to a shared drive file won't create a notification.
       operationId: drive.files.watch
       parameters:
         - description: The ID for the file in question.
