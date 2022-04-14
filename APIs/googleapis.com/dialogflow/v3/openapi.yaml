@@ -19,12 +19,11 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://dialogflow.googleapis.com/$discovery/rest?version=v3
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: dialogflow
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/dialogflow/
 tags:
@@ -2129,7 +2128,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Imports the test cases from a Cloud Storage bucket or a local file. It always creates new test cases and won't overwite any existing ones. The provided ID in the imported test case is neglected. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: ImportTestCasesMetadata - `response`: ImportTestCasesResponse"
+      description: "Imports the test cases from a Cloud Storage bucket or a local file. It always creates new test cases and won't overwrite any existing ones. The provided ID in the imported test case is neglected. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: ImportTestCasesMetadata - `response`: ImportTestCasesResponse"
       operationId: dialogflow.projects.locations.agents.testCases.import
       parameters:
         - description: "Required. The agent to import test cases to. Format: `projects//locations//agents/`."
@@ -3447,7 +3446,7 @@ components:
             type: string
           type: array
         transitionRoutes:
-          description: "A flow's transition routes serve two purposes: * They are responsible for matching the user's first utterances in the flow. * They are inherited by every page's transition routes and can support use cases such as the user saying \"help\" or \"can I talk to a human?\", which can be handled in a common way regardless of the current page. Transition routes defined in the page have higher priority than those defined in the flow. TransitionRoutes are evalauted in the following order: * TransitionRoutes with intent specified.. * TransitionRoutes with only condition specified. TransitionRoutes with intent specified are inherited by pages in the flow."
+          description: "A flow's transition routes serve two purposes: * They are responsible for matching the user's first utterances in the flow. * They are inherited by every page's transition routes and can support use cases such as the user saying \"help\" or \"can I talk to a human?\", which can be handled in a common way regardless of the current page. Transition routes defined in the page have higher priority than those defined in the flow. TransitionRoutes are evalauted in the following order: * TransitionRoutes with intent specified. * TransitionRoutes with only condition specified. TransitionRoutes with intent specified are inherited by pages in the flow."
           items:
             $ref: "#/components/schemas/GoogleCloudDialogflowCxV3TransitionRoute"
           type: array
@@ -3565,7 +3564,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDialogflowCxV3FulfillmentSetParameterAction"
           type: array
         tag:
-          description: The tag used by the webhook to identify which fulfillment is being called. This field is required if `webhook` is specified.
+          description: The value of this field will be populated in the WebhookRequest `fulfillmentInfo.tag` field by Dialogflow when the associated webhook is called. The tag is typically used by the webhook service to identify which fulfillment is being called, but it could be used for other purposes. This field is required if `webhook` is specified.
           type: string
         webhook:
           description: "The webhook to call. Format: `projects//locations//agents//webhooks/`."
@@ -4180,7 +4179,7 @@ components:
       description: A Dialogflow CX conversation (session) can be described and visualized as a state machine. The states of a CX session are represented by pages. For each flow, you define many pages, where your combined pages can handle a complete conversation on the topics the flow is designed for. At any given moment, exactly one page is the current page, the current page is considered active, and the flow associated with that page is considered active. Every flow has a special start page. When a flow initially becomes active, the start page page becomes the current page. For each conversational turn, the current page will either stay the same or transition to another page. You configure each page to collect information from the end-user that is relevant for the conversational state represented by the page. For more information, see the [Page guide](https://cloud.google.com/dialogflow/cx/docs/concept/page).
       properties:
         displayName:
-          description: Required. The human-readable name of the page, unique within the agent.
+          description: Required. The human-readable name of the page, unique within the flow.
           type: string
         entryFulfillment:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3Fulfillment"
@@ -4957,7 +4956,7 @@ components:
       description: An TransitionRouteGroup represents a group of `TransitionRoutes` to be used by a Page.
       properties:
         displayName:
-          description: Required. The human-readable name of the transition route group, unique within the Agent. The display name can be no longer than 30 characters.
+          description: Required. The human-readable name of the transition route group, unique within the flow. The display name can be no longer than 30 characters.
           type: string
         name:
           description: "The unique identifier of the transition route group. TransitionRouteGroups.CreateTransitionRouteGroup populates the name automatically. Format: `projects//locations//agents//flows//transitionRouteGroups/`."
@@ -5249,7 +5248,7 @@ components:
       description: Represents fulfillment information communicated to the webhook.
       properties:
         tag:
-          description: Always present. The tag used to identify which fulfillment is being called.
+          description: Always present. The value of the Fulfillment.tag field will be populated in this field by Dialogflow when the associated webhook is called. The tag is typically used by the webhook service to identify which fulfillment is being called, but it could be used for other purposes.
           type: string
       type: object
     GoogleCloudDialogflowCxV3WebhookRequestIntentInfo:
@@ -5685,7 +5684,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1FulfillmentSetParameterAction"
           type: array
         tag:
-          description: The tag used by the webhook to identify which fulfillment is being called. This field is required if `webhook` is specified.
+          description: The value of this field will be populated in the WebhookRequest `fulfillmentInfo.tag` field by Dialogflow when the associated webhook is called. The tag is typically used by the webhook service to identify which fulfillment is being called, but it could be used for other purposes. This field is required if `webhook` is specified.
           type: string
         webhook:
           description: "The webhook to call. Format: `projects//locations//agents//webhooks/`."
@@ -5915,7 +5914,7 @@ components:
       description: A Dialogflow CX conversation (session) can be described and visualized as a state machine. The states of a CX session are represented by pages. For each flow, you define many pages, where your combined pages can handle a complete conversation on the topics the flow is designed for. At any given moment, exactly one page is the current page, the current page is considered active, and the flow associated with that page is considered active. Every flow has a special start page. When a flow initially becomes active, the start page page becomes the current page. For each conversational turn, the current page will either stay the same or transition to another page. You configure each page to collect information from the end-user that is relevant for the conversational state represented by the page. For more information, see the [Page guide](https://cloud.google.com/dialogflow/cx/docs/concept/page).
       properties:
         displayName:
-          description: Required. The human-readable name of the page, unique within the agent.
+          description: Required. The human-readable name of the page, unique within the flow.
           type: string
         entryFulfillment:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1Fulfillment"
@@ -6383,7 +6382,7 @@ components:
       description: Represents fulfillment information communicated to the webhook.
       properties:
         tag:
-          description: Always present. The tag used to identify which fulfillment is being called.
+          description: Always present. The value of the Fulfillment.tag field will be populated in this field by Dialogflow when the associated webhook is called. The tag is typically used by the webhook service to identify which fulfillment is being called, but it could be used for other purposes.
           type: string
       type: object
     GoogleCloudDialogflowCxV3beta1WebhookRequestIntentInfo:

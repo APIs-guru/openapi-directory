@@ -156,7 +156,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: A filter to narrow down results to a preferred subset. The filtering language accepts strings like "displayName=tokyo", and is documented in more detail in [AIP-160](https://google.aip.dev/160).
+        - description: A filter to narrow down results to a preferred subset. The filtering language accepts strings like `"displayName=tokyo"`, and is documented in more detail in [AIP-160](https://google.aip.dev/160).
           in: query
           name: filter
           schema:
@@ -1162,6 +1162,10 @@ components:
           $ref: "#/components/schemas/OracleRdbms"
           description: Enriched Oracle RDBMS object.
       type: object
+    DropLargeObjects:
+      description: Configuration to drop large object values.
+      properties: {}
+      type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
@@ -1637,10 +1641,6 @@ components:
           format: int32
           type: integer
       type: object
-    OracleDropLargeObjects:
-      description: Configuration to drop large object values.
-      properties: {}
-      type: object
     OracleObjectIdentifier:
       description: Oracle data source object identifier.
       properties:
@@ -1704,7 +1704,7 @@ components:
           $ref: "#/components/schemas/OracleRdbms"
           description: Oracle objects to include in the stream.
         dropLargeObjects:
-          $ref: "#/components/schemas/OracleDropLargeObjects"
+          $ref: "#/components/schemas/DropLargeObjects"
           description: Drop large object values.
         rejectlist:
           $ref: "#/components/schemas/OracleRdbms"

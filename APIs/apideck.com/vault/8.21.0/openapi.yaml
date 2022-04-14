@@ -164,7 +164,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 8.20.0
+  version: 8.21.0
   x-apideck-api: vault
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -527,7 +527,8 @@ paths:
               unifiedApi: 'crm',
               connection: {
                 settings: {
-                  instance_url: 'https://eu28.salesforce.com'
+                  instance_url: 'https://eu28.salesforce.com',
+                  api_key: '12345xxxxxx'
                 },
                 metadata: {
                   account: {
@@ -612,7 +613,8 @@ paths:
               unifiedApi: 'crm',
               connection: {
                 settings: {
-                  instance_url: 'https://eu28.salesforce.com'
+                  instance_url: 'https://eu28.salesforce.com',
+                  api_key: '12345xxxxxx'
                 },
                 metadata: {
                   account: {
@@ -904,7 +906,8 @@ paths:
               resource: 'leads',
               connection: {
                 settings: {
-                  instance_url: 'https://eu28.salesforce.com'
+                  instance_url: 'https://eu28.salesforce.com',
+                  api_key: '12345xxxxxx'
                 },
                 metadata: {
                   account: {
@@ -1829,10 +1832,13 @@ components:
           readOnly: true
           type: string
         settings:
+          additionalProperties: true
           description: Connection settings. Values will persist to `form_fields` with corresponding id
           example:
+            api_key: 12345xxxxxx
             instance_url: https://eu28.salesforce.com
           nullable: true
+          properties: {}
           type: object
         settings_required_for_authorization:
           example:
@@ -2222,9 +2228,6 @@ components:
               - pos.modifier-group.created
               - pos.modifier-group.updated
               - pos.modifier-group.deleted
-              - hris.department.created
-              - hris.department.updated
-              - hris.department.deleted
             example: crm.company.created
             type: string
           title: Subscribed events

@@ -259,7 +259,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 8.20.0
+  version: 8.21.0
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -5569,7 +5569,7 @@ components:
           title: Item code
           type: string
         id:
-          description: ID of the linked item
+          description: ID of the linked item. A reference to the [invoice item](https://developers.apideck.com/apis/accounting/reference#tag/Invoice-Items) that was used to create this line item
           example: "12344"
           nullable: true
           title: Item ID

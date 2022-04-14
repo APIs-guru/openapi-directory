@@ -1536,6 +1536,17 @@ components:
           $ref: "#/components/schemas/ApplianceVersion"
           description: The newest deployable version of the appliance. The current appliance can't be updated into this version, and the owner must manually deploy this OVA to a new appliance.
       type: object
+    AwsSourceVmDetails:
+      description: Represent the source AWS VM details.
+      properties:
+        firmware:
+          description: The firmware type of the source VM.
+          enum:
+            - FIRMWARE_UNSPECIFIED
+            - EFI
+            - BIOS
+          type: string
+      type: object
     CancelCloneJobRequest:
       description: Request message for 'CancelCloneJob' request.
       properties: {}
@@ -2170,6 +2181,10 @@ components:
     MigratingVm:
       description: MigratingVm describes the VM that will be migrated from a Source environment and its replication state.
       properties:
+        awsSourceVmDetails:
+          $ref: "#/components/schemas/AwsSourceVmDetails"
+          description: Output only. Details of the VM from an AWS source.
+          readOnly: true
         computeEngineTargetDefaults:
           $ref: "#/components/schemas/ComputeEngineTargetDefaults"
           description: Details of the target VM in Compute Engine.

@@ -173,7 +173,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a Cloud Dataflow job. To create a job, we recommend using `projects.locations.jobs.create` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using `projects.jobs.create` is not recommended, as your job will always start in `us-central1`.
+      description: Creates a Cloud Dataflow job. To create a job, we recommend using `projects.locations.jobs.create` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using `projects.jobs.create` is not recommended, as your job will always start in `us-central1`. Do not enter confidential information when you supply string values using the API.
       operationId: dataflow.projects.jobs.create
       parameters:
         - description: The ID of the Cloud Platform project that the job belongs to.
@@ -1102,7 +1102,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a Cloud Dataflow job. To create a job, we recommend using `projects.locations.jobs.create` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using `projects.jobs.create` is not recommended, as your job will always start in `us-central1`.
+      description: Creates a Cloud Dataflow job. To create a job, we recommend using `projects.locations.jobs.create` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using `projects.jobs.create` is not recommended, as your job will always start in `us-central1`. Do not enter confidential information when you supply string values using the API.
       operationId: dataflow.projects.locations.jobs.create
       parameters:
         - description: The ID of the Cloud Platform project that the job belongs to.
@@ -2230,7 +2230,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a Cloud Dataflow job from a template.
+      description: Creates a Cloud Dataflow job from a template. Do not enter confidential information when you supply string values using the API.
       operationId: dataflow.projects.locations.templates.create
       parameters:
         - description: Required. The ID of the Cloud Platform project that the job belongs to.
@@ -2602,7 +2602,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a Cloud Dataflow job from a template.
+      description: Creates a Cloud Dataflow job from a template. Do not enter confidential information when you supply string values using the API.
       operationId: dataflow.projects.templates.create
       parameters:
         - description: Required. The ID of the Cloud Platform project that the job belongs to.
@@ -3076,6 +3076,15 @@ components:
           description: Default runtime environment for the job.
         image:
           description: Name of the docker container image. E.g., gcr.io/project/some-image
+          type: string
+        imageRepositoryCertPath:
+          description: Cloud Storage path to self-signed certificate of private registry.
+          type: string
+        imageRepositoryPasswordSecretId:
+          description: Secret Manager secret id for password to authenticate to private registry.
+          type: string
+        imageRepositoryUsernameSecretId:
+          description: Secret Manager secret id for username to authenticate to private registry.
           type: string
         metadata:
           $ref: "#/components/schemas/TemplateMetadata"
@@ -3814,7 +3823,7 @@ components:
           description: The sum of all values being aggregated.
       type: object
     Job:
-      description: Defines a job to be run by the Cloud Dataflow service.
+      description: Defines a job to be run by the Cloud Dataflow service. Do not enter confidential information when you supply string values using the API.
       properties:
         clientRequestId:
           description: The client's unique identifier of the job, re-used across retried attempts. If this field is set, the service will ensure its uniqueness. The request to create a job will fail if the service has knowledge of a previously submitted job with the same client's ID and job name. The caller may use this field to ensure idempotence of job creation across retried attempts to create a job. By default, the field is empty and, in that case, the service ignores it.
@@ -4125,7 +4134,7 @@ components:
           description: The job that was launched, if the request was not a dry run and the job was successfully launched.
       type: object
     LaunchTemplateParameters:
-      description: Parameters to provide to the template being launched.
+      description: Parameters to provide to the template being launched. Note that the [metadata in the pipeline code] (https://cloud.google.com/dataflow/docs/guides/templates/creating-templates#metadata) determines which runtime parameters are valid.
       properties:
         environment:
           $ref: "#/components/schemas/RuntimeEnvironment"
@@ -4773,7 +4782,7 @@ components:
           description: Network to which VMs will be assigned. If empty or unspecified, the service will use the network "default".
           type: string
         numWorkers:
-          description: The initial number of Google Compute Engine instnaces for the job.
+          description: The initial number of Google Compute Engine instances for the job.
           format: int32
           type: integer
         serviceAccountEmail:

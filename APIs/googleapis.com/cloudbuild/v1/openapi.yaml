@@ -631,7 +631,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Remove a Bitbucket Server repository from an given BitbucketServerConfig’s connected repositories. This API is experimental.
+      description: Remove a Bitbucket Server repository from a given BitbucketServerConfig's connected repositories. This API is experimental.
       operationId: cloudbuild.projects.locations.bitbucketServerConfigs.removeBitbucketServerConnectedRepository
       parameters:
         - description: "Required. The name of the `BitbucketServerConfig` to remove a connected repository. Format: `projects/{project}/locations/{location}/bitbucketServerConfigs/{config}`"
