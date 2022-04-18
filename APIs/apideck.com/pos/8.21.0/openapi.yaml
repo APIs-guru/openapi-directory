@@ -149,6 +149,10 @@ info:
 
     A valid connection could not be found associated to your `application_id`. Something _may_ have interrupted the authorization flow. You may need to start the connector authorization process again.
 
+    #### ConnectionSettingsError
+
+    The connector has required settings that were not supplied. Verify `connection.settings` contains all required settings for the connector to be callable.
+
     #### ConnectorNotFoundError
 
     A request was made for an unknown connector. Verify your `service_id` is spelled correctly, and that this connector is enabled for your provided `unified_api`.
@@ -308,6 +312,10 @@ tags:
     name: Modifier Groups
     x-apideck-model:
       $ref: "#/components/schemas/ModifierGroup"
+  - description: ""
+    name: Order Types
+    x-apideck-model:
+      $ref: "#/components/schemas/OrderType"
 paths:
   /pos/items:
     get:
@@ -422,11 +430,20 @@ paths:
                 tax_ids: ['12345', '67890'],
                 absent_at_location_ids: ['12345', '67890'],
                 present_at_all_locations: false,
+                sku: '11910345',
+                code: '11910345',
                 categories: [
                   {
                     id: '12345',
                     name: 'Food',
                     image_ids: ['12345', '67890']
+                  }
+                ],
+                options: [
+                  {
+                    id: '12345',
+                    name: 'Option 1',
+                    attribute_id: '12345'
                   }
                 ],
                 variations: [
@@ -619,11 +636,20 @@ paths:
                 tax_ids: ['12345', '67890'],
                 absent_at_location_ids: ['12345', '67890'],
                 present_at_all_locations: false,
+                sku: '11910345',
+                code: '11910345',
                 categories: [
                   {
                     id: '12345',
                     name: 'Food',
                     image_ids: ['12345', '67890']
+                  }
+                ],
+                options: [
+                  {
+                    id: '12345',
+                    name: 'Option 1',
+                    attribute_id: '12345'
                   }
                 ],
                 variations: [
@@ -1411,10 +1437,17 @@ paths:
               consumerId: 'REPLACE_WITH_CONSUMER_ID'
             })
 
+            const params = {
+              modifierGroup: {
+                name: 'Modifier',
+                alternate_name: 'Modifier New',
+                minimum_required: 1,
+                maximum_allowed: 5
+              }
+            }
+
             try {
-              const { data } = await apideck.pos.modifierGroupsAdd({
-                modifierGroup: {}
-              })
+              const { data } = await apideck.pos.modifierGroupsAdd(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
@@ -1568,11 +1601,18 @@ paths:
               consumerId: 'REPLACE_WITH_CONSUMER_ID'
             })
 
+            const params = {
+              id: 'id_example',
+              modifierGroup: {
+                name: 'Modifier',
+                alternate_name: 'Modifier New',
+                minimum_required: 1,
+                maximum_allowed: 5
+              }
+            }
+
             try {
-              const { data } = await apideck.pos.modifierGroupsUpdate({
-                id: 'id_example',
-                modifierGroup: {}
-              })
+              const { data } = await apideck.pos.modifierGroupsUpdate(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
@@ -1857,6 +1897,280 @@ paths:
             } catch (error) {
               console.error(error)
             }
+  /pos/order-types:
+    get:
+      description: List Order Types
+      operationId: orderTypesAll
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetOrderTypesResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: List Order Types
+      tags:
+        - Order Types
+      x-apideck-api: pos
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.pos.orderTypesAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: orderTypes
+    post:
+      description: Create Order Type
+      operationId: orderTypesAdd
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OrderType"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateOrderTypeResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Create Order Type
+      tags:
+        - Order Types
+      x-apideck-api: pos
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              orderType: {
+                name: 'Default order type',
+                default: true
+              }
+            }
+
+            try {
+              const { data } = await apideck.pos.orderTypesAdd(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/pos/order-types/{id}":
+    delete:
+      description: Delete Order Type
+      operationId: orderTypesDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeleteOrderTypeResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Delete Order Type
+      tags:
+        - Order Types
+      x-apideck-api: pos
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.pos.orderTypesDelete({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    get:
+      description: Get Order Type
+      operationId: orderTypesOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetOrderTypeResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get Order Type
+      tags:
+        - Order Types
+      x-apideck-api: pos
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.pos.orderTypesOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    patch:
+      description: Update Order Type
+      operationId: orderTypesUpdate
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OrderType"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdateOrderTypeResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Update Order Type
+      tags:
+        - Order Types
+      x-apideck-api: pos
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              id: 'id_example',
+              orderType: {
+                name: 'Default order type',
+                default: true
+              }
+            }
+
+            try {
+              const { data } = await apideck.pos.orderTypesUpdate(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
   /pos/orders:
     get:
       description: List Orders
@@ -1962,6 +2276,8 @@ paths:
                 closed_date: '2022-08-13',
                 reference_id: 'my-order-001',
                 status: 'open',
+                state: 'open',
+                payment_status: 'open',
                 currency: 'USD',
                 title: 'string',
                 note: 'string',
@@ -1969,6 +2285,7 @@ paths:
                 customer_id: '12345',
                 employee_id: '12345',
                 location_id: '12345',
+                order_type_id: '12345',
                 table: '1F',
                 seat: '23F',
                 total_amount: 27.5,
@@ -1977,6 +2294,7 @@ paths:
                 total_discount: 3,
                 total_refund: 0,
                 total_service_charge: 0,
+                refunded: false,
                 customers: [
                   {
                     first_name: 'Elon',
@@ -2098,7 +2416,9 @@ paths:
                 ],
                 service_charges: [
                   {
+                    name: 'Charge for delivery',
                     amount: 27500,
+                    percentage: 12.5,
                     currency: 'USD',
                     type: 'auto_gratuity'
                   }
@@ -2350,6 +2670,8 @@ paths:
                 closed_date: '2022-08-13',
                 reference_id: 'my-order-001',
                 status: 'open',
+                state: 'open',
+                payment_status: 'open',
                 currency: 'USD',
                 title: 'string',
                 note: 'string',
@@ -2357,6 +2679,7 @@ paths:
                 customer_id: '12345',
                 employee_id: '12345',
                 location_id: '12345',
+                order_type_id: '12345',
                 table: '1F',
                 seat: '23F',
                 total_amount: 27.5,
@@ -2365,6 +2688,7 @@ paths:
                 total_discount: 3,
                 total_refund: 0,
                 total_service_charge: 0,
+                refunded: false,
                 customers: [
                   {
                     first_name: 'Elon',
@@ -2486,7 +2810,9 @@ paths:
                 ],
                 service_charges: [
                   {
+                    name: 'Charge for delivery',
                     amount: 27500,
+                    percentage: 12.5,
                     currency: 'USD',
                     type: 'auto_gratuity'
                   }
@@ -2638,6 +2964,8 @@ paths:
                 closed_date: '2022-08-13',
                 reference_id: 'my-order-001',
                 status: 'open',
+                state: 'open',
+                payment_status: 'open',
                 currency: 'USD',
                 title: 'string',
                 note: 'string',
@@ -2645,6 +2973,7 @@ paths:
                 customer_id: '12345',
                 employee_id: '12345',
                 location_id: '12345',
+                order_type_id: '12345',
                 table: '1F',
                 seat: '23F',
                 total_amount: 27.5,
@@ -2653,6 +2982,7 @@ paths:
                 total_discount: 3,
                 total_refund: 0,
                 total_service_charge: 0,
+                refunded: false,
                 customers: [
                   {
                     first_name: 'Elon',
@@ -2774,7 +3104,9 @@ paths:
                 ],
                 service_charges: [
                   {
+                    name: 'Charge for delivery',
                     amount: 27500,
+                    percentage: 12.5,
                     currency: 'USD',
                     type: 'auto_gratuity'
                   }
@@ -2976,12 +3308,17 @@ paths:
                 customer_id: '12345',
                 employee_id: '12345',
                 location_id: '12345',
+                device_id: '12345',
+                tender_id: '12345',
+                external_payment_id: '12345',
                 idempotency_key: 'random_string',
                 amount: 27.5,
                 currency: 'USD',
                 tip: 7,
+                tax: 20,
                 total: 37.5,
                 app_fee: 3,
+                change_back_cash_amount: 20,
                 approved: 37.5,
                 refunded: 37.5,
                 processing_fees: [
@@ -3062,7 +3399,16 @@ paths:
                   source: 'string',
                   source_id: 'string',
                   source_fee_amount: 2.5
-                }
+                },
+                service_charges: [
+                  {
+                    name: 'Charge for delivery',
+                    amount: 27500,
+                    percentage: 12.5,
+                    currency: 'USD',
+                    type: 'auto_gratuity'
+                  }
+                ]
               }
             }
 
@@ -3233,12 +3579,17 @@ paths:
                 customer_id: '12345',
                 employee_id: '12345',
                 location_id: '12345',
+                device_id: '12345',
+                tender_id: '12345',
+                external_payment_id: '12345',
                 idempotency_key: 'random_string',
                 amount: 27.5,
                 currency: 'USD',
                 tip: 7,
+                tax: 20,
                 total: 37.5,
                 app_fee: 3,
+                change_back_cash_amount: 20,
                 approved: 37.5,
                 refunded: 37.5,
                 processing_fees: [
@@ -3319,7 +3670,16 @@ paths:
                   source: 'string',
                   source_id: 'string',
                   source_fee_amount: 2.5
-                }
+                },
+                service_charges: [
+                  {
+                    name: 'Charge for delivery',
+                    amount: 27500,
+                    percentage: 12.5,
+                    currency: 'USD',
+                    type: 'auto_gratuity'
+                  }
+                ]
               }
             }
 
@@ -3432,6 +3792,12 @@ components:
           schema:
             $ref: "#/components/schemas/CreateOrderResponse"
       description: Orders
+    CreateOrderTypeResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateOrderTypeResponse"
+      description: OrderTypes
     CreatePaymentResponse:
       content:
         application/json:
@@ -3474,6 +3840,12 @@ components:
           schema:
             $ref: "#/components/schemas/DeleteOrderResponse"
       description: Orders
+    DeleteOrderTypeResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DeleteOrderTypeResponse"
+      description: OrderTypes
     DeletePaymentResponse:
       content:
         application/json:
@@ -3546,6 +3918,18 @@ components:
           schema:
             $ref: "#/components/schemas/GetOrderResponse"
       description: Orders
+    GetOrderTypeResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetOrderTypeResponse"
+      description: OrderTypes
+    GetOrderTypesResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetOrderTypesResponse"
+      description: OrderTypes
     GetOrdersResponse:
       content:
         application/json:
@@ -3612,6 +3996,12 @@ components:
           schema:
             $ref: "#/components/schemas/Order"
       description: Orders
+    OrderType:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OrderType"
+      description: OrderTypes
     Payment:
       content:
         application/json:
@@ -3678,6 +4068,12 @@ components:
           schema:
             $ref: "#/components/schemas/UpdateOrderResponse"
       description: Orders
+    UpdateOrderTypeResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateOrderTypeResponse"
+      description: OrderTypes
     UpdatePaymentResponse:
       content:
         application/json:
@@ -4020,6 +4416,38 @@ components:
         - operation
         - data
       type: object
+    CreateOrderTypeResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: OrderTypes
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: clover
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     CreatePaymentResponse:
       properties:
         data:
@@ -4257,6 +4685,38 @@ components:
         resource:
           description: Unified API resource name
           example: Orders
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: clover
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    DeleteOrderTypeResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: OrderTypes
           type: string
         service:
           description: Apideck ID of service provider
@@ -4727,6 +5187,78 @@ components:
         - data
       type: object
       x-graphql-type-name: Order
+    GetOrderTypeResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/OrderType"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: OrderTypes
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: clover
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: OrderType
+    GetOrderTypesResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/OrderType"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: OrderTypes
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: clover
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: OrderTypeList
     GetOrdersResponse:
       properties:
         data:
@@ -4881,6 +5413,11 @@ components:
                 type: string
           title: Categories
           type: array
+        code:
+          description: Product code, e.g. UPC or EAN
+          example: "11910345"
+          title: SKU
+          type: string
         cost:
           example: 2
           title: Cost
@@ -4923,6 +5460,22 @@ components:
           example: Cocoa
           title: Name
           type: string
+        options:
+          description: List of options pertaining to this item's attribute variation
+          items:
+            properties:
+              attribute_id:
+                example: "12345"
+                title: Attribute ID
+                type: string
+              id:
+                example: "12345"
+                type: string
+              name:
+                example: Option 1
+                title: Name
+                type: string
+          type: array
         present_at_all_locations:
           example: false
           title: Present at all locations
@@ -4937,6 +5490,7 @@ components:
           enum:
             - fixed
             - variable
+            - per_unit
             - other
           example: fixed
           title: Pricing type
@@ -4947,6 +5501,11 @@ components:
             - other
           example: regular
           title: Product type
+          type: string
+        sku:
+          description: SKU of the item
+          example: "11910345"
+          title: SKU
           type: string
         tax_ids:
           description: A list of Tax IDs for the product.
@@ -5032,7 +5591,7 @@ components:
           readOnly: true
           type: string
       required:
-        - idempotency_key
+        - name
       type: object
     Links:
       description: Links to navigate to previous or next pages through the API
@@ -5210,12 +5769,28 @@ components:
     ModifierGroup:
       additionalProperties: false
       properties:
+        alternate_name:
+          example: Modifier New
+          title: Alternate name
+          type: string
         created_at:
           $ref: "#/components/schemas/Item/properties/created_at"
         created_by:
           $ref: "#/components/schemas/Item/properties/created_by"
         id:
           $ref: "#/components/schemas/Id"
+        maximum_allowed:
+          example: 5
+          title: Maximum allowed
+          type: integer
+        minimum_required:
+          example: 1
+          title: Minimum required
+          type: integer
+        name:
+          example: Modifier
+          title: Name
+          type: string
         updated_at:
           $ref: "#/components/schemas/Item/properties/updated_at"
         updated_by:
@@ -6034,6 +6609,22 @@ components:
         order_number:
           example: 1F
           type: string
+        order_type_id:
+          example: "12345"
+          type: string
+        payment_status:
+          description: Is this order paid or not?
+          enum:
+            - open
+            - paid
+            - refunded
+            - credited
+            - partially_paid
+            - partially_refunded
+            - unknown
+          example: open
+          title: Payment status
+          type: string
         payments:
           items:
             properties:
@@ -6052,6 +6643,9 @@ components:
           nullable: true
           title: Reference ID
           type: string
+        refunded:
+          example: false
+          type: boolean
         refunds:
           items:
             properties:
@@ -6084,22 +6678,7 @@ components:
           example: 23F
           type: string
         service_charges:
-          description: Optional service charge or gratuity tip applied to the order.
-          items:
-            properties:
-              amount:
-                example: 27500
-                type: number
-              currency:
-                $ref: "#/components/schemas/Order/properties/currency"
-              type:
-                description: The type of the service charge.
-                enum:
-                  - auto_gratuity
-                  - custom
-                type: string
-            type: object
-          type: array
+          $ref: "#/components/schemas/ServiceCharges"
         source:
           description: Source of order. Indicates the way that the order was placed.
           enum:
@@ -6114,6 +6693,11 @@ components:
           example: api
           nullable: true
           readOnly: true
+          type: string
+        state:
+          description: "A string describing the state of the order. Clover specific: If no value is set, the state defaults to null, which indicates a hidden order. A hidden order is not displayed in user interfaces and can only be retrieved by its id. When creating an order via the REST API the value must be manually set to 'open'. More info [https://docs.clover.com/reference/orderupdateorder]()"
+          example: open
+          title: Status
           type: string
         status:
           enum:
@@ -6282,6 +6866,28 @@ components:
         - location_id
         - merchant_id
       type: object
+    OrderType:
+      additionalProperties: false
+      properties:
+        created_at:
+          $ref: "#/components/schemas/Item/properties/created_at"
+        created_by:
+          $ref: "#/components/schemas/Item/properties/created_by"
+        default:
+          example: true
+          title: Default
+          type: boolean
+        id:
+          $ref: "#/components/schemas/Id"
+        name:
+          example: Default order type
+          title: Order type name
+          type: string
+        updated_at:
+          $ref: "#/components/schemas/Item/properties/updated_at"
+        updated_by:
+          $ref: "#/components/schemas/Item/properties/version"
+      type: object
     Payment:
       additionalProperties: false
       properties:
@@ -6366,6 +6972,10 @@ components:
               description: "The amount of change due back to the buyer. For Square: this read-only field is calculated from the amount_money and buyer_supplied_money fields."
           title: Cash details
           type: object
+        change_back_cash_amount:
+          example: 20
+          title: Change back cash amount
+          type: number
         created_at:
           $ref: "#/components/schemas/Item/properties/created_at"
         created_by:
@@ -6373,6 +6983,9 @@ components:
         currency:
           $ref: "#/components/schemas/Order/properties/currency"
         customer_id:
+          example: "12345"
+          type: string
+        device_id:
           example: "12345"
           type: string
         employee_id:
@@ -6430,6 +7043,9 @@ components:
             - type
             - source
           type: object
+        external_payment_id:
+          example: "12345"
+          type: string
         id:
           $ref: "#/components/schemas/Id"
         idempotency_key:
@@ -6471,6 +7087,8 @@ components:
           example: 37.5
           title: The total amount of the payment refunded to date.
           type: number
+        service_charges:
+          $ref: "#/components/schemas/ServiceCharges"
         source:
           description: Source of this payment.
           enum:
@@ -6499,6 +7117,13 @@ components:
           title: Status
           type: string
           x-graphql-type-name: PosPaymentStatus
+        tax:
+          example: 20
+          title: Tax amount
+          type: number
+        tender_id:
+          example: "12345"
+          type: string
         tip:
           example: 7
           title: Tip amount
@@ -6532,6 +7157,7 @@ components:
         - amount
         - currency
         - order_id
+        - tender_id
       type: object
     PaymentCard:
       description: A card's non-confidential details.
@@ -6703,6 +7329,31 @@ components:
       nullable: true
       title: Row version
       type: string
+    ServiceCharges:
+      description: Optional service charges or gratuity tip applied to the order.
+      items:
+        properties:
+          amount:
+            example: 27500
+            type: number
+          currency:
+            $ref: "#/components/schemas/Order/properties/currency"
+          name:
+            description: Service charge name
+            example: Charge for delivery
+            type: string
+          percentage:
+            description: Service charge percentage. Use this field to calculate the amount of the service charge. Only pass a percentage or amount, not both at the same time.
+            example: 12.5
+            type: number
+          type:
+            description: The type of the service charge.
+            enum:
+              - auto_gratuity
+              - custom
+            type: string
+        type: object
+      type: array
     SocialLink:
       properties:
         id:
@@ -6989,6 +7640,38 @@ components:
         resource:
           description: Unified API resource name
           example: Orders
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: clover
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    UpdateOrderTypeResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: OrderTypes
           type: string
         service:
           description: Apideck ID of service provider
