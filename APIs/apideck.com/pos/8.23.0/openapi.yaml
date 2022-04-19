@@ -263,7 +263,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: POS API
-  version: 8.21.0
+  version: 8.23.0
   x-apideck-api: pos
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -316,6 +316,10 @@ tags:
     name: Order Types
     x-apideck-model:
       $ref: "#/components/schemas/OrderType"
+  - description: ""
+    name: Tenders
+    x-apideck-model:
+      $ref: "#/components/schemas/Tender"
 paths:
   /pos/items:
     get:
@@ -2324,6 +2328,10 @@ paths:
                     id: '12345',
                     status: 'proposed',
                     type: 'shipment',
+                    pickup_details: {
+                      auto_complete_duration: 'P1W3D',
+                      cancel_reason: 'string'
+                    },
                     pickup_address: {
                       id: '123',
                       type: 'primary',
@@ -2429,6 +2437,18 @@ paths:
                     currency: 'USD',
                     reason: 'The reason for the refund being issued.',
                     status: 'pending'
+                  }
+                ],
+                taxes: [
+                  {
+                    id: 'state-sales-tax',
+                    name: 'State Sales Tax',
+                    amount: 27500,
+                    currency: 'USD',
+                    percentage: 15,
+                    scope: 'order',
+                    type: 'unknown',
+                    auto_applied: true
                   }
                 ],
                 discounts: [
@@ -2718,6 +2738,10 @@ paths:
                     id: '12345',
                     status: 'proposed',
                     type: 'shipment',
+                    pickup_details: {
+                      auto_complete_duration: 'P1W3D',
+                      cancel_reason: 'string'
+                    },
                     pickup_address: {
                       id: '123',
                       type: 'primary',
@@ -2823,6 +2847,18 @@ paths:
                     currency: 'USD',
                     reason: 'The reason for the refund being issued.',
                     status: 'pending'
+                  }
+                ],
+                taxes: [
+                  {
+                    id: 'state-sales-tax',
+                    name: 'State Sales Tax',
+                    amount: 27500,
+                    currency: 'USD',
+                    percentage: 15,
+                    scope: 'order',
+                    type: 'unknown',
+                    auto_applied: true
                   }
                 ],
                 discounts: [
@@ -3012,6 +3048,10 @@ paths:
                     id: '12345',
                     status: 'proposed',
                     type: 'shipment',
+                    pickup_details: {
+                      auto_complete_duration: 'P1W3D',
+                      cancel_reason: 'string'
+                    },
                     pickup_address: {
                       id: '123',
                       type: 'primary',
@@ -3117,6 +3157,18 @@ paths:
                     currency: 'USD',
                     reason: 'The reason for the refund being issued.',
                     status: 'pending'
+                  }
+                ],
+                taxes: [
+                  {
+                    id: 'state-sales-tax',
+                    name: 'State Sales Tax',
+                    amount: 27500,
+                    currency: 'USD',
+                    percentage: 15,
+                    scope: 'order',
+                    type: 'unknown',
+                    auto_applied: true
                   }
                 ],
                 discounts: [
@@ -3690,6 +3742,290 @@ paths:
               console.error(error)
             }
       x-graphql-exclude: true
+  /pos/tenders:
+    get:
+      description: List Tenders
+      operationId: tendersAll
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetTendersResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: List Tenders
+      tags:
+        - Tenders
+      x-apideck-api: pos
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.pos.tendersAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: tenders
+    post:
+      description: Create Tender
+      operationId: tendersAdd
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Tender"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateTenderResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Create Tender
+      tags:
+        - Tenders
+      x-apideck-api: pos
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              tender: {
+                key: 'com.clover.tender.cash',
+                label: 'Cash',
+                active: true,
+                hidden: true,
+                editable: true,
+                opens_cash_drawer: true,
+                allows_tipping: true
+              }
+            }
+
+            try {
+              const { data } = await apideck.pos.tendersAdd(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/pos/tenders/{id}":
+    delete:
+      description: Delete Tender
+      operationId: tendersDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeleteTenderResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Delete Tender
+      tags:
+        - Tenders
+      x-apideck-api: pos
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.pos.tendersDelete({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    get:
+      description: Get Tender
+      operationId: tendersOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetTenderResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get Tender
+      tags:
+        - Tenders
+      x-apideck-api: pos
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.pos.tendersOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    patch:
+      description: Update Tender
+      operationId: tendersUpdate
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Tender"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdateTenderResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Update Tender
+      tags:
+        - Tenders
+      x-apideck-api: pos
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              id: 'id_example',
+              tender: {
+                key: 'com.clover.tender.cash',
+                label: 'Cash',
+                active: true,
+                hidden: true,
+                editable: true,
+                opens_cash_drawer: true,
+                allows_tipping: true
+              }
+            }
+
+            try {
+              const { data } = await apideck.pos.tendersUpdate(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
 components:
   parameters:
     applicationId:
@@ -3804,6 +4140,12 @@ components:
           schema:
             $ref: "#/components/schemas/CreatePaymentResponse"
       description: Payments
+    CreateTenderResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateTenderResponse"
+      description: Tenders
     DeleteItemResponse:
       content:
         application/json:
@@ -3852,6 +4194,12 @@ components:
           schema:
             $ref: "#/components/schemas/DeletePaymentResponse"
       description: Payments
+    DeleteTenderResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DeleteTenderResponse"
+      description: Tenders
     GetItemResponse:
       content:
         application/json:
@@ -3948,6 +4296,18 @@ components:
           schema:
             $ref: "#/components/schemas/GetPaymentsResponse"
       description: Payments
+    GetTenderResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetTenderResponse"
+      description: Tenders
+    GetTendersResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetTendersResponse"
+      description: Tenders
     Item:
       content:
         application/json:
@@ -4014,6 +4374,12 @@ components:
           schema:
             $ref: "#/components/schemas/PaymentRequiredResponse"
       description: Payment Required
+    Tender:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Tender"
+      description: Tenders
     UnauthorizedResponse:
       content:
         application/json:
@@ -4080,6 +4446,12 @@ components:
           schema:
             $ref: "#/components/schemas/UpdatePaymentResponse"
       description: Payments
+    UpdateTenderResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateTenderResponse"
+      description: Tenders
   schemas:
     Address:
       properties:
@@ -4480,6 +4852,38 @@ components:
         - operation
         - data
       type: object
+    CreateTenderResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Tenders
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: clover
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     CustomField:
       additionalProperties: false
       properties:
@@ -4753,6 +5157,38 @@ components:
         service:
           description: Apideck ID of service provider
           example: square
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    DeleteTenderResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Tenders
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: clover
           type: string
         status:
           description: HTTP Response Status
@@ -5370,6 +5806,78 @@ components:
         - data
       type: object
       x-graphql-type-name: PaymentList
+    GetTenderResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/Tender"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Tenders
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: clover
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: Tender
+    GetTendersResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Tender"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Tenders
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: clover
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: TenderList
     Id:
       example: "12345"
       readOnly: true
@@ -6489,6 +6997,25 @@ components:
                 type: string
               pickup_address:
                 $ref: "#/components/schemas/Address"
+              pickup_details:
+                properties:
+                  accepted_at:
+                    example: 2020-09-30T07:43:32.000Z
+                    format: date-time
+                    nullable: true
+                    readOnly: true
+                    title: Accepted at (timestamp)
+                    type: string
+                  auto_complete_duration:
+                    description: The duration of time after which an open and accepted pickup fulfillment is automatically moved to the COMPLETED state. The duration must be in RFC 3339 format (for example, 'P1W3D').
+                    example: P1W3D
+                    nullable: true
+                    type: string
+                  cancel_reason:
+                    description: A description of why the pickup was canceled.
+                    nullable: true
+                    type: string
+                type: object
               status:
                 description: The state of the fulfillment.
                 enum:
@@ -6711,6 +7238,41 @@ components:
         table:
           example: 1F
           type: string
+        taxes:
+          items:
+            properties:
+              amount:
+                example: 27500
+                type: number
+              auto_applied:
+                description: "Square-only: Determines whether the tax was automatically applied to the order based on the catalog configuration. For an example, see Automatically Apply Taxes to an Order. [https://developer.squareup.com/docs/orders-api/apply-taxes-and-discounts/auto-apply-taxes]()"
+                example: true
+                type: boolean
+              currency:
+                $ref: "#/components/schemas/Order/properties/currency"
+              id:
+                example: state-sales-tax
+                type: string
+              name:
+                description: The tax's name.
+                example: State Sales Tax
+                type: string
+              percentage:
+                example: 15
+                title: Percentage
+                type: number
+              scope:
+                enum:
+                  - order
+                  - line_item
+                type: string
+              type:
+                enum:
+                  - unknown
+                  - additive
+                  - inclusive
+                type: string
+          type: array
         tenders:
           items:
             properties:
@@ -7377,6 +7939,45 @@ components:
       items:
         type: string
       type: array
+    Tender:
+      additionalProperties: false
+      properties:
+        active:
+          example: true
+          nullable: true
+          title: Is active
+          type: boolean
+        allows_tipping:
+          default: true
+          description: Allow tipping on payment from tender
+          type: boolean
+        created_at:
+          $ref: "#/components/schemas/Item/properties/created_at"
+        created_by:
+          $ref: "#/components/schemas/Item/properties/created_by"
+        editable:
+          $ref: "#/components/schemas/Item/properties/hidden"
+        hidden:
+          $ref: "#/components/schemas/Item/properties/hidden"
+        id:
+          $ref: "#/components/schemas/Id"
+        key:
+          example: com.clover.tender.cash
+          nullable: true
+          type: string
+        label:
+          example: Cash
+          nullable: true
+          type: string
+        opens_cash_drawer:
+          default: true
+          description: If this tender opens the cash drawer
+          type: boolean
+        updated_at:
+          $ref: "#/components/schemas/Item/properties/updated_at"
+        updated_by:
+          $ref: "#/components/schemas/Item/properties/version"
+      type: object
     UnauthorizedResponse:
       properties:
         detail:
@@ -7708,6 +8309,38 @@ components:
         service:
           description: Apideck ID of service provider
           example: square
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    UpdateTenderResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Tenders
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: clover
           type: string
         status:
           description: HTTP Response Status

@@ -1260,6 +1260,34 @@ components:
           description: This can be a mute configuration name or any identifier for mute/unmute of findings based on the filter.
           type: string
       type: object
+    Connection:
+      description: Contains information about the IP connection associated with the finding.
+      properties:
+        destinationIp:
+          description: Destination IP address. Not present for sockets that are listening and not connected.
+          type: string
+        destinationPort:
+          description: Destination port. Not present for sockets that are listening and not connected.
+          format: int32
+          type: integer
+        protocol:
+          description: IANA Internet Protocol Number such as TCP(6) and UDP(17).
+          enum:
+            - PROTOCOL_UNSPECIFIED
+            - ICMP
+            - TCP
+            - UDP
+            - GRE
+            - ESP
+          type: string
+        sourceIp:
+          description: Source IP address.
+          type: string
+        sourcePort:
+          description: Source port.
+          format: int32
+          type: integer
+      type: object
     Cve:
       description: "CVE stands for Common Vulnerabilities and Exposures. More information: https://cve.mitre.org"
       properties:
@@ -1380,9 +1408,17 @@ components:
         category:
           description: 'The additional taxonomy group within findings from a given source. This field is immutable after creation time. Example: "XSS_FLASH_INJECTION"'
           type: string
+        connections:
+          description: Contains information about the IP connection associated with the finding.
+          items:
+            $ref: "#/components/schemas/Connection"
+          type: array
         createTime:
           description: The time at which the finding was created in Security Command Center.
           format: google-datetime
+          type: string
+        description:
+          description: Contains more detail about the finding.
           type: string
         eventTime:
           description: The time the finding was first detected. If an existing finding is updated, then this is the time the update occurred. For example, if the finding represents an open firewall, this property captures the time the detector believes the firewall became open. The accuracy is determined by the detector. If the finding is later resolved, then this time reflects when the finding was resolved. This must not be set to a value greater than the current timestamp.
