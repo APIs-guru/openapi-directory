@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://ondemandscanning.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: ondemandscanning
 externalDocs:
@@ -1151,6 +1151,11 @@ components:
             - GO
             - GO_STDLIB
           type: string
+        pathToFile:
+          description: The path to the jar file / go binary file. The same jar file can be in multiple locations - all of them will be listed.
+          items:
+            type: string
+          type: array
         unused:
           type: string
         version:

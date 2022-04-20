@@ -1168,7 +1168,7 @@ paths:
       description: Makes a recommendation prediction.
       operationId: retail.projects.locations.catalogs.servingConfigs.predict
       parameters:
-        - description: "Required. Full resource name of the format: {name=projects/*/locations/global/catalogs/default_catalog/servingConfigs/*} or {name=projects/*/locations/global/catalogs/default_catalog/placements/*}. We recommend using the `servingConfigs` resource. `placements` is a legacy resource. The ID of the Recommendations AI serving config or placement. Before you can request predictions from your model, you must create at least one serving config or placement for it. For more information, see [Managing serving configurations]. (https://cloud.google.com/retail/docs/manage-configs). The full list of available serving configs can be seen at https://console.cloud.google.com/ai/retail/catalogs/default_catalog/configs"
+        - description: "Required. Full resource name of the format: {name=projects/*/locations/global/catalogs/default_catalog/servingConfigs/*} or {name=projects/*/locations/global/catalogs/default_catalog/placements/*}. We recommend using the `servingConfigs` resource. `placements` is a legacy resource. The ID of the Recommendations AI serving config or placement. Before you can request predictions from your model, you must create at least one serving config or placement for it. For more information, see [Managing serving configurations] (https://cloud.google.com/retail/docs/manage-configs). The full list of available serving configs can be seen at https://console.cloud.google.com/ai/retail/catalogs/default_catalog/configs"
           in: path
           name: placement
           required: true
@@ -2352,7 +2352,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudRetailV2alphaProductInputConfig"
           description: Required. The desired input location of the data.
         notificationPubsubTopic:
-          description: Pub/Sub topic for receiving notification. If this field is set, when the import is finished, a notification will be sent to specified Pub/Sub topic. The message data will be JSON string of a Operation. Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`. Only supported when ImportProductsRequest.reconciliation_mode is set to `FULL`.
+          description: Full Pub/Sub topic name for receiving notification. If this field is set, when the import is finished, a notification will be sent to specified Pub/Sub topic. The message data will be JSON string of a Operation. Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`. It has to be within the same project as ImportProductsRequest.parent. Make sure that both `cloud-retail-customer-data-access@system.gserviceaccount.com` and `service-@gcp-sa-retail.iam.gserviceaccount.com` have the `pubsub.topics.publish` IAM permission on the topic. Only supported when ImportProductsRequest.reconciliation_mode is set to `FULL`.
           type: string
         reconciliationMode:
           description: The mode of reconciliation between existing products and the products to be imported. Defaults to ReconciliationMode.INCREMENTAL.
@@ -2364,6 +2364,9 @@ components:
         requestId:
           description: Deprecated. This field has no effect.
           type: string
+        skipDefaultBranchProtection:
+          description: If true, will perform the FULL import even if it would delete a large proportion of the products in the default branch, which could potentially cause outages if you have live predict/search traffic. Only supported when ImportProductsRequest.reconciliation_mode is set to `FULL`.
+          type: boolean
         updateMask:
           description: Indicates which fields in the provided imported 'products' to update. If not set, will by default update all fields.
           format: google-fieldmask
@@ -2600,7 +2603,7 @@ components:
           description: The 3-letter currency code defined in [ISO 4217](https://www.iso.org/iso-4217-currency-codes.html). If this field is an unrecognizable currency code, an INVALID_ARGUMENT error is returned. The Product.Type.VARIANT Products with the same Product.primary_product_id must share the same currency_code. Otherwise, a FAILED_PRECONDITION error is returned.
           type: string
         originalPrice:
-          description: Price of the product without any discount. If zero, by default set to be the price.
+          description: Price of the product without any discount. If zero, by default set to be the price. If set, original_price should be greater than or equal to price, otherwise an INVALID_ARGUMENT error is thrown.
           format: float
           type: number
         price:
@@ -3181,6 +3184,11 @@ components:
         filter:
           description: The filter syntax consists of an expression language for constructing a predicate from one or more fields of the products being filtered. Filter expression is case-sensitive. See more details at this [user guide](https://cloud.google.com/retail/docs/filter-and-order#filter). If this field is unrecognizable, an INVALID_ARGUMENT is returned.
           type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: "The labels applied to a resource must meet the following requirements: * Each resource can have multiple labels, up to a maximum of 64. * Each label must be a key-value pair. * Keys have a minimum length of 1 character and a maximum length of 63 characters, and cannot be empty. Values can be empty, and have a maximum length of 63 characters. * Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. All characters must use UTF-8 encoding, and international characters are allowed. * The key portion of a label must be unique. However, you can use the same key with multiple resources. * Keys must start with a lowercase letter or international character. See [Google Cloud Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements) for more details."
+          type: object
         offset:
           description: A 0-indexed integer that specifies the current offset (that is, starting result location, amongst the Products deemed by the API as relevant) in search results. This field is only considered if page_token is unset. If this field is negative, an INVALID_ARGUMENT is returned.
           format: int32

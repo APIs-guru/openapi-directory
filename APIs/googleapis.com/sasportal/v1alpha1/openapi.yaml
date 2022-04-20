@@ -60,11 +60,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/SasPortalListCustomersResponse"
           description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - customers
     parameters:
@@ -107,11 +102,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/SasPortalGenerateSecretResponse"
           description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - installer
   /v1alpha1/installer:validate:
@@ -142,11 +132,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/SasPortalValidateInstallerResponse"
           description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - installer
   /v1alpha1/policies:get:
@@ -177,11 +162,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/SasPortalPolicy"
           description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - policies
   /v1alpha1/policies:set:
@@ -212,11 +192,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/SasPortalPolicy"
           description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - policies
   /v1alpha1/policies:test:
@@ -247,11 +222,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/SasPortalTestPermissionsResponse"
           description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - policies
   "/v1alpha1/{name}":
@@ -272,11 +242,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/SasPortalEmpty"
           description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - nodes
     get:
@@ -296,11 +261,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/SasPortalNode"
           description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - nodes
     parameters:
@@ -342,11 +302,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/SasPortalNode"
           description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - nodes
   "/v1alpha1/{name}:move":
@@ -384,11 +339,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/SasPortalOperation"
           description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - nodes
   "/v1alpha1/{name}:signDevice":
@@ -426,11 +376,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/SasPortalEmpty"
           description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - nodes
   "/v1alpha1/{name}:updateSigned":
@@ -468,11 +413,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/SasPortalDevice"
           description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - nodes
   "/v1alpha1/{parent}/deployments":
@@ -508,11 +448,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/SasPortalListDeploymentsResponse"
           description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - nodes
     parameters:
@@ -549,11 +484,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/SasPortalDeployment"
           description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - nodes
   "/v1alpha1/{parent}/devices":
@@ -589,11 +519,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/SasPortalListDevicesResponse"
           description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - nodes
     parameters:
@@ -630,11 +555,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/SasPortalDevice"
           description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - nodes
   "/v1alpha1/{parent}/devices:createSigned":
@@ -672,11 +592,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/SasPortalDevice"
           description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - nodes
   "/v1alpha1/{parent}/nodes":
@@ -712,11 +627,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/SasPortalListNodesResponse"
           description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - nodes
     parameters:
@@ -753,11 +663,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/SasPortalNode"
           description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - nodes
 components:
@@ -1449,21 +1354,3 @@ components:
       description: Response for ValidateInstaller.
       properties: {}
       type: object
-  securitySchemes:
-    Oauth2:
-      description: Oauth 2.0 implicit authentication
-      flows:
-        implicit:
-          authorizationUrl: https://accounts.google.com/o/oauth2/auth
-          scopes:
-            https://www.googleapis.com/auth/userinfo.email: See your primary Google Account email address
-      type: oauth2
-    Oauth2c:
-      description: Oauth 2.0 authorizationCode authentication
-      flows:
-        authorizationCode:
-          authorizationUrl: https://accounts.google.com/o/oauth2/auth
-          scopes:
-            https://www.googleapis.com/auth/userinfo.email: See your primary Google Account email address
-          tokenUrl: https://accounts.google.com/o/oauth2/token
-      type: oauth2
