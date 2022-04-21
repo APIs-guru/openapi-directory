@@ -428,7 +428,7 @@ components:
           description: Required. Location name should reflect your business's real-world name, as used consistently on your storefront, website, and stationery, and as known to customers. Any additional information, when relevant, can be included in other fields of the resource (for example, `Address`, `Categories`). Don't add unnecessary information to your name (for example, prefer "Google" over "Google Inc. - Mountain View Corporate Headquarters"). Don't include marketing taglines, store codes, special characters, hours or closed/open status, phone numbers, website URLs, service/product information, location/address or directions, or containment information (for example, "Chase ATM in Duane Reade").
           type: string
         primaryCategoryId:
-          description: Required. Id of the category that best describes the core business this location engages in.
+          description: Required. Id of the category that best describes the core business this location engages in. e.g. gcid:bakery.
           type: string
         primaryPhone:
           description: Optional. A phone number that connects to your individual business location as directly as possible. Use a local phone number instead of a central, call center helpline number whenever possible.
