@@ -25314,7 +25314,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Creates instances with per-instance configurations in this regional managed instance group. Instances are created using the current instance template. The create instances operation is marked DONE if the createInstances request is successful. The underlying actions take additional time. You must separately verify the status of the creating or actions with the listmanagedinstances method.
+      description: Creates instances with per-instance configs in this regional managed instance group. Instances are created using the current instance template. The create instances operation is marked DONE if the createInstances request is successful. The underlying actions take additional time. You must separately verify the status of the creating or actions with the listmanagedinstances method.
       operationId: compute.regionInstanceGroupManagers.createInstances
       parameters:
         - description: Project ID for this request.
@@ -25442,7 +25442,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Deletes selected per-instance configurations for the managed instance group.
+      description: Deletes selected per-instance configs for the managed instance group.
       operationId: compute.regionInstanceGroupManagers.deletePerInstanceConfigs
       parameters:
         - description: Project ID for this request.
@@ -25669,7 +25669,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Lists all of the per-instance configurations defined for the managed instance group. The orderBy query parameter is not supported.
+      description: Lists all of the per-instance configs defined for the managed instance group. The orderBy query parameter is not supported.
       operationId: compute.regionInstanceGroupManagers.listPerInstanceConfigs
       parameters:
         - description: Project ID for this request.
@@ -25753,7 +25753,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Inserts or patches per-instance configurations for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.
+      description: Inserts or patches per-instance configs for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.
       operationId: compute.regionInstanceGroupManagers.patchPerInstanceConfigs
       parameters:
         - description: Project ID for this request.
@@ -26459,7 +26459,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Inserts or updates per-instance configurations for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.
+      description: Inserts or updates per-instance configs for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.
       operationId: compute.regionInstanceGroupManagers.updatePerInstanceConfigs
       parameters:
         - description: Project ID for this request.
@@ -40056,7 +40056,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Creates instances with per-instance configurations in this managed instance group. Instances are created using the current instance template. The create instances operation is marked DONE if the createInstances request is successful. The underlying actions take additional time. You must separately verify the status of the creating or actions with the listmanagedinstances method.
+      description: Creates instances with per-instance configs in this managed instance group. Instances are created using the current instance template. The create instances operation is marked DONE if the createInstances request is successful. The underlying actions take additional time. You must separately verify the status of the creating or actions with the listmanagedinstances method.
       operationId: compute.instanceGroupManagers.createInstances
       parameters:
         - description: Project ID for this request.
@@ -40184,7 +40184,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Deletes selected per-instance configurations for the managed instance group.
+      description: Deletes selected per-instance configs for the managed instance group.
       operationId: compute.instanceGroupManagers.deletePerInstanceConfigs
       parameters:
         - description: Project ID for this request.
@@ -40411,7 +40411,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Lists all of the per-instance configurations defined for the managed instance group. The orderBy query parameter is not supported.
+      description: Lists all of the per-instance configs defined for the managed instance group. The orderBy query parameter is not supported.
       operationId: compute.instanceGroupManagers.listPerInstanceConfigs
       parameters:
         - description: Project ID for this request.
@@ -40495,7 +40495,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Inserts or patches per-instance configurations for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.
+      description: Inserts or patches per-instance configs for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.
       operationId: compute.instanceGroupManagers.patchPerInstanceConfigs
       parameters:
         - description: Project ID for this request.
@@ -41200,7 +41200,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Inserts or updates per-instance configurations for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.
+      description: Inserts or updates per-instance configs for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.
       operationId: compute.instanceGroupManagers.updatePerInstanceConfigs
       parameters:
         - description: Project ID for this request.
@@ -48580,7 +48580,6 @@ components:
             - IPSEC_INTERCONNECT
             - NAT_AUTO
             - PRIVATE_SERVICE_CONNECT
-            - SERVERLESS
             - SHARED_LOADBALANCER_VIP
             - VPC_PEERING
           type: string
@@ -48998,7 +48997,7 @@ components:
           type: array
       type: object
     AttachedDiskInitializeParams:
-      description: "[Input Only] Specifies the parameters for a new disk that will be created alongside the new instance. Use initialization parameters to create boot disks or local SSDs attached to the new instance. This field is persisted and returned for instanceTemplate and not returned in the context of instance. This property is mutually exclusive with the source property; you can only define one or the other, but not both."
+      description: "[Input Only] Specifies the parameters for a new disk that will be created alongside the new instance. Use initialization parameters to create boot disks or local SSDs attached to the new instance. This property is mutually exclusive with the source property; you can only define one or the other, but not both."
       properties:
         architecture:
           description: The architecture of the attached disk. Valid values are arm64 or x86_64.
@@ -49778,7 +49777,7 @@ components:
             type: string
           type: array
         queryStringWhitelist:
-          description: Names of query string parameters to include in cache keys. Default parameters are always included. '&' and '=' will be percent encoded and not treated as delimiters.
+          description: Names of query string parameters to include in cache keys. All other parameters will be excluded. '&' and '=' will be percent encoded and not treated as delimiters.
           items:
             type: string
           type: array
@@ -50640,7 +50639,7 @@ components:
           $ref: "#/components/schemas/Expr"
           description: The condition that is associated with this binding. If the condition evaluates to `true`, then this binding applies to the current request. If the condition evaluates to `false`, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
         members:
-          description: "Specifies the principals requesting access for a Google Cloud resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. "
+          description: "Specifies the principals requesting access for a Cloud Platform resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. "
           items:
             type: string
           type: array
@@ -50904,7 +50903,6 @@ components:
             - GENERAL_PURPOSE_N2D
             - GENERAL_PURPOSE_T2D
             - MEMORY_OPTIMIZED
-            - MEMORY_OPTIMIZED_M3
             - TYPE_UNSPECIFIED
           type: string
       type: object
@@ -51155,13 +51153,6 @@ components:
     ConfidentialInstanceConfig:
       description: A set of Confidential Instance options.
       properties:
-        confidentialInstanceType:
-          description: Defines the type of technology used by the confidential instance.
-          enum:
-            - CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED
-            - SEV
-            - SEV_SNP
-          type: string
         enableConfidentialCompute:
           description: Defines whether the instance should have confidential compute enabled.
           type: boolean
@@ -51701,7 +51692,6 @@ components:
         state:
           enum:
             - ACTIVE
-            - CREATED
             - STARTING
             - STATE_UNSPECIFIED
             - STOPPED
@@ -53683,7 +53673,6 @@ components:
             - MULTI_IP_SUBNET
             - SECURE_BOOT
             - SEV_CAPABLE
-            - SEV_SNP_CAPABLE
             - UEFI_COMPATIBLE
             - VIRTIO_SCSI_MULTIQUEUE
             - WINDOWS
@@ -55721,7 +55710,7 @@ components:
       properties:
         allInstancesConfig:
           $ref: "#/components/schemas/InstanceGroupManagerAllInstancesConfig"
-          description: Specifies configuration that overrides the instance template configuration for the group.
+          description: Specifies the instances configs overrides that should be applied for all instances in the MIG.
         autoHealingPolicies:
           description: The autohealing policy for this managed instance group. You can specify only one value.
           items:
@@ -55969,7 +55958,7 @@ components:
       properties:
         properties:
           $ref: "#/components/schemas/InstancePropertiesPatch"
-          description: Properties to set on all instances in the group. You can add or modify properties using the instanceGroupManagers.patch or regionInstanceGroupManagers.patch. After setting allInstancesConfig on the group, you must update the group's instances to apply the configuration. To apply the configuration, set the group's updatePolicy.type field to use proactive updates or use the applyUpdatesToInstances method.
+          description: Properties for instances that are created using this instances config. You can add or modify properties using the instanceGroupManagers.patch or regionInstanceGroupManagers.patch. After setting instances_config, you must update your instances to use it; for example, you can use the applyUpdatesToInstances method.
       type: object
     InstanceGroupManagerAutoHealingPolicy:
       properties:
@@ -56094,7 +56083,7 @@ components:
       properties:
         allInstancesConfig:
           $ref: "#/components/schemas/InstanceGroupManagerStatusAllInstancesConfig"
-          description: "[Output only] Status of all-instances configuration on the group."
+          description: "[Output Only] A status of consistency of Instances' config applied to instances with Instances' config defined in managed instance group."
         autoscaler:
           description: "[Output Only] The URL of the Autoscaler that targets this instance group manager."
           type: string
@@ -56111,28 +56100,28 @@ components:
     InstanceGroupManagerStatusAllInstancesConfig:
       properties:
         currentRevision:
-          description: "[Output Only] Current all-instances configuration revision. This value is in RFC3339 text format."
+          description: "[Output Only] Current instances' config revision. This value is in RFC3339 text format."
           type: string
         effective:
-          description: "[Output Only] A bit indicating whether this configuration has been applied to all managed instances in the group."
+          description: "[Output Only] A bit indicating whether instances' config has been applied to all managed instances in managed instance group."
           type: boolean
       type: object
     InstanceGroupManagerStatusStateful:
       properties:
         hasStatefulConfig:
-          description: "[Output Only] A bit indicating whether the managed instance group has stateful configuration, that is, if you have configured any items in a stateful policy or in per-instance configs. The group might report that it has no stateful configuration even when there is still some preserved state on a managed instance, for example, if you have deleted all PICs but not yet applied those deletions."
+          description: "[Output Only] A bit indicating whether the managed instance group has stateful configuration, that is, if you have configured any items in a stateful policy or in per-instance configs. The group might report that it has no stateful config even when there is still some preserved state on a managed instance, for example, if you have deleted all PICs but not yet applied those deletions."
           type: boolean
         isStateful:
-          description: "[Output Only] A bit indicating whether the managed instance group has stateful configuration, that is, if you have configured any items in a stateful policy or in per-instance configs. The group might report that it has no stateful configuration even when there is still some preserved state on a managed instance, for example, if you have deleted all PICs but not yet applied those deletions. This field is deprecated in favor of has_stateful_config."
+          description: "[Output Only] A bit indicating whether the managed instance group has stateful configuration, that is, if you have configured any items in a stateful policy or in per-instance configs. The group might report that it has no stateful config even when there is still some preserved state on a managed instance, for example, if you have deleted all PICs but not yet applied those deletions. This field is deprecated in favor of has_stateful_config."
           type: boolean
         perInstanceConfigs:
           $ref: "#/components/schemas/InstanceGroupManagerStatusStatefulPerInstanceConfigs"
-          description: "[Output Only] Status of per-instance configurations on the instance."
+          description: "[Output Only] Status of per-instance configs on the instance."
       type: object
     InstanceGroupManagerStatusStatefulPerInstanceConfigs:
       properties:
         allEffective:
-          description: A bit indicating if all of the group's per-instance configurations (listed in the output of a listPerInstanceConfigs API call) have status EFFECTIVE or there are no per-instance-configs.
+          description: A bit indicating if all of the group's per-instance configs (listed in the output of a listPerInstanceConfigs API call) have status EFFECTIVE or there are no per-instance-configs.
           type: boolean
       type: object
     InstanceGroupManagerStatusVersionTarget:
@@ -56361,7 +56350,7 @@ components:
       description: InstanceGroupManagers.patchPerInstanceConfigs
       properties:
         perInstanceConfigs:
-          description: The list of per-instance configurations to insert or patch on this managed instance group.
+          description: The list of per-instance configs to insert or patch on this managed instance group.
           items:
             $ref: "#/components/schemas/PerInstanceConfig"
           type: array
@@ -56507,7 +56496,7 @@ components:
       description: InstanceGroupManagers.updatePerInstanceConfigs
       properties:
         perInstanceConfigs:
-          description: The list of per-instance configurations to insert or patch on this managed instance group.
+          description: The list of per-instance configs to insert or patch on this managed instance group.
           items:
             $ref: "#/components/schemas/PerInstanceConfig"
           type: array
@@ -59549,7 +59538,7 @@ components:
       properties:
         allInstancesConfig:
           $ref: "#/components/schemas/ManagedInstanceAllInstancesConfig"
-          description: "[Output Only] Current all-instances configuration revision applied to this instance."
+          description: "[Output Only] Instances config revision applied to this instance."
         currentAction:
           description: "[Output Only] The current action that the managed instance group has scheduled for the instance. Possible values: - NONE The instance is running, and the managed instance group does not have any scheduled actions for this instance. - CREATING The managed instance group is creating this instance. If the group fails to create this instance, it will try again until it is successful. - CREATING_WITHOUT_RETRIES The managed instance group is attempting to create this instance only once. If the group fails to create this instance, it does not try again and the group's targetSize value is decreased instead. - RECREATING The managed instance group is recreating this instance. - DELETING The managed instance group is permanently deleting this instance. - ABANDONING The managed instance group is abandoning this instance. The instance will be removed from the instance group and from any target pools that are associated with this group. - RESTARTING The managed instance group is restarting the instance. - REFRESHING The managed instance group is applying configuration changes to the instance without stopping it. For example, the group can update the target pool list for an instance without stopping that instance. - VERIFYING The managed instance group has created the instance and it is in the process of being verified. "
           enum:
@@ -59624,7 +59613,7 @@ components:
     ManagedInstanceAllInstancesConfig:
       properties:
         revision:
-          description: "[Output Only] Current all-instances configuration revision. This value is in RFC3339 text format."
+          description: "[Output Only] Instances config revision. This value is in RFC3339 text format."
           type: string
       type: object
     ManagedInstanceInstanceHealth:
@@ -60087,7 +60076,7 @@ components:
             - SERVERLESS
           type: string
         pscTargetService:
-          description: 'The target service url used to set up private service connection to a Google API or a PSC Producer Service Attachment. An example value is: "asia-northeast3-cloudkms.googleapis.com"'
+          description: 'The target service url used to set up private service connection to a Google API. An example value is: "asia-northeast3-cloudkms.googleapis.com"'
           type: string
         region:
           description: "[Output Only] The URL of the region where the network endpoint group is located."
@@ -62897,17 +62886,17 @@ components:
     PerInstanceConfig:
       properties:
         fingerprint:
-          description: Fingerprint of this per-instance config. This field can be used in optimistic locking. It is ignored when inserting a per-instance config. An up-to-date fingerprint must be provided in order to update an existing per-instance configuration or the field needs to be unset.
+          description: Fingerprint of this per-instance config. This field can be used in optimistic locking. It is ignored when inserting a per-instance config. An up-to-date fingerprint must be provided in order to update an existing per-instance config or the field needs to be unset.
           format: byte
           type: string
         name:
-          description: The name of a per-instance configuration and its corresponding instance. Serves as a merge key during UpdatePerInstanceConfigs operations, that is, if a per-instance configuration with the same name exists then it will be updated, otherwise a new one will be created for the VM instance with the same name. An attempt to create a per-instance configconfiguration for a VM instance that either doesn't exist or is not part of the group will result in an error.
+          description: The name of a per-instance config and its corresponding instance. Serves as a merge key during UpdatePerInstanceConfigs operations, that is, if a per-instance config with the same name exists then it will be updated, otherwise a new one will be created for the VM instance with the same name. An attempt to create a per-instance config for a VM instance that either doesn't exist or is not part of the group will result in an error.
           type: string
         preservedState:
           $ref: "#/components/schemas/PreservedState"
           description: The intended preserved state for the given instance. Does not contain preserved state generated from a stateful policy.
         status:
-          description: The status of applying this per-instance configuration on the corresponding managed instance.
+          description: The status of applying this per-instance config on the corresponding managed instance.
           enum:
             - APPLYING
             - DELETING
@@ -63693,6 +63682,7 @@ components:
           enum:
             - A2_CPUS
             - AFFINITY_GROUPS
+            - ALIASES_PER_NETWORK_GLOBAL
             - AMD_S9300_GPUS
             - AUTOSCALERS
             - BACKEND_BUCKETS
@@ -63738,6 +63728,7 @@ components:
             - HEALTH_CHECKS
             - IMAGES
             - INSTANCES
+            - INSTANCES_PER_NETWORK_GLOBAL
             - INSTANCE_GROUPS
             - INSTANCE_GROUP_MANAGERS
             - INSTANCE_TEMPLATES
@@ -63746,6 +63737,8 @@ components:
             - INTERCONNECT_ATTACHMENTS_TOTAL_MBPS
             - INTERCONNECT_TOTAL_GBPS
             - INTERNAL_ADDRESSES
+            - INTERNAL_FORWARDING_RULES_PER_NETWORK
+            - INTERNAL_FORWARDING_RULES_WITH_TARGET_INSTANCE_PER_NETWORK
             - INTERNAL_TRAFFIC_DIRECTOR_FORWARDING_RULES
             - IN_PLACE_SNAPSHOTS
             - IN_USE_ADDRESSES
@@ -63788,6 +63781,7 @@ components:
             - PREEMPTIBLE_NVIDIA_T4_VWS_GPUS
             - PREEMPTIBLE_NVIDIA_V100_GPUS
             - PRIVATE_V6_ACCESS_SUBNETWORKS
+            - PSC_GOOGLE_APIS_FORWARDING_RULES_PER_NETWORK
             - PSC_ILB_CONSUMER_FORWARDING_RULES_PER_PRODUCER_NETWORK
             - PSC_INTERNAL_LB_FORWARDING_RULES
             - PUBLIC_ADVERTISED_PREFIXES
@@ -63810,6 +63804,7 @@ components:
             - STATIC_ADDRESSES
             - STATIC_BYOIP_ADDRESSES
             - SUBNETWORKS
+            - SUBNET_RANGES_PER_NETWORK
             - T2A_CPUS
             - T2D_CPUS
             - TARGET_HTTPS_PROXIES
@@ -64255,7 +64250,7 @@ components:
       description: RegionInstanceGroupManagers.patchPerInstanceConfigs
       properties:
         perInstanceConfigs:
-          description: The list of per-instance configurations to insert or patch on this managed instance group.
+          description: The list of per-instance configs to insert or patch on this managed instance group.
           items:
             $ref: "#/components/schemas/PerInstanceConfig"
           type: array
@@ -64264,7 +64259,7 @@ components:
       description: RegionInstanceGroupManagers.updatePerInstanceConfigs
       properties:
         perInstanceConfigs:
-          description: The list of per-instance configurations to insert or patch on this managed instance group.
+          description: The list of per-instance configs to insert or patch on this managed instance group.
           items:
             $ref: "#/components/schemas/PerInstanceConfig"
           type: array

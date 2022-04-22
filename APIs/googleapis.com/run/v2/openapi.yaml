@@ -199,6 +199,191 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v2/{name}:run":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Triggers creation of a new Execution of this Job.
+      operationId: run.projects.locations.jobs.run
+      parameters:
+        - description: "Required. The full name of the Job. Format: projects/{projectnumber}/locations/{location}/jobs/{job}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudRunV2RunJobRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2/{parent}/executions":
+    get:
+      description: List Executions from a Job.
+      operationId: run.projects.locations.jobs.executions.list
+      parameters:
+        - description: 'Required. The Execution from which the Executions should be listed. To list all Executions across Jobs, use "-" instead of Job name. Format: projects/{project}/locations/{location}/jobs/{job}'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of Executions to return in this call.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token received from a previous call to ListExecutions. All other parameters must match.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: If true, returns deleted (but unexpired) resources along with active ones.
+          in: query
+          name: showDeleted
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudRunV2ListExecutionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v2/{parent}/jobs":
+    get:
+      description: List Jobs.
+      operationId: run.projects.locations.jobs.list
+      parameters:
+        - description: "Required. The location and project to list resources on. Format: projects/{projectnumber}/locations/{location}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of Jobs to return in this call.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token received from a previous call to ListJobs. All other parameters must match.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: If true, returns deleted (but unexpired) resources along with active ones.
+          in: query
+          name: showDeleted
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudRunV2ListJobsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create a Job.
+      operationId: run.projects.locations.jobs.create
+      parameters:
+        - description: "Required. The location and project in which this Job should be created. Format: projects/{projectnumber}/locations/{location}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The unique identifier for the Job. The name of the job becomes {parent}/jobs/{job_id}.
+          in: query
+          name: jobId
+          schema:
+            type: string
+        - description: Indicates that the request should be validated and default values populated, without persisting the request or creating any resources.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudRunV2Job"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v2/{parent}/revisions":
     get:
       description: List Revisions from a given Service, or from a given location.
@@ -342,6 +527,58 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v2/{parent}/tasks":
+    get:
+      description: List Tasks from an Execution of a Job.
+      operationId: run.projects.locations.jobs.executions.tasks.list
+      parameters:
+        - description: 'Required. The Execution from which the Tasks should be listed. To list all Tasks across Executions of a Job, use "-" instead of Execution name. To list all Tasks across Jobs, use "-" instead of Job name. Format: projects/{project}/locations/{location}/jobs/{job}/executions/{execution}'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of Tasks to return in this call.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token received from a previous call to ListTasks. All other parameters must match.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: If true, returns deleted (but unexpired) resources along with active ones.
+          in: query
+          name: showDeleted
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudRunV2ListTasksResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v2/{resource}:getIamPolicy":
     get:
       description: Get the IAM Access Control policy currently in effect for the given Cloud Run Service. This result does not include any inherited policies.
@@ -712,6 +949,16 @@ components:
           description: If specified, used to specify which protocol to use. Allowed values are "http1" and "h2c".
           type: string
       type: object
+    GoogleCloudRunV2ContainerStatus:
+      description: ContainerStatus holds the information of container name and image digest value.
+      properties:
+        imageDigest:
+          description: ImageDigest holds the resolved digest for the image specified, regardless of whether a tag or digest was originally specified in the Container object.
+          type: string
+        name:
+          description: The name of the container, if specified.
+          type: string
+      type: object
     GoogleCloudRunV2EnvVar:
       description: EnvVar represents an environment variable present in a Container.
       properties:
@@ -731,6 +978,303 @@ components:
         secretKeyRef:
           $ref: "#/components/schemas/GoogleCloudRunV2SecretKeySelector"
           description: Selects a secret and a specific version from Cloud Secret Manager.
+      type: object
+    GoogleCloudRunV2Execution:
+      description: Execution represents the configuration of a single execution. A execution an immutable resource that references a container image which is run to completion.
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: KRM-style annotations for the resource.
+          type: object
+        completionTime:
+          description: Output only. Represents time when the execution was completed. It is not guaranteed to be set in happens-before order across separate operations.
+          format: google-datetime
+          readOnly: true
+          type: string
+        conditions:
+          description: Output only. The Condition of this Execution, containing its readiness status, and detailed error information in case it did not reach the desired state.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRunV2Condition"
+          readOnly: true
+          type: array
+        createTime:
+          description: Output only. Represents time when the execution was acknowledged by the execution controller. It is not guaranteed to be set in happens-before order across separate operations.
+          format: google-datetime
+          readOnly: true
+          type: string
+        deleteTime:
+          description: Output only. For a deleted resource, the deletion time. It is only populated as a response to a Delete request.
+          format: google-datetime
+          readOnly: true
+          type: string
+        etag:
+          description: Output only. A system-generated fingerprint for this version of the resource. May be used to detect modification conflict during updates.
+          readOnly: true
+          type: string
+        expireTime:
+          description: Output only. For a deleted resource, the time after which it will be permamently deleted. It is only populated as a response to a Delete request.
+          format: google-datetime
+          readOnly: true
+          type: string
+        failedCount:
+          description: Output only. The number of tasks which reached phase Failed.
+          format: int32
+          readOnly: true
+          type: integer
+        generation:
+          description: Output only. A number that monotonically increases every time the user modifies the desired state.
+          format: int64
+          readOnly: true
+          type: string
+        job:
+          description: Output only. The name of the parent Job.
+          readOnly: true
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: KRM-style labels for the resource. User-provided labels are shared with Google's billing system, so they can be used to filter, or break down billing charges by team, component, environment, state, etc. For more information, visit https://cloud.google.com/resource-manager/docs/creating-managing-labels or https://cloud.google.com/run/docs/configuring/labels Cloud Run will populate some labels with 'run.googleapis.com' or 'serving.knative.dev' namespaces. Those labels are read-only, and user changes will not be preserved.
+          type: object
+        launchStage:
+          description: Set the launch stage to a preview stage on write to allow use of preview features in that stage. On read, describes whether the resource uses preview features. Launch Stages are defined at [Google Cloud Platform Launch Stages](https://cloud.google.com/terms/launch-stages).
+          enum:
+            - LAUNCH_STAGE_UNSPECIFIED
+            - UNIMPLEMENTED
+            - PRELAUNCH
+            - EARLY_ACCESS
+            - ALPHA
+            - BETA
+            - GA
+            - DEPRECATED
+          type: string
+        name:
+          description: Output only. The unique name of this Execution.
+          readOnly: true
+          type: string
+        observedGeneration:
+          description: Output only. The generation of this Execution. See comments in `reconciling` for additional information on reconciliation process in Cloud Run.
+          format: int64
+          readOnly: true
+          type: string
+        parallelism:
+          description: "Output only. Specifies the maximum desired number of tasks the execution should run at any given time. Must be <= task_count. The actual number of tasks running in steady state will be less than this number when ((.spec.task_count - .status.successful) < .spec.parallelism), i.e. when the work left to do is less than max parallelism. More info: https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/"
+          format: int32
+          readOnly: true
+          type: integer
+        reconciling:
+          description: Output only. Indicates whether the resource's reconciliation is still in progress. See comments in `Job.reconciling` for additional information on reconciliation process in Cloud Run.
+          readOnly: true
+          type: boolean
+        runningCount:
+          description: Output only. The number of actively running tasks.
+          format: int32
+          readOnly: true
+          type: integer
+        startTime:
+          description: Output only. Represents time when the execution started to run. It is not guaranteed to be set in happens-before order across separate operations.
+          format: google-datetime
+          readOnly: true
+          type: string
+        succeededCount:
+          description: Output only. The number of tasks which reached phase Succeeded.
+          format: int32
+          readOnly: true
+          type: integer
+        taskCount:
+          description: "Output only. Specifies the desired number of tasks the execution should run. Setting to 1 means that parallelism is limited to 1 and the success of that task signals the success of the execution. More info: https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/"
+          format: int32
+          readOnly: true
+          type: integer
+        template:
+          $ref: "#/components/schemas/GoogleCloudRunV2TaskTemplate"
+          description: Output only. Describes the task(s) that will be created when executing an execution.
+          readOnly: true
+        uid:
+          description: Output only. Server assigned unique identifier for the Execution. The value is a UUID4 string and guaranteed to remain unchanged until the resource is deleted.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. The last-modified time.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudRunV2ExecutionReference:
+      description: Reference to an Execution. Use /Executions.GetExecution with the given name to get full execution including the latest status.
+      properties:
+        createTime:
+          description: Creation timestamp of the execution.
+          format: google-datetime
+          type: string
+        name:
+          description: Name of the execution.
+          type: string
+      type: object
+    GoogleCloudRunV2ExecutionTemplate:
+      description: ExecutionTemplate describes the data an execution should have when created from a template.
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: KRM-style annotations for the resource.
+          type: object
+        labels:
+          additionalProperties:
+            type: string
+          description: KRM-style labels for the resource.
+          type: object
+        parallelism:
+          description: Specifies the maximum desired number of tasks the execution should run at given time. Must be <= task_count. When the job is run, if this field is 0 or unset, the maximum possible value will be used for that execution. The actual number of tasks running in steady state will be less than this number when there are fewer tasks waiting to be completed remaining, i.e. when the work left to do is less than max parallelism.
+          format: int32
+          type: integer
+        taskCount:
+          description: "Specifies the desired number of tasks the execution should run. Setting to 1 means that parallelism is limited to 1 and the success of that task signals the success of the execution. More info: https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/"
+          format: int32
+          type: integer
+        template:
+          $ref: "#/components/schemas/GoogleCloudRunV2TaskTemplate"
+          description: Required. Describes the task(s) that will be created when executing an execution.
+      type: object
+    GoogleCloudRunV2Job:
+      description: Job represents the configuration of a single job. A job an immutable resource that references a container image which is run to completion.
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: "KRM-style annotations for the resource. Unstructured key value map that may be set by external tools to store and arbitrary metadata. They are not queryable and should be preserved when modifying objects. Cloud Run will populate some annotations using 'run.googleapis.com' or 'serving.knative.dev' namespaces. This field follows Kubernetes annotations' namespacing, limits, and rules. More info: https://kubernetes.io/docs/user-guide/annotations"
+          type: object
+        binaryAuthorization:
+          $ref: "#/components/schemas/GoogleCloudRunV2BinaryAuthorization"
+          description: Settings for the Binary Authorization feature.
+        client:
+          description: Arbitrary identifier for the API client.
+          type: string
+        clientVersion:
+          description: Arbitrary version identifier for the API client.
+          type: string
+        conditions:
+          description: Output only. The Conditions of all other associated sub-resources. They contain additional diagnostics information in case the Job does not reach its desired state. See comments in `reconciling` for additional information on reconciliation process in Cloud Run.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRunV2Condition"
+          readOnly: true
+          type: array
+        containerStatuses:
+          description: Output only. Status information for each of the containers specified.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRunV2ContainerStatus"
+          readOnly: true
+          type: array
+        createTime:
+          description: Output only. The creation time.
+          format: google-datetime
+          readOnly: true
+          type: string
+        creator:
+          description: Output only. Email address of the authenticated creator.
+          readOnly: true
+          type: string
+        deleteTime:
+          description: Output only. The deletion time.
+          format: google-datetime
+          readOnly: true
+          type: string
+        etag:
+          description: Output only. A system-generated fingerprint for this version of the resource. May be used to detect modification conflict during updates.
+          readOnly: true
+          type: string
+        executionCount:
+          description: Output only. Number of executions created for this job.
+          format: int32
+          readOnly: true
+          type: integer
+        expireTime:
+          description: Output only. For a deleted resource, the time after which it will be permamently deleted.
+          format: google-datetime
+          readOnly: true
+          type: string
+        generation:
+          description: Output only. A number that monotonically increases every time the user modifies the desired state.
+          format: int64
+          readOnly: true
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: KRM-style labels for the resource. User-provided labels are shared with Google's billing system, so they can be used to filter, or break down billing charges by team, component, environment, state, etc. For more information, visit https://cloud.google.com/resource-manager/docs/creating-managing-labels or https://cloud.google.com/run/docs/configuring/labels Cloud Run will populate some labels with 'run.googleapis.com' or 'serving.knative.dev' namespaces. Those labels are read-only, and user changes will not be preserved.
+          type: object
+        lastModifier:
+          description: Output only. Email address of the last authenticated modifier.
+          readOnly: true
+          type: string
+        latestCreatedExecution:
+          $ref: "#/components/schemas/GoogleCloudRunV2ExecutionReference"
+          description: Output only. Name of the last created execution.
+          readOnly: true
+        launchStage:
+          description: The launch stage as defined by [Google Cloud Platform Launch Stages](https://cloud.google.com/terms/launch-stages). Cloud Run supports `ALPHA`, `BETA`, and `GA`. If no value is specified, GA is assumed.
+          enum:
+            - LAUNCH_STAGE_UNSPECIFIED
+            - UNIMPLEMENTED
+            - PRELAUNCH
+            - EARLY_ACCESS
+            - ALPHA
+            - BETA
+            - GA
+            - DEPRECATED
+          type: string
+        name:
+          description: "The fully qualified name of this Job. Format: projects/{project}/locations/{location}/jobs/{job}"
+          type: string
+        observedGeneration:
+          description: Output only. The generation of this Job. See comments in `reconciling` for additional information on reconciliation process in Cloud Run.
+          format: int64
+          readOnly: true
+          type: string
+        reconciling:
+          description: "Output only. Returns true if the Job is currently being acted upon by the system to bring it into the desired state. When a new Job is created, or an existing one is updated, Cloud Run will asynchronously perform all necessary steps to bring the Job to the desired state. This process is called reconciliation. While reconciliation is in process, `observed_generation` and `latest_succeeded_execution`, will have transient values that might mismatch the intended state: Once reconciliation is over (and this field is false), there are two possible outcomes: reconciliation succeeded and the state matches the Job, or there was an error, and reconciliation failed. This state can be found in `terminal_condition.state`. If reconciliation succeeded, the following fields will match: `observed_generation` and `generation`, `latest_succeeded_execution` and `latest_created_execution`. If reconciliation failed, `observed_generation` and `latest_succeeded_execution` will have the state of the last succeeded execution or empty for newly created Job. Additional information on the failure can be found in `terminal_condition` and `conditions`."
+          readOnly: true
+          type: boolean
+        template:
+          $ref: "#/components/schemas/GoogleCloudRunV2ExecutionTemplate"
+          description: Required. The template used to create executions for this Job.
+        terminalCondition:
+          $ref: "#/components/schemas/GoogleCloudRunV2Condition"
+          description: Output only. The Condition of this Job, containing its readiness status, and detailed error information in case it did not reach the desired state.
+          readOnly: true
+        uid:
+          description: Output only. Server assigned unique identifier for the Execution. The value is a UUID4 string and guaranteed to remain unchanged until the resource is deleted.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. The last-modified time.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudRunV2ListExecutionsResponse:
+      description: Response message containing a list of Executions.
+      properties:
+        executions:
+          description: The resulting list of Executions.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRunV2Execution"
+          type: array
+        nextPageToken:
+          description: A token indicating there are more items than page_size. Use it in the next ListExecutions request to continue.
+          type: string
+      type: object
+    GoogleCloudRunV2ListJobsResponse:
+      description: Response message containing a list of Jobs.
+      properties:
+        jobs:
+          description: The resulting list of Jobs.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRunV2Job"
+          type: array
+        nextPageToken:
+          description: A token indicating there are more items than page_size. Use it in the next ListJobs request to continue.
+          type: string
       type: object
     GoogleCloudRunV2ListRevisionsResponse:
       description: Response message containing a list of Revisions.
@@ -754,6 +1298,18 @@ components:
           description: The resulting list of Services.
           items:
             $ref: "#/components/schemas/GoogleCloudRunV2Service"
+          type: array
+      type: object
+    GoogleCloudRunV2ListTasksResponse:
+      description: Response message containing a list of Tasks.
+      properties:
+        nextPageToken:
+          description: A token indicating there are more items than page_size. Use it in the next ListTasks request to continue.
+          type: string
+        tasks:
+          description: The resulting list of Tasks.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRunV2Task"
           type: array
       type: object
     GoogleCloudRunV2ResourceRequirements:
@@ -963,6 +1519,16 @@ components:
           $ref: "#/components/schemas/GoogleCloudRunV2VpcAccess"
           description: VPC Access configuration to use for this Revision. For more information, visit https://cloud.google.com/run/docs/configuring/connecting-vpc.
       type: object
+    GoogleCloudRunV2RunJobRequest:
+      description: Request message to create a new Execution of a Job.
+      properties:
+        etag:
+          description: A system-generated fingerprint for this version of the resource. May be used to detect modification conflict during updates.
+          type: string
+        validateOnly:
+          description: Indicates that the request should be validated without actually deleting any resources.
+          type: boolean
+      type: object
     GoogleCloudRunV2SecretKeySelector:
       description: SecretEnvVarSource represents a source for the value of an EnvVar.
       properties:
@@ -1123,6 +1689,203 @@ components:
           description: Output only. The main URI in which this Service is serving traffic.
           readOnly: true
           type: string
+      type: object
+    GoogleCloudRunV2Task:
+      description: Task represents a single run of a container to completion.
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: KRM-style annotations for the resource.
+          type: object
+        completionTime:
+          description: Output only. Represents time when the Task was completed. It is not guaranteed to be set in happens-before order across separate operations.
+          format: google-datetime
+          readOnly: true
+          type: string
+        conditions:
+          description: Output only. The Condition of this Task, containing its readiness status, and detailed error information in case it did not reach the desired state.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRunV2Condition"
+          readOnly: true
+          type: array
+        containers:
+          description: Holds the single container that defines the unit of execution for this task.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRunV2Container"
+          type: array
+        createTime:
+          description: Output only. Represents time when the task was created by the job controller. It is not guaranteed to be set in happens-before order across separate operations.
+          format: google-datetime
+          readOnly: true
+          type: string
+        deleteTime:
+          description: Output only. For a deleted resource, the deletion time. It is only populated as a response to a Delete request.
+          format: google-datetime
+          readOnly: true
+          type: string
+        encryptionKey:
+          description: Output only. A reference to a customer managed encryption key (CMEK) to use to encrypt this container image. For more information, go to https://cloud.google.com/run/docs/securing/using-cmek
+          readOnly: true
+          type: string
+        etag:
+          description: Output only. A system-generated fingerprint for this version of the resource. May be used to detect modification conflict during updates.
+          readOnly: true
+          type: string
+        execution:
+          description: Output only. The name of the parent Execution.
+          readOnly: true
+          type: string
+        executionEnvironment:
+          description: The execution environment being used to host this Task.
+          enum:
+            - EXECUTION_ENVIRONMENT_UNSPECIFIED
+            - EXECUTION_ENVIRONMENT_GEN1
+            - EXECUTION_ENVIRONMENT_GEN2
+          type: string
+        expireTime:
+          description: Output only. For a deleted resource, the time after which it will be permamently deleted. It is only populated as a response to a Delete request.
+          format: google-datetime
+          readOnly: true
+          type: string
+        generation:
+          description: Output only. A number that monotonically increases every time the user modifies the desired state.
+          format: int64
+          readOnly: true
+          type: string
+        index:
+          description: Output only. Index of the Task, unique per execution, and beginning at 0.
+          format: int32
+          readOnly: true
+          type: integer
+        job:
+          description: Output only. The name of the parent Job.
+          readOnly: true
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: KRM-style labels for the resource. User-provided labels are shared with Google's billing system, so they can be used to filter, or break down billing charges by team, component, environment, state, etc. For more information, visit https://cloud.google.com/resource-manager/docs/creating-managing-labels or https://cloud.google.com/run/docs/configuring/labels Cloud Run will populate some labels with 'run.googleapis.com' or 'serving.knative.dev' namespaces. Those labels are read-only, and user changes will not be preserved.
+          type: object
+        lastAttemptResult:
+          $ref: "#/components/schemas/GoogleCloudRunV2TaskAttemptResult"
+          description: Output only. Result of the last attempt of this Task.
+          readOnly: true
+        launchStage:
+          description: Set the launch stage to a preview stage on write to allow use of preview features in that stage. On read, describes whether the resource uses preview features. Launch Stages are defined at [Google Cloud Platform Launch Stages](https://cloud.google.com/terms/launch-stages).
+          enum:
+            - LAUNCH_STAGE_UNSPECIFIED
+            - UNIMPLEMENTED
+            - PRELAUNCH
+            - EARLY_ACCESS
+            - ALPHA
+            - BETA
+            - GA
+            - DEPRECATED
+          type: string
+        maxRetries:
+          description: Number of retries allowed per Task, before marking this Task failed.
+          format: int32
+          type: integer
+        name:
+          description: Output only. The unique name of this Task.
+          readOnly: true
+          type: string
+        observedGeneration:
+          description: Output only. The generation of this Task. See comments in `Job.reconciling` for additional information on reconciliation process in Cloud Run.
+          format: int64
+          readOnly: true
+          type: string
+        reconciling:
+          description: Output only. Indicates whether the resource's reconciliation is still in progress. See comments in `Job.reconciling` for additional information on reconciliation process in Cloud Run.
+          readOnly: true
+          type: boolean
+        retried:
+          description: Output only. The number of times this Task was retried. Tasks are retried when they fail up to the maxRetries limit.
+          format: int32
+          readOnly: true
+          type: integer
+        serviceAccount:
+          description: Email address of the IAM service account associated with the Task of a Job. The service account represents the identity of the running task, and determines what permissions the task has. If not provided, the task will use the project's default service account.
+          type: string
+        startTime:
+          description: Output only. Represents time when the task started to run. It is not guaranteed to be set in happens-before order across separate operations.
+          format: google-datetime
+          readOnly: true
+          type: string
+        timeout:
+          description: Max allowed time duration the Task may be active before the system will actively try to mark it failed and kill associated containers. This applies per attempt of a task, meaning each retry can run for the full timeout.
+          format: google-duration
+          type: string
+        uid:
+          description: Output only. Server assigned unique identifier for the Task. The value is a UUID4 string and guaranteed to remain unchanged until the resource is deleted.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. The last-modified time.
+          format: google-datetime
+          readOnly: true
+          type: string
+        volumes:
+          description: A list of Volumes to make available to containers.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRunV2Volume"
+          type: array
+        vpcAccess:
+          $ref: "#/components/schemas/GoogleCloudRunV2VpcAccess"
+          description: Output only. VPC Access configuration to use for this Task. For more information, visit https://cloud.google.com/run/docs/configuring/connecting-vpc.
+          readOnly: true
+      type: object
+    GoogleCloudRunV2TaskAttemptResult:
+      description: Result of a task attempt.
+      properties:
+        exitCode:
+          description: Output only. The exit code of this attempt. This may be unset if the container was unable to exit cleanly with a code due to some other failure. See status field for possible failure details.
+          format: int32
+          readOnly: true
+          type: integer
+        status:
+          $ref: "#/components/schemas/GoogleRpcStatus"
+          description: Output only. The status of this attempt. If the status code is OK, then the attempt succeeded.
+          readOnly: true
+      type: object
+    GoogleCloudRunV2TaskTemplate:
+      description: TaskTemplate describes the data a task should have when created from a template.
+      properties:
+        containers:
+          description: Holds the single container that defines the unit of execution for this task.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRunV2Container"
+          type: array
+        encryptionKey:
+          description: A reference to a customer managed encryption key (CMEK) to use to encrypt this container image. For more information, go to https://cloud.google.com/run/docs/securing/using-cmek
+          type: string
+        executionEnvironment:
+          description: The execution environment being used to host this Task.
+          enum:
+            - EXECUTION_ENVIRONMENT_UNSPECIFIED
+            - EXECUTION_ENVIRONMENT_GEN1
+            - EXECUTION_ENVIRONMENT_GEN2
+          type: string
+        maxRetries:
+          description: Number of retries allowed per Task, before marking this Task failed.
+          format: int32
+          type: integer
+        serviceAccount:
+          description: Email address of the IAM service account associated with the Task of a Job. The service account represents the identity of the running task, and determines what permissions the task has. If not provided, the task will use the project's default service account.
+          type: string
+        timeout:
+          description: Max allowed time duration the Task may be active before the system will actively try to mark it failed and kill associated containers. This applies per attempt of a task, meaning each retry can run for the full timeout.
+          format: google-duration
+          type: string
+        volumes:
+          description: A list of Volumes to make available to containers.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRunV2Volume"
+          type: array
+        vpcAccess:
+          $ref: "#/components/schemas/GoogleCloudRunV2VpcAccess"
+          description: VPC Access configuration to use for this Task. For more information, visit https://cloud.google.com/run/docs/configuring/connecting-vpc.
       type: object
     GoogleCloudRunV2TrafficTarget:
       description: Holds a single traffic routing entry for the Service. Allocations can be done to a specific Revision name, or pointing to the latest Ready Revision.
