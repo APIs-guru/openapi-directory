@@ -335,6 +335,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v2/{name}:stop":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Stop a running server.
+      operationId: baremetalsolution.projects.locations.instances.stop
+      parameters:
+        - description: Required. Name of the resource.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StopInstanceRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v2/{parent}/instances":
     get:
       description: List servers in a given project and location.
@@ -1087,6 +1129,9 @@ components:
           items:
             $ref: "#/components/schemas/Network"
           type: array
+        osImage:
+          description: The OS image currently installed on the server.
+          type: string
         state:
           description: The state of the server.
           enum:
@@ -1680,6 +1725,10 @@ components:
             - STATE_UNSPECIFIED
             - DRAFT
             - SUBMITTED
+            - PROVISIONING
+            - PROVISIONED
+            - VALIDATED
+            - CANCELLED
           readOnly: true
           type: string
         ticketId:
@@ -1857,6 +1906,10 @@ components:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
+    StopInstanceRequest:
+      description: Message requesting to stop a server.
+      properties: {}
+      type: object
     SubmitProvisioningConfigRequest:
       description: Request for SubmitProvisioningConfig.
       properties:
@@ -1919,6 +1972,10 @@ components:
           type: string
         currentSizeGib:
           description: The current size of this storage volume, in GiB, including space reserved for snapshots. This size might be different than the requested size if the storage volume has been configured with auto grow or auto shrink.
+          format: int64
+          type: string
+        emergencySizeGib:
+          description: Additional emergency size that was requested for this Volume, in GiB. current_size_gib includes this value.
           format: int64
           type: string
         id:

@@ -831,9 +831,9 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Makes a recommendation prediction.
-      operationId: retail.projects.locations.catalogs.servingConfigs.predict
+      operationId: retail.projects.locations.catalogs.placements.predict
       parameters:
-        - description: "Required. Full resource name of the format: {name=projects/*/locations/global/catalogs/default_catalog/servingConfigs/*} or {name=projects/*/locations/global/catalogs/default_catalog/placements/*}. We recommend using the `servingConfigs` resource. `placements` is a legacy resource. The ID of the Recommendations AI serving config or placement. Before you can request predictions from your model, you must create at least one serving config or placement for it. For more information, see [Managing serving configurations] (https://cloud.google.com/retail/docs/manage-configs). The full list of available serving configs can be seen at https://console.cloud.google.com/ai/retail/catalogs/default_catalog/configs"
+        - description: "Required. Full resource name of the format: {name=projects/*/locations/global/catalogs/default_catalog/placements/*} The ID of the Recommendations AI placement. Before you can request predictions from your model, you must create at least one placement for it. For more information, see [Managing placements](https://cloud.google.com/retail/recommendations-ai/docs/manage-placements). The full list of available placements can be seen at https://console.cloud.google.com/recommendation/catalogs/default_catalog/placements"
           in: path
           name: placement
           required: true
@@ -873,9 +873,9 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Performs a search. This feature is only available for users who have Retail Search enabled. Please enable Retail Search on Cloud Console before using this feature.
-      operationId: retail.projects.locations.catalogs.servingConfigs.search
+      operationId: retail.projects.locations.catalogs.placements.search
       parameters:
-        - description: Required. The resource name of the Retail Search serving config, such as `projects/*/locations/global/catalogs/default_catalog/servingConfigs/default_serving_config` or the name of the legacy placement resource, such as `projects/*/locations/global/catalogs/default_catalog/placements/default_search`. This field is used to identify the serving configuration name and the set of models that will be used to make the search.
+        - description: Required. The resource name of the search engine placement, such as `projects/*/locations/global/catalogs/default_catalog/placements/default_search`. This field is used to identify the serving configuration name and the set of models that will be used to make the search.
           in: path
           name: placement
           required: true
@@ -1424,7 +1424,7 @@ components:
       description: A custom attribute that is not explicitly modeled in Product.
       properties:
         indexable:
-          description: This field will only be used when AttributesConfig.attribute_config_level of the Catalog is 'PRODUCT_LEVEL_ATTRIBUTE_CONFIG', if true, custom attribute values are indexed, so that it can be filtered, faceted or boosted in SearchService.Search. This field is ignored in a UserEvent. See SearchRequest.filter, SearchRequest.facet_specs and SearchRequest.boost_spec for more details.
+          description: This field is normally ignored unless AttributesConfig.attribute_config_level of the Catalog is set to the deprecated 'PRODUCT_LEVEL_ATTRIBUTE_CONFIG' mode. You may learn more on [configuration mode] (https://cloud.google.com/retail/docs/attribute-config#config-modes). if true, custom attribute values are indexed, so that it can be filtered, faceted or boosted in SearchService.Search. This field is ignored in a UserEvent. See SearchRequest.filter, SearchRequest.facet_specs and SearchRequest.boost_spec for more details.
           type: boolean
         numbers:
           description: The numerical values of this custom attribute. For example, `[2.3, 15.4]` when the key is "lengths_cm". Exactly one of text or numbers should be set. Otherwise, an INVALID_ARGUMENT error is returned.
@@ -1433,7 +1433,7 @@ components:
             type: number
           type: array
         searchable:
-          description: This field will only be used when AttributesConfig.attribute_config_level of the Catalog is 'PRODUCT_LEVEL_ATTRIBUTE_CONFIG', if true, custom attribute values are searchable by text queries in SearchService.Search. This field is ignored in a UserEvent. Only set if type text is set. Otherwise, a INVALID_ARGUMENT error is returned.
+          description: This field is normally ignored unless AttributesConfig.attribute_config_level of the Catalog is set to the deprecated 'PRODUCT_LEVEL_ATTRIBUTE_CONFIG' mode. You may learn more on [configuration mode] (https://cloud.google.com/retail/docs/attribute-config#config-modes). If true, custom attribute values are searchable by text queries in SearchService.Search. This field is ignored in a UserEvent. Only set if type text is set. Otherwise, a INVALID_ARGUMENT error is returned.
           type: boolean
         text:
           description: The textual values of this custom attribute. For example, `["yellow", "green"]` when the key is "color". Empty string is not allowed. Otherwise, an INVALID_ARGUMENT error is returned. Exactly one of text or numbers should be set. Otherwise, an INVALID_ARGUMENT error is returned.
@@ -2306,7 +2306,7 @@ components:
           description: A unique search token. This should be included in the UserEvent logs resulting from this search, which enables accurate attribution of search model performance.
           type: string
         correctedQuery:
-          description: If spell correction applies, the corrected query. Otherwise, empty.
+          description: Contains the spell corrected query, if found. If the spell correction type is AUTOMATIC, then the search results will be based on corrected_query, otherwise the original query will be used for search.
           type: string
         facets:
           description: Results of facets requested by user.
@@ -2488,7 +2488,7 @@ components:
           description: A unique ID of a web page view. This should be kept the same for all user events triggered from the same pageview. For example, an item detail page view could trigger multiple events as the user is browsing the page. The `pageViewId` property should be kept the same for all these events so that they can be grouped together properly. When using the client side event reporting with JavaScript pixel and Google Tag Manager, this value is filled in automatically.
           type: string
         productDetails:
-          description: "The main product details related to the event. This field is required for the following event types: * `add-to-cart` * `detail-page-view` * `purchase-complete` * `search` In a `search` event, this field represents the products returned to the end user on the current page (the end user may have not finished browsing the whole page yet). When a new page is returned to the end user, after pagination/filtering/ordering even for the same query, a new `search` event with different product_details is desired. The end user may have not finished browsing the whole page yet."
+          description: "The main product details related to the event. This field is optional except for the following event types: * `add-to-cart` * `detail-page-view` * `purchase-complete` In a `search` event, this field represents the products returned to the end user on the current page (the end user may have not finished browsing the whole page yet). When a new page is returned to the end user, after pagination/filtering/ordering even for the same query, a new `search` event with different product_details is desired. The end user may have not finished browsing the whole page yet."
           items:
             $ref: "#/components/schemas/GoogleCloudRetailV2ProductDetail"
           type: array

@@ -84,7 +84,7 @@ info:
     | 204  | No Content           | The server has successfully fulfilled the request and that there is no additional content to send in the response payload body.                                                                          |
     | 400  | Bad Request          | The receiving server cannot understand the request because of malformed syntax. Do not repeat the request without first modifying it; check the request for errors, fix them and then retry the request. |
     | 401  | Unauthorized         | The request has not been applied because it lacks valid authentication credentials for the target resource.                                                                                              |
-    | 402  | Payment Required     | Subscription data is incomplete or out of date. You'll need to provide payment details to continue.                                                                                                      |
+    | 402  | PosPayment Required     | Subscription data is incomplete or out of date. You'll need to provide payment details to continue.                                                                                                      |
     | 403  | Forbidden            | You do not have the appropriate user rights to access the request. Do not repeat the request.                                                                                                            |
     | 404  | Not Found            | The origin server did not find a current representation for the target resource or is not willing to disclose that one exists.                                                                           |
     | 409  | Conflict             | The request could not be completed due to a conflict with the current state of the target resource.                                                                                                      |
@@ -263,7 +263,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: POS API
-  version: 8.25.0
+  version: 8.26.0
   x-apideck-api: pos
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -289,9 +289,9 @@ tags:
     x-apideck-model:
       $ref: "#/components/schemas/Order"
   - description: ""
-    name: Payments
+    name: PosPayments
     x-apideck-model:
-      $ref: "#/components/schemas/Payment"
+      $ref: "#/components/schemas/PosPayment"
   - description: ""
     name: Merchants
     x-apideck-model:
@@ -2186,6 +2186,7 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/locationId"
       responses:
         "200":
           $ref: "#/components/responses/GetOrdersResponse"
@@ -3177,7 +3178,7 @@ paths:
             }
   /pos/payments:
     get:
-      description: List Payments
+      description: List PosPayments
       operationId: paymentsAll
       parameters:
         - $ref: "#/components/parameters/raw"
@@ -3188,7 +3189,7 @@ paths:
         - $ref: "#/components/parameters/limit"
       responses:
         "200":
-          $ref: "#/components/responses/GetPaymentsResponse"
+          $ref: "#/components/responses/GetPosPaymentsResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -3203,9 +3204,9 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: List Payments
+      summary: List PosPayments
       tags:
-        - Payments
+        - PosPayments
       x-apideck-api: pos
       x-codeSamples:
         - label: Node
@@ -3228,7 +3229,7 @@ paths:
       x-graphql-exclude: true
       x-graphql-field-name: payments
     post:
-      description: Create Payment
+      description: Create PosPayment
       operationId: paymentsAdd
       parameters:
         - $ref: "#/components/parameters/raw"
@@ -3239,11 +3240,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Payment"
+              $ref: "#/components/schemas/PosPayment"
         required: true
       responses:
         "201":
-          $ref: "#/components/responses/CreatePaymentResponse"
+          $ref: "#/components/responses/CreatePosPaymentResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -3258,9 +3259,9 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Create Payment
+      summary: Create PosPayment
       tags:
-        - Payments
+        - PosPayments
       x-apideck-api: pos
       x-codeSamples:
         - label: Node
@@ -3395,7 +3396,7 @@ paths:
       x-graphql-exclude: true
   "/pos/payments/{id}":
     delete:
-      description: Delete Payment
+      description: Delete PosPayment
       operationId: paymentsDelete
       parameters:
         - $ref: "#/components/parameters/id"
@@ -3405,7 +3406,7 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/DeletePaymentResponse"
+          $ref: "#/components/responses/DeletePosPaymentResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -3420,9 +3421,9 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Delete Payment
+      summary: Delete PosPayment
       tags:
-        - Payments
+        - PosPayments
       x-apideck-api: pos
       x-codeSamples:
         - label: Node
@@ -3446,7 +3447,7 @@ paths:
             }
       x-graphql-exclude: true
     get:
-      description: Get Payment
+      description: Get PosPayment
       operationId: paymentsOne
       parameters:
         - $ref: "#/components/parameters/id"
@@ -3456,7 +3457,7 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/GetPaymentResponse"
+          $ref: "#/components/responses/GetPosPaymentResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -3471,9 +3472,9 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Get Payment
+      summary: Get PosPayment
       tags:
-        - Payments
+        - PosPayments
       x-apideck-api: pos
       x-codeSamples:
         - label: Node
@@ -3497,7 +3498,7 @@ paths:
             }
       x-graphql-exclude: true
     patch:
-      description: Update Payment
+      description: Update PosPayment
       operationId: paymentsUpdate
       parameters:
         - $ref: "#/components/parameters/id"
@@ -3509,11 +3510,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Payment"
+              $ref: "#/components/schemas/PosPayment"
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/UpdatePaymentResponse"
+          $ref: "#/components/responses/UpdatePosPaymentResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -3528,9 +3529,9 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Update Payment
+      summary: Update PosPayment
       tags:
-        - Payments
+        - PosPayments
       x-apideck-api: pos
       x-codeSamples:
         - label: Node
@@ -3987,6 +3988,13 @@ components:
         maximum: 200
         minimum: 1
         type: integer
+    locationId:
+      description: ID of the location.
+      in: query
+      name: location_id
+      required: false
+      schema:
+        type: string
     merchantId:
       description: ID of the merchant.
       in: path
@@ -4056,12 +4064,12 @@ components:
           schema:
             $ref: "#/components/schemas/CreateOrderTypeResponse"
       description: OrderTypes
-    CreatePaymentResponse:
+    CreatePosPaymentResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CreatePaymentResponse"
-      description: Payments
+            $ref: "#/components/schemas/CreatePosPaymentResponse"
+      description: PosPayments
     CreateTenderResponse:
       content:
         application/json:
@@ -4110,12 +4118,12 @@ components:
           schema:
             $ref: "#/components/schemas/DeleteOrderTypeResponse"
       description: OrderTypes
-    DeletePaymentResponse:
+    DeletePosPaymentResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/DeletePaymentResponse"
-      description: Payments
+            $ref: "#/components/schemas/DeletePosPaymentResponse"
+      description: PosPayments
     DeleteTenderResponse:
       content:
         application/json:
@@ -4206,18 +4214,18 @@ components:
           schema:
             $ref: "#/components/schemas/GetOrdersResponse"
       description: Orders
-    GetPaymentResponse:
+    GetPosPaymentResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetPaymentResponse"
-      description: Payments
-    GetPaymentsResponse:
+            $ref: "#/components/schemas/GetPosPaymentResponse"
+      description: PosPayments
+    GetPosPaymentsResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetPaymentsResponse"
-      description: Payments
+            $ref: "#/components/schemas/GetPosPaymentsResponse"
+      description: PosPayments
     GetTenderResponse:
       content:
         application/json:
@@ -4284,18 +4292,18 @@ components:
           schema:
             $ref: "#/components/schemas/OrderType"
       description: OrderTypes
-    Payment:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/Payment"
-      description: Payments
     PaymentRequiredResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/PaymentRequiredResponse"
       description: Payment Required
+    PosPayment:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PosPayment"
+      description: PosPayments
     Tender:
       content:
         application/json:
@@ -4362,12 +4370,12 @@ components:
           schema:
             $ref: "#/components/schemas/UpdateOrderTypeResponse"
       description: OrderTypes
-    UpdatePaymentResponse:
+    UpdatePosPaymentResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UpdatePaymentResponse"
-      description: Payments
+            $ref: "#/components/schemas/UpdatePosPaymentResponse"
+      description: PosPayments
     UpdateTenderResponse:
       content:
         application/json:
@@ -4742,7 +4750,7 @@ components:
         - operation
         - data
       type: object
-    CreatePaymentResponse:
+    CreatePosPaymentResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -4752,7 +4760,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Payments
+          example: PosPayments
           type: string
         service:
           description: Apideck ID of service provider
@@ -5064,7 +5072,7 @@ components:
         - operation
         - data
       type: object
-    DeletePaymentResponse:
+    DeletePosPaymentResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -5074,7 +5082,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Payments
+          example: PosPayments
           type: string
         service:
           description: Apideck ID of service provider
@@ -5656,17 +5664,17 @@ components:
         - data
       type: object
       x-graphql-type-name: OrderList
-    GetPaymentResponse:
+    GetPosPaymentResponse:
       properties:
         data:
-          $ref: "#/components/schemas/Payment"
+          $ref: "#/components/schemas/PosPayment"
         operation:
           description: Operation performed
           example: one
           type: string
         resource:
           description: Unified API resource name
-          example: Payments
+          example: PosPayments
           type: string
         service:
           description: Apideck ID of service provider
@@ -5688,12 +5696,12 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: Payment
-    GetPaymentsResponse:
+      x-graphql-type-name: PosPayment
+    GetPosPaymentsResponse:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/Payment"
+            $ref: "#/components/schemas/PosPayment"
           type: array
         links:
           $ref: "#/components/schemas/Links"
@@ -5705,7 +5713,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Payments
+          example: PosPayments
           type: string
         service:
           description: Apideck ID of service provider
@@ -5727,7 +5735,7 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: PaymentList
+      x-graphql-type-name: PosPaymentList
     GetTenderResponse:
       properties:
         data:
@@ -7187,7 +7195,7 @@ components:
             - partially_refunded
             - unknown
           example: open
-          title: Payment status
+          title: PosPayment status
           type: string
         payments:
           items:
@@ -7266,9 +7274,11 @@ components:
         status:
           enum:
             - open
+            - draft
             - delivered
             - delayed
             - voided
+            - completed
           example: open
           title: Status
           type: string
@@ -7487,7 +7497,172 @@ components:
         updated_by:
           $ref: "#/components/schemas/Item/properties/version"
       type: object
-    Payment:
+    PaymentCard:
+      description: A card's non-confidential details.
+      nullable: true
+      properties:
+        billing_address:
+          $ref: "#/components/schemas/Address"
+        bin:
+          description: The first six digits of the card number, known as the Bank Identification Number (BIN).
+          example: "41111"
+          nullable: true
+          type: string
+        card_brand:
+          description: The first six digits of the card number, known as the Bank Identification Number (BIN).
+          enum:
+            - visa
+            - mastercard
+            - amex
+            - discover
+            - discover-diners
+            - jcb
+            - china-unionpay
+            - square-gift-card
+            - square-capital-card
+            - interac
+            - eftpos
+            - felica
+            - ebt
+            - other
+          nullable: true
+          type: string
+        card_type:
+          enum:
+            - credit
+            - debit
+            - prepaid
+            - other
+          example: credit
+          nullable: true
+          type: string
+        cardholder_name:
+          example: John Doe
+          nullable: true
+          type: string
+        customer_id:
+          example: "12345"
+          nullable: true
+          type: string
+        enabled:
+          description: Indicates whether or not a card can be used for payments.
+          example: true
+          nullable: true
+          type: boolean
+        exp_month:
+          description: The expiration month of the associated card as an integer between 1 and 12.
+          example: 1
+          maximum: 12
+          minimum: 1
+          nullable: true
+          type: integer
+        exp_year:
+          description: The four-digit year of the card's expiration date.
+          example: 2022
+          nullable: true
+          type: integer
+        fingerprint:
+          example: " Intended as a POS-assigned identifier, based on the card number, to identify the card across multiple locations within a single application."
+          nullable: true
+          type: string
+        id:
+          $ref: "#/components/schemas/Id"
+        last_4:
+          example: The last 4 digits of the card number.
+          nullable: true
+          type: string
+        merchant_id:
+          example: "12345"
+          type: string
+        prepaid_type:
+          enum:
+            - non-prepaid
+            - prepaid
+            - unknown
+          example: prepaid
+          nullable: true
+          type: string
+        reference_id:
+          description: An optional user-defined reference ID that associates this record with another entity in an external system. For example, a customer ID from an external customer management system.
+          example: card-001
+          nullable: true
+          title: Reference ID
+          type: string
+        version:
+          $ref: "#/components/schemas/Order/properties/version"
+      type: object
+    PaymentRequiredResponse:
+      properties:
+        detail:
+          description: Contains parameter or domain specific information related to the error and why it occurred.
+          example: You have reached your limit of 2000
+          type: string
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Payment Required
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Request Limit Reached
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#requestlimiterror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 402
+          type: number
+        type_name:
+          description: The type of error returned
+          example: RequestLimitError
+          type: string
+    PhoneNumber:
+      properties:
+        area_code:
+          example: "323"
+          nullable: true
+          title: Area code
+          type: string
+        country_code:
+          example: "1"
+          nullable: true
+          title: Country code
+          type: string
+        extension:
+          example: "105"
+          nullable: true
+          title: Phone extension
+          type: string
+        id:
+          example: "12345"
+          nullable: true
+          type: string
+        number:
+          example: 111-111-1111
+          minLength: 1
+          title: Phone number
+          type: string
+        type:
+          enum:
+            - primary
+            - secondary
+            - home
+            - work
+            - office
+            - mobile
+            - assistant
+            - fax
+            - direct-dial-in
+            - personal
+            - other
+          example: primary
+          type: string
+          x-graphql-type-name: PhoneType
+      required:
+        - number
+      type: object
+    PosPayment:
       additionalProperties: false
       properties:
         amount:
@@ -7715,7 +7890,7 @@ components:
           example: approved
           title: Status
           type: string
-          x-graphql-type-name: PosPaymentStatus
+          x-graphql-type-name: PosPosPaymentStatus
         tax:
           example: 20
           title: Tax amount
@@ -7758,171 +7933,66 @@ components:
         - order_id
         - tender_id
       type: object
-    PaymentCard:
-      description: A card's non-confidential details.
-      nullable: true
-      properties:
-        billing_address:
-          $ref: "#/components/schemas/Address"
-        bin:
-          description: The first six digits of the card number, known as the Bank Identification Number (BIN).
-          example: "41111"
-          nullable: true
-          type: string
-        card_brand:
-          description: The first six digits of the card number, known as the Bank Identification Number (BIN).
-          enum:
-            - visa
-            - mastercard
-            - amex
-            - discover
-            - discover-diners
-            - jcb
-            - china-unionpay
-            - square-gift-card
-            - square-capital-card
-            - interac
-            - eftpos
-            - felica
-            - ebt
-            - other
-          nullable: true
-          type: string
-        card_type:
-          enum:
-            - credit
-            - debit
-            - prepaid
-            - other
-          example: credit
-          nullable: true
-          type: string
-        cardholder_name:
-          example: John Doe
-          nullable: true
-          type: string
-        customer_id:
-          example: "12345"
-          nullable: true
-          type: string
-        enabled:
-          description: Indicates whether or not a card can be used for payments.
-          example: true
-          nullable: true
-          type: boolean
-        exp_month:
-          description: The expiration month of the associated card as an integer between 1 and 12.
-          example: 1
-          maximum: 12
-          minimum: 1
-          nullable: true
-          type: integer
-        exp_year:
-          description: The four-digit year of the card's expiration date.
-          example: 2022
-          nullable: true
-          type: integer
-        fingerprint:
-          example: " Intended as a POS-assigned identifier, based on the card number, to identify the card across multiple locations within a single application."
-          nullable: true
-          type: string
-        id:
-          $ref: "#/components/schemas/Id"
-        last_4:
-          example: The last 4 digits of the card number.
-          nullable: true
-          type: string
-        merchant_id:
-          example: "12345"
-          type: string
-        prepaid_type:
-          enum:
-            - non-prepaid
-            - prepaid
-            - unknown
-          example: prepaid
-          nullable: true
-          type: string
-        reference_id:
-          description: An optional user-defined reference ID that associates this record with another entity in an external system. For example, a customer ID from an external customer management system.
-          example: card-001
-          nullable: true
-          title: Reference ID
-          type: string
-        version:
-          $ref: "#/components/schemas/Order/properties/version"
-      type: object
-    PaymentRequiredResponse:
-      properties:
-        detail:
-          description: Contains parameter or domain specific information related to the error and why it occurred.
-          example: You have reached your limit of 2000
-          type: string
-        error:
-          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
-          example: Payment Required
-          type: string
-        message:
-          description: A human-readable message providing more details about the error.
-          example: Request Limit Reached
-          type: string
-        ref:
-          description: Link to documentation of error type
-          example: https://developers.apideck.com/errors#requestlimiterror
-          type: string
-        status_code:
-          description: HTTP status code
-          example: 402
-          type: number
-        type_name:
-          description: The type of error returned
-          example: RequestLimitError
-          type: string
-    PhoneNumber:
-      properties:
-        area_code:
-          example: "323"
-          nullable: true
-          title: Area code
-          type: string
-        country_code:
-          example: "1"
-          nullable: true
-          title: Country code
-          type: string
-        extension:
-          example: "105"
-          nullable: true
-          title: Phone extension
-          type: string
-        id:
-          example: "12345"
-          nullable: true
-          type: string
-        number:
-          example: 111-111-1111
-          minLength: 1
-          title: Phone number
-          type: string
-        type:
-          enum:
-            - primary
-            - secondary
-            - home
-            - work
-            - office
-            - mobile
-            - assistant
-            - fax
-            - direct-dial-in
-            - personal
-            - other
-          example: primary
-          type: string
-          x-graphql-type-name: PhoneType
-      required:
-        - number
-      type: object
+    PosWebhookEvent:
+      allOf:
+        - properties:
+            entity_id:
+              description: The service provider's ID of the entity that triggered this event
+              example: 123456ASDF
+              type: string
+            entity_type:
+              description: The type entity that triggered this event
+              example: Company
+              type: string
+            entity_url:
+              description: The url to retrieve entity detail.
+              example: https://unify.apideck.com/crm/contacts/123456
+              type: string
+            event_id:
+              description: Unique reference to this request event
+              example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
+              type: string
+            execution_attempt:
+              description: The current count this request event has been attempted
+              example: 2
+              type: number
+            occurred_at:
+              description: ISO Datetime for when the original event occurred
+              example: 2021-10-01T03:14:55.419Z
+              type: string
+            service_id:
+              description: Service provider identifier
+              example: close
+              type: string
+          type: object
+        - properties:
+            event_type:
+              enum:
+                - pos.order.created
+                - pos.order.updated
+                - pos.order.deleted
+                - pos.payment.created
+                - pos.payment.updated
+                - pos.payment.deleted
+                - pos.merchant.created
+                - pos.merchant.updated
+                - pos.merchant.deleted
+                - pos.location.created
+                - pos.location.updated
+                - pos.location.deleted
+                - pos.item.created
+                - pos.item.updated
+                - pos.item.deleted
+                - pos.modifier.created
+                - pos.modifier.updated
+                - pos.modifier.deleted
+                - pos.modifier-group.created
+                - pos.modifier-group.updated
+                - pos.modifier-group.deleted
+              example: pos.order.created
+              type: string
+          type: object
+      x-sdk-exclude: true
     RowVersion:
       example: 1-12345
       nullable: true
@@ -8331,7 +8401,7 @@ components:
         - operation
         - data
       type: object
-    UpdatePaymentResponse:
+    UpdatePosPaymentResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -8341,7 +8411,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Payments
+          example: PosPayments
           type: string
         service:
           description: Apideck ID of service provider
@@ -8395,164 +8465,6 @@ components:
         - operation
         - data
       type: object
-    User:
-      properties:
-        addresses:
-          items:
-            $ref: "#/components/schemas/Address"
-          type: array
-        company_name:
-          example: SpaceX
-          nullable: true
-          title: Company name
-          type: string
-        created_at:
-          example: 2017-08-12T20:43:21.291Z
-          readOnly: true
-          type: string
-        department:
-          description: The department the user is currently in.
-          example: R&D
-          nullable: true
-          title: Department
-          type: string
-        description:
-          example: A description
-          nullable: true
-          title: Description
-          type: string
-        division:
-          description: The division the user is currently in.
-          example: Europe
-          nullable: true
-          title: Division
-          type: string
-        emails:
-          items:
-            $ref: "#/components/schemas/Email"
-          type: array
-        employee_number:
-          description: An Employee Number, Employee ID or Employee Code, is a unique number that has been assigned to each individual staff member within a company.
-          example: 123456-AB
-          nullable: true
-          title: Employee number
-          type: string
-        first_name:
-          example: Elon
-          nullable: true
-          title: First name
-          type: string
-        id:
-          example: "12345"
-          readOnly: true
-          type: string
-        image:
-          example: https://logo.clearbit.com/spacex.com?s=128
-          nullable: true
-          type: string
-        language:
-          $ref: "#/components/schemas/Merchant/properties/language"
-        last_name:
-          example: Musk
-          nullable: true
-          title: Last name
-          type: string
-        parent_id:
-          example: "54321"
-          nullable: true
-          type: string
-        password:
-          example: supersecretpassword
-          type: string
-          writeOnly: true
-        phone_numbers:
-          items:
-            $ref: "#/components/schemas/PhoneNumber"
-          type: array
-        status:
-          example: active
-          nullable: true
-          type: string
-        title:
-          example: CEO
-          nullable: true
-          title: Job title
-          type: string
-        updated_at:
-          example: 2017-08-12T20:43:21.291Z
-          readOnly: true
-          type: string
-        username:
-          example: masterofcoin
-          nullable: true
-          type: string
-      required:
-        - emails
-      x-pii:
-        - username
-        - first_name
-        - last_name
-        - email
-    WebhookEvent:
-      allOf:
-        - properties:
-            entity_id:
-              description: The service provider's ID of the entity that triggered this event
-              example: 123456ASDF
-              type: string
-            entity_type:
-              description: The type entity that triggered this event
-              example: Company
-              type: string
-            entity_url:
-              description: The url to retrieve entity detail.
-              example: https://unify.apideck.com/crm/contacts/123456
-              type: string
-            event_id:
-              description: Unique reference to this request event
-              example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
-              type: string
-            execution_attempt:
-              description: The current count this request event has been attempted
-              example: 2
-              type: number
-            occurred_at:
-              description: ISO Datetime for when the original event occurred
-              example: 2021-10-01T03:14:55.419Z
-              type: string
-            service_id:
-              description: Service provider identifier
-              example: close
-              type: string
-          type: object
-        - properties:
-            event_type:
-              enum:
-                - pos.order.created
-                - pos.order.updated
-                - pos.order.deleted
-                - pos.payment.created
-                - pos.payment.updated
-                - pos.payment.deleted
-                - pos.merchant.created
-                - pos.merchant.updated
-                - pos.merchant.deleted
-                - pos.location.created
-                - pos.location.updated
-                - pos.location.deleted
-                - pos.item.created
-                - pos.item.updated
-                - pos.item.deleted
-                - pos.modifier.created
-                - pos.modifier.updated
-                - pos.modifier.deleted
-                - pos.modifier-group.created
-                - pos.modifier-group.updated
-                - pos.modifier-group.deleted
-              example: pos.order.created
-              type: string
-          type: object
-      x-sdk-exclude: true
     Website:
       properties:
         id:
@@ -8598,7 +8510,6 @@ components:
       in: header
       name: Authorization
       type: apiKey
-x-sdk-exclude: true
 x-webhooks:
   ItemCreated:
     post:
@@ -8608,7 +8519,7 @@ x-webhooks:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              $ref: "#/components/schemas/PosWebhookEvent"
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
@@ -8624,7 +8535,7 @@ x-webhooks:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              $ref: "#/components/schemas/PosWebhookEvent"
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
@@ -8640,7 +8551,7 @@ x-webhooks:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              $ref: "#/components/schemas/PosWebhookEvent"
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
@@ -8656,7 +8567,7 @@ x-webhooks:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              $ref: "#/components/schemas/PosWebhookEvent"
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
@@ -8672,7 +8583,7 @@ x-webhooks:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              $ref: "#/components/schemas/PosWebhookEvent"
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
@@ -8688,7 +8599,7 @@ x-webhooks:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              $ref: "#/components/schemas/PosWebhookEvent"
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
@@ -8704,7 +8615,7 @@ x-webhooks:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              $ref: "#/components/schemas/PosWebhookEvent"
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
@@ -8720,7 +8631,7 @@ x-webhooks:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              $ref: "#/components/schemas/PosWebhookEvent"
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
@@ -8736,7 +8647,7 @@ x-webhooks:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              $ref: "#/components/schemas/PosWebhookEvent"
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
@@ -8752,7 +8663,7 @@ x-webhooks:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              $ref: "#/components/schemas/PosWebhookEvent"
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
@@ -8768,7 +8679,7 @@ x-webhooks:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              $ref: "#/components/schemas/PosWebhookEvent"
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
@@ -8784,7 +8695,7 @@ x-webhooks:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              $ref: "#/components/schemas/PosWebhookEvent"
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
@@ -8800,7 +8711,7 @@ x-webhooks:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              $ref: "#/components/schemas/PosWebhookEvent"
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
@@ -8816,7 +8727,7 @@ x-webhooks:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              $ref: "#/components/schemas/PosWebhookEvent"
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
@@ -8832,7 +8743,7 @@ x-webhooks:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              $ref: "#/components/schemas/PosWebhookEvent"
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
@@ -8848,7 +8759,7 @@ x-webhooks:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              $ref: "#/components/schemas/PosWebhookEvent"
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
@@ -8865,7 +8776,7 @@ x-webhooks:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              $ref: "#/components/schemas/PosWebhookEvent"
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
@@ -8882,7 +8793,7 @@ x-webhooks:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              $ref: "#/components/schemas/PosWebhookEvent"
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
@@ -8891,51 +8802,51 @@ x-webhooks:
         - Webhook Events
       x-apideck-event-type: pos.order.updated
       x-apideck-upcoming: true
-  PaymentCreated:
+  PosPaymentCreated:
     post:
-      description: Payment created
+      description: PosPayment created
       operationId: paymentCreated
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              $ref: "#/components/schemas/PosWebhookEvent"
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
-      summary: Payment created
+      summary: PosPayment created
       tags:
         - Webhook Events
       x-apideck-event-type: pos.payment.created
-  PaymentDeleted:
+  PosPaymentDeleted:
     post:
-      description: Payment deleted
+      description: PosPayment deleted
       operationId: paymentDeleted
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              $ref: "#/components/schemas/PosWebhookEvent"
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
-      summary: Payment deleted
+      summary: PosPayment deleted
       tags:
         - Webhook Events
       x-apideck-event-type: pos.payment.deleted
-  PaymentUpdated:
+  PosPaymentUpdated:
     post:
-      description: Payment updated
+      description: PosPayment updated
       operationId: paymentUpdated
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              $ref: "#/components/schemas/PosWebhookEvent"
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
-      summary: Payment updated
+      summary: PosPayment updated
       tags:
         - Webhook Events
       x-apideck-event-type: pos.payment.updated

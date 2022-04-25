@@ -132,6 +132,49 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/doubleclicksearch/v2/agency/{agencyId}/advertiser/{advertiserId}/idmapping":
+    get:
+      description: Downloads a csv file(encoded in UTF-8) that contains ID mappings between legacy SA360 and new SA360. The file includes all children entities of the given advertiser(e.g. engine accounts, campaigns, ad groups, etc.) that exist in both legacy SA360 and new SA360.
+      operationId: doubleclicksearch.reports.getIdMappingFile
+      parameters:
+        - description: Legacy SA360 agency ID.
+          in: path
+          name: agencyId
+          required: true
+          schema:
+            type: string
+        - description: Legacy SA360 advertiser ID.
+          in: path
+          name: advertiserId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IdMappingFile"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/doubleclicksearch
+          Oauth2c:
+            - https://www.googleapis.com/auth/doubleclicksearch
+      tags:
+        - reports
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/doubleclicksearch/v2/agency/{agencyId}/advertiser/{advertiserId}/savedcolumns":
     get:
       description: Retrieve the list of saved columns for a specified advertiser.
@@ -669,6 +712,10 @@ components:
           description: Custom metric numeric value.
           format: double
           type: number
+      type: object
+    IdMappingFile:
+      description: File returned to https://developers.google.com/search-ads/v2/reference/reports/getIdMappingFile.
+      properties: {}
       type: object
     Report:
       description: A DoubleClick Search report. This object contains the report request, some report metadata such as currency code, and the generated report rows or report files.

@@ -259,7 +259,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: HRIS API
-  version: 8.25.0
+  version: 8.26.0
   x-apideck-api: hris
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -292,6 +292,14 @@ tags:
     name: Departments
     x-apideck-model:
       $ref: "#/components/schemas/Department"
+  - description: ""
+    name: Payrolls
+    x-apideck-model:
+      $ref: "#/components/schemas/Payroll"
+  - description: ""
+    name: EmployeePayrolls
+    x-apideck-model:
+      $ref: "#/components/schemas/EmployeePayroll"
 paths:
   /hris/companies:
     get:
@@ -1516,12 +1524,230 @@ paths:
             } catch (error) {
               console.error(error)
             }
+  /hris/payrolls:
+    get:
+      description: List Payroll
+      operationId: payrollsAll
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/payrollsFilter"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetPayrollsResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: List Payroll
+      tags:
+        - Payrolls
+      x-apideck-api: hris
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.hris.payrollsAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: payrolls
+  "/hris/payrolls/employees/{employee_id}":
+    get:
+      description: List payrolls for employee
+      operationId: employeePayrollsAll
+      parameters:
+        - $ref: "#/components/parameters/employeeId"
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/payrollsFilter"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetEmployeePayrollsResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: List Employee Payrolls
+      tags:
+        - EmployeePayrolls
+      x-apideck-api: hris
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.hris.employeePayrollsAll({
+                employeeId: 'employee_id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: employeePayrolls
+  "/hris/payrolls/employees/{employee_id}/payrolls/{payroll_id}":
+    get:
+      description: Get payroll for employee
+      operationId: employeePayrollsOne
+      parameters:
+        - $ref: "#/components/parameters/payrollId"
+        - $ref: "#/components/parameters/employeeId"
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetEmployeePayrollResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get Employee Payroll
+      tags:
+        - EmployeePayrolls
+      x-apideck-api: hris
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              payrollId: 'payroll_id_example',
+              employeeId: 'employee_id_example'
+            }
+
+            try {
+              const { data } = await apideck.hris.employeePayrollsOne(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: employeePayroll
+  "/hris/payrolls/{payroll_id}":
+    get:
+      description: Get Payroll
+      operationId: payrollsOne
+      parameters:
+        - $ref: "#/components/parameters/payrollId"
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetPayrollResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get Payroll
+      tags:
+        - Payrolls
+      x-apideck-api: hris
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.hris.payrollsOne({
+                payrollId: 'payroll_id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: payroll
 components:
   parameters:
     applicationId:
       description: The ID of your Unify application
       in: header
       name: x-apideck-app-id
+      required: true
+      schema:
+        type: string
+    companyId:
+      description: ID of the company you are acting upon.
+      in: path
+      name: company_id
       required: true
       schema:
         type: string
@@ -1538,6 +1764,13 @@ components:
       name: cursor
       schema:
         nullable: true
+        type: string
+    employeeId:
+      description: ID of the employee you are acting upon.
+      in: path
+      name: employee_id
+      required: true
+      schema:
         type: string
     employeesFilter:
       description: Apply filters (beta)
@@ -1563,6 +1796,21 @@ components:
         maximum: 200
         minimum: 1
         type: integer
+    payrollId:
+      description: ID of the payroll you are acting upon.
+      in: path
+      name: payroll_id
+      required: true
+      schema:
+        type: string
+    payrollsFilter:
+      description: Apply filters (beta)
+      explode: true
+      in: query
+      name: filter
+      schema:
+        $ref: "#/components/schemas/PayrollsFilter"
+      style: deepObject
     raw:
       description: Include raw response. Mostly used for debugging purposes
       in: query
@@ -1631,6 +1879,18 @@ components:
           schema:
             $ref: "#/components/schemas/GetDepartmentsResponse"
       description: Departments
+    GetEmployeePayrollResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetEmployeePayrollResponse"
+      description: Payrolls
+    GetEmployeePayrollsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetEmployeePayrollsResponse"
+      description: EmployeePayrolls
     GetEmployeeResponse:
       content:
         application/json:
@@ -1648,13 +1908,25 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/GetHrisCompaniesResponse"
-      description: Company
+      description: Companies
     GetHrisCompanyResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/GetHrisCompanyResponse"
-      description: Companies
+      description: Company
+    GetPayrollResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetPayrollResponse"
+      description: Payrolls
+    GetPayrollsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetPayrollsResponse"
+      description: Payrolls
     NotFoundResponse:
       content:
         application/json:
@@ -1853,6 +2125,21 @@ components:
           description: The type of error returned
           example: RequestValidationError
           type: string
+    Benefit:
+      properties:
+        employee_deduction:
+          description: The amount deducted for benefit.
+          example: 142.94
+          type: number
+        employer_contribution:
+          description: The amount of employer contribution.
+          example: 141.14
+          type: number
+        name:
+          description: The name of the benefit.
+          example: Health Insurance
+          type: string
+      type: object
     CompanyId:
       example: "23456"
       nullable: true
@@ -1863,6 +2150,37 @@ components:
       nullable: true
       title: Company name
       type: string
+    Compensation:
+      additionalProperties: false
+      properties:
+        benefits:
+          description: An array of employee benefits for the pay period.
+          items:
+            $ref: "#/components/schemas/Benefit"
+          type: array
+        deductions:
+          description: An array of employee deductions for the pay period.
+          items:
+            $ref: "#/components/schemas/Deduction"
+          type: array
+        employee_id:
+          $ref: "#/components/schemas/Id"
+        gross_pay:
+          description: The employee's gross pay. Only available when payroll has been processed
+          example: 3000
+          type: number
+        net_pay:
+          description: The employee's net pay. Only available when payroll has been processed
+          example: 2199.93
+          type: number
+        taxes:
+          description: An array of employer and employee taxes for the pay period.
+          items:
+            $ref: "#/components/schemas/Tax"
+          type: array
+      required:
+        - employee_id
+      type: object
     CreateDepartmentResponse:
       properties:
         data:
@@ -2004,6 +2322,17 @@ components:
               type: array
       required:
         - id
+      type: object
+    Deduction:
+      properties:
+        amount:
+          description: The amount deducted.
+          example: 10.97
+          type: number
+        name:
+          description: The name of the deduction.
+          example: Company Car
+          type: string
       type: object
     DeleteDepartmentResponse:
       properties:
@@ -2196,6 +2525,7 @@ components:
                 $ref: "#/components/schemas/Employee/properties/jobs/items/properties/currency"
               effective_date:
                 description: The effective date for this compensation.
+                example: 2020-08-12
                 readOnly: false
                 type: string
               flsa_status:
@@ -2218,6 +2548,7 @@ components:
                 $ref: "#/components/schemas/PaymentUnit"
               rate:
                 description: The amount paid per payment unit.
+                example: 72000
                 readOnly: false
                 type: number
             type: object
@@ -3008,6 +3339,20 @@ components:
       nullable: true
       title: Employee number
       type: string
+    EmployeePayroll:
+      properties:
+        employee:
+          $ref: "#/components/schemas/Employee"
+        payroll:
+          $ref: "#/components/schemas/Payroll"
+      type: object
+    EmployeePayrolls:
+      properties:
+        employee:
+          $ref: "#/components/schemas/Employee"
+        payrolls:
+          $ref: "#/components/schemas/Payroll"
+      type: object
     EmployeesFilter:
       additionalProperties: false
       example:
@@ -3105,6 +3450,72 @@ components:
         - data
       type: object
       x-graphql-type-name: DepartmentList
+    GetEmployeePayrollResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/EmployeePayroll"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Companies
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: undefined
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: EmployeePayroll
+    GetEmployeePayrollsResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/EmployeePayrolls"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Employees
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: sage-hr
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: EmployeePayrollList
     GetEmployeeResponse:
       properties:
         data:
@@ -3249,6 +3660,74 @@ components:
         - data
       type: object
       x-graphql-type-name: HrisCompany
+    GetPayrollResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/Payroll"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Companies
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: undefined
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: Payroll
+    GetPayrollsResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Payroll"
+          type: array
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Employees
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: sage-hr
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: PayrollList
     HrisCompany:
       additionalProperties: false
       properties:
@@ -3305,7 +3784,7 @@ components:
             $ref: "#/components/schemas/Website"
           type: array
       required:
-        - name
+        - legal_name
       type: object
     Id:
       example: "12345"
@@ -3466,6 +3945,111 @@ components:
         - paycheck
       example: year
       type: string
+    Payroll:
+      additionalProperties: false
+      properties:
+        check_date:
+          description: The date on which employees will be paid for the payroll.
+          example: 2022-04-08
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          type: string
+        company_id:
+          $ref: "#/components/schemas/CompanyId"
+        compensations:
+          description: An array of compensations for the payroll.
+          items:
+            $ref: "#/components/schemas/Compensation"
+          type: array
+        end_date:
+          description: The end date, inclusive, of the pay period.
+          example: 2022-04-21
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          type: string
+        id:
+          $ref: "#/components/schemas/Id"
+        processed:
+          description: Whether or not the payroll has been successfully processed. Note that processed payrolls cannot be updated.
+          example: false
+          type: boolean
+        processed_date:
+          description: The date the payroll was processed.
+          example: 2022-04-08
+          nullable: true
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          type: string
+        start_date:
+          description: The start date, inclusive, of the pay period.
+          example: 2022-04-08
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          type: string
+        totals:
+          $ref: "#/components/schemas/PayrollTotals"
+          description: The overview of the payroll totals.
+          type: object
+      required:
+        - id
+        - processed
+        - check_date
+        - start_date
+        - end_date
+      type: object
+    PayrollTotals:
+      properties:
+        check_amount:
+          description: The total check amount for the payroll.
+          example: 27966.23
+          type: number
+        company_debit:
+          description: The total company debit for the payroll.
+          example: 27992.49
+          type: number
+        employee_benefit_deductions:
+          description: The total amount of employee deducted benefits for the payroll.
+          example: 0
+          type: number
+        employee_taxes:
+          description: The total amount of employee paid taxes for the payroll.
+          example: 6616.39
+          type: number
+        employer_benefit_contributions:
+          description: The total amount of company contributed benefits for the payroll.
+          example: 0
+          type: number
+        employer_taxes:
+          description: The total amount of employer paid taxes for the payroll.
+          example: 2038.93
+          type: number
+        gross_pay:
+          description: The gross pay amount for the payroll.
+          example: 27966.23
+          type: number
+        net_pay:
+          description: The net pay amount for the payroll.
+          example: 19337.17
+          type: number
+        tax_debit:
+          description: The total tax debit for the payroll.
+          example: 8655.32
+          type: number
+      type: object
+    PayrollsFilter:
+      additionalProperties: false
+      example:
+        end_date: 2022-04-21
+        start_date: 2022-04-08
+      properties:
+        end_date:
+          description: Return payrolls whose pay period is before the end date
+          example: 2022-04-21
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          type: string
+        start_date:
+          description: Return payrolls whose pay period is after the start date
+          example: 2022-04-08
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          type: string
+      type: object
+      x-graphql-type-name: PayrollsFilter
     PhoneNumber:
       properties:
         area_code:
@@ -3521,6 +4105,21 @@ components:
       nullable: true
       title: Row version
       type: string
+    Tax:
+      properties:
+        amount:
+          description: The amount of the tax.
+          example: 1.97
+          type: number
+        employer:
+          description: Paid by employer.
+          example: false
+          type: boolean
+        name:
+          description: The name of the tax.
+          example: CA State Income Tax
+          type: string
+      type: object
     Title:
       example: CEO
       nullable: true
