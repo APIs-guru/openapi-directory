@@ -101,6 +101,7 @@ paths:
     servers:
       - url: https://fax.twilio.com
     x-twilio:
+      className: fax
       defaultOutputProperties:
         - sid
         - from
@@ -171,6 +172,7 @@ paths:
     servers:
       - url: https://fax.twilio.com
     x-twilio:
+      className: fax_media
       defaultOutputProperties:
         - content_type
         - url
@@ -242,6 +244,7 @@ paths:
     servers:
       - url: https://fax.twilio.com
     x-twilio:
+      className: fax_media
       defaultOutputProperties:
         - content_type
         - url
@@ -295,6 +298,7 @@ paths:
     servers:
       - url: https://fax.twilio.com
     x-twilio:
+      className: fax
       defaultOutputProperties:
         - sid
         - from

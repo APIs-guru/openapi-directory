@@ -164,7 +164,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 8.26.0
+  version: 8.26.1
   x-apideck-api: vault
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -700,7 +700,7 @@ paths:
             const params = {
               serviceId: 'pipedrive',
               unifiedApi: 'crm',
-              connectionsImport: {
+              connection: {
                 credentials: {
                   access_token:
                     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
@@ -727,7 +727,6 @@ paths:
               console.error(error)
             }
       x-graphql-exclude: true
-      x-sdk-exclude: true
   "/vault/connections/{unified_api}/{service_id}/token":
     post:
       description: |

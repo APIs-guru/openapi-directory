@@ -44,6 +44,7 @@ paths:
     servers:
       - url: https://accounts.twilio.com
     x-twilio:
+      className: auth_token_promotion
       defaultOutputProperties:
         - account_sid
         - auth_token
@@ -78,6 +79,7 @@ paths:
     servers:
       - url: https://accounts.twilio.com
     x-twilio:
+      className: secondary_auth_token
       defaultOutputProperties:
         - account_sid
         - secondary_auth_token

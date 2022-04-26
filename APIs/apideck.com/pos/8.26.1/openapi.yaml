@@ -263,7 +263,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: POS API
-  version: 8.26.0
+  version: 8.26.1
   x-apideck-api: pos
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -2943,7 +2943,7 @@ paths:
 
             const params = {
               id: 'id_example',
-              ordersPay: {
+              order: {
                 order_number: '1F',
                 order_date: '2022-08-12',
                 closed_date: '2022-08-13',
@@ -4495,6 +4495,11 @@ components:
           nullable: true
           type: string
       type: object
+    Available:
+      example: true
+      nullable: true
+      title: Available
+      type: boolean
     BadRequestResponse:
       properties:
         detail:
@@ -4814,6 +4819,570 @@ components:
         - operation
         - data
       type: object
+    CreatedAt:
+      example: 2020-09-30T07:43:32.000Z
+      format: date-time
+      readOnly: true
+      title: Created at (timestamp)
+      type: string
+    CreatedBy:
+      example: "12345"
+      nullable: true
+      readOnly: true
+      title: Created by
+      type: string
+    Currency:
+      description: Indicates the associated currency for an amount of money. Values correspond to [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
+      enum:
+        - UNKNOWN_CURRENCY
+        - AED
+        - AFN
+        - ALL
+        - AMD
+        - ANG
+        - AOA
+        - ARS
+        - AUD
+        - AWG
+        - AZN
+        - BAM
+        - BBD
+        - BDT
+        - BGN
+        - BHD
+        - BIF
+        - BMD
+        - BND
+        - BOB
+        - BOV
+        - BRL
+        - BSD
+        - BTN
+        - BWP
+        - BYR
+        - BZD
+        - CAD
+        - CDF
+        - CHE
+        - CHF
+        - CHW
+        - CLF
+        - CLP
+        - CNY
+        - COP
+        - COU
+        - CRC
+        - CUC
+        - CUP
+        - CVE
+        - CZK
+        - DJF
+        - DKK
+        - DOP
+        - DZD
+        - EGP
+        - ERN
+        - ETB
+        - EUR
+        - FJD
+        - FKP
+        - GBP
+        - GEL
+        - GHS
+        - GIP
+        - GMD
+        - GNF
+        - GTQ
+        - GYD
+        - HKD
+        - HNL
+        - HRK
+        - HTG
+        - HUF
+        - IDR
+        - ILS
+        - INR
+        - IQD
+        - IRR
+        - ISK
+        - JMD
+        - JOD
+        - JPY
+        - KES
+        - KGS
+        - KHR
+        - KMF
+        - KPW
+        - KRW
+        - KWD
+        - KYD
+        - KZT
+        - LAK
+        - LBP
+        - LKR
+        - LRD
+        - LSL
+        - LTL
+        - LVL
+        - LYD
+        - MAD
+        - MDL
+        - MGA
+        - MKD
+        - MMK
+        - MNT
+        - MOP
+        - MRO
+        - MUR
+        - MVR
+        - MWK
+        - MXN
+        - MXV
+        - MYR
+        - MZN
+        - NAD
+        - NGN
+        - NIO
+        - NOK
+        - NPR
+        - NZD
+        - OMR
+        - PAB
+        - PEN
+        - PGK
+        - PHP
+        - PKR
+        - PLN
+        - PYG
+        - QAR
+        - RON
+        - RSD
+        - RUB
+        - RWF
+        - SAR
+        - SBD
+        - SCR
+        - SDG
+        - SEK
+        - SGD
+        - SHP
+        - SLL
+        - SOS
+        - SRD
+        - SSP
+        - STD
+        - SVC
+        - SYP
+        - SZL
+        - THB
+        - TJS
+        - TMT
+        - TND
+        - TOP
+        - TRC
+        - TRY
+        - TTD
+        - TWD
+        - TZS
+        - UAH
+        - UGX
+        - USD
+        - USN
+        - USS
+        - UYI
+        - UYU
+        - UZS
+        - VEF
+        - VND
+        - VUV
+        - WST
+        - XAF
+        - XAG
+        - XAU
+        - XBA
+        - XBB
+        - XBC
+        - XBD
+        - XCD
+        - XDR
+        - XOF
+        - XPD
+        - XPF
+        - XPT
+        - XTS
+        - XXX
+        - YER
+        - ZAR
+        - ZMK
+        - ZMW
+        - BTC
+      example: USD
+      nullable: true
+      title: Currency
+      type: string
+      x-enum-elements:
+        - description: Unknown currency
+          name: UNKNOWN_CURRENCY
+        - description: United Arab Emirates dirham
+          name: AED
+        - description: Afghan afghani
+          name: AFN
+        - description: Albanian lek
+          name: ALL
+        - description: Armenian dram
+          name: AMD
+        - description: Netherlands Antillean guilder
+          name: ANG
+        - description: Angolan kwanza
+          name: AOA
+        - description: Argentine peso
+          name: ARS
+        - description: Australian dollar
+          name: AUD
+        - description: Aruban florin
+          name: AWG
+        - description: Azerbaijani manat
+          name: AZN
+        - description: Bosnia and Herzegovina convertible mark
+          name: BAM
+        - description: Barbados dollar
+          name: BBD
+        - description: Bangladeshi taka
+          name: BDT
+        - description: Bulgarian lev
+          name: BGN
+        - description: Bahraini dinar
+          name: BHD
+        - description: Burundian franc
+          name: BIF
+        - description: Bermudian dollar
+          name: BMD
+        - description: Brunei dollar
+          name: BND
+        - description: Boliviano
+          name: BOB
+        - description: Bolivian Mvdol
+          name: BOV
+        - description: Brazilian real
+          name: BRL
+        - description: Bahamian dollar
+          name: BSD
+        - description: Bhutanese ngultrum
+          name: BTN
+        - description: Botswana pula
+          name: BWP
+        - description: Belarusian ruble
+          name: BYR
+        - description: Belize dollar
+          name: BZD
+        - description: Canadian dollar
+          name: CAD
+        - description: Congolese franc
+          name: CDF
+        - description: WIR Euro
+          name: CHE
+        - description: Swiss franc
+          name: CHF
+        - description: WIR Franc
+          name: CHW
+        - description: Unidad de Fomento
+          name: CLF
+        - description: Chilean peso
+          name: CLP
+        - description: Chinese yuan
+          name: CNY
+        - description: Colombian peso
+          name: COP
+        - description: Unidad de Valor Real
+          name: COU
+        - description: Costa Rican colon
+          name: CRC
+        - description: Cuban convertible peso
+          name: CUC
+        - description: Cuban peso
+          name: CUP
+        - description: Cape Verdean escudo
+          name: CVE
+        - description: Czech koruna
+          name: CZK
+        - description: Djiboutian franc
+          name: DJF
+        - description: Danish krone
+          name: DKK
+        - description: Dominican peso
+          name: DOP
+        - description: Algerian dinar
+          name: DZD
+        - description: Egyptian pound
+          name: EGP
+        - description: Eritrean nakfa
+          name: ERN
+        - description: Ethiopian birr
+          name: ETB
+        - description: Euro
+          name: EUR
+        - description: Fiji dollar
+          name: FJD
+        - description: Falkland Islands pound
+          name: FKP
+        - description: Pound sterling
+          name: GBP
+        - description: Georgian lari
+          name: GEL
+        - description: Ghanaian cedi
+          name: GHS
+        - description: Gibraltar pound
+          name: GIP
+        - description: Gambian dalasi
+          name: GMD
+        - description: Guinean franc
+          name: GNF
+        - description: Guatemalan quetzal
+          name: GTQ
+        - description: Guyanese dollar
+          name: GYD
+        - description: Hong Kong dollar
+          name: HKD
+        - description: Honduran lempira
+          name: HNL
+        - description: Croatian kuna
+          name: HRK
+        - description: Haitian gourde
+          name: HTG
+        - description: Hungarian forint
+          name: HUF
+        - description: Indonesian rupiah
+          name: IDR
+        - description: Israeli new shekel
+          name: ILS
+        - description: Indian rupee
+          name: INR
+        - description: Iraqi dinar
+          name: IQD
+        - description: Iranian rial
+          name: IRR
+        - description: Icelandic króna
+          name: ISK
+        - description: Jamaican dollar
+          name: JMD
+        - description: Jordanian dinar
+          name: JOD
+        - description: Japanese yen
+          name: JPY
+        - description: Kenyan shilling
+          name: KES
+        - description: Kyrgyzstani som
+          name: KGS
+        - description: Cambodian riel
+          name: KHR
+        - description: Comoro franc
+          name: KMF
+        - description: North Korean won
+          name: KPW
+        - description: South Korean won
+          name: KRW
+        - description: Kuwaiti dinar
+          name: KWD
+        - description: Cayman Islands dollar
+          name: KYD
+        - description: Kazakhstani tenge
+          name: KZT
+        - description: Lao kip
+          name: LAK
+        - description: Lebanese pound
+          name: LBP
+        - description: Sri Lankan rupee
+          name: LKR
+        - description: Liberian dollar
+          name: LRD
+        - description: Lesotho loti
+          name: LSL
+        - description: Lithuanian litas
+          name: LTL
+        - description: Latvian lats
+          name: LVL
+        - description: Libyan dinar
+          name: LYD
+        - description: Moroccan dirham
+          name: MAD
+        - description: Moldovan leu
+          name: MDL
+        - description: Malagasy ariary
+          name: MGA
+        - description: Macedonian denar
+          name: MKD
+        - description: Myanmar kyat
+          name: MMK
+        - description: Mongolian tögrög
+          name: MNT
+        - description: Macanese pataca
+          name: MOP
+        - description: Mauritanian ouguiya
+          name: MRO
+        - description: Mauritian rupee
+          name: MUR
+        - description: Maldivian rufiyaa
+          name: MVR
+        - description: Malawian kwacha
+          name: MWK
+        - description: Mexican peso
+          name: MXN
+        - description: Mexican Unidad de Inversion
+          name: MXV
+        - description: Malaysian ringgit
+          name: MYR
+        - description: Mozambican metical
+          name: MZN
+        - description: Namibian dollar
+          name: NAD
+        - description: Nigerian naira
+          name: NGN
+        - description: Nicaraguan córdoba
+          name: NIO
+        - description: Norwegian krone
+          name: NOK
+        - description: Nepalese rupee
+          name: NPR
+        - description: New Zealand dollar
+          name: NZD
+        - description: Omani rial
+          name: OMR
+        - description: Panamanian balboa
+          name: PAB
+        - description: Peruvian sol
+          name: PEN
+        - description: Papua New Guinean kina
+          name: PGK
+        - description: Philippine peso
+          name: PHP
+        - description: Pakistani rupee
+          name: PKR
+        - description: Polish złoty
+          name: PLN
+        - description: Paraguayan guaraní
+          name: PYG
+        - description: Qatari riyal
+          name: QAR
+        - description: Romanian leu
+          name: RON
+        - description: Serbian dinar
+          name: RSD
+        - description: Russian ruble
+          name: RUB
+        - description: Rwandan franc
+          name: RWF
+        - description: Saudi riyal
+          name: SAR
+        - description: Solomon Islands dollar
+          name: SBD
+        - description: Seychelles rupee
+          name: SCR
+        - description: Sudanese pound
+          name: SDG
+        - description: Swedish krona
+          name: SEK
+        - description: Singapore dollar
+          name: SGD
+        - description: Saint Helena pound
+          name: SHP
+        - description: Sierra Leonean leone
+          name: SLL
+        - description: Somali shilling
+          name: SOS
+        - description: Surinamese dollar
+          name: SRD
+        - description: South Sudanese pound
+          name: SSP
+        - description: São Tomé and Príncipe dobra
+          name: STD
+        - description: Salvadoran colón
+          name: SVC
+        - description: Syrian pound
+          name: SYP
+        - description: Swazi lilangeni
+          name: SZL
+        - description: Thai baht
+          name: THB
+        - description: Tajikstani somoni
+          name: TJS
+        - description: Turkmenistan manat
+          name: TMT
+        - description: Tunisian dinar
+          name: TND
+        - description: Tongan pa'anga
+          name: TOP
+        - description: Turkish lira
+          name: TRY
+        - description: Trinidad and Tobago dollar
+          name: TTD
+        - description: New Taiwan dollar
+          name: TWD
+        - description: Tanzanian shilling
+          name: TZS
+        - description: Ukrainian hryvnia
+          name: UAH
+        - description: Ugandan shilling
+          name: UGX
+        - description: United States dollar
+          name: USD
+        - description: United States dollar (next day)
+          name: USN
+        - description: United States dollar (same day)
+          name: USS
+        - description: Uruguay Peso en Unidedades Indexadas
+          name: UYI
+        - description: Uruguyan peso
+          name: UYU
+        - description: Uzbekistan som
+          name: UZS
+        - description: Venezuelan bolívar soberano
+          name: VEF
+        - description: Vietnamese đồng
+          name: VND
+        - description: Vanuatu vatu
+          name: VUV
+        - description: Samoan tala
+          name: WST
+        - description: CFA franc BEAC
+          name: XAF
+        - description: Silver
+          name: XAG
+        - description: Gold
+          name: XAU
+        - description: European Composite Unit
+          name: XBA
+        - description: European Monetary Unit
+          name: XBB
+        - description: European Unit of Account 9
+          name: XBC
+        - description: European Unit of Account 17
+          name: XBD
+        - description: East Caribbean dollar
+          name: XCD
+        - description: Special drawing rights (International Monetary Fund)
+          name: XDR
+        - description: CFA franc BCEAO
+          name: XOF
+        - description: Palladium
+          name: XPD
+        - description: CFP franc
+          name: XPF
+        - description: Platinum
+          name: XPT
+        - description: Code reserved for testing
+          name: XTS
+        - description: No currency
+          name: XXX
+        - description: Yemeni rial
+          name: YER
+        - description: South African rand
+          name: ZAR
+        - description: Zambian kwacha
+          name: ZMK
+        - description: Zambian kwacha
+          name: ZMW
+        - description: Bitcoin
+          name: BTC
     CustomField:
       additionalProperties: false
       properties:
@@ -5136,6 +5705,11 @@ components:
         - operation
         - data
       type: object
+    Deleted:
+      example: true
+      nullable: true
+      title: Deleted
+      type: boolean
     Email:
       properties:
         email:
@@ -5808,9 +6382,19 @@ components:
         - data
       type: object
       x-graphql-type-name: TenderList
+    Hidden:
+      example: true
+      nullable: true
+      title: Hidden
+      type: boolean
     Id:
       example: "12345"
       readOnly: true
+      type: string
+    IdempotencyKey:
+      description: A value you specify that uniquely identifies this request among requests you have sent.
+      example: random_string
+      maxLength: 45
       type: string
     Item:
       additionalProperties: false
@@ -5828,10 +6412,7 @@ components:
             type: string
           type: array
         available:
-          example: true
-          nullable: true
-          title: Available
-          type: boolean
+          $ref: "#/components/schemas/Available"
         categories:
           example:
             - id: "12345"
@@ -5861,39 +6442,22 @@ components:
           title: Cost
           type: number
         created_at:
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          readOnly: true
-          title: Created at (timestamp)
-          type: string
+          $ref: "#/components/schemas/CreatedAt"
         created_by:
-          example: "12345"
-          nullable: true
-          readOnly: true
-          title: Created by
-          type: string
+          $ref: "#/components/schemas/CreatedBy"
         deleted:
-          example: true
-          nullable: true
-          title: Deleted
-          type: boolean
+          $ref: "#/components/schemas/Deleted"
         description:
           example: Hot Chocolate
           title: Description
           type: string
         hidden:
-          example: true
-          nullable: true
-          title: Hidden
-          type: boolean
+          $ref: "#/components/schemas/Hidden"
         id:
           example: "#cocoa"
           type: string
         idempotency_key:
-          description: A value you specify that uniquely identifies this request among requests you have sent.
-          example: random_string
-          maxLength: 45
-          type: string
+          $ref: "#/components/schemas/IdempotencyKey"
         name:
           example: Cocoa
           title: Name
@@ -5923,7 +6487,7 @@ components:
           title: Price amount
           type: number
         price_currency:
-          $ref: "#/components/schemas/Order/properties/currency"
+          $ref: "#/components/schemas/Currency"
         pricing_type:
           enum:
             - fixed
@@ -5955,13 +6519,9 @@ components:
           title: Tax IDs
           type: array
         updated_at:
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          readOnly: true
-          title: Updated at (timestamp)
-          type: string
+          $ref: "#/components/schemas/UpdatedAt"
         updated_by:
-          $ref: "#/components/schemas/Item/properties/version"
+          $ref: "#/components/schemas/UpdatedBy"
         variations:
           example:
             - id: "12345"
@@ -5978,7 +6538,7 @@ components:
           items:
             properties:
               created_at:
-                $ref: "#/components/schemas/Item/properties/created_at"
+                $ref: "#/components/schemas/CreatedAt"
               id:
                 $ref: "#/components/schemas/Id"
               item_id:
@@ -6000,7 +6560,7 @@ components:
                 title: Price amount
                 type: number
               price_currency:
-                $ref: "#/components/schemas/Order/properties/currency"
+                $ref: "#/components/schemas/Currency"
               pricing_type:
                 enum:
                   - fixed
@@ -6018,16 +6578,13 @@ components:
                 title: Stockable
                 type: boolean
               updated_at:
-                $ref: "#/components/schemas/Item/properties/updated_at"
+                $ref: "#/components/schemas/UpdatedAt"
               version:
-                $ref: "#/components/schemas/Item/properties/version"
+                $ref: "#/components/schemas/UpdatedBy"
           title: Variations
           type: array
         version:
-          example: "12345"
-          nullable: true
-          readOnly: true
-          type: string
+          $ref: "#/components/schemas/UpdatedBy"
       required:
         - name
       type: object
@@ -6061,11 +6618,11 @@ components:
           title: name
           type: string
         created_at:
-          $ref: "#/components/schemas/Item/properties/created_at"
+          $ref: "#/components/schemas/CreatedAt"
         created_by:
-          $ref: "#/components/schemas/Item/properties/created_by"
+          $ref: "#/components/schemas/CreatedBy"
         currency:
-          $ref: "#/components/schemas/Order/properties/currency"
+          $ref: "#/components/schemas/Currency"
         id:
           $ref: "#/components/schemas/Id"
         merchant_id:
@@ -6088,9 +6645,9 @@ components:
           title: Status
           type: string
         updated_at:
-          $ref: "#/components/schemas/Item/properties/updated_at"
+          $ref: "#/components/schemas/UpdatedAt"
         updated_by:
-          $ref: "#/components/schemas/Item/properties/version"
+          $ref: "#/components/schemas/UpdatedBy"
       type: object
     Merchant:
       additionalProperties: false
@@ -6098,11 +6655,11 @@ components:
         address:
           $ref: "#/components/schemas/Address"
         created_at:
-          $ref: "#/components/schemas/Item/properties/created_at"
+          $ref: "#/components/schemas/CreatedAt"
         created_by:
-          $ref: "#/components/schemas/Item/properties/created_by"
+          $ref: "#/components/schemas/CreatedBy"
         currency:
-          $ref: "#/components/schemas/Order/properties/currency"
+          $ref: "#/components/schemas/Currency"
         id:
           $ref: "#/components/schemas/Id"
         language:
@@ -6137,9 +6694,9 @@ components:
           title: Status
           type: string
         updated_at:
-          $ref: "#/components/schemas/Item/properties/updated_at"
+          $ref: "#/components/schemas/UpdatedAt"
         updated_by:
-          $ref: "#/components/schemas/Item/properties/version"
+          $ref: "#/components/schemas/UpdatedBy"
       type: object
     Meta:
       description: Response metadata
@@ -6176,11 +6733,11 @@ components:
           title: Alternate name
           type: string
         available:
-          $ref: "#/components/schemas/Item/properties/available"
+          $ref: "#/components/schemas/Available"
         created_at:
-          $ref: "#/components/schemas/Item/properties/created_at"
+          $ref: "#/components/schemas/CreatedAt"
         created_by:
-          $ref: "#/components/schemas/Item/properties/created_by"
+          $ref: "#/components/schemas/CreatedBy"
         id:
           $ref: "#/components/schemas/Id"
         modifier_group_id:
@@ -6197,9 +6754,9 @@ components:
           title: Price amount
           type: number
         updated_at:
-          $ref: "#/components/schemas/Item/properties/updated_at"
+          $ref: "#/components/schemas/UpdatedAt"
         updated_by:
-          $ref: "#/components/schemas/Item/properties/version"
+          $ref: "#/components/schemas/UpdatedBy"
       required:
         - name
         - modifier_group_id
@@ -6212,9 +6769,9 @@ components:
           title: Alternate name
           type: string
         created_at:
-          $ref: "#/components/schemas/Item/properties/created_at"
+          $ref: "#/components/schemas/CreatedAt"
         created_by:
-          $ref: "#/components/schemas/Item/properties/created_by"
+          $ref: "#/components/schemas/CreatedBy"
         id:
           $ref: "#/components/schemas/Id"
         maximum_allowed:
@@ -6230,9 +6787,9 @@ components:
           title: Name
           type: string
         updated_at:
-          $ref: "#/components/schemas/Item/properties/updated_at"
+          $ref: "#/components/schemas/UpdatedAt"
         updated_by:
-          $ref: "#/components/schemas/Item/properties/version"
+          $ref: "#/components/schemas/UpdatedBy"
       type: object
     NotFoundResponse:
       properties:
@@ -6303,561 +6860,11 @@ components:
           nullable: true
           type: string
         created_at:
-          $ref: "#/components/schemas/Item/properties/created_at"
+          $ref: "#/components/schemas/CreatedAt"
         created_by:
-          $ref: "#/components/schemas/Item/properties/created_by"
+          $ref: "#/components/schemas/CreatedBy"
         currency:
-          description: Indicates the associated currency for an amount of money. Values correspond to [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
-          enum:
-            - UNKNOWN_CURRENCY
-            - AED
-            - AFN
-            - ALL
-            - AMD
-            - ANG
-            - AOA
-            - ARS
-            - AUD
-            - AWG
-            - AZN
-            - BAM
-            - BBD
-            - BDT
-            - BGN
-            - BHD
-            - BIF
-            - BMD
-            - BND
-            - BOB
-            - BOV
-            - BRL
-            - BSD
-            - BTN
-            - BWP
-            - BYR
-            - BZD
-            - CAD
-            - CDF
-            - CHE
-            - CHF
-            - CHW
-            - CLF
-            - CLP
-            - CNY
-            - COP
-            - COU
-            - CRC
-            - CUC
-            - CUP
-            - CVE
-            - CZK
-            - DJF
-            - DKK
-            - DOP
-            - DZD
-            - EGP
-            - ERN
-            - ETB
-            - EUR
-            - FJD
-            - FKP
-            - GBP
-            - GEL
-            - GHS
-            - GIP
-            - GMD
-            - GNF
-            - GTQ
-            - GYD
-            - HKD
-            - HNL
-            - HRK
-            - HTG
-            - HUF
-            - IDR
-            - ILS
-            - INR
-            - IQD
-            - IRR
-            - ISK
-            - JMD
-            - JOD
-            - JPY
-            - KES
-            - KGS
-            - KHR
-            - KMF
-            - KPW
-            - KRW
-            - KWD
-            - KYD
-            - KZT
-            - LAK
-            - LBP
-            - LKR
-            - LRD
-            - LSL
-            - LTL
-            - LVL
-            - LYD
-            - MAD
-            - MDL
-            - MGA
-            - MKD
-            - MMK
-            - MNT
-            - MOP
-            - MRO
-            - MUR
-            - MVR
-            - MWK
-            - MXN
-            - MXV
-            - MYR
-            - MZN
-            - NAD
-            - NGN
-            - NIO
-            - NOK
-            - NPR
-            - NZD
-            - OMR
-            - PAB
-            - PEN
-            - PGK
-            - PHP
-            - PKR
-            - PLN
-            - PYG
-            - QAR
-            - RON
-            - RSD
-            - RUB
-            - RWF
-            - SAR
-            - SBD
-            - SCR
-            - SDG
-            - SEK
-            - SGD
-            - SHP
-            - SLL
-            - SOS
-            - SRD
-            - SSP
-            - STD
-            - SVC
-            - SYP
-            - SZL
-            - THB
-            - TJS
-            - TMT
-            - TND
-            - TOP
-            - TRC
-            - TRY
-            - TTD
-            - TWD
-            - TZS
-            - UAH
-            - UGX
-            - USD
-            - USN
-            - USS
-            - UYI
-            - UYU
-            - UZS
-            - VEF
-            - VND
-            - VUV
-            - WST
-            - XAF
-            - XAG
-            - XAU
-            - XBA
-            - XBB
-            - XBC
-            - XBD
-            - XCD
-            - XDR
-            - XOF
-            - XPD
-            - XPF
-            - XPT
-            - XTS
-            - XXX
-            - YER
-            - ZAR
-            - ZMK
-            - ZMW
-            - BTC
-          example: USD
-          nullable: true
-          title: Currency
-          type: string
-          x-enum-elements:
-            - description: Unknown currency
-              name: UNKNOWN_CURRENCY
-            - description: United Arab Emirates dirham
-              name: AED
-            - description: Afghan afghani
-              name: AFN
-            - description: Albanian lek
-              name: ALL
-            - description: Armenian dram
-              name: AMD
-            - description: Netherlands Antillean guilder
-              name: ANG
-            - description: Angolan kwanza
-              name: AOA
-            - description: Argentine peso
-              name: ARS
-            - description: Australian dollar
-              name: AUD
-            - description: Aruban florin
-              name: AWG
-            - description: Azerbaijani manat
-              name: AZN
-            - description: Bosnia and Herzegovina convertible mark
-              name: BAM
-            - description: Barbados dollar
-              name: BBD
-            - description: Bangladeshi taka
-              name: BDT
-            - description: Bulgarian lev
-              name: BGN
-            - description: Bahraini dinar
-              name: BHD
-            - description: Burundian franc
-              name: BIF
-            - description: Bermudian dollar
-              name: BMD
-            - description: Brunei dollar
-              name: BND
-            - description: Boliviano
-              name: BOB
-            - description: Bolivian Mvdol
-              name: BOV
-            - description: Brazilian real
-              name: BRL
-            - description: Bahamian dollar
-              name: BSD
-            - description: Bhutanese ngultrum
-              name: BTN
-            - description: Botswana pula
-              name: BWP
-            - description: Belarusian ruble
-              name: BYR
-            - description: Belize dollar
-              name: BZD
-            - description: Canadian dollar
-              name: CAD
-            - description: Congolese franc
-              name: CDF
-            - description: WIR Euro
-              name: CHE
-            - description: Swiss franc
-              name: CHF
-            - description: WIR Franc
-              name: CHW
-            - description: Unidad de Fomento
-              name: CLF
-            - description: Chilean peso
-              name: CLP
-            - description: Chinese yuan
-              name: CNY
-            - description: Colombian peso
-              name: COP
-            - description: Unidad de Valor Real
-              name: COU
-            - description: Costa Rican colon
-              name: CRC
-            - description: Cuban convertible peso
-              name: CUC
-            - description: Cuban peso
-              name: CUP
-            - description: Cape Verdean escudo
-              name: CVE
-            - description: Czech koruna
-              name: CZK
-            - description: Djiboutian franc
-              name: DJF
-            - description: Danish krone
-              name: DKK
-            - description: Dominican peso
-              name: DOP
-            - description: Algerian dinar
-              name: DZD
-            - description: Egyptian pound
-              name: EGP
-            - description: Eritrean nakfa
-              name: ERN
-            - description: Ethiopian birr
-              name: ETB
-            - description: Euro
-              name: EUR
-            - description: Fiji dollar
-              name: FJD
-            - description: Falkland Islands pound
-              name: FKP
-            - description: Pound sterling
-              name: GBP
-            - description: Georgian lari
-              name: GEL
-            - description: Ghanaian cedi
-              name: GHS
-            - description: Gibraltar pound
-              name: GIP
-            - description: Gambian dalasi
-              name: GMD
-            - description: Guinean franc
-              name: GNF
-            - description: Guatemalan quetzal
-              name: GTQ
-            - description: Guyanese dollar
-              name: GYD
-            - description: Hong Kong dollar
-              name: HKD
-            - description: Honduran lempira
-              name: HNL
-            - description: Croatian kuna
-              name: HRK
-            - description: Haitian gourde
-              name: HTG
-            - description: Hungarian forint
-              name: HUF
-            - description: Indonesian rupiah
-              name: IDR
-            - description: Israeli new shekel
-              name: ILS
-            - description: Indian rupee
-              name: INR
-            - description: Iraqi dinar
-              name: IQD
-            - description: Iranian rial
-              name: IRR
-            - description: Icelandic króna
-              name: ISK
-            - description: Jamaican dollar
-              name: JMD
-            - description: Jordanian dinar
-              name: JOD
-            - description: Japanese yen
-              name: JPY
-            - description: Kenyan shilling
-              name: KES
-            - description: Kyrgyzstani som
-              name: KGS
-            - description: Cambodian riel
-              name: KHR
-            - description: Comoro franc
-              name: KMF
-            - description: North Korean won
-              name: KPW
-            - description: South Korean won
-              name: KRW
-            - description: Kuwaiti dinar
-              name: KWD
-            - description: Cayman Islands dollar
-              name: KYD
-            - description: Kazakhstani tenge
-              name: KZT
-            - description: Lao kip
-              name: LAK
-            - description: Lebanese pound
-              name: LBP
-            - description: Sri Lankan rupee
-              name: LKR
-            - description: Liberian dollar
-              name: LRD
-            - description: Lesotho loti
-              name: LSL
-            - description: Lithuanian litas
-              name: LTL
-            - description: Latvian lats
-              name: LVL
-            - description: Libyan dinar
-              name: LYD
-            - description: Moroccan dirham
-              name: MAD
-            - description: Moldovan leu
-              name: MDL
-            - description: Malagasy ariary
-              name: MGA
-            - description: Macedonian denar
-              name: MKD
-            - description: Myanmar kyat
-              name: MMK
-            - description: Mongolian tögrög
-              name: MNT
-            - description: Macanese pataca
-              name: MOP
-            - description: Mauritanian ouguiya
-              name: MRO
-            - description: Mauritian rupee
-              name: MUR
-            - description: Maldivian rufiyaa
-              name: MVR
-            - description: Malawian kwacha
-              name: MWK
-            - description: Mexican peso
-              name: MXN
-            - description: Mexican Unidad de Inversion
-              name: MXV
-            - description: Malaysian ringgit
-              name: MYR
-            - description: Mozambican metical
-              name: MZN
-            - description: Namibian dollar
-              name: NAD
-            - description: Nigerian naira
-              name: NGN
-            - description: Nicaraguan córdoba
-              name: NIO
-            - description: Norwegian krone
-              name: NOK
-            - description: Nepalese rupee
-              name: NPR
-            - description: New Zealand dollar
-              name: NZD
-            - description: Omani rial
-              name: OMR
-            - description: Panamanian balboa
-              name: PAB
-            - description: Peruvian sol
-              name: PEN
-            - description: Papua New Guinean kina
-              name: PGK
-            - description: Philippine peso
-              name: PHP
-            - description: Pakistani rupee
-              name: PKR
-            - description: Polish złoty
-              name: PLN
-            - description: Paraguayan guaraní
-              name: PYG
-            - description: Qatari riyal
-              name: QAR
-            - description: Romanian leu
-              name: RON
-            - description: Serbian dinar
-              name: RSD
-            - description: Russian ruble
-              name: RUB
-            - description: Rwandan franc
-              name: RWF
-            - description: Saudi riyal
-              name: SAR
-            - description: Solomon Islands dollar
-              name: SBD
-            - description: Seychelles rupee
-              name: SCR
-            - description: Sudanese pound
-              name: SDG
-            - description: Swedish krona
-              name: SEK
-            - description: Singapore dollar
-              name: SGD
-            - description: Saint Helena pound
-              name: SHP
-            - description: Sierra Leonean leone
-              name: SLL
-            - description: Somali shilling
-              name: SOS
-            - description: Surinamese dollar
-              name: SRD
-            - description: South Sudanese pound
-              name: SSP
-            - description: São Tomé and Príncipe dobra
-              name: STD
-            - description: Salvadoran colón
-              name: SVC
-            - description: Syrian pound
-              name: SYP
-            - description: Swazi lilangeni
-              name: SZL
-            - description: Thai baht
-              name: THB
-            - description: Tajikstani somoni
-              name: TJS
-            - description: Turkmenistan manat
-              name: TMT
-            - description: Tunisian dinar
-              name: TND
-            - description: Tongan pa'anga
-              name: TOP
-            - description: Turkish lira
-              name: TRY
-            - description: Trinidad and Tobago dollar
-              name: TTD
-            - description: New Taiwan dollar
-              name: TWD
-            - description: Tanzanian shilling
-              name: TZS
-            - description: Ukrainian hryvnia
-              name: UAH
-            - description: Ugandan shilling
-              name: UGX
-            - description: United States dollar
-              name: USD
-            - description: United States dollar (next day)
-              name: USN
-            - description: United States dollar (same day)
-              name: USS
-            - description: Uruguay Peso en Unidedades Indexadas
-              name: UYI
-            - description: Uruguyan peso
-              name: UYU
-            - description: Uzbekistan som
-              name: UZS
-            - description: Venezuelan bolívar soberano
-              name: VEF
-            - description: Vietnamese đồng
-              name: VND
-            - description: Vanuatu vatu
-              name: VUV
-            - description: Samoan tala
-              name: WST
-            - description: CFA franc BEAC
-              name: XAF
-            - description: Silver
-              name: XAG
-            - description: Gold
-              name: XAU
-            - description: European Composite Unit
-              name: XBA
-            - description: European Monetary Unit
-              name: XBB
-            - description: European Unit of Account 9
-              name: XBC
-            - description: European Unit of Account 17
-              name: XBD
-            - description: East Caribbean dollar
-              name: XCD
-            - description: Special drawing rights (International Monetary Fund)
-              name: XDR
-            - description: CFA franc BCEAO
-              name: XOF
-            - description: Palladium
-              name: XPD
-            - description: CFP franc
-              name: XPF
-            - description: Platinum
-              name: XPT
-            - description: Code reserved for testing
-              name: XTS
-            - description: No currency
-              name: XXX
-            - description: Yemeni rial
-              name: YER
-            - description: South African rand
-              name: ZAR
-            - description: Zambian kwacha
-              name: ZMK
-            - description: Zambian kwacha
-              name: ZMW
-            - description: Bitcoin
-              name: BTC
+          $ref: "#/components/schemas/Currency"
         customer_id:
           example: "12345"
           type: string
@@ -6893,7 +6900,7 @@ components:
                 example: 27500
                 type: number
               currency:
-                $ref: "#/components/schemas/Order/properties/currency"
+                $ref: "#/components/schemas/Currency"
               id:
                 $ref: "#/components/schemas/Id"
               name:
@@ -7093,7 +7100,7 @@ components:
                       example: 27500
                       type: number
                     currency:
-                      $ref: "#/components/schemas/Order/properties/currency"
+                      $ref: "#/components/schemas/Currency"
                     discount_id:
                       example: "12345"
                       type: string
@@ -7107,7 +7114,7 @@ components:
                       example: 27500
                       type: number
                     currency:
-                      $ref: "#/components/schemas/Order/properties/currency"
+                      $ref: "#/components/schemas/Currency"
                     id:
                       $ref: "#/components/schemas/Id"
                     tax_id:
@@ -7128,7 +7135,7 @@ components:
                       example: 27500
                       type: number
                     currency:
-                      $ref: "#/components/schemas/Order/properties/currency"
+                      $ref: "#/components/schemas/Currency"
                     name:
                       example: New York Strip Steak - no cheese
                       type: string
@@ -7137,10 +7144,7 @@ components:
                 example: New York Strip Steak
                 type: string
               quantity:
-                example: 1
-                nullable: true
-                title: Quantity
-                type: number
+                $ref: "#/components/schemas/Quantity"
               total_amount:
                 example: 27500
                 nullable: true
@@ -7157,10 +7161,7 @@ components:
                 title: Tax amount
                 type: number
               unit_price:
-                example: 27500.5
-                nullable: true
-                title: Unit price
-                type: number
+                $ref: "#/components/schemas/UnitPrice"
             type: object
           type: array
         location_id:
@@ -7204,7 +7205,7 @@ components:
                 example: 27500
                 type: number
               currency:
-                $ref: "#/components/schemas/Order/properties/currency"
+                $ref: "#/components/schemas/Currency"
               id:
                 $ref: "#/components/schemas/Id"
             type: object
@@ -7225,7 +7226,7 @@ components:
                 example: 27500
                 type: number
               currency:
-                $ref: "#/components/schemas/Order/properties/currency"
+                $ref: "#/components/schemas/Currency"
               id:
                 $ref: "#/components/schemas/Id"
               location_id:
@@ -7296,7 +7297,7 @@ components:
                 example: true
                 type: boolean
               currency:
-                $ref: "#/components/schemas/Order/properties/currency"
+                $ref: "#/components/schemas/Currency"
               id:
                 example: state-sales-tax
                 type: string
@@ -7305,9 +7306,7 @@ components:
                 example: State Sales Tax
                 type: string
               percentage:
-                example: 15
-                title: Percentage
-                type: number
+                $ref: "#/components/schemas/Percentage"
               scope:
                 enum:
                   - order
@@ -7360,7 +7359,7 @@ components:
                 nullable: true
                 type: number
               currency:
-                $ref: "#/components/schemas/Order/properties/currency"
+                $ref: "#/components/schemas/Currency"
               id:
                 $ref: "#/components/schemas/Id"
               location_id:
@@ -7454,14 +7453,11 @@ components:
           title: Total tax
           type: number
         updated_at:
-          $ref: "#/components/schemas/Item/properties/updated_at"
+          $ref: "#/components/schemas/UpdatedAt"
         updated_by:
-          $ref: "#/components/schemas/Item/properties/version"
+          $ref: "#/components/schemas/UpdatedBy"
         version:
-          example: "230320320320"
-          nullable: true
-          title: Version
-          type: string
+          $ref: "#/components/schemas/Version"
         voided:
           example: false
           type: boolean
@@ -7479,9 +7475,9 @@ components:
       additionalProperties: false
       properties:
         created_at:
-          $ref: "#/components/schemas/Item/properties/created_at"
+          $ref: "#/components/schemas/CreatedAt"
         created_by:
-          $ref: "#/components/schemas/Item/properties/created_by"
+          $ref: "#/components/schemas/CreatedBy"
         default:
           example: true
           title: Default
@@ -7493,9 +7489,9 @@ components:
           title: Order type name
           type: string
         updated_at:
-          $ref: "#/components/schemas/Item/properties/updated_at"
+          $ref: "#/components/schemas/UpdatedAt"
         updated_by:
-          $ref: "#/components/schemas/Item/properties/version"
+          $ref: "#/components/schemas/UpdatedBy"
       type: object
     PaymentCard:
       description: A card's non-confidential details.
@@ -7589,7 +7585,7 @@ components:
           title: Reference ID
           type: string
         version:
-          $ref: "#/components/schemas/Order/properties/version"
+          $ref: "#/components/schemas/Version"
       type: object
     PaymentRequiredResponse:
       properties:
@@ -7617,6 +7613,10 @@ components:
           description: The type of error returned
           example: RequestLimitError
           type: string
+    Percentage:
+      example: 15
+      title: Percentage
+      type: number
     PhoneNumber:
       properties:
         area_code:
@@ -7751,11 +7751,11 @@ components:
           title: Change back cash amount
           type: number
         created_at:
-          $ref: "#/components/schemas/Item/properties/created_at"
+          $ref: "#/components/schemas/CreatedAt"
         created_by:
-          $ref: "#/components/schemas/Item/properties/created_by"
+          $ref: "#/components/schemas/CreatedBy"
         currency:
-          $ref: "#/components/schemas/Order/properties/currency"
+          $ref: "#/components/schemas/Currency"
         customer_id:
           example: "12345"
           type: string
@@ -7823,7 +7823,7 @@ components:
         id:
           $ref: "#/components/schemas/Id"
         idempotency_key:
-          $ref: "#/components/schemas/Item/properties/idempotency_key"
+          $ref: "#/components/schemas/IdempotencyKey"
         location_id:
           example: "12345"
           type: string
@@ -7907,9 +7907,9 @@ components:
           title: Total amount
           type: number
         updated_at:
-          $ref: "#/components/schemas/Item/properties/updated_at"
+          $ref: "#/components/schemas/UpdatedAt"
         updated_by:
-          $ref: "#/components/schemas/Item/properties/version"
+          $ref: "#/components/schemas/UpdatedBy"
         wallet:
           description: Wallet details for this payment. This field is currently not available. Reach out to our team for more info.
           properties:
@@ -7993,6 +7993,11 @@ components:
               type: string
           type: object
       x-sdk-exclude: true
+    Quantity:
+      example: 1
+      nullable: true
+      title: Quantity
+      type: number
     RowVersion:
       example: 1-12345
       nullable: true
@@ -8006,7 +8011,7 @@ components:
             example: 27500
             type: number
           currency:
-            $ref: "#/components/schemas/Order/properties/currency"
+            $ref: "#/components/schemas/Currency"
           name:
             description: Service charge name
             example: Charge for delivery
@@ -8059,13 +8064,13 @@ components:
           description: Allow tipping on payment from tender
           type: boolean
         created_at:
-          $ref: "#/components/schemas/Item/properties/created_at"
+          $ref: "#/components/schemas/CreatedAt"
         created_by:
-          $ref: "#/components/schemas/Item/properties/created_by"
+          $ref: "#/components/schemas/CreatedBy"
         editable:
-          $ref: "#/components/schemas/Item/properties/hidden"
+          $ref: "#/components/schemas/Hidden"
         hidden:
-          $ref: "#/components/schemas/Item/properties/hidden"
+          $ref: "#/components/schemas/Hidden"
         id:
           $ref: "#/components/schemas/Id"
         key:
@@ -8081,9 +8086,9 @@ components:
           description: If this tender opens the cash drawer
           type: boolean
         updated_at:
-          $ref: "#/components/schemas/Item/properties/updated_at"
+          $ref: "#/components/schemas/UpdatedAt"
         updated_by:
-          $ref: "#/components/schemas/Item/properties/version"
+          $ref: "#/components/schemas/UpdatedBy"
       type: object
     UnauthorizedResponse:
       properties:
@@ -8151,6 +8156,11 @@ components:
       required:
         - id
       title: UnifiedId
+    UnitPrice:
+      example: 27500.5
+      nullable: true
+      title: Unit price
+      type: number
     UnprocessableResponse:
       properties:
         detail:
@@ -8465,6 +8475,22 @@ components:
         - operation
         - data
       type: object
+    UpdatedAt:
+      example: 2020-09-30T07:43:32.000Z
+      format: date-time
+      readOnly: true
+      title: Updated at (timestamp)
+      type: string
+    UpdatedBy:
+      example: "12345"
+      nullable: true
+      readOnly: true
+      type: string
+    Version:
+      example: "230320320320"
+      nullable: true
+      title: Version
+      type: string
     Website:
       properties:
         id:

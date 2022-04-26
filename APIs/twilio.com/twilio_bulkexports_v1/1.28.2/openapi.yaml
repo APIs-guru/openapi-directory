@@ -179,6 +179,7 @@ paths:
     servers:
       - url: https://bulkexports.twilio.com
     x-twilio:
+      className: export_configuration
       defaultOutputProperties:
         - enabled
         - resource_type
@@ -404,6 +405,7 @@ paths:
     servers:
       - url: https://bulkexports.twilio.com
     x-twilio:
+      className: export_custom_job
       defaultOutputProperties:
         - details
         - email

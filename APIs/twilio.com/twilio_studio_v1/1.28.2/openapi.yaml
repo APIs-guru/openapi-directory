@@ -236,6 +236,7 @@ paths:
     servers:
       - url: https://studio.twilio.com
     x-twilio:
+      className: engagement_context
       defaultOutputProperties:
         - context
       pathType: instance
@@ -417,6 +418,7 @@ paths:
     servers:
       - url: https://studio.twilio.com
     x-twilio:
+      className: step_context
       defaultOutputProperties:
         - context
       pathType: instance
@@ -656,6 +658,7 @@ paths:
     servers:
       - url: https://studio.twilio.com
     x-twilio:
+      className: execution_context
       defaultOutputProperties:
         - context
       pathType: instance
@@ -731,6 +734,7 @@ paths:
     servers:
       - url: https://studio.twilio.com
     x-twilio:
+      className: execution_step
       defaultOutputProperties:
         - sid
         - name
@@ -783,6 +787,7 @@ paths:
     servers:
       - url: https://studio.twilio.com
     x-twilio:
+      className: execution_step
       defaultOutputProperties:
         - sid
         - name
@@ -835,6 +840,7 @@ paths:
     servers:
       - url: https://studio.twilio.com
     x-twilio:
+      className: execution_step_context
       defaultOutputProperties:
         - context
       pathType: instance

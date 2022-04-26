@@ -307,6 +307,7 @@ paths:
     servers:
       - url: https://numbers.twilio.com
     x-twilio:
+      className: bundle_copy
       defaultOutputProperties: []
       pathType: list
   "/v2/RegulatoryCompliance/Bundles/{BundleSid}/Evaluations":
@@ -659,6 +660,7 @@ paths:
     servers:
       - url: https://numbers.twilio.com
     x-twilio:
+      className: replace_items
       defaultOutputProperties: []
       pathType: list
   "/v2/RegulatoryCompliance/Bundles/{Sid}":

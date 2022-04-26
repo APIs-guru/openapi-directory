@@ -57,6 +57,7 @@ paths:
     servers:
       - url: https://voice.twilio.com
     x-twilio:
+      className: archived_call
       defaultOutputProperties: []
       pathType: instance
   /v1/ByocTrunks:
@@ -544,6 +545,7 @@ paths:
     servers:
       - url: https://voice.twilio.com
     x-twilio:
+      className: connection_policy_target
       defaultOutputProperties:
         - sid
         - friendly_name
@@ -673,6 +675,7 @@ paths:
     servers:
       - url: https://voice.twilio.com
     x-twilio:
+      className: connection_policy_target
       defaultOutputProperties:
         - sid
         - friendly_name
@@ -984,6 +987,7 @@ paths:
     servers:
       - url: https://voice.twilio.com
     x-twilio:
+      className: highrisk_special_prefix
       defaultOutputProperties:
         - prefix
       pathType: list
@@ -1211,6 +1215,7 @@ paths:
     servers:
       - url: https://voice.twilio.com
     x-twilio:
+      className: settings
       defaultOutputProperties:
         - dialing_permissions_inheritance
       pathType: instance

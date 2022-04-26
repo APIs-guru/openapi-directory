@@ -13,17 +13,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Identity-Aware Proxy API
   version: v1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://iap.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: iap
 externalDocs:
@@ -37,7 +35,7 @@ paths:
       description: Deletes a TunnelDestGroup.
       operationId: iap.projects.iap_tunnel.locations.destGroups.delete
       parameters:
-        - description: "Required. Name of the TunnelDestGroup to be deleted. In the following format: projects/{project_number/id}/iap_tunnel/locations/{location}/destGroups/{dest_group}."
+        - description: "Required. Name of the TunnelDestGroup to delete. In the following format: `projects/{project_number/id}/iap_tunnel/locations/{location}/destGroups/{dest_group}`."
           in: path
           name: name
           required: true
@@ -61,7 +59,7 @@ paths:
       description: Retrieves an existing TunnelDestGroup.
       operationId: iap.projects.iap_tunnel.locations.destGroups.get
       parameters:
-        - description: "Required. Name of the TunnelDestGroup to be fetched. In the following format: projects/{project_number/id}/iap_tunnel/locations/{location}/destGroups/{dest_group}."
+        - description: "Required. Name of the TunnelDestGroup to be fetched. In the following format: `projects/{project_number/id}/iap_tunnel/locations/{location}/destGroups/{dest_group}`."
           in: path
           name: name
           required: true
@@ -103,7 +101,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The field mask specifying which IAP settings should be updated. If omitted, then all of the settings are updated. See https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+        - description: A field mask that specifies which IAP settings to update. If omitted, then all of the settings are updated. See https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
           in: query
           name: updateMask
           schema:
@@ -308,16 +306,16 @@ paths:
         - projects
   "/v1/{parent}/destGroups":
     get:
-      description: "Lists the existing TunnelDestGroups. To group across all locations, use a `-` as the location ID. For example: /v1/projects/123/iap_tunnel/locations/-/destGroups"
+      description: "Lists the existing TunnelDestGroups. To group across all locations, use a `-` as the location ID. For example: `/v1/projects/123/iap_tunnel/locations/-/destGroups`"
       operationId: iap.projects.iap_tunnel.locations.destGroups.list
       parameters:
-        - description: "Required. GCP Project number/id and location. In the following format: projects/{project_number/id}/iap_tunnel/locations/{location}. A `-` can be used for the location to group across all locations."
+        - description: "Required. Google Cloud Project ID and location. In the following format: `projects/{project_number/id}/iap_tunnel/locations/{location}`. A `-` can be used for the location to group across all locations."
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: The maximum number of groups to return. The service may return fewer than this value. If unspecified, at most 100 groups will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.
+        - description: The maximum number of groups to return. The service might return fewer than this value. If unspecified, at most 100 groups are returned. The maximum value is 1000; values above 1000 are coerced to 1000.
           in: query
           name: pageSize
           schema:
@@ -357,13 +355,13 @@ paths:
       description: Creates a new TunnelDestGroup.
       operationId: iap.projects.iap_tunnel.locations.destGroups.create
       parameters:
-        - description: "Required. GCP Project number/id and location. In the following format: projects/{project_number/id}/iap_tunnel/locations/{location}."
+        - description: "Required. Google Cloud Project ID and location. In the following format: `projects/{project_number/id}/iap_tunnel/locations/{location}`."
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: Required. The ID to use for the TunnelDestGroup, which will become the final component of the resource name. This value should be 4-63 characters, and valid characters are /a-z-/.
+        - description: Required. The ID to use for the TunnelDestGroup, which becomes the final component of the resource name. This value must be 4-63 characters, and valid characters are `a-z-`.
           in: query
           name: tunnelDestGroupId
           schema:
@@ -854,7 +852,7 @@ components:
       description: The response from ListTunnelDestGroups.
       properties:
         nextPageToken:
-          description: A token, which can be send as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          description: A token that you can send as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
         tunnelDestGroups:
           description: TunnelDestGroup existing in the project.
@@ -1019,5 +1017,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

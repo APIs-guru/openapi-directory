@@ -247,6 +247,7 @@ paths:
     servers:
       - url: https://insights.twilio.com
     x-twilio:
+      className: conference_participant
       defaultOutputProperties:
         - participant_sid
         - conference_sid
@@ -301,6 +302,7 @@ paths:
     servers:
       - url: https://insights.twilio.com
     x-twilio:
+      className: conference_participant
       defaultOutputProperties:
         - participant_sid
         - conference_sid
@@ -753,6 +755,7 @@ paths:
     servers:
       - url: https://insights.twilio.com
     x-twilio:
+      className: call_summaries
       defaultOutputProperties:
         - account_sid
         - call_sid
@@ -1070,6 +1073,7 @@ paths:
     servers:
       - url: https://insights.twilio.com
     x-twilio:
+      className: call_summary
       defaultOutputProperties:
         - call_type
         - call_state
@@ -1105,6 +1109,7 @@ paths:
     servers:
       - url: https://insights.twilio.com
     x-twilio:
+      className: call
       defaultOutputProperties: []
       pathType: instance
 components:

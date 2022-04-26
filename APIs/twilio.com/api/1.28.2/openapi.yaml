@@ -1053,6 +1053,7 @@ paths:
     servers:
       - url: https://api.twilio.com
     x-twilio:
+      className: available_phone_number_country
       defaultOutputProperties:
         - country_code
         - country
@@ -1094,6 +1095,7 @@ paths:
     servers:
       - url: https://api.twilio.com
     x-twilio:
+      className: available_phone_number_country
       defaultOutputProperties:
         - country_code
         - country
@@ -7687,6 +7689,7 @@ paths:
     servers:
       - url: https://api.twilio.com
     x-twilio:
+      className: assigned_add_on_extension
       defaultOutputProperties:
         - sid
         - unique_name
@@ -7749,6 +7752,7 @@ paths:
     servers:
       - url: https://api.twilio.com
     x-twilio:
+      className: assigned_add_on_extension
       defaultOutputProperties:
         - sid
         - unique_name
@@ -8198,6 +8202,7 @@ paths:
     servers:
       - url: https://api.twilio.com
     x-twilio:
+      className: new_key
       defaultOutputProperties:
         - sid
         - friendly_name
@@ -9161,6 +9166,7 @@ paths:
     servers:
       - url: https://api.twilio.com
     x-twilio:
+      className: validation_request
       defaultOutputProperties:
         - sid
         - phone_number
@@ -11189,6 +11195,7 @@ paths:
     servers:
       - url: https://api.twilio.com
     x-twilio:
+      className: auth_calls_credential_list_mapping
       defaultOutputProperties:
         - sid
         - friendly_name
@@ -11278,6 +11285,7 @@ paths:
     servers:
       - url: https://api.twilio.com
     x-twilio:
+      className: auth_calls_credential_list_mapping
       defaultOutputProperties:
         - sid
         - friendly_name
@@ -11401,6 +11409,7 @@ paths:
     servers:
       - url: https://api.twilio.com
     x-twilio:
+      className: auth_calls_ip_access_control_list_mapping
       defaultOutputProperties:
         - sid
         - friendly_name
@@ -11490,6 +11499,7 @@ paths:
     servers:
       - url: https://api.twilio.com
     x-twilio:
+      className: auth_calls_ip_access_control_list_mapping
       defaultOutputProperties:
         - sid
         - friendly_name
@@ -11613,6 +11623,7 @@ paths:
     servers:
       - url: https://api.twilio.com
     x-twilio:
+      className: auth_registrations_credential_list_mapping
       defaultOutputProperties:
         - sid
         - friendly_name
@@ -11702,6 +11713,7 @@ paths:
     servers:
       - url: https://api.twilio.com
     x-twilio:
+      className: auth_registrations_credential_list_mapping
       defaultOutputProperties:
         - sid
         - friendly_name
@@ -13100,6 +13112,7 @@ paths:
     servers:
       - url: https://api.twilio.com
     x-twilio:
+      className: new_signing_key
       defaultOutputProperties:
         - sid
         - friendly_name

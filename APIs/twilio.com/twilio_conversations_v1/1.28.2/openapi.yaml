@@ -219,6 +219,7 @@ paths:
     servers:
       - url: https://conversations.twilio.com
     x-twilio:
+      className: address_configuration
       defaultOutputProperties:
         - sid
         - type
@@ -338,6 +339,7 @@ paths:
     servers:
       - url: https://conversations.twilio.com
     x-twilio:
+      className: address_configuration
       defaultOutputProperties:
         - sid
         - type
@@ -738,6 +740,7 @@ paths:
     servers:
       - url: https://conversations.twilio.com
     x-twilio:
+      className: delivery_receipt
       defaultOutputProperties:
         - sid
         - message_sid
@@ -788,6 +791,7 @@ paths:
     servers:
       - url: https://conversations.twilio.com
     x-twilio:
+      className: delivery_receipt
       defaultOutputProperties:
         - sid
         - message_sid
@@ -2968,6 +2972,7 @@ paths:
     servers:
       - url: https://conversations.twilio.com
     x-twilio:
+      className: delivery_receipt
       defaultOutputProperties:
         - sid
         - message_sid
@@ -3027,6 +3032,7 @@ paths:
     servers:
       - url: https://conversations.twilio.com
     x-twilio:
+      className: delivery_receipt
       defaultOutputProperties:
         - sid
         - message_sid
@@ -4615,6 +4621,7 @@ paths:
     servers:
       - url: https://conversations.twilio.com
     x-twilio:
+      className: user_conversation
       defaultOutputProperties:
         - conversation_sid
         - user_sid
@@ -4752,6 +4759,7 @@ paths:
     servers:
       - url: https://conversations.twilio.com
     x-twilio:
+      className: user_conversation
       defaultOutputProperties:
         - conversation_sid
         - user_sid
@@ -5080,6 +5088,7 @@ paths:
     servers:
       - url: https://conversations.twilio.com
     x-twilio:
+      className: user_conversation
       defaultOutputProperties:
         - conversation_sid
         - user_sid
@@ -5190,6 +5199,7 @@ paths:
     servers:
       - url: https://conversations.twilio.com
     x-twilio:
+      className: user_conversation
       defaultOutputProperties:
         - conversation_sid
         - user_sid

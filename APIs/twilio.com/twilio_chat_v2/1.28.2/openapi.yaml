@@ -2497,6 +2497,7 @@ paths:
     servers:
       - url: https://chat.twilio.com
     x-twilio:
+      className: user_binding
       defaultOutputProperties:
         - sid
         - endpoint
@@ -2582,6 +2583,7 @@ paths:
     servers:
       - url: https://chat.twilio.com
     x-twilio:
+      className: user_binding
       defaultOutputProperties:
         - sid
         - endpoint
@@ -2657,6 +2659,7 @@ paths:
     servers:
       - url: https://chat.twilio.com
     x-twilio:
+      className: user_channel
       defaultOutputProperties:
         - channel_sid
         - status
@@ -2799,6 +2802,7 @@ paths:
     servers:
       - url: https://chat.twilio.com
     x-twilio:
+      className: user_channel
       defaultOutputProperties:
         - channel_sid
         - status

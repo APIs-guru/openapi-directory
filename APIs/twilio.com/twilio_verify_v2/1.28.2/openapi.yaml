@@ -136,6 +136,7 @@ paths:
     servers:
       - url: https://verify.twilio.com
     x-twilio:
+      className: verification_attempt
       defaultOutputProperties:
         - sid
         - date_created
@@ -204,6 +205,7 @@ paths:
     servers:
       - url: https://verify.twilio.com
     x-twilio:
+      className: verification_attempts_summary
       defaultOutputProperties:
         - total_attempts
         - total_converted
@@ -239,6 +241,7 @@ paths:
     servers:
       - url: https://verify.twilio.com
     x-twilio:
+      className: verification_attempt
       defaultOutputProperties:
         - sid
         - date_created
@@ -1220,6 +1223,7 @@ paths:
     servers:
       - url: https://verify.twilio.com
     x-twilio:
+      className: new_factor
       defaultOutputProperties:
         - sid
         - friendly_name

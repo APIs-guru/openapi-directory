@@ -13,20 +13,24 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Resource Manager API
   version: v3
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://cloudresourcemanager.googleapis.com/$discovery/rest?version=v3
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: cloudresourcemanager
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/resource-manager
 tags:
+  - name: effectiveTags
   - name: folders
   - name: liens
   - name: operations
@@ -36,6 +40,56 @@ tags:
   - name: tagKeys
   - name: tagValues
 paths:
+  /v3/effectiveTags:
+    get:
+      description: Return a list of effective tags for the given cloud resource, as specified in `parent`.
+      operationId: cloudresourcemanager.effectiveTags.list
+      parameters:
+        - description: Optional. The maximum number of effective tags to return in the response. The server allows a maximum of 300 effective tags to return in a single page. If unspecified, the server will use 100 as the default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A pagination token returned from a previous call to `ListEffectiveTags` that indicates from where this listing should continue.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Required. The full resource name of a resource for which you want to list the effective tags. E.g. "//cloudresourcemanager.googleapis.com/projects/123"
+          in: query
+          name: parent
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListEffectiveTagsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+      tags:
+        - effectiveTags
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /v3/folders:
     get:
       description: Lists the folders that are direct descendants of supplied parent resource. `list()` provides a strongly consistent view of the folders underneath the specified parent resource. `list()` returns folders sorted based upon the (ascending) lexical ordering of their display_name. The caller must have `resourcemanager.folders.list` permission on the identified parent.
@@ -1287,6 +1341,25 @@ components:
       description: Runtime operation information for deleting a TagValue.
       properties: {}
       type: object
+    EffectiveTag:
+      description: An EffectiveTag represents a tag that applies to a resource during policy evaluation. Tags can be either directly bound to a resource or inherited from its ancestor. EffectiveTag contains the name and namespaced_name of the tag value and tag key, with additional fields of `inherited` to indicate the inheritance status of the effective tag.
+      properties:
+        inherited:
+          description: Indicates the inheritance status of a tag value attached to the given resource. If the tag value is inherited from one of the resource's ancestors, inherited will be true. If false, then the tag value is directly attached to the resource, inherited will be false.
+          type: boolean
+        namespacedTagKey:
+          description: The namespaced_name of the TagKey, in the format of `{organization_id}/{tag_key_short_name}`
+          type: string
+        namespacedTagValue:
+          description: Namespaced name of the TagValue. Must be in the format `{organization_id}/{tag_key_short_name}/{tag_value_short_name}`.
+          type: string
+        tagKey:
+          description: The name of the TagKey, in the format `tagKeys/{id}`, such as `tagKeys/123`.
+          type: string
+        tagValue:
+          description: Resource name for TagValue in the format `tagValues/456`.
+          type: string
+      type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
@@ -1425,6 +1498,18 @@ components:
           items:
             type: string
           type: array
+      type: object
+    ListEffectiveTagsResponse:
+      description: The response of ListEffectiveTags.
+      properties:
+        effectiveTags:
+          description: A possibly paginated list of effective tags for the specified resource.
+          items:
+            $ref: "#/components/schemas/EffectiveTag"
+          type: array
+        nextPageToken:
+          description: Pagination token. If the result set is too large to fit in a single response, this token is returned. It encodes the position of the current result cursor. Feeding this value into a new list request with the `page_token` parameter gives the next page of the results. When `next_page_token` is not filled in, there is no next page and the list returned is the last page in the result set. Pagination tokens have a limited lifetime.
+          type: string
       type: object
     ListFoldersResponse:
       description: The ListFolders response message.
@@ -1932,3 +2017,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud services and see the email address of your Google Account
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

@@ -658,6 +658,7 @@ paths:
     servers:
       - url: https://flex-api.twilio.com
     x-twilio:
+      className: interaction_channel
       defaultOutputProperties:
         - sid
       pathType: list
@@ -777,6 +778,7 @@ paths:
     servers:
       - url: https://flex-api.twilio.com
     x-twilio:
+      className: interaction_channel_invite
       defaultOutputProperties:
         - sid
       pathType: list
@@ -906,6 +908,7 @@ paths:
     servers:
       - url: https://flex-api.twilio.com
     x-twilio:
+      className: interaction_channel_participant
       defaultOutputProperties:
         - sid
       pathType: list
@@ -972,6 +975,7 @@ paths:
     servers:
       - url: https://flex-api.twilio.com
     x-twilio:
+      className: interaction_channel_participant
       defaultOutputProperties:
         - sid
       pathType: instance
@@ -1064,6 +1068,7 @@ paths:
     servers:
       - url: https://flex-api.twilio.com
     x-twilio:
+      className: interaction_channel
       defaultOutputProperties:
         - sid
       pathType: instance
