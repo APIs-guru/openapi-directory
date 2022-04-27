@@ -84,11 +84,12 @@ info:
     | 204  | No Content           | The server has successfully fulfilled the request and that there is no additional content to send in the response payload body.                                                                          |
     | 400  | Bad Request          | The receiving server cannot understand the request because of malformed syntax. Do not repeat the request without first modifying it; check the request for errors, fix them and then retry the request. |
     | 401  | Unauthorized         | The request has not been applied because it lacks valid authentication credentials for the target resource.                                                                                              |
-    | 402  | PosPayment Required     | Subscription data is incomplete or out of date. You'll need to provide payment details to continue.                                                                                                      |
+    | 402  | Payment Required     | Subscription data is incomplete or out of date. You'll need to provide payment details to continue.                                                                                                      |
     | 403  | Forbidden            | You do not have the appropriate user rights to access the request. Do not repeat the request.                                                                                                            |
     | 404  | Not Found            | The origin server did not find a current representation for the target resource or is not willing to disclose that one exists.                                                                           |
     | 409  | Conflict             | The request could not be completed due to a conflict with the current state of the target resource.                                                                                                      |
     | 422  | Unprocessable Entity | The server understands the content type of the request entity, and the syntax of the request entity is correct but was unable to process the contained instructions.                                     |
+    | 429  | Too Many Requests    | You sent too many requests in a given amount of time ("rate limit"). Try again later                                                                                                                     |
     | 5xx  | Server Errors        | Something went wrong with the Unify API. These errors are logged on our side. You can contact our team to resolve the issue.                                                                             |
 
     ### Handling errors
@@ -128,6 +129,10 @@ info:
     #### ConnectorDisabledError
 
     A request has been made to a connector that has since been disabled. This may be temporary - You can contact our team to resolve the issue.
+
+    ### ConnectorRateLimitError
+
+    You sent too many request to a connector. These rate limits vary from connector to connector. You will need to try again later.
 
     #### RequestLimitError
 
@@ -263,7 +268,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: POS API
-  version: 8.26.1
+  version: 8.27.1
   x-apideck-api: pos
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -4310,6 +4315,12 @@ components:
           schema:
             $ref: "#/components/schemas/Tender"
       description: Tenders
+    TooManyRequestsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/TooManyRequestsResponse"
+      description: Too Many Requests
     UnauthorizedResponse:
       content:
         application/json:
@@ -8090,6 +8101,36 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+    TooManyRequestsResponse:
+      properties:
+        detail:
+          properties:
+            context:
+              type: string
+            error:
+              additionalProperties: true
+              type: object
+          type: object
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 6585)
+          example: Too Many Requests
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Connector Rate Limit Error
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#connectorratelimiterror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 429
+          type: number
+        type_name:
+          description: The type of error returned
+          example: ConnectorRateLimitError
+          type: string
     UnauthorizedResponse:
       properties:
         detail:

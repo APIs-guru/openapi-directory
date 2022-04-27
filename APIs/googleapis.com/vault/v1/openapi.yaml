@@ -2142,6 +2142,7 @@ components:
             - TEAM_DRIVE
             - ENTIRE_ORG
             - ROOM
+            - SITES_URL
             - SHARED_DRIVE
           type: string
         orgUnitInfo:
@@ -2156,11 +2157,15 @@ components:
             - TEAM_DRIVE
             - ENTIRE_ORG
             - ROOM
+            - SITES_URL
             - SHARED_DRIVE
           type: string
         sharedDriveInfo:
           $ref: "#/components/schemas/SharedDriveInfo"
           description: Required when **SearchMethod** is **SHARED_DRIVE**.
+        sitesUrlInfo:
+          $ref: "#/components/schemas/SitesUrlInfo"
+          description: Required when **SearchMethod** is **SITES_URL**.
         startTime:
           description: The start time for the search query. Specify in GMT. The value is rounded to 12 AM on the specified date.
           format: google-datetime
@@ -2239,6 +2244,15 @@ components:
       properties:
         sharedDriveIds:
           description: A list of shared drive IDs, as provided by the [Drive API](https://developers.google.com/drive).
+          items:
+            type: string
+          type: array
+      type: object
+    SitesUrlInfo:
+      description: The published site URLs of new Google Sites to search
+      properties:
+        urls:
+          description: A list of published site URLs.
           items:
             type: string
           type: array

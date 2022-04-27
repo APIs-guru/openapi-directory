@@ -164,7 +164,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 8.26.1
+  version: 8.27.1
   x-apideck-api: vault
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -526,6 +526,7 @@ paths:
               serviceId: 'pipedrive',
               unifiedApi: 'crm',
               connection: {
+                enabled: true,
                 settings: {
                   instance_url: 'https://eu28.salesforce.com',
                   api_key: '12345xxxxxx'
@@ -548,8 +549,7 @@ paths:
                       }
                     ]
                   }
-                ],
-                enabled: true
+                ]
               }
             }
 
@@ -612,6 +612,7 @@ paths:
               serviceId: 'pipedrive',
               unifiedApi: 'crm',
               connection: {
+                enabled: true,
                 settings: {
                   instance_url: 'https://eu28.salesforce.com',
                   api_key: '12345xxxxxx'
@@ -634,8 +635,7 @@ paths:
                       }
                     ]
                   }
-                ],
-                enabled: true
+                ]
               }
             }
 
@@ -904,6 +904,7 @@ paths:
               unifiedApi: 'crm',
               resource: 'leads',
               connection: {
+                enabled: true,
                 settings: {
                   instance_url: 'https://eu28.salesforce.com',
                   api_key: '12345xxxxxx'
@@ -926,8 +927,7 @@ paths:
                       }
                     ]
                   }
-                ],
-                enabled: true
+                ]
               }
             }
 
@@ -1681,6 +1681,7 @@ components:
         auth_type:
           $ref: "#/components/schemas/AuthType"
         authorize_url:
+          description: The OAuth redirect URI. Redirect your users to this URI to let them authorize your app in the connector's UI. Before you can use this URI, you must add `redirect_uri` as a query parameter. Your users will be redirected to this `redirect_uri` after they granted access to your app in the connector's UI.
           example: https://unify.apideck.com/vault/authorize/salesforce/<application-id>?state=<state>
           nullable: true
           readOnly: true
@@ -1746,6 +1747,7 @@ components:
           readOnly: true
           type: number
         enabled:
+          description: Whether the connection is enabled or not. You can enable or disable a connection using the Update Connection API.
           example: true
           type: boolean
         form_fields:
@@ -1775,6 +1777,7 @@ components:
           readOnly: true
           type: array
         has_guide:
+          description: Whether the connector has a guide available in the developer docs or not (https://docs.apideck.com/connectors/{service_id}/docs/consumer+connection).
           example: true
           readOnly: true
           type: boolean
@@ -1822,6 +1825,7 @@ components:
           readOnly: true
           type: array
         revoke_url:
+          description: The OAuth revoke URI. Redirect your users to this URI to revoke this connection. Before you can use this URI, you must add `redirect_uri` as a query parameter. Your users will be redirected to this `redirect_uri` after they granted access to your app in the connector's UI.
           example: https://unify.apideck.com/vault/revoke/salesforce/<application-id>?state=<state>
           nullable: true
           readOnly: true
