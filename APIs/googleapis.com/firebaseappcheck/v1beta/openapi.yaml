@@ -22,9 +22,9 @@ info:
     - format: google
       url: https://firebaseappcheck.googleapis.com/$discovery/rest?version=v1beta
       version: v1
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: firebaseappcheck
-  x-preferred: false
 externalDocs:
   url: https://firebase.google.com/docs/app-check
 tags:
@@ -261,6 +261,52 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
+  "/v1beta/{app}:exchangePlayIntegrityToken":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Validates an [integrity verdict response token from Play Integrity](https://developer.android.com/google/play/integrity/verdict#decrypt-verify). If valid, returns an AppCheckToken.
+      operationId: firebaseappcheck.projects.apps.exchangePlayIntegrityToken
+      parameters:
+        - description: "Required. The relative resource name of the Android app, in the format: ``` projects/{project_number}/apps/{app_id} ``` If necessary, the `project_number` element can be replaced with the project ID of the Firebase project. Learn more about using project identifiers in Google's [AIP 2510](https://google.aip.dev/cloud/2510) standard."
+          in: path
+          name: app
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaExchangePlayIntegrityTokenRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaAppCheckToken"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+      tags:
+        - projects
   "/v1beta/{app}:exchangeRecaptchaEnterpriseToken":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -321,7 +367,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Validates a [reCAPTCHA v3 response token](https://developers.google.com/recaptcha/docs/v3). If valid, returns an AppCheckToken.
+      description: This method has been renamed to ExchangeRecaptchaV3Token. Validates a [reCAPTCHA v3 response token](https://developers.google.com/recaptcha/docs/v3). If valid, returns an AppCheckToken.
       operationId: firebaseappcheck.projects.apps.exchangeRecaptchaToken
       parameters:
         - description: "Required. The relative resource name of the web app, in the format: ``` projects/{project_number}/apps/{app_id} ``` If necessary, the `project_number` element can be replaced with the project ID of the Firebase project. Learn more about using project identifiers in Google's [AIP 2510](https://google.aip.dev/cloud/2510) standard."
@@ -479,6 +525,52 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaGenerateAppAttestChallengeResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+      tags:
+        - projects
+  "/v1beta/{app}:generatePlayIntegrityChallenge":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Generates a challenge that protects the integrity of an immediately following integrity verdict request to the Play Integrity API. The next call to ExchangePlayIntegrityToken using the resulting integrity token will verify the presence and validity of the challenge. A challenge should not be reused for multiple calls.
+      operationId: firebaseappcheck.projects.apps.generatePlayIntegrityChallenge
+      parameters:
+        - description: "Required. The relative resource name of the app, in the format: ``` projects/{project_number}/apps/{app_id} ``` If necessary, the `project_number` element can be replaced with the project ID of the Firebase project. Learn more about using project identifiers in Google's [AIP 2510](https://google.aip.dev/cloud/2510) standard."
+          in: path
+          name: app
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaGeneratePlayIntegrityChallengeRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaGeneratePlayIntegrityChallengeResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -698,9 +790,59 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1beta/{parent}/apps/-/playIntegrityConfig:batchGet":
+    get:
+      description: Atomically gets the PlayIntegrityConfigs for the specified list of apps.
+      operationId: firebaseappcheck.projects.apps.playIntegrityConfig.batchGet
+      parameters:
+        - description: Required. The parent project name shared by all PlayIntegrityConfigs being retrieved, in the format ``` projects/{project_number} ``` The parent collection in the `name` field of any resource being retrieved must match this field, or the entire batch fails.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The relative resource names of the PlayIntegrityConfigs to retrieve, in the format ``` projects/{project_number}/apps/{app_id}/playIntegrityConfig ``` A maximum of 100 objects can be retrieved in a batch.
+          explode: true
+          in: query
+          name: names
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaBatchGetPlayIntegrityConfigsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1beta/{parent}/apps/-/recaptchaConfig:batchGet":
     get:
-      description: Atomically gets the RecaptchaConfigs for the specified list of apps. For security reasons, the `site_secret` field is never populated in the response.
+      description: The RecaptchaConfig REST resource has been renamed to RecaptchaV3Config. Please use BatchGetRecaptchaV3Configs instead. Atomically gets the RecaptchaConfigs for the specified list of apps. For security reasons, the `site_secret` field is never populated in the response.
       operationId: firebaseappcheck.projects.apps.recaptchaConfig.batchGet
       parameters:
         - description: Required. The parent project name shared by all RecaptchaConfigs being retrieved, in the format ``` projects/{project_number} ``` The parent collection in the `name` field of any resource being retrieved must match this field, or the entire batch fails.
@@ -1156,7 +1298,7 @@ components:
         type: string
   schemas:
     GoogleFirebaseAppcheckV1betaAppAttestConfig:
-      description: An app's App Attest configuration object. This configuration controls certain properties of the App Check token returned by ExchangeAppAttestAttestation and ExchangeAppAttestAssertion, such as its ttl. Note that the Team ID registered with your app is used as part of the validation process. Please register it via the Firebase Console or programmatically via the [Firebase Management Service](https://firebase.google.com/docs/projects/api/reference/rest/v1beta1/projects.iosApps/patch).
+      description: An app's App Attest configuration object. This configuration controls certain properties of the `AppCheckToken` returned by ExchangeAppAttestAttestation and ExchangeAppAttestAssertion, such as its ttl. Note that the Team ID registered with your app is used as part of the validation process. Please register it via the Firebase Console or programmatically via the [Firebase Management Service](https://firebase.google.com/docs/projects/api/reference/rest/v1beta1/projects.iosApps/patch).
       properties:
         name:
           description: "Required. The relative resource name of the App Attest configuration object, in the format: ``` projects/{project_number}/apps/{app_id}/appAttestConfig ```"
@@ -1170,7 +1312,7 @@ components:
       description: Encapsulates an *App Check token*, which are used to access Firebase services protected by App Check.
       properties:
         attestationToken:
-          description: An App Check token. App Check tokens are signed [JWTs](https://tools.ietf.org/html/rfc7519) containing claims that identify the attested app and Firebase project. This token is used to access Firebase services protected by App Check.
+          description: This field has been renamed to `token`. An App Check token. App Check tokens are signed [JWTs](https://tools.ietf.org/html/rfc7519) containing claims that identify the attested app and Firebase project. This token is used to access Firebase services protected by App Check.
           type: string
         token:
           description: An App Check token. App Check tokens are signed [JWTs](https://tools.ietf.org/html/rfc7519) containing claims that identify the attested app and Firebase project. This token is used to access Firebase services protected by App Check.
@@ -1207,6 +1349,15 @@ components:
           description: DeviceCheckConfigs retrieved.
           items:
             $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaDeviceCheckConfig"
+          type: array
+      type: object
+    GoogleFirebaseAppcheckV1betaBatchGetPlayIntegrityConfigsResponse:
+      description: Response message for the BatchGetPlayIntegrityConfigs method.
+      properties:
+        configs:
+          description: PlayIntegrityConfigs retrieved.
+          items:
+            $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaPlayIntegrityConfig"
           type: array
       type: object
     GoogleFirebaseAppcheckV1betaBatchGetRecaptchaConfigsResponse:
@@ -1281,7 +1432,7 @@ components:
           type: string
       type: object
     GoogleFirebaseAppcheckV1betaDeviceCheckConfig:
-      description: An app's DeviceCheck configuration object. This configuration is used by ExchangeDeviceCheckToken to validate device tokens issued to apps by DeviceCheck. It also controls certain properties of the returned App Check token, such as its ttl. Note that the Team ID registered with your app is used as part of the validation process. Please register it via the Firebase Console or programmatically via the [Firebase Management Service](https://firebase.google.com/docs/projects/api/reference/rest/v1beta1/projects.iosApps/patch).
+      description: An app's DeviceCheck configuration object. This configuration is used by ExchangeDeviceCheckToken to validate device tokens issued to apps by DeviceCheck. It also controls certain properties of the returned `AppCheckToken`, such as its ttl. Note that the Team ID registered with your app is used as part of the validation process. Please register it via the Firebase Console or programmatically via the [Firebase Management Service](https://firebase.google.com/docs/projects/api/reference/rest/v1beta1/projects.iosApps/patch).
       properties:
         keyId:
           description: Required. The key identifier of a private key enabled with DeviceCheck, created in your Apple Developer account.
@@ -1345,7 +1496,7 @@ components:
           type: string
         attestationToken:
           $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaAttestationTokenResponse"
-          description: Encapsulates an App Check token.
+          description: This field has been renamed to `app_check_token`. Encapsulates an App Check token.
       type: object
     GoogleFirebaseAppcheckV1betaExchangeCustomTokenRequest:
       description: Request message for the ExchangeCustomToken method.
@@ -1366,6 +1517,13 @@ components:
       properties:
         deviceToken:
           description: Required. The `device_token` as returned by Apple's client-side [DeviceCheck API](https://developer.apple.com/documentation/devicecheck/dcdevice). This is the base64 encoded `Data` (Swift) or `NSData` (ObjC) object.
+          type: string
+      type: object
+    GoogleFirebaseAppcheckV1betaExchangePlayIntegrityTokenRequest:
+      description: Request message for the ExchangePlayIntegrityToken method.
+      properties:
+        playIntegrityToken:
+          description: Required. The [integrity verdict response token from Play Integrity](https://developer.android.com/google/play/integrity/verdict#decrypt-verify) issued to your app.
           type: string
       type: object
     GoogleFirebaseAppcheckV1betaExchangeRecaptchaEnterpriseTokenRequest:
@@ -1412,6 +1570,21 @@ components:
           format: google-duration
           type: string
       type: object
+    GoogleFirebaseAppcheckV1betaGeneratePlayIntegrityChallengeRequest:
+      description: Request message for the GeneratePlayIntegrityChallenge method.
+      properties: {}
+      type: object
+    GoogleFirebaseAppcheckV1betaGeneratePlayIntegrityChallengeResponse:
+      description: Response message for the GeneratePlayIntegrityChallenge method.
+      properties:
+        challenge:
+          description: A one-time use [challenge](https://developer.android.com/google/play/integrity/verdict#protect-against-replay-attacks) for the client to pass to the Play Integrity API.
+          type: string
+        ttl:
+          description: The duration from the time this challenge is minted until its expiration. This field is intended to ease client-side token management, since the client may have clock skew, but is still able to accurately measure a duration.
+          format: google-duration
+          type: string
+      type: object
     GoogleFirebaseAppcheckV1betaListDebugTokensResponse:
       description: Response message for the ListDebugTokens method.
       properties:
@@ -1435,6 +1608,17 @@ components:
           items:
             $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaService"
           type: array
+      type: object
+    GoogleFirebaseAppcheckV1betaPlayIntegrityConfig:
+      description: An app's Play Integrity configuration object. This configuration controls certain properties of the `AppCheckToken` returned by ExchangePlayIntegrityToken, such as its ttl. Note that your registered SHA-256 certificate fingerprints are used to validate tokens issued by the Play Integrity API; please register them via the Firebase Console or programmatically via the [Firebase Management Service](https://firebase.google.com/docs/projects/api/reference/rest/v1beta1/projects.androidApps.sha/create).
+      properties:
+        name:
+          description: "Required. The relative resource name of the Play Integrity configuration object, in the format: ``` projects/{project_number}/apps/{app_id}/playIntegrityConfig ```"
+          type: string
+        tokenTtl:
+          description: Specifies the duration for which App Check tokens exchanged from Play Integrity tokens will be valid. If unset, a default value of 1 hour is assumed. Must be between 30 minutes and 7 days, inclusive.
+          format: google-duration
+          type: string
       type: object
     GoogleFirebaseAppcheckV1betaPublicJwk:
       description: A JWK as specified by [section 4 of RFC 7517](https://tools.ietf.org/html/rfc7517#section-4) and [section 6.3.1 of RFC 7518](https://tools.ietf.org/html/rfc7518#section-6.3.1).
@@ -1468,7 +1652,7 @@ components:
           type: array
       type: object
     GoogleFirebaseAppcheckV1betaRecaptchaConfig:
-      description: An app's reCAPTCHA v3 configuration object. This configuration is used by ExchangeRecaptchaToken to validate reCAPTCHA tokens issued to apps by reCAPTCHA v3. It also controls certain properties of the returned App Check token, such as its ttl.
+      description: This REST resource has been renamed to RecaptchaV3Config. An app's reCAPTCHA v3 configuration object. This configuration is used by ExchangeRecaptchaToken to validate reCAPTCHA tokens issued to apps by reCAPTCHA v3. It also controls certain properties of the returned `AppCheckToken`, such as its ttl.
       properties:
         name:
           description: "Required. The relative resource name of the reCAPTCHA v3 configuration object, in the format: ``` projects/{project_number}/apps/{app_id}/recaptchaConfig ```"
@@ -1486,7 +1670,7 @@ components:
           type: string
       type: object
     GoogleFirebaseAppcheckV1betaRecaptchaEnterpriseConfig:
-      description: An app's reCAPTCHA Enterprise configuration object. This configuration is used by ExchangeRecaptchaEnterpriseToken to validate reCAPTCHA tokens issued to apps by reCAPTCHA Enterprise. It also controls certain properties of the returned App Check token, such as its ttl.
+      description: An app's reCAPTCHA Enterprise configuration object. This configuration is used by ExchangeRecaptchaEnterpriseToken to validate reCAPTCHA tokens issued to apps by reCAPTCHA Enterprise. It also controls certain properties of the returned `AppCheckToken`, such as its ttl.
       properties:
         name:
           description: "Required. The relative resource name of the reCAPTCHA Enterprise configuration object, in the format: ``` projects/{project_number}/apps/{app_id}/recaptchaEnterpriseConfig ```"
@@ -1500,7 +1684,7 @@ components:
           type: string
       type: object
     GoogleFirebaseAppcheckV1betaRecaptchaV3Config:
-      description: An app's reCAPTCHA v3 configuration object. This configuration is used by ExchangeRecaptchaV3Token to validate reCAPTCHA tokens issued to apps by reCAPTCHA v3. It also controls certain properties of the returned App Check token, such as its ttl.
+      description: An app's reCAPTCHA v3 configuration object. This configuration is used by ExchangeRecaptchaV3Token to validate reCAPTCHA tokens issued to apps by reCAPTCHA v3. It also controls certain properties of the returned `AppCheckToken`, such as its ttl.
       properties:
         name:
           description: "Required. The relative resource name of the reCAPTCHA v3 configuration object, in the format: ``` projects/{project_number}/apps/{app_id}/recaptchaV3Config ```"
@@ -1518,7 +1702,7 @@ components:
           type: string
       type: object
     GoogleFirebaseAppcheckV1betaSafetyNetConfig:
-      description: An app's SafetyNet configuration object. This configuration controls certain properties of the App Check token returned by ExchangeSafetyNetToken, such as its ttl. Note that your registered SHA-256 certificate fingerprints are used to validate tokens issued by SafetyNet; please register them via the Firebase Console or programmatically via the [Firebase Management Service](https://firebase.google.com/docs/projects/api/reference/rest/v1beta1/projects.androidApps.sha/create).
+      description: An app's SafetyNet configuration object. This configuration controls certain properties of the `AppCheckToken` returned by ExchangeSafetyNetToken, such as its ttl. Note that your registered SHA-256 certificate fingerprints are used to validate tokens issued by SafetyNet; please register them via the Firebase Console or programmatically via the [Firebase Management Service](https://firebase.google.com/docs/projects/api/reference/rest/v1beta1/projects.androidApps.sha/create).
       properties:
         name:
           description: "Required. The relative resource name of the SafetyNet configuration object, in the format: ``` projects/{project_number}/apps/{app_id}/safetyNetConfig ```"

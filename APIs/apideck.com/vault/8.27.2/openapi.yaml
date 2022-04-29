@@ -164,7 +164,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 8.27.1
+  version: 8.27.2
   x-apideck-api: vault
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -2231,6 +2231,12 @@ components:
               - pos.modifier-group.created
               - pos.modifier-group.updated
               - pos.modifier-group.deleted
+              - hris.employee.created
+              - hris.employee.updated
+              - hris.employee.deleted
+              - hris.company.created
+              - hris.company.updated
+              - hris.company.deleted
             example: crm.company.created
             type: string
           title: Subscribed events
