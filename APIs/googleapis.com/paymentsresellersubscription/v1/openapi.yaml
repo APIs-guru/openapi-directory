@@ -211,13 +211,18 @@ paths:
         - partners
   "/v1/{parent}/products":
     get:
-      description: Used by partners to list products that can be resold to their customers. It should be called directly by the partner using service accounts.
+      description: To retrieve the products that can be resold by the partner. It should be autenticated with a service account.
       operationId: paymentsresellersubscription.partners.products.list
       parameters:
         - description: "Required. The parent, the partner that can resell. Format: partners/{partner}"
           in: path
           name: parent
           required: true
+          schema:
+            type: string
+        - description: 'Optional. Specifies the filters for the products results. The syntax defined in the EBNF grammar: https://google.aip.dev/assets/misc/ebnf-filtering.txt. An error will be thrown if any specified parameter is not supported. Currently, it can only be used by Youtube partners. Allowed parameters are: - regionCodes - zipCode - eligibilityId Multiple parameters can be specified, for example: "regionCodes=US zipCode=94043 eligibilityId=2022H1Campaign"'
+          in: query
+          name: filter
           schema:
             type: string
         - description: Optional. The maximum number of products to return. The service may return fewer than this value. If unspecified, at most 50 products will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.
@@ -253,7 +258,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/promotions":
     get:
-      description: Used by partners to list promotions, such as free trial, that can be applied on subscriptions. It should be called directly by the partner using service accounts.
+      description: To retrieve the promotions, such as free trial, that can be used by the partner. It should be autenticated with a service account.
       operationId: paymentsresellersubscription.partners.promotions.list
       parameters:
         - description: "Required. The parent, the partner that can resell. Format: partners/{partner}"
@@ -262,7 +267,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'Optional. Specifies the filters for the promotion results. The syntax defined in the EBNF grammar: https://google.aip.dev/assets/misc/ebnf-filtering.txt. Examples: - applicable_products: "sku1" - region_codes: "US" - applicable_products: "sku1" AND region_codes: "US"'
+        - description: 'Optional. Specifies the filters for the promotion results. The syntax defined in the EBNF grammar: https://google.aip.dev/assets/misc/ebnf-filtering.txt. An error will be thrown if the specified parameter(s) is not supported. Currently, it can only be used by Youtube partners. Allowed parameters are: - region_codes: "US" - zip_code: "94043" - eligibility_id: "2022H1Campaign" Multiple parameters can be specified, for example: "region_codes=US zip_code=94043 eligibility_id=2022H1Campaign"'
           in: query
           name: filter
           schema:
@@ -298,6 +303,43 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1/{parent}/promotions:findEligible":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: To find eligible promotions for the current user. The API requires user authorization via OAuth. The user is inferred from the authenticated OAuth credential.
+      operationId: paymentsresellersubscription.partners.promotions.findEligible
+      parameters:
+        - description: "Required. The parent, the partner that can resell. Format: partners/{partner}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1FindEligiblePromotionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1FindEligiblePromotionsResponse"
+          description: Successful response
+      tags:
+        - partners
   "/v1/{parent}/subscriptions":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -543,6 +585,31 @@ components:
         partnerUserToken:
           description: Required. Identifier of the end-user in partner’s system.
           type: string
+      type: object
+    GoogleCloudPaymentsResellerSubscriptionV1FindEligiblePromotionsRequest:
+      properties:
+        filter:
+          description: 'Optional. Specifies the filters for the promotion results. The syntax defined in the EBNF grammar: https://google.aip.dev/assets/misc/ebnf-filtering.txt. An error will be thrown if any specified parameter is not supported. Currently, it can only be used by Youtube partners. Allowed parameters are: - regionCodes - zipCode - eligibilityId - applicableProducts Multiple parameters can be specified, for example: "regionCodes=US zipCode=94043 eligibilityId=2022H1Campaign", or "applicableProducts=partners/p1/products/product2"'
+          type: string
+        pageSize:
+          description: Optional. The maximum number of promotions to return. The service may return fewer than this value. If unspecified, at most 50 products will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.
+          format: int32
+          type: integer
+        pageToken:
+          description: Optional. A page token, received from a previous `ListPromotions` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListPromotions` must match the call that provided the page token.
+          type: string
+      type: object
+    GoogleCloudPaymentsResellerSubscriptionV1FindEligiblePromotionsResponse:
+      description: Response containing the found promotions for the current user.
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is empty, there are no subsequent pages.
+          type: string
+        promotions:
+          description: The promotions for the current user.
+          items:
+            $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1Promotion"
+          type: array
       type: object
     GoogleCloudPaymentsResellerSubscriptionV1ListProductsResponse:
       properties:

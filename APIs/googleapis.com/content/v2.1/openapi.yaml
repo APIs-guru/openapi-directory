@@ -5026,7 +5026,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Required. The Content API ID of the product, in the form channel:contentLanguage:targetCountry:offerId.
+        - description: Required. The Content API ID of the product, in the form `channel:contentLanguage:targetCountry:offerId`.
           in: path
           name: productId
           required: true
@@ -5043,7 +5043,7 @@ paths:
       tags:
         - productdeliverytime
     get:
-      description: Gets productDeliveryTime by productId
+      description: Gets `productDeliveryTime` by `productId`.
       operationId: content.productdeliverytime.get
       parameters:
         - description: Required. The Google merchant ID of the account that contains the product. This account cannot be a multi-client account.
@@ -5052,7 +5052,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Required. The Content API ID of the product, in the form channel:contentLanguage:targetCountry:offerId.
+        - description: Required. The Content API ID of the product, in the form `channel:contentLanguage:targetCountry:offerId`.
           in: path
           name: productId
           required: true
@@ -8897,26 +8897,26 @@ components:
           type: integer
       type: object
     DeliveryArea:
-      description: A delivery area for the product. Only one of administrativeAreaCode or postalCodeRange must be set.
+      description: A delivery area for the product. Only one of `countryCode` or `postalCodeRange` must be set.
       properties:
         countryCode:
-          description: Required. The country that the product can be delivered to. Submit an [unicode CLDR region](http://www.unicode.org/repos/cldr/tags/latest/common/main/en.xml) such as US or CH.
+          description: Required. The country that the product can be delivered to. Submit a [unicode CLDR region](http://www.unicode.org/repos/cldr/tags/latest/common/main/en.xml) such as `US` or `CH`.
           type: string
         postalCodeRange:
           $ref: "#/components/schemas/DeliveryAreaPostalCodeRange"
           description: A postal code, postal code range or postal code prefix that defines this area. Limited to US and AUS.
         regionCode:
-          description: A state, territory, or prefecture. This is supported for the United States, Australia, and Japan. Provide a subdivision code from the ISO 3166-2 code tables ([US](https://en.wikipedia.org/wiki/ISO_3166-2:US), [AU](https://en.wikipedia.org/wiki/ISO_3166-2:AU), or [JP](https://en.wikipedia.org/wiki/ISO_3166-2:JP)) without country prefix (for example, NY, NSW, 03).
+          description: A state, territory, or prefecture. This is supported for the United States, Australia, and Japan. Provide a subdivision code from the ISO 3166-2 code tables ([US](https://en.wikipedia.org/wiki/ISO_3166-2:US), [AU](https://en.wikipedia.org/wiki/ISO_3166-2:AU), or [JP](https://en.wikipedia.org/wiki/ISO_3166-2:JP)) without country prefix (for example, `"NY"`, `"NSW"`, `"03"`).
           type: string
       type: object
     DeliveryAreaPostalCodeRange:
-      description: A range of postal codes that defines the delivery area. Only set firstPostalCode when specifying a single postal code.
+      description: A range of postal codes that defines the delivery area. Only set `firstPostalCode` when specifying a single postal code.
       properties:
         firstPostalCode:
-          description: 'Required. A postal code or a pattern of the form prefix* denoting the inclusive lower bound of the range defining the area. Examples values: "94108", "9410*", "9*".'
+          description: 'Required. A postal code or a pattern of the form prefix* denoting the inclusive lower bound of the range defining the area. Examples values: `"94108"`, `"9410*"`, `"9*"`.'
           type: string
         lastPostalCode:
-          description: "A postal code or a pattern of the form prefix* denoting the inclusive upper bound of the range defining the area (for example [070* - 078*] results in the range [07000 - 07899]). It must have the same length as firstPostalCode: if firstPostalCode is a postal code then lastPostalCode must be a postal code too; if firstPostalCode is a pattern then lastPostalCode must be a pattern with the same prefix length. Ignored if not set, then the area is defined as being all the postal codes matching firstPostalCode."
+          description: "A postal code or a pattern of the form prefix* denoting the inclusive upper bound of the range defining the area (for example [070* - 078*] results in the range [07000 - 07899]). It must have the same length as `firstPostalCode`: if `firstPostalCode` is a postal code then `lastPostalCode` must be a postal code too; if firstPostalCode is a pattern then `lastPostalCode` must be a pattern with the same prefix length. Ignored if not set, then the area is defined as being all the postal codes matching `firstPostalCode`."
           type: string
       type: object
     DeliveryTime:
@@ -12033,6 +12033,9 @@ components:
         pattern:
           description: The item's pattern (for example, polka dots).
           type: string
+        pause:
+          description: 'Publication of this item should be temporarily paused. Acceptable values are: - "`ads`" '
+          type: string
         pickupMethod:
           description: 'The pick up option for the item. Acceptable values are: - "`buy`" - "`reserve`" - "`ship to store`" - "`not supported`" '
           type: string
@@ -12163,26 +12166,26 @@ components:
           description: Tax value.
       type: object
     ProductDeliveryTime:
-      description: The estimated days to deliver for this product. These methods are intended for authorized partners working with a merchant. Merchants should use the [product API](https://developers.google.com/shopping-content/reference/rest/v2.1/products#productshipping) instead. To obtain authorization from a merchant refer to
+      description: The estimated days to deliver a product after an order is placed. Only authorized shipping signals partners working with a merchant can use this resource. Merchants should use the [`products`](https://developers.google.com/shopping-content/reference/rest/v2.1/products#productshipping) resource instead.
       properties:
         areaDeliveryTimes:
-          description: Required. A set of associations between DeliveryAreas and DeliveryTimes. The total number of areaDeliveryTimes can be at most 100.
+          description: Required. A set of associations between `DeliveryArea` and `DeliveryTime` entries. The total number of `areaDeliveryTimes` can be at most 100.
           items:
             $ref: "#/components/schemas/ProductDeliveryTimeAreaDeliveryTime"
           type: array
         productId:
           $ref: "#/components/schemas/ProductId"
-          description: Required. The id of the product.
+          description: Required. The `id` of the product.
       type: object
     ProductDeliveryTimeAreaDeliveryTime:
-      description: A pairing of DeliveryArea associated with a DeliveryTime for this product.
+      description: A pairing of `DeliveryArea` associated with a `DeliveryTime` for this product.
       properties:
         deliveryArea:
           $ref: "#/components/schemas/DeliveryArea"
-          description: Required. The delivery area associated with deliveryTime for this product.
+          description: Required. The delivery area associated with `deliveryTime` for this product.
         deliveryTime:
           $ref: "#/components/schemas/ProductDeliveryTimeAreaDeliveryTimeDeliveryTime"
-          description: Required. The delivery time associated with deliveryArea for this product.
+          description: Required. The delivery time associated with `deliveryArea` for this product.
       type: object
     ProductDeliveryTimeAreaDeliveryTimeDeliveryTime:
       description: A delivery time for this product.
@@ -12218,7 +12221,7 @@ components:
       description: The Content API ID of the product.
       properties:
         productId:
-          description: The Content API ID of the product, in the form channel:contentLanguage:targetCountry:offerId.
+          description: The Content API ID of the product, in the form `channel:contentLanguage:targetCountry:offerId`.
           type: string
       type: object
     ProductProductDetail:
@@ -12654,7 +12657,7 @@ components:
           format: int32
           type: integer
         id:
-          description: Required. Output only. The REST promotion id to uniquely identify the promotion. Content API methods that operate on promotions take this as their promotionId parameter. The REST ID for a promotion is of the form channel:contentLanguage:targetCountry:promotionId The channel field will have a value of "online", "in_store", or "online_in_store".
+          description: Required. Output only. The REST promotion id to uniquely identify the promotion. Content API methods that operate on promotions take this as their promotionId parameter. The REST ID for a promotion is of the form [channel]:contentLanguage:targetCountry:promotionId The channel field will have a value of "online", "in_store", or "online_in_store".
           readOnly: true
           type: string
         itemGroupId:

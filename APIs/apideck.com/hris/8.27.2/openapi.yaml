@@ -3368,7 +3368,9 @@ components:
         employee:
           $ref: "#/components/schemas/Employee"
         payrolls:
-          $ref: "#/components/schemas/Payroll"
+          items:
+            $ref: "#/components/schemas/Payroll"
+          type: array
       type: object
     EmployeesFilter:
       additionalProperties: false

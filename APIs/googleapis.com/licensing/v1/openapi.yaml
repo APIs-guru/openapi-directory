@@ -6,7 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: The Google Enterprise License Manager API's allows you to license apps for all the users of a domain managed by you.
+  description: The Google Enterprise License Manager API lets you manage Google Workspace and related licenses for all users of a customer that you manage.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -263,7 +263,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Customer's `customerId`. A previous version of this API accepted the primary domain name as a value for this field. If the customer is suspended, the server returns an error.
+        - description: The customer's unique ID as defined in the Admin console, such as `C00000000`. If the customer is suspended, the server returns an error.
           in: query
           name: customerId
           required: true
@@ -318,7 +318,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Customer's `customerId`. A previous version of this API accepted the primary domain name as a value for this field. If the customer is suspended, the server returns an error.
+        - description: The customer's unique ID as defined in the Admin console, such as `C00000000`. If the customer is suspended, the server returns an error.
           in: query
           name: customerId
           required: true
