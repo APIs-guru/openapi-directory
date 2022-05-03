@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://realtimebidding.googleapis.com/$discovery/rest?version=v1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: realtimebidding
 externalDocs:
@@ -705,6 +705,147 @@ paths:
             - https://www.googleapis.com/auth/realtime-bidding
       tags:
         - bidders
+  "/v1/{parent}/publisherConnections":
+    get:
+      description: Lists publisher connections for a given bidder.
+      operationId: realtimebidding.bidders.publisherConnections.list
+      parameters:
+        - description: Required. Name of the bidder for which publishers have initiated connections. The pattern for this resource is `bidders/{bidder}` where `{bidder}` represents the account ID of the bidder.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Query string to filter publisher connections. Connections can be filtered by `displayName`, `publisherPlatform`, and `biddingState`. If no filter is specified, all publisher connections will be returned. Example: 'displayName=\"Great Publisher*\" AND publisherPlatform=ADMOB AND biddingState != PENDING' See https://google.aip.dev/160 for more information about filtering syntax."
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: "Order specification by which results should be sorted. If no sort order is specified, the results will be returned in an arbitrary order. Currently results can be sorted by `createTime`. Example: 'createTime DESC'."
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Requested page size. The server may return fewer results than requested (due to timeout constraint) even if more are available via another call. If unspecified, the server will pick an appropriate default. Acceptable values are 1 to 5000, inclusive.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results the server should return. Typically, this is the value of ListPublisherConnectionsResponse.nextPageToken returned from the previous call to the 'ListPublisherConnections' method.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListPublisherConnectionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/realtime-bidding
+          Oauth2c:
+            - https://www.googleapis.com/auth/realtime-bidding
+      tags:
+        - bidders
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{parent}/publisherConnections:batchApprove":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Batch approves multiple publisher connections.
+      operationId: realtimebidding.bidders.publisherConnections.batchApprove
+      parameters:
+        - description: "Required. The bidder for whom publisher connections will be approved. Format: `bidders/{bidder}` where `{bidder}` is the account ID of the bidder."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchApprovePublisherConnectionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchApprovePublisherConnectionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/realtime-bidding
+          Oauth2c:
+            - https://www.googleapis.com/auth/realtime-bidding
+      tags:
+        - bidders
+  "/v1/{parent}/publisherConnections:batchReject":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Batch rejects multiple publisher connections.
+      operationId: realtimebidding.bidders.publisherConnections.batchReject
+      parameters:
+        - description: "Required. The bidder for whom publisher connections will be rejected. Format: `bidders/{bidder}` where `{bidder}` is the account ID of the bidder."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchRejectPublisherConnectionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchRejectPublisherConnectionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/realtime-bidding
+          Oauth2c:
+            - https://www.googleapis.com/auth/realtime-bidding
+      tags:
+        - bidders
   "/v1/{parent}/userLists":
     get:
       description: Lists the user lists visible to the current user.
@@ -1209,6 +1350,42 @@ components:
         mobileAppTargeting:
           $ref: "#/components/schemas/StringTargetingDimension"
           description: Targeted app IDs. App IDs can refer to those found in an app store or ones that are not published in an app store. A maximum of 30,000 app IDs can be targeted.
+      type: object
+    BatchApprovePublisherConnectionsRequest:
+      description: A request to approve a batch of publisher connections.
+      properties:
+        names:
+          description: Required. The names of the publishers with which connections will be approved. In the pattern `bidders/{bidder}/publisherConnections/{publisher}` where `{bidder}` is the account ID of the bidder, and `{publisher}` is the ads.txt/app-ads.txt publisher ID.
+          items:
+            type: string
+          type: array
+      type: object
+    BatchApprovePublisherConnectionsResponse:
+      description: A response for the request to approve a batch of publisher connections.
+      properties:
+        publisherConnections:
+          description: The publisher connections that have been approved.
+          items:
+            $ref: "#/components/schemas/PublisherConnection"
+          type: array
+      type: object
+    BatchRejectPublisherConnectionsRequest:
+      description: A request to reject a batch of publisher connections.
+      properties:
+        names:
+          description: Required. The names of the publishers with whom connection will be rejected. In the pattern `bidders/{bidder}/publisherConnections/{publisher}` where `{bidder}` is the account ID of the bidder, and `{publisher}` is the ads.txt/app-ads.txt publisher ID.
+          items:
+            type: string
+          type: array
+      type: object
+    BatchRejectPublisherConnectionsResponse:
+      description: A response for the request to reject a batch of publisher connections.
+      properties:
+        publisherConnections:
+          description: The publisher connections that have been rejected.
+          items:
+            $ref: "#/components/schemas/PublisherConnection"
+          type: array
       type: object
     Bidder:
       description: Bidder settings.
@@ -1824,6 +2001,18 @@ components:
             $ref: "#/components/schemas/PretargetingConfig"
           type: array
       type: object
+    ListPublisherConnectionsResponse:
+      description: A response to a request for listing publisher connections.
+      properties:
+        nextPageToken:
+          description: A token to retrieve the next page of results. Pass this value in the ListPublisherConnectionsRequest.pageToken field in the subsequent call to the `ListPublisherConnections` method to retrieve the next page of results.
+          type: string
+        publisherConnections:
+          description: The list of publisher connections.
+          items:
+            $ref: "#/components/schemas/PublisherConnection"
+          type: array
+      type: object
     ListUserListsResponse:
       description: The list user list response.
       properties:
@@ -2121,6 +2310,39 @@ components:
         webTargeting:
           $ref: "#/components/schemas/StringTargetingDimension"
           description: Targeting on a subset of site inventory. If WEB is listed in included_environments, the specified targeting is applied. A maximum of 50,000 site URLs can be targeted. An unset value for targeting allows all web-based bid requests to be sent. Sites can either be targeting positively (bid requests will be sent only if the destination site is listed in the targeting dimension) or negatively (bid requests will be sent only if the destination site is not listed in the pretargeting configuration).
+      type: object
+    PublisherConnection:
+      description: An Open Bidding exchange's connection to a publisher. This is initiated by the publisher for the bidder to review. If approved by the bidder, this means that the bidder agrees to receive bid requests from the publisher.
+      properties:
+        biddingState:
+          description: Whether the publisher has been approved by the bidder.
+          enum:
+            - STATE_UNSPECIFIED
+            - PENDING
+            - REJECTED
+            - APPROVED
+          type: string
+        createTime:
+          description: Output only. The time at which the publisher initiated a connection with the bidder (irrespective of if or when the bidder approves it). This is subsequently updated if the publisher revokes and re-initiates the connection.
+          format: google-datetime
+          readOnly: true
+          type: string
+        displayName:
+          description: Output only. Publisher display name.
+          readOnly: true
+          type: string
+        name:
+          description: Output only. Name of the publisher connection. This follows the pattern `bidders/{bidder}/publisherConnections/{publisher}`, where `{bidder}` represents the account ID of the bidder, and `{publisher}` is the ads.txt/app-ads.txt publisher ID.
+          readOnly: true
+          type: string
+        publisherPlatform:
+          description: Output only. Whether the publisher is an Ad Manager or AdMob publisher.
+          enum:
+            - PUBLISHER_PLATFORM_UNSPECIFIED
+            - GOOGLE_AD_MANAGER
+            - ADMOB
+          readOnly: true
+          type: string
       type: object
     RemoveTargetedAppsRequest:
       description: A request to stop targeting the provided apps in a specific pretargeting configuration. The pretargeting configuration itself specifies how these apps are targeted. in PretargetingConfig.appTargeting.mobileAppTargeting.

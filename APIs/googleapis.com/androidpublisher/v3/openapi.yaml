@@ -4152,7 +4152,7 @@ components:
           description: The order id associated with the purchase of the inapp product.
           type: string
         productId:
-          description: The inapp product SKU.
+          description: The inapp product SKU. May not be present.
           type: string
         purchaseState:
           description: "The purchase state of the order. Possible values are: 0. Purchased 1. Canceled 2. Pending"
@@ -4163,14 +4163,14 @@ components:
           format: int64
           type: string
         purchaseToken:
-          description: The purchase token generated to identify this purchase.
+          description: The purchase token generated to identify this purchase. May not be present.
           type: string
         purchaseType:
           description: "The type of purchase of the inapp product. This field is only set if this purchase was not made using the standard in-app billing flow. Possible values are: 0. Test (i.e. purchased from a license testing account) 1. Promo (i.e. purchased using a promo code) 2. Rewarded (i.e. from watching a video ad instead of paying)"
           format: int32
           type: integer
         quantity:
-          description: The quantity associated with the purchase of the inapp product.
+          description: The quantity associated with the purchase of the inapp product. If not present, the quantity is 1.
           format: int32
           type: integer
         regionCode:

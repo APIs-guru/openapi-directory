@@ -38330,7 +38330,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -38401,7 +38400,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -38458,7 +38456,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -38662,7 +38659,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -38733,7 +38729,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -38790,7 +38785,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -39174,7 +39168,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -39245,7 +39238,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -39332,7 +39324,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -39710,7 +39701,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -39885,11 +39875,6 @@ components:
         selfLink:
           description: "[Output Only] Server-defined URL for the resource."
           type: string
-        serviceBindings:
-          description: URLs of networkservices.ServiceBinding resources. Can only be set if load balancing scheme is INTERNAL_SELF_MANAGED. If set, lists of backends and health checks must be both empty.
-          items:
-            type: string
-          type: array
         sessionAffinity:
           description: "Type of session affinity to use. The default is NONE. Only NONE and HEADER_FIELD are supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true. For more details, see: [Session Affinity](https://cloud.google.com/load-balancing/docs/backend-service#session_affinity)."
           enum:
@@ -39954,7 +39939,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -40172,7 +40156,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -40278,7 +40261,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -40717,7 +40699,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -40788,7 +40769,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -40845,7 +40825,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -41236,7 +41215,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -41331,7 +41309,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -41457,7 +41434,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -41528,7 +41504,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -41585,7 +41560,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -41665,7 +41639,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -41798,7 +41771,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -41944,7 +41916,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -42131,7 +42102,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -42300,7 +42270,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -42544,9 +42513,6 @@ components:
             - STANDARD
             - STANDARD_OVERRIDES_FIXED_STANDARD
           type: string
-        noAutomateDnsZone:
-          description: This is used in PSC consumer ForwardingRule to control whether it should try to auto-generate a DNS zone or not. Non-PSC forwarding rules do not use this field.
-          type: boolean
         portRange:
           description: "This field can be used only if: - Load balancing scheme is one of EXTERNAL, INTERNAL_SELF_MANAGED or INTERNAL_MANAGED - IPProtocol is one of TCP, UDP, or SCTP. Packets addressed to ports in the specified range will be forwarded to target or backend_service. You can only use one of ports, port_range, or allPorts. The three are mutually exclusive. Forwarding rules with the same [IPAddress, IPProtocol] pair must have disjoint ports. Some types of forwarding target have constraints on the acceptable ports. For more information, see [Port specifications](https://cloud.google.com/load-balancing/docs/forwarding-rule-concepts#port_specifications). @pattern: \\\\d+(?:-\\\\d+)?"
           type: string
@@ -42635,7 +42601,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -42706,7 +42671,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -42781,7 +42745,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -43156,7 +43119,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -43298,7 +43260,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -43374,7 +43335,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -43431,7 +43391,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -43728,7 +43687,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -43998,7 +43956,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -44210,7 +44167,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -44466,7 +44422,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -44592,7 +44547,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -44663,7 +44617,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -44878,7 +44831,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -44959,7 +44911,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -45197,7 +45148,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -45271,7 +45221,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -45376,7 +45325,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -45450,7 +45398,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -45533,7 +45480,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -45604,7 +45550,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -45861,7 +45806,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -45997,7 +45941,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -46392,7 +46335,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -46463,7 +46405,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -46541,7 +46482,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -46705,7 +46645,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -46846,7 +46785,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -47096,7 +47034,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -47333,7 +47270,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -47486,7 +47422,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -47557,7 +47492,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -47614,7 +47548,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -47966,7 +47899,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -48023,7 +47955,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -48193,7 +48124,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -48299,7 +48229,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -48391,7 +48320,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -48448,7 +48376,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -48599,7 +48526,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -48662,12 +48588,6 @@ components:
           description: Maximum Transmission Unit in bytes.
           format: int32
           type: integer
-        stackType:
-          description: Which IP version(s) of traffic and routes are allowed to be imported or exported between peer networks. The default value is IPV4_ONLY.
-          enum:
-            - IPV4_IPV6
-            - IPV4_ONLY
-          type: string
         state:
           description: "[Output Only] State for the peering, either `ACTIVE` or `INACTIVE`. The peering is `ACTIVE` when there's a matching configuration in the peer network."
           enum:
@@ -48863,7 +48783,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -48953,7 +48872,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -49096,7 +49014,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -49153,7 +49070,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -49302,7 +49218,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -49373,7 +49288,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -49439,7 +49353,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -49561,7 +49474,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -49632,7 +49544,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -49689,7 +49600,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -49810,7 +49720,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -49955,7 +49864,6 @@ components:
                   - MISSING_TYPE_DEPENDENCY
                   - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                   - NEXT_HOP_CANNOT_IP_FORWARD
-                  - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                   - NEXT_HOP_INSTANCE_NOT_FOUND
                   - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                   - NEXT_HOP_NOT_RUNNING
@@ -50035,7 +49943,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -50106,7 +50013,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -50163,7 +50069,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -50372,7 +50277,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -50472,7 +50376,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -50574,7 +50477,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -50939,7 +50841,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -51088,7 +50989,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -51158,7 +51058,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -51243,7 +51142,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -51307,7 +51205,6 @@ components:
             - COMMITTED_N2A_CPUS
             - COMMITTED_N2D_CPUS
             - COMMITTED_N2_CPUS
-            - COMMITTED_NVIDIA_A100_80GB_GPUS
             - COMMITTED_NVIDIA_A100_GPUS
             - COMMITTED_NVIDIA_K80_GPUS
             - COMMITTED_NVIDIA_P100_GPUS
@@ -51358,7 +51255,6 @@ components:
             - NETWORK_FIREWALL_POLICIES
             - NODE_GROUPS
             - NODE_TEMPLATES
-            - NVIDIA_A100_80GB_GPUS
             - NVIDIA_A100_GPUS
             - NVIDIA_K80_GPUS
             - NVIDIA_P100_GPUS
@@ -51372,7 +51268,6 @@ components:
             - PD_EXTREME_TOTAL_PROVISIONED_IOPS
             - PREEMPTIBLE_CPUS
             - PREEMPTIBLE_LOCAL_SSD_GB
-            - PREEMPTIBLE_NVIDIA_A100_80GB_GPUS
             - PREEMPTIBLE_NVIDIA_A100_GPUS
             - PREEMPTIBLE_NVIDIA_K80_GPUS
             - PREEMPTIBLE_NVIDIA_P100_GPUS
@@ -51528,7 +51423,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -51598,7 +51492,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -51692,7 +51585,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -51772,7 +51664,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -51917,7 +51808,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -52024,7 +51914,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -52120,7 +52009,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -52352,7 +52240,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -52422,7 +52309,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -52486,7 +52372,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -52569,7 +52454,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -52695,7 +52579,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -52839,7 +52722,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -53075,7 +52957,6 @@ components:
                   - MISSING_TYPE_DEPENDENCY
                   - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                   - NEXT_HOP_CANNOT_IP_FORWARD
-                  - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                   - NEXT_HOP_INSTANCE_NOT_FOUND
                   - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                   - NEXT_HOP_NOT_RUNNING
@@ -53164,7 +53045,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -53303,7 +53183,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -53526,7 +53405,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -53571,14 +53449,6 @@ components:
           type: boolean
         enableEndpointIndependentMapping:
           type: boolean
-        endpointTypes:
-          description: List of NAT-ted endpoint types supported by the Nat Gateway. If the list is empty, then it will be equivalent to include ENDPOINT_TYPE_VM
-          items:
-            enum:
-              - ENDPOINT_TYPE_SWG
-              - ENDPOINT_TYPE_VM
-            type: string
-          type: array
         icmpIdleTimeoutSec:
           description: Timeout (in seconds) for ICMP connections. Defaults to 30s if not set.
           format: int32
@@ -53887,7 +53757,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -54217,7 +54086,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -54279,7 +54147,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -54444,7 +54311,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -54793,7 +54659,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -54893,7 +54758,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -54950,7 +54814,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -55200,7 +55063,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -55402,7 +55264,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -55473,7 +55334,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -55572,7 +55432,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -55642,7 +55501,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -55753,7 +55611,6 @@ components:
                   - MISSING_TYPE_DEPENDENCY
                   - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                   - NEXT_HOP_CANNOT_IP_FORWARD
-                  - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                   - NEXT_HOP_INSTANCE_NOT_FOUND
                   - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                   - NEXT_HOP_NOT_RUNNING
@@ -55963,7 +55820,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -56034,7 +55890,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -56143,7 +55998,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -56308,7 +56162,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -56365,7 +56218,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -56501,7 +56353,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -56558,7 +56409,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -56711,7 +56561,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -56782,7 +56631,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -56897,7 +56745,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -56968,7 +56815,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -57025,7 +56871,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -57158,7 +57003,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -57240,7 +57084,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -57329,7 +57172,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -57470,7 +57312,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -57593,7 +57434,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -57718,7 +57558,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -57789,7 +57628,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -57846,7 +57684,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -58035,7 +57872,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -58172,7 +58008,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -58229,7 +58064,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -58357,7 +58191,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -58477,7 +58310,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -58604,7 +58436,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -58675,7 +58506,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -58807,7 +58637,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -58977,7 +58806,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -59048,7 +58876,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -59105,7 +58932,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -59211,7 +59037,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING
@@ -59339,7 +59164,6 @@ components:
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
                 - NEXT_HOP_INSTANCE_NOT_FOUND
                 - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
                 - NEXT_HOP_NOT_RUNNING

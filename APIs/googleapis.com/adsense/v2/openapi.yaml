@@ -611,6 +611,47 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v2/{name}/saved":
+    get:
+      description: Gets the saved report from the given resource name.
+      operationId: adsense.accounts.reports.getSaved
+      parameters:
+        - description: "Required. The name of the saved report to retrieve. Format: accounts/{account}/reports/{report}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SavedReport"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/adsense
+          Oauth2c:
+            - https://www.googleapis.com/auth/adsense
+        - Oauth2:
+            - https://www.googleapis.com/auth/adsense.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/adsense.readonly
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v2/{name}/saved:generate":
     get:
       description: Generates a saved report.
@@ -1486,7 +1527,7 @@ components:
           description: "Resource name of the ad client. Format: accounts/{account}/adclients/{adclient}"
           type: string
         productCode:
-          description: Output only. Product code of the ad client. For example, "AFC" for AdSense for Content.
+          description: Output only. Reporting product code of the ad client. For example, "AFC" for AdSense for Content. Corresponds to the `PRODUCT_CODE` dimension, and present only if the ad client supports reporting.
           readOnly: true
           type: string
         reportingDimensionId:

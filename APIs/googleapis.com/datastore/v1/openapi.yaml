@@ -1807,7 +1807,7 @@ components:
       properties:
         gqlQuery:
           $ref: "#/components/schemas/GqlQuery"
-          description: The GQL query to run. This query must be a non-aggregation query.
+          description: The GQL query to run.
         partitionId:
           $ref: "#/components/schemas/PartitionId"
           description: Entities are partitioned into subsets, identified by a partition ID. Queries are scoped to a single partition. This partition ID is normalized with the standard default context partition ID.
