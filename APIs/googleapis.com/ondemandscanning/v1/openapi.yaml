@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://ondemandscanning.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: ondemandscanning
 externalDocs:
@@ -559,7 +559,7 @@ components:
           type: string
       type: object
     CVSS:
-      description: Common Vulnerability Scoring System. For details, see https://www.first.org/cvss/specification-document This is a message we will try to use for storing multiple versions of CVSS. The intention is that as new versions of CVSS scores get added, we will be able to modify this message rather than adding new protos for each new version of the score.
+      description: Common Vulnerability Scoring System. For details, see https://www.first.org/cvss/specification-document This is a message we will try to use for storing various versions of CVSS rather than making a separate proto for storing a specific version.
       properties:
         attackComplexity:
           enum:
@@ -867,6 +867,13 @@ components:
           type: string
         url:
           description: Git repository URL.
+          type: string
+      type: object
+    GrafeasV1FileLocation:
+      description: Indicates the location at which a package was found.
+      properties:
+        filePath:
+          description: For jars that are contained inside .war files, this filepath can indicate the path to war file combined with the path to jar file.
           type: string
       type: object
     Hash:
@@ -1195,6 +1202,11 @@ components:
             - CRITICAL
           readOnly: true
           type: string
+        fileLocation:
+          description: The location at which this package was found.
+          items:
+            $ref: "#/components/schemas/GrafeasV1FileLocation"
+          type: array
         fixAvailable:
           description: Output only. Whether a fix is available for this package.
           type: boolean

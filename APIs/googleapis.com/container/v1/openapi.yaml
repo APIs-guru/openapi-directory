@@ -37,7 +37,7 @@ paths:
       description: Lists all clusters owned by a project in either the specified zone or all zones.
       operationId: container.projects.zones.clusters.list
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the parent field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the parent field.
           in: path
           name: projectId
           required: true
@@ -84,7 +84,7 @@ paths:
       description: Creates a cluster, consisting of the specified number and type of Google Compute Engine instances. By default, the cluster is created in the project's [default network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks). One firewall is added for the cluster. After cluster creation, the Kubelet creates routes for each node to allow the containers on that node to communicate with all other instances in the cluster. Finally, an entry is added to the project's global metadata indicating which CIDR range the cluster is using.
       operationId: container.projects.zones.clusters.create
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the parent field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the parent field.
           in: path
           name: projectId
           required: true
@@ -120,7 +120,7 @@ paths:
       description: Deletes the cluster, including the Kubernetes endpoint and all worker nodes. Firewalls and routes that were configured during cluster creation are also deleted. Other Google Compute Engine resources that might be in use by the cluster, such as load balancer resources, are not deleted if they weren't present when the cluster was initially created.
       operationId: container.projects.zones.clusters.delete
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           in: path
           name: projectId
           required: true
@@ -161,7 +161,7 @@ paths:
       description: Gets the details of a specific cluster.
       operationId: container.projects.zones.clusters.get
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           in: path
           name: projectId
           required: true
@@ -214,7 +214,7 @@ paths:
       description: Updates the settings of a specific cluster.
       operationId: container.projects.zones.clusters.update
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           in: path
           name: projectId
           required: true
@@ -268,7 +268,7 @@ paths:
       description: Sets the addons for a specific cluster.
       operationId: container.projects.zones.clusters.addons
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           in: path
           name: projectId
           required: true
@@ -322,7 +322,7 @@ paths:
       description: Enables or disables the ABAC authorization mechanism on a cluster.
       operationId: container.projects.zones.clusters.legacyAbac
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           in: path
           name: projectId
           required: true
@@ -376,7 +376,7 @@ paths:
       description: Sets the locations for a specific cluster. Deprecated. Use [projects.locations.clusters.update](https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters/update) instead.
       operationId: container.projects.zones.clusters.locations
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           in: path
           name: projectId
           required: true
@@ -430,7 +430,7 @@ paths:
       description: Sets the logging service for a specific cluster.
       operationId: container.projects.zones.clusters.logging
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           in: path
           name: projectId
           required: true
@@ -484,7 +484,7 @@ paths:
       description: Updates the master for a specific cluster.
       operationId: container.projects.zones.clusters.master
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           in: path
           name: projectId
           required: true
@@ -538,7 +538,7 @@ paths:
       description: Sets the monitoring service for a specific cluster.
       operationId: container.projects.zones.clusters.monitoring
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           in: path
           name: projectId
           required: true
@@ -580,7 +580,7 @@ paths:
       description: Lists the node pools for a cluster.
       operationId: container.projects.zones.clusters.nodePools.list
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber). This field has been deprecated and replaced by the parent field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the parent field.
           in: path
           name: projectId
           required: true
@@ -633,7 +633,7 @@ paths:
       description: Creates a node pool for a cluster.
       operationId: container.projects.zones.clusters.nodePools.create
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber). This field has been deprecated and replaced by the parent field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the parent field.
           in: path
           name: projectId
           required: true
@@ -675,7 +675,7 @@ paths:
       description: Deletes a node pool from a cluster.
       operationId: container.projects.zones.clusters.nodePools.delete
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber). This field has been deprecated and replaced by the name field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           in: path
           name: projectId
           required: true
@@ -722,7 +722,7 @@ paths:
       description: Retrieves the requested node pool.
       operationId: container.projects.zones.clusters.nodePools.get
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber). This field has been deprecated and replaced by the name field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           in: path
           name: projectId
           required: true
@@ -794,7 +794,7 @@ paths:
       description: Sets the autoscaling settings for the specified node pool.
       operationId: container.projects.zones.clusters.nodePools.autoscaling
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           in: path
           name: projectId
           required: true
@@ -854,7 +854,7 @@ paths:
       description: Sets the NodeManagement options for a node pool.
       operationId: container.projects.zones.clusters.nodePools.setManagement
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           in: path
           name: projectId
           required: true
@@ -914,7 +914,7 @@ paths:
       description: Sets the size for a specific node pool. The new size will be used for all replicas, including future replicas created by modifying NodePool.locations.
       operationId: container.projects.zones.clusters.nodePools.setSize
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           in: path
           name: projectId
           required: true
@@ -974,7 +974,7 @@ paths:
       description: Updates the version and/or image type for the specified node pool.
       operationId: container.projects.zones.clusters.nodePools.update
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           in: path
           name: projectId
           required: true
@@ -1034,7 +1034,7 @@ paths:
       description: Rolls back a previously Aborted or Failed NodePool upgrade. This makes no changes if the last upgrade successfully completed.
       operationId: container.projects.zones.clusters.nodePools.rollback
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           in: path
           name: projectId
           required: true
@@ -1094,7 +1094,7 @@ paths:
       description: Sets labels on a cluster.
       operationId: container.projects.zones.clusters.resourceLabels
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber). This field has been deprecated and replaced by the name field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           in: path
           name: projectId
           required: true
@@ -1148,7 +1148,7 @@ paths:
       description: Completes master IP rotation.
       operationId: container.projects.zones.clusters.completeIpRotation
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber). This field has been deprecated and replaced by the name field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           in: path
           name: projectId
           required: true
@@ -1202,7 +1202,7 @@ paths:
       description: Sets the maintenance policy for a cluster.
       operationId: container.projects.zones.clusters.setMaintenancePolicy
       parameters:
-        - description: Required. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840).
+        - description: Required. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
           in: path
           name: projectId
           required: true
@@ -1256,7 +1256,7 @@ paths:
       description: Sets master auth materials. Currently supports changing the admin password or a specific cluster, either via password generation or explicitly setting the password.
       operationId: container.projects.zones.clusters.setMasterAuth
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           in: path
           name: projectId
           required: true
@@ -1310,7 +1310,7 @@ paths:
       description: Enables or disables Network Policy for a cluster.
       operationId: container.projects.zones.clusters.setNetworkPolicy
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber). This field has been deprecated and replaced by the name field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           in: path
           name: projectId
           required: true
@@ -1364,7 +1364,7 @@ paths:
       description: Starts master IP rotation.
       operationId: container.projects.zones.clusters.startIpRotation
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber). This field has been deprecated and replaced by the name field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           in: path
           name: projectId
           required: true
@@ -1406,7 +1406,7 @@ paths:
       description: Lists all operations in a project in a specific zone or all zones.
       operationId: container.projects.zones.operations.list
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the parent field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the parent field.
           in: path
           name: projectId
           required: true
@@ -1454,7 +1454,7 @@ paths:
       description: Gets the specified operation.
       operationId: container.projects.zones.operations.get
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           in: path
           name: projectId
           required: true
@@ -1520,7 +1520,7 @@ paths:
       description: Cancels the specified operation.
       operationId: container.projects.zones.operations.cancel
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           in: path
           name: projectId
           required: true
@@ -1562,7 +1562,7 @@ paths:
       description: Returns configuration info about the Google Kubernetes Engine service.
       operationId: container.projects.zones.getServerconfig
       parameters:
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           in: path
           name: projectId
           required: true
@@ -1626,7 +1626,7 @@ paths:
           name: nodePoolId
           schema:
             type: string
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber). This field has been deprecated and replaced by the name field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           in: query
           name: projectId
           schema:
@@ -1665,7 +1665,7 @@ paths:
           name: operationId
           schema:
             type: string
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           in: query
           name: projectId
           schema:
@@ -1741,7 +1741,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           in: query
           name: projectId
           schema:
@@ -2586,7 +2586,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the parent field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the parent field.
           in: query
           name: projectId
           schema:
@@ -2699,7 +2699,7 @@ paths:
           name: clusterId
           schema:
             type: string
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber). This field has been deprecated and replaced by the parent field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the parent field.
           in: query
           name: projectId
           schema:
@@ -2775,7 +2775,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the parent field.
+        - description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the parent field.
           in: query
           name: projectId
           schema:
@@ -3028,7 +3028,7 @@ components:
           description: Deprecated. The server-assigned `name` of the operation. This field has been deprecated and replaced by the name field.
           type: string
         projectId:
-          description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+          description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         zone:
           description: Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the operation resides. This field has been deprecated and replaced by the name field.
@@ -3428,7 +3428,7 @@ components:
           description: The name (project, location, cluster name) of the cluster to complete IP rotation. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
-          description: Deprecated. The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber). This field has been deprecated and replaced by the name field.
+          description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         zone:
           description: Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
@@ -3465,7 +3465,7 @@ components:
           description: The parent (project and location) where the cluster will be created. Specified in the format `projects/*/locations/*`.
           type: string
         projectId:
-          description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the parent field.
+          description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the parent field.
           type: string
         zone:
           description: Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the parent field.
@@ -3484,7 +3484,7 @@ components:
           description: The parent (project, location, cluster name) where the node pool will be created. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
-          description: Deprecated. The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber). This field has been deprecated and replaced by the parent field.
+          description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the parent field.
           type: string
         zone:
           description: Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the parent field.
@@ -3888,6 +3888,13 @@ components:
           $ref: "#/components/schemas/RecurringTimeWindow"
           description: RecurringWindow specifies some number of recurring time periods for maintenance to occur. The time windows may be overlapping. If no maintenance windows are set, maintenance can occur at any time.
       type: object
+    ManagedPrometheusConfig:
+      description: ManagedPrometheusConfig defines the configuration for Google Cloud Managed Service for Prometheus.
+      properties:
+        enabled:
+          description: Enable Managed Collection.
+          type: boolean
+      type: object
     MasterAuth:
       description: The authentication information for accessing the master endpoint. Authentication can be done using HTTP basic auth or using client certificates.
       properties:
@@ -3973,6 +3980,9 @@ components:
         componentConfig:
           $ref: "#/components/schemas/MonitoringComponentConfig"
           description: Monitoring components configuration
+        managedPrometheusConfig:
+          $ref: "#/components/schemas/ManagedPrometheusConfig"
+          description: Enable Google Cloud Managed Service for Prometheus in the cluster.
       type: object
     NetworkConfig:
       description: NetworkConfig reports the relative names of network & subnetwork.
@@ -4012,6 +4022,16 @@ components:
           description: ServiceExternalIPsConfig specifies if services with externalIPs field are blocked or not.
         subnetwork:
           description: "Output only. The relative name of the Google Compute Engine [subnetwork](https://cloud.google.com/compute/docs/vpc) to which the cluster is connected. Example: projects/my-project/regions/us-central1/subnetworks/my-subnet"
+          type: string
+      type: object
+    NetworkPerformanceConfig:
+      description: Configuration of all network bandwidth tiers
+      properties:
+        totalEgressBandwidthTier:
+          description: Specifies the total network bandwidth tier for the NodePool.
+          enum:
+            - TIER_UNSPECIFIED
+            - TIER_1
           type: string
       type: object
     NetworkPolicy:
@@ -4191,6 +4211,9 @@ components:
         createPodRange:
           description: Input only. Whether to create a new range for pod IPs in this node pool. Defaults are provided for `pod_range` and `pod_ipv4_cidr_block` if they are not specified. If neither `create_pod_range` or `pod_range` are specified, the cluster-level default (`ip_allocation_policy.cluster_ipv4_cidr_block`) is used. Only applicable if `ip_allocation_policy.use_ip_aliases` is true. This field cannot be changed after the node pool has been created.
           type: boolean
+        networkPerformanceConfig:
+          $ref: "#/components/schemas/NetworkPerformanceConfig"
+          description: Network bandwidth tier configuration.
         podIpv4CidrBlock:
           description: The IP address range for pod IPs in this node pool. Only applicable if `create_pod_range` is true. Set to blank to have a range chosen with the default size. Set to /netmask (e.g. `/14`) to have a range chosen with a specific netmask. Set to a [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) notation (e.g. `10.96.0.0/14`) to pick a specific range to use. Only applicable if `ip_allocation_policy.use_ip_aliases` is true. This field cannot be changed after the node pool has been created.
           type: string
@@ -4585,7 +4608,7 @@ components:
           description: Deprecated. The name of the node pool to rollback. This field has been deprecated and replaced by the name field.
           type: string
         projectId:
-          description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+          description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         zone:
           description: Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
@@ -4691,7 +4714,7 @@ components:
           description: The name (project, location, cluster) of the cluster to set addons. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
-          description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+          description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         zone:
           description: Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
@@ -4710,7 +4733,7 @@ components:
           description: The name (project, location, cluster name) of the cluster to set labels. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
-          description: Deprecated. The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber). This field has been deprecated and replaced by the name field.
+          description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         resourceLabels:
           additionalProperties:
@@ -4734,7 +4757,7 @@ components:
           description: The name (project, location, cluster name) of the cluster to set legacy abac. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
-          description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+          description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         zone:
           description: Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
@@ -4755,7 +4778,7 @@ components:
           description: The name (project, location, cluster) of the cluster to set locations. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
-          description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+          description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         zone:
           description: Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
@@ -4774,7 +4797,7 @@ components:
           description: The name (project, location, cluster) of the cluster to set logging. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
-          description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+          description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         zone:
           description: Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
@@ -4793,7 +4816,7 @@ components:
           description: The name (project, location, cluster name) of the cluster to set maintenance policy. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
-          description: Required. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840).
+          description: Required. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
           type: string
         zone:
           description: Required. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides.
@@ -4817,7 +4840,7 @@ components:
           description: The name (project, location, cluster) of the cluster to set auth. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
-          description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+          description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         update:
           $ref: "#/components/schemas/MasterAuth"
@@ -4839,7 +4862,7 @@ components:
           description: The name (project, location, cluster) of the cluster to set monitoring. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
-          description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+          description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         zone:
           description: Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
@@ -4858,7 +4881,7 @@ components:
           $ref: "#/components/schemas/NetworkPolicy"
           description: Required. Configuration options for the NetworkPolicy feature.
         projectId:
-          description: Deprecated. The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber). This field has been deprecated and replaced by the name field.
+          description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         zone:
           description: Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
@@ -4880,7 +4903,7 @@ components:
           description: Deprecated. The name of the node pool to upgrade. This field has been deprecated and replaced by the name field.
           type: string
         projectId:
-          description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+          description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         zone:
           description: Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
@@ -4902,7 +4925,7 @@ components:
           description: Deprecated. The name of the node pool to update. This field has been deprecated and replaced by the name field.
           type: string
         projectId:
-          description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+          description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         zone:
           description: Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
@@ -4925,7 +4948,7 @@ components:
           description: Deprecated. The name of the node pool to update. This field has been deprecated and replaced by the name field.
           type: string
         projectId:
-          description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+          description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         zone:
           description: Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
@@ -4958,7 +4981,7 @@ components:
           description: The name (project, location, cluster name) of the cluster to start IP rotation. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
-          description: Deprecated. The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber). This field has been deprecated and replaced by the name field.
+          description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         rotateCredentials:
           description: Whether to rotate credentials during IP rotation.
@@ -5049,7 +5072,7 @@ components:
           description: The name (project, location, cluster) of the cluster to update. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
-          description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+          description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         update:
           $ref: "#/components/schemas/ClusterUpdate"
@@ -5071,7 +5094,7 @@ components:
           description: The name (project, location, cluster) of the cluster to update. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
-          description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+          description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         zone:
           description: Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
@@ -5116,7 +5139,7 @@ components:
           description: 'Required. The Kubernetes version to change the nodes to (typically an upgrade). Users may specify either explicit versions offered by Kubernetes Engine or version aliases, which have the following behavior: - "latest": picks the highest valid Kubernetes version - "1.X": picks the highest valid patch+gke.N patch in the 1.X version - "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version - "1.X.Y-gke.N": picks an explicit Kubernetes version - "-": picks the Kubernetes master version'
           type: string
         projectId:
-          description: Deprecated. The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840). This field has been deprecated and replaced by the name field.
+          description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         tags:
           $ref: "#/components/schemas/NetworkTags"
