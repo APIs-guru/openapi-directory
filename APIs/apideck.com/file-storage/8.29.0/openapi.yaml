@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.0.3
 servers:
   - url: https://unify.apideck.com
 info:
@@ -6,9 +6,9 @@ info:
     email: hello@apideck.com
     url: https://developers.apideck.com
   description: |+
-    Welcome to the HRIS API.
+    Welcome to the File Storage API.
 
-    You can use this API to access all HRIS API endpoints.
+    You can use this API to access all File Storage API endpoints.
 
     ## Base URL
 
@@ -267,9 +267,9 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  title: HRIS API
-  version: 8.28.1
-  x-apideck-api: hris
+  title: File storage API
+  version: 8.29.0
+  x-apideck-api: file-storage
   x-apideck-sdk-support: true
   x-apisguru-categories:
     - developer_tools
@@ -277,10 +277,10 @@ info:
     url: https://developers.apideck.com/icon.png
   x-origin:
     - format: openapi
-      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/hris.yml
+      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/file-storage.yml
       version: "3.0"
   x-providerName: apideck.com
-  x-serviceName: hris
+  x-serviceName: file-storage
   x-tags:
     - partner
 externalDocs:
@@ -289,31 +289,27 @@ externalDocs:
 security:
   - apiKey: []
 tags:
-  - description: ""
-    name: Employees
+  - description: Files
+    name: Files
     x-apideck-model:
-      $ref: "#/components/schemas/Employee"
+      $ref: "#/components/schemas/UnifiedFile"
   - description: ""
-    name: Companies
+    name: Folders
     x-apideck-model:
-      $ref: "#/components/schemas/HrisCompany"
+      $ref: "#/components/schemas/Folder"
   - description: ""
-    name: Departments
+    name: Shared Links
     x-apideck-model:
-      $ref: "#/components/schemas/Department"
+      $ref: "#/components/schemas/SharedLink"
   - description: ""
-    name: Payrolls
+    name: Upload Sessions
     x-apideck-model:
-      $ref: "#/components/schemas/Payroll"
-  - description: ""
-    name: EmployeePayrolls
-    x-apideck-model:
-      $ref: "#/components/schemas/EmployeePayroll"
+      $ref: "#/components/schemas/UploadSession"
 paths:
-  /hris/companies:
+  /file-storage/files:
     get:
-      description: List Companies
-      operationId: companiesAll
+      description: List Files
+      operationId: filesAll
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
@@ -321,9 +317,11 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/filesFilter"
+        - $ref: "#/components/parameters/filesSort"
       responses:
         "200":
-          $ref: "#/components/responses/GetHrisCompaniesResponse"
+          $ref: "#/components/responses/GetFilesResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -338,10 +336,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: List Companies
+      summary: List Files
       tags:
-        - Companies
-      x-apideck-api: hris
+        - Files
+      x-apideck-api: fileStorage
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -355,29 +353,30 @@ paths:
             })
 
             try {
-              const { data } = await apideck.hris.companiesAll({})
+              const { data } = await apideck.fileStorage.filesAll({})
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: hrisCompanies
+      x-graphql-field-name: files
     post:
-      description: Create Company
-      operationId: companiesAdd
+      description: Upload file (max 4MB). Please use the Upload Session API to upload bigger files.
+      operationId: filesUpload
       parameters:
         - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/metadata"
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
       requestBody:
         content:
-          application/json:
+          "*/*":
             schema:
-              $ref: "#/components/schemas/HrisCompany"
-        required: true
+              format: binary
+              type: string
       responses:
         "201":
-          $ref: "#/components/responses/CreateHrisCompanyResponse"
+          $ref: "#/components/responses/CreateFileResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -392,10 +391,278 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Create Company
+      summary: Upload file
       tags:
-        - Companies
-      x-apideck-api: hris
+        - Files
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID',
+              metadata: 'REPLACE_WITH_METADATA'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.filesUpload({
+                filesUpload: 'string'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-exclude: true
+      x-sdk-exclude: true
+  /file-storage/files/search:
+    post:
+      description: Search Files
+      operationId: filesSearch
+      parameters:
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FilesSearch"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/GetFilesResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Search Files
+      tags:
+        - Files
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.filesSearch({
+                filesSearch: {
+                  query: 'logo jpg'
+                }
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/file-storage/files/{id}":
+    delete:
+      description: Delete File
+      operationId: filesDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeleteFileResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Delete File
+      tags:
+        - Files
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.filesDelete({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    get:
+      description: Get File
+      operationId: filesOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetFileResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get File
+      tags:
+        - Files
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.filesOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/file-storage/files/{id}/download":
+    get:
+      description: Download File
+      operationId: filesDownload
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetFileDownloadResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Download File
+      tags:
+        - Files
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.filesDownload({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-exclude: true
+  /file-storage/folders:
+    post:
+      description: Create Folder
+      operationId: foldersAdd
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateFolderRequest"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateFolderResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Create Folder
+      tags:
+        - Folders
+      x-apideck-api: fileStorage
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -409,76 +676,23 @@ paths:
             })
 
             const params = {
-              company: {
-                legal_name: 'SpaceX',
-                display_name: 'SpaceX',
-                subdomain: 'company',
-                company_number: '123456-AB',
-                addresses: [
-                  {
-                    id: '123',
-                    type: 'primary',
-                    string: '25 Spring Street, Blackburn, VIC 3130',
-                    name: 'HQ US',
-                    line1: 'Main street',
-                    line2: 'apt #',
-                    line3: 'Suite #',
-                    line4: 'delivery instructions',
-                    street_number: '25',
-                    city: 'San Francisco',
-                    state: 'CA',
-                    postal_code: '94104',
-                    country: 'US',
-                    latitude: '40.759211',
-                    longitude: '-73.984638',
-                    county: 'Santa Clara',
-                    contact_name: 'Elon Musk',
-                    salutation: 'Mr',
-                    phone_number: '111-111-1111',
-                    fax: '122-111-1111',
-                    email: 'elon@musk.com',
-                    website: 'https://elonmusk.com',
-                    row_version: '1-12345'
-                  }
-                ],
-                phone_numbers: [
-                  {
-                    id: '12345',
-                    country_code: '1',
-                    area_code: '323',
-                    number: '111-111-1111',
-                    extension: '105',
-                    type: 'primary'
-                  }
-                ],
-                emails: [
-                  {
-                    id: '123',
-                    email: 'elon@musk.com',
-                    type: 'primary'
-                  }
-                ],
-                websites: [
-                  {
-                    id: '12345',
-                    url: 'http://example.com',
-                    type: 'primary'
-                  }
-                ],
-                debtor_id: '12345'
+              folder: {
+                name: 'Documents',
+                description: 'My Personal Documents',
+                parent_folder_id: '1234'
               }
             }
 
             try {
-              const { data } = await apideck.hris.companiesAdd(params)
+              const { data } = await apideck.fileStorage.foldersAdd(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  "/hris/companies/{id}":
+  "/file-storage/folders/{id}":
     delete:
-      description: Delete Company
-      operationId: companiesDelete
+      description: Delete Folder
+      operationId: foldersDelete
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -487,7 +701,7 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/DeleteHrisCompanyResponse"
+          $ref: "#/components/responses/DeleteFolderResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -502,10 +716,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Delete Company
+      summary: Delete Folder
       tags:
-        - Companies
-      x-apideck-api: hris
+        - Folders
+      x-apideck-api: fileStorage
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -519,7 +733,7 @@ paths:
             })
 
             try {
-              const { data } = await apideck.hris.companiesDelete({
+              const { data } = await apideck.fileStorage.foldersDelete({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
@@ -527,8 +741,8 @@ paths:
               console.error(error)
             }
     get:
-      description: Get Company
-      operationId: companiesOne
+      description: Get Folder
+      operationId: foldersOne
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -537,7 +751,7 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/GetHrisCompanyResponse"
+          $ref: "#/components/responses/GetFolderResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -552,10 +766,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Get Company
+      summary: Get Folder
       tags:
-        - Companies
-      x-apideck-api: hris
+        - Folders
+      x-apideck-api: fileStorage
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -569,7 +783,7 @@ paths:
             })
 
             try {
-              const { data } = await apideck.hris.companiesOne({
+              const { data } = await apideck.fileStorage.foldersOne({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
@@ -577,8 +791,8 @@ paths:
               console.error(error)
             }
     patch:
-      description: Update Company
-      operationId: companiesUpdate
+      description: Rename or move Folder
+      operationId: foldersUpdate
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -589,11 +803,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/HrisCompany"
+              $ref: "#/components/schemas/UpdateFolderRequest"
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/UpdateHrisCompanyResponse"
+          $ref: "#/components/responses/UpdateFolderResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -608,10 +822,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Update Company
+      summary: Rename or move Folder
       tags:
-        - Companies
-      x-apideck-api: hris
+        - Folders
+      x-apideck-api: fileStorage
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -626,288 +840,23 @@ paths:
 
             const params = {
               id: 'id_example',
-              company: {
-                legal_name: 'SpaceX',
-                display_name: 'SpaceX',
-                subdomain: 'company',
-                company_number: '123456-AB',
-                addresses: [
-                  {
-                    id: '123',
-                    type: 'primary',
-                    string: '25 Spring Street, Blackburn, VIC 3130',
-                    name: 'HQ US',
-                    line1: 'Main street',
-                    line2: 'apt #',
-                    line3: 'Suite #',
-                    line4: 'delivery instructions',
-                    street_number: '25',
-                    city: 'San Francisco',
-                    state: 'CA',
-                    postal_code: '94104',
-                    country: 'US',
-                    latitude: '40.759211',
-                    longitude: '-73.984638',
-                    county: 'Santa Clara',
-                    contact_name: 'Elon Musk',
-                    salutation: 'Mr',
-                    phone_number: '111-111-1111',
-                    fax: '122-111-1111',
-                    email: 'elon@musk.com',
-                    website: 'https://elonmusk.com',
-                    row_version: '1-12345'
-                  }
-                ],
-                phone_numbers: [
-                  {
-                    id: '12345',
-                    country_code: '1',
-                    area_code: '323',
-                    number: '111-111-1111',
-                    extension: '105',
-                    type: 'primary'
-                  }
-                ],
-                emails: [
-                  {
-                    id: '123',
-                    email: 'elon@musk.com',
-                    type: 'primary'
-                  }
-                ],
-                websites: [
-                  {
-                    id: '12345',
-                    url: 'http://example.com',
-                    type: 'primary'
-                  }
-                ],
-                debtor_id: '12345'
+              folder: {
+                name: 'Documents',
+                description: 'My Personal Documents',
+                parent_folder_id: '1234'
               }
             }
 
             try {
-              const { data } = await apideck.hris.companiesUpdate(params)
+              const { data } = await apideck.fileStorage.foldersUpdate(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  /hris/departments:
-    get:
-      description: List Departments
-      operationId: departmentsAll
-      parameters:
-        - $ref: "#/components/parameters/raw"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/cursor"
-        - $ref: "#/components/parameters/limit"
-      responses:
-        "200":
-          $ref: "#/components/responses/GetDepartmentsResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: List Departments
-      tags:
-        - Departments
-      x-apideck-api: hris
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.hris.departmentsAll({})
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-      x-graphql-field-name: departments
+  "/file-storage/folders/{id}/copy":
     post:
-      description: Create Department
-      operationId: departmentsAdd
-      parameters:
-        - $ref: "#/components/parameters/raw"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Department"
-        required: true
-      responses:
-        "201":
-          $ref: "#/components/responses/CreateDepartmentResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Create Department
-      tags:
-        - Departments
-      x-apideck-api: hris
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            const params = {
-              department: {
-                name: 'R&D',
-                code: '2',
-                description: 'R&D'
-              }
-            }
-
-            try {
-              const { data } = await apideck.hris.departmentsAdd(params)
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-  "/hris/departments/{id}":
-    delete:
-      description: Delete Department
-      operationId: departmentsDelete
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
-      responses:
-        "200":
-          $ref: "#/components/responses/DeleteDepartmentResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Delete Department
-      tags:
-        - Departments
-      x-apideck-api: hris
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.hris.departmentsDelete({
-                id: 'id_example'
-              })
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-    get:
-      description: Get Department
-      operationId: departmentsOne
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
-      responses:
-        "200":
-          $ref: "#/components/responses/GetDepartmentResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Get Department
-      tags:
-        - Departments
-      x-apideck-api: hris
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.hris.departmentsOne({
-                id: 'id_example'
-              })
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-    patch:
-      description: Update Department
-      operationId: departmentsUpdate
+      description: Copy Folder
+      operationId: foldersCopy
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -918,11 +867,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Department"
+              $ref: "#/components/schemas/CopyFolderRequest"
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/UpdateDepartmentResponse"
+          $ref: "#/components/responses/UpdateFolderResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -937,10 +886,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Update Department
+      summary: Copy Folder
       tags:
-        - Departments
-      x-apideck-api: hris
+        - Folders
+      x-apideck-api: fileStorage
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -955,23 +904,23 @@ paths:
 
             const params = {
               id: 'id_example',
-              department: {
-                name: 'R&D',
-                code: '2',
-                description: 'R&D'
+              folder: {
+                name: 'Documents',
+                parent_folder_id: '1234'
               }
             }
 
             try {
-              const { data } = await apideck.hris.departmentsUpdate(params)
+              const { data } = await apideck.fileStorage.foldersCopy(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  /hris/employees:
+      x-graphql-exclude: true
+  /file-storage/shared-links:
     get:
-      description: List Employees
-      operationId: employeesAll
+      description: List SharedLinks
+      operationId: sharedLinksAll
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
@@ -979,10 +928,9 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
-        - $ref: "#/components/parameters/employeesFilter"
       responses:
         "200":
-          $ref: "#/components/responses/GetEmployeesResponse"
+          $ref: "#/components/responses/GetSharedLinksResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -997,10 +945,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: List Employees
+      summary: List SharedLinks
       tags:
-        - Employees
-      x-apideck-api: hris
+        - Shared Links
+      x-apideck-api: fileStorage
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1014,15 +962,15 @@ paths:
             })
 
             try {
-              const { data } = await apideck.hris.employeesAll({})
+              const { data } = await apideck.fileStorage.sharedLinksAll({})
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: employees
+      x-graphql-field-name: sharedLinks
     post:
-      description: Create Employee
-      operationId: employeesAdd
+      description: Create Shared Link
+      operationId: sharedLinksAdd
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
@@ -1032,11 +980,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Employee"
+              $ref: "#/components/schemas/SharedLink"
         required: true
       responses:
         "201":
-          $ref: "#/components/responses/CreateEmployeeResponse"
+          $ref: "#/components/responses/CreateSharedLinkResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -1051,10 +999,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Create Employee
+      summary: Create Shared Link
       tags:
-        - Employees
-      x-apideck-api: hris
+        - Shared Links
+      x-apideck-api: fileStorage
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1068,167 +1016,24 @@ paths:
             })
 
             const params = {
-              employee: {
-                first_name: 'Elon',
-                last_name: 'Musk',
-                middle_name: 'D.',
-                display_name: 'Technoking',
-                preferred_name: 'Elon Musk',
-                initials: 'EM',
-                salutation: 'Mr',
-                title: 'CEO',
-                marital_status: 'married',
-                division: 'Europe',
-                department: 'R&D',
-                team: {
-                  id: '1234',
-                  name: 'Full Stack Engineers'
-                },
-                company_id: '23456',
-                company_name: 'SpaceX',
-                employment_start_date: '2021-10-26',
-                employment_end_date: '2028-10-26',
-                employee_number: '123456-AB',
-                employment_status: 'active',
-                employment_role: {
-                  type: 'contractor',
-                  sub_type: 'full_time'
-                },
-                manager: {
-                  name: 'Elon Musk',
-                  first_name: 'Elon',
-                  last_name: 'Musk',
-                  email: 'elon@musk.com'
-                },
-                social_security_number: '123456789',
-                birthday: '2000-08-12',
-                country_of_birth: 'US',
-                description: 'A description',
-                gender: 'male',
-                pronouns: 'she,her',
-                preferred_language: 'EN',
-                languages: ['EN'],
-                nationalities: ['US'],
-                photo_url: 'https://unavatar.io/elon-musk',
-                jobs: [
-                  {
-                    title: 'CEO',
-                    compensation_rate: 72000,
-                    currency: 'USD',
-                    payment_unit: 'year',
-                    hired_at: '2020-08-12',
-                    is_primary: true,
-                    location: {
-                      id: '123',
-                      type: 'primary',
-                      string: '25 Spring Street, Blackburn, VIC 3130',
-                      name: 'HQ US',
-                      line1: 'Main street',
-                      line2: 'apt #',
-                      line3: 'Suite #',
-                      line4: 'delivery instructions',
-                      street_number: '25',
-                      city: 'San Francisco',
-                      state: 'CA',
-                      postal_code: '94104',
-                      country: 'US',
-                      latitude: '40.759211',
-                      longitude: '-73.984638',
-                      county: 'Santa Clara',
-                      contact_name: 'Elon Musk',
-                      salutation: 'Mr',
-                      phone_number: '111-111-1111',
-                      fax: '122-111-1111',
-                      email: 'elon@musk.com',
-                      website: 'https://elonmusk.com',
-                      row_version: '1-12345'
-                    }
-                  }
-                ],
-                compensations: [
-                  {
-                    id: '3404301363494309004',
-                    job_id: '3490439050957906679',
-                    rate: '50.00',
-                    payment_unit: 'hour',
-                    flsa_status: 'nonexempt',
-                    effective_date: '2021-06-11'
-                  }
-                ],
-                addresses: [
-                  {
-                    id: '123',
-                    type: 'primary',
-                    string: '25 Spring Street, Blackburn, VIC 3130',
-                    name: 'HQ US',
-                    line1: 'Main street',
-                    line2: 'apt #',
-                    line3: 'Suite #',
-                    line4: 'delivery instructions',
-                    street_number: '25',
-                    city: 'San Francisco',
-                    state: 'CA',
-                    postal_code: '94104',
-                    country: 'US',
-                    latitude: '40.759211',
-                    longitude: '-73.984638',
-                    county: 'Santa Clara',
-                    contact_name: 'Elon Musk',
-                    salutation: 'Mr',
-                    phone_number: '111-111-1111',
-                    fax: '122-111-1111',
-                    email: 'elon@musk.com',
-                    website: 'https://elonmusk.com',
-                    row_version: '1-12345'
-                  }
-                ],
-                phone_numbers: [
-                  {
-                    id: '12345',
-                    country_code: '1',
-                    area_code: '323',
-                    number: '111-111-1111',
-                    extension: '105',
-                    type: 'primary'
-                  }
-                ],
-                emails: [
-                  {
-                    id: '123',
-                    email: 'elon@musk.com',
-                    type: 'primary'
-                  }
-                ],
-                custom_fields: [
-                  {
-                    id: '2389328923893298',
-                    name: 'employee_level',
-                    description: 'Employee Level',
-                    value: 'Uses Salesforce and Marketo'
-                  }
-                ],
-                social_links: [
-                  {
-                    id: '12345',
-                    url: 'https://www.twitter.com/apideck-io',
-                    type: 'twitter'
-                  }
-                ],
-                row_version: '1-12345',
-                deleted: true
+              sharedLink: {
+                download_url: 'https://www.box.com/shared/static/rh935iit6ewrmw0unyul.jpeg',
+                target_id: 'string',
+                scope: 'company',
+                password: 'string'
               }
             }
 
             try {
-              const { data } = await apideck.hris.employeesAdd(params)
+              const { data } = await apideck.fileStorage.sharedLinksAdd(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  "/hris/employees/{id}":
+  "/file-storage/shared-links/{id}":
     delete:
-      description: Delete Employee
-      operationId: employeesDelete
+      description: Delete Shared Link
+      operationId: sharedLinksDelete
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -1237,7 +1042,7 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/DeleteEmployeeResponse"
+          $ref: "#/components/responses/DeleteSharedLinkResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -1252,10 +1057,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Delete Employee
+      summary: Delete Shared Link
       tags:
-        - Employees
-      x-apideck-api: hris
+        - Shared Links
+      x-apideck-api: fileStorage
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1269,7 +1074,7 @@ paths:
             })
 
             try {
-              const { data } = await apideck.hris.employeesDelete({
+              const { data } = await apideck.fileStorage.sharedLinksDelete({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
@@ -1277,8 +1082,8 @@ paths:
               console.error(error)
             }
     get:
-      description: Get Employee
-      operationId: employeesOne
+      description: Get Shared Link
+      operationId: sharedLinksOne
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -1287,7 +1092,7 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/GetEmployeeResponse"
+          $ref: "#/components/responses/GetSharedLinkResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -1302,10 +1107,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Get Employee
+      summary: Get Shared Link
       tags:
-        - Employees
-      x-apideck-api: hris
+        - Shared Links
+      x-apideck-api: fileStorage
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1319,7 +1124,7 @@ paths:
             })
 
             try {
-              const { data } = await apideck.hris.employeesOne({
+              const { data } = await apideck.fileStorage.sharedLinksOne({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
@@ -1327,8 +1132,8 @@ paths:
               console.error(error)
             }
     patch:
-      description: Update Employee
-      operationId: employeesUpdate
+      description: Update Shared Link
+      operationId: sharedLinksUpdate
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -1339,11 +1144,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Employee"
+              $ref: "#/components/schemas/SharedLink"
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/UpdateEmployeeResponse"
+          $ref: "#/components/responses/UpdateSharedLinkResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -1358,10 +1163,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Update Employee
+      summary: Update Shared Link
       tags:
-        - Employees
-      x-apideck-api: hris
+        - Shared Links
+      x-apideck-api: fileStorage
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1376,176 +1181,38 @@ paths:
 
             const params = {
               id: 'id_example',
-              employee: {
-                first_name: 'Elon',
-                last_name: 'Musk',
-                middle_name: 'D.',
-                display_name: 'Technoking',
-                preferred_name: 'Elon Musk',
-                initials: 'EM',
-                salutation: 'Mr',
-                title: 'CEO',
-                marital_status: 'married',
-                division: 'Europe',
-                department: 'R&D',
-                team: {
-                  id: '1234',
-                  name: 'Full Stack Engineers'
-                },
-                company_id: '23456',
-                company_name: 'SpaceX',
-                employment_start_date: '2021-10-26',
-                employment_end_date: '2028-10-26',
-                employee_number: '123456-AB',
-                employment_status: 'active',
-                employment_role: {
-                  type: 'contractor',
-                  sub_type: 'full_time'
-                },
-                manager: {
-                  name: 'Elon Musk',
-                  first_name: 'Elon',
-                  last_name: 'Musk',
-                  email: 'elon@musk.com'
-                },
-                social_security_number: '123456789',
-                birthday: '2000-08-12',
-                country_of_birth: 'US',
-                description: 'A description',
-                gender: 'male',
-                pronouns: 'she,her',
-                preferred_language: 'EN',
-                languages: ['EN'],
-                nationalities: ['US'],
-                photo_url: 'https://unavatar.io/elon-musk',
-                jobs: [
-                  {
-                    title: 'CEO',
-                    compensation_rate: 72000,
-                    currency: 'USD',
-                    payment_unit: 'year',
-                    hired_at: '2020-08-12',
-                    is_primary: true,
-                    location: {
-                      id: '123',
-                      type: 'primary',
-                      string: '25 Spring Street, Blackburn, VIC 3130',
-                      name: 'HQ US',
-                      line1: 'Main street',
-                      line2: 'apt #',
-                      line3: 'Suite #',
-                      line4: 'delivery instructions',
-                      street_number: '25',
-                      city: 'San Francisco',
-                      state: 'CA',
-                      postal_code: '94104',
-                      country: 'US',
-                      latitude: '40.759211',
-                      longitude: '-73.984638',
-                      county: 'Santa Clara',
-                      contact_name: 'Elon Musk',
-                      salutation: 'Mr',
-                      phone_number: '111-111-1111',
-                      fax: '122-111-1111',
-                      email: 'elon@musk.com',
-                      website: 'https://elonmusk.com',
-                      row_version: '1-12345'
-                    }
-                  }
-                ],
-                compensations: [
-                  {
-                    id: '3404301363494309004',
-                    job_id: '3490439050957906679',
-                    rate: '50.00',
-                    payment_unit: 'hour',
-                    flsa_status: 'nonexempt',
-                    effective_date: '2021-06-11'
-                  }
-                ],
-                addresses: [
-                  {
-                    id: '123',
-                    type: 'primary',
-                    string: '25 Spring Street, Blackburn, VIC 3130',
-                    name: 'HQ US',
-                    line1: 'Main street',
-                    line2: 'apt #',
-                    line3: 'Suite #',
-                    line4: 'delivery instructions',
-                    street_number: '25',
-                    city: 'San Francisco',
-                    state: 'CA',
-                    postal_code: '94104',
-                    country: 'US',
-                    latitude: '40.759211',
-                    longitude: '-73.984638',
-                    county: 'Santa Clara',
-                    contact_name: 'Elon Musk',
-                    salutation: 'Mr',
-                    phone_number: '111-111-1111',
-                    fax: '122-111-1111',
-                    email: 'elon@musk.com',
-                    website: 'https://elonmusk.com',
-                    row_version: '1-12345'
-                  }
-                ],
-                phone_numbers: [
-                  {
-                    id: '12345',
-                    country_code: '1',
-                    area_code: '323',
-                    number: '111-111-1111',
-                    extension: '105',
-                    type: 'primary'
-                  }
-                ],
-                emails: [
-                  {
-                    id: '123',
-                    email: 'elon@musk.com',
-                    type: 'primary'
-                  }
-                ],
-                custom_fields: [
-                  {
-                    id: '2389328923893298',
-                    name: 'employee_level',
-                    description: 'Employee Level',
-                    value: 'Uses Salesforce and Marketo'
-                  }
-                ],
-                social_links: [
-                  {
-                    id: '12345',
-                    url: 'https://www.twitter.com/apideck-io',
-                    type: 'twitter'
-                  }
-                ],
-                row_version: '1-12345',
-                deleted: true
+              sharedLink: {
+                download_url: 'https://www.box.com/shared/static/rh935iit6ewrmw0unyul.jpeg',
+                target_id: 'string',
+                scope: 'company',
+                password: 'string'
               }
             }
 
             try {
-              const { data } = await apideck.hris.employeesUpdate(params)
+              const { data } = await apideck.fileStorage.sharedLinksUpdate(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  /hris/payrolls:
-    get:
-      description: List Payroll
-      operationId: payrollsAll
+  /file-storage/upload-sessions:
+    post:
+      description: Start Upload Session
+      operationId: uploadSessionsAdd
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/payrollsFilter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUploadSessionRequest"
+        required: true
       responses:
-        "200":
-          $ref: "#/components/responses/GetPayrollsResponse"
+        "201":
+          $ref: "#/components/responses/CreateUploadSessionResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -1560,114 +1227,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: List Payroll
+      summary: Start Upload Session
       tags:
-        - Payrolls
-      x-apideck-api: hris
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.hris.payrollsAll({})
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-      x-graphql-field-name: payrolls
-  "/hris/payrolls/employees/{employee_id}":
-    get:
-      description: List payrolls for employee
-      operationId: employeePayrollsAll
-      parameters:
-        - $ref: "#/components/parameters/employeeId"
-        - $ref: "#/components/parameters/raw"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/payrollsFilter"
-      responses:
-        "200":
-          $ref: "#/components/responses/GetEmployeePayrollsResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: List Employee Payrolls
-      tags:
-        - EmployeePayrolls
-      x-apideck-api: hris
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.hris.employeePayrollsAll({
-                employeeId: 'employee_id_example'
-              })
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-      x-graphql-field-name: employeePayrolls
-  "/hris/payrolls/employees/{employee_id}/payrolls/{payroll_id}":
-    get:
-      description: Get payroll for employee
-      operationId: employeePayrollsOne
-      parameters:
-        - $ref: "#/components/parameters/payrollId"
-        - $ref: "#/components/parameters/employeeId"
-        - $ref: "#/components/parameters/raw"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-      responses:
-        "200":
-          $ref: "#/components/responses/GetEmployeePayrollResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Get Employee Payroll
-      tags:
-        - EmployeePayrolls
-      x-apideck-api: hris
+        - Upload Sessions
+      x-apideck-api: fileStorage
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1681,30 +1244,32 @@ paths:
             })
 
             const params = {
-              payrollId: 'payroll_id_example',
-              employeeId: 'employee_id_example'
+              uploadSession: {
+                name: 'Documents',
+                parent_folder_id: '1234',
+                size: 1810673
+              }
             }
 
             try {
-              const { data } = await apideck.hris.employeePayrollsOne(params)
+              const { data } = await apideck.fileStorage.uploadSessionsAdd(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: employeePayroll
-  "/hris/payrolls/{payroll_id}":
-    get:
-      description: Get Payroll
-      operationId: payrollsOne
+  "/file-storage/upload-sessions/{id}":
+    delete:
+      description: Abort Upload Session
+      operationId: uploadSessionsDelete
       parameters:
-        - $ref: "#/components/parameters/payrollId"
-        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/GetPayrollResponse"
+          $ref: "#/components/responses/DeleteUploadSessionResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -1719,10 +1284,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Get Payroll
+      summary: Abort Upload Session
       tags:
-        - Payrolls
-      x-apideck-api: hris
+        - Upload Sessions
+      x-apideck-api: fileStorage
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1736,27 +1301,193 @@ paths:
             })
 
             try {
-              const { data } = await apideck.hris.payrollsOne({
-                payrollId: 'payroll_id_example'
+              const { data } = await apideck.fileStorage.uploadSessionsDelete({
+                id: 'id_example'
               })
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: payroll
+    get:
+      description: Get Upload Session
+      operationId: uploadSessionsOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetUploadSessionResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get Upload Session
+      tags:
+        - Upload Sessions
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.uploadSessionsOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    put:
+      description: Upload part of file to Upload Session
+      operationId: uploadSessionsUpload
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/partNumber"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          "*/*":
+            schema:
+              example: <binary string>
+              format: binary
+              type: string
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdateUploadSessionResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Upload part of file to Upload Session
+      tags:
+        - Upload Sessions
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              id: 'id_example',
+              partNumber: 0,
+              body: '<binary string>'
+            }
+
+            try {
+              const { data } = await apideck.fileStorage.uploadSessionsUpload(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-exclude: true
+      x-sdk-exclude: true
+  "/file-storage/upload-sessions/{id}/finish":
+    post:
+      description: Finish Upload Session
+      operationId: uploadSessionsFinish
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties: {}
+              type: object
+      responses:
+        "201":
+          $ref: "#/components/responses/GetFileResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Finish Upload Session
+      tags:
+        - Upload Sessions
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.uploadSessionsFinish({
+                id: 'id_example',
+                uploadSessionsFinish: {}
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
 components:
   parameters:
     applicationId:
       description: The ID of your Unify application
       in: header
       name: x-apideck-app-id
-      required: true
-      schema:
-        type: string
-    companyId:
-      description: ID of the company you are acting upon.
-      in: path
-      name: company_id
       required: true
       schema:
         type: string
@@ -1774,20 +1505,21 @@ components:
       schema:
         nullable: true
         type: string
-    employeeId:
-      description: ID of the employee you are acting upon.
-      in: path
-      name: employee_id
-      required: true
-      schema:
-        type: string
-    employeesFilter:
+    filesFilter:
       description: Apply filters (beta)
       explode: true
       in: query
       name: filter
       schema:
-        $ref: "#/components/schemas/EmployeesFilter"
+        $ref: "#/components/schemas/FilesFilter"
+      style: deepObject
+    filesSort:
+      description: Apply sorting
+      explode: true
+      in: query
+      name: sort
+      schema:
+        $ref: "#/components/schemas/FilesSort"
       style: deepObject
     id:
       description: ID of the record you are acting upon.
@@ -1805,21 +1537,25 @@ components:
         maximum: 200
         minimum: 1
         type: integer
-    payrollId:
-      description: ID of the payroll you are acting upon.
-      in: path
-      name: payroll_id
+    metadata:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateFileRequest"
+      description: Metadata to attach to the file
+      in: header
+      name: x-apideck-metadata
+      required: true
+    partNumber:
+      description: Part number of the file part being uploaded.
+      in: query
+      name: part_number
       required: true
       schema:
-        type: string
-    payrollsFilter:
-      description: Apply filters (beta)
-      explode: true
-      in: query
-      name: filter
-      schema:
-        $ref: "#/components/schemas/PayrollsFilter"
-      style: deepObject
+        example: 0
+        maximum: 10000
+        minimum: 0
+        type: number
     raw:
       description: Include raw response. Mostly used for debugging purposes
       in: query
@@ -1840,102 +1576,103 @@ components:
           schema:
             $ref: "#/components/schemas/BadRequestResponse"
       description: Bad Request
-    CreateDepartmentResponse:
+    CreateFileResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CreateDepartmentResponse"
-      description: Departments
-    CreateEmployeeResponse:
+            $ref: "#/components/schemas/CreateFileResponse"
+      description: Files
+    CreateFolderResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CreateEmployeeResponse"
-      description: Employees
-    CreateHrisCompanyResponse:
+            $ref: "#/components/schemas/CreateFolderResponse"
+      description: Folders
+    CreateSharedLinkResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CreateHrisCompanyResponse"
-      description: Companies
-    DeleteDepartmentResponse:
+            $ref: "#/components/schemas/CreateSharedLinkResponse"
+      description: Shared Links
+    CreateUploadSessionResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/DeleteDepartmentResponse"
-      description: Departments
-    DeleteEmployeeResponse:
+            $ref: "#/components/schemas/CreateUploadSessionResponse"
+      description: UploadSessions
+    DeleteFileResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/DeleteEmployeeResponse"
-      description: Employees
-    DeleteHrisCompanyResponse:
+            $ref: "#/components/schemas/DeleteFileResponse"
+      description: Files
+    DeleteFolderResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/DeleteHrisCompanyResponse"
-      description: Companies
-    GetDepartmentResponse:
+            $ref: "#/components/schemas/DeleteFolderResponse"
+      description: Folders
+    DeleteSharedLinkResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetDepartmentResponse"
-      description: Departments
-    GetDepartmentsResponse:
+            $ref: "#/components/schemas/DeleteSharedLinkResponse"
+      description: Shared Links
+    DeleteUploadSessionResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetDepartmentsResponse"
-      description: Departments
-    GetEmployeePayrollResponse:
+            $ref: "#/components/schemas/DeleteUploadSessionResponse"
+      description: UploadSessions
+    GetFileDownloadResponse:
+      content:
+        "*/*":
+          schema:
+            format: binary
+            type: string
+      description: File Download
+    GetFileResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetEmployeePayrollResponse"
-      description: Payrolls
-    GetEmployeePayrollsResponse:
+            $ref: "#/components/schemas/GetFileResponse"
+      description: File
+    GetFilesResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetEmployeePayrollsResponse"
-      description: EmployeePayrolls
-    GetEmployeeResponse:
+            $ref: "#/components/schemas/GetFilesResponse"
+      description: Files
+    GetFolderResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetEmployeeResponse"
-      description: Employees
-    GetEmployeesResponse:
+            $ref: "#/components/schemas/GetFolderResponse"
+      description: Folders
+    GetFoldersResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetEmployeesResponse"
-      description: Employees
-    GetHrisCompaniesResponse:
+            $ref: "#/components/schemas/GetFoldersResponse"
+      description: Folders
+    GetSharedLinkResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetHrisCompaniesResponse"
-      description: Companies
-    GetHrisCompanyResponse:
+            $ref: "#/components/schemas/GetSharedLinkResponse"
+      description: Shared Link
+    GetSharedLinksResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetHrisCompanyResponse"
-      description: Company
-    GetPayrollResponse:
+            $ref: "#/components/schemas/GetSharedLinksResponse"
+      description: Shared Links
+    GetUploadSessionResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetPayrollResponse"
-      description: Payrolls
-    GetPayrollsResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/GetPayrollsResponse"
-      description: Payrolls
+            $ref: "#/components/schemas/GetUploadSessionResponse"
+      description: UploadSessions
     NotFoundResponse:
       content:
         application/json:
@@ -1978,137 +1715,31 @@ components:
           schema:
             $ref: "#/components/schemas/UnprocessableResponse"
       description: Unprocessable
-    UpdateDepartmentResponse:
+    UpdateFileResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UpdateDepartmentResponse"
-      description: Departments
-    UpdateEmployeeResponse:
+            $ref: "#/components/schemas/UpdateFileResponse"
+      description: Files
+    UpdateFolderResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UpdateEmployeeResponse"
-      description: Employees
-    UpdateHrisCompanyResponse:
+            $ref: "#/components/schemas/UpdateFolderResponse"
+      description: Folders
+    UpdateSharedLinkResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UpdateHrisCompanyResponse"
-      description: Companies
+            $ref: "#/components/schemas/UpdateSharedLinkResponse"
+      description: Shared Links
+    UpdateUploadSessionResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateUploadSessionResponse"
+      description: UploadSessions
   schemas:
-    Address:
-      properties:
-        city:
-          description: Name of city.
-          example: San Francisco
-          nullable: true
-          type: string
-        contact_name:
-          example: Elon Musk
-          nullable: true
-          type: string
-        country:
-          description: country code according to ISO 3166-1 alpha-2.
-          example: US
-          nullable: true
-          type: string
-        county:
-          description: Address field that holds a sublocality, such as a county
-          example: Santa Clara
-          nullable: true
-          type: string
-        email:
-          example: elon@musk.com
-          nullable: true
-          type: string
-        fax:
-          example: 122-111-1111
-          nullable: true
-          type: string
-        id:
-          example: "123"
-          nullable: true
-          type: string
-        latitude:
-          example: "40.759211"
-          nullable: true
-          type: string
-        line1:
-          description: "Line 1 of the address e.g. number, street, suite, apt #, etc."
-          example: Main street
-          nullable: true
-          type: string
-        line2:
-          description: Line 2 of the address
-          example: "apt #"
-          nullable: true
-          type: string
-        line3:
-          description: Line 3 of the address
-          example: "Suite #"
-          nullable: true
-          type: string
-        line4:
-          description: Line 4 of the address
-          example: delivery instructions
-          nullable: true
-          type: string
-        longitude:
-          example: "-73.984638"
-          nullable: true
-          type: string
-        name:
-          example: HQ US
-          nullable: true
-          type: string
-        phone_number:
-          example: 111-111-1111
-          nullable: true
-          type: string
-        postal_code:
-          description: Zip code or equivalent.
-          example: "94104"
-          nullable: true
-          type: string
-        row_version:
-          $ref: "#/components/schemas/RowVersion"
-        salutation:
-          example: Mr
-          nullable: true
-          type: string
-        state:
-          description: Name of state
-          example: CA
-          nullable: true
-          type: string
-        street_number:
-          description: Street number
-          example: "25"
-          nullable: true
-          type: string
-        string:
-          example: 25 Spring Street, Blackburn, VIC 3130
-          nullable: true
-          title: The address string. Some APIs don't provide structured address data.
-          type: string
-        type:
-          enum:
-            - primary
-            - secondary
-            - home
-            - office
-            - shipping
-            - billing
-            - other
-          example: primary
-          type: string
-          x-graphql-type-name: AddressType
-        website:
-          example: https://elonmusk.com
-          nullable: true
-          type: string
-      type: object
     BadRequestResponse:
       properties:
         detail:
@@ -2140,63 +1771,38 @@ components:
           description: The type of error returned
           example: RequestValidationError
           type: string
-    Benefit:
-      properties:
-        employee_deduction:
-          description: The amount deducted for benefit.
-          example: 142.94
-          type: number
-        employer_contribution:
-          description: The amount of employer contribution.
-          example: 141.14
-          type: number
-        name:
-          description: The name of the benefit.
-          example: Health Insurance
-          type: string
-      type: object
-    CompanyId:
-      example: "23456"
-      nullable: true
-      title: Company ID
-      type: string
-    CompanyName:
-      example: SpaceX
-      nullable: true
-      title: Company name
-      type: string
-    Compensation:
+    CopyFolderRequest:
       additionalProperties: false
       properties:
-        benefits:
-          description: An array of employee benefits for the pay period.
-          items:
-            $ref: "#/components/schemas/Benefit"
-          type: array
-        deductions:
-          description: An array of employee deductions for the pay period.
-          items:
-            $ref: "#/components/schemas/Deduction"
-          type: array
-        employee_id:
+        id:
           $ref: "#/components/schemas/Id"
-        gross_pay:
-          description: The employee's gross pay. Only available when payroll has been processed
-          example: 3000
-          type: number
-        net_pay:
-          description: The employee's net pay. Only available when payroll has been processed
-          example: 2199.93
-          type: number
-        taxes:
-          description: An array of employer and employee taxes for the pay period.
-          items:
-            $ref: "#/components/schemas/Tax"
-          type: array
+        name:
+          description: The name of the folder.
+          example: Documents
+          type: string
+        parent_folder_id:
+          $ref: "#/components/schemas/ParentFolderId"
       required:
-        - employee_id
+        - parent_folder_id
       type: object
-    CreateDepartmentResponse:
+    CreateFileRequest:
+      additionalProperties: false
+      properties:
+        description:
+          description: Optional description of the file.
+          example: My Personal Documents
+          type: string
+        name:
+          description: The name of the file.
+          example: Documents
+          type: string
+        parent_folder_id:
+          $ref: "#/components/schemas/ParentFolderId"
+      required:
+        - name
+        - parent_folder_id
+      type: object
+    CreateFileResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -2206,11 +1812,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Departments
+          example: files
           type: string
         service:
           description: Apideck ID of service provider
-          example: workday
+          example: google-drive
           type: string
         status:
           description: HTTP Response Status
@@ -2228,39 +1834,26 @@ components:
         - operation
         - data
       type: object
-    CreateEmployeeResponse:
+    CreateFolderRequest:
+      additionalProperties: false
       properties:
-        data:
-          $ref: "#/components/schemas/UnifiedId"
-        operation:
-          description: Operation performed
-          example: one
+        description:
+          description: Optional description of the folder.
+          example: My Personal Documents
           type: string
-        resource:
-          description: Unified API resource name
-          example: Employees
+        id:
+          $ref: "#/components/schemas/Id"
+        name:
+          description: The name of the folder.
+          example: Documents
           type: string
-        service:
-          description: Apideck ID of service provider
-          example: sage-hr
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
+        parent_folder_id:
+          $ref: "#/components/schemas/ParentFolderId"
       required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
+        - name
+        - parent_folder_id
       type: object
-    CreateHrisCompanyResponse:
+    CreateFolderResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -2270,11 +1863,91 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Companies
+          example: Folders
           type: string
         service:
           description: Apideck ID of service provider
           example: undefined
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    CreateSharedLinkResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Shared Links
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: dropbox
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    CreateUploadSessionRequest:
+      additionalProperties: false
+      properties:
+        name:
+          description: The name of the file.
+          example: Documents
+          type: string
+        parent_folder_id:
+          $ref: "#/components/schemas/ParentFolderId"
+        size:
+          $ref: "#/components/schemas/FileSize"
+      required:
+        - name
+        - parent_folder_id
+        - size
+      type: object
+    CreateUploadSessionResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: UploadSessions
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: dropbox
           type: string
         status:
           description: HTTP Response Status
@@ -2304,604 +1977,7 @@ components:
       readOnly: true
       title: Created by
       type: string
-    Currency:
-      description: Indicates the associated currency for an amount of money. Values correspond to [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
-      enum:
-        - UNKNOWN_CURRENCY
-        - AED
-        - AFN
-        - ALL
-        - AMD
-        - ANG
-        - AOA
-        - ARS
-        - AUD
-        - AWG
-        - AZN
-        - BAM
-        - BBD
-        - BDT
-        - BGN
-        - BHD
-        - BIF
-        - BMD
-        - BND
-        - BOB
-        - BOV
-        - BRL
-        - BSD
-        - BTN
-        - BWP
-        - BYR
-        - BZD
-        - CAD
-        - CDF
-        - CHE
-        - CHF
-        - CHW
-        - CLF
-        - CLP
-        - CNY
-        - COP
-        - COU
-        - CRC
-        - CUC
-        - CUP
-        - CVE
-        - CZK
-        - DJF
-        - DKK
-        - DOP
-        - DZD
-        - EGP
-        - ERN
-        - ETB
-        - EUR
-        - FJD
-        - FKP
-        - GBP
-        - GEL
-        - GHS
-        - GIP
-        - GMD
-        - GNF
-        - GTQ
-        - GYD
-        - HKD
-        - HNL
-        - HRK
-        - HTG
-        - HUF
-        - IDR
-        - ILS
-        - INR
-        - IQD
-        - IRR
-        - ISK
-        - JMD
-        - JOD
-        - JPY
-        - KES
-        - KGS
-        - KHR
-        - KMF
-        - KPW
-        - KRW
-        - KWD
-        - KYD
-        - KZT
-        - LAK
-        - LBP
-        - LKR
-        - LRD
-        - LSL
-        - LTL
-        - LVL
-        - LYD
-        - MAD
-        - MDL
-        - MGA
-        - MKD
-        - MMK
-        - MNT
-        - MOP
-        - MRO
-        - MUR
-        - MVR
-        - MWK
-        - MXN
-        - MXV
-        - MYR
-        - MZN
-        - NAD
-        - NGN
-        - NIO
-        - NOK
-        - NPR
-        - NZD
-        - OMR
-        - PAB
-        - PEN
-        - PGK
-        - PHP
-        - PKR
-        - PLN
-        - PYG
-        - QAR
-        - RON
-        - RSD
-        - RUB
-        - RWF
-        - SAR
-        - SBD
-        - SCR
-        - SDG
-        - SEK
-        - SGD
-        - SHP
-        - SLL
-        - SOS
-        - SRD
-        - SSP
-        - STD
-        - SVC
-        - SYP
-        - SZL
-        - THB
-        - TJS
-        - TMT
-        - TND
-        - TOP
-        - TRC
-        - TRY
-        - TTD
-        - TWD
-        - TZS
-        - UAH
-        - UGX
-        - USD
-        - USN
-        - USS
-        - UYI
-        - UYU
-        - UZS
-        - VEF
-        - VND
-        - VUV
-        - WST
-        - XAF
-        - XAG
-        - XAU
-        - XBA
-        - XBB
-        - XBC
-        - XBD
-        - XCD
-        - XDR
-        - XOF
-        - XPD
-        - XPF
-        - XPT
-        - XTS
-        - XXX
-        - YER
-        - ZAR
-        - ZMK
-        - ZMW
-        - BTC
-      example: USD
-      nullable: true
-      title: Currency
-      type: string
-      x-enum-elements:
-        - description: Unknown currency
-          name: UNKNOWN_CURRENCY
-        - description: United Arab Emirates dirham
-          name: AED
-        - description: Afghan afghani
-          name: AFN
-        - description: Albanian lek
-          name: ALL
-        - description: Armenian dram
-          name: AMD
-        - description: Netherlands Antillean guilder
-          name: ANG
-        - description: Angolan kwanza
-          name: AOA
-        - description: Argentine peso
-          name: ARS
-        - description: Australian dollar
-          name: AUD
-        - description: Aruban florin
-          name: AWG
-        - description: Azerbaijani manat
-          name: AZN
-        - description: Bosnia and Herzegovina convertible mark
-          name: BAM
-        - description: Barbados dollar
-          name: BBD
-        - description: Bangladeshi taka
-          name: BDT
-        - description: Bulgarian lev
-          name: BGN
-        - description: Bahraini dinar
-          name: BHD
-        - description: Burundian franc
-          name: BIF
-        - description: Bermudian dollar
-          name: BMD
-        - description: Brunei dollar
-          name: BND
-        - description: Boliviano
-          name: BOB
-        - description: Bolivian Mvdol
-          name: BOV
-        - description: Brazilian real
-          name: BRL
-        - description: Bahamian dollar
-          name: BSD
-        - description: Bhutanese ngultrum
-          name: BTN
-        - description: Botswana pula
-          name: BWP
-        - description: Belarusian ruble
-          name: BYR
-        - description: Belize dollar
-          name: BZD
-        - description: Canadian dollar
-          name: CAD
-        - description: Congolese franc
-          name: CDF
-        - description: WIR Euro
-          name: CHE
-        - description: Swiss franc
-          name: CHF
-        - description: WIR Franc
-          name: CHW
-        - description: Unidad de Fomento
-          name: CLF
-        - description: Chilean peso
-          name: CLP
-        - description: Chinese yuan
-          name: CNY
-        - description: Colombian peso
-          name: COP
-        - description: Unidad de Valor Real
-          name: COU
-        - description: Costa Rican colon
-          name: CRC
-        - description: Cuban convertible peso
-          name: CUC
-        - description: Cuban peso
-          name: CUP
-        - description: Cape Verdean escudo
-          name: CVE
-        - description: Czech koruna
-          name: CZK
-        - description: Djiboutian franc
-          name: DJF
-        - description: Danish krone
-          name: DKK
-        - description: Dominican peso
-          name: DOP
-        - description: Algerian dinar
-          name: DZD
-        - description: Egyptian pound
-          name: EGP
-        - description: Eritrean nakfa
-          name: ERN
-        - description: Ethiopian birr
-          name: ETB
-        - description: Euro
-          name: EUR
-        - description: Fiji dollar
-          name: FJD
-        - description: Falkland Islands pound
-          name: FKP
-        - description: Pound sterling
-          name: GBP
-        - description: Georgian lari
-          name: GEL
-        - description: Ghanaian cedi
-          name: GHS
-        - description: Gibraltar pound
-          name: GIP
-        - description: Gambian dalasi
-          name: GMD
-        - description: Guinean franc
-          name: GNF
-        - description: Guatemalan quetzal
-          name: GTQ
-        - description: Guyanese dollar
-          name: GYD
-        - description: Hong Kong dollar
-          name: HKD
-        - description: Honduran lempira
-          name: HNL
-        - description: Croatian kuna
-          name: HRK
-        - description: Haitian gourde
-          name: HTG
-        - description: Hungarian forint
-          name: HUF
-        - description: Indonesian rupiah
-          name: IDR
-        - description: Israeli new shekel
-          name: ILS
-        - description: Indian rupee
-          name: INR
-        - description: Iraqi dinar
-          name: IQD
-        - description: Iranian rial
-          name: IRR
-        - description: Icelandic króna
-          name: ISK
-        - description: Jamaican dollar
-          name: JMD
-        - description: Jordanian dinar
-          name: JOD
-        - description: Japanese yen
-          name: JPY
-        - description: Kenyan shilling
-          name: KES
-        - description: Kyrgyzstani som
-          name: KGS
-        - description: Cambodian riel
-          name: KHR
-        - description: Comoro franc
-          name: KMF
-        - description: North Korean won
-          name: KPW
-        - description: South Korean won
-          name: KRW
-        - description: Kuwaiti dinar
-          name: KWD
-        - description: Cayman Islands dollar
-          name: KYD
-        - description: Kazakhstani tenge
-          name: KZT
-        - description: Lao kip
-          name: LAK
-        - description: Lebanese pound
-          name: LBP
-        - description: Sri Lankan rupee
-          name: LKR
-        - description: Liberian dollar
-          name: LRD
-        - description: Lesotho loti
-          name: LSL
-        - description: Lithuanian litas
-          name: LTL
-        - description: Latvian lats
-          name: LVL
-        - description: Libyan dinar
-          name: LYD
-        - description: Moroccan dirham
-          name: MAD
-        - description: Moldovan leu
-          name: MDL
-        - description: Malagasy ariary
-          name: MGA
-        - description: Macedonian denar
-          name: MKD
-        - description: Myanmar kyat
-          name: MMK
-        - description: Mongolian tögrög
-          name: MNT
-        - description: Macanese pataca
-          name: MOP
-        - description: Mauritanian ouguiya
-          name: MRO
-        - description: Mauritian rupee
-          name: MUR
-        - description: Maldivian rufiyaa
-          name: MVR
-        - description: Malawian kwacha
-          name: MWK
-        - description: Mexican peso
-          name: MXN
-        - description: Mexican Unidad de Inversion
-          name: MXV
-        - description: Malaysian ringgit
-          name: MYR
-        - description: Mozambican metical
-          name: MZN
-        - description: Namibian dollar
-          name: NAD
-        - description: Nigerian naira
-          name: NGN
-        - description: Nicaraguan córdoba
-          name: NIO
-        - description: Norwegian krone
-          name: NOK
-        - description: Nepalese rupee
-          name: NPR
-        - description: New Zealand dollar
-          name: NZD
-        - description: Omani rial
-          name: OMR
-        - description: Panamanian balboa
-          name: PAB
-        - description: Peruvian sol
-          name: PEN
-        - description: Papua New Guinean kina
-          name: PGK
-        - description: Philippine peso
-          name: PHP
-        - description: Pakistani rupee
-          name: PKR
-        - description: Polish złoty
-          name: PLN
-        - description: Paraguayan guaraní
-          name: PYG
-        - description: Qatari riyal
-          name: QAR
-        - description: Romanian leu
-          name: RON
-        - description: Serbian dinar
-          name: RSD
-        - description: Russian ruble
-          name: RUB
-        - description: Rwandan franc
-          name: RWF
-        - description: Saudi riyal
-          name: SAR
-        - description: Solomon Islands dollar
-          name: SBD
-        - description: Seychelles rupee
-          name: SCR
-        - description: Sudanese pound
-          name: SDG
-        - description: Swedish krona
-          name: SEK
-        - description: Singapore dollar
-          name: SGD
-        - description: Saint Helena pound
-          name: SHP
-        - description: Sierra Leonean leone
-          name: SLL
-        - description: Somali shilling
-          name: SOS
-        - description: Surinamese dollar
-          name: SRD
-        - description: South Sudanese pound
-          name: SSP
-        - description: São Tomé and Príncipe dobra
-          name: STD
-        - description: Salvadoran colón
-          name: SVC
-        - description: Syrian pound
-          name: SYP
-        - description: Swazi lilangeni
-          name: SZL
-        - description: Thai baht
-          name: THB
-        - description: Tajikstani somoni
-          name: TJS
-        - description: Turkmenistan manat
-          name: TMT
-        - description: Tunisian dinar
-          name: TND
-        - description: Tongan pa'anga
-          name: TOP
-        - description: Turkish lira
-          name: TRY
-        - description: Trinidad and Tobago dollar
-          name: TTD
-        - description: New Taiwan dollar
-          name: TWD
-        - description: Tanzanian shilling
-          name: TZS
-        - description: Ukrainian hryvnia
-          name: UAH
-        - description: Ugandan shilling
-          name: UGX
-        - description: United States dollar
-          name: USD
-        - description: United States dollar (next day)
-          name: USN
-        - description: United States dollar (same day)
-          name: USS
-        - description: Uruguay Peso en Unidedades Indexadas
-          name: UYI
-        - description: Uruguyan peso
-          name: UYU
-        - description: Uzbekistan som
-          name: UZS
-        - description: Venezuelan bolívar soberano
-          name: VEF
-        - description: Vietnamese đồng
-          name: VND
-        - description: Vanuatu vatu
-          name: VUV
-        - description: Samoan tala
-          name: WST
-        - description: CFA franc BEAC
-          name: XAF
-        - description: Silver
-          name: XAG
-        - description: Gold
-          name: XAU
-        - description: European Composite Unit
-          name: XBA
-        - description: European Monetary Unit
-          name: XBB
-        - description: European Unit of Account 9
-          name: XBC
-        - description: European Unit of Account 17
-          name: XBD
-        - description: East Caribbean dollar
-          name: XCD
-        - description: Special drawing rights (International Monetary Fund)
-          name: XDR
-        - description: CFA franc BCEAO
-          name: XOF
-        - description: Palladium
-          name: XPD
-        - description: CFP franc
-          name: XPF
-        - description: Platinum
-          name: XPT
-        - description: Code reserved for testing
-          name: XTS
-        - description: No currency
-          name: XXX
-        - description: Yemeni rial
-          name: YER
-        - description: South African rand
-          name: ZAR
-        - description: Zambian kwacha
-          name: ZMK
-        - description: Zambian kwacha
-          name: ZMW
-        - description: Bitcoin
-          name: BTC
-    CustomField:
-      additionalProperties: false
-      properties:
-        description:
-          description: More information about the custom field
-          example: Employee Level
-          title: Description
-          type: string
-        id:
-          example: "2389328923893298"
-          title: ID
-          type: string
-        name:
-          description: Name of the custom field.
-          example: employee_level
-          title: Name
-          type: string
-        value:
-          anyOf:
-            - example: Uses Salesforce and Marketo
-              nullable: true
-              type: string
-            - example: 10
-              nullable: true
-              type: number
-            - example: true
-              nullable: true
-              type: boolean
-            - items:
-                type: string
-              type: array
-      required:
-        - id
-      type: object
-    Deduction:
-      properties:
-        amount:
-          description: The amount deducted.
-          example: 10.97
-          type: number
-        name:
-          description: The name of the deduction.
-          example: Company Car
-          type: string
-      type: object
-    DeleteDepartmentResponse:
+    DeleteFileResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -2911,11 +1987,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Departments
+          example: files
           type: string
         service:
           description: Apideck ID of service provider
-          example: workday
+          example: google-drive
           type: string
         status:
           description: HTTP Response Status
@@ -2933,7 +2009,7 @@ components:
         - operation
         - data
       type: object
-    DeleteEmployeeResponse:
+    DeleteFolderResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -2943,39 +2019,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Employees
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: sage-hr
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-    DeleteHrisCompanyResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/UnifiedId"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Companies
+          example: Folders
           type: string
         service:
           description: Apideck ID of service provider
@@ -2997,839 +2041,444 @@ components:
         - operation
         - data
       type: object
-    Department:
-      additionalProperties: false
+    DeleteSharedLinkResponse:
       properties:
-        code:
-          example: "2"
-          nullable: true
-          title: Code
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
           type: string
-        created_at:
-          $ref: "#/components/schemas/CreatedAt"
-        created_by:
-          $ref: "#/components/schemas/CreatedBy"
-        description:
-          example: R&D
-          nullable: true
-          title: Description
+        resource:
+          description: Unified API resource name
+          example: Shared Links
           type: string
-        id:
-          $ref: "#/components/schemas/Id"
-        name:
-          description: Department name
-          example: R&D
-          nullable: true
-          title: Name
+        service:
+          description: Apideck ID of service provider
+          example: dropbox
           type: string
-        updated_at:
-          $ref: "#/components/schemas/UpdatedAt"
-        updated_by:
-          $ref: "#/components/schemas/UpdatedBy"
-      type: object
-    Description:
-      example: A description
-      nullable: true
-      title: Description
-      type: string
-    Division:
-      description: The division the user is currently in.
-      example: Europe
-      nullable: true
-      title: Division
-      type: string
-    Email:
-      properties:
-        email:
-          example: elon@musk.com
-          format: email
-          minLength: 1
+        status:
+          description: HTTP Response Status
+          example: OK
           type: string
-        id:
-          example: "123"
-          type: string
-        type:
-          enum:
-            - primary
-            - secondary
-            - work
-            - personal
-            - billing
-            - other
-          example: primary
-          type: string
-          x-graphql-type-name: EmailType
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
       required:
-        - email
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
       type: object
-    Employee:
+    DeleteUploadSessionResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: UploadSessions
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: dropbox
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    ExpiresAt:
+      example: 2022-09-30T07:43:32.000Z
+      format: date-time
+      readOnly: true
+      type: string
+    FileSize:
+      description: The size of the file in bytes
+      example: 1810673
+      type: integer
+      x-graphql-type-name: FileSize
+    FileType:
+      description: The type of resource. Could be file, folder or url
+      enum:
+        - file
+        - folder
+        - url
+      example: file
+      readOnly: true
+      type: string
+      x-graphql-type-name: FileType
+    FilesFilter:
       additionalProperties: false
       properties:
-        addresses:
-          items:
-            $ref: "#/components/schemas/Address"
-          type: array
-        birthday:
-          example: 2000-08-12
-          format: date
-          nullable: true
+        folder_id:
+          description: ID of the folder to filter on. The root folder has an alias "root"
+          example: root
           type: string
-        company_id:
-          $ref: "#/components/schemas/CompanyId"
-        company_name:
-          $ref: "#/components/schemas/CompanyName"
-        compensations:
-          items:
-            example:
-              effective_date: 2021-06-11
-              flsa_status: nonexempt
-              id: "3404301363494309004"
-              job_id: "3490439050957906679"
-              payment_unit: hour
-              rate: "50.00"
-            properties:
-              currency:
-                $ref: "#/components/schemas/Currency"
-              effective_date:
-                description: The effective date for this compensation.
-                example: 2020-08-12
-                readOnly: false
-                type: string
-              flsa_status:
-                description: The FLSA status for this compensation.
-                enum:
-                  - exempt
-                  - salaried-nonexempt
-                  - nonexempt
-                  - owner
-                readOnly: false
-                type: string
-              id:
-                $ref: "#/components/schemas/Id"
-              job_id:
-                description: The ID of the job to which the compensation belongs.
-                example: "12345"
-                readOnly: true
-                type: string
-              payment_unit:
-                $ref: "#/components/schemas/PaymentUnit"
-              rate:
-                description: The amount paid per payment unit.
-                example: 72000
-                readOnly: false
-                type: number
-            type: object
-          type: array
-        country_of_birth:
-          description: country code according to ISO 3166-1 alpha-2.
-          example: US
-          maxLength: 2
-          minLength: 2
-          nullable: true
-          type: string
-        created_at:
-          $ref: "#/components/schemas/CreatedAt"
-        created_by:
-          $ref: "#/components/schemas/CreatedBy"
-        custom_fields:
-          items:
-            $ref: "#/components/schemas/CustomField"
-          type: array
-        deleted:
-          example: true
-          nullable: true
-          title: Deleted
+        shared:
+          description: Only return files and folders that are shared
           type: boolean
-        department:
-          description: The department the user is currently in.
-          example: R&D
-          nullable: true
-          title: Department
-          type: string
-        description:
-          $ref: "#/components/schemas/Description"
-        display_name:
-          example: Technoking
-          nullable: true
-          title: Display name
-          type: string
-        division:
-          $ref: "#/components/schemas/Division"
-        emails:
-          items:
-            $ref: "#/components/schemas/Email"
-          type: array
-        employee_number:
-          $ref: "#/components/schemas/EmployeeNumber"
-        employment_end_date:
-          description: A Start Date is the date that the employee ended working at the company
-          example: 2028-10-26
-          nullable: true
-          title: Employee end date
-          type: string
-        employment_role:
-          properties:
-            sub_type:
-              enum:
-                - full_time
-                - part_time
-                - hourly
-              nullable: true
-              type: string
-            type:
-              enum:
-                - contractor
-                - employee
-                - freelance
-                - temp
-              nullable: true
-              type: string
-          type: object
-        employment_start_date:
-          description: A Start Date is the date that the employee started working at the company
-          example: 2021-10-26
-          nullable: true
-          title: Employee start date
-          type: string
-        employment_status:
-          enum:
-            - active
-            - inactive
-            - terminated
-            - other
-          example: active
-          nullable: true
-          type: string
-        first_name:
-          $ref: "#/components/schemas/FirstName"
-        gender:
-          $ref: "#/components/schemas/Gender"
-        id:
-          $ref: "#/components/schemas/Id"
-        initials:
-          example: EM
-          nullable: true
-          title: Initials
-          type: string
-        jobs:
-          items:
-            properties:
-              compensation_rate:
-                example: 72000
-                title: The compensation rate of the job.
-                type: number
-              currency:
-                $ref: "#/components/schemas/Currency"
-              employee_id:
-                $ref: "#/components/schemas/Id"
-              hired_at:
-                example: 2020-08-12
-                format: date
-                nullable: true
-                type: string
-              id:
-                $ref: "#/components/schemas/Id"
-              is_primary:
-                description: Indicates whether this the employee's primary job
-                example: true
-                title: Primary
-                type: boolean
-              location:
-                $ref: "#/components/schemas/Address"
-              payment_unit:
-                $ref: "#/components/schemas/PaymentUnit"
-              title:
-                $ref: "#/components/schemas/Title"
-            type: object
-          type: array
-        languages:
-          items:
-            $ref: "#/components/schemas/Language"
-          type: array
-        last_name:
-          $ref: "#/components/schemas/LastName"
-        manager:
-          properties:
-            email:
-              example: elon@musk.com
-              format: email
-              nullable: true
-              type: string
-            first_name:
-              $ref: "#/components/schemas/FirstName"
-            id:
-              $ref: "#/components/schemas/Id"
-            last_name:
-              $ref: "#/components/schemas/LastName"
-            name:
-              example: Elon Musk
-              nullable: true
-              title: Name
-              type: string
-          type: object
-        marital_status:
-          example: married
-          nullable: true
-          title: Marital status
-          type: string
-        middle_name:
-          $ref: "#/components/schemas/MiddleName"
-        nationalities:
-          items:
-            description: country code according to ISO 3166-1 alpha-2.
-            example: US
-            nullable: true
-            title: Nationality
-            type: string
-          type: array
-        phone_numbers:
-          items:
-            $ref: "#/components/schemas/PhoneNumber"
-          type: array
-        photo_url:
-          $ref: "#/components/schemas/PhotoUrl"
-        preferred_language:
-          $ref: "#/components/schemas/Language"
-        preferred_name:
-          example: Elon Musk
-          nullable: true
-          title: Preferred name
-          type: string
-        pronouns:
-          example: she,her
-          nullable: true
-          title: Pronouns
-          type: string
-        row_version:
-          $ref: "#/components/schemas/RowVersion"
-        salutation:
-          example: Mr
-          nullable: true
-          type: string
-        social_links:
-          items:
-            properties:
-              id:
-                example: "12345"
-                nullable: true
-                type: string
-              type:
-                example: twitter
-                nullable: true
-                type: string
-              url:
-                example: https://www.twitter.com/apideck-io
-                minLength: 1
-                type: string
-            required:
-              - url
-            type: object
-          type: array
-        social_security_number:
-          example: "123456789"
-          nullable: true
-          title: Social Security Number
-          type: string
-        team:
-          description: The team the user is currently in.
-          nullable: true
-          properties:
-            id:
-              example: "1234"
-              nullable: true
-              type: string
-            name:
-              example: Full Stack Engineers
-              nullable: true
-              type: string
-          type: object
-        title:
-          $ref: "#/components/schemas/Title"
-        updated_at:
-          $ref: "#/components/schemas/UpdatedAt"
-        updated_by:
-          $ref: "#/components/schemas/UpdatedBy"
       type: object
-    EmployeeNumber:
-      description: An Employee Number, Employee ID or Employee Code, is a unique number that has been assigned to each individual staff member within a company.
-      example: 123456-AB
-      nullable: true
-      title: Employee number
-      type: string
-    EmployeePayroll:
-      properties:
-        employee:
-          $ref: "#/components/schemas/Employee"
-        payroll:
-          $ref: "#/components/schemas/Payroll"
-      type: object
-    EmployeePayrolls:
-      properties:
-        employee:
-          $ref: "#/components/schemas/Employee"
-        payrolls:
-          items:
-            $ref: "#/components/schemas/Payroll"
-          type: array
-      type: object
-    EmployeesFilter:
+      x-graphql-type-name: FilesFilter
+    FilesSearch:
       additionalProperties: false
       example:
-        company_id: "1234"
+        query: logo jpg
       properties:
-        company_id:
-          description: Company ID to filter on
-          example: "1234"
+        query:
+          description: The query to search for. May match across multiple fields.
+          example: logo jpg
           type: string
-      type: object
-      x-graphql-type-name: EmployeesFilter
-    FirstName:
-      example: Elon
-      nullable: true
-      title: First name
-      type: string
-    Gender:
-      enum:
-        - male
-        - female
-        - unisex
-        - other
-      example: male
-      nullable: true
-      type: string
-    GetDepartmentResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/Department"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Departments
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: workday
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
       required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
+        - query
       type: object
-      x-graphql-type-name: Department
-    GetDepartmentsResponse:
+    FilesSort:
+      additionalProperties: false
+      example:
+        by: updated_at
+        direction: desc
       properties:
-        data:
-          items:
-            $ref: "#/components/schemas/Department"
-          type: array
-        links:
-          $ref: "#/components/schemas/Links"
-        meta:
-          $ref: "#/components/schemas/Meta"
-        operation:
-          description: Operation performed
-          example: one
+        by:
+          description: The field on which to sort the Files
+          enum:
+            - updated_at
+            - name
+          example: updated_at
           type: string
-        resource:
-          description: Unified API resource name
-          example: Departments
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: workday
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
+          x-graphql-type-name: FilesSortBy
+        direction:
+          $ref: "#/components/schemas/SortDirection"
       required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
+        - by
       type: object
-      x-graphql-type-name: DepartmentList
-    GetEmployeePayrollResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/EmployeePayroll"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Companies
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: undefined
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-      x-graphql-type-name: EmployeePayroll
-    GetEmployeePayrollsResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/EmployeePayrolls"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Employees
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: sage-hr
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-      x-graphql-type-name: EmployeePayrollList
-    GetEmployeeResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/Employee"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Employees
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: sage-hr
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-      x-graphql-type-name: Employee
-    GetEmployeesResponse:
-      properties:
-        data:
-          items:
-            $ref: "#/components/schemas/Employee"
-          type: array
-        links:
-          $ref: "#/components/schemas/Links"
-        meta:
-          $ref: "#/components/schemas/Meta"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Employees
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: sage-hr
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-      x-graphql-type-name: EmployeeList
-    GetHrisCompaniesResponse:
-      properties:
-        data:
-          items:
-            $ref: "#/components/schemas/HrisCompany"
-          type: array
-        links:
-          $ref: "#/components/schemas/Links"
-        meta:
-          $ref: "#/components/schemas/Meta"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Companies
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: undefined
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-      x-graphql-type-name: HrisCompanyList
-    GetHrisCompanyResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/HrisCompany"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Companies
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: undefined
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-      x-graphql-type-name: HrisCompany
-    GetPayrollResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/Payroll"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Companies
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: undefined
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-      x-graphql-type-name: Payroll
-    GetPayrollsResponse:
-      properties:
-        data:
-          items:
-            $ref: "#/components/schemas/Payroll"
-          type: array
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Employees
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: sage-hr
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-      x-graphql-type-name: PayrollList
-    HrisCompany:
+      x-graphql-type-name: FilesSort
+    Folder:
       additionalProperties: false
       properties:
-        addresses:
-          items:
-            $ref: "#/components/schemas/Address"
-          type: array
-        company_number:
-          description: An Company Number, Company ID or Company Code, is a unique number that has been assigned to each company.
-          example: 123456-AB
-          nullable: true
-          title: Company number
-          type: string
         created_at:
           $ref: "#/components/schemas/CreatedAt"
         created_by:
           $ref: "#/components/schemas/CreatedBy"
-        debtor_id:
-          example: "12345"
-          minLength: 1
+        description:
+          description: Optional description of the folder
+          example: My Personal Documents
           type: string
-        deleted:
-          example: false
-          readOnly: true
-          type: boolean
-        display_name:
-          example: SpaceX
-          minLength: 1
-          type: string
-        emails:
-          items:
-            $ref: "#/components/schemas/Email"
-          type: array
         id:
           $ref: "#/components/schemas/Id"
-        legal_name:
-          example: SpaceX
-          minLength: 1
+        name:
+          description: The name of the folder
+          example: Documents
           type: string
-        phone_numbers:
+        owner:
+          $ref: "#/components/schemas/Owner"
+        parent_folders:
+          description: The parent folders of the file, starting from the root
           items:
-            $ref: "#/components/schemas/PhoneNumber"
+            $ref: "#/components/schemas/LinkedFolder"
           type: array
-        subdomain:
-          example: company
-          minLength: 1
+        parent_folders_complete:
+          description: Whether the list of parent folder is complete. Some connectors only return the direct parent of a folder
+          readOnly: true
+          type: boolean
+        path:
+          description: The full path of the folder (includes the folder name)
+          example: /Personal/Documents
+          readOnly: true
           type: string
+        size:
+          description: The size of the folder in bytes
+          example: 1810673
+          readOnly: true
+          type: integer
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
-        websites:
-          items:
-            $ref: "#/components/schemas/Website"
-          type: array
       required:
-        - legal_name
+        - name
+        - parent_folders
       type: object
-    HrisEventType:
-      enum:
-        - "*"
-        - hris.employee.created
-        - hris.employee.updated
-        - hris.employee.deleted
-        - hris.company.created
-        - hris.company.updated
-        - hris.company.deleted
-      example: hris.employee.created
-      type: string
+    GetFileResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedFile"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: files
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: google-drive
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: File
+    GetFilesResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/UnifiedFile"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: files
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: google-drive
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: FileList
+    GetFolderResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/Folder"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Folders
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: undefined
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: Folder
+    GetFoldersResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Folder"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Folders
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: undefined
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: FolderList
+    GetSharedLinkResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/SharedLink"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Shared Links
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: dropbox
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: SharedLink
+    GetSharedLinksResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/SharedLink"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Shared Links
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: dropbox
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: SharedLinkList
+    GetUploadSessionResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UploadSession"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: UploadSessions
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: dropbox
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: UploadSession
     Id:
       example: "12345"
       readOnly: true
       type: string
-    Language:
-      description: language code according to ISO 639-1. For the United States - EN
-      example: EN
-      nullable: true
-      type: string
-    LastName:
-      example: Musk
-      nullable: true
-      title: Last name
-      type: string
+    LinkedFolder:
+      properties:
+        id:
+          $ref: "#/components/schemas/Id"
+        name:
+          description: The name of the folder
+          example: Personal
+          type: string
+      required:
+        - id
+      type: object
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:
@@ -3875,11 +2524,6 @@ components:
           example: 50
           type: integer
       type: object
-    MiddleName:
-      example: D.
-      nullable: true
-      title: Middle name
-      type: string
     NotFoundResponse:
       properties:
         detail:
@@ -3940,6 +2584,29 @@ components:
           description: The type of error returned
           example: MappingError
           type: string
+    Owner:
+      properties:
+        email:
+          description: Email of the owner
+          example: hello@apideck.com
+          readOnly: true
+          type: string
+        id:
+          description: ID of the owner
+          example: "12345"
+          readOnly: true
+          type: string
+        name:
+          description: Name of the owner
+          example: Elon Musk
+          readOnly: true
+          type: string
+      readOnly: true
+      type: object
+    ParentFolderId:
+      description: The parent folder to create the new file within.
+      example: "1234"
+      type: string
     PaymentRequiredResponse:
       properties:
         detail:
@@ -3966,195 +2633,72 @@ components:
           description: The type of error returned
           example: RequestLimitError
           type: string
-    PaymentUnit:
-      enum:
-        - hour
-        - week
-        - month
-        - year
-        - paycheck
-      example: year
-      type: string
-    Payroll:
+    SharedLink:
       additionalProperties: false
       properties:
-        check_date:
-          description: The date on which employees will be paid for the payroll.
-          example: 2022-04-08
-          pattern: ^\d{4}-\d{2}-\d{2}$
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        download_url:
+          description: The URL that can be used to download the file.
+          example: https://www.box.com/shared/static/rh935iit6ewrmw0unyul.jpeg
           type: string
-        company_id:
-          $ref: "#/components/schemas/CompanyId"
-        compensations:
-          description: An array of compensations for the payroll.
-          items:
-            $ref: "#/components/schemas/Compensation"
-          type: array
-        end_date:
-          description: The end date, inclusive, of the pay period.
-          example: 2022-04-21
-          pattern: ^\d{4}-\d{2}-\d{2}$
+        expires_at:
+          $ref: "#/components/schemas/ExpiresAt"
+        password:
+          description: Optional password for the shared link.
+          nullable: true
           type: string
+          writeOnly: true
+        password_protected:
+          description: Indicated if the shared link is password protected.
+          readOnly: true
+          type: boolean
+        scope:
+          description: The scope of the shared link.
+          enum:
+            - public
+            - company
+          example: company
+          type: string
+        target:
+          $ref: "#/components/schemas/SharedLinkTarget"
+        target_id:
+          description: The ID of the file or folder to link.
+          type: string
+          writeOnly: true
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+        url:
+          description: The URL that can be used to view the file.
+          example: https://www.box.com/s/vspke7y05sb214wjokpk
+          readOnly: true
+          type: string
+      required:
+        - target_id
+      type: object
+    SharedLinkTarget:
+      additionalProperties: false
+      properties:
         id:
           $ref: "#/components/schemas/Id"
-        processed:
-          description: Whether or not the payroll has been successfully processed. Note that processed payrolls cannot be updated.
-          example: false
-          type: boolean
-        processed_date:
-          description: The date the payroll was processed.
-          example: 2022-04-08
-          nullable: true
-          pattern: ^\d{4}-\d{2}-\d{2}$
-          type: string
-        start_date:
-          description: The start date, inclusive, of the pay period.
-          example: 2022-04-08
-          pattern: ^\d{4}-\d{2}-\d{2}$
-          type: string
-        totals:
-          $ref: "#/components/schemas/PayrollTotals"
-          description: The overview of the payroll totals.
-          type: object
-      required:
-        - id
-        - processed
-        - check_date
-        - start_date
-        - end_date
-      type: object
-    PayrollTotals:
-      properties:
-        check_amount:
-          description: The total check amount for the payroll.
-          example: 27966.23
-          type: number
-        company_debit:
-          description: The total company debit for the payroll.
-          example: 27992.49
-          type: number
-        employee_benefit_deductions:
-          description: The total amount of employee deducted benefits for the payroll.
-          example: 0
-          type: number
-        employee_taxes:
-          description: The total amount of employee paid taxes for the payroll.
-          example: 6616.39
-          type: number
-        employer_benefit_contributions:
-          description: The total amount of company contributed benefits for the payroll.
-          example: 0
-          type: number
-        employer_taxes:
-          description: The total amount of employer paid taxes for the payroll.
-          example: 2038.93
-          type: number
-        gross_pay:
-          description: The gross pay amount for the payroll.
-          example: 27966.23
-          type: number
-        net_pay:
-          description: The net pay amount for the payroll.
-          example: 19337.17
-          type: number
-        tax_debit:
-          description: The total tax debit for the payroll.
-          example: 8655.32
-          type: number
-      type: object
-    PayrollsFilter:
-      additionalProperties: false
-      example:
-        end_date: 2022-04-21
-        start_date: 2022-04-08
-      properties:
-        end_date:
-          description: Return payrolls whose pay period is before the end date
-          example: 2022-04-21
-          pattern: ^\d{4}-\d{2}-\d{2}$
-          type: string
-        start_date:
-          description: Return payrolls whose pay period is after the start date
-          example: 2022-04-08
-          pattern: ^\d{4}-\d{2}-\d{2}$
-          type: string
-      type: object
-      x-graphql-type-name: PayrollsFilter
-    PhoneNumber:
-      properties:
-        area_code:
-          example: "323"
-          nullable: true
-          title: Area code
-          type: string
-        country_code:
-          example: "1"
-          nullable: true
-          title: Country code
-          type: string
-        extension:
-          example: "105"
-          nullable: true
-          title: Phone extension
-          type: string
-        id:
-          example: "12345"
-          nullable: true
-          type: string
-        number:
-          example: 111-111-1111
-          minLength: 1
-          title: Phone number
+        name:
+          description: The name of the file
+          example: sample.jpg
           type: string
         type:
-          enum:
-            - primary
-            - secondary
-            - home
-            - work
-            - office
-            - mobile
-            - assistant
-            - fax
-            - direct-dial-in
-            - personal
-            - other
-          example: primary
-          type: string
-          x-graphql-type-name: PhoneType
+          $ref: "#/components/schemas/FileType"
+      readOnly: true
       required:
-        - number
+        - id
       type: object
-    PhotoUrl:
-      example: https://unavatar.io/elon-musk
-      nullable: true
-      title: Photo URL
+    SortDirection:
+      default: asc
+      description: The direction in which to sort the results
+      enum:
+        - asc
+        - desc
       type: string
-    RowVersion:
-      example: 1-12345
-      nullable: true
-      title: Row version
-      type: string
-    Tax:
-      properties:
-        amount:
-          description: The amount of the tax.
-          example: 1.97
-          type: number
-        employer:
-          description: Paid by employer.
-          example: false
-          type: boolean
-        name:
-          description: The name of the tax.
-          example: CA State Income Tax
-          type: string
-      type: object
-    Title:
-      example: CEO
-      nullable: true
-      title: Job title
-      type: string
+      x-graphql-type-name: SortDirection
     TooManyRequestsResponse:
       properties:
         detail:
@@ -4242,6 +2786,57 @@ components:
           description: The type of error returned
           example: RequestHeadersValidationError
           type: string
+    UnifiedFile:
+      additionalProperties: false
+      properties:
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        created_by:
+          $ref: "#/components/schemas/CreatedBy"
+        description:
+          description: Optional description of the file
+          example: A sample image
+          type: string
+        downloadable:
+          description: Whether the current user can download this file
+          type: boolean
+        id:
+          $ref: "#/components/schemas/Id"
+        mime_type:
+          description: The MIME type of the file.
+          example: image/jpeg
+          type: string
+        name:
+          description: The name of the file
+          example: sample.jpg
+          type: string
+        owner:
+          $ref: "#/components/schemas/Owner"
+        parent_folders:
+          description: The parent folders of the file, starting from the root
+          items:
+            $ref: "#/components/schemas/LinkedFolder"
+          type: array
+        parent_folders_complete:
+          description: Whether the list of parent folder is complete. Some connectors only return the direct parent of a file
+          type: boolean
+        path:
+          description: The full path of the file or folder (includes the file name)
+          example: /Documents/sample.jpg
+          type: string
+        size:
+          $ref: "#/components/schemas/FileSize"
+        type:
+          $ref: "#/components/schemas/FileType"
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+        updated_by:
+          $ref: "#/components/schemas/UpdatedBy"
+      required:
+        - id
+        - name
+        - type
+      type: object
     UnifiedId:
       properties:
         id:
@@ -4277,7 +2872,7 @@ components:
           description: The type of error returned
           example: InvalidStateError
           type: string
-    UpdateDepartmentResponse:
+    UpdateFileResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -4287,11 +2882,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Departments
+          example: files
           type: string
         service:
           description: Apideck ID of service provider
-          example: workday
+          example: google-drive
           type: string
         status:
           description: HTTP Response Status
@@ -4309,39 +2904,23 @@ components:
         - operation
         - data
       type: object
-    UpdateEmployeeResponse:
+    UpdateFolderRequest:
+      additionalProperties: false
       properties:
-        data:
-          $ref: "#/components/schemas/UnifiedId"
-        operation:
-          description: Operation performed
-          example: one
+        description:
+          description: Optional description of the folder.
+          example: My Personal Documents
           type: string
-        resource:
-          description: Unified API resource name
-          example: Employees
+        id:
+          $ref: "#/components/schemas/Id"
+        name:
+          description: The name of the folder.
+          example: Documents
           type: string
-        service:
-          description: Apideck ID of service provider
-          example: sage-hr
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
+        parent_folder_id:
+          $ref: "#/components/schemas/ParentFolderId"
       type: object
-    UpdateHrisCompanyResponse:
+    UpdateFolderResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -4351,11 +2930,75 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Companies
+          example: Folders
           type: string
         service:
           description: Apideck ID of service provider
           example: undefined
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    UpdateSharedLinkResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Shared Links
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: dropbox
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    UpdateUploadSessionResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: UploadSessions
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: dropbox
           type: string
         status:
           description: HTTP Response Status
@@ -4384,65 +3027,33 @@ components:
       nullable: true
       readOnly: true
       type: string
-    WebhookEvent:
-      allOf:
-        - properties:
-            entity_id:
-              description: The service provider's ID of the entity that triggered this event
-              example: 123456ASDF
-              type: string
-            entity_type:
-              description: The type entity that triggered this event
-              example: Company
-              type: string
-            entity_url:
-              description: The url to retrieve entity detail.
-              example: https://unify.apideck.com/crm/contacts/123456
-              type: string
-            event_id:
-              description: Unique reference to this request event
-              example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
-              type: string
-            execution_attempt:
-              description: The current count this request event has been attempted
-              example: 2
-              type: number
-            occurred_at:
-              description: ISO Datetime for when the original event occurred
-              example: 2021-10-01T03:14:55.419Z
-              type: string
-            service_id:
-              description: Service provider identifier
-              example: close
-              type: string
-          type: object
-        - properties:
-            event_type:
-              $ref: "#/components/schemas/HrisEventType"
-          type: object
-      x-sdk-exclude: true
-    Website:
+    UploadSession:
+      additionalProperties: false
       properties:
+        expires_at:
+          $ref: "#/components/schemas/ExpiresAt"
         id:
-          example: "12345"
-          nullable: true
+          $ref: "#/components/schemas/Id"
+        parallel_upload_supported:
+          description: Indicates if parts of the file can uploaded in parallel.
+          example: true
+          readOnly: true
+          type: boolean
+        part_size:
+          description: Size in bytes of each part of the file that you will upload. Uploaded parts need to be this size for the upload to be successful.
+          example: 1000000
+          readOnly: true
+          type: number
+        success:
+          description: Indicates if the upload session was completed successfully.
+          example: true
+          readOnly: true
+          type: boolean
+        uploaded_byte_range:
+          description: The range of bytes that was successfully uploaded.
+          example: 0-42
+          readOnly: true
           type: string
-        type:
-          enum:
-            - primary
-            - secondary
-            - work
-            - personal
-            - other
-          example: primary
-          type: string
-          x-graphql-type-name: WebsiteType
-        url:
-          example: http://example.com
-          minLength: 1
-          type: string
-      required:
-        - url
       type: object
   securitySchemes:
     apiKey:
@@ -4466,101 +3077,3 @@ components:
       in: header
       name: Authorization
       type: apiKey
-x-webhooks:
-  CompanyCreated:
-    post:
-      description: Company created
-      operationId: companyCreated
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/WebhookEvent"
-      responses:
-        "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      summary: Company created
-      tags:
-        - Webhook Events
-      x-apideck-event-type: hris.company.created
-  CompanyDeleted:
-    post:
-      description: Company deleted
-      operationId: companyDeleted
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/WebhookEvent"
-      responses:
-        "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      summary: Company deleted
-      tags:
-        - Webhook Events
-      x-apideck-event-type: hris.company.deleted
-  CompanyUpdated:
-    post:
-      description: Company updated
-      operationId: companyUpdated
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/WebhookEvent"
-      responses:
-        "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      summary: Company updated
-      tags:
-        - Webhook Events
-      x-apideck-event-type: hris.company.updated
-  EmployeeCreated:
-    post:
-      description: Employee created
-      operationId: employeeCreated
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/WebhookEvent"
-      responses:
-        "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      summary: Employee created
-      tags:
-        - Webhook Events
-      x-apideck-event-type: hris.employee.created
-  EmployeeDeleted:
-    post:
-      description: Employee deleted
-      operationId: employeeDeleted
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/WebhookEvent"
-      responses:
-        "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      summary: Employee deleted
-      tags:
-        - Webhook Events
-      x-apideck-event-type: hris.employee.deleted
-  EmployeeUpdated:
-    post:
-      description: Employee updated
-      operationId: employeeUpdated
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/WebhookEvent"
-      responses:
-        "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      summary: Employee updated
-      tags:
-        - Webhook Events
-      x-apideck-event-type: hris.employee.updated
-  x-sdk-exclude: true

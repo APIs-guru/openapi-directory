@@ -5433,6 +5433,11 @@ components:
         assistQueryParams:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2AssistQueryParameters"
           description: Parameters for a human assist query.
+        cxParameters:
+          additionalProperties:
+            description: Properties of the object.
+          description: "Additional parameters to be put into Dialogflow CX session parameters. To remove a parameter from the session, clients should explicitly set the parameter value to null. Note: this field should only be used if you are connecting to a Dialogflow CX agent."
+          type: object
         eventInput:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2EventInput"
           description: An input event to send to Dialogflow.

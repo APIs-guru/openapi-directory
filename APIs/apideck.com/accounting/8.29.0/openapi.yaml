@@ -268,7 +268,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 8.28.1
+  version: 8.29.0
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -309,6 +309,10 @@ tags:
     name: Customers
     x-apideck-model:
       $ref: "#/components/schemas/AccountingCustomer"
+  - description: ""
+    name: Suppliers
+    x-apideck-model:
+      $ref: "#/components/schemas/Supplier"
   - description: ""
     name: Company Info
     x-apideck-model:
@@ -1261,6 +1265,7 @@ paths:
                 tax_inclusive: true,
                 sub_total: 27500,
                 total_tax: 2500,
+                tax_code: '1234',
                 total: 27500,
                 balance: 27500,
                 deposit: 0,
@@ -1523,6 +1528,7 @@ paths:
                 tax_inclusive: true,
                 sub_total: 27500,
                 total_tax: 2500,
+                tax_code: '1234',
                 total: 27500,
                 balance: 27500,
                 deposit: 0,
@@ -2287,6 +2293,416 @@ paths:
             } catch (error) {
               console.error(error)
             }
+  /accounting/suppliers:
+    get:
+      description: List Suppliers
+      operationId: suppliersAll
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetSuppliersResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: List Suppliers
+      tags:
+        - Suppliers
+      x-apideck-api: accounting
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.accounting.suppliersAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: Suppliers
+    post:
+      description: Create Supplier
+      operationId: suppliersAdd
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Supplier"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateSupplierResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Create Supplier
+      tags:
+        - Suppliers
+      x-apideck-api: accounting
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              supplier: {
+                company_name: 'SpaceX',
+                display_name: 'Windsurf Shop',
+                title: 'CEO',
+                first_name: 'Elon',
+                middle_name: 'D.',
+                last_name: 'Musk',
+                suffix: 'Jr.',
+                addresses: [
+                  {
+                    id: '123',
+                    type: 'primary',
+                    string: '25 Spring Street, Blackburn, VIC 3130',
+                    name: 'HQ US',
+                    line1: 'Main street',
+                    line2: 'apt #',
+                    line3: 'Suite #',
+                    line4: 'delivery instructions',
+                    street_number: '25',
+                    city: 'San Francisco',
+                    state: 'CA',
+                    postal_code: '94104',
+                    country: 'US',
+                    latitude: '40.759211',
+                    longitude: '-73.984638',
+                    county: 'Santa Clara',
+                    contact_name: 'Elon Musk',
+                    salutation: 'Mr',
+                    phone_number: '111-111-1111',
+                    fax: '122-111-1111',
+                    email: 'elon@musk.com',
+                    website: 'https://elonmusk.com',
+                    row_version: '1-12345'
+                  }
+                ],
+                notes: 'Some notes about this supplier',
+                phone_numbers: [
+                  {
+                    id: '12345',
+                    country_code: '1',
+                    area_code: '323',
+                    number: '111-111-1111',
+                    extension: '105',
+                    type: 'primary'
+                  }
+                ],
+                emails: [
+                  {
+                    id: '123',
+                    email: 'elon@musk.com',
+                    type: 'primary'
+                  }
+                ],
+                websites: [
+                  {
+                    id: '12345',
+                    url: 'http://example.com',
+                    type: 'primary'
+                  }
+                ],
+                tax_rate: {
+                  id: '123456'
+                },
+                tax_number: 'US123945459',
+                currency: 'USD',
+                account: {
+                  id: '123456',
+                  nominal_code: 'N091'
+                },
+                status: 'active',
+                row_version: '1-12345'
+              }
+            }
+
+            try {
+              const { data } = await apideck.accounting.suppliersAdd(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/accounting/suppliers/{id}":
+    delete:
+      description: Delete Supplier
+      operationId: suppliersDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeleteSupplierResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Delete Supplier
+      tags:
+        - Suppliers
+      x-apideck-api: accounting
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.accounting.suppliersDelete({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    get:
+      description: Get Supplier
+      operationId: suppliersOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetSupplierResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get Supplier
+      tags:
+        - Suppliers
+      x-apideck-api: accounting
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.accounting.suppliersOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    patch:
+      description: Update Supplier
+      operationId: suppliersUpdate
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Supplier"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdateSupplierResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Update Supplier
+      tags:
+        - Suppliers
+      x-apideck-api: accounting
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              id: 'id_example',
+              supplier: {
+                company_name: 'SpaceX',
+                display_name: 'Windsurf Shop',
+                title: 'CEO',
+                first_name: 'Elon',
+                middle_name: 'D.',
+                last_name: 'Musk',
+                suffix: 'Jr.',
+                addresses: [
+                  {
+                    id: '123',
+                    type: 'primary',
+                    string: '25 Spring Street, Blackburn, VIC 3130',
+                    name: 'HQ US',
+                    line1: 'Main street',
+                    line2: 'apt #',
+                    line3: 'Suite #',
+                    line4: 'delivery instructions',
+                    street_number: '25',
+                    city: 'San Francisco',
+                    state: 'CA',
+                    postal_code: '94104',
+                    country: 'US',
+                    latitude: '40.759211',
+                    longitude: '-73.984638',
+                    county: 'Santa Clara',
+                    contact_name: 'Elon Musk',
+                    salutation: 'Mr',
+                    phone_number: '111-111-1111',
+                    fax: '122-111-1111',
+                    email: 'elon@musk.com',
+                    website: 'https://elonmusk.com',
+                    row_version: '1-12345'
+                  }
+                ],
+                notes: 'Some notes about this supplier',
+                phone_numbers: [
+                  {
+                    id: '12345',
+                    country_code: '1',
+                    area_code: '323',
+                    number: '111-111-1111',
+                    extension: '105',
+                    type: 'primary'
+                  }
+                ],
+                emails: [
+                  {
+                    id: '123',
+                    email: 'elon@musk.com',
+                    type: 'primary'
+                  }
+                ],
+                websites: [
+                  {
+                    id: '12345',
+                    url: 'http://example.com',
+                    type: 'primary'
+                  }
+                ],
+                tax_rate: {
+                  id: '123456'
+                },
+                tax_number: 'US123945459',
+                currency: 'USD',
+                account: {
+                  id: '123456',
+                  nominal_code: 'N091'
+                },
+                status: 'active',
+                row_version: '1-12345'
+              }
+            }
+
+            try {
+              const { data } = await apideck.accounting.suppliersUpdate(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
   /accounting/tax-rates:
     get:
       description: |
@@ -2705,6 +3121,12 @@ components:
           schema:
             $ref: "#/components/schemas/CreatePaymentResponse"
       description: Payment created
+    CreateSupplierResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateSupplierResponse"
+      description: Supplier created
     CreateTaxRateResponse:
       content:
         application/json:
@@ -2741,6 +3163,12 @@ components:
           schema:
             $ref: "#/components/schemas/DeletePaymentResponse"
       description: Payment deleted
+    DeleteSupplierResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DeleteSupplierResponse"
+      description: Supplier deleted
     DeleteTaxRateResponse:
       content:
         application/json:
@@ -2813,6 +3241,18 @@ components:
           schema:
             $ref: "#/components/schemas/GetPaymentsResponse"
       description: Payments
+    GetSupplierResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetSupplierResponse"
+      description: Supplier
+    GetSuppliersResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetSuppliersResponse"
+      description: Suppliers
     GetTaxRateResponse:
       content:
         application/json:
@@ -2897,6 +3337,12 @@ components:
           schema:
             $ref: "#/components/schemas/UpdatePaymentResponse"
       description: Payment Updated
+    UpdateSupplierResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateSupplierResponse"
+      description: Supplier updated
     UpdateTaxRateResponse:
       content:
         application/json:
@@ -2921,11 +3367,13 @@ components:
         currency:
           $ref: "#/components/schemas/Currency"
         display_id:
+          description: Display ID
           example: EMP00101
           nullable: true
           title: Display ID
           type: string
         display_name:
+          description: Display Name
           example: Windsurf Shop
           nullable: true
           title: Display Name
@@ -2939,6 +3387,7 @@ components:
         id:
           $ref: "#/components/schemas/Id"
         individual:
+          description: Is this an individual or business customer
           example: true
           nullable: true
           title: Is individual
@@ -2948,6 +3397,7 @@ components:
         middle_name:
           $ref: "#/components/schemas/MiddleName"
         notes:
+          description: Some notes about this customer
           example: Some notes about this customer
           nullable: true
           title: Notes
@@ -2974,17 +3424,11 @@ components:
         suffix:
           $ref: "#/components/schemas/Suffix"
         tax_number:
-          example: US123945459
-          nullable: true
-          title: Tax number
-          type: string
+          $ref: "#/components/schemas/TaxNumber"
         tax_rate:
           $ref: "#/components/schemas/LinkedTaxRate"
         title:
-          example: CEO
-          nullable: true
-          title: Job title
-          type: string
+          $ref: "#/components/schemas/Title"
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         updated_by:
@@ -3052,6 +3496,11 @@ components:
               $ref: "#/components/schemas/AccountingEventType"
           type: object
       x-sdk-exclude: true
+    Active:
+      example: true
+      nullable: true
+      title: Is active
+      type: boolean
     Address:
       properties:
         city:
@@ -3415,6 +3864,7 @@ components:
         company_name:
           $ref: "#/components/schemas/CompanyName"
         company_start_date:
+          description: Date when company file was created
           example: 2015-06-05
           format: date
           title: Date when company file was created
@@ -3430,6 +3880,7 @@ components:
             $ref: "#/components/schemas/Email"
           type: array
         fiscal_year_start_month:
+          description: The start month of fiscal year.
           enum:
             - January
             - February
@@ -3449,11 +3900,9 @@ components:
         id:
           $ref: "#/components/schemas/Id"
         language:
-          description: language code according to ISO 639-1. For the United States - EN
-          example: EN
-          nullable: true
-          type: string
+          $ref: "#/components/schemas/Language"
         legal_name:
+          description: The legal name of the company
           example: SpaceX Inc.
           title: Legal name
           type: string
@@ -3783,6 +4232,38 @@ components:
         - data
       type: object
     CreatePaymentResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: add
+          type: string
+        resource:
+          description: Unified API resource name
+          example: payments
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: xero
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    CreateSupplierResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -4580,6 +5061,38 @@ components:
         - operation
         - data
       type: object
+    DeleteSupplierResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: delete
+          type: string
+        resource:
+          description: Unified API resource name
+          example: suppliers
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: xero
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     DeleteTaxRateResponse:
       properties:
         data:
@@ -5039,6 +5552,78 @@ components:
         - data
       type: object
       x-graphql-type-name: PaymentList
+    GetSupplierResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/Supplier"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: suppliers
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: xero
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: Supplier
+    GetSuppliersResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Supplier"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: all
+          type: string
+        resource:
+          description: Unified API resource name
+          example: suppliers
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: xero
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: SupplierList
     GetTaxRateResponse:
       properties:
         data:
@@ -5119,6 +5704,7 @@ components:
       additionalProperties: false
       properties:
         balance:
+          description: Balance of invoice due.
           example: 27500
           nullable: true
           title: Balance
@@ -5136,11 +5722,13 @@ components:
         customer:
           $ref: "#/components/schemas/LinkedCustomer"
         customer_memo:
+          description: Customer memo
           example: Thank you for your business and have a great day!
           nullable: true
           title: Customer memo
           type: string
         deposit:
+          description: Amount of deposit made to this invoice.
           example: 0
           nullable: true
           title: Deposit
@@ -5148,7 +5736,7 @@ components:
         downstream_id:
           $ref: "#/components/schemas/DownstreamId"
         due_date:
-          description: The invoice due date is the date on which a payment or invoice is scheduled to be received by the seller - YYYY-MM-DD
+          description: The invoice due date is the date on which a payment or invoice is scheduled to be received by the seller - YYYY-MM-DD.
           example: 2020-10-30
           format: date
           title: Due date
@@ -5156,13 +5744,13 @@ components:
         id:
           $ref: "#/components/schemas/Id"
         invoice_date:
-          description: Date invoice was issued - YYYY-MM-DD
+          description: Date invoice was issued - YYYY-MM-DD.
           example: 2020-09-30
           format: date
           title: Invoice date
           type: string
         invoice_sent:
-          description: Invoice sent to contact/customer
+          description: Invoice sent to contact/customer.
           example: true
           title: Invoice Sent
           type: boolean
@@ -5171,6 +5759,7 @@ components:
             $ref: "#/components/schemas/InvoiceLineItem"
           type: array
         number:
+          description: Invoice number.
           example: OIT00546
           nullable: true
           title: Invoice number
@@ -5207,10 +5796,17 @@ components:
           title: Status
           type: string
         sub_total:
+          description: Sub-total amount, normally before tax.
           example: 27500
           nullable: true
           title: Sub-total amount
           type: number
+        tax_code:
+          description: Applicable tax id/code override if tax is not supplied on a line item basis.
+          example: "1234"
+          nullable: true
+          title: Tax Code
+          type: string
         tax_inclusive:
           $ref: "#/components/schemas/TaxInclusive"
         template_id:
@@ -5220,22 +5816,25 @@ components:
           title: Template
           type: string
         terms:
-          description: Terms of payment
+          description: Terms of payment.
           example: Net 30 days
           nullable: true
           title: Terms
           type: string
         total:
+          description: Total amount of invoice, including tax.
           example: 27500
           nullable: true
           title: Total amount
           type: number
         total_tax:
+          description: Total tax amount applied to this invoice.
           example: 2500
           nullable: true
           title: Total tax amount
           type: number
         type:
+          description: Invoice type
           enum:
             - standard
             - credit
@@ -5257,10 +5856,7 @@ components:
       additionalProperties: false
       properties:
         active:
-          example: true
-          nullable: true
-          title: Is active
-          type: boolean
+          $ref: "#/components/schemas/Active"
         asset_account:
           $ref: "#/components/schemas/LinkedLedgerAccount"
         code:
@@ -5274,6 +5870,7 @@ components:
         created_by:
           $ref: "#/components/schemas/CreatedBy"
         description:
+          description: A short description of the item
           example: Model Y is a fully electric, mid-size SUV, with seating for up to seven, dual motor AWD and unparalleled protection.
           nullable: true
           title: Description
@@ -5281,6 +5878,7 @@ components:
         expense_account:
           $ref: "#/components/schemas/LinkedLedgerAccount"
         id:
+          description: The ID of the item.
           example: "123456"
           readOnly: true
           title: Item ID
@@ -5288,6 +5886,7 @@ components:
         income_account:
           $ref: "#/components/schemas/LinkedLedgerAccount"
         name:
+          description: Item name
           example: Model Y
           nullable: true
           title: Item name
@@ -5337,6 +5936,7 @@ components:
           title: Item tracked
           type: boolean
         type:
+          description: Item type
           enum:
             - inventory
             - service
@@ -5369,14 +5969,16 @@ components:
           title: Item code
           type: string
         description:
+          description: User defined description
           example: Model Y is a fully electric, mid-size SUV, with seating for up to seven, dual motor AWD and unparalleled protection.
           nullable: true
           title: Description
           type: string
         discount_percentage:
+          description: Discount percentage
           example: 0.01
           nullable: true
-          title: Amount
+          title: Discount amount
           type: number
         id:
           $ref: "#/components/schemas/Id"
@@ -5385,6 +5987,7 @@ components:
         ledger_account:
           $ref: "#/components/schemas/LinkedLedgerAccount"
         line_number:
+          description: Line number in the invoice
           example: 1
           nullable: true
           title: Line number
@@ -5392,12 +5995,14 @@ components:
         quantity:
           $ref: "#/components/schemas/Quantity"
         row_id:
+          description: Row ID
           example: "12345"
           title: Row ID
           type: string
         row_version:
           $ref: "#/components/schemas/RowVersion"
         tax_amount:
+          description: Tax amount
           example: 27500
           nullable: true
           title: Tax amount
@@ -5405,11 +6010,13 @@ components:
         tax_rate:
           $ref: "#/components/schemas/LinkedTaxRate"
         total_amount:
+          description: Total amount of the line item
           example: 27500
           nullable: true
           title: Total amount
           type: number
         type:
+          description: Item type
           enum:
             - sales_item
             - discount
@@ -5432,6 +6039,11 @@ components:
         id:
           $ref: "#/components/schemas/Id"
       type: object
+    Language:
+      description: language code according to ISO 639-1. For the United States - EN
+      example: EN
+      nullable: true
+      type: string
     LastName:
       example: Musk
       nullable: true
@@ -5441,6 +6053,7 @@ components:
       additionalProperties: true
       properties:
         active:
+          description: Whether the account is active or not.
           example: true
           nullable: true
           title: Is active
@@ -5448,6 +6061,7 @@ components:
         bank_account:
           $ref: "#/components/schemas/BankAccount"
         categories:
+          description: The categories of the account.
           items:
             properties:
               id:
@@ -5455,13 +6069,16 @@ components:
                 readOnly: true
                 type: string
               name:
+                description: The name of the category.
                 example: Finance Charges Expense
                 readOnly: true
                 title: Category name
                 type: string
           readOnly: true
+          title: Categories
           type: array
         classification:
+          description: The classification of account.
           enum:
             - asset
             - equity
@@ -5474,6 +6091,7 @@ components:
             - costs_of_sales
           example: asset
           nullable: true
+          title: Classification
           type: string
         created_at:
           $ref: "#/components/schemas/CreatedAt"
@@ -5482,22 +6100,30 @@ components:
         currency:
           $ref: "#/components/schemas/Currency"
         current_balance:
+          description: The current balance of the account.
           example: 20000
           nullable: true
           title: Current balance
           type: number
         description:
+          description: The description of the account.
           example: Main checking account
           nullable: true
+          title: Description
           type: string
         display_id:
+          description: The human readable display ID used when displaying the account
           example: 1-12345
+          title: Display ID
           type: string
         fully_qualified_name:
+          description: The fully qualified name of the account.
           example: Asset.Bank.Checking_Account
           nullable: true
+          title: Fully Qualified Name
           type: string
         header:
+          description: Whether the account is a header or not.
           example: true
           nullable: true
           title: Is header
@@ -5516,14 +6142,19 @@ components:
           nullable: true
           type: number
         name:
+          description: The name of the account.
           example: Bank account
           nullable: true
+          title: Name
           type: string
         nominal_code:
+          description: The nominal code of the ledger account.
           example: N091
           nullable: true
+          title: Nominal Code
           type: string
         opening_balance:
+          description: The opening balance of the account.
           example: 75000
           nullable: true
           title: Opening balance
@@ -5531,13 +6162,17 @@ components:
         parent_account:
           properties:
             display_id:
+              description: The human readable display ID used when displaying the parent account
               example: 1-1100
               title: Display ID
               type: string
             id:
+              description: The ID of the parent account.
               example: "12345"
+              title: Parent account ID
               type: string
             name:
+              description: The name of the parent account.
               example: Bank Accounts
               title: Name
               type: string
@@ -5545,6 +6180,7 @@ components:
         row_version:
           $ref: "#/components/schemas/RowVersion"
         status:
+          description: The status of the account.
           enum:
             - active
             - inactive
@@ -5555,34 +6191,46 @@ components:
           type: string
           x-graphql-type-name: LedgerAccountStatus
         sub_account:
+          description: Whether the account is a sub account or not.
           example: false
           nullable: true
+          title: Is sub account
           type: boolean
         sub_accounts:
+          description: The sub accounts of the account.
           items:
             properties:
               account_sub_name:
+                description: The name of the sub account.
                 example: Petty Cash
                 readOnly: true
-                title: Account Sub Name
+                title: Sub Account Name
                 type: string
               id:
+                description: The ID of the sub account.
                 example: "12345"
                 readOnly: true
+                title: Sub account ID
                 type: string
           readOnly: true
+          title: Sub accounts
           type: array
         sub_type:
+          description: The sub type of account.
           example: CHECKING_ACCOUNT
           nullable: true
+          title: Sub Type
           type: string
         tax_rate:
           $ref: "#/components/schemas/LinkedTaxRate"
         tax_type:
+          description: The tax type of the account.
           example: NONE
           nullable: true
+          title: Tax Type
           type: string
         type:
+          description: The type of account.
           enum:
             - accounts_receivable
             - revenue
@@ -5604,6 +6252,7 @@ components:
             - non_current_liability
             - other_liability
           example: bank
+          title: Type
           type: string
           x-graphql-type-name: LedgerAccountType
         updated_at:
@@ -5620,22 +6269,27 @@ components:
       nullable: true
       properties:
         company_name:
+          description: The company name of the customer.
           example: The boring company
           nullable: true
           readOnly: true
+          title: Company Name
           type: string
         display_id:
+          description: The display ID of the customer.
           example: CUST00101
           nullable: true
           readOnly: true
           title: Display ID
           type: string
         display_name:
+          description: The display name of the customer.
           example: Windsurf Shop
           nullable: true
           title: Display Name
           type: string
         id:
+          description: The ID of the customer this entity is linked to.
           example: "12345"
           title: Customer ID
           type: string
@@ -5660,6 +6314,7 @@ components:
           title: Item ID
           type: string
         name:
+          description: User defined item name
           example: Model Y
           nullable: true
           readOnly: true
@@ -5671,18 +6326,22 @@ components:
       nullable: true
       properties:
         id:
+          description: The unique identifier for the account.
           example: "123456"
           title: Account ID
           type: string
         name:
+          description: The name of the account.
           example: Bank account
           nullable: true
           readOnly: true
           title: Account Name
           type: string
         nominal_code:
+          description: The nominal code of the account.
           example: N091
           nullable: true
+          title: Nominal Code
           type: string
       required:
         - id
@@ -5691,18 +6350,24 @@ components:
     LinkedTaxRate:
       properties:
         code:
+          description: Tax rate code
           example: N-T
           nullable: true
           readOnly: true
+          title: Tax rate code
           type: string
         id:
+          description: The ID of the object.
           example: "123456"
           nullable: true
+          title: The ID of the object.
           type: string
         name:
+          description: Name of the tax rate
           example: GST on Purchases
           nullable: true
           readOnly: true
+          title: Name
           type: string
       type: object
       x-graphql-type-name: LinkedTaxRate
@@ -5853,6 +6518,7 @@ components:
                 title: Linked entity ID
                 type: string
               type:
+                description: Type of entity this payment should be attributed to.
                 enum:
                   - invoice
                   - order
@@ -5879,6 +6545,7 @@ components:
           title: Payment identifier
           type: string
         note:
+          description: Optional note to be associated with the payment.
           example: Some notes about this payment
           nullable: true
           title: Note
@@ -6106,6 +6773,82 @@ components:
       nullable: true
       title: Suffix
       type: string
+    Supplier:
+      properties:
+        account:
+          $ref: "#/components/schemas/LinkedLedgerAccount"
+        addresses:
+          items:
+            $ref: "#/components/schemas/Address"
+          type: array
+        company_name:
+          $ref: "#/components/schemas/CompanyName"
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        created_by:
+          $ref: "#/components/schemas/CreatedBy"
+        currency:
+          $ref: "#/components/schemas/Currency"
+        display_name:
+          description: Display name of supplier.
+          example: Windsurf Shop
+          nullable: true
+          title: Display Name
+          type: string
+        emails:
+          items:
+            $ref: "#/components/schemas/Email"
+          type: array
+        first_name:
+          $ref: "#/components/schemas/FirstName"
+        id:
+          $ref: "#/components/schemas/Id"
+        last_name:
+          $ref: "#/components/schemas/LastName"
+        middle_name:
+          $ref: "#/components/schemas/MiddleName"
+        notes:
+          example: Some notes about this supplier
+          nullable: true
+          title: Notes
+          type: string
+        phone_numbers:
+          items:
+            $ref: "#/components/schemas/PhoneNumber"
+          type: array
+        row_version:
+          $ref: "#/components/schemas/RowVersion"
+        status:
+          description: Customer status
+          enum:
+            - active
+            - inactive
+            - archived
+            - gdpr-erasure-request
+            - unknown
+          example: active
+          nullable: true
+          title: Status
+          type: string
+          x-graphql-type-name: CustomerStatus
+        suffix:
+          $ref: "#/components/schemas/Suffix"
+        tax_number:
+          $ref: "#/components/schemas/TaxNumber"
+        tax_rate:
+          $ref: "#/components/schemas/LinkedTaxRate"
+        title:
+          $ref: "#/components/schemas/Title"
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+        updated_by:
+          $ref: "#/components/schemas/UpdatedBy"
+        websites:
+          items:
+            $ref: "#/components/schemas/Website"
+          type: array
+      type: object
+      x-graphql-type-name: Supplier
     Tags:
       example:
         - New
@@ -6118,10 +6861,16 @@ components:
       nullable: true
       title: Tax inclusive
       type: boolean
+    TaxNumber:
+      example: US123945459
+      nullable: true
+      title: Tax number
+      type: string
     TaxRate:
       additionalProperties: false
       properties:
         code:
+          description: Tax code assigned to identify this tax rate.
           example: ABN
           nullable: true
           title: Tax code
@@ -6156,22 +6905,27 @@ components:
         created_by:
           $ref: "#/components/schemas/CreatedBy"
         description:
+          description: Description of tax rate
           example: Reduced rate GST Purchases
           nullable: true
           title: Description
           type: string
         effective_tax_rate:
+          description: Effective tax rate
           example: 10
           nullable: true
           title: Effective tax rate
           type: number
         id:
+          description: ID assigned to identify this tax rate.
           example: "1234"
           nullable: true
           type: string
         name:
+          description: Name assigned to identify this tax rate.
           example: GST on Purchases
           minLength: 1
+          title: Name
           type: string
         original_tax_rate_id:
           description: ID of the original tax rate from which the new tax rate is derived. Helps to understand the relationship between corresponding tax rate entities.
@@ -6188,6 +6942,7 @@ components:
         row_version:
           $ref: "#/components/schemas/RowVersion"
         status:
+          description: Tax rate status
           enum:
             - active
             - inactive
@@ -6238,25 +6993,35 @@ components:
         assets:
           description: Boolean to describe if tax rate can be used for asset accounts
           example: true
+          title: Assets
           type: boolean
         equity:
           description: Boolean to describe if tax rate can be used for equity accounts
           example: true
+          title: Equity
           type: boolean
         expenses:
           description: Boolean to describe if tax rate can be used for expense accounts
           example: true
+          title: Expenses
           type: boolean
         liabilities:
           description: Boolean to describe if tax rate can be used for liability accounts
           example: true
+          title: Liabilities
           type: boolean
         revenue:
           description: Boolean to describe if tax rate can be used for revenue accounts
           example: true
+          title: Revenue
           type: boolean
       type: object
       x-graphql-type-name: TaxRatesFilter
+    Title:
+      example: CEO
+      nullable: true
+      title: Job title
+      type: string
     TooManyRequestsResponse:
       properties:
         detail:
@@ -6529,6 +7294,38 @@ components:
         resource:
           description: Unified API resource name
           example: payments
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: xero
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    UpdateSupplierResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: update
+          type: string
+        resource:
+          description: Unified API resource name
+          example: suppliers
           type: string
         service:
           description: Apideck ID of service provider
