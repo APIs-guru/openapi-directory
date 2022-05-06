@@ -1021,7 +1021,7 @@ components:
         failedVersions:
           description: The versions the operation failed to delete.
           items:
-            $ref: "#/components/schemas/Version"
+            type: string
           type: array
       type: object
     Binding:

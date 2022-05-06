@@ -901,13 +901,6 @@ components:
           description: End time of the operation. Required when the operation is used in ServiceController.Report, but optional when the operation is used in ServiceController.Check.
           format: google-datetime
           type: string
-        extensions:
-          description: Unimplemented.
-          items:
-            additionalProperties:
-              description: Properties of the object. Contains field @type with type URL.
-            type: object
-          type: array
         importance:
           description: DO NOT USE. This is an experimental field.
           enum:
