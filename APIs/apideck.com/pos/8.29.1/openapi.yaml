@@ -294,7 +294,7 @@ tags:
     x-apideck-model:
       $ref: "#/components/schemas/Order"
   - description: ""
-    name: PosPayments
+    name: Payments
     x-apideck-model:
       $ref: "#/components/schemas/PosPayment"
   - description: ""
@@ -1451,7 +1451,18 @@ paths:
                 name: 'Modifier',
                 alternate_name: 'Modifier New',
                 minimum_required: 1,
-                maximum_allowed: 5
+                maximum_allowed: 5,
+                modifiers: [
+                  {
+                    id: '12345',
+                    name: 'Modifier',
+                    alternate_name: 'Modifier New',
+                    price_amount: 10,
+                    currency: 'USD',
+                    available: true
+                  }
+                ],
+                row_version: '1-12345'
               }
             }
 
@@ -1616,7 +1627,18 @@ paths:
                 name: 'Modifier',
                 alternate_name: 'Modifier New',
                 minimum_required: 1,
-                maximum_allowed: 5
+                maximum_allowed: 5,
+                modifiers: [
+                  {
+                    id: '12345',
+                    name: 'Modifier',
+                    alternate_name: 'Modifier New',
+                    price_amount: 10,
+                    currency: 'USD',
+                    available: true
+                  }
+                ],
+                row_version: '1-12345'
               }
             }
 
@@ -1729,6 +1751,7 @@ paths:
                 name: 'Modifier',
                 alternate_name: 'Modifier New',
                 price_amount: 10,
+                currency: 'USD',
                 modifier_group_id: ['123'],
                 available: true
               }
@@ -1895,6 +1918,7 @@ paths:
                 name: 'Modifier',
                 alternate_name: 'Modifier New',
                 price_amount: 10,
+                currency: 'USD',
                 modifier_group_id: ['123'],
                 available: true
               }
@@ -3183,7 +3207,7 @@ paths:
             }
   /pos/payments:
     get:
-      description: List PosPayments
+      description: List Payments
       operationId: paymentsAll
       parameters:
         - $ref: "#/components/parameters/raw"
@@ -3209,9 +3233,9 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: List PosPayments
+      summary: List Payments
       tags:
-        - PosPayments
+        - Payments
       x-apideck-api: pos
       x-codeSamples:
         - label: Node
@@ -3234,7 +3258,7 @@ paths:
       x-graphql-exclude: true
       x-graphql-field-name: payments
     post:
-      description: Create PosPayment
+      description: Create Payment
       operationId: paymentsAdd
       parameters:
         - $ref: "#/components/parameters/raw"
@@ -3264,9 +3288,9 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Create PosPayment
+      summary: CreateP ayment
       tags:
-        - PosPayments
+        - Payments
       x-apideck-api: pos
       x-codeSamples:
         - label: Node
@@ -3401,7 +3425,7 @@ paths:
       x-graphql-exclude: true
   "/pos/payments/{id}":
     delete:
-      description: Delete PosPayment
+      description: Delete Payment
       operationId: paymentsDelete
       parameters:
         - $ref: "#/components/parameters/id"
@@ -3426,9 +3450,9 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Delete PosPayment
+      summary: Delete Payment
       tags:
-        - PosPayments
+        - Payments
       x-apideck-api: pos
       x-codeSamples:
         - label: Node
@@ -3452,7 +3476,7 @@ paths:
             }
       x-graphql-exclude: true
     get:
-      description: Get PosPayment
+      description: Get Payment
       operationId: paymentsOne
       parameters:
         - $ref: "#/components/parameters/id"
@@ -3477,9 +3501,9 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Get PosPayment
+      summary: Get Payment
       tags:
-        - PosPayments
+        - Payments
       x-apideck-api: pos
       x-codeSamples:
         - label: Node
@@ -3503,7 +3527,7 @@ paths:
             }
       x-graphql-exclude: true
     patch:
-      description: Update PosPayment
+      description: Update Payment
       operationId: paymentsUpdate
       parameters:
         - $ref: "#/components/parameters/id"
@@ -3534,9 +3558,9 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Update PosPayment
+      summary: Update Payment
       tags:
-        - PosPayments
+        - Payments
       x-apideck-api: pos
       x-codeSamples:
         - label: Node
@@ -6749,6 +6773,8 @@ components:
           $ref: "#/components/schemas/CreatedAt"
         created_by:
           $ref: "#/components/schemas/CreatedBy"
+        currency:
+          $ref: "#/components/schemas/Currency"
         id:
           $ref: "#/components/schemas/Id"
         modifier_group_id:
@@ -6793,10 +6819,36 @@ components:
           example: 1
           title: Minimum required
           type: integer
+        modifiers:
+          items:
+            properties:
+              alternate_name:
+                example: Modifier New
+                title: Alternate name
+                type: string
+              available:
+                $ref: "#/components/schemas/Available"
+              currency:
+                $ref: "#/components/schemas/Currency"
+              id:
+                example: "12345"
+                title: ID
+                type: string
+              name:
+                example: Modifier
+                title: Name
+                type: string
+              price_amount:
+                example: 10
+                title: Price amount
+                type: number
+          type: array
         name:
           example: Modifier
           title: Name
           type: string
+        row_version:
+          $ref: "#/components/schemas/RowVersion"
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         updated_by:

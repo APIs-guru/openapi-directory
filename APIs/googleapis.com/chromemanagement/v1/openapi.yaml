@@ -286,10 +286,10 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1/{name}":
     get:
-      description: Get a specific app for a customer by its resource name.
-      operationId: chromemanagement.customers.apps.web.get
+      description: Get telemetry device.
+      operationId: chromemanagement.customers.telemetry.devices.get
       parameters:
-        - description: "Required. The app for which details are being queried. Examples: \"customers/my_customer/apps/chrome/gmbmikajjgmnabiglmofipeabaddhgne@2.1.2\" for the Save to Google Drive Chrome extension version 2.1.2, \"customers/my_customer/apps/android/com.google.android.apps.docs\" for the Google Drive Android app's latest version."
+        - description: Required. Name of the `TelemetryDevice` to return.
           in: path
           name: name
           required: true
@@ -300,13 +300,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleChromeManagementV1AppDetails"
+                $ref: "#/components/schemas/GoogleChromeManagementV1TelemetryDevice"
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/chrome.management.appdetails.readonly
+            - https://www.googleapis.com/auth/chrome.management.telemetry.readonly
           Oauth2c:
-            - https://www.googleapis.com/auth/chrome.management.appdetails.readonly
+            - https://www.googleapis.com/auth/chrome.management.telemetry.readonly
       tags:
         - customers
     parameters:

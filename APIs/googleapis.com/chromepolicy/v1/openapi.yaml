@@ -539,7 +539,7 @@ components:
           readOnly: true
           type: string
         fieldDependencies:
-          description: Output only. Provides a list of fields and the values they must have for this field to be allowed to be set.
+          description: Output only. Provides a list of fields and values. At least one of the fields must have the corresponding value in order for this field to be allowed to be set.
           items:
             $ref: "#/components/schemas/GoogleChromePolicyV1PolicySchemaFieldDependencies"
           readOnly: true

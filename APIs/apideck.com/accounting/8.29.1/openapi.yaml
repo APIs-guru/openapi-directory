@@ -428,7 +428,32 @@ paths:
               bill: {
                 supplier: {
                   id: '12345',
-                  display_name: 'Windsurf Shop'
+                  display_name: 'Windsurf Shop',
+                  address: {
+                    id: '123',
+                    type: 'primary',
+                    string: '25 Spring Street, Blackburn, VIC 3130',
+                    name: 'HQ US',
+                    line1: 'Main street',
+                    line2: 'apt #',
+                    line3: 'Suite #',
+                    line4: 'delivery instructions',
+                    street_number: '25',
+                    city: 'San Francisco',
+                    state: 'CA',
+                    postal_code: '94104',
+                    country: 'US',
+                    latitude: '40.759211',
+                    longitude: '-73.984638',
+                    county: 'Santa Clara',
+                    contact_name: 'Elon Musk',
+                    salutation: 'Mr',
+                    phone_number: '111-111-1111',
+                    fax: '122-111-1111',
+                    email: 'elon@musk.com',
+                    website: 'https://elonmusk.com',
+                    row_version: '1-12345'
+                  }
                 },
                 currency: 'USD',
                 currency_rate: 0.69,
@@ -443,7 +468,7 @@ paths:
                     line_number: 1,
                     description:
                       'Model Y is a fully electric, mid-size SUV, with seating for up to seven, dual motor AWD and unparalleled protection.',
-                    type: 'sales_item',
+                    type: 'expense_account',
                     tax_amount: 27500,
                     total_amount: 27500,
                     quantity: 1,
@@ -453,12 +478,12 @@ paths:
                     item: {
                       id: '12344'
                     },
-                    tax_rate: {
-                      id: '123456'
-                    },
                     ledger_account: {
                       id: '123456',
                       nominal_code: 'N091'
+                    },
+                    tax_rate: {
+                      id: '123456'
                     },
                     row_version: '1-12345'
                   }
@@ -637,7 +662,32 @@ paths:
               bill: {
                 supplier: {
                   id: '12345',
-                  display_name: 'Windsurf Shop'
+                  display_name: 'Windsurf Shop',
+                  address: {
+                    id: '123',
+                    type: 'primary',
+                    string: '25 Spring Street, Blackburn, VIC 3130',
+                    name: 'HQ US',
+                    line1: 'Main street',
+                    line2: 'apt #',
+                    line3: 'Suite #',
+                    line4: 'delivery instructions',
+                    street_number: '25',
+                    city: 'San Francisco',
+                    state: 'CA',
+                    postal_code: '94104',
+                    country: 'US',
+                    latitude: '40.759211',
+                    longitude: '-73.984638',
+                    county: 'Santa Clara',
+                    contact_name: 'Elon Musk',
+                    salutation: 'Mr',
+                    phone_number: '111-111-1111',
+                    fax: '122-111-1111',
+                    email: 'elon@musk.com',
+                    website: 'https://elonmusk.com',
+                    row_version: '1-12345'
+                  }
                 },
                 currency: 'USD',
                 currency_rate: 0.69,
@@ -652,7 +702,7 @@ paths:
                     line_number: 1,
                     description:
                       'Model Y is a fully electric, mid-size SUV, with seating for up to seven, dual motor AWD and unparalleled protection.',
-                    type: 'sales_item',
+                    type: 'expense_account',
                     tax_amount: 27500,
                     total_amount: 27500,
                     quantity: 1,
@@ -662,12 +712,12 @@ paths:
                     item: {
                       id: '12344'
                     },
-                    tax_rate: {
-                      id: '123456'
-                    },
                     ledger_account: {
                       id: '123456',
                       nominal_code: 'N091'
+                    },
+                    tax_rate: {
+                      id: '123456'
                     },
                     row_version: '1-12345'
                   }
@@ -4128,7 +4178,7 @@ components:
           $ref: "#/components/schemas/LinkedLedgerAccount"
         line_items:
           items:
-            $ref: "#/components/schemas/InvoiceLineItem"
+            $ref: "#/components/schemas/BillLineItem"
           type: array
         notes:
           example: Some notes about this bill.
@@ -4184,6 +4234,77 @@ components:
           $ref: "#/components/schemas/UpdatedAt"
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
+      type: object
+    BillLineItem:
+      additionalProperties: false
+      properties:
+        code:
+          description: User defined item code
+          example: 120-C
+          nullable: true
+          title: Item code
+          type: string
+        description:
+          description: User defined description
+          example: Model Y is a fully electric, mid-size SUV, with seating for up to seven, dual motor AWD and unparalleled protection.
+          nullable: true
+          title: Description
+          type: string
+        discount_percentage:
+          description: Discount percentage
+          example: 0.01
+          nullable: true
+          title: Discount amount
+          type: number
+        id:
+          $ref: "#/components/schemas/Id"
+        item:
+          $ref: "#/components/schemas/LinkedInvoiceItem"
+        ledger_account:
+          $ref: "#/components/schemas/LinkedLedgerAccount"
+        line_number:
+          description: Line number in the invoice
+          example: 1
+          nullable: true
+          title: Line number
+          type: integer
+        quantity:
+          $ref: "#/components/schemas/Quantity"
+        row_id:
+          description: Row ID
+          example: "12345"
+          title: Row ID
+          type: string
+        row_version:
+          $ref: "#/components/schemas/RowVersion"
+        tax_amount:
+          description: Tax amount
+          example: 27500
+          nullable: true
+          title: Tax amount
+          type: number
+        tax_rate:
+          $ref: "#/components/schemas/LinkedTaxRate"
+        total_amount:
+          description: Total amount of the line item
+          example: 27500
+          nullable: true
+          title: Total amount
+          type: number
+        type:
+          description: Bill Line Item type
+          enum:
+            - expense_item
+            - expense_account
+          example: expense_account
+          nullable: true
+          title: Type
+          type: string
+          x-graphql-type-name: BillLineItemType
+        unit_of_measure:
+          $ref: "#/components/schemas/UnitOfMeasure"
+        unit_price:
+          $ref: "#/components/schemas/UnitPrice"
       type: object
     Company:
       additionalProperties: false
@@ -6981,6 +7102,8 @@ components:
       description: The supplier this entity is linked to.
       nullable: true
       properties:
+        address:
+          $ref: "#/components/schemas/Address"
         company_name:
           description: The company name of the supplier.
           example: The boring company

@@ -947,7 +947,7 @@ paths:
       description: Gets the access control policy on the specified Source.
       operationId: securitycenter.organizations.sources.getIamPolicy
       parameters:
-        - description: "REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field."
+        - description: "REQUIRED: The resource for which the policy is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
           name: resource
           required: true
@@ -989,7 +989,7 @@ paths:
       description: Sets the access control policy on the specified Source.
       operationId: securitycenter.organizations.sources.setIamPolicy
       parameters:
-        - description: "REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field."
+        - description: "REQUIRED: The resource for which the policy is being specified. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
           name: resource
           required: true
@@ -1031,7 +1031,7 @@ paths:
       description: Returns the permissions that a caller has on the specified source.
       operationId: securitycenter.organizations.sources.testIamPermissions
       parameters:
-        - description: "REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field."
+        - description: "REQUIRED: The resource for which the policy detail is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
           name: resource
           required: true
@@ -2175,6 +2175,7 @@ components:
               - MODIFY_AUTHENTICATION_PROCESS
               - DATA_DESTRUCTION
               - DOMAIN_POLICY_MODIFICATION
+              - IMPAIR_DEFENSES
             type: string
           type: array
         primaryTactic:
@@ -2231,6 +2232,7 @@ components:
               - MODIFY_AUTHENTICATION_PROCESS
               - DATA_DESTRUCTION
               - DOMAIN_POLICY_MODIFICATION
+              - IMPAIR_DEFENSES
             type: string
           type: array
         version:
