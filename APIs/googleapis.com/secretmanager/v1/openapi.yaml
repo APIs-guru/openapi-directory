@@ -13,17 +13,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Secret Manager API
   version: v1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://secretmanager.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: secretmanager
 externalDocs:
@@ -531,7 +529,7 @@ paths:
       description: Gets the access control policy for a secret. Returns empty policy if the secret exists and does not have a policy set.
       operationId: secretmanager.projects.secrets.getIamPolicy
       parameters:
-        - description: "REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field."
+        - description: "REQUIRED: The resource for which the policy is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
           name: resource
           required: true
@@ -585,7 +583,7 @@ paths:
       description: Sets the access control policy on the specified secret. Replaces any existing policy. Permissions on SecretVersions are enforced according to the policy set on the associated Secret.
       operationId: secretmanager.projects.secrets.setIamPolicy
       parameters:
-        - description: "REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field."
+        - description: "REQUIRED: The resource for which the policy is being specified. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
           name: resource
           required: true
@@ -627,7 +625,7 @@ paths:
       description: 'Returns permissions that a caller has for the specified secret. If the secret does not exist, this call returns an empty set of permissions, not a NOT_FOUND error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
       operationId: secretmanager.projects.secrets.testIamPermissions
       parameters:
-        - description: "REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field."
+        - description: "REQUIRED: The resource for which the policy detail is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
           name: resource
           required: true
@@ -1165,5 +1163,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

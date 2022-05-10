@@ -268,7 +268,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 8.29.1
+  version: 8.29.3
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -460,6 +460,7 @@ paths:
                 tax_inclusive: true,
                 bill_date: '2020-09-30',
                 due_date: '2020-10-30',
+                paid_date: '2020-10-30',
                 po_number: '90000117',
                 line_items: [
                   {
@@ -490,6 +491,9 @@ paths:
                 ],
                 terms: 'Net 30 days',
                 balance: 27500,
+                deposit: 0,
+                sub_total: 27500,
+                total_tax: 2500,
                 total: 27500,
                 tax_code: '1234',
                 notes: 'Some notes about this bill.',
@@ -694,6 +698,7 @@ paths:
                 tax_inclusive: true,
                 bill_date: '2020-09-30',
                 due_date: '2020-10-30',
+                paid_date: '2020-10-30',
                 po_number: '90000117',
                 line_items: [
                   {
@@ -724,6 +729,9 @@ paths:
                 ],
                 terms: 'Net 30 days',
                 balance: 27500,
+                deposit: 0,
+                sub_total: 27500,
+                total_tax: 2500,
                 total: 27500,
                 tax_code: '1234',
                 notes: 'Some notes about this bill.',
@@ -1324,6 +1332,7 @@ paths:
                 sold: true,
                 purchased: true,
                 tracked: true,
+                inventory_date: '2020-10-30',
                 type: 'inventory',
                 sales_details: {
                   unit_price: 27500.5,
@@ -1525,6 +1534,7 @@ paths:
                 sold: true,
                 purchased: true,
                 tracked: true,
+                inventory_date: '2020-10-30',
                 type: 'inventory',
                 sales_details: {
                   unit_price: 27500.5,
@@ -4164,6 +4174,12 @@ components:
           $ref: "#/components/schemas/Currency"
         currency_rate:
           $ref: "#/components/schemas/CurrencyRate"
+        deposit:
+          description: Amount of deposit made to this bill.
+          example: 0
+          nullable: true
+          title: Deposit
+          type: number
         downstream_id:
           $ref: "#/components/schemas/DownstreamId"
         due_date:
@@ -4184,6 +4200,13 @@ components:
           example: Some notes about this bill.
           nullable: true
           title: Notes
+          type: string
+        paid_date:
+          description: The paid date is the date on which a payment was sent to the supplier - YYYY-MM-DD.
+          example: 2020-10-30
+          format: date
+          nullable: true
+          title: Paid date
           type: string
         po_number:
           description: A PO Number uniquely identifies a purchase order and is generally defined by the buyer. The buyer will match the PO number in the invoice to the Purchase Order.
@@ -4208,6 +4231,12 @@ components:
           nullable: true
           title: Status
           type: string
+        sub_total:
+          description: Sub-total amount, normally before tax.
+          example: 27500
+          nullable: true
+          title: Sub-total amount
+          type: number
         supplier:
           $ref: "#/components/schemas/LinkedSupplier"
         tax_code:
@@ -4229,6 +4258,12 @@ components:
           example: 27500
           nullable: true
           title: Total amount
+          type: number
+        total_tax:
+          description: Total tax amount applied to this bill.
+          example: 2500
+          nullable: true
+          title: Total tax amount
           type: number
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
@@ -6636,6 +6671,13 @@ components:
           type: string
         income_account:
           $ref: "#/components/schemas/LinkedLedgerAccount"
+        inventory_date:
+          description: The date of opening balance if inventory item is tracked - YYYY-MM-DD.
+          example: 2020-10-30
+          format: date
+          nullable: true
+          title: Inventory date
+          type: string
         name:
           description: Item name
           example: Model Y

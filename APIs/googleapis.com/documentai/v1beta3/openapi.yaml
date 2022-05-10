@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://documentai.googleapis.com/$discovery/rest?version=v1beta3
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: documentai
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/document-ai/docs/
 tags:
@@ -1575,7 +1576,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageToken"
           type: array
         transforms:
-          description: Transformation matrices (both already applied and not) to the original document image to produce Page.image.
+          description: Transformation matrices that were applied to the original document image to produce Page.image.
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageMatrix"
           type: array
@@ -1757,9 +1758,6 @@ components:
     GoogleCloudDocumentaiV1beta1DocumentPageMatrix:
       description: Representation for transformation matrix, intended to be compatible and used with OpenCV format for image manipulation.
       properties:
-        applied:
-          description: Has the transformation already been applied to the current Document? Needed to disambiguate pre-processing transformations already applied vs transformations added at annotation time by HITL operators.
-          type: boolean
         cols:
           description: Number of columns in the matrix.
           format: int32
@@ -2410,7 +2408,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageToken"
           type: array
         transforms:
-          description: Transformation matrices (both already applied and not) to the original document image to produce Page.image.
+          description: Transformation matrices that were applied to the original document image to produce Page.image.
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageMatrix"
           type: array
@@ -2592,9 +2590,6 @@ components:
     GoogleCloudDocumentaiV1beta2DocumentPageMatrix:
       description: Representation for transformation matrix, intended to be compatible and used with OpenCV format for image manipulation.
       properties:
-        applied:
-          description: Has the transformation already been applied to the current Document? Needed to disambiguate pre-processing transformations already applied vs transformations added at annotation time by HITL operators.
-          type: boolean
         cols:
           description: Number of columns in the matrix.
           format: int32
@@ -3409,7 +3404,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DocumentPageToken"
           type: array
         transforms:
-          description: Transformation matrices (both already applied and not) to the original document image to produce Page.image.
+          description: Transformation matrices that were applied to the original document image to produce Page.image.
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DocumentPageMatrix"
           type: array
@@ -3591,9 +3586,6 @@ components:
     GoogleCloudDocumentaiV1beta3DocumentPageMatrix:
       description: Representation for transformation matrix, intended to be compatible and used with OpenCV format for image manipulation.
       properties:
-        applied:
-          description: Has the transformation already been applied to the current Document? Needed to disambiguate pre-processing transformations already applied vs transformations added at annotation time by HITL operators.
-          type: boolean
         cols:
           description: Number of columns in the matrix.
           format: int32
