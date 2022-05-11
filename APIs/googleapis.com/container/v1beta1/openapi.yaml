@@ -3073,6 +3073,13 @@ components:
         enabled:
           description: Enable Binary Authorization for this cluster. If enabled, all container images will be validated by Binary Authorization.
           type: boolean
+        evaluationMode:
+          description: Mode of operation for binauthz policy evaluation. Currently the only options are equivalent to enable/disable. If unspecified, defaults to DISABLED.
+          enum:
+            - EVALUATION_MODE_UNSPECIFIED
+            - DISABLED
+            - PROJECT_SINGLETON_POLICY_ENFORCE
+          type: string
       type: object
     CancelOperationRequest:
       description: CancelOperationRequest cancels a single operation.

@@ -2478,6 +2478,10 @@ components:
     GooglePrivacyDlpV2InfoTypeSummary:
       description: The infoType details for this column.
       properties:
+        estimatedPrevalence:
+          description: Approximate percentage of non-null rows that contained data detected by this infotype.
+          format: int32
+          type: integer
         infoType:
           $ref: "#/components/schemas/GooglePrivacyDlpV2InfoType"
           description: The infoType.
@@ -3111,6 +3115,10 @@ components:
     GooglePrivacyDlpV2OtherInfoTypeSummary:
       description: Infotype details for other infoTypes found within a column.
       properties:
+        estimatedPrevalence:
+          description: Approximate percentage of non-null rows that contained data detected by this infotype.
+          format: int32
+          type: integer
         infoType:
           $ref: "#/components/schemas/GooglePrivacyDlpV2InfoType"
           description: The other infoType.

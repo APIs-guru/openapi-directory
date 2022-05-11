@@ -7466,7 +7466,7 @@ components:
           description: Top-level administrative subdivision of the country. For example, a state like California ("CA") or a province like Quebec ("QC").
           type: string
         streetAddress:
-          description: Street-level part of the address.
+          description: Street-level part of the address. Use `\n` to add a second line.
           type: string
       type: object
     AccountAdsLink:
@@ -7496,7 +7496,7 @@ components:
       properties:
         address:
           $ref: "#/components/schemas/AccountAddress"
-          description: The address of the business.
+          description: The address of the business. Use `\n` to add a second address line.
         customerService:
           $ref: "#/components/schemas/AccountCustomerService"
           description: The customer service information of the business.
@@ -7845,6 +7845,9 @@ components:
           type: boolean
         paymentsManager:
           description: Whether user can manage payment settings.
+          type: boolean
+        reportingManager:
+          description: Whether user is a reporting manager.
           type: boolean
       type: object
     AccountYouTubeChannelLink:
@@ -8197,7 +8200,7 @@ components:
           description: Required. Postal code or ZIP (for example, "94043").
           type: string
         streetAddress:
-          description: Street-level part of the address.
+          description: Street-level part of the address. Use `\n` to add a second line.
           type: string
       type: object
     Amount:
@@ -10026,7 +10029,7 @@ components:
           description: Top-level administrative subdivision of the country. For example, a state like California ("CA") or a province like Quebec ("QC").
           type: string
         streetAddress:
-          description: Street-level part of the address.
+          description: Street-level part of the address. Use `\n` to add a second line.
           items:
             type: string
           type: array
@@ -14304,7 +14307,7 @@ components:
           description: Top-level administrative subdivision of the country. For example, a state like California ("CA") or a province like Quebec ("QC").
           type: string
         streetAddress:
-          description: Street-level part of the address.
+          description: Street-level part of the address. Use `\n` to add a second line.
           items:
             type: string
           type: array

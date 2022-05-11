@@ -823,6 +823,9 @@ components:
           $ref: "#/components/schemas/MaintenanceSchedule"
           description: Output only. Date and time of upcoming maintenance events which have been scheduled.
           readOnly: true
+        maintenanceVersion:
+          description: Optional. The self service update maintenance version. The version is date based such as "20210712_00_00".
+          type: string
         memorySizeGb:
           description: Required. Redis memory size in GiB.
           format: int32

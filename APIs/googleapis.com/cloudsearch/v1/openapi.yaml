@@ -2454,10 +2454,13 @@ components:
           type: array
       type: object
     CustomEmoji:
-      description: "Proto representation of a custom emoji. May be used in both APIs and in Spanner, but certain fields should be restricted to one or the other. See the per-field documentation for details. NEXT_TAG: 11"
+      description: "Proto representation of a custom emoji. May be used in both APIs and in Spanner, but certain fields should be restricted to one or the other. See the per-field documentation for details. NEXT_TAG: 13"
       properties:
         blobId:
           description: ID for the underlying image data in Blobstore. This field should *only* be present in Spanner or within the server, but should not be exposed in public APIs.
+          type: string
+        contentType:
+          description: Content type of the file used to upload the emoji. Used for takeout. Written to Spanner when the emoji is created.
           type: string
         createTimeMicros:
           description: Time when the Emoji was created, in microseconds. This field may be present in Spanner, within the server, or in public APIs.
@@ -2466,6 +2469,10 @@ components:
         creatorUserId:
           $ref: "#/components/schemas/UserId"
           description: This field should *never* be persisted to Spanner.
+        ephemeralUrl:
+          description: Output only. A short-lived URL clients can use for directly accessing a custom emoji image. This field is intended for API consumption, and should *never* be persisted to Spanner.
+          readOnly: true
+          type: string
         ownerCustomerId:
           $ref: "#/components/schemas/CustomerId"
           description: This field should *never* be persisted to Spanner.
@@ -2804,7 +2811,10 @@ components:
         joinedSpacesAffinityScore:
           format: double
           type: number
-        lastMessagePostedTimestampMicros:
+        lastMessagePostedTimestampSecs:
+          format: int64
+          type: string
+        lastReadTimestampSecs:
           format: int64
           type: string
         memberMetadataCount:
@@ -2825,7 +2835,7 @@ components:
         spaceAgeInDays:
           format: double
           type: number
-        spaceCreationTimestampMicros:
+        spaceCreationTimestampSecs:
           format: int64
           type: string
         topicalityScore:

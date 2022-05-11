@@ -3156,7 +3156,7 @@ components:
           $ref: "#/components/schemas/ApiConfigHandler"
           description: Serving configuration for Google Cloud Endpoints (https://cloud.google.com/appengine/docs/python/endpoints/).Only returned in GET requests if view=FULL is set.
         appEngineApis:
-          description: app_engine_apis allows second generation runtimes to access the App Engine APIs.
+          description: Allows App Engine second generation runtimes to access the legacy bundled services.
           type: boolean
         automaticScaling:
           $ref: "#/components/schemas/AutomaticScaling"
