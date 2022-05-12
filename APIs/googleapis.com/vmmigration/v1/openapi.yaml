@@ -1634,6 +1634,9 @@ components:
             - COMPUTE_ENGINE_DISK_TYPE_SSD
             - COMPUTE_ENGINE_DISK_TYPE_BALANCED
           type: string
+        hostname:
+          description: The hostname to assign to the VM.
+          type: string
         labels:
           additionalProperties:
             type: string
@@ -1711,6 +1714,9 @@ components:
             - COMPUTE_ENGINE_DISK_TYPE_STANDARD
             - COMPUTE_ENGINE_DISK_TYPE_SSD
             - COMPUTE_ENGINE_DISK_TYPE_BALANCED
+          type: string
+        hostname:
+          description: The hostname to assign to the VM.
           type: string
         labels:
           additionalProperties:

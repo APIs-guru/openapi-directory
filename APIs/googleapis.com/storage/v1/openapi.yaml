@@ -3478,8 +3478,18 @@ components:
                       matchesPattern:
                         description: 'A regular expression that satisfies the RE2 syntax. This condition is satisfied when the name of the object matches the RE2 pattern. Note: This feature is currently in the "Early Access" launch stage and is only available to a whitelisted set of users; that means that this feature may be changed in backward-incompatible ways and that it is not guaranteed to be released.'
                         type: string
+                      matchesPrefix:
+                        description: List of object name prefixes. This condition will be satisfied when at least one of the prefixes exactly matches the beginning of the object name.
+                        items:
+                          type: string
+                        type: array
                       matchesStorageClass:
                         description: Objects having any of the storage classes specified by this condition will be matched. Values include MULTI_REGIONAL, REGIONAL, NEARLINE, COLDLINE, ARCHIVE, STANDARD, and DURABLE_REDUCED_AVAILABILITY.
+                        items:
+                          type: string
+                        type: array
+                      matchesSuffix:
+                        description: List of object name suffixes. This condition will be satisfied when at least one of the suffixes exactly matches the end of the object name.
                         items:
                           type: string
                         type: array
