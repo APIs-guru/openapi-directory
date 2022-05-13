@@ -1743,7 +1743,7 @@ paths:
       description: Get the IAM Access Control policy currently in effect for the given Cloud Run service. This result does not include any inherited policies.
       operationId: run.projects.locations.services.getIamPolicy
       parameters:
-        - description: "REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field."
+        - description: "REQUIRED: The resource for which the policy is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
           name: resource
           required: true
@@ -1797,7 +1797,7 @@ paths:
       description: Sets the IAM Access control policy for the specified Service. Overwrites any existing policy.
       operationId: run.projects.locations.services.setIamPolicy
       parameters:
-        - description: "REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field."
+        - description: "REQUIRED: The resource for which the policy is being specified. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
           name: resource
           required: true
@@ -1839,7 +1839,7 @@ paths:
       description: Returns permissions that a caller has on the specified Project. There are no permissions required for making this API call.
       operationId: run.projects.locations.services.testIamPermissions
       parameters:
-        - description: "REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field."
+        - description: "REQUIRED: The resource for which the policy detail is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
           name: resource
           required: true
