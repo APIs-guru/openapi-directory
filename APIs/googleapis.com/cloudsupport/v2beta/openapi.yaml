@@ -774,7 +774,7 @@ components:
           description: The display name of the classification.
           type: string
         id:
-          description: The unique ID for a classification. Must be specified for case creation.
+          description: The unique ID for a classification. Must be specified for case creation. To retrieve valid classification IDs for case creation, use `caseClassifications.search`.
           type: string
       type: object
     CloseCaseRequest:

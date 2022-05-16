@@ -545,7 +545,7 @@ paths:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: gkehub.projects.locations.memberships.getIamPolicy
       parameters:
-        - description: "REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field."
+        - description: "REQUIRED: The resource for which the policy is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
           name: resource
           required: true
@@ -599,7 +599,7 @@ paths:
       description: Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
       operationId: gkehub.projects.locations.memberships.setIamPolicy
       parameters:
-        - description: "REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field."
+        - description: "REQUIRED: The resource for which the policy is being specified. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
           name: resource
           required: true
@@ -641,7 +641,7 @@ paths:
       description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
       operationId: gkehub.projects.locations.memberships.testIamPermissions
       parameters:
-        - description: "REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field."
+        - description: "REQUIRED: The resource for which the policy detail is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
           name: resource
           required: true
@@ -742,6 +742,61 @@ components:
       schema:
         type: string
   schemas:
+    AnthosVMMembershipSpec:
+      description: AnthosVMMembershipSpec contains the AnthosVM feature configuration for a membership/cluster.
+      properties:
+        subfeaturesSpec:
+          description: List of configurations of the Anthos For VM subfeatures that are to be enabled
+          items:
+            $ref: "#/components/schemas/AnthosVMSubFeatureSpec"
+          type: array
+      type: object
+    AnthosVMMembershipState:
+      description: AnthosVMFeatureState contains the state of the AnthosVM feature. It represents the actual state in the cluster, while the AnthosVMMembershipSpec represents the desired state.
+      properties:
+        localControllerState:
+          $ref: "#/components/schemas/LocalControllerState"
+          description: State of the local PE-controller inside the cluster
+        subfeatureState:
+          description: List of AnthosVM subfeature states
+          items:
+            $ref: "#/components/schemas/AnthosVMSubFeatureState"
+          type: array
+      type: object
+    AnthosVMSubFeatureSpec:
+      description: AnthosVMSubFeatureSpec contains the subfeature configuration for a membership/cluster.
+      properties:
+        enabled:
+          description: Indicates whether the subfeature should be enabled on the cluster or not. If set to true, the subfeature's control plane and resources will be installed in the cluster. If set to false, the oneof spec if present will be ignored and nothing will be installed in the cluster.
+          type: boolean
+        migrateSpec:
+          $ref: "#/components/schemas/MigrateSpec"
+          description: MigrateSpec repsents the configuration for Migrate subfeature.
+        serviceMeshSpec:
+          $ref: "#/components/schemas/ServiceMeshSpec"
+          description: ServiceMeshSpec repsents the configuration for Service Mesh subfeature.
+      type: object
+    AnthosVMSubFeatureState:
+      description: AnthosVMSubFeatureState contains the state of the AnthosVM subfeatures.
+      properties:
+        description:
+          description: Description represents human readable description of the subfeature state. If the deployment failed, this should also contain the reason for the failure.
+          type: string
+        installationState:
+          description: InstallationState represents the state of installation of the subfeature in the cluster.
+          enum:
+            - INSTALLATION_STATE_UNSPECIFIED
+            - INSTALLATION_STATE_NOT_INSTALLED
+            - INSTALLATION_STATE_INSTALLED
+            - INSTALLATION_STATE_FAILED
+          type: string
+        migrateState:
+          $ref: "#/components/schemas/MigrateState"
+          description: MigrateState represents the state of the Migrate subfeature.
+        serviceMeshState:
+          $ref: "#/components/schemas/ServiceMeshState"
+          description: ServiceMeshState represents the state of the Service Mesh subfeature.
+      type: object
     AppDevExperienceFeatureSpec:
       description: Spec for App Dev Experience Feature.
       properties: {}
@@ -1597,6 +1652,21 @@ components:
             $ref: "#/components/schemas/Operation"
           type: array
       type: object
+    LocalControllerState:
+      description: LocalControllerState contains the state of the local controller deployed in the cluster.
+      properties:
+        description:
+          description: Description represents the human readable description of the current state of the local PE controller
+          type: string
+        installationState:
+          description: InstallationState represents the state of deployment of the local PE controller in the cluster.
+          enum:
+            - INSTALLATION_STATE_UNSPECIFIED
+            - INSTALLATION_STATE_NOT_INSTALLED
+            - INSTALLATION_STATE_INSTALLED
+            - INSTALLATION_STATE_FAILED
+          type: string
+      type: object
     Location:
       description: A resource that represents Google Cloud Platform location.
       properties:
@@ -1700,6 +1770,9 @@ components:
     MembershipFeatureSpec:
       description: MembershipFeatureSpec contains configuration information for a single Membership.
       properties:
+        anthosvm:
+          $ref: "#/components/schemas/AnthosVMMembershipSpec"
+          description: AnthosVM spec.
         configmanagement:
           $ref: "#/components/schemas/ConfigManagementMembershipSpec"
           description: Config Management-specific spec.
@@ -1713,6 +1786,9 @@ components:
     MembershipFeatureState:
       description: MembershipFeatureState contains Feature status information for a single Membership.
       properties:
+        anthosvm:
+          $ref: "#/components/schemas/AnthosVMMembershipState"
+          description: AnthosVM state.
         appdevexperience:
           $ref: "#/components/schemas/AppDevExperienceFeatureState"
           description: Appdevexperience specific state.
@@ -1743,6 +1819,14 @@ components:
             - SERVICE_UPDATING
           readOnly: true
           type: string
+      type: object
+    MigrateSpec:
+      description: MigrateSpec contains the migrate subfeature configuration.
+      properties: {}
+      type: object
+    MigrateState:
+      description: MigrateState contains the state of Migrate subfeature
+      properties: {}
       type: object
     MultiCloudCluster:
       description: MultiCloudCluster contains information specific to GKE Multi-Cloud clusters.
@@ -1917,6 +2001,14 @@ components:
           $ref: "#/components/schemas/ServiceMeshControlPlaneManagement"
           description: Output only. Status of control plane management
           readOnly: true
+      type: object
+    ServiceMeshSpec:
+      description: ServiceMeshSpec contains the serviceMesh subfeature configuration.
+      properties: {}
+      type: object
+    ServiceMeshState:
+      description: ServiceMeshState contains the state of Service Mesh subfeature
+      properties: {}
       type: object
     ServiceMeshStatusDetails:
       description: Structured and human-readable details for a status.

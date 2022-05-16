@@ -13,15 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Composer API
   version: v1beta1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://composer.googleapis.com/$discovery/rest?version=v1beta1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: composer
 externalDocs:
@@ -594,13 +596,13 @@ components:
           type: object
       type: object
     CidrBlock:
-      description: CidrBlock contains an optional name and one CIDR block.
+      description: CIDR block with an optional name.
       properties:
         cidrBlock:
-          description: cidr_block must be specified in CIDR notation.
+          description: CIDR block that must be specified in CIDR notation.
           type: string
         displayName:
-          description: display_name is a field for users to identify CIDR blocks.
+          description: User-defined name that identifies the CIDR block.
           type: string
       type: object
     DatabaseConfig:
@@ -710,7 +712,7 @@ components:
           description: Optional. The maintenance window is the period when Cloud Composer components may undergo maintenance. It is defined so that maintenance is not executed during peak hours or critical time periods. The system will not be under maintenance for every occurrence of this window, but when maintenance is planned, it will be scheduled during the window. The maintenance window period must encompass at least 12 hours per week. This may be split into multiple chunks, each with a size of at least 4 hours. If this value is omitted, Cloud Composer components may be subject to maintenance at any time.
         masterAuthorizedNetworksConfig:
           $ref: "#/components/schemas/MasterAuthorizedNetworksConfig"
-          description: "Optional. The configuration options for GKE clusters master authorized networks. By default master authorized networks feature is: - in case of private environment: enabled with no external networks allowlisted. - in case of public environment: disabled."
+          description: "Optional. The configuration options for GKE cluster master authorized networks. By default master authorized networks feature is: - in case of private environment: enabled with no external networks allowlisted. - in case of public environment: disabled."
         nodeConfig:
           $ref: "#/components/schemas/NodeConfig"
           description: The configuration used for the Kubernetes Engine cluster.
@@ -846,12 +848,12 @@ components:
       description: Configuration options for the master authorized networks feature. Enabled master authorized networks will disallow all external traffic to access Kubernetes master through HTTPS except traffic from the given CIDR blocks, Google Compute Engine Public IPs and Google Prod IPs.
       properties:
         cidrBlocks:
-          description: cidr_blocks define up to 50 external networks that could access Kubernetes master through HTTPS.
+          description: Up to 50 external networks that could access Kubernetes master through HTTPS.
           items:
             $ref: "#/components/schemas/CidrBlock"
           type: array
         enabled:
-          description: Whether or not master authorized networks is enabled.
+          description: Whether or not master authorized networks feature is enabled.
           type: boolean
       type: object
     NodeConfig:
@@ -1177,3 +1179,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}
