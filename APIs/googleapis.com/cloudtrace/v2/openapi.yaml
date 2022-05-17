@@ -13,17 +13,20 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Trace API
   version: v2
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://cloudtrace.googleapis.com/$discovery/rest?version=v2
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: cloudtrace
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/trace
 tags:
@@ -325,7 +328,7 @@ components:
           type: integer
         displayName:
           $ref: "#/components/schemas/TruncatableString"
-          description: Required. A description of the span's operation (up to 128 bytes). Cloud Trace displays the description in the Cloud Console. For example, the display name can be a qualified method name or a file name and a line number where the operation is called. A best practice is to use the same display name within an application and at the same call point. This makes it easier to correlate spans in different traces.
+          description: Required. A description of the span's operation (up to 128 bytes). Cloud Trace displays the description in the Cloud console. For example, the display name can be a qualified method name or a file name and a line number where the operation is called. A best practice is to use the same display name within an application and at the same call point. This makes it easier to correlate spans in different traces.
         endTime:
           description: Required. The end time of the span. On the client side, this is the time kept by the local machine where the span execution ends. On the server side, this is the time when the server application handler stops running.
           format: google-datetime
@@ -500,3 +503,5 @@ components:
             https://www.googleapis.com/auth/trace.append: Write Trace data for a project or application
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

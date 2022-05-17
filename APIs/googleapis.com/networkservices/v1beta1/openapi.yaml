@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://networkservices.googleapis.com/$discovery/rest?version=v1beta1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: networkservices
 externalDocs:
@@ -356,7 +356,7 @@ paths:
       description: Lists Gateways in a given project and location.
       operationId: networkservices.projects.locations.gateways.list
       parameters:
-        - description: Required. The project and location from which the Gateways should be listed, specified in the format `projects/*/locations/global`.
+        - description: Required. The project and location from which the Gateways should be listed, specified in the format `projects/*/locations/*`.
           in: path
           name: parent
           required: true
@@ -402,7 +402,7 @@ paths:
       description: Creates a new Gateway in a given project and location.
       operationId: networkservices.projects.locations.gateways.create
       parameters:
-        - description: Required. The parent resource of the Gateway. Must be in the format `projects/*/locations/global`.
+        - description: Required. The parent resource of the Gateway. Must be in the format `projects/*/locations/*`.
           in: path
           name: parent
           required: true
@@ -1259,7 +1259,7 @@ components:
           description: Optional. Set of label tags associated with the Gateway resource.
           type: object
         name:
-          description: Required. Name of the Gateway resource. It matches pattern `projects/*/locations/global/gateways/`.
+          description: Required. Name of the Gateway resource. It matches pattern `projects/*/locations/*/gateways/`.
           type: string
         ports:
           description: Required. One or more ports that the Gateway must receive traffic on. The proxy binds to the ports specified. Gateway listen on 0.0.0.0 on the ports specified below.

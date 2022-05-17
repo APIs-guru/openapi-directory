@@ -376,6 +376,7 @@ paths:
         - sid
         - friendly_name
         - date_created
+      parent: /Trunks
       pathType: list
   "/v1/Trunks/{TrunkSid}/CredentialLists/{Sid}":
     delete:
@@ -448,6 +449,7 @@ paths:
         - sid
         - friendly_name
         - date_created
+      parent: /Trunks
       pathType: instance
   "/v1/Trunks/{TrunkSid}/IpAccessControlLists":
     description: List of IP addresses for accessing a trunk
@@ -555,6 +557,7 @@ paths:
         - sid
         - friendly_name
         - date_created
+      parent: /Trunks
       pathType: list
   "/v1/Trunks/{TrunkSid}/IpAccessControlLists/{Sid}":
     delete:
@@ -627,6 +630,7 @@ paths:
         - sid
         - friendly_name
         - date_created
+      parent: /Trunks
       pathType: instance
   "/v1/Trunks/{TrunkSid}/OriginationUrls":
     description: Network element entry points into your communications infrastructure
@@ -750,6 +754,7 @@ paths:
         - sip_url
         - priority
         - weight
+      parent: /Trunks
       pathType: list
   "/v1/Trunks/{TrunkSid}/OriginationUrls/{Sid}":
     delete:
@@ -880,6 +885,7 @@ paths:
         - sip_url
         - priority
         - weight
+      parent: /Trunks
       pathType: instance
   "/v1/Trunks/{TrunkSid}/PhoneNumbers":
     description: Phone numbers associated with trunks
@@ -987,6 +993,7 @@ paths:
         - sid
         - friendly_name
         - phone_number
+      parent: /Trunks
       pathType: list
   "/v1/Trunks/{TrunkSid}/PhoneNumbers/{Sid}":
     delete:
@@ -1059,6 +1066,7 @@ paths:
         - sid
         - friendly_name
         - phone_number
+      parent: /Trunks
       pathType: instance
   "/v1/Trunks/{TrunkSid}/Recording":
     description: Recording settings for a trunk
@@ -1138,6 +1146,7 @@ paths:
       defaultOutputProperties:
         - mode
         - trim
+      parent: /Trunks
       pathType: instance
 components:
   schemas:

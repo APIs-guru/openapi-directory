@@ -2260,6 +2260,10 @@ components:
     GoogleCloudDocumentaiV1ProcessRequest:
       description: Request message for the process document method.
       properties:
+        fieldMask:
+          description: Specifies which fields to include in ProcessResponse's document.
+          format: google-fieldmask
+          type: string
         inlineDocument:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1Document"
           description: An inline document proto.

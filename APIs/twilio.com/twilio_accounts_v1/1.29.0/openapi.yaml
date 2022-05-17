@@ -85,6 +85,14 @@ paths:
         - secondary_auth_token
         - date_created
       pathType: instance
+  /v1/Credentials:
+    description: "TODO: Resource-level docs"
+    servers:
+      - url: https://accounts.twilio.com
+    x-twilio:
+      className: credential
+      defaultOutputProperties: []
+      pathType: list
   /v1/Credentials/AWS:
     description: User provided AWS keys
     get:
@@ -178,6 +186,7 @@ paths:
         - sid
         - friendly_name
         - date_created
+      parent: /Credentials
       pathType: list
   "/v1/Credentials/AWS/{Sid}":
     delete:
@@ -266,6 +275,7 @@ paths:
         - sid
         - friendly_name
         - date_created
+      parent: /Credentials
       pathType: instance
   /v1/Credentials/PublicKeys:
     description: User provided public keys
@@ -360,6 +370,7 @@ paths:
         - sid
         - friendly_name
         - date_created
+      parent: /Credentials
       pathType: list
   "/v1/Credentials/PublicKeys/{Sid}":
     delete:
@@ -448,6 +459,7 @@ paths:
         - sid
         - friendly_name
         - date_created
+      parent: /Credentials
       pathType: instance
 components:
   schemas:

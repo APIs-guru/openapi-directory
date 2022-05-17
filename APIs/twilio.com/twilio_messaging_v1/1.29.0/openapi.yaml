@@ -402,6 +402,7 @@ paths:
         - brand_registration_sid
         - campaign_status
         - date_created
+      parent: /Services
       pathType: list
   "/v1/Services/{MessagingServiceSid}/Compliance/Usa2p/Usecases":
     description: Messaging Service Use Case resource. Fetch possible use cases for service. The Use Cases API returns an empty list if there is an issue with the customer's A2P brand registration. This Brand cannot register any campaign use cases. Customers are requested to contact support with their A2P brand information.
@@ -443,6 +444,7 @@ paths:
       className: us_app_to_person_usecase
       defaultOutputProperties:
         - us_app_to_person_usecases
+      parent: /Services
       pathType: list
   "/v1/Services/{MessagingServiceSid}/Compliance/Usa2p/{Sid}":
     delete:
@@ -516,6 +518,7 @@ paths:
         - brand_registration_sid
         - campaign_status
         - date_created
+      parent: /Services
       pathType: instance
   "/v1/Services/{ServiceSid}/AlphaSenders":
     description: A Messaging Service resource to add, fetch or remove an Alpha Sender ID from a Messaging Service.
@@ -619,6 +622,7 @@ paths:
       defaultOutputProperties:
         - sid
         - alpha_sender
+      parent: /Services
       pathType: list
   "/v1/Services/{ServiceSid}/AlphaSenders/{Sid}":
     delete:
@@ -684,6 +688,7 @@ paths:
       defaultOutputProperties:
         - sid
         - alpha_sender
+      parent: /Services
       pathType: instance
   "/v1/Services/{ServiceSid}/PhoneNumbers":
     description: A Messaging Service resource to add, fetch or remove phone numbers from a Messaging Service.
@@ -791,6 +796,7 @@ paths:
         - sid
         - phone_number
         - country_code
+      parent: /Services
       pathType: list
   "/v1/Services/{ServiceSid}/PhoneNumbers/{Sid}":
     delete:
@@ -857,6 +863,7 @@ paths:
         - sid
         - phone_number
         - country_code
+      parent: /Services
       pathType: instance
   "/v1/Services/{ServiceSid}/ShortCodes":
     description: A Messaging Service resource to add, fetch or remove short code numbers from a Messaging Service.
@@ -964,6 +971,7 @@ paths:
         - sid
         - short_code
         - country_code
+      parent: /Services
       pathType: list
   "/v1/Services/{ServiceSid}/ShortCodes/{Sid}":
     delete:
@@ -1030,6 +1038,7 @@ paths:
         - sid
         - short_code
         - country_code
+      parent: /Services
       pathType: instance
   "/v1/Services/{Sid}":
     delete:
@@ -1410,6 +1419,7 @@ paths:
         - date_updated
         - vetting_status
         - vetting_class
+      parent: /a2p/BrandRegistrations
       pathType: list
   "/v1/a2p/BrandRegistrations/{BrandSid}/Vettings/{BrandVettingSid}":
     description: A Messaging Service resource to add and get Brand Vettings.
@@ -1458,6 +1468,7 @@ paths:
         - date_updated
         - vetting_status
         - vetting_class
+      parent: /a2p/BrandRegistrations
       pathType: instance
   "/v1/a2p/BrandRegistrations/{Sid}":
     description: A Messaging Service resource to add and fetch Brand Registrations.

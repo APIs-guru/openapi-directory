@@ -405,6 +405,7 @@ paths:
         - sid
         - endpoint
         - identity
+      parent: /Services
       pathType: list
   "/v2/Services/{ServiceSid}/Bindings/{Sid}":
     delete:
@@ -477,6 +478,7 @@ paths:
         - sid
         - endpoint
         - identity
+      parent: /Services
       pathType: instance
   "/v2/Services/{ServiceSid}/Channels":
     description: "TODO: Resource-level docs"
@@ -620,6 +622,7 @@ paths:
         - sid
         - unique_name
         - friendly_name
+      parent: /Services
       pathType: list
   "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Invites":
     description: "TODO: Resource-level docs"
@@ -749,6 +752,7 @@ paths:
         - sid
         - identity
         - date_created
+      parent: /Services/{ServiceSid}/Channels
       pathType: list
   "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Invites/{Sid}":
     delete:
@@ -833,6 +837,7 @@ paths:
         - sid
         - identity
         - date_created
+      parent: /Services/{ServiceSid}/Channels
       pathType: instance
   "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Members":
     description: "TODO: Resource-level docs"
@@ -989,6 +994,7 @@ paths:
         - sid
         - identity
         - date_created
+      parent: /Services/{ServiceSid}/Channels
       pathType: list
   "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Members/{Sid}":
     delete:
@@ -1151,6 +1157,7 @@ paths:
         - sid
         - identity
         - date_created
+      parent: /Services/{ServiceSid}/Channels
       pathType: instance
   "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Messages":
     description: "TODO: Resource-level docs"
@@ -1305,6 +1312,7 @@ paths:
         - from
         - to
         - date_created
+      parent: /Services/{ServiceSid}/Channels
       pathType: list
   "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Messages/{Sid}":
     delete:
@@ -1472,6 +1480,7 @@ paths:
         - from
         - to
         - date_created
+      parent: /Services/{ServiceSid}/Channels
       pathType: instance
   "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Webhooks":
     description: "TODO: Resource-level docs"
@@ -1619,6 +1628,7 @@ paths:
       defaultOutputProperties:
         - sid
         - configuration
+      parent: /Services/{ServiceSid}/Channels
       pathType: list
   "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Webhooks/{Sid}":
     delete:
@@ -1776,6 +1786,7 @@ paths:
       defaultOutputProperties:
         - sid
         - configuration
+      parent: /Services/{ServiceSid}/Channels
       pathType: instance
   "/v2/Services/{ServiceSid}/Channels/{Sid}":
     delete:
@@ -1915,6 +1926,7 @@ paths:
         - sid
         - unique_name
         - friendly_name
+      parent: /Services
       pathType: instance
   "/v2/Services/{ServiceSid}/Roles":
     description: "TODO: Resource-level docs"
@@ -2032,6 +2044,7 @@ paths:
         - sid
         - friendly_name
         - type
+      parent: /Services
       pathType: list
   "/v2/Services/{ServiceSid}/Roles/{Sid}":
     delete:
@@ -2151,6 +2164,7 @@ paths:
         - sid
         - friendly_name
         - type
+      parent: /Services
       pathType: instance
   "/v2/Services/{ServiceSid}/Users":
     description: "TODO: Resource-level docs"
@@ -2276,6 +2290,7 @@ paths:
         - friendly_name
         - identity
         - date_created
+      parent: /Services
       pathType: list
   "/v2/Services/{ServiceSid}/Users/{Sid}":
     delete:
@@ -2400,6 +2415,7 @@ paths:
         - friendly_name
         - identity
         - date_created
+      parent: /Services
       pathType: instance
   "/v2/Services/{ServiceSid}/Users/{UserSid}/Bindings":
     description: "TODO: Resource-level docs"
@@ -2487,6 +2503,7 @@ paths:
         - endpoint
         - identity
         - binding_type
+      parent: /Services/{ServiceSid}/Users
       pathType: list
   "/v2/Services/{ServiceSid}/Users/{UserSid}/Bindings/{Sid}":
     delete:
@@ -2573,6 +2590,7 @@ paths:
         - endpoint
         - identity
         - binding_type
+      parent: /Services/{ServiceSid}/Users
       pathType: instance
   "/v2/Services/{ServiceSid}/Users/{UserSid}/Channels":
     description: "TODO: Resource-level docs"
@@ -2647,6 +2665,7 @@ paths:
       defaultOutputProperties:
         - channel_sid
         - status
+      parent: /Services/{ServiceSid}/Users
       pathType: list
   "/v2/Services/{ServiceSid}/Users/{UserSid}/Channels/{ChannelSid}":
     delete:
@@ -2782,6 +2801,7 @@ paths:
       defaultOutputProperties:
         - channel_sid
         - status
+      parent: /Services/{ServiceSid}/Users
       pathType: instance
   "/v2/Services/{Sid}":
     delete:

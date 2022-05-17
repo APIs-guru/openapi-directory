@@ -537,6 +537,7 @@ paths:
         - endpoint
         - binding_type
         - address
+      parent: /Services
       pathType: list
   "/v1/Services/{ServiceSid}/Bindings/{Sid}":
     delete:
@@ -611,6 +612,7 @@ paths:
         - endpoint
         - binding_type
         - address
+      parent: /Services
       pathType: instance
   "/v1/Services/{ServiceSid}/Notifications":
     description: "TODO: Resource-level docs"
@@ -710,6 +712,7 @@ paths:
         - sid
         - priority
         - title
+      parent: /Services
       pathType: list
   "/v1/Services/{Sid}":
     delete:

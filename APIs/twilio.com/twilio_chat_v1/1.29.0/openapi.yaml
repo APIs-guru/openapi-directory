@@ -459,6 +459,7 @@ paths:
         - sid
         - unique_name
         - friendly_name
+      parent: /Services
       pathType: list
   "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Invites":
     description: Pending invitations to users to become channel members
@@ -588,6 +589,7 @@ paths:
         - sid
         - identity
         - date_created
+      parent: /Services/{ServiceSid}/Channels
       pathType: list
   "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Invites/{Sid}":
     delete:
@@ -672,6 +674,7 @@ paths:
         - sid
         - identity
         - date_created
+      parent: /Services/{ServiceSid}/Channels
       pathType: instance
   "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Members":
     description: Users joined to specific channels
@@ -801,6 +804,7 @@ paths:
         - sid
         - identity
         - date_created
+      parent: /Services/{ServiceSid}/Channels
       pathType: list
   "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Members/{Sid}":
     delete:
@@ -941,6 +945,7 @@ paths:
         - sid
         - identity
         - date_created
+      parent: /Services/{ServiceSid}/Channels
       pathType: instance
   "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Messages":
     description: Individual chat messages
@@ -1078,6 +1083,7 @@ paths:
         - from
         - to
         - date_created
+      parent: /Services/{ServiceSid}/Channels
       pathType: list
   "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Messages/{Sid}":
     delete:
@@ -1224,6 +1230,7 @@ paths:
         - from
         - to
         - date_created
+      parent: /Services/{ServiceSid}/Channels
       pathType: instance
   "/v1/Services/{ServiceSid}/Channels/{Sid}":
     delete:
@@ -1336,6 +1343,7 @@ paths:
         - sid
         - unique_name
         - friendly_name
+      parent: /Services
       pathType: instance
   "/v1/Services/{ServiceSid}/Roles":
     description: Roles determining user or member permissions
@@ -1453,6 +1461,7 @@ paths:
         - sid
         - friendly_name
         - type
+      parent: /Services
       pathType: list
   "/v1/Services/{ServiceSid}/Roles/{Sid}":
     delete:
@@ -1572,6 +1581,7 @@ paths:
         - sid
         - friendly_name
         - type
+      parent: /Services
       pathType: instance
   "/v1/Services/{ServiceSid}/Users":
     description: Unique chat users within a chat service
@@ -1688,6 +1698,7 @@ paths:
         - sid
         - friendly_name
         - date_created
+      parent: /Services
       pathType: list
   "/v1/Services/{ServiceSid}/Users/{Sid}":
     delete:
@@ -1803,6 +1814,7 @@ paths:
         - sid
         - friendly_name
         - date_created
+      parent: /Services
       pathType: instance
   "/v1/Services/{ServiceSid}/Users/{UserSid}/Channels":
     description: "TODO: Resource-level docs"
@@ -1877,6 +1889,7 @@ paths:
       defaultOutputProperties:
         - channel_sid
         - status
+      parent: /Services/{ServiceSid}/Users
       pathType: list
   "/v1/Services/{Sid}":
     delete:

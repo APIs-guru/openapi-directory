@@ -787,6 +787,7 @@ paths:
         - packets_downloaded
         - start
         - end
+      parent: /Sims
       pathType: list
   "/v1/Sims/{SimSid}/UsageRecords":
     description: Usage information for SIMs
@@ -871,6 +872,7 @@ paths:
     x-twilio:
       defaultOutputProperties:
         - period
+      parent: /Sims
       pathType: list
   /v1/UsageRecords:
     description: Aggregated Usage information for all SIMs on an Account

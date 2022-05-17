@@ -217,6 +217,7 @@ paths:
         - sid
         - friendly_name
         - date_created
+      parent: /Services
       pathType: list
   "/v1/Services/{ServiceSid}/Assets/{AssetSid}/Versions":
     description: The content of an Asset.
@@ -293,6 +294,7 @@ paths:
         - path
         - visibility
         - date_created
+      parent: /Services/{ServiceSid}/Assets
       pathType: list
   "/v1/Services/{ServiceSid}/Assets/{AssetSid}/Versions/{Sid}":
     description: The content of an Asset.
@@ -344,6 +346,7 @@ paths:
         - path
         - visibility
         - date_created
+      parent: /Services/{ServiceSid}/Assets
       pathType: instance
   "/v1/Services/{ServiceSid}/Assets/{Sid}":
     delete:
@@ -452,6 +455,7 @@ paths:
         - sid
         - friendly_name
         - date_created
+      parent: /Services
       pathType: instance
   "/v1/Services/{ServiceSid}/Builds":
     description: A collection of Function Versions, Asset Versions, Dependencies, and a Runtime that form a deployable unit.
@@ -567,6 +571,7 @@ paths:
         - sid
         - status
         - date_created
+      parent: /Services
       pathType: list
   "/v1/Services/{ServiceSid}/Builds/{Sid}":
     delete:
@@ -633,6 +638,7 @@ paths:
         - sid
         - status
         - date_created
+      parent: /Services
       pathType: instance
   "/v1/Services/{ServiceSid}/Builds/{Sid}/Status":
     description: The status of a Build resource.
@@ -673,6 +679,7 @@ paths:
       defaultOutputProperties:
         - sid
         - status
+      parent: /Services/{ServiceSid}/Builds
       pathType: instance
   "/v1/Services/{ServiceSid}/Environments":
     description: Represents a deployed build of a given set of Functions and/or Assets at a specific URL.
@@ -775,6 +782,7 @@ paths:
         - unique_name
         - domain_name
         - build_sid
+      parent: /Services
       pathType: list
   "/v1/Services/{ServiceSid}/Environments/{EnvironmentSid}/Deployments":
     description: An association of a Build with an Environment so that the Build is published in the Environment.
@@ -892,6 +900,7 @@ paths:
         - sid
         - build_sid
         - date_created
+      parent: /Services/{ServiceSid}/Environments
       pathType: list
   "/v1/Services/{ServiceSid}/Environments/{EnvironmentSid}/Deployments/{Sid}":
     description: An association of a Build with an Environment so that the Build is published in the Environment.
@@ -941,6 +950,7 @@ paths:
         - sid
         - build_sid
         - date_created
+      parent: /Services/{ServiceSid}/Environments
       pathType: instance
   "/v1/Services/{ServiceSid}/Environments/{EnvironmentSid}/Logs":
     description: A record of an event that occurred related to a function invocation.
@@ -1032,6 +1042,7 @@ paths:
       - url: https://serverless.twilio.com
     x-twilio:
       defaultOutputProperties: []
+      parent: /Services/{ServiceSid}/Environments
       pathType: list
   "/v1/Services/{ServiceSid}/Environments/{EnvironmentSid}/Logs/{Sid}":
     description: A record of an event that occurred related to a function invocation.
@@ -1078,6 +1089,7 @@ paths:
       - url: https://serverless.twilio.com
     x-twilio:
       defaultOutputProperties: []
+      parent: /Services/{ServiceSid}/Environments
       pathType: instance
   "/v1/Services/{ServiceSid}/Environments/{EnvironmentSid}/Variables":
     description: A key and value pair that is specific to an Environment.
@@ -1198,6 +1210,7 @@ paths:
         - sid
         - key
         - date_created
+      parent: /Services/{ServiceSid}/Environments
       pathType: list
   "/v1/Services/{ServiceSid}/Environments/{EnvironmentSid}/Variables/{Sid}":
     delete:
@@ -1334,6 +1347,7 @@ paths:
         - sid
         - key
         - date_created
+      parent: /Services/{ServiceSid}/Environments
       pathType: instance
   "/v1/Services/{ServiceSid}/Environments/{Sid}":
     delete:
@@ -1401,6 +1415,7 @@ paths:
         - unique_name
         - domain_name
         - build_sid
+      parent: /Services
       pathType: instance
   "/v1/Services/{ServiceSid}/Functions":
     description: A wrapper that represents a Serverless JavaScript function and groups the different  and groups the different Versions of this code.
@@ -1499,6 +1514,7 @@ paths:
         - sid
         - friendly_name
         - date_created
+      parent: /Services
       pathType: list
   "/v1/Services/{ServiceSid}/Functions/{FunctionSid}/Versions":
     description: The content of a Function.
@@ -1575,6 +1591,7 @@ paths:
         - path
         - visibility
         - date_created
+      parent: /Services/{ServiceSid}/Functions
       pathType: list
   "/v1/Services/{ServiceSid}/Functions/{FunctionSid}/Versions/{Sid}":
     description: The content of a Function.
@@ -1626,6 +1643,7 @@ paths:
         - path
         - visibility
         - date_created
+      parent: /Services/{ServiceSid}/Functions
       pathType: instance
   "/v1/Services/{ServiceSid}/Functions/{FunctionSid}/Versions/{Sid}/Content":
     description: The code of a Function Version.
@@ -1675,6 +1693,7 @@ paths:
       defaultOutputProperties:
         - sid
         - content
+      parent: /Services/{ServiceSid}/Functions/{FunctionSid}/Versions
       pathType: instance
   "/v1/Services/{ServiceSid}/Functions/{Sid}":
     delete:
@@ -1783,6 +1802,7 @@ paths:
         - sid
         - friendly_name
         - date_created
+      parent: /Services
       pathType: instance
   "/v1/Services/{Sid}":
     delete:

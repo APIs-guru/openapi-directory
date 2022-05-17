@@ -197,6 +197,7 @@ paths:
         - contact_sid
         - status
         - date_created
+      parent: /Flows
       pathType: list
   "/v1/Flows/{FlowSid}/Engagements/{EngagementSid}/Context":
     description: "[DEPRECATED] JSON context for engagements"
@@ -239,6 +240,7 @@ paths:
       className: engagement_context
       defaultOutputProperties:
         - context
+      parent: /Flows/{FlowSid}/Engagements
       pathType: instance
   "/v1/Flows/{FlowSid}/Engagements/{EngagementSid}/Steps":
     description: Steps within a Studio flow
@@ -317,6 +319,7 @@ paths:
         - name
         - transitioned_from
         - transitioned_to
+      parent: /Flows/{FlowSid}/Engagements
       pathType: list
   "/v1/Flows/{FlowSid}/Engagements/{EngagementSid}/Steps/{Sid}":
     description: Steps within a Studio flow
@@ -370,6 +373,7 @@ paths:
         - name
         - transitioned_from
         - transitioned_to
+      parent: /Flows/{FlowSid}/Engagements
       pathType: instance
   "/v1/Flows/{FlowSid}/Engagements/{EngagementSid}/Steps/{StepSid}/Context":
     description: JSON context for individual steps
@@ -421,6 +425,7 @@ paths:
       className: step_context
       defaultOutputProperties:
         - context
+      parent: /Flows/{FlowSid}/Engagements/{EngagementSid}/Steps
       pathType: instance
   "/v1/Flows/{FlowSid}/Engagements/{Sid}":
     delete:
@@ -494,6 +499,7 @@ paths:
         - contact_sid
         - status
         - date_created
+      parent: /Flows
       pathType: instance
   "/v1/Flows/{FlowSid}/Executions":
     description: Executions of Studio flows
@@ -619,6 +625,7 @@ paths:
         - contact_sid
         - status
         - date_created
+      parent: /Flows
       pathType: list
   "/v1/Flows/{FlowSid}/Executions/{ExecutionSid}/Context":
     description: JSON context for executions
@@ -661,6 +668,7 @@ paths:
       className: execution_context
       defaultOutputProperties:
         - context
+      parent: /Flows/{FlowSid}/Executions
       pathType: instance
   "/v1/Flows/{FlowSid}/Executions/{ExecutionSid}/Steps":
     description: Individual steps within an execution
@@ -739,6 +747,7 @@ paths:
         - sid
         - name
         - date_created
+      parent: /Flows/{FlowSid}/Executions
       pathType: list
   "/v1/Flows/{FlowSid}/Executions/{ExecutionSid}/Steps/{Sid}":
     description: Individual steps within an execution
@@ -792,6 +801,7 @@ paths:
         - sid
         - name
         - date_created
+      parent: /Flows/{FlowSid}/Executions
       pathType: instance
   "/v1/Flows/{FlowSid}/Executions/{ExecutionSid}/Steps/{StepSid}/Context":
     description: JSON context for an individual step within an execution
@@ -843,6 +853,7 @@ paths:
       className: execution_step_context
       defaultOutputProperties:
         - context
+      parent: /Flows/{FlowSid}/Executions/{ExecutionSid}/Steps
       pathType: instance
   "/v1/Flows/{FlowSid}/Executions/{Sid}":
     delete:
@@ -964,6 +975,7 @@ paths:
         - contact_sid
         - status
         - date_created
+      parent: /Flows
       pathType: instance
   "/v1/Flows/{Sid}":
     delete:

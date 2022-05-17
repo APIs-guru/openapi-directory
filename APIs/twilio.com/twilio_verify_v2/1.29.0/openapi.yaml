@@ -485,6 +485,7 @@ paths:
         - token
         - ttl
         - date_created
+      parent: /Services
       pathType: list
   "/v2/Services/{ServiceSid}/AccessTokens/{Sid}":
     description: "TODO: Resource-level docs"
@@ -534,6 +535,7 @@ paths:
         - token
         - ttl
         - date_created
+      parent: /Services
       pathType: instance
   "/v2/Services/{ServiceSid}/Entities":
     description: "TODO: Resource-level docs"
@@ -638,6 +640,7 @@ paths:
         - sid
         - identity
         - date_created
+      parent: /Services
       pathType: list
   "/v2/Services/{ServiceSid}/Entities/{Identity}":
     delete:
@@ -704,6 +707,7 @@ paths:
         - sid
         - identity
         - date_created
+      parent: /Services
       pathType: instance
   "/v2/Services/{ServiceSid}/Entities/{Identity}/Challenges":
     description: "TODO: Resource-level docs"
@@ -866,6 +870,7 @@ paths:
         - status
         - responded_reason
         - date_created
+      parent: /Services/{ServiceSid}/Entities
       pathType: list
   "/v2/Services/{ServiceSid}/Entities/{Identity}/Challenges/{ChallengeSid}/Notifications":
     description: "TODO: Resource-level docs"
@@ -926,6 +931,7 @@ paths:
         - identity
         - challenge_sid
         - date_created
+      parent: /Services/{ServiceSid}/Entities/{Identity}/Challenges
       pathType: list
   "/v2/Services/{ServiceSid}/Entities/{Identity}/Challenges/{Sid}":
     description: "TODO: Resource-level docs"
@@ -1027,6 +1033,7 @@ paths:
         - status
         - responded_reason
         - date_created
+      parent: /Services/{ServiceSid}/Entities
       pathType: instance
   "/v2/Services/{ServiceSid}/Entities/{Identity}/Factors":
     description: "TODO: Resource-level docs"
@@ -1229,6 +1236,7 @@ paths:
         - friendly_name
         - status
         - factor_type
+      parent: /Services/{ServiceSid}/Entities
       pathType: list
   "/v2/Services/{ServiceSid}/Entities/{Identity}/Factors/{Sid}":
     delete:
@@ -1394,6 +1402,7 @@ paths:
         - friendly_name
         - status
         - factor_type
+      parent: /Services/{ServiceSid}/Entities
       pathType: instance
   "/v2/Services/{ServiceSid}/MessagingConfigurations":
     description: "TODO: Resource-level docs"
@@ -1508,6 +1517,7 @@ paths:
         - messaging_service_sid
         - date_created
         - date_updated
+      parent: /Services
       pathType: list
   "/v2/Services/{ServiceSid}/MessagingConfigurations/{Country}":
     delete:
@@ -1622,6 +1632,7 @@ paths:
         - messaging_service_sid
         - date_created
         - date_updated
+      parent: /Services
       pathType: instance
   "/v2/Services/{ServiceSid}/RateLimits":
     description: "TODO: Resource-level docs"
@@ -1733,6 +1744,7 @@ paths:
         - description
         - date_created
         - date_updated
+      parent: /Services
       pathType: list
   "/v2/Services/{ServiceSid}/RateLimits/{RateLimitSid}/Buckets":
     description: "TODO: Resource-level docs"
@@ -1864,6 +1876,7 @@ paths:
         - interval
         - date_created
         - date_updated
+      parent: /Services/{ServiceSid}/RateLimits
       pathType: list
   "/v2/Services/{ServiceSid}/RateLimits/{RateLimitSid}/Buckets/{Sid}":
     delete:
@@ -2014,6 +2027,7 @@ paths:
         - interval
         - date_created
         - date_updated
+      parent: /Services/{ServiceSid}/RateLimits
       pathType: instance
   "/v2/Services/{ServiceSid}/RateLimits/{Sid}":
     delete:
@@ -2133,6 +2147,7 @@ paths:
         - description
         - date_created
         - date_updated
+      parent: /Services
       pathType: instance
   "/v2/Services/{ServiceSid}/VerificationCheck":
     description: "TODO: Resource-level docs"
@@ -2197,6 +2212,7 @@ paths:
         - status
         - valid
         - date_created
+      parent: /Services
       pathType: list
   "/v2/Services/{ServiceSid}/Verifications":
     description: "TODO: Resource-level docs"
@@ -2287,6 +2303,7 @@ paths:
         - status
         - valid
         - date_created
+      parent: /Services
       pathType: list
   "/v2/Services/{ServiceSid}/Verifications/{Sid}":
     description: "TODO: Resource-level docs"
@@ -2375,6 +2392,7 @@ paths:
         - status
         - valid
         - date_created
+      parent: /Services
       pathType: instance
   "/v2/Services/{ServiceSid}/Webhooks":
     description: "TODO: Resource-level docs"
@@ -2506,6 +2524,7 @@ paths:
         - webhook_method
         - status
         - date_created
+      parent: /Services
       pathType: list
   "/v2/Services/{ServiceSid}/Webhooks/{Sid}":
     delete:
@@ -2646,6 +2665,7 @@ paths:
         - webhook_method
         - status
         - date_created
+      parent: /Services
       pathType: instance
   "/v2/Services/{Sid}":
     delete:

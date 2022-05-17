@@ -366,6 +366,7 @@ paths:
         - sid
         - friendly_name
         - date_created
+      parent: /Workspaces
       pathType: list
   "/v1/Workspaces/{WorkspaceSid}/Activities/{Sid}":
     delete:
@@ -481,6 +482,7 @@ paths:
         - sid
         - friendly_name
         - date_created
+      parent: /Workspaces
       pathType: instance
   "/v1/Workspaces/{WorkspaceSid}/CumulativeStatistics":
     description: "TODO: Resource-level docs"
@@ -544,6 +546,7 @@ paths:
         - end_time
         - avg_task_acceptance_time
         - tasks_completed
+      parent: /Workspaces
       pathType: instance
   "/v1/Workspaces/{WorkspaceSid}/Events":
     description: "TODO: Resource-level docs"
@@ -687,6 +690,7 @@ paths:
         - sid
         - description
         - event_date
+      parent: /Workspaces
       pathType: list
   "/v1/Workspaces/{WorkspaceSid}/Events/{Sid}":
     description: "TODO: Resource-level docs"
@@ -730,6 +734,7 @@ paths:
         - sid
         - description
         - event_date
+      parent: /Workspaces
       pathType: instance
   "/v1/Workspaces/{WorkspaceSid}/RealTimeStatistics":
     description: "TODO: Resource-level docs"
@@ -770,6 +775,7 @@ paths:
         - longest_task_waiting_age
         - longest_task_waiting_sid
         - total_tasks
+      parent: /Workspaces
       pathType: instance
   "/v1/Workspaces/{WorkspaceSid}/Statistics":
     description: "TODO: Resource-level docs"
@@ -830,6 +836,7 @@ paths:
       className: workspace_statistics
       defaultOutputProperties:
         - cumulative
+      parent: /Workspaces
       pathType: instance
   "/v1/Workspaces/{WorkspaceSid}/TaskChannels":
     description: Types of tasks
@@ -941,6 +948,7 @@ paths:
         - sid
         - friendly_name
         - date_created
+      parent: /Workspaces
       pathType: list
   "/v1/Workspaces/{WorkspaceSid}/TaskChannels/{Sid}":
     delete:
@@ -1050,6 +1058,7 @@ paths:
         - sid
         - friendly_name
         - date_created
+      parent: /Workspaces
       pathType: instance
   "/v1/Workspaces/{WorkspaceSid}/TaskQueues":
     description: "TODO: Resource-level docs"
@@ -1196,6 +1205,7 @@ paths:
         - sid
         - friendly_name
         - task_order
+      parent: /Workspaces
       pathType: list
   "/v1/Workspaces/{WorkspaceSid}/TaskQueues/Statistics":
     description: "TODO: Resource-level docs"
@@ -1295,6 +1305,7 @@ paths:
       className: task_queues_statistics
       defaultOutputProperties:
         - cumulative
+      parent: /Workspaces/{WorkspaceSid}/TaskQueues
       pathType: list
   "/v1/Workspaces/{WorkspaceSid}/TaskQueues/{Sid}":
     delete:
@@ -1434,6 +1445,7 @@ paths:
         - sid
         - friendly_name
         - task_order
+      parent: /Workspaces
       pathType: instance
   "/v1/Workspaces/{WorkspaceSid}/TaskQueues/{TaskQueueSid}/CumulativeStatistics":
     description: "TODO: Resource-level docs"
@@ -1506,6 +1518,7 @@ paths:
         - end_time
         - avg_task_acceptance_time
         - tasks_completed
+      parent: /Workspaces/{WorkspaceSid}/TaskQueues
       pathType: instance
   "/v1/Workspaces/{WorkspaceSid}/TaskQueues/{TaskQueueSid}/RealTimeStatistics":
     description: "TODO: Resource-level docs"
@@ -1555,6 +1568,7 @@ paths:
         - longest_task_waiting_age
         - longest_task_waiting_sid
         - total_tasks
+      parent: /Workspaces/{WorkspaceSid}/TaskQueues
       pathType: instance
   "/v1/Workspaces/{WorkspaceSid}/TaskQueues/{TaskQueueSid}/Statistics":
     description: "TODO: Resource-level docs"
@@ -1624,6 +1638,7 @@ paths:
       className: task_queue_statistics
       defaultOutputProperties:
         - cumulative
+      parent: /Workspaces/{WorkspaceSid}/TaskQueues
       pathType: instance
   "/v1/Workspaces/{WorkspaceSid}/Tasks":
     description: "TODO: Resource-level docs"
@@ -1796,6 +1811,7 @@ paths:
         - assignment_status
         - priority
         - reason
+      parent: /Workspaces
       pathType: list
   "/v1/Workspaces/{WorkspaceSid}/Tasks/{Sid}":
     delete:
@@ -1942,6 +1958,7 @@ paths:
         - assignment_status
         - priority
         - reason
+      parent: /Workspaces
       pathType: instance
   "/v1/Workspaces/{WorkspaceSid}/Tasks/{TaskSid}/Reservations":
     description: Tasks reserved for workers
@@ -2034,6 +2051,7 @@ paths:
         - reservation_status
         - worker_name
         - worker_sid
+      parent: /Workspaces/{WorkspaceSid}/Tasks
       pathType: list
   "/v1/Workspaces/{WorkspaceSid}/Tasks/{TaskSid}/Reservations/{Sid}":
     description: Tasks reserved for workers
@@ -2393,6 +2411,7 @@ paths:
         - reservation_status
         - worker_name
         - worker_sid
+      parent: /Workspaces/{WorkspaceSid}/Tasks
       pathType: instance
   "/v1/Workspaces/{WorkspaceSid}/Workers":
     description: "TODO: Resource-level docs"
@@ -2547,6 +2566,7 @@ paths:
         - sid
         - friendly_name
         - available
+      parent: /Workspaces
       pathType: list
   "/v1/Workspaces/{WorkspaceSid}/Workers/CumulativeStatistics":
     description: "TODO: Resource-level docs"
@@ -2607,6 +2627,7 @@ paths:
         - reservations_timed_out
         - reservations_canceled
         - reservations_rescinded
+      parent: /Workspaces/{WorkspaceSid}/Workers
       pathType: instance
   "/v1/Workspaces/{WorkspaceSid}/Workers/RealTimeStatistics":
     description: "TODO: Resource-level docs"
@@ -2645,6 +2666,7 @@ paths:
       className: workers_real_time_statistics
       defaultOutputProperties:
         - total_workers
+      parent: /Workspaces/{WorkspaceSid}/Workers
       pathType: instance
   "/v1/Workspaces/{WorkspaceSid}/Workers/Statistics":
     description: "TODO: Resource-level docs"
@@ -2718,6 +2740,7 @@ paths:
       className: workers_statistics
       defaultOutputProperties:
         - cumulative
+      parent: /Workspaces/{WorkspaceSid}/Workers
       pathType: instance
   "/v1/Workspaces/{WorkspaceSid}/Workers/{Sid}":
     delete:
@@ -2855,6 +2878,7 @@ paths:
         - sid
         - friendly_name
         - available
+      parent: /Workspaces
       pathType: instance
   "/v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Channels":
     description: "TODO: Resource-level docs"
@@ -2933,6 +2957,7 @@ paths:
         - sid
         - task_channel_sid
         - task_channel_unique_name
+      parent: /Workspaces/{WorkspaceSid}/Workers
       pathType: list
   "/v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Channels/{Sid}":
     description: "TODO: Resource-level docs"
@@ -3035,6 +3060,7 @@ paths:
         - sid
         - task_channel_sid
         - task_channel_unique_name
+      parent: /Workspaces/{WorkspaceSid}/Workers
       pathType: instance
   "/v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Reservations":
     description: Current and past reservations for a worker
@@ -3126,6 +3152,7 @@ paths:
         - sid
         - reservation_status
         - date_created
+      parent: /Workspaces/{WorkspaceSid}/Workers
       pathType: list
   "/v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Reservations/{Sid}":
     description: Current and past reservations for a worker
@@ -3474,6 +3501,7 @@ paths:
         - sid
         - reservation_status
         - date_created
+      parent: /Workspaces/{WorkspaceSid}/Workers
       pathType: instance
   "/v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Statistics":
     description: "TODO: Resource-level docs"
@@ -3538,6 +3566,7 @@ paths:
       className: worker_statistics
       defaultOutputProperties:
         - cumulative
+      parent: /Workspaces/{WorkspaceSid}/Workers
       pathType: instance
   "/v1/Workspaces/{WorkspaceSid}/Workflows":
     description: "TODO: Resource-level docs"
@@ -3662,6 +3691,7 @@ paths:
         - sid
         - friendly_name
         - document_content_type
+      parent: /Workspaces
       pathType: list
   "/v1/Workspaces/{WorkspaceSid}/Workflows/{Sid}":
     delete:
@@ -3794,6 +3824,7 @@ paths:
         - sid
         - friendly_name
         - document_content_type
+      parent: /Workspaces
       pathType: instance
   "/v1/Workspaces/{WorkspaceSid}/Workflows/{WorkflowSid}/CumulativeStatistics":
     description: "TODO: Resource-level docs"
@@ -3866,6 +3897,7 @@ paths:
         - end_time
         - avg_task_acceptance_time
         - tasks_completed
+      parent: /Workspaces/{WorkspaceSid}/Workflows
       pathType: instance
   "/v1/Workspaces/{WorkspaceSid}/Workflows/{WorkflowSid}/RealTimeStatistics":
     description: "TODO: Resource-level docs"
@@ -3915,6 +3947,7 @@ paths:
         - longest_task_waiting_age
         - longest_task_waiting_sid
         - total_tasks
+      parent: /Workspaces/{WorkspaceSid}/Workflows
       pathType: instance
   "/v1/Workspaces/{WorkspaceSid}/Workflows/{WorkflowSid}/Statistics":
     description: "TODO: Resource-level docs"
@@ -3984,6 +4017,7 @@ paths:
       className: workflow_statistics
       defaultOutputProperties:
         - cumulative
+      parent: /Workspaces/{WorkspaceSid}/Workflows
       pathType: instance
 components:
   schemas:

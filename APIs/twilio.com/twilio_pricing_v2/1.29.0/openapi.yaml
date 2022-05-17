@@ -152,6 +152,15 @@ paths:
         - inbound_call_price
         - price_unit
       pathType: instance
+  /v2/Voice:
+    description: Voice pricing
+    servers:
+      - url: https://pricing.twilio.com
+    x-twilio:
+      className: voice
+      defaultOutputProperties:
+        - name
+      pathType: instance
   /v2/Voice/Countries:
     description: Voice pricing by country
     get:
@@ -209,6 +218,7 @@ paths:
       defaultOutputProperties:
         - country
         - price_unit
+      parent: /Voice
       pathType: list
   "/v2/Voice/Countries/{IsoCountry}":
     description: Voice pricing by country
@@ -240,6 +250,7 @@ paths:
       defaultOutputProperties:
         - country
         - price_unit
+      parent: /Voice
       pathType: instance
   "/v2/Voice/Numbers/{DestinationNumber}":
     description: Voice pricing for a specific phone number
@@ -278,6 +289,7 @@ paths:
         - country
         - inbound_call_price
         - price_unit
+      parent: /Voice
       pathType: instance
 components:
   schemas:
