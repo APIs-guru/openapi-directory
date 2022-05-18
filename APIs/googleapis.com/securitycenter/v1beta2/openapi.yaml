@@ -1065,6 +1065,10 @@ components:
         name:
           description: "The resource name of the SecurityCenterSettings. Format: organizations/{organization}/securityCenterSettings Format: folders/{folder}/securityCenterSettings Format: projects/{project}/securityCenterSettings"
           type: string
+        onboardingTime:
+          description: Timestamp of when the customer organization was onboarded to SCC.
+          format: google-datetime
+          type: string
         orgServiceAccount:
           description: The organization level service account to be used for security center components.
           type: string

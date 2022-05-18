@@ -1552,7 +1552,7 @@ components:
           description: A plain-text description of the message's cards, used when the actual cards cannot be displayed (e.g. mobile notifications).
           type: string
         lastUpdateTime:
-          description: Output only. The time at which the message was last updated in Google Chat server. If the message was never updated, this field will be same as create_time.
+          description: Output only. The time at which the message was last updated. If the message was never updated, this field matches `create_time`.
           format: google-datetime
           readOnly: true
           type: string

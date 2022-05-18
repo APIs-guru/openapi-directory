@@ -6,7 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: Manages alerts on issues affecting your domain.
+  description: "Manages alerts on issues affecting your domain. Note: The current version of this API (v1beta1) is available to all Google Workspace customers. "
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -1166,6 +1166,19 @@ components:
           description: Name that uniquely identifies the detector.
           type: string
       type: object
+    PrimaryAdminChangedEvent:
+      description: Event occurred when primary admin changed in customer's account. The event are being received from insight forwarder
+      properties:
+        domain:
+          description: domain in which actioned occurred
+          type: string
+        previousAdminEmail:
+          description: Email of person who was the primary admin before the action
+          type: string
+        updatedAdminEmail:
+          description: Email of person who is the primary admin after the action
+          type: string
+      type: object
     ReportingRule:
       description: Alerts from Reporting Rules configured by Admin.
       properties:
@@ -1281,6 +1294,56 @@ components:
           description: Email of the user who caused the violation. Value could be empty if not applicable, for example, a violation found by drive continuous scan.
           type: string
       type: object
+    SSOProfileCreatedEvent:
+      description: Event occurred when SSO Profile created in customer's account. The event are being received from insight forwarder
+      properties:
+        inboundSsoProfileName:
+          description: sso profile name which got created
+          type: string
+      type: object
+    SSOProfileDeletedEvent:
+      description: Event occurred when SSO Profile deleted in customer's account. The event are being received from insight forwarder
+      properties:
+        inboundSsoProfileName:
+          description: sso profile name which got deleted
+          type: string
+      type: object
+    SSOProfileUpdatedEvent:
+      description: Event occurred when SSO Profile updated in customer's account. The event are being received from insight forwarder
+      properties:
+        inboundSsoProfileChanges:
+          description: changes made to sso profile
+          type: string
+        inboundSsoProfileName:
+          description: sso profile name which got updated
+          type: string
+      type: object
+    SensitiveAdminAction:
+      description: Alert that is triggered when Sensitive Admin Action occur in customer account.
+      properties:
+        actorEmail:
+          description: Email of person who performed the action
+          type: string
+        eventTime:
+          description: The time at which event occurred
+          format: google-datetime
+          type: string
+        primaryAdminChangedEvent:
+          $ref: "#/components/schemas/PrimaryAdminChangedEvent"
+          description: Event occurred when primary admin changed in customer's account
+        ssoProfileCreatedEvent:
+          $ref: "#/components/schemas/SSOProfileCreatedEvent"
+          description: Event occurred when SSO Profile created in customer's account
+        ssoProfileDeletedEvent:
+          $ref: "#/components/schemas/SSOProfileDeletedEvent"
+          description: Event occurred when SSO Profile deleted in customer's account
+        ssoProfileUpdatedEvent:
+          $ref: "#/components/schemas/SSOProfileUpdatedEvent"
+          description: Event occurred when SSO Profile updated in customer's account
+        superAdminPasswordResetEvent:
+          $ref: "#/components/schemas/SuperAdminPasswordResetEvent"
+          description: Event occurred when password was reset for super admin in customer's account
+      type: object
     Settings:
       description: Customer-level settings.
       properties:
@@ -1313,6 +1376,13 @@ components:
           type: array
         message:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
+          type: string
+      type: object
+    SuperAdminPasswordResetEvent:
+      description: Event occurred when password was reset for super admin in customer's account. The event are being received from insight forwarder
+      properties:
+        userEmail:
+          description: email of person whose password was reset
           type: string
       type: object
     SuspiciousActivity:

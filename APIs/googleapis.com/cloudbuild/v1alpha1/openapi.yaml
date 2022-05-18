@@ -796,21 +796,6 @@ components:
           description: "The resource name of the GitHubEnterprise to be created. Format: `projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}`."
           type: string
       type: object
-    CreateGitLabConfigOperationMetadata:
-      description: Metadata for `CreateGitLabConfig` operation.
-      properties:
-        completeTime:
-          description: Time the operation was completed.
-          format: google-datetime
-          type: string
-        createTime:
-          description: Time the operation was created.
-          format: google-datetime
-          type: string
-        gitlabConfig:
-          description: "The resource name of the GitLabConfig to be created. Format: `projects/{project}/locations/{location}/gitlabConfigs/{id}`."
-          type: string
-      type: object
     CreateWorkerPoolOperationMetadata:
       description: Metadata for the `CreateWorkerPool` operation.
       properties:
@@ -854,21 +839,6 @@ components:
           type: string
         githubEnterpriseConfig:
           description: "The resource name of the GitHubEnterprise to be deleted. Format: `projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}`."
-          type: string
-      type: object
-    DeleteGitLabConfigOperationMetadata:
-      description: Metadata for `DeleteGitLabConfig` operation.
-      properties:
-        completeTime:
-          description: Time the operation was completed.
-          format: google-datetime
-          type: string
-        createTime:
-          description: Time the operation was created.
-          format: google-datetime
-          type: string
-        gitlabConfig:
-          description: "The resource name of the GitLabConfig to be created. Format: `projects/{project}/locations/{location}/gitlabConfigs/{id}`."
           type: string
       type: object
     DeleteWorkerPoolOperationMetadata:
@@ -1443,21 +1413,6 @@ components:
           type: string
         githubEnterpriseConfig:
           description: "The resource name of the GitHubEnterprise to be updated. Format: `projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}`."
-          type: string
-      type: object
-    UpdateGitLabConfigOperationMetadata:
-      description: Metadata for `UpdateGitLabConfig` operation.
-      properties:
-        completeTime:
-          description: Time the operation was completed.
-          format: google-datetime
-          type: string
-        createTime:
-          description: Time the operation was created.
-          format: google-datetime
-          type: string
-        gitlabConfig:
-          description: "The resource name of the GitLabConfig to be created. Format: `projects/{project}/locations/{location}/gitlabConfigs/{id}`."
           type: string
       type: object
     UpdateWorkerPoolOperationMetadata:
