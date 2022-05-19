@@ -8,7 +8,7 @@ info:
     url: https://developer.nexmo.com/
   description: The Messages API consolidates and normalises exchanges across all messaging channels. It allows you to use a single API to interact with our various channels such as SMS, MMS, WhatsApp, Viber and Facebook Messenger
   title: Messages API
-  version: 1.1.0
+  version: 1.1.1
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/messages-olympus.yml
@@ -1002,12 +1002,9 @@ components:
                   example: verify
                   type: string
                 parameters:
-                  description: The parameters are an array of strings. The first value being {{1}} in the template.
-                  example:
-                    - Acme
-                    - "12345"
+                  description: The parameters are an array of objects, with the first object being used for {{1}} in the template, with the second being {{2}} etc.
                   items:
-                    type: string
+                    $ref: "#/components/schemas/TemplateParameters"
                   type: array
               required:
                 - name
@@ -1017,6 +1014,14 @@ components:
           title: Template
           type: object
           x-tab-id: Template
+    TemplateParameters:
+      description: List of parameters to populate the template
+      properties:
+        key:
+          description: key/value pair.You can find the full list of supported parameters on WhatsApp's [messages parameters documentation] (https://developers.facebook.com/docs/whatsapp/on-premises/reference/messages#message-templates).
+          example: value
+          type: string
+      type: object
     Text:
       allOf:
         - $ref: "#/components/schemas/baseMessageType"

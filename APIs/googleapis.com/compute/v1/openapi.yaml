@@ -40787,7 +40787,6 @@ components:
             - GENERAL_PURPOSE_N2D
             - GENERAL_PURPOSE_T2D
             - MEMORY_OPTIMIZED
-            - MEMORY_OPTIMIZED_M3
             - TYPE_UNSPECIFIED
           type: string
       type: object
@@ -44265,7 +44264,7 @@ components:
           type: string
         sourceType:
           default: RAW
-          description: The type of the image used to create this disk. The default and only valid value is RAW.
+          description: The type of the image used to create this disk. The default and only value is RAW
           enum:
             - RAW
           type: string
@@ -47268,13 +47267,6 @@ components:
             $ref: "#/components/schemas/LocationPolicyLocation"
           description: Location configurations mapped by location name. Currently only zone names are supported and must be represented as valid internal URLs, such as zones/us-central1-a.
           type: object
-        targetShape:
-          description: Strategy for distributing VMs across zones in a region.
-          enum:
-            - ANY
-            - ANY_SINGLE_ZONE
-            - BALANCED
-          type: string
       type: object
     LocationPolicyLocation:
       properties:

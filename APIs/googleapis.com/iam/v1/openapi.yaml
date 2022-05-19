@@ -588,7 +588,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Disable a ServiceAccountKey. A disabled service account key can be enabled through EnableServiceAccountKey.
+      description: Disable a ServiceAccountKey. A disabled service account key can be re-enabled with EnableServiceAccountKey.
       operationId: iam.projects.serviceAccounts.keys.disable
       parameters:
         - description: "Required. The resource name of the service account key in the following format: `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}/keys/{key}`. Using `-` as a wildcard for the `PROJECT_ID` will infer the project from the account. The `ACCOUNT` value can be the `email` address or the `unique_id` of the service account."
@@ -1558,7 +1558,7 @@ components:
           type: object
       type: object
     PatchServiceAccountRequest:
-      description: The request for PatchServiceAccount. You can patch only the `display_name` and `description` fields. You must use the `update_mask` field to specify which of these fields you want to patch. Only the fields specified in the request are guaranteed to be returned in the response. Other fields may be empty in the response.
+      description: The service account patch request. You can patch only the `display_name` and `description` fields. You must use the `update_mask` field to specify which of these fields you want to patch. Only the fields specified in the request are guaranteed to be returned in the response. Other fields may be empty in the response.
       properties:
         serviceAccount:
           $ref: "#/components/schemas/ServiceAccount"

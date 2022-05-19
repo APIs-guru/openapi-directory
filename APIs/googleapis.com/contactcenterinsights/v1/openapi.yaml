@@ -1051,7 +1051,7 @@ components:
           description: Map that contains metadata about the Article Suggestion and the document that it originates from.
           type: object
         queryRecord:
-          description: "Name of the query record. Format: projects/{project}/locations/{location}/queryRecords/{query_record}"
+          description: "The name of the answer record. Format: projects/{project}/locations/{location}/answerRecords/{answer_record}"
           type: string
         source:
           description: "The knowledge document that this answer was extracted from. Format: projects/{project}/knowledgeBases/{knowledge_base}/documents/{document}"
@@ -1651,7 +1651,7 @@ components:
           description: Map that contains metadata about the FAQ answer and the document that it originates from.
           type: object
         queryRecord:
-          description: "Name of the query record. Format: projects/{project}/locations/{location}/queryRecords/{query_record}."
+          description: "The name of the answer record. Format: projects/{project}/locations/{location}/answerRecords/{answer_record}"
           type: string
         question:
           description: The corresponding FAQ question.
@@ -2101,7 +2101,7 @@ components:
           description: Map that contains metadata about the Smart Compose suggestion and the document from which it originates.
           type: object
         queryRecord:
-          description: "Name of the query record. Format: projects/{project}/locations/{location}/queryRecords/{query_record}"
+          description: "The name of the answer record. Format: projects/{project}/locations/{location}/answerRecords/{answer_record}"
           type: string
         suggestion:
           description: The content of the suggestion.
@@ -2120,7 +2120,7 @@ components:
           description: Map that contains metadata about the Smart Reply and the document from which it originates.
           type: object
         queryRecord:
-          description: "Name of the query record. Format: projects/{project}/locations/{location}/queryRecords/{query_record}"
+          description: "The name of the answer record. Format: projects/{project}/locations/{location}/answerRecords/{answer_record}"
           type: string
         reply:
           description: The content of the reply.

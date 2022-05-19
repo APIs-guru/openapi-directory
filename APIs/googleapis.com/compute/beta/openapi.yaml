@@ -46627,7 +46627,6 @@ components:
             - GENERAL_PURPOSE_N2D
             - GENERAL_PURPOSE_T2D
             - MEMORY_OPTIMIZED
-            - MEMORY_OPTIMIZED_M3
             - TYPE_UNSPECIFIED
           type: string
       type: object
@@ -50208,7 +50207,7 @@ components:
           type: string
         sourceType:
           default: RAW
-          description: The type of the image used to create this disk. The default and only valid value is RAW.
+          description: The type of the image used to create this disk. The default and only value is RAW
           enum:
             - RAW
           type: string

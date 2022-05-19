@@ -3302,6 +3302,9 @@ components:
         privateClusterConfig:
           $ref: "#/components/schemas/PrivateClusterConfig"
           description: Configuration for private cluster.
+        protectConfig:
+          $ref: "#/components/schemas/ProtectConfig"
+          description: Enable/Disable Protect API features for the cluster.
         releaseChannel:
           $ref: "#/components/schemas/ReleaseChannel"
           description: Release channel configuration.
@@ -3507,6 +3510,9 @@ components:
             - PRIVATE_IPV6_GOOGLE_ACCESS_TO_GOOGLE
             - PRIVATE_IPV6_GOOGLE_ACCESS_BIDIRECTIONAL
           type: string
+        desiredProtectConfig:
+          $ref: "#/components/schemas/ProtectConfig"
+          description: Enable/Disable Protect API features for the cluster.
         desiredReleaseChannel:
           $ref: "#/components/schemas/ReleaseChannel"
           description: The desired release channel configuration.
@@ -3839,6 +3845,13 @@ components:
         createSubnetwork:
           description: Whether a new subnetwork will be created automatically for the cluster. This field is only applicable when `use_ip_aliases` is true.
           type: boolean
+        ipv6AccessType:
+          description: The ipv6 access type (internal or external) when create_subnetwork is true
+          enum:
+            - IPV6_ACCESS_TYPE_UNSPECIFIED
+            - INTERNAL
+            - EXTERNAL
+          type: string
         nodeIpv4Cidr:
           description: This field is deprecated, use node_ipv4_cidr_block.
           type: string
@@ -3853,6 +3866,13 @@ components:
           type: string
         servicesSecondaryRangeName:
           description: The name of the secondary range to be used as for the services CIDR block. The secondary range will be used for service ClusterIPs. This must be an existing secondary range associated with the cluster subnetwork. This field is only applicable with use_ip_aliases and create_subnetwork is false.
+          type: string
+        stackType:
+          description: IP stack type
+          enum:
+            - STACK_TYPE_UNSPECIFIED
+            - IPV4
+            - IPV4_IPV6
           type: string
         subnetworkName:
           description: A custom subnetwork name to be used if `create_subnetwork` is true. If this field is empty, then an automatic name will be chosen for the new subnetwork.
@@ -4729,6 +4749,13 @@ components:
           description: Whenever master is accessible globally or not.
           type: boolean
       type: object
+    ProtectConfig:
+      description: ProtectConfig defines the flags needed to enable/disable features for the Protect API.
+      properties:
+        workloadConfig:
+          $ref: "#/components/schemas/WorkloadConfig"
+          description: WorkloadConfig defines which actions are enabled for a cluster's workload configurations.
+      type: object
     PubSub:
       description: Pub/Sub specific notification config.
       properties:
@@ -5573,6 +5600,19 @@ components:
         enableCertificates:
           description: enable_certificates controls issuance of workload mTLS certificates. If set, the GKE Workload Identity Certificates controller and node agent will be deployed in the cluster, which can then be configured by creating a WorkloadCertificateConfig Custom Resource. Requires Workload Identity (workload_pool must be non-empty).
           type: boolean
+      type: object
+    WorkloadConfig:
+      description: WorkloadConfig defines the flags to enable or disable the workload configurations for the cluster.
+      properties:
+        auditMode:
+          description: Sets which mode of auditing should be used for the cluster's workloads.
+          enum:
+            - MODE_UNSPECIFIED
+            - DISABLED
+            - BASIC
+            - BASELINE
+            - RESTRICTED
+          type: string
       type: object
     WorkloadIdentityConfig:
       description: Configuration for the use of Kubernetes Service Accounts in GCP IAM policies.

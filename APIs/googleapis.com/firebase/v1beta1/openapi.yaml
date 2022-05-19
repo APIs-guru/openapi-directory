@@ -257,6 +257,48 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
+  "/v1beta1/{name}:remove":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Removes the specified WebApp from the project.
+      operationId: firebase.projects.webApps.remove
+      parameters:
+        - description: "Required. The resource name of the WebApp, in the format: projects/ PROJECT_IDENTIFIER/webApps/APP_ID Since an APP_ID is a unique identifier, the Unique Resource from Sub-Collection access pattern may be used here, in the format: projects/-/webApps/APP_ID Refer to the WebApp [name](../projects.webApps#WebApp.FIELDS.name) field for details about PROJECT_IDENTIFIER and APP_ID values."
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RemoveWebAppRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1beta1/{parent}/androidApps":
     get:
       description: Lists each AndroidApp associated with the specified FirebaseProject. The elements are returned in no particular order, but will be a consistent view of the Apps when additional requests are made with a `pageToken`.
@@ -1349,6 +1391,42 @@ components:
         analyticsPropertyId:
           description: "Optional. The ID of the Google Analytics property associated with the specified `FirebaseProject`. - If not set, then the Google Analytics property that is currently associated with the specified `FirebaseProject` is removed. - If set, and the specified `FirebaseProject` is currently associated with a *different* Google Analytics property, then the response is a `412 Precondition Failed` error. "
           type: string
+      type: object
+    RemoveAndroidAppRequest:
+      properties:
+        allowMissing:
+          description: If set to true, and the App is not found, the request will succeed but no action will be taken on the server.
+          type: boolean
+        etag:
+          description: Checksum provided in the AndroidApp entity, which if provided ensures the client has an up-to-date value before proceeding.
+          type: string
+        validateOnly:
+          description: If set to true, only validate the request and do not delete the app.
+          type: boolean
+      type: object
+    RemoveIosAppRequest:
+      properties:
+        allowMissing:
+          description: If set to true, and the App is not found, the request will succeed but no action will be taken on the server.
+          type: boolean
+        etag:
+          description: Checksum provided in the IosApp entity, which if provided ensures the client has an up-to-date value before proceeding.
+          type: string
+        validateOnly:
+          description: If set to true, only validate the request and do not delete the app.
+          type: boolean
+      type: object
+    RemoveWebAppRequest:
+      properties:
+        allowMissing:
+          description: If set to true, and the App is not found, the request will succeed but no action will be taken on the server.
+          type: boolean
+        etag:
+          description: Checksum provided in the WebApp entity, which if provided ensures the client has an up-to-date value before proceeding.
+          type: string
+        validateOnly:
+          description: If set to true, only validate the request and do not delete the app.
+          type: boolean
       type: object
     SearchFirebaseAppsResponse:
       properties:

@@ -2057,6 +2057,9 @@ components:
         content:
           description: String, regex or JSON content to match. Maximum 1024 bytes. An empty content string indicates no content matching is to be performed.
           type: string
+        jsonPathMatcher:
+          $ref: "#/components/schemas/JsonPathMatcher"
+          description: Matcher information for MATCHES_JSON_PATH and NOT_MATCHES_JSON_PATH
         matcher:
           description: The type of content matcher that will be applied to the server output, compared to the content string when the check is run.
           enum:
@@ -2065,6 +2068,8 @@ components:
             - NOT_CONTAINS_STRING
             - MATCHES_REGEX
             - NOT_MATCHES_REGEX
+            - MATCHES_JSON_PATH
+            - NOT_MATCHES_JSON_PATH
           type: string
       type: object
     CreateCollectdTimeSeriesRequest:
@@ -2501,6 +2506,20 @@ components:
           type: string
         meshUid:
           description: Identifier for the Istio mesh in which this canonical service is defined. Corresponds to the mesh_uid metric label in Istio metrics (https://cloud.google.com/monitoring/api/metrics_istio).
+          type: string
+      type: object
+    JsonPathMatcher:
+      description: Information needed to perform a JSONPath content match. Used for ContentMatcherOption::MATCHES_JSON_PATH and ContentMatcherOption::NOT_MATCHES_JSON_PATH.
+      properties:
+        jsonMatcher:
+          description: The type of JSONPath match that will be applied to the JSON output (ContentMatcher.content)
+          enum:
+            - JSON_PATH_MATCHER_OPTION_UNSPECIFIED
+            - EXACT_MATCH
+            - REGEX_MATCH
+          type: string
+        jsonPath:
+          description: JSONPath within the response output pointing to the expected ContentMatcher::content to match against.
           type: string
       type: object
     LabelDescriptor:

@@ -14,20 +14,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Container Analysis API
   version: v1beta1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://containeranalysis.googleapis.com/$discovery/rest?version=v1beta1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: containeranalysis
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/container-analysis/api/reference/rest/
 tags:
@@ -1006,16 +1003,18 @@ components:
           type: object
       type: object
     CVSS:
-      description: Common Vulnerability Scoring System. For details, see https://www.first.org/cvss/specification-document
+      description: "Common Vulnerability Scoring System. This message is compatible with CVSS v2 and v3. For CVSS v2 details, see https://www.first.org/cvss/v2/guide CVSS v2 calculator: https://nvd.nist.gov/vuln-metrics/cvss/v2-calculator For CVSS v3 details, see https://www.first.org/cvss/specification-document CVSS v3 calculator: https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator"
       properties:
         attackComplexity:
+          description: Defined in CVSS v3, CVSS v2
           enum:
             - ATTACK_COMPLEXITY_UNSPECIFIED
             - ATTACK_COMPLEXITY_LOW
             - ATTACK_COMPLEXITY_HIGH
+            - ATTACK_COMPLEXITY_MEDIUM
           type: string
         attackVector:
-          description: Base Metrics Represents the intrinsic characteristics of a vulnerability that are constant over time and across user environments.
+          description: Base Metrics Represents the intrinsic characteristics of a vulnerability that are constant over time and across user environments. Defined in CVSS v3, CVSS v2
           enum:
             - ATTACK_VECTOR_UNSPECIFIED
             - ATTACK_VECTOR_NETWORK
@@ -1024,6 +1023,7 @@ components:
             - ATTACK_VECTOR_PHYSICAL
           type: string
         authentication:
+          description: Defined in CVSS v2
           enum:
             - AUTHENTICATION_UNSPECIFIED
             - AUTHENTICATION_MULTIPLE
@@ -1031,22 +1031,28 @@ components:
             - AUTHENTICATION_NONE
           type: string
         availabilityImpact:
+          description: Defined in CVSS v3, CVSS v2
           enum:
             - IMPACT_UNSPECIFIED
             - IMPACT_HIGH
             - IMPACT_LOW
             - IMPACT_NONE
+            - IMPACT_PARTIAL
+            - IMPACT_COMPLETE
           type: string
         baseScore:
           description: The base score is a function of the base metric scores.
           format: float
           type: number
         confidentialityImpact:
+          description: Defined in CVSS v3, CVSS v2
           enum:
             - IMPACT_UNSPECIFIED
             - IMPACT_HIGH
             - IMPACT_LOW
             - IMPACT_NONE
+            - IMPACT_PARTIAL
+            - IMPACT_COMPLETE
           type: string
         exploitabilityScore:
           format: float
@@ -1055,13 +1061,17 @@ components:
           format: float
           type: number
         integrityImpact:
+          description: Defined in CVSS v3, CVSS v2
           enum:
             - IMPACT_UNSPECIFIED
             - IMPACT_HIGH
             - IMPACT_LOW
             - IMPACT_NONE
+            - IMPACT_PARTIAL
+            - IMPACT_COMPLETE
           type: string
         privilegesRequired:
+          description: Defined in CVSS v3
           enum:
             - PRIVILEGES_REQUIRED_UNSPECIFIED
             - PRIVILEGES_REQUIRED_NONE
@@ -1069,12 +1079,14 @@ components:
             - PRIVILEGES_REQUIRED_HIGH
           type: string
         scope:
+          description: Defined in CVSS v3
           enum:
             - SCOPE_UNSPECIFIED
             - SCOPE_UNCHANGED
             - SCOPE_CHANGED
           type: string
         userInteraction:
+          description: Defined in CVSS v3
           enum:
             - USER_INTERACTION_UNSPECIFIED
             - USER_INTERACTION_NONE
@@ -3439,5 +3451,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

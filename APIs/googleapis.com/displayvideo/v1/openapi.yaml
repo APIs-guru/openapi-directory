@@ -8581,7 +8581,7 @@ components:
       description: Wrapper message for a list of contact information defining Customer Match audience members.
       properties:
         contactInfos:
-          description: A list of ContactInfo objects defining Customer Match audience members. The size of contact_infos mustn't be greater than 500,000.
+          description: A list of ContactInfo objects defining Customer Match audience members. The size of members after splitting the contact_infos mustn't be greater than 500,000.
           items:
             $ref: "#/components/schemas/ContactInfo"
           type: array
@@ -8881,6 +8881,7 @@ components:
             - SDF_VERSION_5_2
             - SDF_VERSION_5_3
             - SDF_VERSION_5_4
+            - SDF_VERSION_5_5
           type: string
       type: object
     Creative:
@@ -9193,6 +9194,12 @@ components:
             - ENTITY_STATUS_PAUSED
             - ENTITY_STATUS_SCHEDULED_FOR_DELETION
           type: string
+        modelReadiness:
+          description: Output only. The custom bidding model readiness state for each advertiser who have access. This field may only include the state of the queried advertiser if the algorithm [`owner`](/display-video/api/reference/rest/v1/customBiddingAlgorithms#CustomBiddingAlgorithm.FIELDS.oneof_owner) is a partner and is being retrieved using an advertiser [`accessor`](/display-video/api/reference/rest/v1/customBiddingAlgorithms/list#body.QUERY_PARAMETERS.oneof_accessor).
+          items:
+            $ref: "#/components/schemas/CustomBiddingModelReadinessState"
+          readOnly: true
+          type: array
         name:
           description: Output only. The resource name of the custom bidding algorithm.
           readOnly: true
@@ -9207,6 +9214,23 @@ components:
             format: int64
             type: string
           type: array
+      type: object
+    CustomBiddingModelReadinessState:
+      description: The custom bidding algorithm model readiness state for a single shared advertiser.
+      properties:
+        advertiserId:
+          description: The unique ID of the advertiser with access to the custom bidding algorithm.
+          format: int64
+          type: string
+        readinessState:
+          description: The readiness state of custom bidding model.
+          enum:
+            - READINESS_STATE_UNSPECIFIED
+            - READINESS_STATE_ACTIVE
+            - READINESS_STATE_INSUFFICIENT_DATA
+            - READINESS_STATE_TRAINING
+            - READINESS_STATE_NO_VALID_SCRIPT
+          type: string
       type: object
     CustomBiddingScript:
       description: A single custom bidding script.
@@ -10251,7 +10275,7 @@ components:
           type: boolean
       type: object
     GenderAssignedTargetingOptionDetails:
-      description: Details for assigned gender targeting option. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARTGETING_TYPE_GENDER`.
+      description: Details for assigned gender targeting option. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_GENDER`.
       properties:
         gender:
           description: The gender of the audience. Output only in v1.
@@ -12086,7 +12110,7 @@ components:
           type: string
       type: object
     ParentalStatusAssignedTargetingOptionDetails:
-      description: Details for assigned parental status targeting option. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARTGETING_TYPE_PARENTAL_STATUS`.
+      description: Details for assigned parental status targeting option. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_PARENTAL_STATUS`.
       properties:
         parentalStatus:
           description: Output only. The parental status of the audience.
@@ -12602,6 +12626,7 @@ components:
             - SDF_VERSION_5_2
             - SDF_VERSION_5_3
             - SDF_VERSION_5_4
+            - SDF_VERSION_5_5
           type: string
       type: object
     SdfDownloadTask:
@@ -12635,6 +12660,7 @@ components:
             - SDF_VERSION_5_2
             - SDF_VERSION_5_3
             - SDF_VERSION_5_4
+            - SDF_VERSION_5_5
           type: string
       type: object
     SearchTargetingOptionsRequest:
