@@ -949,6 +949,9 @@ components:
         osImage:
           description: The OS image currently installed on the server.
           type: string
+        pod:
+          description: Immutable. Pod name. Pod is an independent part of infrastructure. Instance can be connected to the assets (networks, volumes) allocated in the same pod only.
+          type: string
         state:
           description: The state of the server.
           enum:
@@ -1747,6 +1750,9 @@ components:
         name:
           description: "Output only. The resource name of this `Volume`. Resource names are schemeless URIs that follow the conventions in https://cloud.google.com/apis/design/resource_names. Format: `projects/{project}/locations/{location}/volumes/{volume}`"
           readOnly: true
+          type: string
+        pod:
+          description: Immutable. Pod name.
           type: string
         remainingSpaceGib:
           description: The space remaining in the storage volume for new LUNs, in GiB, excluding space reserved for snapshots.

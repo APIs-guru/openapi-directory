@@ -2667,6 +2667,7 @@ components:
             - MYSQL_8_0_26
             - MYSQL_8_0_27
             - MYSQL_8_0_28
+            - MYSQL_8_0_29
             - POSTGRES_13
             - POSTGRES_14
             - SQLSERVER_2019_STANDARD
@@ -2782,6 +2783,7 @@ components:
             - MYSQL_8_0_26
             - MYSQL_8_0_27
             - MYSQL_8_0_28
+            - MYSQL_8_0_29
             - POSTGRES_13
             - POSTGRES_14
             - SQLSERVER_2019_STANDARD
@@ -3119,6 +3121,7 @@ components:
               - MYSQL_8_0_26
               - MYSQL_8_0_27
               - MYSQL_8_0_28
+              - MYSQL_8_0_29
               - POSTGRES_13
               - POSTGRES_14
               - SQLSERVER_2019_STANDARD
@@ -3610,6 +3613,7 @@ components:
             - CREATE_CLONE
             - RESCHEDULE_MAINTENANCE
             - START_EXTERNAL_SYNC
+            - LOG_CLEANUP
           type: string
         selfLink:
           description: The URI of this resource.
@@ -4013,7 +4017,7 @@ components:
           type: string
       type: object
     SqlScheduledMaintenance:
-      description: Any scheduled maintenancce for this instance.
+      description: Any scheduled maintenance for this instance.
       properties:
         canDefer:
           type: boolean
