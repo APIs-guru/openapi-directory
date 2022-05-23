@@ -4184,6 +4184,26 @@ components:
       additionalProperties: false
       properties:
         assets:
+          example:
+            current_assets:
+              accounts:
+                - id: "1"
+                  name: Accounts Receivable (A/R)
+                  value: 10000
+                - id: "2"
+                  name: Accounts Payable (A/P)
+                  value: 10000
+              total: 100000
+            fixed_assets:
+              accounts:
+                - id: "1"
+                  name: Accounts Receivable (A/R)
+                  value: 10000
+                - id: "2"
+                  name: Accounts Payable (A/P)
+                  value: 10000
+              total: 100000
+            total: 200000
           properties:
             current_assets:
               properties:
@@ -4258,6 +4278,12 @@ components:
         created_by:
           $ref: "#/components/schemas/CreatedBy"
         equity:
+          example:
+            items:
+              - id: "1"
+                name: Retained Earnings
+                value: 10000
+            total: 200000
           properties:
             items:
               items:
@@ -4266,7 +4292,7 @@ components:
                     $ref: "#/components/schemas/Id"
                   name:
                     description: The type of the equity
-                    example: Accounts Payable (A/P)
+                    example: Retained Earnings
                     title: Account Name
                     type: string
                   value:
@@ -4289,6 +4315,12 @@ components:
         id:
           $ref: "#/components/schemas/Id"
         liabilities:
+          example:
+            accounts:
+              - id: "1"
+                name: Accounts Payable (A/P)
+                value: 10000
+            total: 200000
           properties:
             accounts:
               items:

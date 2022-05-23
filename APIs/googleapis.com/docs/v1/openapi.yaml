@@ -1853,6 +1853,17 @@ components:
           readOnly: true
           type: string
       type: object
+    PinTableHeaderRowsRequest:
+      description: Updates the number of pinned table header rows in a table.
+      properties:
+        pinnedHeaderRowsCount:
+          description: The number of table rows to pin, where 0 implies that all rows are unpinned.
+          format: int32
+          type: integer
+        tableStartLocation:
+          $ref: "#/components/schemas/Location"
+          description: The location where the table starts in the document.
+      type: object
     PositionedObject:
       description: An object that is tethered to a Paragraph and positioned relative to the beginning of the paragraph. A PositionedObject contains an EmbeddedObject such as an image.
       properties:
@@ -2058,6 +2069,9 @@ components:
         mergeTableCells:
           $ref: "#/components/schemas/MergeTableCellsRequest"
           description: Merges cells in a table.
+        pinTableHeaderRows:
+          $ref: "#/components/schemas/PinTableHeaderRowsRequest"
+          description: Updates the number of pinned header rows in a table.
         replaceAllText:
           $ref: "#/components/schemas/ReplaceAllTextRequest"
           description: Replaces all instances of the specified text.
@@ -2758,6 +2772,12 @@ components:
         minRowHeight:
           $ref: "#/components/schemas/Dimension"
           description: The minimum height of the row. The row will be rendered in the Docs editor at a height equal to or greater than this value in order to show all the content in the row's cells.
+        preventOverflow:
+          description: Whether the row cannot overflow across page or column boundaries.
+          type: boolean
+        tableHeader:
+          description: Whether the row is a table header.
+          type: boolean
       type: object
     TableRowStyleSuggestionState:
       description: A mask that indicates which of the fields on the base TableRowStyle have been changed in this suggestion. For any field set to true, there is a new suggested value.

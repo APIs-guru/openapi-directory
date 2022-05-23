@@ -246,6 +246,21 @@ components:
           description: What kind of user agent is associated, e.g. operating system shells, embedded or stand-alone applications, etc.
           type: string
       type: object
+    Compliance:
+      description: Contains compliance information about a security standard indicating unmet recommendations.
+      properties:
+        ids:
+          description: e.g. A.12.4.1
+          items:
+            type: string
+          type: array
+        standard:
+          description: e.g. "cis", "pci", "owasp", etc.
+          type: string
+        version:
+          description: e.g. 1.1
+          type: string
+      type: object
     Connection:
       description: Contains information about the IP connection associated with the finding.
       properties:
@@ -273,6 +288,22 @@ components:
           description: Source port.
           format: int32
           type: integer
+      type: object
+    Contact:
+      description: Representa a single contact's email address
+      properties:
+        email:
+          description: An email address e.g. "person123@company.com"
+          type: string
+      type: object
+    ContactDetails:
+      description: The details pertaining to specific contacts
+      properties:
+        contacts:
+          description: A list of contacts
+          items:
+            $ref: "#/components/schemas/Contact"
+          type: array
       type: object
     Cve:
       description: "CVE stands for Common Vulnerabilities and Exposures. More information: https://cve.mitre.org"
@@ -366,6 +397,66 @@ components:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
       type: object
+    EnvironmentVariable:
+      description: EnvironmentVariable is a name-value pair to store env variables for Process.
+      properties:
+        name:
+          description: Environment variable name as a JSON encoded string.
+          type: string
+        val:
+          description: Environment variable value as a JSON encoded string.
+          type: string
+      type: object
+    ExfilResource:
+      description: Resource that has been exfiltrated or exfiltrated_to.
+      properties:
+        components:
+          description: Subcomponents of the asset that is exfiltrated - these could be URIs used during exfiltration, table names, databases, filenames, etc. For example, multiple tables may be exfiltrated from the same CloudSQL instance, or multiple files from the same Cloud Storage bucket.
+          items:
+            type: string
+          type: array
+        name:
+          description: Resource’s URI (https://google.aip.dev/122#full-resource-names)
+          type: string
+      type: object
+    Exfiltration:
+      description: Exfiltration represents a data exfiltration attempt of one or more source(s) to one or more target(s). Source(s) represent the source of data that is exfiltrated, and Target(s) represents the destination the data was copied to.
+      properties:
+        sources:
+          description: If there are multiple sources, then the data is considered “joined” between them. For instance, BigQuery can join multiple tables, and each table would be considered a source.
+          items:
+            $ref: "#/components/schemas/ExfilResource"
+          type: array
+        targets:
+          description: If there are multiple targets, each target would get a complete copy of the “joined” source data.
+          items:
+            $ref: "#/components/schemas/ExfilResource"
+          type: array
+      type: object
+    File:
+      description: File information about the related binary/library used by an executable, or the script used by a script interpreter
+      properties:
+        contents:
+          description: Prefix of the file contents as a JSON encoded string. (Currently only populated for Malicious Script Executed findings.)
+          type: string
+        hashedSize:
+          description: The length in bytes of the file prefix that was hashed. If hashed_size == size, any hashes reported represent the entire file.
+          format: int64
+          type: string
+        partiallyHashed:
+          description: True when the hash covers only a prefix of the file.
+          type: boolean
+        path:
+          description: Absolute path of the file as a JSON encoded string.
+          type: string
+        sha256:
+          description: SHA256 hash of the first hashed_size bytes of the file encoded as a hex string. If hashed_size == size, hash_sha256 represents the SHA256 hash of the entire file.
+          type: string
+        size:
+          description: Size of the file in bytes.
+          format: int64
+          type: string
+      type: object
     Finding:
       description: Security Command Center finding. A finding is a record of assessment data like security, risk, health, or privacy, that is ingested into Security Command Center for presentation, notification, analysis, policy testing, and enforcement. For example, a cross-site scripting (XSS) vulnerability in an App Engine application is a finding.
       properties:
@@ -378,11 +469,22 @@ components:
         category:
           description: 'The additional taxonomy group within findings from a given source. This field is immutable after creation time. Example: "XSS_FLASH_INJECTION"'
           type: string
+        compliances:
+          description: Contains compliance information for security standards associated to the finding.
+          items:
+            $ref: "#/components/schemas/Compliance"
+          type: array
         connections:
           description: Contains information about the IP connection associated with the finding.
           items:
             $ref: "#/components/schemas/Connection"
           type: array
+        contacts:
+          additionalProperties:
+            $ref: "#/components/schemas/ContactDetails"
+          description: "Output only. Map containing the point of contacts for the given finding. The key represents the type of contact, while the value contains a list of all the contacts that pertain. Please refer to: https://cloud.google.com/resource-manager/docs/managing-notification-contacts#notification-categories { “security”: {contact: {email: “person1@company.com”} contact: {email: “person2@company.com”} }"
+          readOnly: true
+          type: object
         createTime:
           description: The time at which the finding was created in Security Command Center.
           format: google-datetime
@@ -394,6 +496,9 @@ components:
           description: The time the finding was first detected. If an existing finding is updated, then this is the time the update occurred. For example, if the finding represents an open firewall, this property captures the time the detector believes the firewall became open. The accuracy is determined by the detector. If the finding is later resolved, then this time reflects when the finding was resolved. This must not be set to a value greater than the current timestamp.
           format: google-datetime
           type: string
+        exfiltration:
+          $ref: "#/components/schemas/Exfiltration"
+          description: Represents exfiltrations associated with the Finding.
         externalSystems:
           additionalProperties:
             $ref: "#/components/schemas/GoogleCloudSecuritycenterV1ExternalSystem"
@@ -449,6 +554,11 @@ components:
         parent:
           description: 'The relative resource name of the source the finding belongs to. See: https://cloud.google.com/apis/design/resource_names#relative_resource_name This field is immutable after creation time. For example: "organizations/{organization_id}/sources/{source_id}"'
           type: string
+        processes:
+          description: Represents operating system processes associated with the Finding.
+          items:
+            $ref: "#/components/schemas/Process"
+          type: array
         resourceName:
           description: "For findings on Google Cloud resources, the full resource name of the Google Cloud resource this finding is for. See: https://cloud.google.com/apis/design/resource_names#full_resource_name When the finding is for a non-Google Cloud resource, the resourceName can be a customer or partner defined string. This field is immutable after creation time."
           type: string
@@ -984,6 +1094,45 @@ components:
             description: Properties of the object. Contains field @type with type URL.
           description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
+      type: object
+    Process:
+      description: Represents an operating system process.
+      properties:
+        args:
+          description: Process arguments as JSON encoded strings.
+          items:
+            type: string
+          type: array
+        argumentsTruncated:
+          description: True if arguments is incomplete.
+          type: boolean
+        binary:
+          $ref: "#/components/schemas/File"
+          description: File information for the process executable.
+        envVariables:
+          description: Process environment variables.
+          items:
+            $ref: "#/components/schemas/EnvironmentVariable"
+          type: array
+        envVariablesTruncated:
+          description: True if env_variables is incomplete.
+          type: boolean
+        libraries:
+          description: File information for libraries loaded by the process.
+          items:
+            $ref: "#/components/schemas/File"
+          type: array
+        parentPid:
+          description: The parent process id.
+          format: int64
+          type: string
+        pid:
+          description: The process id.
+          format: int64
+          type: string
+        script:
+          $ref: "#/components/schemas/File"
+          description: When the process represents the invocation of a script, binary provides information about the interpreter while script provides information about the script file provided to the interpreter.
       type: object
     Reference:
       description: Additional Links

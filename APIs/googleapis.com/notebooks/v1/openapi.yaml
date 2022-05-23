@@ -95,6 +95,45 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Update Notebook Runtime configuration.
+      operationId: notebooks.projects.locations.runtimes.patch
+      parameters:
+        - description: "Output only. The resource name of the runtime. Format: `projects/{project}/locations/{location}/runtimes/{runtimeId}`"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Idempotent request UUID.
+          in: query
+          name: requestId
+          schema:
+            type: string
+        - description: "Required. Specifies the path, relative to `Runtime`, of the field to update. For example, to change the software configuration kernels, the `update_mask` parameter would be specified as `software_config.kernels`, and the `PATCH` request body would specify the new value, as follows: { \"software_config\":{ \"kernels\": [{ 'repository': 'gcr.io/deeplearning-platform-release/pytorch-gpu', 'tag': 'latest' }], } } Currently, only the following fields can be updated: - software_config.kernels - software_config.post_startup_script - software_config.custom_gpu_driver_path - software_config.idle_shutdown - software_config.idle_shutdown_timeout"
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Runtime"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{name}/locations":
     get:
       description: Lists information about the supported locations for this service.
@@ -1517,7 +1556,7 @@ paths:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: notebooks.projects.locations.runtimes.getIamPolicy
       parameters:
-        - description: "REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field."
+        - description: "REQUIRED: The resource for which the policy is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
           name: resource
           required: true
@@ -1571,7 +1610,7 @@ paths:
       description: Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
       operationId: notebooks.projects.locations.runtimes.setIamPolicy
       parameters:
-        - description: "REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field."
+        - description: "REQUIRED: The resource for which the policy is being specified. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
           name: resource
           required: true
@@ -1613,7 +1652,7 @@ paths:
       description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
       operationId: notebooks.projects.locations.runtimes.testIamPermissions
       parameters:
-        - description: "REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field."
+        - description: "REQUIRED: The resource for which the policy detail is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
           name: resource
           required: true
@@ -2762,6 +2801,13 @@ components:
         postStartupScript:
           description: Path to a Bash script that automatically runs after a notebook instance fully boots up. The path must be a URL or Cloud Storage path (`gs://path-to-file/file-name`).
           type: string
+        postStartupScriptBehavior:
+          description: Behavior for the post startup script.
+          enum:
+            - POST_STARTUP_SCRIPT_BEHAVIOR_UNSPECIFIED
+            - RUN_EVERY_START
+            - DOWNLOAD_AND_RUN_EVERY_START
+          type: string
         upgradeable:
           description: Output only. Bool indicating whether an newer image is available in an image family.
           readOnly: true
@@ -3186,7 +3232,7 @@ components:
           description: Use VM image name to find the image.
           type: string
         project:
-          description: "Required. The name of the Google Cloud project that this VM image belongs to. Format: `projects/{project_id}`"
+          description: "Required. The name of the Google Cloud project that this VM image belongs to. Format: `{project_id}`"
           type: string
       type: object
   securitySchemes:
