@@ -268,7 +268,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 8.29.5
+  version: 8.30.1
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1018,16 +1018,19 @@ paths:
                 },
                 tax_number: 'US123945459',
                 currency: 'USD',
-                bank_accounts: {
-                  iban: 'CH2989144532982975332',
-                  bic: 'AUDSCHGGXXX',
-                  bsb_number: '062-001',
-                  bank_code: 'BNH',
-                  account_number: '123456789',
-                  account_name: 'SPACEX LLC',
-                  account_type: 'credit_card',
-                  currency: 'USD'
-                },
+                bank_accounts: [
+                  {
+                    iban: 'CH2989144532982975332',
+                    bic: 'AUDSCHGGXXX',
+                    bsb_number: '062-001',
+                    branch_identifier: '001',
+                    bank_code: 'BNH',
+                    account_number: '123465',
+                    account_name: 'SPACEX LLC',
+                    account_type: 'credit_card',
+                    currency: 'USD'
+                  }
+                ],
                 status: 'active',
                 row_version: '1-12345'
               }
@@ -1257,16 +1260,19 @@ paths:
                 },
                 tax_number: 'US123945459',
                 currency: 'USD',
-                bank_accounts: {
-                  iban: 'CH2989144532982975332',
-                  bic: 'AUDSCHGGXXX',
-                  bsb_number: '062-001',
-                  bank_code: 'BNH',
-                  account_number: '123456789',
-                  account_name: 'SPACEX LLC',
-                  account_type: 'credit_card',
-                  currency: 'USD'
-                },
+                bank_accounts: [
+                  {
+                    iban: 'CH2989144532982975332',
+                    bic: 'AUDSCHGGXXX',
+                    bsb_number: '062-001',
+                    branch_identifier: '001',
+                    bank_code: 'BNH',
+                    account_number: '123465',
+                    account_name: 'SPACEX LLC',
+                    account_type: 'credit_card',
+                    currency: 'USD'
+                  }
+                ],
                 status: 'active',
                 row_version: '1-12345'
               }
@@ -2227,8 +2233,9 @@ paths:
                   iban: 'CH2989144532982975332',
                   bic: 'AUDSCHGGXXX',
                   bsb_number: '062-001',
+                  branch_identifier: '001',
                   bank_code: 'BNH',
-                  account_number: '123456789',
+                  account_number: '123465',
                   account_name: 'SPACEX LLC',
                   account_type: 'credit_card',
                   currency: 'USD'
@@ -2425,8 +2432,9 @@ paths:
                   iban: 'CH2989144532982975332',
                   bic: 'AUDSCHGGXXX',
                   bsb_number: '062-001',
+                  branch_identifier: '001',
                   bank_code: 'BNH',
-                  account_number: '123456789',
+                  account_number: '123465',
                   account_name: 'SPACEX LLC',
                   account_type: 'credit_card',
                   currency: 'USD'
@@ -2935,6 +2943,19 @@ paths:
                     type: 'primary'
                   }
                 ],
+                bank_accounts: [
+                  {
+                    iban: 'CH2989144532982975332',
+                    bic: 'AUDSCHGGXXX',
+                    bsb_number: '062-001',
+                    branch_identifier: '001',
+                    bank_code: 'BNH',
+                    account_number: '123465',
+                    account_name: 'SPACEX LLC',
+                    account_type: 'credit_card',
+                    currency: 'USD'
+                  }
+                ],
                 tax_rate: {
                   id: '123456'
                 },
@@ -3164,6 +3185,19 @@ paths:
                     id: '12345',
                     url: 'http://example.com',
                     type: 'primary'
+                  }
+                ],
+                bank_accounts: [
+                  {
+                    iban: 'CH2989144532982975332',
+                    bic: 'AUDSCHGGXXX',
+                    bsb_number: '062-001',
+                    branch_identifier: '001',
+                    bank_code: 'BNH',
+                    account_number: '123465',
+                    account_name: 'SPACEX LLC',
+                    account_type: 'credit_card',
+                    currency: 'USD'
                   }
                 ],
                 tax_rate: {
@@ -3884,7 +3918,9 @@ components:
             $ref: "#/components/schemas/Address"
           type: array
         bank_accounts:
-          $ref: "#/components/schemas/BankAccount"
+          items:
+            $ref: "#/components/schemas/BankAccount"
+          type: array
         company_name:
           $ref: "#/components/schemas/CompanyName"
         created_at:
@@ -4381,7 +4417,7 @@ components:
           type: string
         account_number:
           description: A bank account number is a number that is tied to your bank account. If you have several bank accounts, such as personal, joint, business (and so on), each account will have a different account number.
-          example: "123456789"
+          example: "123465"
           nullable: true
           title: Bank Account Number
           type: string
@@ -4404,6 +4440,12 @@ components:
         bic:
           example: AUDSCHGGXXX
           nullable: true
+          type: string
+        branch_identifier:
+          description: A branch identifier is a unique identifier for a branch of a bank or financial institution.
+          example: "001"
+          nullable: true
+          title: Branch Identifier
           type: string
         bsb_number:
           description: A BSB is a 6 digit numeric code used for identifying the branch of an Australian or New Zealand bank or financial institution.
@@ -7902,6 +7944,10 @@ components:
         addresses:
           items:
             $ref: "#/components/schemas/Address"
+          type: array
+        bank_accounts:
+          items:
+            $ref: "#/components/schemas/BankAccount"
           type: array
         company_name:
           $ref: "#/components/schemas/CompanyName"

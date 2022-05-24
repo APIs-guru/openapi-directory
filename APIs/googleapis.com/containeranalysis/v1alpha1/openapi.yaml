@@ -14,20 +14,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Container Analysis API
   version: v1alpha1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://containeranalysis.googleapis.com/$discovery/rest?version=v1alpha1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: containeranalysis
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/container-analysis/api/reference/rest/
 tags:
@@ -2375,6 +2372,91 @@ components:
           description: A server-assigned, globally unique identifier.
           type: string
       type: object
+    GoogleDevtoolsContaineranalysisV1alpha1SlsaProvenanceZeroTwoSlsaBuilder:
+      description: Identifies the entity that executed the recipe, which is trusted to have correctly performed the operation and populated this provenance.
+      properties:
+        id:
+          description: URI indicating the builder’s identity.
+          type: string
+      type: object
+    GoogleDevtoolsContaineranalysisV1alpha1SlsaProvenanceZeroTwoSlsaCompleteness:
+      description: Indicates that the builder claims certain fields in this message to be complete.
+      properties:
+        environment:
+          description: If true, the builder claims that invocation.environment is complete.
+          type: boolean
+        materials:
+          description: If true, the builder claims that materials is complete.
+          type: boolean
+        parameters:
+          description: If true, the builder claims that invocation.parameters is complete.
+          type: boolean
+      type: object
+    GoogleDevtoolsContaineranalysisV1alpha1SlsaProvenanceZeroTwoSlsaConfigSource:
+      description: Describes where the config file that kicked off the build came from. This is effectively a pointer to the source where buildConfig came from.
+      properties:
+        digest:
+          additionalProperties:
+            type: string
+          description: Collection of cryptographic digests for the contents of the artifact specified by invocation.configSource.uri.
+          type: object
+        entryPoint:
+          description: String identifying the entry point into the build.
+          type: string
+        uri:
+          description: URI indicating the identity of the source of the config.
+          type: string
+      type: object
+    GoogleDevtoolsContaineranalysisV1alpha1SlsaProvenanceZeroTwoSlsaInvocation:
+      description: Identifies the event that kicked off the build.
+      properties:
+        configSource:
+          $ref: "#/components/schemas/GoogleDevtoolsContaineranalysisV1alpha1SlsaProvenanceZeroTwoSlsaConfigSource"
+          description: Describes where the config file that kicked off the build came from.
+        environment:
+          additionalProperties:
+            description: Properties of the object.
+          description: Any other builder-controlled inputs necessary for correctly evaluating the build.
+          type: object
+        parameters:
+          additionalProperties:
+            description: Properties of the object.
+          description: Collection of all external inputs that influenced the build on top of invocation.configSource.
+          type: object
+      type: object
+    GoogleDevtoolsContaineranalysisV1alpha1SlsaProvenanceZeroTwoSlsaMaterial:
+      description: The collection of artifacts that influenced the build including sources, dependencies, build tools, base images, and so on.
+      properties:
+        digest:
+          additionalProperties:
+            type: string
+          description: Collection of cryptographic digests for the contents of this artifact.
+          type: object
+        uri:
+          description: The method by which this artifact was referenced during the build.
+          type: string
+      type: object
+    GoogleDevtoolsContaineranalysisV1alpha1SlsaProvenanceZeroTwoSlsaMetadata:
+      description: Other properties of the build.
+      properties:
+        buildFinishedOn:
+          description: The timestamp of when the build completed.
+          format: google-datetime
+          type: string
+        buildInvocationId:
+          description: Identifies this particular build invocation, which can be useful for finding associated logs or other ad-hoc analysis.
+          type: string
+        buildStartedOn:
+          description: The timestamp of when the build started.
+          format: google-datetime
+          type: string
+        completeness:
+          $ref: "#/components/schemas/GoogleDevtoolsContaineranalysisV1alpha1SlsaProvenanceZeroTwoSlsaCompleteness"
+          description: Indicates that the builder claims certain fields in this message to be complete.
+        reproducible:
+          description: If true, the builder claims that running invocation on materials will produce bit-for-bit identical output.
+          type: boolean
+      type: object
     GoogleDevtoolsContaineranalysisV1alpha1SourceContext:
       description: A SourceContext is a reference to a tree of files. A SourceContext together with a path point to a unique revision of a single file or directory.
       properties:
@@ -2434,10 +2516,13 @@ components:
           type: string
         provenance:
           $ref: "#/components/schemas/InTotoProvenance"
-          description: provenance is a predicate of type intotoprovenance
+          description: Generic Grafeas provenance.
         slsaProvenance:
           $ref: "#/components/schemas/SlsaProvenance"
-          description: slsa_provenance is a predicate of type slsaProvenance
+          description: SLSA 0.1 provenance.
+        slsaProvenanceZeroTwo:
+          $ref: "#/components/schemas/SlsaProvenanceZeroTwo"
+          description: SLSA 0.2 provenance.
         subject:
           description: subject is the subjects of the intoto statement
           items:
@@ -3322,6 +3407,32 @@ components:
           $ref: "#/components/schemas/SlsaRecipe"
           description: Identifies the configuration used for the build. When combined with materials, this SHOULD fully describe the build, such that re-running this recipe results in bit-for-bit identical output (if the build is reproducible).
       type: object
+    SlsaProvenanceZeroTwo:
+      description: SlsaProvenanceZeroTwo is the slsa provenance as defined by the slsa spec. See full explanation of fields at slsa.dev/provenance/v0.2.
+      properties:
+        buildConfig:
+          additionalProperties:
+            description: Properties of the object.
+          description: Lists the steps in the build.
+          type: object
+        buildType:
+          description: URI indicating what type of build was performed.
+          type: string
+        builder:
+          $ref: "#/components/schemas/GoogleDevtoolsContaineranalysisV1alpha1SlsaProvenanceZeroTwoSlsaBuilder"
+          description: Identifies the entity that executed the recipe, which is trusted to have correctly performed the operation and populated this provenance.
+        invocation:
+          $ref: "#/components/schemas/GoogleDevtoolsContaineranalysisV1alpha1SlsaProvenanceZeroTwoSlsaInvocation"
+          description: Identifies the event that kicked off the build.
+        materials:
+          description: The collection of artifacts that influenced the build including sources, dependencies, build tools, base images, and so on.
+          items:
+            $ref: "#/components/schemas/GoogleDevtoolsContaineranalysisV1alpha1SlsaProvenanceZeroTwoSlsaMaterial"
+          type: array
+        metadata:
+          $ref: "#/components/schemas/GoogleDevtoolsContaineranalysisV1alpha1SlsaProvenanceZeroTwoSlsaMetadata"
+          description: Other properties of the build.
+      type: object
     SlsaRecipe:
       description: Steps taken to build the artifact. For a TaskRun, typically each container corresponds to one step in the recipe.
       properties:
@@ -3621,5 +3732,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

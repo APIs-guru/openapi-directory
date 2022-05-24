@@ -212,6 +212,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{name}:invalidate":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "Invalidates an existing ApprovalRequest. Returns the updated ApprovalRequest. NOTE: This does not deny access to the resource if another request has been made and approved. It only invalidates a single approval. Returns FAILED_PRECONDITION if the request exists but is not in an approved state."
+      operationId: accessapproval.projects.approvalRequests.invalidate
+      parameters:
+        - description: Name of the ApprovalRequest to invalidate.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InvalidateApprovalRequestMessage"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApprovalRequest"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{parent}/approvalRequests":
     get:
       description: Lists approval requests associated with a project, folder, or organization. Approval requests can be filtered by state (pending, active, dismissed). The order is reverse chronological.
@@ -463,6 +505,10 @@ components:
           description: The time at which the approval expires.
           format: google-datetime
           type: string
+        invalidateTime:
+          description: If set, denotes the timestamp at which the approval is invalidated.
+          format: google-datetime
+          type: string
         signatureInfo:
           $ref: "#/components/schemas/SignatureInfo"
           description: The signature for the ApprovalRequest and details on how it was signed.
@@ -498,6 +544,10 @@ components:
             - ENROLLMENT_LEVEL_UNSPECIFIED
             - BLOCK_ALL
           type: string
+      type: object
+    InvalidateApprovalRequestMessage:
+      description: Request to invalidate an existing approval.
+      properties: {}
       type: object
     ListApprovalRequestsResponse:
       description: Response to listing of ApprovalRequest objects.

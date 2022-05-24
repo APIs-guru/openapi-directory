@@ -13,17 +13,20 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Resource Manager API
   version: v3
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://cloudresourcemanager.googleapis.com/$discovery/rest?version=v3
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: cloudresourcemanager
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/resource-manager
 tags:
@@ -1898,6 +1901,17 @@ components:
         parent:
           description: Immutable. The resource name of the new TagKey's parent. Must be of the form `organizations/{org_id}`.
           type: string
+        purpose:
+          description: Optional. A purpose denotes that this Tag is intended for use in policies of a specific policy engine, and will involve that policy engine in management operations involving this Tag. A purpose does not grant a policy engine exclusive rights to the Tag, and it may be referenced by other policy engines. A purpose cannot be changed once set.
+          enum:
+            - PURPOSE_UNSPECIFIED
+            - GCE_FIREWALL
+          type: string
+        purposeData:
+          additionalProperties:
+            type: string
+          description: Optional. Purpose data corresponds to the policy system that the tag is intended for. See documentation for `Purpose` for formatting of this field. Purpose data cannot be changed once set.
+          type: object
         shortName:
           description: Required. Immutable. The user friendly name for a TagKey. The short name should be unique for TagKeys within the same tag namespace. The short name must be 1-63 characters, beginning and ending with an alphanumeric character ([a-z0-9A-Z]) with dashes (-), underscores (_), dots (.), and alphanumerics between.
           type: string
@@ -2014,3 +2028,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud services and see the email address of your Google Account
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}
