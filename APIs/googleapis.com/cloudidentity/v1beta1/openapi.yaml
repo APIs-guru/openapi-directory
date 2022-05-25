@@ -13,17 +13,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Identity API
   version: v1beta1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://cloudidentity.googleapis.com/$discovery/rest?version=v1beta1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: cloudidentity
 externalDocs:
@@ -1926,16 +1924,6 @@ components:
           format: google-datetime
           type: string
       type: object
-    FirstAdminInvitationInfo:
-      description: Message containing first admin invitation info for customers
-      properties:
-        isFirstAdmin:
-          description: Optional. To enable First Admin Invitation for Domained Customer
-          type: boolean
-        primaryDomain:
-          description: Optional. Domain information of first admin invited
-          type: string
-      type: object
     GetMembershipGraphResponse:
       description: The response message for MembershipsService.GetMembershipGraph.
       properties:
@@ -2835,10 +2823,7 @@ components:
       type: object
     SendUserInvitationRequest:
       description: A request to send email for inviting target user corresponding to the UserInvitation.
-      properties:
-        firstAdminInvitationInfo:
-          $ref: "#/components/schemas/FirstAdminInvitationInfo"
-          description: Optional. First admin invitation info for customers
+      properties: {}
       type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
@@ -2953,5 +2938,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

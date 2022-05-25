@@ -661,6 +661,66 @@ paths:
             }
       x-graphql-exclude: true
       x-sdk-exclude: true
+  "/webhook/webhooks/{id}/x/{serviceId}":
+    post:
+      description: Execute a webhook
+      operationId: webhooksShortExecute
+      parameters:
+        - $ref: "#/components/parameters/webhookToken"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/ExecuteWebhookEventRequest"
+                - $ref: "#/components/schemas/ExecuteWebhookEventsRequest"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/ExecuteWebhookResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Execute a webhook
+      tags:
+        - Webhooks
+      x-apideck-api: webhook
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY'
+            })
+
+            const params = {
+              id: 'id_example',
+              serviceId: 'serviceId_example',
+              webhooksShortExecute: {}
+            }
+
+            try {
+              const { data } = await apideck.webhook.webhooksShortExecute(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-exclude: true
+      x-sdk-exclude: true
 components:
   parameters:
     applicationId:

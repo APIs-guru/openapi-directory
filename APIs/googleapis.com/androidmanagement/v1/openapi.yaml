@@ -2181,6 +2181,13 @@ components:
             - USE_DEFAULT_DEVICE_TIMEOUT
             - REQUIRE_EVERY_DAY
           type: string
+        unifiedLockSettings:
+          description: Controls whether a unified lock is allowed for the device and the work profile, on devices running Android 9 and above with a work profile. This can be set only if password_scope is set to SCOPE_PROFILE, the policy will be rejected otherwise. If user has not set a separate work lock and this field is set to REQUIRE_SEPARATE_WORK_LOCK, a NonComplianceDetail is reported with nonComplianceReason set to USER_ACTION.
+          enum:
+            - UNIFIED_LOCK_SETTINGS_UNSPECIFIED
+            - ALLOW_UNIFIED_WORK_AND_PERSONAL_LOCK
+            - REQUIRE_SEPARATE_WORK_LOCK
+          type: string
       type: object
     PermissionGrant:
       description: Configuration for an Android permission and its grant state.
@@ -2500,7 +2507,7 @@ components:
           type: array
         passwordRequirements:
           $ref: "#/components/schemas/PasswordRequirements"
-          description: Password requirements. The field password_requirements.require_password_unlock must not be set. DEPRECATED - Use passwordPolicies.Note:Complexity-based values of PasswordQuality, that is, COMPLEXITY_LOW, COMPLEXITY_MEDIUM, and COMPLEXITY_HIGH, cannot be used here.
+          description: Password requirements. The field password_requirements.require_password_unlock must not be set. DEPRECATED - Use passwordPolicies.Note:Complexity-based values of PasswordQuality, that is, COMPLEXITY_LOW, COMPLEXITY_MEDIUM, and COMPLEXITY_HIGH, cannot be used here. unified_lock_settings cannot be used here.
         permissionGrants:
           description: Explicit permission or group grants or denials for all apps. These values override the default_permission_policy.
           items:

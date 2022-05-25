@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://ondemandscanning.googleapis.com/$discovery/rest?version=v1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: ondemandscanning
 externalDocs:
@@ -876,13 +876,13 @@ components:
           description: For jars that are contained inside .war files, this filepath can indicate the path to war file combined with the path to jar file.
           type: string
       type: object
-    GrafeasV1SlsaProvenance_0_2SlsaBuilder:
+    GrafeasV1SlsaProvenanceZeroTwoSlsaBuilder:
       description: Identifies the entity that executed the recipe, which is trusted to have correctly performed the operation and populated this provenance.
       properties:
         id:
           type: string
       type: object
-    GrafeasV1SlsaProvenance_0_2SlsaCompleteness:
+    GrafeasV1SlsaProvenanceZeroTwoSlsaCompleteness:
       description: Indicates that the builder claims certain fields in this message to be complete.
       properties:
         environment:
@@ -892,7 +892,7 @@ components:
         parameters:
           type: boolean
       type: object
-    GrafeasV1SlsaProvenance_0_2SlsaConfigSource:
+    GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource:
       description: Describes where the config file that kicked off the build came from. This is effectively a pointer to the source where buildConfig came from.
       properties:
         digest:
@@ -904,11 +904,11 @@ components:
         uri:
           type: string
       type: object
-    GrafeasV1SlsaProvenance_0_2SlsaInvocation:
+    GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation:
       description: Identifies the event that kicked off the build.
       properties:
         configSource:
-          $ref: "#/components/schemas/GrafeasV1SlsaProvenance_0_2SlsaConfigSource"
+          $ref: "#/components/schemas/GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource"
         environment:
           additionalProperties:
             description: Properties of the object.
@@ -918,7 +918,7 @@ components:
             description: Properties of the object.
           type: object
       type: object
-    GrafeasV1SlsaProvenance_0_2SlsaMaterial:
+    GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial:
       description: The collection of artifacts that influenced the build including sources, dependencies, build tools, base images, and so on.
       properties:
         digest:
@@ -928,7 +928,7 @@ components:
         uri:
           type: string
       type: object
-    GrafeasV1SlsaProvenance_0_2SlsaMetadata:
+    GrafeasV1SlsaProvenanceZeroTwoSlsaMetadata:
       description: Other properties of the build.
       properties:
         buildFinishedOn:
@@ -940,7 +940,7 @@ components:
           format: google-datetime
           type: string
         completeness:
-          $ref: "#/components/schemas/GrafeasV1SlsaProvenance_0_2SlsaCompleteness"
+          $ref: "#/components/schemas/GrafeasV1SlsaProvenanceZeroTwoSlsaCompleteness"
         reproducible:
           type: boolean
       type: object
@@ -1014,8 +1014,8 @@ components:
           $ref: "#/components/schemas/InTotoProvenance"
         slsaProvenance:
           $ref: "#/components/schemas/SlsaProvenance"
-        slsaProvenance02:
-          $ref: "#/components/schemas/SlsaProvenance_0_2"
+        slsaProvenanceZeroTwo:
+          $ref: "#/components/schemas/SlsaProvenanceZeroTwo"
         subject:
           items:
             $ref: "#/components/schemas/Subject"
@@ -1463,7 +1463,7 @@ components:
           $ref: "#/components/schemas/SlsaRecipe"
           description: Identifies the configuration used for the build. When combined with materials, this SHOULD fully describe the build, such that re-running this recipe results in bit-for-bit identical output (if the build is reproducible). required
       type: object
-    SlsaProvenance_0_2:
+    SlsaProvenanceZeroTwo:
       description: See full explanation of fields at slsa.dev/provenance/v0.2.
       properties:
         buildConfig:
@@ -1473,15 +1473,15 @@ components:
         buildType:
           type: string
         builder:
-          $ref: "#/components/schemas/GrafeasV1SlsaProvenance_0_2SlsaBuilder"
+          $ref: "#/components/schemas/GrafeasV1SlsaProvenanceZeroTwoSlsaBuilder"
         invocation:
-          $ref: "#/components/schemas/GrafeasV1SlsaProvenance_0_2SlsaInvocation"
+          $ref: "#/components/schemas/GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation"
         materials:
           items:
-            $ref: "#/components/schemas/GrafeasV1SlsaProvenance_0_2SlsaMaterial"
+            $ref: "#/components/schemas/GrafeasV1SlsaProvenanceZeroTwoSlsaMaterial"
           type: array
         metadata:
-          $ref: "#/components/schemas/GrafeasV1SlsaProvenance_0_2SlsaMetadata"
+          $ref: "#/components/schemas/GrafeasV1SlsaProvenanceZeroTwoSlsaMetadata"
       type: object
     SlsaRecipe:
       description: Steps taken to build the artifact. For a TaskRun, typically each container corresponds to one step in the recipe.
