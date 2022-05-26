@@ -1386,7 +1386,7 @@ components:
           readOnly: true
           type: string
         table:
-          description: The name of the table to which to write data, of the form {projectId}.{datasetId}.{tableId}
+          description: The name of the table to which to write data, of the form {projectId}:{datasetId}.{tableId}
           type: string
         useTopicSchema:
           description: When true, use the topic's schema as the columns to write to in BigQuery, if it exists.

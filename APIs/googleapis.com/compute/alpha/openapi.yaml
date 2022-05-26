@@ -43878,7 +43878,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Sets an instance's scheduling options. You can only call this method on a stopped instance, that is, a VM instance that is in a `TERMINATED` state. See Instance Life Cycle for more information on the possible instance states. For more information about setting scheduling options for a VM, see Set VM availability policies.
+      description: Sets an instance's scheduling options. You can only call this method on a stopped instance, that is, a VM instance that is in a `TERMINATED` state. See Instance Life Cycle for more information on the possible instance states. For more information about setting scheduling options for a VM, see Set VM host maintenance policy.
       operationId: compute.instances.setScheduling
       parameters:
         - description: Project ID for this request.
@@ -49943,7 +49943,7 @@ components:
       description: Represents a Backend Service resource. A backend service defines how Google Cloud load balancers distribute traffic. The backend service configuration contains a set of values, such as the protocol used to connect to backends, various distribution and session settings, health checks, and timeouts. These settings provide fine-grained control over how your load balancer behaves. Most of the settings have default values that allow for easy configuration if you need to get started quickly. Backend services in Google Compute Engine can be either regionally or globally scoped. * [Global](https://cloud.google.com/compute/docs/reference/rest/alpha/backendServices) * [Regional](https://cloud.google.com/compute/docs/reference/rest/alpha/regionBackendServices) For more information, see Backend Services.
       properties:
         affinityCookieTtlSec:
-          description: Lifetime of cookies in seconds. This setting is applicable to external and internal HTTP(S) load balancers and Traffic Director and requires GENERATED_COOKIE or HTTP_COOKIE session affinity. If set to 0, the cookie is non-persistent and lasts only until the end of the browser session (or equivalent). The maximum allowed value is one day (86,400). Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
+          description: Lifetime of cookies in seconds. This setting is applicable to external and internal HTTP(S) load balancers and Traffic Director and requires GENERATED_COOKIE or HTTP_COOKIE session affinity. If set to 0, the cookie is non-persistent and lasts only until the end of the browser session (or equivalent). The maximum allowed value is two weeks (1,209,600). Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
           format: int32
           type: integer
         backends:
@@ -67063,7 +67063,7 @@ components:
             $ref: "#/components/schemas/SchedulingNodeAffinity"
           type: array
         onHostMaintenance:
-          description: Defines the maintenance behavior for this instance. For standard instances, the default behavior is MIGRATE. For preemptible instances, the default and only possible behavior is TERMINATE. For more information, see Set VM availability policies.
+          description: Defines the maintenance behavior for this instance. For standard instances, the default behavior is MIGRATE. For preemptible instances, the default and only possible behavior is TERMINATE. For more information, see Set VM host maintenance policy.
           enum:
             - MIGRATE
             - TERMINATE
@@ -67350,9 +67350,27 @@ components:
     SecurityPolicyAdaptiveProtectionConfig:
       description: Configuration options for Cloud Armor Adaptive Protection (CAAP).
       properties:
+        autoDeployConfig:
+          $ref: "#/components/schemas/SecurityPolicyAdaptiveProtectionConfigAutoDeployConfig"
         layer7DdosDefenseConfig:
           $ref: "#/components/schemas/SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig"
           description: If set to true, enables Cloud Armor Machine Learning.
+      type: object
+    SecurityPolicyAdaptiveProtectionConfigAutoDeployConfig:
+      description: Configuration options for Adaptive Protection auto-deploy feature.
+      properties:
+        confidenceThreshold:
+          format: float
+          type: number
+        expirationSec:
+          format: int32
+          type: integer
+        impactedBaselineThreshold:
+          format: float
+          type: number
+        loadThreshold:
+          format: float
+          type: number
       type: object
     SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig:
       description: Configuration options for L7 DDoS detection.

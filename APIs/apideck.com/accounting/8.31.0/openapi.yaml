@@ -268,7 +268,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 8.30.1
+  version: 8.31.0
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -7877,6 +7877,7 @@ components:
           type: string
         stages:
           items:
+            additionalProperties: false
             properties:
               display_order:
                 example: 1
@@ -7891,6 +7892,10 @@ components:
               value:
                 example: CONTRACT_SENT
                 type: string
+              win_probability:
+                description: The expected probability of winning an Opportunity in this Pipeline Stage. Valid values are [0-100].
+                example: 50
+                type: integer
             type: object
           type: array
         updated_at:

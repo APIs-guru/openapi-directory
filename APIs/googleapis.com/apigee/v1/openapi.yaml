@@ -955,6 +955,43 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
+  "/v1/{name}:getProjectMapping":
+    get:
+      description: Gets the project ID and region for an Apigee organization.
+      operationId: apigee.organizations.getProjectMapping
+      parameters:
+        - description: "Required. Apigee organization name in the following format: `organizations/{org}`"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudApigeeV1OrganizationProjectMapping"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{name}:getSyncAuthorization":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -5198,17 +5235,17 @@ components:
           description: Environment.
           type: string
         errors:
-          description: Errors reported for this deployment. Populated only when state == ERROR. This field is not populated in List APIs.
+          description: "Errors reported for this deployment. Populated only when state == ERROR. **Note**: This field is displayed only when viewing deployment status."
           items:
             $ref: "#/components/schemas/GoogleRpcStatus"
           type: array
         instances:
-          description: Status reported by each runtime instance. This field is not populated in List APIs.
+          description: "Status reported by each runtime instance. **Note**: This field is displayed only when viewing deployment status."
           items:
             $ref: "#/components/schemas/GoogleCloudApigeeV1InstanceDeploymentStatus"
           type: array
         pods:
-          description: "Status reported by runtime pods. This field is not populated for List APIs. **Note**: **This field is deprecated**. Runtime versions 1.3 and above report instance level status rather than pod status."
+          description: "Status reported by runtime pods. **Note**: **This field is deprecated**. Runtime versions 1.3 and above report instance level status rather than pod status."
           items:
             $ref: "#/components/schemas/GoogleCloudApigeeV1PodStatus"
           type: array
@@ -5216,7 +5253,7 @@ components:
           description: API proxy revision.
           type: string
         routeConflicts:
-          description: Conflicts in the desired state routing configuration. The presence of conflicts does not cause the state to be `ERROR`, but it will mean that some of the deployment's base paths are not routed to its environment. If the conflicts change, the state will transition to `PROGRESSING` until the latest configuration is rolled out to all instances. This field is not populated in List APIs.
+          description: "Conflicts in the desired state routing configuration. The presence of conflicts does not cause the state to be `ERROR`, but it will mean that some of the deployment's base paths are not routed to its environment. If the conflicts change, the state will transition to `PROGRESSING` until the latest configuration is rolled out to all instances. **Note**: This field is displayed only when viewing deployment status."
           items:
             $ref: "#/components/schemas/GoogleCloudApigeeV1DeploymentChangeReportRoutingConflict"
           type: array
@@ -5224,7 +5261,7 @@ components:
           description: The full resource name of Cloud IAM Service Account that this deployment is using, eg, `projects/-/serviceAccounts/{email}`.
           type: string
         state:
-          description: Current state of the deployment. This field is not populated in List APIs.
+          description: "Current state of the deployment. **Note**: This field is displayed only when viewing deployment status."
           enum:
             - RUNTIME_STATE_UNSPECIFIED
             - READY
@@ -6762,6 +6799,10 @@ components:
       type: object
     GoogleCloudApigeeV1OrganizationProjectMapping:
       properties:
+        location:
+          description: Output only. The Google Cloud region where control plane data is located. For more information, see https://cloud.google.com/about/locations/.
+          readOnly: true
+          type: string
         organization:
           description: Name of the Apigee organization.
           type: string
