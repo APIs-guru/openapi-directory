@@ -1406,7 +1406,7 @@ paths:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: dataproc.projects.regions.workflowTemplates.getIamPolicy
       parameters:
-        - description: "REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field."
+        - description: "REQUIRED: The resource for which the policy is being requested. See Resource names (https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
           name: resource
           required: true
@@ -1448,7 +1448,7 @@ paths:
       description: Sets the access control policy on the specified resource. Replaces any existing policy.Can return NOT_FOUND, INVALID_ARGUMENT, and PERMISSION_DENIED errors.
       operationId: dataproc.projects.regions.workflowTemplates.setIamPolicy
       parameters:
-        - description: "REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field."
+        - description: "REQUIRED: The resource for which the policy is being specified. See Resource names (https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
           name: resource
           required: true
@@ -1490,7 +1490,7 @@ paths:
       description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a NOT_FOUND error.Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
       operationId: dataproc.projects.regions.workflowTemplates.testIamPermissions
       parameters:
-        - description: "REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field."
+        - description: "REQUIRED: The resource for which the policy detail is being requested. See Resource names (https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
           name: resource
           required: true
@@ -1601,20 +1601,6 @@ components:
         acceleratorTypeUri:
           description: "Full URL, partial URI, or short name of the accelerator type resource to expose to this instance. See Compute Engine AcceleratorTypes (https://cloud.google.com/compute/docs/reference/beta/acceleratorTypes).Examples: https://www.googleapis.com/compute/beta/projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80 projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80 nvidia-tesla-k80Auto Zone Exception: If you are using the Dataproc Auto Zone Placement (https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/auto-zone#using_auto_zone_placement) feature, you must use the short name of the accelerator type resource, for example, nvidia-tesla-k80."
           type: string
-      type: object
-    AuthenticationConfig:
-      description: Configuration for using injectable credentials or service account
-      properties:
-        authenticationType:
-          description: Authentication type for session execution.
-          enum:
-            - AUTHENTICATION_TYPE_UNSPECIFIED
-            - SERVICE_ACCOUNT
-            - INJECTABLE_CREDENTIALS
-          type: string
-        injectableCredentialsConfig:
-          $ref: "#/components/schemas/InjectableCredentialsConfig"
-          description: Configuration for using end user authentication
       type: object
     AutoscalingConfig:
       description: Autoscaling Policy config associated with the cluster.
@@ -2443,10 +2429,6 @@ components:
         credentialsCiphertext:
           description: Required. The encrypted credentials being injected in to the cluster.The client is responsible for encrypting the credentials in a way that is supported by the cluster.A wrapped value is used here so that the actual contents of the encrypted credentials are not written to audit logs.
           type: string
-      type: object
-    InjectableCredentialsConfig:
-      description: Specific injectable credentials authentication parameters
-      properties: {}
       type: object
     InstanceGroupAutoscalingPolicyConfig:
       description: Configuration for the size bounds of an instance group, including its proportional size to other groups.
@@ -3291,9 +3273,6 @@ components:
             type: string
           description: Optional. A mapping of property names to values, which are used to configure workload execution.
           type: object
-        sessionAuthenticationConfig:
-          $ref: "#/components/schemas/AuthenticationConfig"
-          description: Optional. Authentication configuration for the session execution.
         version:
           description: Optional. Version of the batch runtime.
           type: string
