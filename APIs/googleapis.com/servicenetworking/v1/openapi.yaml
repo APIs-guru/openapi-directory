@@ -13,15 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Service Networking API
   version: v1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://servicenetworking.googleapis.com/$discovery/rest?version=v1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: servicenetworking
 externalDocs:
@@ -1092,6 +1094,10 @@ components:
         checkServiceNetworkingUsePermission:
           description: Optional. The IAM permission check determines whether the consumer project has 'servicenetworking.services.use' permission or not.
           type: boolean
+        computeIdempotencyWindow:
+          description: "Optional. Specifies a custom time bucket for Arcus subnetwork request idempotency. If two equivalent concurrent requests are made, Arcus will know to ignore the request if it has already been completed or is in progress. Only requests with matching compute_idempotency_window have guaranteed idempotency. Changing this time window between requests results in undefined behavior. Zero (or empty) value with custom_compute_idempotency_window=true specifies no idempotency (i.e. no request ID is provided to Arcus). Maximum value of 14 days (enforced by Arcus limit). For more information on how to use, see: go/revisit-sn-idempotency-window"
+          format: google-duration
+          type: string
         consumer:
           description: Required. A resource that represents the service consumer, such as `projects/123456`. The project number can be different from the value in the consumer network parameter. For example, the network might be part of a Shared VPC network. In those cases, Service Networking validates that this resource belongs to that Shared VPC.
           type: string
@@ -1134,10 +1140,13 @@ components:
           description: Required. A name for the new subnet. For information about the naming requirements, see [subnetwork](/compute/docs/reference/rest/v1/subnetworks) in the Compute API documentation.
           type: string
         subnetworkUsers:
-          description: A list of members that are granted the `compute.networkUser` role on the subnet.
+          description: A list of members that are granted the `roles/servicenetworking.subnetworkAdmin` role on the subnet.
           items:
             type: string
           type: array
+        useCustomComputeIdempotencyWindow:
+          description: "Optional. Specifies if Service Networking should use a custom time bucket for Arcus idempotency. If false, Service Networking uses a 300 second (5 minute) Arcus idempotency window. If true, Service Networking uses a custom idempotency window provided by the user in field compute_idempotency_window. For more information on how to use, see: go/revisit-sn-idempotency-window"
+          type: boolean
       type: object
     Api:
       description: Api is a light-weight descriptor for an API Interface. Interfaces are also described as "protocol buffer services" in some contexts, such as by the "service" keyword in a .proto file, but they are different from API Services, which represent a concrete implementation of an interface as opposed to simply a description of methods and bindings. They are also sometimes simply referred to as "APIs" in other contexts, such as the name of this message itself. See https://cloud.google.com/apis/design/glossary for detailed terminology.
@@ -2711,3 +2720,5 @@ components:
             https://www.googleapis.com/auth/service.management: Manage your Google API service configuration
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}
