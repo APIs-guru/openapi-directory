@@ -649,7 +649,7 @@ paths:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: cloudiot.projects.locations.registries.groups.getIamPolicy
       parameters:
-        - description: "REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field."
+        - description: "REQUIRED: The resource for which the policy is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
           name: resource
           required: true
@@ -695,7 +695,7 @@ paths:
       description: Sets the access control policy on the specified resource. Replaces any existing policy.
       operationId: cloudiot.projects.locations.registries.groups.setIamPolicy
       parameters:
-        - description: "REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field."
+        - description: "REQUIRED: The resource for which the policy is being specified. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
           name: resource
           required: true
@@ -741,7 +741,7 @@ paths:
       description: Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a NOT_FOUND error.
       operationId: cloudiot.projects.locations.registries.groups.testIamPermissions
       parameters:
-        - description: "REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field."
+        - description: "REQUIRED: The resource for which the policy detail is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
           name: resource
           required: true

@@ -99,7 +99,7 @@ paths:
           name: filter
           schema:
             type: string
-        - description: The maximum number of results to return per response.
+        - description: The maximum number of instances to return. The service may return fewer than this value. The maximum value is 1000; values above 1000 are coerced to 1000.
           in: query
           name: maxResults
           schema:
@@ -2441,6 +2441,7 @@ components:
           enum:
             - SQL_API_WARNING_CODE_UNSPECIFIED
             - REGION_UNREACHABLE
+            - MAX_RESULTS_EXCEEDS_LIMIT
           type: string
         message:
           description: The warning message.
@@ -3940,6 +3941,7 @@ components:
             - UNSUPPORTED_BINLOG_FORMAT
             - BINLOG_RETENTION_SETTING
             - UNSUPPORTED_STORAGE_ENGINE
+            - LIMITED_SUPPORT_TABLES
           type: string
       type: object
     SqlInstancesRescheduleMaintenanceRequestBody:

@@ -993,6 +993,36 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /games/v1/players/me/scopedIds:
+    get:
+      description: Retrieves scoped player identifiers for currently authenticated user.
+      operationId: games.players.getScopedPlayerIds
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScopedPlayerIds"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/games
+          Oauth2c:
+            - https://www.googleapis.com/auth/games
+      tags:
+        - players
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/games/v1/players/{playerId}":
     get:
       description: Retrieves the Player resource with the given ID. To retrieve the player for the currently authenticated user, set `playerId` to `me`.
@@ -2630,6 +2660,16 @@ components:
             - OK
             - DEPRECATED
             - INVALID
+          type: string
+      type: object
+    ScopedPlayerIds:
+      description: Scoped player identifiers.
+      properties:
+        developerPlayerKey:
+          description: Identifier of the player across all games of the given developer. Every player has the same developer_player_key in all games of one developer. Developer player key changes for the game if the game is transferred to another developer. Note that game_player_id will stay unchanged.
+          type: string
+        gamePlayerId:
+          description: Game-scoped player identifier. This is the same id that is returned in GetPlayer game_player_id field.
           type: string
       type: object
     ScoreSubmission:

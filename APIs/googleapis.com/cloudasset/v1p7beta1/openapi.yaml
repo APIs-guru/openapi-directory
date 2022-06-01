@@ -13,17 +13,20 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Asset API
   version: v1p7beta1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://cloudasset.googleapis.com/$discovery/rest?version=v1p7beta1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: cloudasset
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/asset-inventory/docs/quickstart
 tags:
@@ -689,6 +692,11 @@ components:
     GoogleIdentityAccesscontextmanagerV1EgressTo:
       description: Defines the conditions under which an EgressPolicy matches a request. Conditions are based on information about the ApiOperation intended to be performed on the `resources` specified. Note that if the destination of the request is also protected by a ServicePerimeter, then that ServicePerimeter must have an IngressPolicy which allows access in order for this request to succeed. The request must match `operations` AND `resources` fields in order to be allowed egress out of the perimeter.
       properties:
+        externalResources:
+          description: "A list of external resources that are allowed to be accessed. A request matches if it contains an external resource in this list (Example: s3://bucket/path). Currently '*' is not allowed."
+          items:
+            type: string
+          type: array
         operations:
           description: A list of ApiOperations allowed to be performed by the sources specified in the corresponding EgressFrom. A request matches if it uses an operation/service in this list.
           items:
@@ -940,3 +948,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

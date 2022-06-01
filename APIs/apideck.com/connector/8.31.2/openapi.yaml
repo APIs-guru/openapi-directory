@@ -130,7 +130,7 @@ info:
 
     A request has been made to a connector that has since been disabled. This may be temporary - You can contact our team to resolve the issue.
 
-    ### ConnectorRateLimitError
+    #### ConnectorRateLimitError
 
     You sent too many request to a connector. These rate limits vary from connector to connector. You will need to try again later.
 
@@ -197,6 +197,10 @@ info:
     #### ConnectorWorkflowMappingError
 
     The composite api calls required for this operation have not been mapped entirely. It's possible this connector is in `beta` or still under development. We've been notified and are working to fix this issue.
+
+    #### ConnectorOperationUnsupportedError
+
+    You're attempting a call that is not supported by the connector. It's likely this operation is supported by another connector, but we're unable to implement for this one.
 
     #### PaginationNotSupportedError
 
@@ -268,7 +272,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Connector API
-  version: 8.31.0
+  version: 8.31.2
   x-apideck-api: connector
   x-apideck-sdk-support: true
   x-apisguru-categories:
