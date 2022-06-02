@@ -272,7 +272,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 8.31.2
+  version: 8.31.3
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1303,6 +1303,7 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/invoiceItemsFilter"
       responses:
         "200":
           $ref: "#/components/responses/GetInvoiceItemsResponse"
@@ -3587,6 +3588,14 @@ components:
       required: true
       schema:
         type: string
+    invoiceItemsFilter:
+      description: Apply filters (beta)
+      explode: true
+      in: query
+      name: filter
+      schema:
+        $ref: "#/components/schemas/InvoiceItemsFilter"
+      style: deepObject
     limit:
       description: Number of records to return
       in: query
@@ -7127,6 +7136,18 @@ components:
       $ref: "#/components/schemas/LinkedLedgerAccount"
     InvoiceItemIncomeAccount:
       $ref: "#/components/schemas/LinkedLedgerAccount"
+    InvoiceItemsFilter:
+      additionalProperties: false
+      example:
+        name: Widgets Large
+      properties:
+        name:
+          description: Name of Invoice Items to search for
+          example: Widgets Large
+          title: Name
+          type: string
+      type: object
+      x-graphql-type-name: InvoiceItemsFilter
     InvoiceLineItem:
       additionalProperties: false
       properties:

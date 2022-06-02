@@ -2734,9 +2734,6 @@ components:
           items:
             $ref: "#/components/schemas/SourceReference"
           type: array
-        spanId:
-          description: Stackdriver Trace span identifier for this request.
-          type: string
         startTime:
           description: Time when the request started.
           format: google-datetime

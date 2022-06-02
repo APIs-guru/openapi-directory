@@ -2443,6 +2443,82 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
+  "/v1/{parent}/entries":
+    get:
+      description: Lists key value entries for key values maps scoped to an organization, environment, or API proxy.
+      operationId: apigee.organizations.keyvaluemaps.entries.list
+      parameters:
+        - description: "Required. Scope as indicated by the URI in which to list key value maps. Use one of the following formats in your request: `organizations/{organization}/apis/{api}/keyvaluemaps/{keyvaluemap}`. `organizations/{organization}/environments/{environment}/keyvaluemaps/{keyvaluemap}` `organizations/{organization}/keyvaluemaps/{keyvaluemap}`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Maximum number of key value entries to return. If unspecified, at most 100 entries will be returned.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. Page token, a key value entry returned from a previous call that can use to retrieve the next page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudApigeeV1ListKeyValueEntriesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates key value entries in a org, env or apis scoped key value map.
+      operationId: apigee.organizations.keyvaluemaps.entries.create
+      parameters:
+        - description: "Required. Scope as indicated by the URI in which to create the key value map entry. Use one of the following formats in your request: `organizations/{organization}/apis/{api}/keyvaluemaps/{keyvaluemap}`. `organizations/{organization}/environments/{environment}/keyvaluemaps/{keyvaluemap}` `organizations/{organization}/keyvaluemaps/{keyvaluemap}`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudApigeeV1KeyValueEntry"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudApigeeV1KeyValueEntry"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
   "/v1/{parent}/envgroups":
     get:
       description: Lists all environment groups.
@@ -6189,6 +6265,16 @@ components:
           description: "Reference name in the following format: `organizations/{org}/environments/{env}/references/{reference}`"
           type: string
       type: object
+    GoogleCloudApigeeV1KeyValueEntry:
+      description: Key value map pair where the value represents the data associated with the corresponding key.
+      properties:
+        name:
+          description: Resource URI that can be used to identify the scope of the key value map entries.
+          type: string
+        value:
+          description: Required. Data or payload that is being retrieved and associated with the unique key.
+          type: string
+      type: object
     GoogleCloudApigeeV1KeyValueMap:
       description: Collection of key/value string pairs.
       properties:
@@ -6440,6 +6526,18 @@ components:
           type: array
         nextPageToken:
           description: Page token that you can include in a ListInstance request to retrieve the next page of content. If omitted, no subsequent pages exist.
+          type: string
+      type: object
+    GoogleCloudApigeeV1ListKeyValueEntriesResponse:
+      description: The request structure for listing Key value map keys and its corrresponding values.
+      properties:
+        keyValueEntries:
+          description: One or more key value map keys and values.
+          items:
+            $ref: "#/components/schemas/GoogleCloudApigeeV1KeyValueEntry"
+          type: array
+        nextPageToken:
+          description: Token that can be sent as `next_page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
       type: object
     GoogleCloudApigeeV1ListNatAddressesResponse:

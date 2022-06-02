@@ -1,15 +1,14 @@
-openapi: 3.0.3
+openapi: 3.0.0
 servers:
-  - description: Production
-    url: https://unify.apideck.com
+  - url: https://unify.apideck.com
 info:
   contact:
     email: hello@apideck.com
     url: https://developers.apideck.com
   description: |+
-    Welcome to the Lead API.
+    Welcome to the Customer Support API.
 
-    You can use this API to access all Lead API endpoints.
+    You can use this API to access all Customer Support API endpoints.
 
     ## Base URL
 
@@ -272,9 +271,9 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  title: Lead API
-  version: 8.31.2
-  x-apideck-api: lead
+  title: Customer Support
+  version: 8.31.3
+  x-apideck-api: customer-support
   x-apideck-sdk-support: true
   x-apisguru-categories:
     - developer_tools
@@ -282,10 +281,10 @@ info:
     url: https://developers.apideck.com/icon.png
   x-origin:
     - format: openapi
-      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/lead.yml
+      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/customer-support.yml
       version: "3.0"
   x-providerName: apideck.com
-  x-serviceName: lead
+  x-serviceName: customer-support
   x-tags:
     - partner
 externalDocs:
@@ -293,18 +292,16 @@ externalDocs:
   url: https://developers.apideck.com
 security:
   - apiKey: []
-    applicationId: []
-    consumerId: []
 tags:
   - description: ""
-    name: Leads
+    name: Customers
     x-apideck-model:
-      $ref: "#/components/schemas/Lead"
+      $ref: "#/components/schemas/CustomerSupportCustomer"
 paths:
-  /lead/leads:
+  /customer-support/customers:
     get:
-      description: List leads
-      operationId: leadsAll
+      description: List Customer Support Customers
+      operationId: customersAll
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
@@ -312,11 +309,9 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
-        - $ref: "#/components/parameters/leadsFilter"
-        - $ref: "#/components/parameters/leadsSort"
       responses:
         "200":
-          $ref: "#/components/responses/GetLeadsResponse"
+          $ref: "#/components/responses/GetCustomerSupportCustomersResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -331,10 +326,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: List leads
+      summary: List Customer Support Customers
       tags:
-        - Leads
-      x-apideck-api: lead
+        - Customers
+      x-apideck-api: customerSupport
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -348,15 +343,15 @@ paths:
             })
 
             try {
-              const { data } = await apideck.lead.leadsAll({})
+              const { data } = await apideck.customerSupport.customersAll({})
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: leads
+      x-graphql-field-name: customerSupportCustomers
     post:
-      description: Create lead
-      operationId: leadsAdd
+      description: Create Customer Support Customer
+      operationId: customersAdd
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
@@ -366,11 +361,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Lead"
+              $ref: "#/components/schemas/CustomerSupportCustomer"
         required: true
       responses:
         "201":
-          $ref: "#/components/responses/CreateLeadResponse"
+          $ref: "#/components/responses/CreateCustomerSupportCustomerResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -385,10 +380,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Create lead
+      summary: Create Customer Support Customer
       tags:
-        - Leads
-      x-apideck-api: lead
+        - Customers
+      x-apideck-api: customerSupport
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -402,30 +397,11 @@ paths:
             })
 
             const params = {
-              lead: {
-                name: 'Elon Musk',
-                company_name: 'Spacex',
-                owner_id: '54321',
-                company_id: '2',
-                contact_id: '2',
-                lead_source: 'Cold Call',
+              customer: {
+                company_name: 'SpaceX',
                 first_name: 'Elon',
                 last_name: 'Musk',
-                description: 'A thinker',
-                prefix: 'Sir',
-                title: 'CEO',
-                language: 'EN',
-                status: 'New',
-                monetary_amount: 75000,
-                currency: 'USD',
-                fax: '+12129876543',
-                websites: [
-                  {
-                    id: '12345',
-                    url: 'http://example.com',
-                    type: 'primary'
-                  }
-                ],
+                individual: true,
                 addresses: [
                   {
                     id: '123',
@@ -453,13 +429,7 @@ paths:
                     row_version: '1-12345'
                   }
                 ],
-                social_links: [
-                  {
-                    id: '12345',
-                    url: 'https://www.twitter.com/apideck-io',
-                    type: 'twitter'
-                  }
-                ],
+                notes: 'Some notes about this customer',
                 phone_numbers: [
                   {
                     id: '12345',
@@ -477,28 +447,33 @@ paths:
                     type: 'primary'
                   }
                 ],
-                custom_fields: [
-                  {
-                    id: '2389328923893298',
-                    name: 'employee_level',
-                    description: 'Employee Level',
-                    value: 'Uses Salesforce and Marketo'
-                  }
-                ],
-                tags: ['New']
+                tax_number: 'US123945459',
+                currency: 'USD',
+                bank_accounts: {
+                  iban: 'CH2989144532982975332',
+                  bic: 'AUDSCHGGXXX',
+                  bsb_number: '062-001',
+                  branch_identifier: '001',
+                  bank_code: 'BNH',
+                  account_number: '123465',
+                  account_name: 'SPACEX LLC',
+                  account_type: 'credit_card',
+                  currency: 'USD'
+                },
+                status: 'active'
               }
             }
 
             try {
-              const { data } = await apideck.lead.leadsAdd(params)
+              const { data } = await apideck.customerSupport.customersAdd(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  "/lead/leads/{id}":
+  "/customer-support/customers/{id}":
     delete:
-      description: Delete lead
-      operationId: leadsDelete
+      description: Delete Customer Support Customer
+      operationId: customersDelete
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -507,7 +482,7 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/DeleteLeadResponse"
+          $ref: "#/components/responses/DeleteCustomerSupportCustomerResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -522,10 +497,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Delete lead
+      summary: Delete Customer Support Customer
       tags:
-        - Leads
-      x-apideck-api: lead
+        - Customers
+      x-apideck-api: customerSupport
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -539,7 +514,7 @@ paths:
             })
 
             try {
-              const { data } = await apideck.lead.leadsDelete({
+              const { data } = await apideck.customerSupport.customersDelete({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
@@ -547,8 +522,8 @@ paths:
               console.error(error)
             }
     get:
-      description: Get lead
-      operationId: leadsOne
+      description: Get Customer Support Customer
+      operationId: customersOne
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -557,7 +532,7 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/GetLeadResponse"
+          $ref: "#/components/responses/GetCustomerSupportCustomerResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -572,10 +547,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Get lead
+      summary: Get Customer Support Customer
       tags:
-        - Leads
-      x-apideck-api: lead
+        - Customers
+      x-apideck-api: customerSupport
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -589,7 +564,7 @@ paths:
             })
 
             try {
-              const { data } = await apideck.lead.leadsOne({
+              const { data } = await apideck.customerSupport.customersOne({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
@@ -597,8 +572,8 @@ paths:
               console.error(error)
             }
     patch:
-      description: Update lead
-      operationId: leadsUpdate
+      description: Update Customer Support Customer
+      operationId: customersUpdate
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -609,11 +584,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Lead"
+              $ref: "#/components/schemas/CustomerSupportCustomer"
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/UpdateLeadResponse"
+          $ref: "#/components/responses/UpdateCustomerSupportCustomerResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -628,10 +603,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Update lead
+      summary: Update Customer Support Customer
       tags:
-        - Leads
-      x-apideck-api: lead
+        - Customers
+      x-apideck-api: customerSupport
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -646,30 +621,11 @@ paths:
 
             const params = {
               id: 'id_example',
-              lead: {
-                name: 'Elon Musk',
-                company_name: 'Spacex',
-                owner_id: '54321',
-                company_id: '2',
-                contact_id: '2',
-                lead_source: 'Cold Call',
+              customer: {
+                company_name: 'SpaceX',
                 first_name: 'Elon',
                 last_name: 'Musk',
-                description: 'A thinker',
-                prefix: 'Sir',
-                title: 'CEO',
-                language: 'EN',
-                status: 'New',
-                monetary_amount: 75000,
-                currency: 'USD',
-                fax: '+12129876543',
-                websites: [
-                  {
-                    id: '12345',
-                    url: 'http://example.com',
-                    type: 'primary'
-                  }
-                ],
+                individual: true,
                 addresses: [
                   {
                     id: '123',
@@ -697,13 +653,7 @@ paths:
                     row_version: '1-12345'
                   }
                 ],
-                social_links: [
-                  {
-                    id: '12345',
-                    url: 'https://www.twitter.com/apideck-io',
-                    type: 'twitter'
-                  }
-                ],
+                notes: 'Some notes about this customer',
                 phone_numbers: [
                   {
                     id: '12345',
@@ -721,20 +671,25 @@ paths:
                     type: 'primary'
                   }
                 ],
-                custom_fields: [
-                  {
-                    id: '2389328923893298',
-                    name: 'employee_level',
-                    description: 'Employee Level',
-                    value: 'Uses Salesforce and Marketo'
-                  }
-                ],
-                tags: ['New']
+                tax_number: 'US123945459',
+                currency: 'USD',
+                bank_accounts: {
+                  iban: 'CH2989144532982975332',
+                  bic: 'AUDSCHGGXXX',
+                  bsb_number: '062-001',
+                  branch_identifier: '001',
+                  bank_code: 'BNH',
+                  account_number: '123465',
+                  account_name: 'SPACEX LLC',
+                  account_type: 'credit_card',
+                  currency: 'USD'
+                },
+                status: 'active'
               }
             }
 
             try {
-              const { data } = await apideck.lead.leadsUpdate(params)
+              const { data } = await apideck.customerSupport.customersUpdate(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
@@ -769,22 +724,6 @@ components:
       required: true
       schema:
         type: string
-    leadsFilter:
-      description: Apply filters (beta)
-      explode: true
-      in: query
-      name: filter
-      schema:
-        $ref: "#/components/schemas/LeadsFilter"
-      style: deepObject
-    leadsSort:
-      description: Apply sorting (beta)
-      explode: true
-      in: query
-      name: sort
-      schema:
-        $ref: "#/components/schemas/LeadsSort"
-      style: deepObject
     limit:
       description: Number of records to return
       in: query
@@ -814,30 +753,30 @@ components:
           schema:
             $ref: "#/components/schemas/BadRequestResponse"
       description: Bad Request
-    CreateLeadResponse:
+    CreateCustomerSupportCustomerResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CreateLeadResponse"
-      description: Lead created
-    DeleteLeadResponse:
+            $ref: "#/components/schemas/CreateCustomerSupportCustomerResponse"
+      description: CustomerSupportCustomers
+    DeleteCustomerSupportCustomerResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/DeleteLeadResponse"
-      description: Lead deleted
-    GetLeadResponse:
+            $ref: "#/components/schemas/DeleteCustomerSupportCustomerResponse"
+      description: CustomerSupportCustomers
+    GetCustomerSupportCustomerResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetLeadResponse"
-      description: Lead
-    GetLeadsResponse:
+            $ref: "#/components/schemas/GetCustomerSupportCustomerResponse"
+      description: CustomerSupportCustomers
+    GetCustomerSupportCustomersResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetLeadsResponse"
-      description: Leads
+            $ref: "#/components/schemas/GetCustomerSupportCustomersResponse"
+      description: CustomerSupportCustomers
     NotFoundResponse:
       content:
         application/json:
@@ -880,12 +819,12 @@ components:
           schema:
             $ref: "#/components/schemas/UnprocessableResponse"
       description: Unprocessable
-    UpdateLeadResponse:
+    UpdateCustomerSupportCustomerResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UpdateLeadResponse"
-      description: Lead updated
+            $ref: "#/components/schemas/UpdateCustomerSupportCustomerResponse"
+      description: CustomerSupportCustomers
   schemas:
     Address:
       properties:
@@ -1083,7 +1022,365 @@ components:
           nullable: true
           type: string
       type: object
-    CreateLeadResponse:
+    Company:
+      additionalProperties: false
+      properties:
+        abn_branch:
+          description: An ABN Branch (also known as a GST Branch) is used if part of your business needs to account for GST separately from its parent entity.
+          example: "123"
+          nullable: true
+          title: ABN Branch
+          type: string
+        abn_or_tfn:
+          description: An ABN is necessary for operating a business, while a TFN (Tax File Number) is required for any person working in Australia.
+          example: 46 115 614 695
+          nullable: true
+          title: ABN or TFN
+          type: string
+        acn:
+          description: The Australian Company Number (ACN) is a nine digit number with the last digit being a check digit calculated using a modified modulus 10 calculation. ASIC has adopted a convention of always printing and displaying the ACN in the format XXX XXX XXX; three blocks of three characters, each block separated by a blank.
+          example: XXX XXX XXX
+          nullable: true
+          title: ACN
+          type: string
+        addresses:
+          items:
+            $ref: "#/components/schemas/Address"
+          type: array
+        annual_revenue:
+          description: Annual revenue
+          example: +$35m
+          nullable: true
+          type: string
+        bank_accounts:
+          items:
+            $ref: "#/components/schemas/BankAccount"
+          type: array
+        created_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          readOnly: true
+          type: string
+        created_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          type: string
+        currency:
+          $ref: "#/components/schemas/Currency"
+        custom_fields:
+          items:
+            $ref: "#/components/schemas/CustomField"
+          type: array
+        deleted:
+          example: false
+          readOnly: true
+          type: boolean
+        description:
+          example: Space Exploration Technologies Corp. is an American aerospace manufacturer, space transportation services and communications company headquartered in Hawthorne, California.
+          nullable: true
+          type: string
+        emails:
+          items:
+            $ref: "#/components/schemas/Email"
+          type: array
+        fax:
+          example: "+12129876543"
+          nullable: true
+          type: string
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        image:
+          example: https://www.spacex.com/static/images/share.jpg
+          nullable: true
+          type: string
+        industry:
+          description: Industry
+          example: Apparel
+          nullable: true
+          type: string
+        interaction_count:
+          example: 1
+          nullable: true
+          readOnly: true
+          type: integer
+        last_activity_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        name:
+          example: SpaceX
+          minLength: 1
+          type: string
+        number_of_employees:
+          description: Number of employees
+          example: 500-1000
+          nullable: true
+          type: string
+        owner_id:
+          example: "12345"
+          type: string
+        ownership:
+          description: Ownership
+          example: Public
+          nullable: true
+          type: string
+        parent_id:
+          description: Parent ID
+          example: "22345"
+          readOnly: true
+          type: string
+        payee_number:
+          example: 78932EN
+          nullable: true
+          title: Payee number
+          type: string
+        phone_numbers:
+          items:
+            $ref: "#/components/schemas/PhoneNumber"
+          type: array
+        read_only:
+          example: false
+          nullable: true
+          title: Read-only
+          type: boolean
+        row_type:
+          properties:
+            id:
+              example: "12345"
+              type: string
+            name:
+              example: Customer Account
+              type: string
+          title: Company Row Type
+          type: object
+          x-graphql-type-name: CompanyRowType
+        sales_tax_number:
+          example: 12456EN
+          nullable: true
+          title: Sales tax number
+          type: string
+        social_links:
+          items:
+            $ref: "#/components/schemas/SocialLink"
+          type: array
+        status:
+          example: Open
+          nullable: true
+          type: string
+        tags:
+          $ref: "#/components/schemas/Tags"
+        updated_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          readOnly: true
+          type: string
+        updated_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          type: string
+        vat_number:
+          description: VAT number
+          example: BE0689615164
+          nullable: true
+          type: string
+        websites:
+          items:
+            $ref: "#/components/schemas/Website"
+          type: array
+      required:
+        - name
+      type: object
+    CompanyName:
+      example: SpaceX
+      nullable: true
+      title: Company name
+      type: string
+    Contact:
+      additionalProperties: false
+      properties:
+        active:
+          example: true
+          nullable: true
+          type: boolean
+        addresses:
+          items:
+            $ref: "#/components/schemas/Address"
+          type: array
+        birthday:
+          example: 2000-08-12
+          nullable: true
+          type: string
+        company_id:
+          example: "23456"
+          nullable: true
+          type: string
+        company_name:
+          example: "23456"
+          nullable: true
+          type: string
+        created_at:
+          example: 2017-08-12T20:43:21.291Z
+          format: date-time
+          readOnly: true
+          type: string
+        current_balance:
+          example: 10.5
+          nullable: true
+          title: Current Balance
+          type: number
+        custom_fields:
+          items:
+            $ref: "#/components/schemas/CustomField"
+          type: array
+        department:
+          example: Engineering
+          nullable: true
+          type: string
+        description:
+          example: Internal champion
+          nullable: true
+          title: Description
+          type: string
+        emails:
+          items:
+            $ref: "#/components/schemas/Email"
+          type: array
+        fax:
+          example: "+12129876543"
+          nullable: true
+          type: string
+        first_call_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        first_email_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        first_name:
+          example: Elon
+          nullable: true
+          type: string
+        gender:
+          enum:
+            - male
+            - female
+            - unisex
+          example: female
+          nullable: true
+          type: string
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        image:
+          deprecated: true
+          example: https://unavatar.io/elon-musk
+          nullable: true
+          type: string
+        language:
+          description: language code according to ISO 639-1. For the United States - EN
+          example: EN
+          nullable: true
+          type: string
+        last_activity_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        last_name:
+          example: Musk
+          nullable: true
+          type: string
+        lead_id:
+          example: "34567"
+          nullable: true
+          type: string
+        lead_source:
+          example: Cold Call
+          nullable: true
+          type: string
+        middle_name:
+          example: D.
+          nullable: true
+          type: string
+        name:
+          example: Elon Musk
+          minLength: 1
+          type: string
+        owner_id:
+          example: "54321"
+          nullable: true
+          type: string
+        phone_numbers:
+          items:
+            $ref: "#/components/schemas/PhoneNumber"
+          type: array
+        photo_url:
+          example: https://unavatar.io/elon-musk
+          nullable: true
+          title: Photo URL
+          type: string
+        prefix:
+          example: Mr.
+          nullable: true
+          type: string
+        social_links:
+          items:
+            $ref: "#/components/schemas/SocialLink"
+          type: array
+        status:
+          example: open
+          nullable: true
+          type: string
+        suffix:
+          example: PhD
+          nullable: true
+          type: string
+        tags:
+          $ref: "#/components/schemas/Tags"
+        title:
+          example: CEO
+          nullable: true
+          type: string
+        type:
+          enum:
+            - customer
+            - supplier
+            - employee
+            - personal
+          example: personal
+          nullable: true
+          type: string
+        updated_at:
+          example: 2017-08-12T20:43:21.291Z
+          format: date-time
+          readOnly: true
+          type: string
+        websites:
+          items:
+            $ref: "#/components/schemas/Website"
+          type: array
+      required:
+        - name
+      x-pii:
+        - name
+        - first_name
+        - middle_name
+        - last_name
+        - email
+    CreateCustomerSupportCustomerResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -1093,11 +1390,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: companies
+          example: customers
           type: string
         service:
           description: Apideck ID of service provider
-          example: zoho-crm
+          example: kustomer
           type: string
         status:
           description: HTTP Response Status
@@ -1701,7 +1998,93 @@ components:
       required:
         - id
       type: object
-    DeleteLeadResponse:
+    CustomerSupportCustomer:
+      additionalProperties: false
+      properties:
+        addresses:
+          items:
+            $ref: "#/components/schemas/Address"
+          type: array
+        bank_accounts:
+          $ref: "#/components/schemas/BankAccount"
+        company_name:
+          $ref: "#/components/schemas/CompanyName"
+        created_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          readOnly: true
+          title: Created at (timestamp)
+          type: string
+        created_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          title: Created by
+          type: string
+        currency:
+          $ref: "#/components/schemas/Currency"
+        emails:
+          items:
+            $ref: "#/components/schemas/Email"
+          type: array
+        first_name:
+          example: Elon
+          nullable: true
+          title: First name
+          type: string
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        individual:
+          example: true
+          nullable: true
+          title: Is individual
+          type: boolean
+        last_name:
+          example: Musk
+          nullable: true
+          title: Last name
+          type: string
+        notes:
+          example: Some notes about this customer
+          nullable: true
+          title: Notes
+          type: string
+        phone_numbers:
+          items:
+            $ref: "#/components/schemas/PhoneNumber"
+          type: array
+        status:
+          description: Customer status
+          enum:
+            - active
+            - archived
+            - gdpr-erasure-request
+            - unknown
+          example: active
+          nullable: true
+          title: Status
+          type: string
+          x-graphql-type-name: CustomerStatus
+        tax_number:
+          example: US123945459
+          nullable: true
+          title: Tax number
+          type: string
+        updated_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          readOnly: true
+          title: Updated at (timestamp)
+          type: string
+        updated_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          type: string
+      type: object
+    DeleteCustomerSupportCustomerResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -1711,11 +2094,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: companies
+          example: customers
           type: string
         service:
           description: Apideck ID of service provider
-          example: zoho-crm
+          example: kustomer
           type: string
         status:
           description: HTTP Response Status
@@ -1757,21 +2140,21 @@ components:
       required:
         - email
       type: object
-    GetLeadResponse:
+    GetCustomerSupportCustomerResponse:
       properties:
         data:
-          $ref: "#/components/schemas/Lead"
+          $ref: "#/components/schemas/CustomerSupportCustomer"
         operation:
           description: Operation performed
           example: one
           type: string
         resource:
           description: Unified API resource name
-          example: companies
+          example: customers
           type: string
         service:
           description: Apideck ID of service provider
-          example: zoho-crm
+          example: kustomer
           type: string
         status:
           description: HTTP Response Status
@@ -1789,11 +2172,12 @@ components:
         - operation
         - data
       type: object
-    GetLeadsResponse:
+      x-graphql-type-name: CustomerSupportCustomer
+    GetCustomerSupportCustomersResponse:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/Lead"
+            $ref: "#/components/schemas/CustomerSupportCustomer"
           type: array
         links:
           $ref: "#/components/schemas/Links"
@@ -1805,11 +2189,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: companies
+          example: customers
           type: string
         service:
           description: Apideck ID of service provider
-          example: zoho-crm
+          example: kustomer
           type: string
         status:
           description: HTTP Response Status
@@ -1827,7 +2211,7 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: LeadList
+      x-graphql-type-name: CustomerSupportCustomerList
     Lead:
       additionalProperties: false
       properties:
@@ -1939,100 +2323,6 @@ components:
         - email
         - first_name
         - last_name
-    LeadEventType:
-      enum:
-        - "*"
-        - lead.lead.created
-        - lead.lead.updated
-        - lead.lead.deleted
-      example: lead.lead.created
-      type: string
-    LeadWebhookEvent:
-      allOf:
-        - properties:
-            entity_id:
-              description: The service provider's ID of the entity that triggered this event
-              example: 123456ASDF
-              type: string
-            entity_type:
-              description: The type entity that triggered this event
-              example: Company
-              type: string
-            entity_url:
-              description: The url to retrieve entity detail.
-              example: https://unify.apideck.com/crm/contacts/123456
-              type: string
-            event_id:
-              description: Unique reference to this request event
-              example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
-              type: string
-            execution_attempt:
-              description: The current count this request event has been attempted
-              example: 2
-              type: number
-            occurred_at:
-              description: ISO Datetime for when the original event occurred
-              example: 2021-10-01T03:14:55.419Z
-              type: string
-            service_id:
-              description: Service provider identifier
-              example: close
-              type: string
-          type: object
-        - properties:
-            event_type:
-              $ref: "#/components/schemas/LeadEventType"
-          type: object
-      x-sdk-exclude: true
-    LeadsFilter:
-      additionalProperties: false
-      example:
-        email: elon@tesla.com
-        first_name: Elon
-        last_name: Musk
-      properties:
-        email:
-          description: E-mail of the lead to filter on
-          example: elon@tesla.com
-          type: string
-        first_name:
-          description: First name of the lead to filter on
-          example: Elon
-          type: string
-        last_name:
-          description: Last name of the lead to filter on
-          example: Musk
-          type: string
-        name:
-          description: Name of the lead to filter on
-          example: Elon Musk
-          type: string
-      type: object
-      x-graphql-type-name: LeadsFilter
-    LeadsSort:
-      additionalProperties: false
-      example:
-        by: created_at
-        direction: desc
-      properties:
-        by:
-          description: The field on which to sort the Leads
-          enum:
-            - created_at
-            - updated_at
-            - name
-            - first_name
-            - last_name
-            - email
-          example: created_at
-          type: string
-          x-graphql-type-name: LeadsSortBy
-        direction:
-          $ref: "#/components/schemas/SortDirection"
-      required:
-        - by
-      type: object
-      x-graphql-type-name: LeadsSort
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:
@@ -2138,6 +2428,182 @@ components:
           description: The type of error returned
           example: MappingError
           type: string
+    Opportunity:
+      additionalProperties: false
+      properties:
+        close_date:
+          example: 2020-10-30
+          format: date
+          nullable: true
+          type: string
+        company_id:
+          example: "12345"
+          nullable: true
+          type: string
+        company_name:
+          example: Copper
+          nullable: true
+          type: string
+        contact_id:
+          example: "12345"
+          nullable: true
+          type: string
+        created_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          readOnly: true
+          type: string
+        created_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          type: string
+        currency:
+          $ref: "#/components/schemas/Currency"
+        custom_fields:
+          items:
+            $ref: "#/components/schemas/CustomField"
+          type: array
+        date_last_contacted:
+          example: 2020-09-30T00:00:00.000Z
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        date_lead_created:
+          example: 2020-09-30T00:00:00.000Z
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        date_stage_changed:
+          example: 2020-09-30T00:00:00.000Z
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        deleted:
+          example: false
+          readOnly: true
+          type: boolean
+        description:
+          example: Opportunities are created for People and Companies that are interested in buying your products or services. Create Opportunities for People and Companies to move them through one of your Pipelines.
+          nullable: true
+          type: string
+        expected_revenue:
+          description: Expected Revenue
+          example: 75000
+          nullable: true
+          readOnly: true
+          type: number
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        interaction_count:
+          example: 0
+          nullable: true
+          readOnly: true
+          type: number
+        last_activity_at:
+          example: 2020-09-30T07:43:32.000Z
+          nullable: true
+          readOnly: true
+          type: string
+        lead_id:
+          example: "12345"
+          nullable: true
+          type: string
+        lead_source:
+          description: Lead source
+          example: Website
+          nullable: true
+          type: string
+        loss_reason:
+          example: No budget
+          nullable: true
+          type: string
+        loss_reason_id:
+          example: "12345"
+          nullable: true
+          type: string
+        monetary_amount:
+          example: 75000
+          nullable: true
+          type: number
+        owner_id:
+          example: "12345"
+          nullable: true
+          type: string
+        pipeline_id:
+          example: "12345"
+          nullable: true
+          type: string
+        pipeline_stage_id:
+          example: "12345"
+          nullable: true
+          type: string
+        primary_contact_id:
+          example: "12345"
+          nullable: true
+          type: string
+        priority:
+          example: None
+          nullable: true
+          type: string
+        source_id:
+          example: "12345"
+          nullable: true
+          type: string
+        stage_last_changed_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          nullable: true
+          type: string
+        status:
+          example: Open
+          nullable: true
+          type: string
+        status_id:
+          example: "12345"
+          nullable: true
+          type: string
+        tags:
+          $ref: "#/components/schemas/Tags"
+        title:
+          example: New Rocket
+          minLength: 1
+          type: string
+        type:
+          example: Existing Customer - Upgrade
+          nullable: true
+          type: string
+        updated_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          readOnly: true
+          type: string
+        updated_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          type: string
+        win_probability:
+          example: 40
+          nullable: true
+          type: number
+        won_reason:
+          example: Best pitch
+          nullable: true
+          type: string
+        won_reason_id:
+          example: "12345"
+          nullable: true
+          type: string
+      required:
+        - title
+        - primary_contact_id
+      type: object
     PaymentRequiredResponse:
       properties:
         detail:
@@ -2209,6 +2675,58 @@ components:
       required:
         - number
       type: object
+    Pipeline:
+      additionalProperties: false
+      properties:
+        archived:
+          example: false
+          type: boolean
+        created_at:
+          example: 2017-08-12T20:43:21.291Z
+          readOnly: true
+          type: string
+        currency:
+          $ref: "#/components/schemas/Currency"
+        display_order:
+          example: 1
+          type: integer
+        id:
+          example: default
+          type: string
+        name:
+          example: Sales Pipeline
+          minLength: 1
+          type: string
+        stages:
+          items:
+            additionalProperties: false
+            properties:
+              display_order:
+                example: 1
+                type: integer
+              id:
+                example: contractsent
+                readOnly: true
+                type: string
+              name:
+                example: Contract Sent
+                type: string
+              value:
+                example: CONTRACT_SENT
+                type: string
+              win_probability:
+                description: The expected probability of winning an Opportunity in this Pipeline Stage. Valid values are [0-100].
+                example: 50
+                type: integer
+            type: object
+          type: array
+        updated_at:
+          example: 2017-08-12T20:43:21.291Z
+          readOnly: true
+          type: string
+      required:
+        - name
+      x-pii: []
     RowVersion:
       example: 1-12345
       nullable: true
@@ -2231,14 +2749,6 @@ components:
       required:
         - url
       type: object
-    SortDirection:
-      default: asc
-      description: The direction in which to sort the results
-      enum:
-        - asc
-        - desc
-      type: string
-      x-graphql-type-name: SortDirection
     Tags:
       example:
         - New
@@ -2367,7 +2877,7 @@ components:
           description: The type of error returned
           example: InvalidStateError
           type: string
-    UpdateLeadResponse:
+    UpdateCustomerSupportCustomerResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -2377,11 +2887,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: companies
+          example: customers
           type: string
         service:
           description: Apideck ID of service provider
-          example: zoho-crm
+          example: kustomer
           type: string
         status:
           description: HTTP Response Status
@@ -2444,84 +2954,3 @@ components:
       in: header
       name: Authorization
       type: apiKey
-    applicationId:
-      description: The ID of your Unify application
-      in: header
-      name: x-apideck-app-id
-      type: apiKey
-    consumerId:
-      description: The ID of the consumer which you want to get or push data from
-      in: header
-      name: x-apideck-consumer-id
-      type: apiKey
-x-webhooks:
-  LeadCreated:
-    post:
-      description: Lead Created
-      operationId: leadCreated
-      parameters:
-        - description: The type of event that was triggered
-          in: header
-          name: x-apideck-event-type
-          required: true
-          schema:
-            example: lead.lead.created
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/LeadWebhookEvent"
-      responses:
-        "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      summary: Lead Created
-      tags:
-        - Lead
-  LeadDeleted:
-    post:
-      description: Lead Deleted
-      operationId: leadDeleted
-      parameters:
-        - description: The type of event that was triggered
-          in: header
-          name: x-apideck-event-type
-          required: true
-          schema:
-            example: lead.lead.deleted
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/LeadWebhookEvent"
-      responses:
-        "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      summary: Lead Deleted
-      tags:
-        - Lead
-  LeadUpdated:
-    post:
-      description: Lead Updated
-      operationId: leadUpdated
-      parameters:
-        - description: The type of event that was triggered
-          in: header
-          name: x-apideck-event-type
-          required: true
-          schema:
-            example: lead.lead.updated
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/LeadWebhookEvent"
-      responses:
-        "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      summary: Lead Updated
-      tags:
-        - Lead
-  x-sdk-exclude: true
