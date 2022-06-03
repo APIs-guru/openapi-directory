@@ -2937,6 +2937,13 @@ components:
         gpuPartitionSize:
           description: Size of partitions to create on the GPU. Valid values are described in the NVIDIA [mig user guide](https://docs.nvidia.com/datacenter/tesla/mig-user-guide/#partitioning).
           type: string
+        gpuSharingConfig:
+          $ref: "#/components/schemas/GPUSharingConfig"
+          description: The configuration for GPU sharing options.
+        maxTimeSharedClientsPerGpu:
+          description: The number of time-shared GPU resources to expose for each physical GPU.
+          format: int64
+          type: string
       type: object
     AddonsConfig:
       description: Configuration for the addons that can be automatically spun up in the cluster, enabling additional functionality.
@@ -3714,6 +3721,20 @@ components:
             type: string
           type: array
       type: object
+    GPUSharingConfig:
+      description: GPUSharingConfig represents the GPU sharing configuration for Hardware Accelerators.
+      properties:
+        gpuSharingStrategy:
+          description: The type of GPU sharing strategy to enable on the GPU node.
+          enum:
+            - GPU_SHARING_STRATEGY_UNSPECIFIED
+            - TIME_SHARING
+          type: string
+        maxSharedClientsPerGpu:
+          description: The max number of containers that can share a physical GPU.
+          format: int64
+          type: string
+      type: object
     GcePersistentDiskCsiDriverConfig:
       description: Configuration for the Compute Engine PD CSI driver.
       properties:
@@ -4295,7 +4316,7 @@ components:
           type: array
       type: object
     NodeConfig:
-      description: Parameters that describe the nodes in a cluster. *Note:* GKE Autopilot clusters do not recognize parameters in `NodeConfig`. Use AutoprovisioningNodePoolDefaults instead.
+      description: Parameters that describe the nodes in a cluster. GKE Autopilot clusters do not recognize parameters in `NodeConfig`. Use AutoprovisioningNodePoolDefaults instead.
       properties:
         accelerators:
           description: A list of hardware accelerators to be attached to each node. See https://cloud.google.com/compute/docs/gpus for more information about support for GPUs.

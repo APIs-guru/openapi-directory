@@ -431,24 +431,27 @@ components:
       description: "Representation of a Realtime Database instance. Details on interacting with contents of a DatabaseInstance can be found at: https://firebase.google.com/docs/database/rest/start."
       properties:
         databaseUrl:
-          description: Immutable. The globally unique hostname of the database.
+          description: Output only. Output Only. The globally unique hostname of the database.
+          readOnly: true
           type: string
         name:
           description: "The fully qualified resource name of the database instance, in the form: `projects/{project-number}/locations/{location-id}/instances/{database-id}`."
           type: string
         project:
-          description: "The resource name of the project this instance belongs to. For example: `projects/{project-number}`."
+          description: "Output only. The resource name of the project this instance belongs to. For example: `projects/{project-number}`."
+          readOnly: true
           type: string
         state:
-          description: The database's lifecycle state. Read-only.
+          description: Output only. The database's lifecycle state. Read-only.
           enum:
             - LIFECYCLE_STATE_UNSPECIFIED
             - ACTIVE
             - DISABLED
             - DELETED
+          readOnly: true
           type: string
         type:
-          description: The database instance type. On creation only USER_DATABASE is allowed, which is also the default when omitted.
+          description: Immutable. The database instance type. On creation only USER_DATABASE is allowed, which is also the default when omitted.
           enum:
             - DATABASE_INSTANCE_TYPE_UNSPECIFIED
             - DEFAULT_DATABASE

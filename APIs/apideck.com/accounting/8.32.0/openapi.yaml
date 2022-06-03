@@ -272,7 +272,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 8.31.3
+  version: 8.32.0
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -4105,6 +4105,7 @@ components:
       title: Is active
       type: boolean
     Address:
+      additionalProperties: false
       properties:
         city:
           description: Name of city.
@@ -4439,6 +4440,7 @@ components:
         - equity
       type: object
     BankAccount:
+      additionalProperties: false
       properties:
         account_name:
           description: The name which you used in opening your bank account.
@@ -6197,6 +6199,7 @@ components:
       readOnly: true
       type: string
     Email:
+      additionalProperties: false
       properties:
         email:
           example: elon@musk.com
@@ -7874,6 +7877,7 @@ components:
           example: RequestLimitError
           type: string
     PhoneNumber:
+      additionalProperties: false
       properties:
         area_code:
           example: "323"
@@ -7918,58 +7922,6 @@ components:
       required:
         - number
       type: object
-    Pipeline:
-      additionalProperties: false
-      properties:
-        archived:
-          example: false
-          type: boolean
-        created_at:
-          example: 2017-08-12T20:43:21.291Z
-          readOnly: true
-          type: string
-        currency:
-          $ref: "#/components/schemas/Currency"
-        display_order:
-          example: 1
-          type: integer
-        id:
-          example: default
-          type: string
-        name:
-          example: Sales Pipeline
-          minLength: 1
-          type: string
-        stages:
-          items:
-            additionalProperties: false
-            properties:
-              display_order:
-                example: 1
-                type: integer
-              id:
-                example: contractsent
-                readOnly: true
-                type: string
-              name:
-                example: Contract Sent
-                type: string
-              value:
-                example: CONTRACT_SENT
-                type: string
-              win_probability:
-                description: The expected probability of winning an Opportunity in this Pipeline Stage. Valid values are [0-100].
-                example: 50
-                type: integer
-            type: object
-          type: array
-        updated_at:
-          example: 2017-08-12T20:43:21.291Z
-          readOnly: true
-          type: string
-      required:
-        - name
-      x-pii: []
     Quantity:
       example: 1
       nullable: true
@@ -7986,6 +7938,7 @@ components:
       title: Sales Tax Number
       type: string
     SocialLink:
+      additionalProperties: false
       properties:
         id:
           example: "12345"
@@ -8663,6 +8616,7 @@ components:
       readOnly: true
       type: string
     Website:
+      additionalProperties: false
       properties:
         id:
           example: "12345"

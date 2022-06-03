@@ -272,7 +272,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: HRIS API
-  version: 8.31.3
+  version: 8.32.0
   x-apideck-api: hris
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -310,7 +310,7 @@ tags:
     x-apideck-model:
       $ref: "#/components/schemas/Payroll"
   - description: ""
-    name: EmployeePayrolls
+    name: Employee Payrolls
     x-apideck-model:
       $ref: "#/components/schemas/EmployeePayroll"
 paths:
@@ -417,6 +417,7 @@ paths:
                 legal_name: 'SpaceX',
                 display_name: 'SpaceX',
                 subdomain: 'company',
+                status: 'active',
                 company_number: '123456-AB',
                 addresses: [
                   {
@@ -634,6 +635,7 @@ paths:
                 legal_name: 'SpaceX',
                 display_name: 'SpaceX',
                 subdomain: 'company',
+                status: 'active',
                 company_number: '123456-AB',
                 addresses: [
                   {
@@ -1104,6 +1106,10 @@ paths:
                   last_name: 'Musk',
                   email: 'elon@musk.com'
                 },
+                direct_reports: [
+                  'a0d636c6-43b3-4bde-8c70-85b707d992f4',
+                  'a98lfd96-43b3-4bde-8c70-85b707d992e6'
+                ],
                 social_security_number: '123456789',
                 birthday: '2000-08-12',
                 country_of_birth: 'US',
@@ -1114,9 +1120,15 @@ paths:
                 languages: ['EN'],
                 nationalities: ['US'],
                 photo_url: 'https://unavatar.io/elon-musk',
+                timezone: 'Europe/London',
+                source:
+                  'When the employee is imported as a new hire, this field indicates what system (e.g. the name of the ATS) this employee was imported from.',
+                source_id:
+                  'Unique identifier of the employee in the system this employee was imported from (e.g. the ID in the ATS).',
                 jobs: [
                   {
                     title: 'CEO',
+                    role: 'Sales',
                     compensation_rate: 72000,
                     currency: 'USD',
                     payment_unit: 'year',
@@ -1159,6 +1171,7 @@ paths:
                     effective_date: '2021-06-11'
                   }
                 ],
+                works_remote: true,
                 addresses: [
                   {
                     id: '123',
@@ -1218,6 +1231,10 @@ paths:
                     type: 'twitter'
                   }
                 ],
+                tax_code: '1111',
+                tax_id: '234-32-0000',
+                dietary_preference: 'Veggie',
+                food_allergies: ['No allergies'],
                 row_version: '1-12345',
                 deleted: true
               }
@@ -1412,6 +1429,10 @@ paths:
                   last_name: 'Musk',
                   email: 'elon@musk.com'
                 },
+                direct_reports: [
+                  'a0d636c6-43b3-4bde-8c70-85b707d992f4',
+                  'a98lfd96-43b3-4bde-8c70-85b707d992e6'
+                ],
                 social_security_number: '123456789',
                 birthday: '2000-08-12',
                 country_of_birth: 'US',
@@ -1422,9 +1443,15 @@ paths:
                 languages: ['EN'],
                 nationalities: ['US'],
                 photo_url: 'https://unavatar.io/elon-musk',
+                timezone: 'Europe/London',
+                source:
+                  'When the employee is imported as a new hire, this field indicates what system (e.g. the name of the ATS) this employee was imported from.',
+                source_id:
+                  'Unique identifier of the employee in the system this employee was imported from (e.g. the ID in the ATS).',
                 jobs: [
                   {
                     title: 'CEO',
+                    role: 'Sales',
                     compensation_rate: 72000,
                     currency: 'USD',
                     payment_unit: 'year',
@@ -1467,6 +1494,7 @@ paths:
                     effective_date: '2021-06-11'
                   }
                 ],
+                works_remote: true,
                 addresses: [
                   {
                     id: '123',
@@ -1526,6 +1554,10 @@ paths:
                     type: 'twitter'
                   }
                 ],
+                tax_code: '1111',
+                tax_id: '234-32-0000',
+                dietary_preference: 'Veggie',
+                food_allergies: ['No allergies'],
                 row_version: '1-12345',
                 deleted: true
               }
@@ -1617,7 +1649,7 @@ paths:
         - apiKey: []
       summary: List Employee Payrolls
       tags:
-        - EmployeePayrolls
+        - Employee Payrolls
       x-apideck-api: hris
       x-codeSamples:
         - label: Node
@@ -1670,7 +1702,7 @@ paths:
         - apiKey: []
       summary: Get Employee Payroll
       tags:
-        - EmployeePayrolls
+        - Employee Payrolls
       x-apideck-api: hris
       x-codeSamples:
         - label: Node
@@ -2002,6 +2034,7 @@ components:
       description: Companies
   schemas:
     Address:
+      additionalProperties: false
       properties:
         city:
           description: Name of city.
@@ -3043,6 +3076,7 @@ components:
       title: Division
       type: string
     Email:
+      additionalProperties: false
       properties:
         email:
           example: elon@musk.com
@@ -3152,6 +3186,20 @@ components:
           type: string
         description:
           $ref: "#/components/schemas/Description"
+        dietary_preference:
+          description: Indicate the employee's dietary preference.
+          example: Veggie
+          nullable: true
+          title: Dietary preference
+          type: string
+        direct_reports:
+          example:
+            - a0d636c6-43b3-4bde-8c70-85b707d992f4
+            - a98lfd96-43b3-4bde-8c70-85b707d992e6
+          items:
+            type: string
+          nullable: true
+          type: array
         display_name:
           example: Technoking
           nullable: true
@@ -3186,6 +3234,8 @@ components:
                 - employee
                 - freelance
                 - temp
+                - intership
+                - other
               nullable: true
               type: string
           type: object
@@ -3206,6 +3256,15 @@ components:
           type: string
         first_name:
           $ref: "#/components/schemas/FirstName"
+        food_allergies:
+          description: Indicate the employee's food allergies.
+          example:
+            - No allergies
+          items:
+            type: string
+          nullable: true
+          title: Food allergies
+          type: array
         gender:
           $ref: "#/components/schemas/Gender"
         id:
@@ -3243,6 +3302,11 @@ components:
                 $ref: "#/components/schemas/Address"
               payment_unit:
                 $ref: "#/components/schemas/PaymentUnit"
+              role:
+                example: Sales
+                nullable: true
+                title: Job role
+                type: string
               title:
                 $ref: "#/components/schemas/Title"
             type: object
@@ -3313,6 +3377,7 @@ components:
           type: string
         social_links:
           items:
+            additionalProperties: false
             properties:
               id:
                 example: "12345"
@@ -3335,7 +3400,28 @@ components:
           nullable: true
           title: Social Security Number
           type: string
+        source:
+          example: When the employee is imported as a new hire, this field indicates what system (e.g. the name of the ATS) this employee was imported from.
+          nullable: true
+          title: Source
+          type: string
+        source_id:
+          example: Unique identifier of the employee in the system this employee was imported from (e.g. the ID in the ATS).
+          nullable: true
+          title: Source ID
+          type: string
+        tax_code:
+          example: "1111"
+          nullable: true
+          title: Tax Code
+          type: string
+        tax_id:
+          example: 234-32-0000
+          nullable: true
+          title: Tax ID
+          type: string
         team:
+          additionalProperties: false
           description: The team the user is currently in.
           nullable: true
           properties:
@@ -3348,12 +3434,23 @@ components:
               nullable: true
               type: string
           type: object
+        timezone:
+          example: Europe/London
+          nullable: true
+          title: Timezone
+          type: string
         title:
           $ref: "#/components/schemas/Title"
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
+        works_remote:
+          description: Indicates whether the employee works remote
+          example: true
+          nullable: true
+          title: Remote
+          type: boolean
       type: object
     EmployeeNumber:
       description: An Employee Number, Employee ID or Employee Code, is a unique number that has been assigned to each individual staff member within a company.
@@ -3795,6 +3892,14 @@ components:
           items:
             $ref: "#/components/schemas/PhoneNumber"
           type: array
+        status:
+          enum:
+            - active
+            - inactive
+            - trial
+            - other
+          example: active
+          type: string
         subdomain:
           example: company
           minLength: 1
@@ -4086,6 +4191,7 @@ components:
       type: object
       x-graphql-type-name: PayrollsFilter
     PhoneNumber:
+      additionalProperties: false
       properties:
         area_code:
           example: "323"
@@ -4427,6 +4533,7 @@ components:
           type: object
       x-sdk-exclude: true
     Website:
+      additionalProperties: false
       properties:
         id:
           example: "12345"
