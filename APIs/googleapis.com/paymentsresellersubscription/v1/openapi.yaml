@@ -734,7 +734,7 @@ components:
           type: integer
       type: object
     GoogleCloudPaymentsResellerSubscriptionV1Subscription:
-      description: A Subscription resource managed by 3P Partners.
+      description: LINT.IfChange A Subscription resource managed by 3P Partners.
       properties:
         cancellationDetails:
           $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1SubscriptionCancellationDetails"
@@ -844,8 +844,12 @@ components:
           type: string
       type: object
     GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItem:
-      description: "Individual line item definition of a subscription. Next id: 5"
+      description: "Individual line item definition of a subscription. Next id: 6"
       properties:
+        description:
+          description: Output only. Description of this line item.
+          readOnly: true
+          type: string
         lineItemFreeTrialEndTime:
           description: Output only. It is set only if the line item has its own free trial applied. End time of the line item free trial period, in ISO 8061 format. For example, "2019-08-31T17:28:54.564Z". It will be set the same as createTime if no free trial promotion is specified.
           format: google-datetime

@@ -1090,6 +1090,8 @@ components:
           example: "+12129876543"
           nullable: true
           type: string
+        first_name:
+          $ref: "#/components/schemas/FirstName"
         id:
           example: "12345"
           readOnly: true
@@ -1114,6 +1116,8 @@ components:
           nullable: true
           readOnly: true
           type: string
+        last_name:
+          $ref: "#/components/schemas/LastName"
         name:
           example: SpaceX
           minLength: 1
@@ -2030,10 +2034,7 @@ components:
             $ref: "#/components/schemas/Email"
           type: array
         first_name:
-          example: Elon
-          nullable: true
-          title: First name
-          type: string
+          $ref: "#/components/schemas/FirstName"
         id:
           example: "12345"
           readOnly: true
@@ -2044,10 +2045,7 @@ components:
           title: Is individual
           type: boolean
         last_name:
-          example: Musk
-          nullable: true
-          title: Last name
-          type: string
+          $ref: "#/components/schemas/LastName"
         notes:
           example: Some notes about this customer
           nullable: true
@@ -2143,6 +2141,11 @@ components:
       required:
         - email
       type: object
+    FirstName:
+      example: Elon
+      nullable: true
+      title: First name
+      type: string
     GetCustomerSupportCustomerResponse:
       properties:
         data:
@@ -2215,6 +2218,11 @@ components:
         - data
       type: object
       x-graphql-type-name: CustomerSupportCustomerList
+    LastName:
+      example: Musk
+      nullable: true
+      title: Last name
+      type: string
     Lead:
       additionalProperties: false
       properties:

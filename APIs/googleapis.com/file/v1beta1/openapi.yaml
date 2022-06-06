@@ -552,6 +552,97 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1beta1/{parent}/shares":
+    get:
+      description: Lists all shares for a specified instance.
+      operationId: file.projects.locations.instances.shares.list
+      parameters:
+        - description: Required. The instance for which to retrieve share information, in the format `projects/{project_id}/locations/{location}/instances/{instance_id}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: List filter.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Sort results. Supported values are "name", "name desc" or "" (unsorted).
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: The maximum number of items to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value to use if there are additional results to retrieve for this list request.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListSharesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a share.
+      operationId: file.projects.locations.instances.shares.create
+      parameters:
+        - description: Required. The Filestore Instance to create the share for, in the format `projects/{project_id}/locations/{location}/instances/{instance_id}`
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID to use for the share. The ID must be unique within the specified instance. This value must start with a lowercase letter followed by up to 62 lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
+          in: query
+          name: shareId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Share"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1beta1/{parent}/snapshots":
     get:
       description: Lists all snapshots in a project for either a specified location or for all locations.
@@ -739,6 +830,9 @@ components:
           description: Output only. Amount of bytes that will be downloaded if the backup is restored
           format: int64
           readOnly: true
+          type: string
+        kmsKeyName:
+          description: Immutable. KMS key name used for data encryption.
           type: string
         labels:
           additionalProperties:
@@ -1045,6 +1139,15 @@ components:
     Instance:
       description: A Cloud Filestore instance.
       properties:
+        capacityGb:
+          description: The storage capacity of the instance in gigabytes (GB = 1024^3 bytes). This capacity can be increased up to `max_capacity_gb` GB in multipliers of `capacity_step_size_gb` GB.
+          format: int64
+          type: string
+        capacityStepSizeGb:
+          description: Output only. The increase/decrease capacity step size.
+          format: int64
+          readOnly: true
+          type: string
         createTime:
           description: Output only. The time when the instance was created.
           format: google-datetime
@@ -1069,6 +1172,19 @@ components:
             type: string
           description: Resource labels to represent user provided metadata.
           type: object
+        maxCapacityGb:
+          description: Output only. The max capacity of the instance.
+          format: int64
+          readOnly: true
+          type: string
+        maxShareCount:
+          description: Output only. The max number of shares allowed.
+          format: int64
+          readOnly: true
+          type: string
+        multiShareEnabled:
+          description: Indicates whether this instance uses a multi-share configuration with which it can have more than one file-share or none at all. File-shares are added, updated and removed through the separate file-share APIs.
+          type: boolean
         name:
           description: Output only. The resource name of the instance, in the format `projects/{project_id}/locations/{location_id}/instances/{instance_id}`.
           readOnly: true
@@ -1177,6 +1293,23 @@ components:
           description: A list of operations that matches the specified filter in the request.
           items:
             $ref: "#/components/schemas/Operation"
+          type: array
+      type: object
+    ListSharesResponse:
+      description: ListSharesResponse is the result of ListSharesRequest.
+      properties:
+        nextPageToken:
+          description: The token you can use to retrieve the next page of results. Not returned if there are no more results in the list.
+          type: string
+        shares:
+          description: A list of shares in the project for the specified instance.
+          items:
+            $ref: "#/components/schemas/Share"
+          type: array
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
           type: array
       type: object
     ListSnapshotsResponse:
@@ -1418,6 +1551,48 @@ components:
         startTime:
           $ref: "#/components/schemas/TimeOfDay"
           description: Time within the window to start the operations.
+      type: object
+    Share:
+      description: A Cloud Filestore share.
+      properties:
+        capacityGb:
+          description: File share capacity in gigabytes (GB). Cloud Filestore defines 1 GB as 1024^3 bytes. Must be greater than 0.
+          format: int64
+          type: string
+        createTime:
+          description: Output only. The time when the share was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: A description of the share with 2048 characters or less. Requests with longer descriptions will be rejected.
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Resource labels to represent user provided metadata.
+          type: object
+        mountName:
+          description: The mount name of the share. Must be 63 characters or less and consist of uppercase or lowercase letters, numbers, and underscores.
+          type: string
+        name:
+          description: Output only. The resource name of the share, in the format `projects/{project_id}/locations/{location_id}/instances/{instance_id}/shares/{share_id}`.
+          readOnly: true
+          type: string
+        nfsExportOptions:
+          description: Nfs Export Options. There is a limit of 10 export options per file share.
+          items:
+            $ref: "#/components/schemas/NfsExportOptions"
+          type: array
+        state:
+          description: Output only. The share state.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - READY
+            - DELETING
+          readOnly: true
+          type: string
       type: object
     Snapshot:
       description: A Cloud Filestore snapshot.

@@ -34,6 +34,8 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - oauth2_legacy:
+            - analytics.behavioral_events.send
       summary: Sends Custom Behavioral Event
       tags:
         - Behavioral_Events_Tracking
@@ -157,3 +159,11 @@ components:
       in: query
       name: hapikey
       type: apiKey
+    oauth2_legacy:
+      flows:
+        authorizationCode:
+          authorizationUrl: https://app.hubspot.com/oauth/authorize
+          scopes:
+            analytics.behavioral_events.send: Send Behavioral Event Completions
+          tokenUrl: https://api.hubapi.com/oauth/v1/token
+      type: oauth2

@@ -1726,6 +1726,41 @@ components:
       description: Request message for ArchiveCustomMetric RPC.
       properties: {}
       type: object
+    GoogleAnalyticsAdminV1alphaAttributionSettings:
+      description: The attribution settings used for a given property. This is a singleton resource.
+      properties:
+        acquisitionConversionEventLookbackWindow:
+          description: Required. The lookback window configuration for acquisition conversion events. The default window size is 30 days.
+          enum:
+            - ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_UNSPECIFIED
+            - ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_7_DAYS
+            - ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_30_DAYS
+          type: string
+        name:
+          description: 'Output only. Resource name of this attribution settings resource. Format: properties/{property_id}/attributionSettings Example: "properties/1000/attributionSettings"'
+          readOnly: true
+          type: string
+        otherConversionEventLookbackWindow:
+          description: Required. The lookback window for all other, non-acquisition conversion events. The default window size is 90 days.
+          enum:
+            - OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_UNSPECIFIED
+            - OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_30_DAYS
+            - OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_60_DAYS
+            - OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_90_DAYS
+          type: string
+        reportingAttributionModel:
+          description: Required. The reporting attribution model used to calculate conversion credit in this property's reports. Changing the attribution model will apply to both historical and future data. These changes will be reflected in reports with conversion and revenue data. User and session data will be unaffected.
+          enum:
+            - REPORTING_ATTRIBUTION_MODEL_UNSPECIFIED
+            - CROSS_CHANNEL_DATA_DRIVEN
+            - CROSS_CHANNEL_LAST_CLICK
+            - CROSS_CHANNEL_FIRST_CLICK
+            - CROSS_CHANNEL_LINEAR
+            - CROSS_CHANNEL_POSITION_BASED
+            - CROSS_CHANNEL_TIME_DECAY
+            - ADS_PREFERRED_LAST_CLICK
+          type: string
+      type: object
     GoogleAnalyticsAdminV1alphaAuditUserLink:
       description: Read-only resource used to summarize a principal's effective roles.
       properties:
@@ -1857,6 +1892,9 @@ components:
         account:
           $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAccount"
           description: A snapshot of an Account resource in change history.
+        attributionSettings:
+          $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAttributionSettings"
+          description: A snapshot of AttributionSettings resource in change history.
         conversionEvent:
           $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaConversionEvent"
           description: A snapshot of a ConversionEvent resource in change history.
@@ -2679,6 +2717,7 @@ components:
               - DISPLAY_VIDEO_360_ADVERTISER_LINK
               - DISPLAY_VIDEO_360_ADVERTISER_LINK_PROPOSAL
               - DATA_STREAM
+              - ATTRIBUTION_SETTINGS
             type: string
           type: array
       type: object

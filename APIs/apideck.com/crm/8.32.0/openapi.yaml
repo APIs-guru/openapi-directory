@@ -891,6 +891,8 @@ paths:
                 abn_or_tfn: '46 115 614 695',
                 abn_branch: '123',
                 acn: 'XXX XXX XXX',
+                first_name: 'Elon',
+                last_name: 'Musk',
                 bank_accounts: [
                   {
                     iban: 'CH2989144532982975332',
@@ -1155,6 +1157,8 @@ paths:
                 abn_or_tfn: '46 115 614 695',
                 abn_branch: '123',
                 acn: 'XXX XXX XXX',
+                first_name: 'Elon',
+                last_name: 'Musk',
                 bank_accounts: [
                   {
                     iban: 'CH2989144532982975332',
@@ -4547,6 +4551,8 @@ components:
           example: "+12129876543"
           nullable: true
           type: string
+        first_name:
+          $ref: "#/components/schemas/FirstName"
         id:
           example: "12345"
           readOnly: true
@@ -4571,6 +4577,8 @@ components:
           nullable: true
           readOnly: true
           type: string
+        last_name:
+          $ref: "#/components/schemas/LastName"
         name:
           example: SpaceX
           minLength: 1
@@ -6066,6 +6074,11 @@ components:
       required:
         - email
       type: object
+    FirstName:
+      example: Elon
+      nullable: true
+      title: First name
+      type: string
     GetActivitiesResponse:
       properties:
         data:
@@ -6637,6 +6650,11 @@ components:
         - data
       type: object
       x-graphql-type-name: UserList
+    LastName:
+      example: Musk
+      nullable: true
+      title: Last name
+      type: string
     Lead:
       additionalProperties: false
       properties:
@@ -7767,10 +7785,7 @@ components:
           title: Employee number
           type: string
         first_name:
-          example: Elon
-          nullable: true
-          title: First name
-          type: string
+          $ref: "#/components/schemas/FirstName"
         id:
           example: "12345"
           readOnly: true
@@ -7785,10 +7800,7 @@ components:
           nullable: true
           type: string
         last_name:
-          example: Musk
-          nullable: true
-          title: Last name
-          type: string
+          $ref: "#/components/schemas/LastName"
         parent_id:
           example: "54321"
           nullable: true

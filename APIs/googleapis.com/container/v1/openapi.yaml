@@ -2900,6 +2900,9 @@ components:
         gpuPartitionSize:
           description: Size of partitions to create on the GPU. Valid values are described in the NVIDIA [mig user guide](https://docs.nvidia.com/datacenter/tesla/mig-user-guide/#partitioning).
           type: string
+        gpuSharingConfig:
+          $ref: "#/components/schemas/GPUSharingConfig"
+          description: The configuration for GPU sharing options.
       type: object
     AddonsConfig:
       description: Configuration for the addons that can be automatically spun up in the cluster, enabling additional functionality.
@@ -3573,6 +3576,20 @@ components:
             type: string
           type: array
       type: object
+    GPUSharingConfig:
+      description: GPUSharingConfig represents the GPU sharing configuration for Hardware Accelerators.
+      properties:
+        gpuSharingStrategy:
+          description: The type of GPU sharing strategy to enable on the GPU node.
+          enum:
+            - GPU_SHARING_STRATEGY_UNSPECIFIED
+            - TIME_SHARING
+          type: string
+        maxSharedClientsPerGpu:
+          description: The max number of containers that can share a physical GPU.
+          format: int64
+          type: string
+      type: object
     GcePersistentDiskCsiDriverConfig:
       description: Configuration for the Compute Engine PD CSI driver.
       properties:
@@ -4071,7 +4088,7 @@ components:
           type: array
       type: object
     NodeConfig:
-      description: "Parameters that describe the nodes in a cluster. *Note: *GKE Autopilot clusters do not recognize parameters in `NodeConfig`. Use AutoprovisioningNodePoolDefaults instead."
+      description: Parameters that describe the nodes in a cluster. GKE Autopilot clusters do not recognize parameters in `NodeConfig`. Use AutoprovisioningNodePoolDefaults instead.
       properties:
         accelerators:
           description: A list of hardware accelerators to be attached to each node. See https://cloud.google.com/compute/docs/gpus for more information about support for GPUs.
@@ -4084,6 +4101,9 @@ components:
         bootDiskKmsKey:
           description: " The Customer Managed Encryption Key used to encrypt the boot disk attached to each node in the node pool. This should be of the form projects/[KEY_PROJECT_ID]/locations/[LOCATION]/keyRings/[RING_NAME]/cryptoKeys/[KEY_NAME]. For more information about protecting resources with Cloud KMS Keys please see: https://cloud.google.com/compute/docs/disks/customer-managed-encryption"
           type: string
+        confidentialNodes:
+          $ref: "#/components/schemas/ConfidentialNodes"
+          description: Confidential nodes config. All the nodes in the node pool will be Confidential VM once enabled.
         diskSizeGb:
           description: Size of the disk attached to each node, specified in GB. The smallest allowed disk size is 10GB. If unspecified, the default disk size is 100GB.
           format: int32
@@ -5113,6 +5133,9 @@ components:
         clusterId:
           description: Deprecated. The name of the cluster to upgrade. This field has been deprecated and replaced by the name field.
           type: string
+        confidentialNodes:
+          $ref: "#/components/schemas/ConfidentialNodes"
+          description: Confidential nodes config. All the nodes in the node pool will be Confidential VM once enabled.
         gcfsConfig:
           $ref: "#/components/schemas/GcfsConfig"
           description: GCFS config.

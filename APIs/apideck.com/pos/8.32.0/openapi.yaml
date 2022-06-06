@@ -1456,6 +1456,8 @@ paths:
                 alternate_name: 'Modifier New',
                 minimum_required: 1,
                 maximum_allowed: 5,
+                selection_type: 'single',
+                present_at_all_locations: false,
                 modifiers: [
                   {
                     id: '12345',
@@ -1466,6 +1468,7 @@ paths:
                     available: true
                   }
                 ],
+                deleted: true,
                 row_version: '1-12345'
               }
             }
@@ -1632,6 +1635,8 @@ paths:
                 alternate_name: 'Modifier New',
                 minimum_required: 1,
                 maximum_allowed: 5,
+                selection_type: 'single',
+                present_at_all_locations: false,
                 modifiers: [
                   {
                     id: '12345',
@@ -1642,6 +1647,7 @@ paths:
                     available: true
                   }
                 ],
+                deleted: true,
                 row_version: '1-12345'
               }
             }
@@ -1777,6 +1783,7 @@ paths:
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/modifierGroupFilter"
       responses:
         "200":
           $ref: "#/components/responses/DeleteModifierResponse"
@@ -1827,6 +1834,7 @@ paths:
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/modifierGroupFilter"
       responses:
         "200":
           $ref: "#/components/responses/GetModifierResponse"
@@ -4035,6 +4043,14 @@ components:
       required: true
       schema:
         type: string
+    modifierGroupFilter:
+      description: Apply filters (beta)
+      explode: true
+      in: query
+      name: filter
+      schema:
+        $ref: "#/components/schemas/ModifierGroupFilter"
+      style: deepObject
     raw:
       description: Include raw response. Mostly used for debugging purposes
       in: query
@@ -6813,6 +6829,8 @@ components:
           $ref: "#/components/schemas/CreatedAt"
         created_by:
           $ref: "#/components/schemas/CreatedBy"
+        deleted:
+          $ref: "#/components/schemas/Deleted"
         id:
           $ref: "#/components/schemas/Id"
         maximum_allowed:
@@ -6851,13 +6869,35 @@ components:
           example: Modifier
           title: Name
           type: string
+        present_at_all_locations:
+          example: false
+          title: Present at all locations
+          type: boolean
         row_version:
           $ref: "#/components/schemas/RowVersion"
+        selection_type:
+          enum:
+            - single
+            - multiple
+          example: single
+          title: Indicates whether multiple options from the modifier group can be applied to a single or multiple modifiers
+          type: string
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+    ModifierGroupFilter:
+      additionalProperties: false
+      example:
+        modifier_group_id: "1234"
+      properties:
+        modifier_group_id:
+          description: Id of the job to filter on
+          example: "1234"
+          type: string
+      type: object
+      x-graphql-type-name: ModifierGroupFilter
     NotFoundResponse:
       properties:
         detail:
