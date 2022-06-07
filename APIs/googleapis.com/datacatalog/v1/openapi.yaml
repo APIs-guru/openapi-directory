@@ -13,17 +13,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Google Cloud Data Catalog API
   version: v1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://datacatalog.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: datacatalog
 externalDocs:
@@ -1477,7 +1475,8 @@ components:
       properties:
         dataplexTable:
           $ref: "#/components/schemas/GoogleCloudDatacatalogV1DataplexTableSpec"
-          description: Fields specific to a Dataplex table and present only in the Dataplex table entries.
+          description: Output only. Fields specific to a Dataplex table and present only in the Dataplex table entries.
+          readOnly: true
         type:
           description: Type of this table.
           enum:
@@ -1551,10 +1550,12 @@ components:
       properties:
         bigqueryDateShardedSpec:
           $ref: "#/components/schemas/GoogleCloudDatacatalogV1BigQueryDateShardedSpec"
-          description: Specification for a group of BigQuery tables with the `[prefix]YYYYMMDD` name pattern. For more information, see [Introduction to partitioned tables] (https://cloud.google.com/bigquery/docs/partitioned-tables#partitioning_versus_sharding).
+          description: Output only. Specification for a group of BigQuery tables with the `[prefix]YYYYMMDD` name pattern. For more information, see [Introduction to partitioned tables] (https://cloud.google.com/bigquery/docs/partitioned-tables#partitioning_versus_sharding).
+          readOnly: true
         bigqueryTableSpec:
           $ref: "#/components/schemas/GoogleCloudDatacatalogV1BigQueryTableSpec"
-          description: Specification that applies to a BigQuery table. Valid only for entries with the `TABLE` type.
+          description: Output only. Specification that applies to a BigQuery table. Valid only for entries with the `TABLE` type.
+          readOnly: true
         businessContext:
           $ref: "#/components/schemas/GoogleCloudDatacatalogV1BusinessContext"
           description: Business Context of the entry. Not supported for BigQuery datasets
@@ -2455,5 +2456,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

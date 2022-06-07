@@ -1707,7 +1707,7 @@ components:
           type: string
       type: object
     NamespacedDebugInput:
-      description: "Next ID: 15"
+      description: "Next ID: 16"
       properties:
         absolutelyForcedExpNames:
           description: Set of experiment names to be absolutely forced. These experiments will be forced without evaluating the conditions.
@@ -1776,6 +1776,13 @@ components:
             type: boolean
           description: Rollouts to force in a particular experiment state. Map from rollout name to rollout value.
           type: object
+        testingMode:
+          description: If set to ALL_OFF, organic selection will be disabled; if set to ALL_ON, organic selection will be disabled, and only select launch experiments will receive traffic. See go/mendel-aoao-runtime-design.
+          enum:
+            - TESTING_MODE_UNSPECIFIED
+            - TESTING_MODE_ALL_OFF
+            - TESTING_MODE_ALL_ON
+          type: string
       type: object
     NumericBucketingOption:
       description: Input only. Use this field to specify bucketing option for the histogram search response.

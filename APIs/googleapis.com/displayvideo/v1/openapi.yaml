@@ -11046,7 +11046,7 @@ components:
       description: Details for assigned household income targeting option. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_HOUSEHOLD_INCOME`.
       properties:
         householdIncome:
-          description: Output only. The household income of the audience.
+          description: The household income of the audience. Output only in v1. Required in v2.
           enum:
             - HOUSEHOLD_INCOME_UNSPECIFIED
             - HOUSEHOLD_INCOME_UNKNOWN
@@ -11056,7 +11056,6 @@ components:
             - HOUSEHOLD_INCOME_TOP_21_TO_30_PERCENT
             - HOUSEHOLD_INCOME_TOP_11_TO_20_PERCENT
             - HOUSEHOLD_INCOME_TOP_10_PERCENT
-          readOnly: true
           type: string
         targetingOptionId:
           description: Required. The targeting_option_id of a TargetingOption of type `TARGETING_TYPE_HOUSEHOLD_INCOME`.

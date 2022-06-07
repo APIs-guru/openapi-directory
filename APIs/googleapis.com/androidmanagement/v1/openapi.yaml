@@ -428,6 +428,40 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/enrollmentTokens":
+    get:
+      description: "Lists active, unexpired enrollment tokens for a given enterprise. The list items contain only a partial view of EnrollmentToken: all the fields but name and expiration_timestamp are empty. This method is meant to help manage active enrollment tokens lifecycle. For security reasons, it's recommended to delete active enrollment tokens as soon as they're not intended to be used anymore."
+      operationId: androidmanagement.enterprises.enrollmentTokens.list
+      parameters:
+        - description: Required. The name of the enterprise in the form enterprises/{enterpriseId}.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The requested page size. The service may return fewer than this value. If unspecified, at most 10 items will be returned. The maximum value is 100; values above 100 will be coerced to 100.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results returned by the server.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListEnrollmentTokensResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidmanagement
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidmanagement
+      tags:
+        - enterprises
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -441,7 +475,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates an enrollment token for a given enterprise.
+      description: Creates an enrollment token for a given enterprise. It's up to the caller's responsibility to manage the lifecycle of newly created tokens and deleting them when they're not intended to be used anymore. Once an enrollment token has been created, it's not possible to retrieve the token's content anymore using AM API. It is recommended for EMMs to securely store the token if it's intended to be reused.
       operationId: androidmanagement.enterprises.enrollmentTokens.create
       parameters:
         - description: The name of the enterprise in the form enterprises/{enterpriseId}.
@@ -1858,6 +1892,18 @@ components:
           description: If there are more results, a token to retrieve next page of results.
           type: string
       type: object
+    ListEnrollmentTokensResponse:
+      description: Response to a request to list enrollment tokens for a given enterprise.
+      properties:
+        enrollmentTokens:
+          description: The list of enrollment tokens.
+          items:
+            $ref: "#/components/schemas/EnrollmentToken"
+          type: array
+        nextPageToken:
+          description: If there are more results, a token to retrieve next page of results.
+          type: string
+      type: object
     ListEnterprisesResponse:
       description: Response to a request to list enterprises.
       properties:
@@ -2119,7 +2165,7 @@ components:
       description: Additional context for non-compliance related to Wi-Fi configuration.
       properties:
         wifiGuid:
-          description: The guid of non-compliant Wi-Fi configuration.
+          description: The GUID of non-compliant Wi-Fi configuration.
           type: string
       type: object
     Operation:
@@ -2884,7 +2930,7 @@ components:
           description: Additional context for non-compliance related to Wi-Fi configuration. See ONC_WIFI_INVALID_VALUE.
         passwordPoliciesContext:
           $ref: "#/components/schemas/PasswordPoliciesContext"
-          description: Additional context for non-compliance related to password policies. See PASSWORD_POLICIES_PASSWORD_EXPIRED, and PASSWORD_POLICIES_PASSWORD_NOT_SUFFICIENT.
+          description: Additional context for non-compliance related to password policies. See PASSWORD_POLICIES_PASSWORD_EXPIRED and PASSWORD_POLICIES_PASSWORD_NOT_SUFFICIENT.
       type: object
     Status:
       description: "The Status type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by gRPC (https://github.com/grpc). Each Status message contains three pieces of data: error code, error message, and error details.You can find out more about this error model and how to work with it in the API Design Guide (https://cloud.google.com/apis/design/errors)."

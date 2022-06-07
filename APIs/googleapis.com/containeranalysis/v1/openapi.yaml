@@ -1930,8 +1930,9 @@ components:
         algo:
           description: "`SHA1`, `SHA512` etc."
           type: string
-        digestValue:
-          description: "Value of the digest encoded. For example: SHA512 - base64 encoding, SHA1 - hex encoding."
+        digestBytes:
+          description: Value of the digest.
+          format: byte
           type: string
       type: object
     DiscoveryNote:
