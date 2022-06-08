@@ -2441,6 +2441,9 @@ paths:
               - OBJECT_TARGETING_TEMPLATE
               - OBJECT_SEARCH_LIFT_STUDY
               - OBJECT_FLOODLIGHT_DV360_LINK
+              - OBJECT_ADVERTISER_CUSTOMER_LINK
+              - OBJECT_CREATIVE_PROJECT
+              - OBJECT_ACCOUNT_CAMPAIGN_CREATIVE_PROJECT_LINK
             type: string
         - description: Value of the nextPageToken from the previous result page.
           in: query
@@ -5729,6 +5732,14 @@ paths:
                 - UNKNOWN
                 - APPLE_APP_STORE
                 - GOOGLE_PLAY_STORE
+                - ROKU_APP_STORE
+                - AMAZON_FIRETV_APP_STORE
+                - PLAYSTATION_APP_STORE
+                - APPLE_TV_APP_STORE
+                - XBOX_APP_STORE
+                - SAMSUNG_TV_APP_STORE
+                - ANDROID_TV_APP_STORE
+                - GENERIC_CTV_APP_STORE
               type: string
             type: array
           style: form
@@ -10971,7 +10982,7 @@ components:
           $ref: "#/components/schemas/MeasurementPartnerCampaignLink"
           description: Measurement partner campaign link for tag wrapping.
         name:
-          description: Name of this campaign. This is a required field and must be less than 256 characters long and unique among campaigns of the same advertiser.
+          description: Name of this campaign. This is a required field and must be less than 512 characters long and unique among campaigns of the same advertiser.
           type: string
         nielsenOcrEnabled:
           description: Whether Nielsen reports are enabled for this campaign.
@@ -11573,6 +11584,7 @@ components:
             - CREATIVE_AUTHORING_SOURCE_DBM
             - CREATIVE_AUTHORING_SOURCE_STUDIO
             - CREATIVE_AUTHORING_SOURCE_GWD
+            - CREATIVE_AUTHORING_SOURCE_ACS
           type: string
         authoringTool:
           description: "Authoring tool for HTML5 banner creatives. This is a read-only field. Applicable to the following creative types: HTML5_BANNER."
@@ -12334,6 +12346,7 @@ components:
               - CLICK_TAG_HARD_CODED
               - SVG_INVALID
               - CLICK_TAG_IN_RICH_MEDIA
+              - MISSING_ENABLER_REFERENCE
             type: string
           type: array
       type: object
@@ -14268,6 +14281,7 @@ components:
           enum:
             - NONE
             - INTEGRAL_AD_SCIENCE
+            - DOUBLE_VERIFY
           type: string
         partnerAdvertiserId:
           description: .
@@ -14292,6 +14306,7 @@ components:
           enum:
             - NONE
             - INTEGRAL_AD_SCIENCE
+            - DOUBLE_VERIFY
           type: string
         partnerCampaignId:
           description: Partner campaign ID needed for establishing linking with Measurement partner.
@@ -14317,6 +14332,7 @@ components:
           enum:
             - NONE
             - INTEGRAL_AD_SCIENCE
+            - DOUBLE_VERIFY
           type: string
         tagWrappingMode:
           description: Measurement mode for the wrapped placement.
@@ -14327,7 +14343,14 @@ components:
             - MONITORING_ONLY
             - VIDEO_PIXEL_MONITORING
             - TRACKING
+            - VPAID_MONITORING
+            - VPAID_BLOCKING
             - NON_VPAID_MONITORING
+            - VPAID_ONLY_MONITORING
+            - VPAID_ONLY_BLOCKING
+            - VPAID_ONLY_FILTERING
+            - VPAID_FILTERING
+            - NON_VPAID_FILTERING
           type: string
         wrappedTag:
           description: Tag provided by the measurement partner during wrapping.
@@ -14392,6 +14415,14 @@ components:
             - UNKNOWN
             - APPLE_APP_STORE
             - GOOGLE_PLAY_STORE
+            - ROKU_APP_STORE
+            - AMAZON_FIRETV_APP_STORE
+            - PLAYSTATION_APP_STORE
+            - APPLE_TV_APP_STORE
+            - XBOX_APP_STORE
+            - SAMSUNG_TV_APP_STORE
+            - ANDROID_TV_APP_STORE
+            - GENERIC_CTV_APP_STORE
           type: string
         id:
           description: ID of this mobile app.
@@ -14994,7 +15025,7 @@ components:
           $ref: "#/components/schemas/LookbackConfiguration"
           description: Lookback window settings for this placement.
         name:
-          description: Name of this placement.This is a required field and must be less than or equal to 256 characters long.
+          description: Name of this placement.This is a required field and must be less than or equal to 512 characters long.
           type: string
         partnerWrappingData:
           $ref: "#/components/schemas/MeasurementPartnerWrappingData"

@@ -31,7 +31,6 @@ externalDocs:
   url: https://developers.google.com/shopping-content/v2/
 tags:
   - name: accounts
-  - name: accountsbyexternalsellerid
   - name: accountstatuses
   - name: accountstatusesbyexternalsellerid
   - name: accounttax
@@ -1591,49 +1590,6 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - accounts
-  "/{merchantId}/accountsbyexternalsellerid/{externalSellerId}":
-    get:
-      description: Gets data of the account with the specified external_seller_id belonging to the MCA with the specified merchant_id.
-      operationId: content.accountsbyexternalsellerid.get
-      parameters:
-        - description: Required. The ID of the MCA containing the seller.
-          in: path
-          name: merchantId
-          required: true
-          schema:
-            type: string
-        - description: Required. The External Seller ID of the seller account to be retrieved.
-          in: path
-          name: externalSellerId
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Account"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/content
-          Oauth2c:
-            - https://www.googleapis.com/auth/content
-      tags:
-        - accountsbyexternalsellerid
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
   "/{merchantId}/accountstatuses":
     get:
       description: Lists the statuses of the sub-accounts in your Merchant Center account.
@@ -2612,7 +2568,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Invokes a fetch for the datafeed in your Merchant Center account. If you need to call this method more than once per day, we recommend you use the Products service to update your product data.
+      description: Invokes a fetch for the datafeed in your Merchant Center account. If you need to call this method more than once per day, we recommend you use the [Products service](https://developers.google.com/shopping-content/reference/rest/v2.1/products) to update your product data.
       operationId: content.datafeeds.fetchnow
       parameters:
         - description: The ID of the account that manages the datafeed. This account cannot be a multi-client account.
@@ -5341,7 +5297,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Update the regional inventory of a product in your Merchant Center account. If a regional inventory with the same region ID already exists, this method updates that entry.
+      description: Updates the regional inventory of a product in your Merchant Center account. If a regional inventory with the same region ID already exists, this method updates that entry.
       operationId: content.regionalinventory.insert
       parameters:
         - description: The ID of the account that contains the product. This account cannot be a multi-client account.
@@ -5565,7 +5521,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Inserts a promotion for your Merchant Center account. If the promotion already exists, then it will update the promotion instead.
+      description: Inserts a promotion for your Merchant Center account. If the promotion already exists, then it updates the promotion instead.
       operationId: content.promotions.create
       parameters:
         - description: Required. The ID of the account that contains the collection.
@@ -10496,7 +10452,7 @@ components:
     OrderShipment:
       properties:
         carrier:
-          description: "The carrier handling the shipment. For supported carriers, Google includes the carrier name and tracking URL in emails to customers. For select supported carriers, Google also automatically updates the shipment status based on the provided shipment ID. *Note:* You can also use unsupported carriers, but emails to customers won't include the carrier name or tracking URL, and there will be no automatic order status updates. Supported carriers for \"US\" are: - \"`ups`\" (United Parcel Service) *automatic status updates* - \"`usps`\" (United States Postal Service) *automatic status updates* - \"`fedex`\" (FedEx) *automatic status updates * - \"`dhl`\" (DHL eCommerce) *automatic status updates* (US only) - \"`ontrac`\" (OnTrac) *automatic status updates * - \"`dhl express`\" (DHL Express) - \"`deliv`\" (Deliv) - \"`dynamex`\" (TForce) - \"`lasership`\" (LaserShip) - \"`mpx`\" (Military Parcel Xpress) - \"`uds`\" (United Delivery Service) - \"`efw`\" (Estes Forwarding Worldwide) - \"`jd logistics`\" (JD Logistics) - \"`yunexpress`\" (YunExpress) - \"`china post`\" (China Post) - \"`china ems`\" (China Post Express Mail Service) - \"`singapore post`\" (Singapore Post) - \"`pos malaysia`\" (Pos Malaysia) - \"`postnl`\" (PostNL) - \"`ptt`\" (PTT Turkish Post) - \"`eub`\" (ePacket) - \"`chukou1`\" (Chukou1 Logistics) - \"`bestex`\" (Best Express) - \"`canada post`\" (Canada Post) - \"`purolator`\" (Purolator) - \"`canpar`\" (Canpar) - \"`india post`\" (India Post) - \"`blue dart`\" (Blue Dart) - \"`delhivery`\" (Delhivery) - \"`dtdc`\" (DTDC) - \"`tpc india`\" (TPC India) - \"`lso`\" (Lone Star Overnight) - \"`tww`\" (Team Worldwide) - \"`deliver-it`\" (Deliver-IT) Supported carriers for FR are: - \"`la poste`\" (La Poste) *automatic status updates * - \"`colissimo`\" (Colissimo by La Poste) *automatic status updates* - \"`ups`\" (United Parcel Service) *automatic status updates * - \"`chronopost`\" (Chronopost by La Poste) - \"`gls`\" (General Logistics Systems France) - \"`dpd`\" (DPD Group by GeoPost) - \"`bpost`\" (Belgian Post Group) - \"`colis prive`\" (Colis Privé) - \"`boxtal`\" (Boxtal) - \"`geodis`\" (GEODIS) - \"`tnt`\" (TNT) - \"`db schenker`\" (DB Schenker) - \"`aramex`\" (Aramex) "
+          description: "The carrier handling the shipment. For supported carriers, Google includes the carrier name and tracking URL in emails to customers. For select supported carriers, Google also automatically updates the shipment status based on the provided shipment ID. *Note:* You can also use unsupported carriers, but emails to customers won't include the carrier name or tracking URL, and there will be no automatic order status updates. Supported carriers for \"US\" are: - \"`ups`\" (United Parcel Service) *automatic status updates* - \"`usps`\" (United States Postal Service) *automatic status updates* - \"`fedex`\" (FedEx) *automatic status updates * - \"`dhl`\" (DHL eCommerce) *automatic status updates* (US only) - \"`ontrac`\" (OnTrac) *automatic status updates * - \"`dhl express`\" (DHL Express) - \"`deliv`\" (Deliv) - \"`dynamex`\" (TForce) - \"`lasership`\" (LaserShip) - \"`mpx`\" (Military Parcel Xpress) - \"`uds`\" (United Delivery Service) - \"`efw`\" (Estes Forwarding Worldwide) - \"`jd logistics`\" (JD Logistics) - \"`yunexpress`\" (YunExpress) - \"`china post`\" (China Post) - \"`china ems`\" (China Post Express Mail Service) - \"`singapore post`\" (Singapore Post) - \"`pos malaysia`\" (Pos Malaysia) - \"`postnl`\" (PostNL) - \"`ptt`\" (PTT Turkish Post) - \"`eub`\" (ePacket) - \"`chukou1`\" (Chukou1 Logistics) - \"`bestex`\" (Best Express) - \"`canada post`\" (Canada Post) - \"`purolator`\" (Purolator) - \"`canpar`\" (Canpar) - \"`india post`\" (India Post) - \"`blue dart`\" (Blue Dart) - \"`delhivery`\" (Delhivery) - \"`dtdc`\" (DTDC) - \"`tpc india`\" (TPC India) - \"`lso`\" (Lone Star Overnight) - \"`tww`\" (Team Worldwide) - \"`deliver-it`\" (Deliver-IT) - \"`cdl last mile`\" (CDL Last Mile) Supported carriers for FR are: - \"`la poste`\" (La Poste) *automatic status updates * - \"`colissimo`\" (Colissimo by La Poste) *automatic status updates* - \"`ups`\" (United Parcel Service) *automatic status updates * - \"`chronopost`\" (Chronopost by La Poste) - \"`gls`\" (General Logistics Systems France) - \"`dpd`\" (DPD Group by GeoPost) - \"`bpost`\" (Belgian Post Group) - \"`colis prive`\" (Colis Privé) - \"`boxtal`\" (Boxtal) - \"`geodis`\" (GEODIS) - \"`tnt`\" (TNT) - \"`db schenker`\" (DB Schenker) - \"`aramex`\" (Aramex) "
           type: string
         creationDate:
           description: Date on which the shipment has been created, in ISO 8601 format.
@@ -12611,7 +12567,7 @@ components:
           type: array
       type: object
     Promotion:
-      description: " The Promotions feature is publicly available for the US, CA, IN, GB, AU target countries (en language only) in Content API for Shopping. Represents a promotion. See the following articles for more details. * [Promotions feed specification](https://support.google.com/merchants/answer/2906014) * [Local promotions feed specification](https://support.google.com/merchants/answer/10146130) * [Promotions on Buy on Google product data specification](https://support.google.com/merchants/answer/9173673)"
+      description: The Promotions feature is available for `AU`, `CA`, `DE`, `FR`, `GB`, `IN` and `US` target countries, and `en` content language. Represents a promotion. See the following articles for more details. * [Promotions feed specification](https://support.google.com/merchants/answer/2906014) * [Local promotions feed specification](https://support.google.com/merchants/answer/10146130) * [Promotions on Buy on Google product data specification](https://support.google.com/merchants/answer/9173673)
       properties:
         brand:
           description: Product filter by brand for the promotion.
@@ -12624,7 +12580,7 @@ components:
             type: string
           type: array
         contentLanguage:
-          description: Required. The content language used as part of the unique identifier. Currently only en value is supported.
+          description: Required. The content language used as part of the unique identifier. Currently only `en` value is supported.
           type: string
         couponValueType:
           description: Required. Coupon value type for the promotion.
@@ -12647,39 +12603,39 @@ components:
           description: Free gift description for the promotion.
           type: string
         freeGiftItemId:
-          description: Free gift item id for the promotion.
+          description: Free gift item ID for the promotion.
           type: string
         freeGiftValue:
           $ref: "#/components/schemas/PriceAmount"
           description: Free gift value for the promotion.
         genericRedemptionCode:
-          description: Generic redemption code for the promotion. To be used with the above field.
+          description: Generic redemption code for the promotion. To be used with the `offerType` field.
           type: string
         getThisQuantityDiscounted:
           description: The number of items discounted in the promotion.
           format: int32
           type: integer
         id:
-          description: Required. Output only. The REST promotion id to uniquely identify the promotion. Content API methods that operate on promotions take this as their promotionId parameter. The REST ID for a promotion is of the form [channel]:contentLanguage:targetCountry:promotionId The channel field will have a value of "online", "in_store", or "online_in_store".
+          description: Required. Output only. The REST promotion ID to uniquely identify the promotion. Content API methods that operate on promotions take this as their `promotionId` parameter. The REST ID for a promotion is of the form channel:contentLanguage:targetCountry:promotionId The `channel` field has a value of `"online"`, `"in_store"`, or `"online_in_store"`.
           readOnly: true
           type: string
         itemGroupId:
-          description: Product filter by item group id for the promotion.
+          description: Product filter by item group ID for the promotion.
           items:
             type: string
           type: array
         itemGroupIdExclusion:
-          description: Product filter by item group id exclusion for the promotion.
+          description: Product filter by item group ID exclusion for the promotion.
           items:
             type: string
           type: array
         itemId:
-          description: Product filter by item id for the promotion.
+          description: Product filter by item ID for the promotion.
           items:
             type: string
           type: array
         itemIdExclusion:
-          description: Product filter by item id exclusion for the promotion.
+          description: Product filter by item ID exclusion for the promotion.
           items:
             type: string
           type: array
@@ -12702,7 +12658,7 @@ components:
           type: integer
         moneyBudget:
           $ref: "#/components/schemas/PriceAmount"
-          description: Promotion cost cap of the promotion.
+          description: Cost cap for the promotion.
         moneyOffAmount:
           $ref: "#/components/schemas/PriceAmount"
           description: The money off amount offered in the promotion.
@@ -12744,19 +12700,19 @@ components:
             type: string
           type: array
         promotionDisplayDates:
-          description: "String representation of the promotion display dates (deprecated: Use promotion_display_time_period instead)."
+          description: String representation of the promotion display dates. Deprecated. Use `promotion_display_time_period` instead.
           type: string
         promotionDisplayTimePeriod:
           $ref: "#/components/schemas/TimePeriod"
-          description: TimePeriod representation of the promotion display dates.
+          description: "`TimePeriod` representation of the promotion's display dates."
         promotionEffectiveDates:
-          description: "String representation of the promotion effective dates (deprecated: Use promotion_effective_time_period instead)."
+          description: String representation of the promotion effective dates. Deprecated. Use `promotion_effective_time_period` instead.
           type: string
         promotionEffectiveTimePeriod:
           $ref: "#/components/schemas/TimePeriod"
-          description: Required. TimePeriod representation of the promotion effective dates.
+          description: Required. `TimePeriod` representation of the promotion's effective dates.
         promotionId:
-          description: Required. The user provided promotion id to uniquely identify the promotion.
+          description: Required. The user provided promotion ID to uniquely identify the promotion.
           type: string
         redemptionChannel:
           description: Required. Redemption channel for the promotion. At least one channel is required.
@@ -12768,12 +12724,12 @@ components:
             type: string
           type: array
         shippingServiceNames:
-          description: Shipping service names for thse promotion.
+          description: Shipping service names for the promotion.
           items:
             type: string
           type: array
         targetCountry:
-          description: Required. The target country used as part of the unique identifier. Currently only US and CA are supported.
+          description: Required. The target country used as part of the unique identifier. Can be `AU`, `CA`, `DE`, `FR`, `GB`, `IN` or `US`.
           type: string
       type: object
     PubsubNotificationSettings:

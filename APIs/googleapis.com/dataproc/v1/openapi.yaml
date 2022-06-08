@@ -1820,7 +1820,7 @@ components:
       description: Describes the identifying information, config, and status of a Dataproc cluster
       properties:
         clusterName:
-          description: Required. The cluster name. Cluster names within a project must be unique. Names of deleted clusters can be reused.
+          description: Required. The cluster name, which must be unique within a project. The name must start with a lowercase letter, and can contain up to 51 lowercase letters, numbers, and hyphens. It cannot end with a hyphen. The name of a deleted cluster can be reused.
           type: string
         clusterUuid:
           description: Output only. A cluster UUID (Unique Universal Identifier). Dataproc generates this value when it creates the cluster.
@@ -2266,6 +2266,9 @@ components:
           items:
             $ref: "#/components/schemas/GkeNodePoolAcceleratorConfig"
           type: array
+        bootDiskKmsKey:
+          description: "Optional. The Customer Managed Encryption Key (CMEK) (https://cloud.google.com/compute/docs/disks/customer-managed-encryption) used to encrypt the boot disk attached to each node in the node pool. Specify the key using the following format: projects/KEY_PROJECT_ID /locations/LOCATION/keyRings/RING_NAME/cryptoKeys/KEY_NAME."
+          type: string
         localSsdCount:
           description: Optional. The number of local SSD disks to attach to the node, which is limited by the maximum number of disks allowable per zone (see Adding Local SSDs (https://cloud.google.com/compute/docs/disks/local-ssd)).
           format: int32
@@ -2978,6 +2981,24 @@ components:
           format: google-duration
           type: string
       type: object
+    NodePool:
+      description: indicating a list of workers of same type
+      properties:
+        id:
+          description: Required. A unique id of the node pool. Primary and Secondary workers can be specified using special reserved ids PRIMARY_WORKER_POOL and SECONDARY_WORKER_POOL respectively. Aux node pools can be referenced using corresponding pool id.
+          type: string
+        instanceNames:
+          description: Name of instances to be repaired. These instances must belong to specified node pool.
+          items:
+            type: string
+          type: array
+        repairAction:
+          description: Required. Repair action to take on specified resources of the node pool.
+          enum:
+            - REPAIR_ACTION_UNSPECIFIED
+            - DELETE
+          type: string
+      type: object
     Operation:
       description: This resource represents a long-running operation that is the result of a network API call.
       properties:
@@ -3238,6 +3259,11 @@ components:
         clusterUuid:
           description: Optional. Specifying the cluster_uuid means the RPC will fail (with error NOT_FOUND) if a cluster with the specified UUID does not exist.
           type: string
+        nodePools:
+          description: Optional. Node pools and corresponding repair action to be taken. All node pools should be unique in this request. i.e. Multiple entries for the same node pool id are not allowed.
+          items:
+            $ref: "#/components/schemas/NodePool"
+          type: array
         requestId:
           description: "Optional. A unique ID used to identify the request. If the server receives two RepairClusterRequests with the same ID, the second request is ignored, and the first google.longrunning.Operation created and stored in the backend is returned.Recommendation: Set this value to a UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters."
           type: string

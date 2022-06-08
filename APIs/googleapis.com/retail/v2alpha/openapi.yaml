@@ -3304,6 +3304,9 @@ components:
     GoogleCloudRetailV2alphaSearchRequestFacetSpecFacetKey:
       description: Specifies how a facet is computed.
       properties:
+        caseInsensitive:
+          description: Whether to make facet keys case insensitive when getting faceting values with prefixes or contains.
+          type: boolean
         contains:
           description: Only get facet values that contains the given strings. For example, suppose "categories" has three values "Women > Shoe", "Women > Dress" and "Men > Shoe". If set "contains" to "Shoe", the "categories" facet will give only "Women > Shoe" and "Men > Shoe". Only supported on textual fields. Maximum is 10.
           items:

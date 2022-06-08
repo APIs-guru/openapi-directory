@@ -13,15 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Identity-Aware Proxy API
   version: v1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://iap.googleapis.com/$discovery/rest?version=v1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: iap
 externalDocs:
@@ -95,7 +97,7 @@ paths:
       description: Updates a TunnelDestGroup.
       operationId: iap.projects.iap_tunnel.locations.destGroups.patch
       parameters:
-        - description: Required. Immutable. Identifier for the TunnelDestGroup. Must be unique within the project.
+        - description: Required. Immutable. Identifier for the TunnelDestGroup. Must be unique within the project and contain only lower case letters (a-z) and dashes (-).
           in: path
           name: name
           required: true
@@ -361,7 +363,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Required. The ID to use for the TunnelDestGroup, which becomes the final component of the resource name. This value must be 4-63 characters, and valid characters are `a-z-`.
+        - description: Required. The ID to use for the TunnelDestGroup, which becomes the final component of the resource name. This value must be 4-63 characters, and valid characters are `[a-z]-`.
           in: query
           name: tunnelDestGroupId
           schema:
@@ -703,7 +705,7 @@ components:
           type: string
         csmSettings:
           $ref: "#/components/schemas/CsmSettings"
-          description: Settings to configure IAP's behavior for a CSM mesh.
+          description: Settings to configure IAP's behavior for a service mesh.
       type: object
     Binding:
       description: Associates `members`, or principals, with a `role`.
@@ -746,7 +748,7 @@ components:
           type: boolean
       type: object
     CsmSettings:
-      description: Configuration for RCTokens generated for CSM workloads protected by IAP. RCTokens are IAP generated JWTs that can be verified at the application. The RCToken is primarily used for ISTIO deployments, and can be scoped to a single mesh by configuring the audience field accordingly
+      description: Configuration for RCTokens generated for service mesh workloads protected by IAP. RCTokens are IAP generated JWTs that can be verified at the application. The RCToken is primarily used for service mesh deployments, and can be scoped to a single mesh by configuring the audience field accordingly
       properties:
         rctokenAud:
           description: Audience claim set in the generated RCToken. This value is not validated by IAP.
@@ -921,7 +923,7 @@ components:
           format: google-duration
           type: string
         method:
-          description: Reauth method required by the policy.
+          description: Reauth method requested.
           enum:
             - METHOD_UNSPECIFIED
             - LOGIN
@@ -996,7 +998,7 @@ components:
             type: string
           type: array
         name:
-          description: Required. Immutable. Identifier for the TunnelDestGroup. Must be unique within the project.
+          description: Required. Immutable. Identifier for the TunnelDestGroup. Must be unique within the project and contain only lower case letters (a-z) and dashes (-).
           type: string
       type: object
   securitySchemes:
@@ -1017,3 +1019,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}
