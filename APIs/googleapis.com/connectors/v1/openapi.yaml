@@ -109,7 +109,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Field mask is used to specify the fields to be overwritten in the Connection resource by the update. The fields specified in the update_mask are relative to the resource, not the full request. A field will be overwritten if it is in the mask. If the user does not provide a mask then all fields will be overwritten.
+        - description: Required. Field mask is used to specify the fields to be overwritten in the Connection resource by the update. The fields specified in the update_mask are relative to the resource, not the full request. A field will be overwritten if it is in the mask. If the user does not provide a mask then all fields will be overwritten.
           in: query
           name: updateMask
           schema:
@@ -879,6 +879,7 @@ components:
             - USER_PASSWORD
             - OAUTH2_JWT_BEARER
             - OAUTH2_CLIENT_CREDENTIALS
+            - SSH_PUBLIC_KEY
           type: string
         oauth2ClientCredentials:
           $ref: "#/components/schemas/Oauth2ClientCredentials"
@@ -886,6 +887,9 @@ components:
         oauth2JwtBearer:
           $ref: "#/components/schemas/Oauth2JwtBearer"
           description: Oauth2JwtBearer.
+        sshPublicKey:
+          $ref: "#/components/schemas/SshPublicKey"
+          description: SSH Public Key.
         userPassword:
           $ref: "#/components/schemas/UserPassword"
           description: UserPassword.
@@ -900,6 +904,7 @@ components:
             - USER_PASSWORD
             - OAUTH2_JWT_BEARER
             - OAUTH2_CLIENT_CREDENTIALS
+            - SSH_PUBLIC_KEY
           type: string
         configVariableTemplates:
           description: Config variables to describe an `AuthConfig` for a `Connection`.
@@ -1005,12 +1010,6 @@ components:
         description:
           description: Optional. Description of the resource.
           type: string
-        egressBackends:
-          description: Output only. Outbound domains/hosts needs to be allowlisted.
-          items:
-            type: string
-          readOnly: true
-          type: array
         envoyImageLocation:
           description: "Output only. GCR location where the envoy image is stored. formatted like: gcr.io/{bucketName}/{imageName}"
           readOnly: true
@@ -1863,6 +1862,10 @@ components:
           description: Output only. location_id of the runtime location. E.g. "us-west1".
           readOnly: true
           type: string
+        name:
+          description: "Output only. Resource name of the form: `projects/*/locations/*/runtimeConfig`"
+          readOnly: true
+          type: string
         runtimeEndpoint:
           description: Output only. The endpoint of the connectors runtime ingress.
           readOnly: true
@@ -1931,6 +1934,21 @@ components:
           enum:
             - SOURCE_TYPE_UNSPECIFIED
             - CONFIG_VARIABLE
+          type: string
+      type: object
+    SshPublicKey:
+      properties:
+        certType:
+          description: Format of SSH Client cert.
+          type: string
+        password:
+          $ref: "#/components/schemas/Secret"
+          description: This is an optional field used in case client has enabled multi-factor authentication
+        sshClientCert:
+          $ref: "#/components/schemas/Secret"
+          description: SSH Client Cert. It should contain both public and private key.
+        username:
+          description: The user account used to authenticate.
           type: string
       type: object
     Status:

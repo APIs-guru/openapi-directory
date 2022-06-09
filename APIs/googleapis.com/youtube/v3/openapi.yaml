@@ -1733,6 +1733,83 @@ paths:
             - https://www.googleapis.com/auth/youtube.force-ssl
       tags:
         - liveBroadcasts
+  /youtube/v3/liveBroadcasts/cuepoint:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Insert cuepoints in a broadcast
+      operationId: youtube.youtube.v3.liveBroadcasts.cuepoint.create
+      parameters:
+        - description: Broadcast to insert ads to, or equivalently `external_video_id` for internal use.
+          in: query
+          name: id
+          schema:
+            type: string
+        - description: "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+          in: query
+          name: onBehalfOfContentOwner
+          schema:
+            type: string
+        - description: This parameter can only be used in a properly authorized request. *Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwnerChannel* parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.
+          in: query
+          name: onBehalfOfContentOwnerChannel
+          schema:
+            type: string
+        - description: The *part* parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status.
+          explode: true
+          in: query
+          name: part
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        - in: query
+          name: resource.cueType
+          schema:
+            enum:
+              - cueTypeUnspecified
+              - cueTypeAd
+            type: string
+        - description: The duration of this cuepoint.
+          in: query
+          name: resource.durationSecs
+          schema:
+            type: integer
+        - description: The identifier for cuepoint resource.
+          in: query
+          name: resource.id
+          schema:
+            type: string
+        - description: The time when the cuepoint should be inserted by offset to the broadcast actual start time.
+          in: query
+          name: resource.insertionOffsetTimeMs
+          schema:
+            type: string
+        - description: The wall clock time at which the cuepoint should be inserted. Only one of insertion_offset_time_ms and walltime_ms may be set at a time.
+          in: query
+          name: resource.walltimeMs
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cuepoint"
+          description: Successful response
+      tags:
+        - youtube
   /youtube/v3/liveBroadcasts/transition:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -6728,6 +6805,30 @@ components:
           enum:
             - ytUnspecified
             - ytAgeRestricted
+          type: string
+      type: object
+    Cuepoint:
+      description: Note that there may be a 5-second end-point resolution issue. For instance, if a cuepoint comes in for 22:03:27, we may stuff the cuepoint into 22:03:25 or 22:03:30, depending. This is an artifact of HLS.
+      properties:
+        cueType:
+          enum:
+            - cueTypeUnspecified
+            - cueTypeAd
+          type: string
+        durationSecs:
+          description: The duration of this cuepoint.
+          format: uint32
+          type: integer
+        id:
+          description: The identifier for cuepoint resource.
+          type: string
+        insertionOffsetTimeMs:
+          description: The time when the cuepoint should be inserted by offset to the broadcast actual start time.
+          format: int64
+          type: string
+        walltimeMs:
+          description: The wall clock time at which the cuepoint should be inserted. Only one of insertion_offset_time_ms and walltime_ms may be set at a time.
+          format: uint64
           type: string
       type: object
     Entity:

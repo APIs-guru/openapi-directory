@@ -1061,6 +1061,10 @@ components:
     GoogleCloudRunV2ExecutionReference:
       description: Reference to an Execution. Use /Executions.GetExecution with the given name to get full execution including the latest status.
       properties:
+        completionTime:
+          description: Creation timestamp of the execution.
+          format: google-datetime
+          type: string
         createTime:
           description: Creation timestamp of the execution.
           format: google-datetime

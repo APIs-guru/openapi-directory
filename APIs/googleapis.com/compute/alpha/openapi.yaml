@@ -55886,7 +55886,7 @@ components:
           description: "[Output Only] The resource type, which is always compute#instanceGroupManager for managed instance groups."
           type: string
         listManagedInstancesResults:
-          description: Pagination behavior of listManagedInstances API method for this Managed Instance Group.
+          description: Pagination behavior of the listManagedInstances API method for this managed instance group.
           enum:
             - PAGELESS
             - PAGINATED
@@ -69348,13 +69348,7 @@ components:
             - DISABLE_GOOGLE_ACCESS
             - ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE
             - ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE
-            - ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE_FOR_SERVICE_ACCOUNTS
           type: string
-        privateIpv6GoogleAccessServiceAccounts:
-          description: Deprecated in favor of enable PrivateIpv6GoogleAccess on instance directly. The service accounts can be used to selectively turn on Private IPv6 Google Access only on the VMs primary service account matching the value. This value only takes effect when PrivateIpv6GoogleAccess is ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE_FOR_SERVICE_ACCOUNTS or ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE_FOR_SERVICE_ACCOUNTS.
-          items:
-            type: string
-          type: array
         purpose:
           description: The purpose of the resource. This field can be either PRIVATE_RFC_1918 or INTERNAL_HTTPS_LOAD_BALANCER. A subnetwork with purpose set to INTERNAL_HTTPS_LOAD_BALANCER is a user-created subnetwork that is reserved for Internal HTTP(S) Load Balancing. If unspecified, the purpose defaults to PRIVATE_RFC_1918. The enableFlowLogs field isn't supported with the purpose field set to INTERNAL_HTTPS_LOAD_BALANCER.
           enum:

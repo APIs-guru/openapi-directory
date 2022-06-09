@@ -2448,7 +2448,7 @@ paths:
       description: Lists key value entries for key values maps scoped to an organization, environment, or API proxy.
       operationId: apigee.organizations.keyvaluemaps.entries.list
       parameters:
-        - description: "Required. Scope as indicated by the URI in which to list key value maps. Use one of the following formats in your request: `organizations/{organization}/apis/{api}/keyvaluemaps/{keyvaluemap}`. `organizations/{organization}/environments/{environment}/keyvaluemaps/{keyvaluemap}` `organizations/{organization}/keyvaluemaps/{keyvaluemap}`."
+        - description: "Required. Scope as indicated by the URI in which to list key value maps. Use **one** of the following structures in your request: * `organizations/{organization}/apis/{api}/keyvaluemaps/{keyvaluemap}`. * `organizations/{organization}/environments/{environment}/keyvaluemaps/{keyvaluemap}` * `organizations/{organization}/keyvaluemaps/{keyvaluemap}`."
           in: path
           name: parent
           required: true
@@ -2459,7 +2459,7 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: Optional. Page token, a key value entry returned from a previous call that can use to retrieve the next page.
+        - description: Optional. Page token. If provides, must be a valid key value entry returned from a previous call that can be used to retrieve the next page.
           in: query
           name: pageToken
           schema:
@@ -2491,10 +2491,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates key value entries in a org, env or apis scoped key value map.
+      description: Creates key value entries in a key value map scoped to an organization, environment, or API proxy.
       operationId: apigee.organizations.keyvaluemaps.entries.create
       parameters:
-        - description: "Required. Scope as indicated by the URI in which to create the key value map entry. Use one of the following formats in your request: `organizations/{organization}/apis/{api}/keyvaluemaps/{keyvaluemap}`. `organizations/{organization}/environments/{environment}/keyvaluemaps/{keyvaluemap}` `organizations/{organization}/keyvaluemaps/{keyvaluemap}`."
+        - description: "Required. Scope as indicated by the URI in which to create the key value map entry. Use **one** of the following structures in your request: * `organizations/{organization}/apis/{api}/keyvaluemaps/{keyvaluemap}`. * `organizations/{organization}/environments/{environment}/keyvaluemaps/{keyvaluemap}` * `organizations/{organization}/keyvaluemaps/{keyvaluemap}`."
           in: path
           name: parent
           required: true
@@ -6279,7 +6279,7 @@ components:
       description: Collection of key/value string pairs.
       properties:
         encrypted:
-          description: Optional. Flag that specifies whether entry values will be encrypted. Enable to encrypt entry values.
+          description: Optional. Flag that specifies whether entry values will be encrypted. You must set this value to `true`. Apigee X and hybrid do not support unencrytped key value maps.
           type: boolean
         name:
           description: Required. ID of the key value map.
