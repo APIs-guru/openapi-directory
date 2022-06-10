@@ -860,9 +860,6 @@ components:
     AllocateIdsRequest:
       description: The request for Datastore.AllocateIds.
       properties:
-        databaseId:
-          description: If not empty, the ID of the database against which to make the request.
-          type: string
         keys:
           description: Required. A list of keys with incomplete key paths for which to allocate IDs. No key may be reserved/read-only.
           items:
@@ -890,9 +887,6 @@ components:
     BeginTransactionRequest:
       description: The request for Datastore.BeginTransaction.
       properties:
-        databaseId:
-          description: If not empty, the ID of the database against which to make the request.
-          type: string
         transactionOptions:
           $ref: "#/components/schemas/TransactionOptions"
           description: Options for a new transaction.
@@ -908,9 +902,6 @@ components:
     CommitRequest:
       description: The request for Datastore.Commit.
       properties:
-        databaseId:
-          description: If not empty, the ID of the database against which to make the request.
-          type: string
         mode:
           description: The type of commit to perform. Defaults to `TRANSACTIONAL`.
           enum:
@@ -949,7 +940,7 @@ components:
       description: A filter that merges multiple other filters using the given operator.
       properties:
         filters:
-          description: "The list of filters to combine. Requires: * At least one filter is present."
+          description: The list of filters to combine. Must contain at least one filter.
           items:
             $ref: "#/components/schemas/Filter"
           type: array
@@ -1509,9 +1500,6 @@ components:
     LookupRequest:
       description: The request for Datastore.Lookup.
       properties:
-        databaseId:
-          description: If not empty, the ID of the database against which to make the request.
-          type: string
         keys:
           description: Required. Keys of entities to look up.
           items:
@@ -1589,9 +1577,6 @@ components:
     PartitionId:
       description: 'A partition ID identifies a grouping of entities. The grouping is always by project and namespace, however the namespace ID may be empty. A partition ID contains several dimensions: project ID and namespace ID. Partition dimensions: - May be `""`. - Must be valid UTF-8 bytes. - Must have values that match regex `[A-Za-z\d\.\-_]{1,100}` If the value of any dimension matches regex `__.*__`, the partition is reserved/read-only. A reserved/read-only partition ID is forbidden in certain documented contexts. Foreign partition IDs (in which the project ID does not match the context project ID ) are discouraged. Reads and writes of foreign partition IDs may fail if the project is not in an active state.'
       properties:
-        databaseId:
-          description: If not empty, the ID of the database to which the entities belong.
-          type: string
         namespaceId:
           description: If not empty, the ID of the namespace to which the entities belong.
           type: string
@@ -1808,9 +1793,6 @@ components:
     RollbackRequest:
       description: The request for Datastore.Rollback.
       properties:
-        databaseId:
-          description: If not empty, the ID of the database against which to make the request.
-          type: string
         transaction:
           description: Required. The transaction identifier, returned by a call to Datastore.BeginTransaction.
           format: byte
@@ -1823,9 +1805,6 @@ components:
     RunQueryRequest:
       description: The request for Datastore.RunQuery.
       properties:
-        databaseId:
-          description: If not empty, the ID of the database against which to make the request.
-          type: string
         gqlQuery:
           $ref: "#/components/schemas/GqlQuery"
           description: The GQL query to run. This query must be a non-aggregation query.

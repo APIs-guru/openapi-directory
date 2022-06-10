@@ -1073,6 +1073,63 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1alpha1/{parent}/replicationCycles":
+    get:
+      description: Lists ReplicationCycles in a given MigratingVM.
+      operationId: vmmigration.projects.locations.sources.migratingVms.replicationCycles.list
+      parameters:
+        - description: Required. The parent, which owns this collection of ReplicationCycles.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. The filter request.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. the order by fields for the result.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. The maximum number of replication cycles to return. The service may return fewer than this value. If unspecified, at most 100 migrating VMs will be returned. The maximum value is 100; values above 100 will be coerced to 100.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Required. A page token, received from a previous `ListReplicationCycles` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListReplicationCycles` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListReplicationCyclesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1alpha1/{parent}/sources":
     get:
       description: Lists Sources in a given project and location.
@@ -1498,6 +1555,10 @@ components:
       schema:
         type: string
   schemas:
+    AdaptingOSStep:
+      description: AdaptingOSStep contains specific step details.
+      properties: {}
+      type: object
     AddGroupMigrationRequest:
       description: Request message for 'AddGroupMigration' request.
       properties:
@@ -1585,6 +1646,11 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        endTime:
+          description: Output only. The time the clone job was ended.
+          format: google-datetime
+          readOnly: true
+          type: string
         error:
           $ref: "#/components/schemas/Status"
           description: Output only. Provides details for the errors that led to the Clone Job's state.
@@ -1611,10 +1677,37 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        steps:
+          description: Output only. The clone steps list representing its progress.
+          items:
+            $ref: "#/components/schemas/CloneStep"
+          readOnly: true
+          type: array
         targetDetails:
           $ref: "#/components/schemas/TargetVMDetails"
           description: "Output only. Details of the VM to create as the target of this clone job. Deprecated: Use compute_engine_target_details instead."
           readOnly: true
+      type: object
+    CloneStep:
+      description: CloneStep holds information about the clone step progress.
+      properties:
+        adaptingOs:
+          $ref: "#/components/schemas/AdaptingOSStep"
+          description: Adapting OS step.
+        endTime:
+          description: The time the step has ended.
+          format: google-datetime
+          type: string
+        instantiatingMigratedVm:
+          $ref: "#/components/schemas/InstantiatingMigratedVMStep"
+          description: Instantiating migrated VM step.
+        preparingVmDisks:
+          $ref: "#/components/schemas/PreparingVMDisksStep"
+          description: Preparing VM disks step.
+        startTime:
+          description: The time the step has started.
+          format: google-datetime
+          type: string
       type: object
     ComputeEngineTargetDefaults:
       description: ComputeEngineTargetDefaults is a collection of details for creating a VM in a target Compute Engine project.
@@ -1825,6 +1918,11 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        endTime:
+          description: Output only. The time the cutover job had finished.
+          format: google-datetime
+          readOnly: true
+          type: string
         error:
           $ref: "#/components/schemas/Status"
           description: Output only. Provides details for the errors that led to the Cutover Job's state.
@@ -1865,10 +1963,43 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        steps:
+          description: Output only. The cutover steps list representing its progress.
+          items:
+            $ref: "#/components/schemas/CutoverStep"
+          readOnly: true
+          type: array
         targetDetails:
           $ref: "#/components/schemas/TargetVMDetails"
           description: "Output only. Details of the VM to create as the target of this cutover job. Deprecated: Use compute_engine_target_details instead."
           readOnly: true
+      type: object
+    CutoverStep:
+      description: CutoverStep holds information about the cutover step progress.
+      properties:
+        endTime:
+          description: The time the step has ended.
+          format: google-datetime
+          type: string
+        finalSync:
+          $ref: "#/components/schemas/ReplicationCycle"
+          description: Final sync step.
+        instantiatingMigratedVm:
+          $ref: "#/components/schemas/InstantiatingMigratedVMStep"
+          description: Instantiating migrated VM step.
+        preparingVmDisks:
+          $ref: "#/components/schemas/PreparingVMDisksStep"
+          description: Preparing VM disks step.
+        previousReplicationCycle:
+          $ref: "#/components/schemas/ReplicationCycle"
+          description: A replication cycle prior cutover step.
+        shuttingDownSourceVm:
+          $ref: "#/components/schemas/ShuttingDownSourceVMStep"
+          description: Shutting down VM step.
+        startTime:
+          description: The time the step has started.
+          format: google-datetime
+          type: string
       type: object
     CycleStep:
       description: CycleStep holds information about a step progress.
@@ -2009,6 +2140,10 @@ components:
       description: InitializingReplicationStep contains specific step details.
       properties: {}
       type: object
+    InstantiatingMigratedVMStep:
+      description: InstantiatingMigratedVMStep contains specific step details.
+      properties: {}
+      type: object
     Link:
       description: Describes a URL link.
       properties:
@@ -2141,6 +2276,26 @@ components:
           description: A list of operations that matches the specified filter in the request.
           items:
             $ref: "#/components/schemas/Operation"
+          type: array
+      type: object
+    ListReplicationCyclesResponse:
+      description: Response message for 'ListReplicationCycles' request.
+      properties:
+        nextPageToken:
+          description: Output only. A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          readOnly: true
+          type: string
+        replicationCycles:
+          description: Output only. The list of replication cycles response.
+          items:
+            $ref: "#/components/schemas/ReplicationCycle"
+          readOnly: true
+          type: array
+        unreachable:
+          description: Output only. Locations that could not be reached.
+          items:
+            type: string
+          readOnly: true
           type: array
       type: object
     ListSourcesResponse:
@@ -2453,6 +2608,10 @@ components:
       description: PostProcessingStep contains specific step details.
       properties: {}
       type: object
+    PreparingVMDisksStep:
+      description: PreparingVMDisksStep contains specific step details.
+      properties: {}
+      type: object
     RemoveGroupMigrationRequest:
       description: Request message for 'RemoveMigration' request.
       properties:
@@ -2483,6 +2642,13 @@ components:
     ReplicationCycle:
       description: ReplicationCycle contains information about the current replication cycle status.
       properties:
+        endTime:
+          description: The time the replication cycle has ended.
+          format: google-datetime
+          type: string
+        name:
+          description: The identifier of the ReplicationCycle.
+          type: string
         progress:
           description: The current progress in percentage of this cycle.
           format: int32
@@ -2546,6 +2712,10 @@ components:
           items:
             type: string
           type: array
+      type: object
+    ShuttingDownSourceVMStep:
+      description: ShuttingDownSourceVMStep contains specific step details.
+      properties: {}
       type: object
     Source:
       description: Source message describes a specific vm migration Source resource. It contains the source environment information.

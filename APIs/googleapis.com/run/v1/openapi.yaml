@@ -2301,6 +2301,10 @@ components:
     ExecutionReference:
       description: Reference to an Execution. Use /Executions.GetExecution with the given name to get full execution including the latest status.
       properties:
+        completionTimestamp:
+          description: Optional. Completion timestamp of the execution.
+          format: google-datetime
+          type: string
         creationTimestamp:
           description: Optional. Creation timestamp of the execution.
           format: google-datetime

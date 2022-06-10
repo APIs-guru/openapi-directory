@@ -849,7 +849,7 @@ components:
           $ref: "#/components/schemas/PubsubDestination"
           description: Destination on Pub/Sub.
         spriteSheets:
-          description: List of output sprite sheets.
+          description: List of output sprite sheets. Spritesheets require at least one VideoStream in the Jobconfig.
           items:
             $ref: "#/components/schemas/SpriteSheet"
           type: array
