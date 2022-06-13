@@ -3629,7 +3629,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ThirdPartyLink"
+                $ref: "#/components/schemas/ThirdPartyLinkListResponse"
           description: Successful response
       tags:
         - thirdPartyLinks
@@ -8688,6 +8688,20 @@ components:
         status:
           $ref: "#/components/schemas/ThirdPartyLinkStatus"
           description: The status object contains information about the status of the link.
+      type: object
+    ThirdPartyLinkListResponse:
+      properties:
+        etag:
+          description: Etag of this resource.
+          type: string
+        items:
+          items:
+            $ref: "#/components/schemas/ThirdPartyLink"
+          type: array
+        kind:
+          default: youtube#thirdPartyLinkListResponse
+          description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#thirdPartyLinkListResponse".'
+          type: string
       type: object
     ThirdPartyLinkSnippet:
       description: Basic information about a third party account link, including its type and type-specific information.

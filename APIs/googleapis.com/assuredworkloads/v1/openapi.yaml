@@ -181,6 +181,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1/{name}:restrictAllowedResources":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Restrict the list of resources allowed in the Workload environment. The current list of allowed products can be found at https://cloud.google.com/assured-workloads/docs/supported-products In addition to assuredworkloads.workload.update permission, the user should also have orgpolicy.policy.set permission on the folder resource to use this functionality.
+      operationId: assuredworkloads.organizations.locations.workloads.restrictAllowedResources
+      parameters:
+        - description: Required. The resource name of the Workload. This is the workloads's relative path in the API, formatted as "organizations/{organization_id}/locations/{location_id}/workloads/{workload_id}". For example, "organizations/123/locations/us-east1/workloads/assured-workload-1".
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1RestrictAllowedResourcesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1RestrictAllowedResourcesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
   "/v1/{parent}/workloads":
     get:
       description: Lists Assured Workloads under a CRM Node.
@@ -383,6 +425,21 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1Workload"
           type: array
+      type: object
+    GoogleCloudAssuredworkloadsV1RestrictAllowedResourcesRequest:
+      description: Request for restricting list of available resources in Workload environment.
+      properties:
+        restrictionType:
+          description: Required. The type of restriction for using gcp products in the Workload environment.
+          enum:
+            - RESTRICTION_TYPE_UNSPECIFIED
+            - ALLOW_ALL_GCP_RESOURCES
+            - ALLOW_COMPLIANT_RESOURCES
+          type: string
+      type: object
+    GoogleCloudAssuredworkloadsV1RestrictAllowedResourcesResponse:
+      description: Response for restricting the list of allowed resources.
+      properties: {}
       type: object
     GoogleCloudAssuredworkloadsV1Workload:
       description: An Workload object for managing highly regulated workloads of cloud customers.

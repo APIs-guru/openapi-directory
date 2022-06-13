@@ -50863,6 +50863,12 @@ components:
           default: compute#instanceGroupManager
           description: "[Output Only] The resource type, which is always compute#instanceGroupManager for managed instance groups."
           type: string
+        listManagedInstancesResults:
+          description: Pagination behavior of the listManagedInstances API method for this managed instance group.
+          enum:
+            - PAGELESS
+            - PAGINATED
+          type: string
         name:
           description: The name of the managed instance group. The name must be 1-63 characters long, and comply with RFC1035.
           pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"

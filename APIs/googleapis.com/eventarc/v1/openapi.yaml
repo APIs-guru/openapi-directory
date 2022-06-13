@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://eventarc.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: eventarc
 externalDocs:
@@ -295,6 +295,87 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{parent}/channelConnections":
+    get:
+      description: List channel connections.
+      operationId: eventarc.projects.locations.channelConnections.list
+      parameters:
+        - description: Required. The parent collection from which to list channel connections.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "The maximum number of channel connections to return on each page. Note: The service may send fewer responses."
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The page token; provide the value from the `next_page_token` field in a previous `ListChannelConnections` call to retrieve the subsequent page. When paginating, all other parameters provided to `ListChannelConnetions` match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListChannelConnectionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create a new ChannelConnection in a particular project and location.
+      operationId: eventarc.projects.locations.channelConnections.create
+      parameters:
+        - description: Required. The parent collection in which to add this channel connection.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The user-provided ID to be assigned to the channel connection.
+          in: query
+          name: channelConnectionId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChannelConnection"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{parent}/channels":
     get:
       description: List channels.
@@ -544,7 +625,7 @@ paths:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: eventarc.projects.locations.triggers.getIamPolicy
       parameters:
-        - description: "REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field."
+        - description: "REQUIRED: The resource for which the policy is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
           name: resource
           required: true
@@ -598,7 +679,7 @@ paths:
       description: Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
       operationId: eventarc.projects.locations.triggers.setIamPolicy
       parameters:
-        - description: "REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field."
+        - description: "REQUIRED: The resource for which the policy is being specified. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
           name: resource
           required: true
@@ -640,7 +721,7 @@ paths:
       description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
       operationId: eventarc.projects.locations.triggers.testIamPermissions
       parameters:
-        - description: "REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field."
+        - description: "REQUIRED: The resource for which the policy detail is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
           name: resource
           required: true
@@ -818,6 +899,33 @@ components:
           type: string
         uid:
           description: Output only. Server assigned unique identifier for the channel. The value is a UUID4 string and guaranteed to remain unchanged until the resource is deleted.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. The last-modified time.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    ChannelConnection:
+      description: A representation of the ChannelConnection resource. A ChannelConnection is a resource which event providers create during the activation process to establish a connection between the provider and the subscriber channel.
+      properties:
+        activationToken:
+          description: Input only. Activation token for the channel. The token will be used during the creation of ChannelConnection to bind the channel with the provider project. This field will not be stored in the provider resource.
+          type: string
+        channel:
+          description: Required. The name of the connected subscriber Channel. This is a weak reference to avoid cross project and cross accounts references. This must be in `projects/{project}/location/{location}/channels/{channel_id}` format.
+          type: string
+        createTime:
+          description: Output only. The creation time.
+          format: google-datetime
+          readOnly: true
+          type: string
+        name:
+          description: Required. The name of the connection.
+          type: string
+        uid:
+          description: Output only. / Output only. Server assigned ID of the resource. The server guarantees uniqueness and immutability until deleted.
           readOnly: true
           type: string
         updateTime:
@@ -1006,6 +1114,23 @@ components:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
+    ListChannelConnectionsResponse:
+      description: The response message for the `ListChannelConnections` method.
+      properties:
+        channelConnections:
+          description: The requested channel connections, up to the number specified in `page_size`.
+          items:
+            $ref: "#/components/schemas/ChannelConnection"
+          type: array
+        nextPageToken:
+          description: A page token that can be sent to ListChannelConnections to request the next page. If this is empty, then there are no more pages.
+          type: string
+        unreachable:
+          description: Unreachable resources, if any.
+          items:
+            type: string
+          type: array
+      type: object
     ListChannelsResponse:
       description: The response message for the `ListChannels` method.
       properties:
@@ -1188,6 +1313,34 @@ components:
           format: google-fieldmask
           type: string
       type: object
+    StateCondition:
+      description: A condition that is part of the trigger state computation.
+      properties:
+        code:
+          description: The canonical code of the condition.
+          enum:
+            - OK
+            - CANCELLED
+            - UNKNOWN
+            - INVALID_ARGUMENT
+            - DEADLINE_EXCEEDED
+            - NOT_FOUND
+            - ALREADY_EXISTS
+            - PERMISSION_DENIED
+            - UNAUTHENTICATED
+            - RESOURCE_EXHAUSTED
+            - FAILED_PRECONDITION
+            - ABORTED
+            - OUT_OF_RANGE
+            - UNIMPLEMENTED
+            - INTERNAL
+            - UNAVAILABLE
+            - DATA_LOSS
+          type: string
+        message:
+          description: Human-readable message.
+          type: string
+      type: object
     TestIamPermissionsRequest:
       description: Request message for `TestIamPermissions` method.
       properties:
@@ -1219,6 +1372,12 @@ components:
         channel:
           description: Optional. The name of the channel associated with the trigger in `projects/{project}/locations/{location}/channels/{channel}` format. You must provide a channel to receive events from Eventarc SaaS partners.
           type: string
+        conditions:
+          additionalProperties:
+            $ref: "#/components/schemas/StateCondition"
+          description: Output only. The reason(s) why a trigger is in FAILED state.
+          readOnly: true
+          type: object
         createTime:
           description: Output only. The creation time.
           format: google-datetime

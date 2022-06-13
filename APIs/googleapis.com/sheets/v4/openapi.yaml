@@ -1361,25 +1361,25 @@ components:
       properties:
         firstBandColor:
           $ref: "#/components/schemas/Color"
-          description: The first color that is alternating. (Required)
+          description: "The first color that is alternating. (Required) Deprecated: Use first_band_color_style."
         firstBandColorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: The first color that is alternating. (Required) If first_band_color is also set, this field takes precedence.
         footerColor:
           $ref: "#/components/schemas/Color"
-          description: The color of the last row or column. If this field is not set, the last row or column is filled with either first_band_color or second_band_color, depending on the color of the previous row or column.
+          description: "The color of the last row or column. If this field is not set, the last row or column is filled with either first_band_color or second_band_color, depending on the color of the previous row or column. Deprecated: Use footer_color_style."
         footerColorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: The color of the last row or column. If this field is not set, the last row or column is filled with either first_band_color or second_band_color, depending on the color of the previous row or column. If footer_color is also set, this field takes precedence.
         headerColor:
           $ref: "#/components/schemas/Color"
-          description: The color of the first row or column. If this field is set, the first row or column is filled with this color and the colors alternate between first_band_color and second_band_color starting from the second row or column. Otherwise, the first row or column is filled with first_band_color and the colors proceed to alternate as they normally would.
+          description: "The color of the first row or column. If this field is set, the first row or column is filled with this color and the colors alternate between first_band_color and second_band_color starting from the second row or column. Otherwise, the first row or column is filled with first_band_color and the colors proceed to alternate as they normally would. Deprecated: Use header_color_style."
         headerColorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: The color of the first row or column. If this field is set, the first row or column is filled with this color and the colors alternate between first_band_color and second_band_color starting from the second row or column. Otherwise, the first row or column is filled with first_band_color and the colors proceed to alternate as they normally would. If header_color is also set, this field takes precedence.
         secondBandColor:
           $ref: "#/components/schemas/Color"
-          description: The second color that is alternating. (Required)
+          description: "The second color that is alternating. (Required) Deprecated: Use second_band_color_style."
         secondBandColorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: The second color that is alternating. (Required) If second_band_color is also set, this field takes precedence.
@@ -1399,7 +1399,7 @@ components:
           type: string
         negativeColor:
           $ref: "#/components/schemas/Color"
-          description: Color to be used, in case baseline value represents a negative change for key value. This field is optional.
+          description: "Color to be used, in case baseline value represents a negative change for key value. This field is optional. Deprecated: Use negative_color_style."
         negativeColorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: Color to be used, in case baseline value represents a negative change for key value. This field is optional. If negative_color is also set, this field takes precedence.
@@ -1408,7 +1408,7 @@ components:
           description: Specifies the horizontal text positioning of baseline value. This field is optional. If not specified, default positioning is used.
         positiveColor:
           $ref: "#/components/schemas/Color"
-          description: Color to be used, in case baseline value represents a positive change for key value. This field is optional.
+          description: "Color to be used, in case baseline value represents a positive change for key value. This field is optional. Deprecated: Use positive_color_style."
         positiveColorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: Color to be used, in case baseline value represents a positive change for key value. This field is optional. If positive_color is also set, this field takes precedence.
@@ -1455,7 +1455,7 @@ components:
       properties:
         color:
           $ref: "#/components/schemas/Color"
-          description: The color for elements (such as bars, lines, and points) associated with this series. If empty, a default color is used.
+          description: "The color for elements (such as bars, lines, and points) associated with this series. If empty, a default color is used. Deprecated: Use color_style."
         colorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: The color for elements (such as bars, lines, and points) associated with this series. If empty, a default color is used. If color is also set, this field takes precedence.
@@ -1596,7 +1596,7 @@ components:
       properties:
         color:
           $ref: "#/components/schemas/Color"
-          description: Color of the series data point. If empty, the series default is used.
+          description: "Color of the series data point. If empty, the series default is used. Deprecated: Use color_style."
         colorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: Color of the series data point. If empty, the series default is used. If color is also set, this field takes precedence.
@@ -1951,7 +1951,7 @@ components:
       properties:
         color:
           $ref: "#/components/schemas/Color"
-          description: The color of the border.
+          description: "The color of the border. Deprecated: Use [color_style]."
         colorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: The color of the border. If color is also set, this field takes precedence.
@@ -1993,7 +1993,7 @@ components:
       properties:
         bubbleBorderColor:
           $ref: "#/components/schemas/Color"
-          description: The bubble border color.
+          description: "The bubble border color. Deprecated: Use bubble_border_color_style."
         bubbleBorderColorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: The bubble border color. If bubble_border_color is also set, this field takes precedence.
@@ -2132,7 +2132,7 @@ components:
       properties:
         backgroundColor:
           $ref: "#/components/schemas/Color"
-          description: The background color of the cell.
+          description: "The background color of the cell. Deprecated: Use background_color_style."
         backgroundColorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: The background color of the cell. If background_color is also set, this field takes precedence.
@@ -2312,7 +2312,7 @@ components:
           type: string
         backgroundColor:
           $ref: "#/components/schemas/Color"
-          description: The background color of the entire chart. Not applicable to Org charts.
+          description: "The background color of the entire chart. Not applicable to Org charts. Deprecated: Use background_color_style."
         backgroundColorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: The background color of the entire chart. Not applicable to Org charts. If background_color is also set, this field takes precedence.
@@ -3319,7 +3319,7 @@ components:
       properties:
         color:
           $ref: "#/components/schemas/Color"
-          description: The color of the border.
+          description: "The color of the border. Deprecated: Use color_style."
         colorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: The color of the border. If color is also set, this field takes precedence.
@@ -3392,13 +3392,13 @@ components:
           type: array
         visibleBackgroundColor:
           $ref: "#/components/schemas/Color"
-          description: The background fill color to filter by; only cells with this fill color are shown. Mutually exclusive with visible_foreground_color.
+          description: "The background fill color to filter by; only cells with this fill color are shown. Mutually exclusive with visible_foreground_color. Deprecated: Use visible_background_color_style."
         visibleBackgroundColorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: The background fill color to filter by; only cells with this fill color are shown. This field is mutually exclusive with visible_foreground_color, and must be set to an RGB-type color. If visible_background_color is also set, this field takes precedence.
         visibleForegroundColor:
           $ref: "#/components/schemas/Color"
-          description: The foreground color to filter by; only cells with this foreground color are shown. Mutually exclusive with visible_background_color.
+          description: "The foreground color to filter by; only cells with this foreground color are shown. Mutually exclusive with visible_background_color. Deprecated: Use visible_foreground_color_style."
         visibleForegroundColorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: The foreground color to filter by; only cells with this foreground color are shown. This field is mutually exclusive with visible_background_color, and must be set to an RGB-type color. If visible_foreground_color is also set, this field takes precedence.
@@ -3678,7 +3678,7 @@ components:
       properties:
         barColor:
           $ref: "#/components/schemas/Color"
-          description: The color of the column representing this series in each bucket. This field is optional.
+          description: "The color of the column representing this series in each bucket. This field is optional. Deprecated: Use bar_color_style."
         barColorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: The color of the column representing this series in each bucket. This field is optional. If bar_color is also set, this field takes precedence.
@@ -3715,7 +3715,7 @@ components:
       properties:
         color:
           $ref: "#/components/schemas/Color"
-          description: The color this interpolation point should use.
+          description: "The color this interpolation point should use. Deprecated: Use color_style."
         colorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: The color this interpolation point should use. If color is also set, this field takes precedence.
@@ -3906,7 +3906,7 @@ components:
           description: The data containing the labels for all the nodes in the chart. Labels must be unique.
         nodeColor:
           $ref: "#/components/schemas/Color"
-          description: The color of the org chart nodes.
+          description: "The color of the org chart nodes. Deprecated: Use node_color_style."
         nodeColorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: The color of the org chart nodes. If node_color is also set, this field takes precedence.
@@ -3923,7 +3923,7 @@ components:
           description: The data containing the label of the parent for the corresponding node. A blank value indicates that the node has no parent and is a top-level node. This field is optional.
         selectedNodeColor:
           $ref: "#/components/schemas/Color"
-          description: The color of the selected org chart nodes.
+          description: "The color of the selected org chart nodes. Deprecated: Use selected_node_color_style."
         selectedNodeColorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: The color of the selected org chart nodes. If selected_node_color is also set, this field takes precedence.
@@ -4800,7 +4800,7 @@ components:
           type: string
         tabColor:
           $ref: "#/components/schemas/Color"
-          description: The color of the tab in the UI.
+          description: "The color of the tab in the UI. Deprecated: Use tab_color_style."
         tabColorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: The color of the tab in the UI. If tab_color is also set, this field takes precedence.
@@ -4830,7 +4830,7 @@ components:
           type: boolean
         backgroundColor:
           $ref: "#/components/schemas/Color"
-          description: The background color of the slicer.
+          description: "The background color of the slicer. Deprecated: Use background_color_style."
         backgroundColorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: The background color of the slicer. If background_color is also set, this field takes precedence.
@@ -4876,7 +4876,7 @@ components:
       properties:
         backgroundColor:
           $ref: "#/components/schemas/Color"
-          description: The background fill color to sort by; cells with this fill color are sorted to the top. Mutually exclusive with foreground_color.
+          description: "The background fill color to sort by; cells with this fill color are sorted to the top. Mutually exclusive with foreground_color. Deprecated: Use background_color_style."
         backgroundColorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: The background fill color to sort by; cells with this fill color are sorted to the top. Mutually exclusive with foreground_color, and must be an RGB-type color. If background_color is also set, this field takes precedence.
@@ -4889,7 +4889,7 @@ components:
           type: integer
         foregroundColor:
           $ref: "#/components/schemas/Color"
-          description: The foreground color to sort by; cells with this foreground color are sorted to the top. Mutually exclusive with background_color.
+          description: "The foreground color to sort by; cells with this foreground color are sorted to the top. Mutually exclusive with background_color. Deprecated: Use foreground_color_style."
         foregroundColorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: The foreground color to sort by; cells with this foreground color are sorted to the top. Mutually exclusive with background_color, and must be an RGB-type color. If foreground_color is also set, this field takes precedence.
@@ -5015,7 +5015,7 @@ components:
           type: integer
         foregroundColor:
           $ref: "#/components/schemas/Color"
-          description: The foreground color of the text.
+          description: "The foreground color of the text. Deprecated: Use foreground_color_style."
         foregroundColorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: The foreground color of the text. If foreground_color is also set, this field takes precedence.
@@ -5133,25 +5133,25 @@ components:
       properties:
         maxValueColor:
           $ref: "#/components/schemas/Color"
-          description: "The background color for cells with a color value greater than or equal to maxValue. Defaults to #109618 if not specified."
+          description: "The background color for cells with a color value greater than or equal to maxValue. Defaults to #109618 if not specified. Deprecated: Use max_value_color_style."
         maxValueColorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: "The background color for cells with a color value greater than or equal to maxValue. Defaults to #109618 if not specified. If max_value_color is also set, this field takes precedence."
         midValueColor:
           $ref: "#/components/schemas/Color"
-          description: "The background color for cells with a color value at the midpoint between minValue and maxValue. Defaults to #efe6dc if not specified."
+          description: "The background color for cells with a color value at the midpoint between minValue and maxValue. Defaults to #efe6dc if not specified. Deprecated: Use mid_value_color_style."
         midValueColorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: "The background color for cells with a color value at the midpoint between minValue and maxValue. Defaults to #efe6dc if not specified. If mid_value_color is also set, this field takes precedence."
         minValueColor:
           $ref: "#/components/schemas/Color"
-          description: "The background color for cells with a color value less than or equal to minValue. Defaults to #dc3912 if not specified."
+          description: "The background color for cells with a color value less than or equal to minValue. Defaults to #dc3912 if not specified. Deprecated: Use min_value_color_style."
         minValueColorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: "The background color for cells with a color value less than or equal to minValue. Defaults to #dc3912 if not specified. If min_value_color is also set, this field takes precedence."
         noDataColor:
           $ref: "#/components/schemas/Color"
-          description: "The background color for cells that have no color data associated with them. Defaults to #000000 if not specified."
+          description: "The background color for cells that have no color data associated with them. Defaults to #000000 if not specified. Deprecated: Use no_data_color_style."
         noDataColorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: "The background color for cells that have no color data associated with them. Defaults to #000000 if not specified. If no_data_color is also set, this field takes precedence."
@@ -5167,7 +5167,7 @@ components:
           description: The color scale for data cells in the treemap chart. Data cells are assigned colors based on their color values. These color values come from color_data, or from size_data if color_data is not specified. Cells with color values less than or equal to min_value will have minValueColor as their background color. Cells with color values greater than or equal to max_value will have maxValueColor as their background color. Cells with color values between min_value and max_value will have background colors on a gradient between minValueColor and maxValueColor, the midpoint of the gradient being midValueColor. Cells with missing or non-numeric color values will have noDataColor as their background color.
         headerColor:
           $ref: "#/components/schemas/Color"
-          description: The background color for header cells.
+          description: "The background color for header cells. Deprecated: Use header_color_style."
         headerColorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: The background color for header cells. If header_color is also set, this field takes precedence.
@@ -5584,7 +5584,7 @@ components:
       properties:
         color:
           $ref: "#/components/schemas/Color"
-          description: The color of the column.
+          description: "The color of the column. Deprecated: Use color_style."
         colorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: The color of the column. If color is also set, this field takes precedence.

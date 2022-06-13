@@ -62,9 +62,9 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
           Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
       tags:
         - customers
     parameters:
@@ -109,9 +109,9 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
           Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
       tags:
         - installer
   /v1alpha1/installer:validate:
@@ -144,9 +144,9 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
           Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
       tags:
         - installer
   /v1alpha1/policies:get:
@@ -179,9 +179,9 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
           Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
       tags:
         - policies
   /v1alpha1/policies:set:
@@ -214,9 +214,9 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
           Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
       tags:
         - policies
   /v1alpha1/policies:test:
@@ -249,9 +249,9 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
           Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
       tags:
         - policies
   "/v1alpha1/{name}":
@@ -274,9 +274,9 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
           Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
       tags:
         - nodes
     get:
@@ -298,9 +298,9 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
           Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
       tags:
         - nodes
     parameters:
@@ -344,9 +344,9 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
           Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
       tags:
         - nodes
   "/v1alpha1/{name}:move":
@@ -386,9 +386,9 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
           Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
       tags:
         - nodes
   "/v1alpha1/{name}:signDevice":
@@ -428,9 +428,9 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
           Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
       tags:
         - nodes
   "/v1alpha1/{name}:updateSigned":
@@ -470,9 +470,9 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
           Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
       tags:
         - nodes
   "/v1alpha1/{parent}/deployments":
@@ -510,9 +510,9 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
           Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
       tags:
         - nodes
     parameters:
@@ -551,9 +551,9 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
           Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
       tags:
         - nodes
   "/v1alpha1/{parent}/devices":
@@ -591,9 +591,9 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
           Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
       tags:
         - nodes
     parameters:
@@ -632,9 +632,9 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
           Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
       tags:
         - nodes
   "/v1alpha1/{parent}/devices:createSigned":
@@ -674,9 +674,9 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
           Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
       tags:
         - nodes
   "/v1alpha1/{parent}/nodes":
@@ -714,9 +714,9 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
           Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
       tags:
         - nodes
     parameters:
@@ -755,9 +755,9 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
           Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sasportal
       tags:
         - nodes
 components:
@@ -1456,7 +1456,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/userinfo.email: See your primary Google Account email address
+            https://www.googleapis.com/auth/sasportal: Read, create, update, and delete your SAS Portal data.
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -1464,6 +1464,6 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/userinfo.email: See your primary Google Account email address
+            https://www.googleapis.com/auth/sasportal: Read, create, update, and delete your SAS Portal data.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

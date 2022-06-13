@@ -2531,6 +2531,27 @@ components:
             - DEGRADED
           type: string
       type: object
+    ServiceMeshDataPlaneManagement:
+      description: Status of data plane management. Only reported per-member.
+      properties:
+        details:
+          description: Explanation of the status.
+          items:
+            $ref: "#/components/schemas/ServiceMeshStatusDetails"
+          type: array
+        state:
+          description: Lifecycle status of data plane management.
+          enum:
+            - LIFECYCLE_STATE_UNSPECIFIED
+            - DISABLED
+            - FAILED_PRECONDITION
+            - PROVISIONING
+            - ACTIVE
+            - STALLED
+            - NEEDS_ATTENTION
+            - DEGRADED
+          type: string
+      type: object
     ServiceMeshFeatureState:
       description: "**Service Mesh**: State for the whole Hub, as analyzed by the Service Mesh Hub Controller."
       properties:
@@ -2575,6 +2596,10 @@ components:
         controlPlaneManagement:
           $ref: "#/components/schemas/ServiceMeshControlPlaneManagement"
           description: Output only. Status of control plane management
+          readOnly: true
+        dataPlaneManagement:
+          $ref: "#/components/schemas/ServiceMeshDataPlaneManagement"
+          description: Output only. Status of data plane management.
           readOnly: true
       type: object
     ServiceMeshSpec:

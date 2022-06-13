@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://datamigration.googleapis.com/$discovery/rest?version=v1beta1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: datamigration
 externalDocs:
@@ -1445,6 +1445,7 @@ components:
             - UNSUPPORTED_GTID_MODE
             - UNSUPPORTED_DEFINER
             - CANT_RESTART_RUNNING_MIGRATION
+            - TABLES_WITH_LIMITED_SUPPORT
           readOnly: true
           type: string
         errorDetailMessage:
