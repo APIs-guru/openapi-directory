@@ -513,7 +513,7 @@ components:
       description: A filter that merges multiple other filters using the given operator.
       properties:
         filters:
-          description: "The list of filters to combine. Requires: * At least one filter is present."
+          description: The list of filters to combine. Must contain at least one filter.
           items:
             $ref: "#/components/schemas/Filter"
           type: array

@@ -6516,7 +6516,7 @@ components:
       description: Defines an assignment of a role.
       properties:
         assignedTo:
-          description: The unique ID of the user this role is assigned to.
+          description: The unique ID of the entity this role is assigned to—either the `user_id` of a user or the `uniqueId` of a service account, as defined in [Identity and Access Management (IAM)](https://cloud.google.com/iam/docs/reference/rest/v1/projects.serviceAccounts).
           type: string
         etag:
           description: ETag of the resource.

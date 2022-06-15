@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://ondemandscanning.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: ondemandscanning
 externalDocs:
@@ -1027,6 +1027,14 @@ components:
           description: "The compact encoding of a JWS, which is always three base64 encoded strings joined by periods. For details, see: https://tools.ietf.org/html/rfc7515.html#section-3.1"
           type: string
       type: object
+    LanguagePackageDependency:
+      description: Indicates a language package available between this package and the customer's resource artifact.
+      properties:
+        package:
+          type: string
+        version:
+          type: string
+      type: object
     Layer:
       description: Layer holds metadata specific to a layer of a Docker image.
       properties:
@@ -1227,6 +1235,11 @@ components:
         cpeUri:
           description: The cpe_uri in [cpe format] (https://cpe.mitre.org/specification/) in which the vulnerability may manifest. Examples include distro or storage location for vulnerable jar.
           type: string
+        dependencyChain:
+          description: The dependency chain between this package and the user's artifact. List in order from the customer's package under review first, to the current package last. Inclusive of the original package and the current package.
+          items:
+            $ref: "#/components/schemas/LanguagePackageDependency"
+          type: array
         fileLocation:
           description: The path to the jar file / go binary file.
           items:
