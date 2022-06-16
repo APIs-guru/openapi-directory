@@ -13,17 +13,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Service Consumer Management API
   version: v1beta1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://serviceconsumermanagement.googleapis.com/$discovery/rest?version=v1beta1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: serviceconsumermanagement
 externalDocs:
@@ -1086,17 +1084,6 @@ components:
     MetricRule:
       description: Bind API methods to metrics. Binding a method to a metric causes that metric's configured quota behaviors to apply to the method call.
       properties:
-        dynamicMetricCosts:
-          additionalProperties:
-            enum:
-              - DYNAMIC_COST_TYPE_UNSPECIFIED
-              - REQUEST_BODY_BYTES
-              - REQUEST_BODY_AND_HEADER_BYTES
-              - RESPONSE_BODY_BYTES
-              - RESPONSE_BODY_AND_HEADER_BYTES
-            type: string
-          description: Metrics to update when the selected methods are called. The key of the map is the metric name, the value is the DynamicCostType to specify how to calculate the cost from the request. The cost amount will be increased for the metric against which the quota limits are defined. It is only implemented in CloudESF(go/cloudesf)
-          type: object
         metricCosts:
           additionalProperties:
             format: int64
@@ -1871,5 +1858,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

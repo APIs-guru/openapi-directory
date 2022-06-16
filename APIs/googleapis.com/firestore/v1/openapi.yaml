@@ -804,6 +804,49 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create a database.
+      operationId: firestore.projects.databases.create
+      parameters:
+        - description: Required. A parent name of the form `projects/{project_id}`
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID to use for the database, which will become the final component of the database's resource name. This value should be 4-63 characters. Valid characters are /a-z-/ with first character a letter and the last a letter or a number. Must not be UUID-like /[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}/. "(default)" database id is also valid.
+          in: query
+          name: databaseId
+          schema:
+            type: string
+        - description: If set, validate the request and preview the response, but do not actually create the database.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleFirestoreAdminV1Database"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/datastore
+          Oauth2c:
+            - https://www.googleapis.com/auth/datastore
+      tags:
+        - projects
   "/v1/{parent}/fields":
     get:
       description: Lists the field configuration and metadata for this database. Currently, FirestoreAdmin.ListFields only supports listing fields that have been explicitly overridden. To issue this query, call FirestoreAdmin.ListFields with the filter set to `indexConfig.usesAncestorConfig:false` .
@@ -1754,6 +1797,9 @@ components:
         name:
           description: "Required. A field name of the form `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}/fields/{field_path}` A field path may be a simple field name, e.g. `address` or a path to fields within map_value , e.g. `address.city`, or a special field path. The only valid special field is `*`, which represents any field. Field paths may be quoted using ` (backtick). The only character that needs to be escaped within a quoted field path is the backtick character itself, escaped using a backslash. Special characters in field paths that must be quoted include: `*`, `.`, ``` (backtick), `[`, `]`, as well as any ascii symbolic characters. Examples: (Note: Comments here are written in markdown syntax, so there is an additional layer of backticks to represent a code block) `\\`address.city\\`` represents a field named `address.city`, not the map key `city` in the field `address`. `\\`*\\`` represents a field named `*`, not any field. A special `Field` contains the default indexing settings for all fields. This field's resource name is: `projects/{project_id}/databases/{database_id}/collectionGroups/__default__/fields/*` Indexes defined on this `Field` will be applied to all fields which do not have their own `Field` index configuration."
           type: string
+        ttlConfig:
+          $ref: "#/components/schemas/GoogleFirestoreAdminV1TtlConfig"
+          description: The TTL configuration for this `Field`. Setting or unsetting this will enable or disable the TTL for documents that have this `Field`.
       type: object
     GoogleFirestoreAdminV1FieldOperationMetadata:
       description: Metadata for google.longrunning.Operation results from FirestoreAdmin.UpdateField.
@@ -1792,6 +1838,9 @@ components:
             - FAILED
             - CANCELLED
           type: string
+        ttlConfigDelta:
+          $ref: "#/components/schemas/GoogleFirestoreAdminV1TtlConfigDelta"
+          description: Describes the deltas of TTL configuration.
       type: object
     GoogleFirestoreAdminV1ImportDocumentsMetadata:
       description: Metadata for google.longrunning.Operation results from FirestoreAdmin.ImportDocuments.
@@ -2004,6 +2053,30 @@ components:
           format: int64
           type: string
       type: object
+    GoogleFirestoreAdminV1TtlConfig:
+      description: The TTL (time-to-live) configuration for documents that have this `Field` set. Storing a timestamp value into a TTL-enabled field will be treated as the document's absolute expiration time. Using any other data type or leaving the field absent will disable the TTL for the individual document.
+      properties:
+        state:
+          description: Output only. The state of the TTL configuration.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - ACTIVE
+            - NEEDS_REPAIR
+          readOnly: true
+          type: string
+      type: object
+    GoogleFirestoreAdminV1TtlConfigDelta:
+      description: Information about an TTL configuration change.
+      properties:
+        changeType:
+          description: Specifies how the TTL configuration is changing.
+          enum:
+            - CHANGE_TYPE_UNSPECIFIED
+            - ADD
+            - REMOVE
+          type: string
+      type: object
     GoogleFirestoreAdminV1UpdateDatabaseMetadata:
       description: Metadata related to the update database operation.
       properties: {}
@@ -2068,6 +2141,10 @@ components:
           type: integer
         pageToken:
           description: A page token. Must be a value from ListCollectionIdsResponse.
+          type: string
+        readTime:
+          description: Reads documents as they were at the given time. This may not be older than 270 seconds.
+          format: google-datetime
           type: string
       type: object
     ListCollectionIdsResponse:
@@ -2200,6 +2277,10 @@ components:
         partitionCount:
           description: The desired maximum number of partition points. The partitions may be returned across multiple pages of results. The number must be positive. The actual number of partitions returned may be fewer. For example, this may be set to one fewer than the number of parallel queries to be run, or in running a data pipeline job, one fewer than the number of workers or compute instances available.
           format: int64
+          type: string
+        readTime:
+          description: Reads documents as they were at the given time. This may not be older than 270 seconds.
+          format: google-datetime
           type: string
         structuredQuery:
           $ref: "#/components/schemas/StructuredQuery"
