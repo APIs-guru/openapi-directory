@@ -263,6 +263,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1/{name}:abandon":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Abandons a Release in the Delivery Pipeline.
+      operationId: clouddeploy.projects.locations.deliveryPipelines.releases.abandon
+      parameters:
+        - description: Required. Name of the Release. Format is projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/ releases/{release}.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AbandonReleaseRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AbandonReleaseResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{name}:approve":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -953,6 +995,14 @@ components:
       schema:
         type: string
   schemas:
+    AbandonReleaseRequest:
+      description: The request object used by `AbandonRelease`.
+      properties: {}
+      type: object
+    AbandonReleaseResponse:
+      description: The response object for `AbandonRelease`.
+      properties: {}
+      type: object
     AnthosCluster:
       description: Information specifying an Anthos Cluster.
       properties:
@@ -1106,6 +1156,9 @@ components:
         serialPipeline:
           $ref: "#/components/schemas/SerialPipeline"
           description: SerialPipeline defines a sequential set of stages for a `DeliveryPipeline`.
+        suspended:
+          description: When suspended, no new releases or rollouts can be created, but in-progress ones will complete.
+          type: boolean
         uid:
           description: Output only. Unique identifier of the `DeliveryPipeline`.
           readOnly: true
@@ -1426,6 +1479,10 @@ components:
     Release:
       description: A `Release` resource in the Google Cloud Deploy API. A `Release` defines a specific Skaffold configuration instance that can be deployed.
       properties:
+        abandoned:
+          description: Output only. Indicates whether this is an abandoned release.
+          readOnly: true
+          type: boolean
         annotations:
           additionalProperties:
             type: string
@@ -1578,6 +1635,7 @@ components:
             - EXECUTION_FAILED
             - DEADLINE_EXCEEDED
             - RELEASE_FAILED
+            - RELEASE_ABANDONED
           readOnly: true
           type: string
         deployStartTime:

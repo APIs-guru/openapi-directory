@@ -56,6 +56,7 @@ tags:
   - name: httpsHealthChecks
   - name: imageFamilyViews
   - name: images
+  - name: instanceGroupManagerResizeRequests
   - name: instanceGroupManagers
   - name: instanceGroups
   - name: instances
@@ -40801,6 +40802,255 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instanceGroupManagers
+  "/projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/resizeRequests":
+    get:
+      description: Retrieves a list of resize requests that are contained in the managed instance group.
+      operationId: compute.instanceGroupManagerResizeRequests.list
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone where the managed instance group is located. The name should conform to RFC1035.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: The name of the managed instance group. The name should conform to RFC1035.
+          in: path
+          name: instanceGroupManager
+          required: true
+          schema:
+            type: string
+        - description: "A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq \"double quoted literal\"` `(fieldname1 eq literal) (fieldname2 ne \"literal\")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name \"instance\", you would use `name ne .*instance`."
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)"
+          in: query
+          name: maxResults
+          schema:
+            minimum: 0
+            type: integer
+        - description: Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+          in: query
+          name: returnPartialSuccess
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstanceGroupManagerResizeRequestsListResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - instanceGroupManagerResizeRequests
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Creates a new resize request that starts provisioning VMs immediately or queues VM creation.
+      operationId: compute.instanceGroupManagerResizeRequests.insert
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone where the managed instance group is located and where the resize request will be created. Name should conform to RFC1035.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: The name of the managed instance group to which the resize request will be added. Name should conform to RFC1035 or be a resource ID.
+          in: path
+          name: instanceGroupManager
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InstanceGroupManagerResizeRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - instanceGroupManagerResizeRequests
+  "/projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/resizeRequests/{resizeRequest}":
+    delete:
+      description: Deletes the specified resize request.
+      operationId: compute.instanceGroupManagerResizeRequests.delete
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone where the managed instance group is located. The name should conform to RFC1035.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: The name of the managed instance group. The name should conform to RFC1035 or be a resource ID.
+          in: path
+          name: instanceGroupManager
+          required: true
+          schema:
+            type: string
+        - description: The name of the resize request to delete. The name should conform to RFC1035 or be a resource ID.
+          in: path
+          name: resizeRequest
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - instanceGroupManagerResizeRequests
+    get:
+      description: Returns all of the details about the specified resize request.
+      operationId: compute.instanceGroupManagerResizeRequests.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone where the managed instance group and the resize request are located. Name should conform to RFC1035.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: The name of the managed instance group. Name should conform to RFC1035 or be a resource ID.
+          in: path
+          name: instanceGroupManager
+          required: true
+          schema:
+            type: string
+        - description: The name of the resize request. Name should conform to RFC1035 or be a resource ID.
+          in: path
+          name: resizeRequest
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstanceGroupManagerResizeRequest"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - instanceGroupManagerResizeRequests
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
   "/projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/resumeInstances":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -55960,6 +56210,10 @@ components:
           description: "[Output Only] The number of instances in the managed instance group that are scheduled to be created or are currently being created. If the group fails to create any of these instances, it tries again until it creates the instance successfully. If you have disabled creation retries, this field will not be populated; instead, the creatingWithoutRetries field will be populated."
           format: int32
           type: integer
+        creatingAtomically:
+          description: "[Output Only] The number of instances that the managed instance group will attempt to create atomically, in a batch mode. If the desired count of instances can not be created, entire batch will be deleted and the group will decrease its targetSize value accordingly."
+          format: int32
+          type: integer
         creatingWithoutRetries:
           description: "[Output Only] The number of instances that the managed instance group will attempt to create. The group attempts to create each instance only once. If the group fails to create any of these instances, it decreases the group's targetSize value accordingly."
           format: int32
@@ -56145,6 +56399,134 @@ components:
         kind:
           default: compute#instanceGroupManagerList
           description: "[Output Only] The resource type, which is always compute#instanceGroupManagerList for a list of managed instance groups."
+          type: string
+        nextPageToken:
+          description: "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results."
+          type: string
+        selfLink:
+          description: "[Output Only] Server-defined URL for this resource."
+          type: string
+        warning:
+          description: "[Output Only] Informational warning message."
+          properties:
+            code:
+              description: "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response."
+              enum:
+                - CLEANUP_FAILED
+                - DEPRECATED_RESOURCE_USED
+                - DEPRECATED_TYPE_USED
+                - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+                - EXPERIMENTAL_TYPE_USED
+                - EXTERNAL_API_WARNING
+                - FIELD_VALUE_OVERRIDEN
+                - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
+                - MISSING_TYPE_DEPENDENCY
+                - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+                - NEXT_HOP_CANNOT_IP_FORWARD
+                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
+                - NEXT_HOP_INSTANCE_NOT_FOUND
+                - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+                - NEXT_HOP_NOT_RUNNING
+                - NOT_CRITICAL_ERROR
+                - NO_RESULTS_ON_PAGE
+                - PARTIAL_SUCCESS
+                - REQUIRED_TOS_AGREEMENT
+                - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+                - RESOURCE_NOT_DELETED
+                - SCHEMA_VALIDATION_IGNORED
+                - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+                - UNDECLARED_PROPERTIES
+                - UNREACHABLE
+              type: string
+            data:
+              description: '[Output Only] Metadata about this warning in key: value format. For example: "data": [ { "key": "scope", "value": "zones/us-east1-d" } '
+              items:
+                properties:
+                  key:
+                    description: "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding)."
+                    type: string
+                  value:
+                    description: "[Output Only] A warning data value corresponding to the key."
+                    type: string
+                type: object
+              type: array
+            message:
+              description: "[Output Only] A human-readable description of the warning code."
+              type: string
+          type: object
+      type: object
+    InstanceGroupManagerResizeRequest:
+      description: "InstanceGroupManagerResizeRequest represents a request to create a number of VMs: either immediately or by queuing the request for the specified time. This resize request is nested under InstanceGroupManager and the VMs created by this request are added to the owning InstanceGroupManager."
+      properties:
+        count:
+          description: The count of instances to create as part of this resize request.
+          format: int32
+          type: integer
+        creationTimestamp:
+          description: "[Output Only] The creation timestamp for this resize request in RFC3339 text format."
+          type: string
+        description:
+          description: An optional description of this resource.
+          type: string
+        id:
+          description: "[Output Only] A unique identifier for this resource type. The server generates this identifier."
+          format: uint64
+          type: string
+        kind:
+          default: compute#instanceGroupManagerResizeRequest
+          description: "[Output Only] The resource type, which is always compute#instanceGroupManagerResizeRequest for resize requests."
+          type: string
+        name:
+          description: The name of this resize request. The name must be 1-63 characters long, and comply with RFC1035.
+          pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
+          type: string
+        queuingPolicy:
+          $ref: "#/components/schemas/QueuingPolicy"
+          description: When set, defines queing parameters for the requested deferred capacity. When unset, the request starts provisioning immediately, or fails if immediate provisioning is not possible.
+        selfLink:
+          description: "[Output Only] The URL for this resize request. The server defines this URL."
+          type: string
+        selfLinkWithId:
+          description: "[Output Only] Server-defined URL for this resource with the resource id."
+          type: string
+        state:
+          description: "[Output only] Current state of the request."
+          enum:
+            - ACCEPTED
+            - CREATING
+            - DELETING
+            - FAILED
+            - PROVISIONING
+            - SUCCEEDED
+          type: string
+        status:
+          $ref: "#/components/schemas/InstanceGroupManagerResizeRequestStatus"
+          description: "[Output only] Status of the request. The Status message is aligned with QueuedResource.status. ResizeRequest.queuing_policy contains the queuing policy as provided by the user; it could have either valid_until_time or valid_until_duration. ResizeRequest.status.queuing_policy always contains absolute time as calculated by the server when the request is queued."
+        zone:
+          description: "[Output Only] The URL of a zone where the resize request is located."
+          type: string
+      type: object
+    InstanceGroupManagerResizeRequestStatus:
+      properties:
+        queuingPolicy:
+          $ref: "#/components/schemas/QueuingPolicy"
+          description: Constraints for the time when the instances start provisioning. Always exposed as absolute time.
+      type: object
+    InstanceGroupManagerResizeRequestsListResponse:
+      description: "[Output Only] A list of resize requests."
+      properties:
+        id:
+          description: "[Output Only] Unique identifier for the resource; defined by the server."
+          type: string
+        items:
+          description: A list of resize request resources.
+          items:
+            $ref: "#/components/schemas/InstanceGroupManagerResizeRequest"
+          type: array
+        kind:
+          default: compute#instanceGroupManagerResizeRequestList
+          description: "[Output Only] Type of the resource. Always compute#instanceGroupManagerResizeRequestList for a list of resize requests."
           type: string
         nextPageToken:
           description: "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results."
@@ -63876,6 +64258,16 @@ components:
               description: "[Output Only] A human-readable description of the warning code."
               type: string
           type: object
+      type: object
+    QueuingPolicy:
+      description: Queuing parameters for the requested deferred capacity.
+      properties:
+        validUntilDuration:
+          $ref: "#/components/schemas/Duration"
+          description: Relative deadline for waiting for capacity.
+        validUntilTime:
+          description: Absolute deadline for waiting for capacity in RFC3339 text format.
+          type: string
       type: object
     Quota:
       description: A quotas entry.
