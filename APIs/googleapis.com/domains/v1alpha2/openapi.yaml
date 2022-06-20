@@ -19,16 +19,64 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://domains.googleapis.com/$discovery/rest?version=v1alpha2
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: domains
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/domains/
 tags:
   - name: projects
 paths:
+  "/v1alpha2/{location}/registrations:retrieveImportableDomains":
+    get:
+      description: Lists domain names from [Google Domains](https://domains.google/) that can be imported to Cloud Domains using the `ImportDomain` method. Since individual users can own domains in Google Domains, the list of domains returned depends on the individual user making the call. Domains supported by Google Domains, but not supported by Cloud Domains, are not returned.
+      operationId: domains.projects.locations.registrations.retrieveImportableDomains
+      parameters:
+        - description: Required. The location. Must be in the format `projects/*/locations/*`.
+          in: path
+          name: location
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of results to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: When set to the `next_page_token` from a prior response, provides the next page of results.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RetrieveImportableDomainsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1alpha2/{location}/registrations:retrieveRegisterParameters":
     get:
       description: Gets parameters needed to register a new domain name, including price and up-to-date availability. Use the returned values to call `RegisterDomain`.
@@ -73,7 +121,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1alpha2/{location}/registrations:retrieveTransferParameters":
     get:
-      description: Gets parameters needed to transfer a domain name from another registrar to Cloud Domains. For domains managed by Google Domains, transferring to Cloud Domains is not supported. Use the returned values to call `TransferDomain`.
+      description: Gets parameters needed to transfer a domain name from another registrar to Cloud Domains. For domains already managed by [Google Domains](https://domains.google/), use `ImportDomain` instead. Use the returned values to call `TransferDomain`.
       operationId: domains.projects.locations.registrations.retrieveTransferParameters
       parameters:
         - description: Required. The location. Must be in the format `projects/*/locations/*`.
@@ -448,6 +496,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1alpha2/{parent}/registrations:import":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Imports a domain name from [Google Domains](https://domains.google/) for use in Cloud Domains. To transfer a domain from another registrar, use the `TransferDomain` method instead. Since individual users can own domains in Google Domains, the calling user must have ownership permission on the domain.
+      operationId: domains.projects.locations.registrations.import
+      parameters:
+        - description: Required. The parent resource of the Registration. Must be in the format `projects/*/locations/*`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ImportDomainRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1alpha2/{parent}/registrations:register":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -504,7 +594,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Transfers a domain name from another registrar to Cloud Domains. For domains managed by Google Domains, transferring to Cloud Domains is not supported. Before calling this method, go to the domain's current registrar to unlock the domain for transfer and retrieve the domain's transfer authorization code. Then call `RetrieveTransferParameters` to confirm that the domain is unlocked and to get values needed to build a call to this method. A successful call creates a `Registration` resource in state `TRANSFER_PENDING`. It can take several days to complete the transfer process. The registrant can often speed up this process by approving the transfer through the current registrar, either by clicking a link in an email from the registrar or by visiting the registrar's website. A few minutes after transfer approval, the resource transitions to state `ACTIVE`, indicating that the transfer was successful. If the transfer is rejected or the request expires without being approved, the resource can end up in state `TRANSFER_FAILED`. If transfer fails, you can safely delete the resource and retry the transfer.
+      description: Transfers a domain name from another registrar to Cloud Domains. For domains already managed by [Google Domains](https://domains.google/), use `ImportDomain` instead. Before calling this method, go to the domain's current registrar to unlock the domain for transfer and retrieve the domain's transfer authorization code. Then call `RetrieveTransferParameters` to confirm that the domain is unlocked and to get values needed to build a call to this method. A successful call creates a `Registration` resource in state `TRANSFER_PENDING`. It can take several days to complete the transfer process. The registrant can often speed up this process by approving the transfer through the current registrar, either by clicking a link in an email from the registrar or by visiting the registrar's website. A few minutes after transfer approval, the resource transitions to state `ACTIVE`, indicating that the transfer was successful. If the transfer is rejected or the request expires without being approved, the resource can end up in state `TRANSFER_FAILED`. If transfer fails, you can safely delete the resource and retry the transfer.
       operationId: domains.projects.locations.registrations.transfer
       parameters:
         - description: Required. The parent resource of the `Registration`. Must be in the format `projects/*/locations/*`.
@@ -1103,6 +1193,26 @@ components:
           $ref: "#/components/schemas/GoogleDomainsDns"
           description: The free DNS zone provided by [Google Domains](https://domains.google/).
       type: object
+    Domain:
+      description: A domain that the calling user manages in Google Domains.
+      properties:
+        domainName:
+          description: The domain name. Unicode domain names are expressed in Punycode format.
+          type: string
+        resourceState:
+          description: The state of this domain as a `Registration` resource.
+          enum:
+            - RESOURCE_STATE_UNSPECIFIED
+            - IMPORTABLE
+            - UNSUPPORTED
+            - SUSPENDED
+            - EXPIRED
+            - DELETED
+          type: string
+        yearlyPrice:
+          $ref: "#/components/schemas/Money"
+          description: Price to renew the domain for one year. Only set when `resource_state` is `IMPORTABLE`.
+      type: object
     DsRecord:
       description: Defines a Delegation Signer (DS) record, which is needed to enable DNSSEC for a domain. It contains a digest (hash) of a DNSKEY record that must be present in the domain's DNS zone.
       properties:
@@ -1204,6 +1314,18 @@ components:
             type: string
           readOnly: true
           type: array
+      type: object
+    ImportDomainRequest:
+      description: Request for the `ImportDomain` method.
+      properties:
+        domainName:
+          description: Required. The domain name. Unicode domain names must be expressed in Punycode format.
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Set of labels associated with the `Registration`.
+          type: object
       type: object
     ListLocationsResponse:
       description: The response message for Locations.ListLocations.
@@ -1476,7 +1598,7 @@ components:
           description: Price to register or renew the domain for one year.
       type: object
     Registration:
-      description: "The `Registration` resource facilitates managing and configuring domain name registrations. There are several ways to create a new `Registration` resource: To create a new `Registration` resource, find a suitable domain name by calling the `SearchDomains` method with a query to see available domain name options. After choosing a name, call `RetrieveRegisterParameters` to ensure availability and obtain information like pricing, which is needed to build a call to `RegisterDomain`. Another way to create a new `Registration` is to transfer an existing domain from another registrar. First, go to the current registrar to unlock the domain for transfer and retrieve the domain's transfer authorization code. Then call `RetrieveTransferParameters` to confirm that the domain is unlocked and to get values needed to build a call to `TransferDomain`."
+      description: "The `Registration` resource facilitates managing and configuring domain name registrations. There are several ways to create a new `Registration` resource: To create a new `Registration` resource, find a suitable domain name by calling the `SearchDomains` method with a query to see available domain name options. After choosing a name, call `RetrieveRegisterParameters` to ensure availability and obtain information like pricing, which is needed to build a call to `RegisterDomain`. Another way to create a new `Registration` is to transfer an existing domain from another registrar. First, go to the current registrar to unlock the domain for transfer and retrieve the domain's transfer authorization code. Then call `RetrieveTransferParameters` to confirm that the domain is unlocked and to get values needed to build a call to `TransferDomain`. Finally, you can create a new `Registration` by importing an existing domain managed with [Google Domains](https://domains.google/). First, call `RetrieveImportableDomains` to list domains to which the calling user has sufficient access. Then call `ImportDomain` on any domain names you want to use with Cloud Domains."
       properties:
         contactSettings:
           $ref: "#/components/schemas/ContactSettings"
@@ -1523,6 +1645,15 @@ components:
           $ref: "#/components/schemas/ContactSettings"
           description: Output only. Pending contact settings for the `Registration`. Updates to the `contact_settings` field that change its `registrant_contact` or `privacy` fields require email confirmation by the `registrant_contact` before taking effect. This field is set only if there are pending updates to the `contact_settings` that have not been confirmed. To confirm the changes, the `registrant_contact` must follow the instructions in the email they receive.
           readOnly: true
+        registerFailureReason:
+          description: Output only. The reason the domain registration failed. Only set for domains in REGISTRATION_FAILED state.
+          enum:
+            - REGISTER_FAILURE_REASON_UNSPECIFIED
+            - REGISTER_FAILURE_REASON_UNKNOWN
+            - DOMAIN_NOT_AVAILABLE
+            - INVALID_CONTACTS
+          readOnly: true
+          type: string
         state:
           description: Output only. The state of the `Registration`
           enum:
@@ -1531,6 +1662,7 @@ components:
             - REGISTRATION_FAILED
             - TRANSFER_PENDING
             - TRANSFER_FAILED
+            - IMPORT_PENDING
             - ACTIVE
             - SUSPENDED
             - EXPORTED
@@ -1547,10 +1679,38 @@ components:
             type: string
           readOnly: true
           type: array
+        transferFailureReason:
+          description: Output only. The reason the domain transfer failed. Only set for domains in TRANSFER_FAILED state.
+          enum:
+            - TRANSFER_FAILURE_REASON_UNSPECIFIED
+            - TRANSFER_FAILURE_REASON_UNKNOWN
+            - EMAIL_CONFIRMATION_FAILURE
+            - DOMAIN_NOT_REGISTERED
+            - DOMAIN_HAS_TRANSFER_LOCK
+            - INVALID_AUTHORIZATION_CODE
+            - TRANSFER_CANCELLED
+            - TRANSFER_REJECTED
+            - INVALID_REGISTRANT_EMAIL_ADDRESS
+            - DOMAIN_NOT_ELIGIBLE_FOR_TRANSFER
+            - TRANSFER_ALREADY_PENDING
+          readOnly: true
+          type: string
       type: object
     ResetAuthorizationCodeRequest:
       description: Request for the `ResetAuthorizationCode` method.
       properties: {}
+      type: object
+    RetrieveImportableDomainsResponse:
+      description: Response for the `RetrieveImportableDomains` method.
+      properties:
+        domains:
+          description: A list of domains that the calling user manages in Google Domains.
+          items:
+            $ref: "#/components/schemas/Domain"
+          type: array
+        nextPageToken:
+          description: When present, there are more results to retrieve. Set `page_token` to this value on a subsequent call to get the next page of results.
+          type: string
       type: object
     RetrieveRegisterParametersResponse:
       description: Response for the `RetrieveRegisterParameters` method.
@@ -1651,6 +1811,9 @@ components:
       properties:
         currentRegistrar:
           description: The registrar that currently manages the domain.
+          type: string
+        currentRegistrarUri:
+          description: The URL of registrar that currently manages the domain.
           type: string
         domainName:
           description: The domain name. Unicode domain names are expressed in Punycode format.

@@ -297,6 +297,7 @@ tags:
     name: Customers
     x-apideck-model:
       $ref: "#/components/schemas/CustomerSupportCustomer"
+    x-apideck-resource-id: customers
 paths:
   /customer-support/customers:
     get:
@@ -933,12 +934,37 @@ components:
             - other
           example: primary
           type: string
+          x-apideck-enum-id: addresses.type
           x-graphql-type-name: AddressType
         website:
           example: https://elonmusk.com
           nullable: true
           type: string
       type: object
+      x-apideck-weights:
+        city: high
+        contact_name: edge-case
+        country: high
+        county: edge-case
+        email: edge-case
+        fax: edge-case
+        id: edge-case
+        latitude: low
+        line1: high
+        line2: low
+        line3: edge-case
+        line4: edge-case
+        longitude: low
+        name: edge-case
+        phone_number: edge-case
+        postal_code: high
+        row_version: edge-case
+        salutation: edge-case
+        state: high
+        street_number: low
+        string: low
+        type: critical
+        website: edge-case
     BadRequestResponse:
       properties:
         detail:
@@ -995,6 +1021,7 @@ components:
           nullable: true
           title: Account Type
           type: string
+          x-apideck-enum-id: bank-accounts.account_type
         bank_code:
           description: A bank code is a code assigned by a central bank, a bank supervisory body or a Bankers Association in a country to all its licensed member banks or financial institutions.
           example: BNH
@@ -1024,6 +1051,8 @@ components:
           nullable: true
           type: string
       type: object
+      x-apideck-weights:
+        account_number: critical
     Company:
       additionalProperties: false
       properties:
@@ -1285,6 +1314,7 @@ components:
           example: female
           nullable: true
           type: string
+          x-apideck-enum-id: contacts.gender
         id:
           example: "12345"
           readOnly: true
@@ -1369,6 +1399,7 @@ components:
           example: personal
           nullable: true
           type: string
+          x-apideck-enum-id: contacts.type
         updated_at:
           example: 2017-08-12T20:43:21.291Z
           format: date-time
@@ -1607,6 +1638,8 @@ components:
       nullable: true
       title: Currency
       type: string
+      x-apideck-enum-coverage-ignore: true
+      x-apideck-enum-id: currencies
       x-enum-elements:
         - description: Unknown currency
           name: UNKNOWN_CURRENCY
@@ -2066,6 +2099,7 @@ components:
           nullable: true
           title: Status
           type: string
+          x-apideck-enum-id: customers.status
           x-graphql-type-name: CustomerStatus
         tax_number:
           example: US123945459
@@ -2137,6 +2171,7 @@ components:
             - other
           example: primary
           type: string
+          x-apideck-enum-id: emails.type
           x-graphql-type-name: EmailType
       required:
         - email
@@ -2329,6 +2364,7 @@ components:
       required:
         - name
         - company_name
+      type: object
       x-pii:
         - name
         - email
@@ -2683,6 +2719,7 @@ components:
             - other
           example: primary
           type: string
+          x-apideck-enum-id: phone_numbers.type
           x-graphql-type-name: PhoneType
       required:
         - number
@@ -2886,6 +2923,7 @@ components:
             - other
           example: primary
           type: string
+          x-apideck-enum-id: websites.type
           x-graphql-type-name: WebsiteType
         url:
           example: http://example.com

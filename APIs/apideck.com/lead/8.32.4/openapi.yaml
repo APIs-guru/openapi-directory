@@ -300,6 +300,7 @@ tags:
     name: Leads
     x-apideck-model:
       $ref: "#/components/schemas/Lead"
+    x-apideck-resource-id: leads
 paths:
   /lead/leads:
     get:
@@ -994,12 +995,37 @@ components:
             - other
           example: primary
           type: string
+          x-apideck-enum-id: addresses.type
           x-graphql-type-name: AddressType
         website:
           example: https://elonmusk.com
           nullable: true
           type: string
       type: object
+      x-apideck-weights:
+        city: high
+        contact_name: edge-case
+        country: high
+        county: edge-case
+        email: edge-case
+        fax: edge-case
+        id: edge-case
+        latitude: low
+        line1: high
+        line2: low
+        line3: edge-case
+        line4: edge-case
+        longitude: low
+        name: edge-case
+        phone_number: edge-case
+        postal_code: high
+        row_version: edge-case
+        salutation: edge-case
+        state: high
+        street_number: low
+        string: low
+        type: critical
+        website: edge-case
     BadRequestResponse:
       properties:
         detail:
@@ -1056,6 +1082,7 @@ components:
           nullable: true
           title: Account Type
           type: string
+          x-apideck-enum-id: bank-accounts.account_type
         bank_code:
           description: A bank code is a code assigned by a central bank, a bank supervisory body or a Bankers Association in a country to all its licensed member banks or financial institutions.
           example: BNH
@@ -1085,6 +1112,8 @@ components:
           nullable: true
           type: string
       type: object
+      x-apideck-weights:
+        account_number: critical
     CreateLeadResponse:
       properties:
         data:
@@ -1306,6 +1335,8 @@ components:
       nullable: true
       title: Currency
       type: string
+      x-apideck-enum-coverage-ignore: true
+      x-apideck-enum-id: currencies
       x-enum-elements:
         - description: Unknown currency
           name: UNKNOWN_CURRENCY
@@ -1756,6 +1787,7 @@ components:
             - other
           example: primary
           type: string
+          x-apideck-enum-id: emails.type
           x-graphql-type-name: EmailType
       required:
         - email
@@ -1937,6 +1969,7 @@ components:
       required:
         - name
         - company_name
+      type: object
       x-pii:
         - name
         - email
@@ -1950,6 +1983,7 @@ components:
         - lead.lead.deleted
       example: lead.lead.created
       type: string
+      x-apideck-enum-id: lead.events
     LeadWebhookEvent:
       allOf:
         - properties:
@@ -2029,6 +2063,7 @@ components:
             - email
           example: created_at
           type: string
+          x-apideck-enum-id: leads.sort_by
           x-graphql-type-name: LeadsSortBy
         direction:
           $ref: "#/components/schemas/SortDirection"
@@ -2209,6 +2244,7 @@ components:
             - other
           example: primary
           type: string
+          x-apideck-enum-id: phone_numbers.type
           x-graphql-type-name: PhoneType
       required:
         - number
@@ -2243,6 +2279,7 @@ components:
         - asc
         - desc
       type: string
+      x-apideck-enum-id: sort_direction
       x-graphql-type-name: SortDirection
     Tags:
       example:
@@ -2420,6 +2457,7 @@ components:
             - other
           example: primary
           type: string
+          x-apideck-enum-id: websites.type
           x-graphql-type-name: WebsiteType
         url:
           example: http://example.com

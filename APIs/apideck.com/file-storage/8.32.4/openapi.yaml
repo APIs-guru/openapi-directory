@@ -297,18 +297,22 @@ tags:
     name: Files
     x-apideck-model:
       $ref: "#/components/schemas/UnifiedFile"
+    x-apideck-resource-id: files
   - description: ""
     name: Folders
     x-apideck-model:
       $ref: "#/components/schemas/Folder"
+    x-apideck-resource-id: folders
   - description: ""
     name: Shared Links
     x-apideck-model:
       $ref: "#/components/schemas/SharedLink"
+    x-apideck-resource-id: shared-links
   - description: ""
     name: Upload Sessions
     x-apideck-model:
       $ref: "#/components/schemas/UploadSession"
+    x-apideck-resource-id: upload-sessions
 paths:
   /file-storage/files:
     get:
@@ -2128,6 +2132,7 @@ components:
       example: file
       readOnly: true
       type: string
+      x-apideck-enum-id: files.type
       x-graphql-type-name: FileType
     FilesFilter:
       additionalProperties: false
@@ -2166,6 +2171,7 @@ components:
             - name
           example: updated_at
           type: string
+          x-apideck-enum-id: files.sort_by
           x-graphql-type-name: FilesSortBy
         direction:
           $ref: "#/components/schemas/SortDirection"
@@ -2664,6 +2670,7 @@ components:
             - company
           example: company
           type: string
+          x-apideck-enum-id: files.scope
         target:
           $ref: "#/components/schemas/SharedLinkTarget"
         target_id:
@@ -2702,6 +2709,7 @@ components:
         - asc
         - desc
       type: string
+      x-apideck-enum-id: sort_direction
       x-graphql-type-name: SortDirection
     TooManyRequestsResponse:
       properties:

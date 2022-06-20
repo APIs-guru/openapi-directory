@@ -300,34 +300,42 @@ tags:
     name: Companies
     x-apideck-model:
       $ref: "#/components/schemas/Company"
+    x-apideck-resource-id: companies
   - description: ""
     name: Opportunities
     x-apideck-model:
       $ref: "#/components/schemas/Opportunity"
+    x-apideck-resource-id: opportunities
   - description: ""
     name: Leads
     x-apideck-model:
       $ref: "#/components/schemas/Lead"
+    x-apideck-resource-id: leads
   - description: ""
     name: Contacts
     x-apideck-model:
       $ref: "#/components/schemas/Contact"
+    x-apideck-resource-id: contacts
   - description: ""
     name: Pipelines
     x-apideck-model:
       $ref: "#/components/schemas/Pipeline"
+    x-apideck-resource-id: pipelines
   - description: ""
     name: Notes
     x-apideck-model:
       $ref: "#/components/schemas/Note"
+    x-apideck-resource-id: notes
   - description: ""
     name: Users
     x-apideck-model:
       $ref: "#/components/schemas/User"
+    x-apideck-resource-id: users
   - description: ""
     name: Activities
     x-apideck-model:
       $ref: "#/components/schemas/Activity"
+    x-apideck-resource-id: activities
 paths:
   /crm/activities:
     get:
@@ -4134,6 +4142,7 @@ components:
             - busy
           example: busy
           type: string
+          x-apideck-enum-id: activities.show_as
         solution_id:
           example: "12345"
           nullable: true
@@ -4159,6 +4168,7 @@ components:
             - other
           example: meeting
           type: string
+          x-apideck-enum-id: activities.type
           x-graphql-type-name: ActivityType
         updated_at:
           example: 2020-09-30T07:43:32.000Z
@@ -4236,6 +4246,7 @@ components:
           example: accepted
           nullable: true
           type: string
+          x-apideck-enum-id: activity-attendees.status
         suffix:
           example: PhD
           nullable: true
@@ -4362,12 +4373,37 @@ components:
             - other
           example: primary
           type: string
+          x-apideck-enum-id: addresses.type
           x-graphql-type-name: AddressType
         website:
           example: https://elonmusk.com
           nullable: true
           type: string
       type: object
+      x-apideck-weights:
+        city: high
+        contact_name: edge-case
+        country: high
+        county: edge-case
+        email: edge-case
+        fax: edge-case
+        id: edge-case
+        latitude: low
+        line1: high
+        line2: low
+        line3: edge-case
+        line4: edge-case
+        longitude: low
+        name: edge-case
+        phone_number: edge-case
+        postal_code: high
+        row_version: edge-case
+        salutation: edge-case
+        state: high
+        street_number: low
+        string: low
+        type: critical
+        website: edge-case
     BadRequestResponse:
       properties:
         detail:
@@ -4424,6 +4460,7 @@ components:
           nullable: true
           title: Account Type
           type: string
+          x-apideck-enum-id: bank-accounts.account_type
         bank_code:
           description: A bank code is a code assigned by a central bank, a bank supervisory body or a Bankers Association in a country to all its licensed member banks or financial institutions.
           example: BNH
@@ -4453,6 +4490,8 @@ components:
           nullable: true
           type: string
       type: object
+      x-apideck-weights:
+        account_number: critical
     CompaniesFilter:
       additionalProperties: false
       example:
@@ -4478,6 +4517,7 @@ components:
             - name
           example: created_at
           type: string
+          x-apideck-enum-id: companies.sort_by
           x-graphql-type-name: CompaniesSortBy
         direction:
           $ref: "#/components/schemas/SortDirection"
@@ -4741,6 +4781,7 @@ components:
           example: female
           nullable: true
           type: string
+          x-apideck-enum-id: contacts.gender
         id:
           example: "12345"
           readOnly: true
@@ -4825,6 +4866,7 @@ components:
           example: personal
           nullable: true
           type: string
+          x-apideck-enum-id: contacts.type
         updated_at:
           example: 2017-08-12T20:43:21.291Z
           format: date-time
@@ -4884,6 +4926,7 @@ components:
             - email
           example: created_at
           type: string
+          x-apideck-enum-id: contacts.sort_by
           x-graphql-type-name: ContactsSortBy
         direction:
           $ref: "#/components/schemas/SortDirection"
@@ -5170,6 +5213,7 @@ components:
         - crm.opportunity.deleted
       example: crm.company.created
       type: string
+      x-apideck-enum-id: crm.events
     CrmWebhookEvent:
       allOf:
         - properties:
@@ -5396,6 +5440,8 @@ components:
       nullable: true
       title: Currency
       type: string
+      x-apideck-enum-coverage-ignore: true
+      x-apideck-enum-id: currencies
       x-enum-elements:
         - description: Unknown currency
           name: UNKNOWN_CURRENCY
@@ -6070,6 +6116,7 @@ components:
             - other
           example: primary
           type: string
+          x-apideck-enum-id: emails.type
           x-graphql-type-name: EmailType
       required:
         - email
@@ -6761,6 +6808,7 @@ components:
       required:
         - name
         - company_name
+      type: object
       x-pii:
         - name
         - email
@@ -6808,6 +6856,7 @@ components:
             - email
           example: created_at
           type: string
+          x-apideck-enum-id: leads.sort_by
           x-graphql-type-name: LeadsSortBy
         direction:
           $ref: "#/components/schemas/SortDirection"
@@ -7016,6 +7065,7 @@ components:
             - status
           example: created_at
           type: string
+          x-apideck-enum-id: opportunities.sort_by
           x-graphql-type-name: OpportunitiesSortBy
         direction:
           $ref: "#/components/schemas/SortDirection"
@@ -7267,6 +7317,7 @@ components:
             - other
           example: primary
           type: string
+          x-apideck-enum-id: phone_numbers.type
           x-graphql-type-name: PhoneType
       required:
         - number
@@ -7357,6 +7408,7 @@ components:
         - asc
         - desc
       type: string
+      x-apideck-enum-id: sort_direction
       x-graphql-type-name: SortDirection
     Tags:
       example:
@@ -7853,6 +7905,7 @@ components:
             - other
           example: primary
           type: string
+          x-apideck-enum-id: websites.type
           x-graphql-type-name: WebsiteType
         url:
           example: http://example.com

@@ -19,12 +19,11 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://gkehub.googleapis.com/$discovery/rest?version=v1beta1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: gkehub
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/anthos/multicluster-management/connect/registering-a-cluster
 tags:
@@ -1151,6 +1150,15 @@ components:
           description: Output only. If cluster_missing is set then it denotes that API(gkeonprem.googleapis.com) resource for this GKE On-Prem cluster no longer exists.
           readOnly: true
           type: boolean
+        clusterType:
+          description: Immutable. The on prem cluster's type.
+          enum:
+            - CLUSTERTYPE_UNSPECIFIED
+            - BOOTSTRAP
+            - HYBRID
+            - STANDALONE
+            - USER
+          type: string
         resourceLink:
           description: "Immutable. Self-link of the GCP resource for the GKE On-Prem cluster. For example: //gkeonprem.googleapis.com/projects/my-project/locations/us-west1-a/vmwareClusters/my-cluster //gkeonprem.googleapis.com/projects/my-project/locations/us-west1-a/bareMetalClusters/my-cluster"
           type: string

@@ -297,22 +297,27 @@ tags:
     name: Employees
     x-apideck-model:
       $ref: "#/components/schemas/Employee"
+    x-apideck-resource-id: employees
   - description: ""
     name: Companies
     x-apideck-model:
       $ref: "#/components/schemas/HrisCompany"
+    x-apideck-resource-id: companies
   - description: ""
     name: Departments
     x-apideck-model:
       $ref: "#/components/schemas/Department"
+    x-apideck-resource-id: departments
   - description: ""
     name: Payrolls
     x-apideck-model:
       $ref: "#/components/schemas/Payroll"
+    x-apideck-resource-id: payrolls
   - description: ""
     name: Employee Payrolls
     x-apideck-model:
       $ref: "#/components/schemas/EmployeePayroll"
+    x-apideck-resource-id: employee-payrolls
 paths:
   /hris/companies:
     get:
@@ -2140,12 +2145,37 @@ components:
             - other
           example: primary
           type: string
+          x-apideck-enum-id: addresses.type
           x-graphql-type-name: AddressType
         website:
           example: https://elonmusk.com
           nullable: true
           type: string
       type: object
+      x-apideck-weights:
+        city: high
+        contact_name: edge-case
+        country: high
+        county: edge-case
+        email: edge-case
+        fax: edge-case
+        id: edge-case
+        latitude: low
+        line1: high
+        line2: low
+        line3: edge-case
+        line4: edge-case
+        longitude: low
+        name: edge-case
+        phone_number: edge-case
+        postal_code: high
+        row_version: edge-case
+        salutation: edge-case
+        state: high
+        street_number: low
+        string: low
+        type: critical
+        website: edge-case
     BadRequestResponse:
       properties:
         detail:
@@ -2530,6 +2560,8 @@ components:
       nullable: true
       title: Currency
       type: string
+      x-apideck-enum-coverage-ignore: true
+      x-apideck-enum-id: currencies
       x-enum-elements:
         - description: Unknown currency
           name: UNKNOWN_CURRENCY
@@ -3096,6 +3128,7 @@ components:
             - other
           example: primary
           type: string
+          x-apideck-enum-id: emails.type
           x-graphql-type-name: EmailType
       required:
         - email
@@ -3142,6 +3175,7 @@ components:
                   - owner
                 readOnly: false
                 type: string
+                x-apideck-enum-id: employees.compensations.flsa_status
               id:
                 $ref: "#/components/schemas/Id"
               job_id:
@@ -3228,6 +3262,7 @@ components:
                 - hourly
               nullable: true
               type: string
+              x-apideck-enum-id: employees.employment_role.sub_type
             type:
               enum:
                 - contractor
@@ -3238,6 +3273,7 @@ components:
                 - other
               nullable: true
               type: string
+              x-apideck-enum-id: employees.employment_role.type
           type: object
         employment_start_date:
           description: A Start Date is the date that the employee started working at the company
@@ -3254,6 +3290,7 @@ components:
           example: active
           nullable: true
           type: string
+          x-apideck-enum-id: employees.employment_status
         first_name:
           $ref: "#/components/schemas/FirstName"
         food_allergies:
@@ -3499,6 +3536,7 @@ components:
       example: male
       nullable: true
       type: string
+      x-apideck-enum-id: genders
     GetDepartmentResponse:
       properties:
         data:
@@ -3900,6 +3938,7 @@ components:
             - other
           example: active
           type: string
+          x-apideck-enum-id: companies.status
         subdomain:
           example: company
           minLength: 1
@@ -4085,6 +4124,7 @@ components:
         - paycheck
       example: year
       type: string
+      x-apideck-enum-id: payment_unit
     Payroll:
       additionalProperties: false
       properties:
@@ -4232,6 +4272,7 @@ components:
             - other
           example: primary
           type: string
+          x-apideck-enum-id: phone_numbers.type
           x-graphql-type-name: PhoneType
       required:
         - number
@@ -4548,6 +4589,7 @@ components:
             - other
           example: primary
           type: string
+          x-apideck-enum-id: websites.type
           x-graphql-type-name: WebsiteType
         url:
           example: http://example.com

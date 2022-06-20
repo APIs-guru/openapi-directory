@@ -1236,6 +1236,7 @@ components:
         - disabled
       example: enabled
       type: string
+      x-apideck-enum-id: webhooks.status
       x-graphql-type-name: WebhookStatus
     UnauthorizedResponse:
       properties:
@@ -1321,6 +1322,7 @@ components:
         - pos
       example: crm
       type: string
+      x-apideck-enum-id: unifies_api
     UnprocessableResponse:
       properties:
         detail:
@@ -1673,6 +1675,7 @@ components:
         - hris.company.deleted
       example: crm.company.created
       type: string
+      x-apideck-enum-id: webhooks.event_type
   securitySchemes:
     apiKey:
       description: |

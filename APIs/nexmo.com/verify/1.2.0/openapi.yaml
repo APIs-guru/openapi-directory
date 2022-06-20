@@ -18,7 +18,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://www.nexmo.com/terms-of-use
   title: Verify API
-  version: 1.1.7
+  version: 1.2.0
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/verify.yml
@@ -28,6 +28,11 @@ info:
 externalDocs:
   description: More information on the Verify product on our Developer Portal
   url: https://developer.nexmo.com/verify
+tags:
+  - description: Verify Requests
+    name: Requests
+  - description: Fraud Management
+    name: Fraud Management
 paths:
   "/check/{format}":
     post:
@@ -199,6 +204,52 @@ paths:
                   - $ref: "#/components/schemas/controlErrorResponse"
           description: OK
       summary: Verify Control
+  /network-unblock:
+    post:
+      description: Request to unblock a network that has been blocked due to potential fraud detection
+      operationId: networkUnblock
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/networkUnblock"
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/networkUnblockResponseOk"
+          description: Accepted
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/networkUnblockResponseForbidden"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/networkUnblockResponseNotFound"
+          description: Not Found
+        "422":
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/networkUnblockResponseUnprocessableNetwork"
+                  - $ref: "#/components/schemas/networkUnblockResponseInvalidDuration"
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorThrottled"
+          description: Rate Limited
+      summary: Request a network unblock
+      tags:
+        - Fraud Management
   "/psd2/{format}":
     post:
       description: |-
@@ -437,6 +488,8 @@ paths:
                   - $ref: "#/components/schemas/requestErrorResponse"
           description: OK
       summary: Request a Verification
+      tags:
+        - Requests
 components:
   parameters:
     api_key:
@@ -463,6 +516,30 @@ components:
           - xml
         type: string
   schemas:
+    ErrorThrottled:
+      properties:
+        detail:
+          description: Additional information about the error
+          example: Please wait, then retry your request
+          type: string
+        instance:
+          description: Internal Trace ID
+          example: bf0ca0bf927b3b52e3cb03217e1a1ddf
+          type: string
+        title:
+          description: Generic error message
+          example: Rate Limit Hit
+          type: string
+        type:
+          description: Link to error / remediation options
+          example: https://developer.vonage.com/api-errors/verify#rate-limit
+          type: string
+      required:
+        - type
+        - title
+        - detail
+        - instance
+      type: object
     api_key:
       description: You can find your API key in your [account dashboard](https://dashboard.nexmo.com)
       example: abcd1234
@@ -656,6 +733,135 @@ components:
         cost of the verification is the sum of this field and the `price` field.
       example: "0.03330000"
       type: string
+    networkUnblock:
+      properties:
+        network:
+          description: The Network code
+          example: 32526
+          type: string
+        unblock_duration:
+          description: Duration the unblock will be applied in seconds
+          example: "3600"
+          required:
+            - "false"
+          type: integer
+      type: object
+    networkUnblockResponseForbidden:
+      description: Forbidden
+      properties:
+        detail:
+          description: Verbose description of the server error.
+          example: Your account does not have permission to perform this action.
+          type: string
+        instance:
+          description: The Instance ID
+          example: bf0ca0bf927b3b52e3cb03217e1a1ddf
+          type: string
+        title:
+          description: Full string text of the HTTP error code.
+          example: Forbidden
+          type: string
+        type:
+          description: A URL link to the API documentation for this type of error.
+          example: https://developer.vonage.com/api-errors#forbidden
+          type: string
+      type: object
+      xml:
+        name: networkUnblockResponseForbidden
+    networkUnblockResponseInvalidDuration:
+      description: Invalid Duration
+      properties:
+        detail:
+          description: Verbose description of the server error.
+          example: Unblock duration is invalid.
+          type: string
+        instance:
+          description: The Instance ID
+          example: bf0ca0bf927b3b52e3cb03217e1a1ddf
+          type: string
+        invalid_parameters:
+          description: Detailed payload of errors.
+          example:
+            name: unblock_duration
+            reason: Must be an integer in minutes
+          items: {}
+          type: array
+        title:
+          description: Full string text of the HTTP error code.
+          example: Invalid unblock_duration parameter
+          type: string
+        type:
+          description: A URL link to the API documentation for this type of error.
+          example: https://developer.vonage.com/api-errors#invalid-paramater
+          type: string
+      type: object
+      xml:
+        name: networkUnblockResponseInvalidDuration
+    networkUnblockResponseNotFound:
+      description: Not Found
+      properties:
+        detail:
+          description: Verbose description of the server error.
+          example: The network you provided does not have an active block.
+          type: string
+        instance:
+          description: InstanceID
+          example: bf0ca0bf927b3b52e3cb03217e1a1ddf
+          type: string
+        title:
+          description: Full string text of the HTTP error code.
+          example: Not Found
+          type: string
+        type:
+          description: A URL link to the API documentation for this type of error.
+          example: https://developer.vonage.com/api-errors#bad-request
+          type: string
+      type: object
+      xml:
+        name: networkUnblockResponseNotFound
+    networkUnblockResponseOk:
+      description: Success
+      properties:
+        network:
+          description: The unique network ID
+          example: "23410"
+          type: string
+        unblocked_until:
+          description: Gives the DateTime when the unblock will expire.
+          example: 2024-04-22T08:34:58Z
+          type: string
+      type: object
+      xml:
+        name: networkUnblockResponse
+    networkUnblockResponseUnprocessableNetwork:
+      description: Invalid Network
+      properties:
+        detail:
+          description: Verbose description of the server error.
+          example: Network is not in the request.
+          type: string
+        instance:
+          description: The Instance ID
+          example: bf0ca0bf927b3b52e3cb03217e1a1ddf
+          type: string
+        invalid_parameters:
+          description: Detailed payload of errors.
+          example:
+            name: network
+            reason: Network not found
+          items: {}
+          type: array
+        title:
+          description: Full string text of the HTTP error code.
+          example: Network not found.
+          type: string
+        type:
+          description: A URL link to the API documentation for this type of error.
+          example: https://developer.vonage.com/api-errors#invalid-paramater
+          type: string
+      type: object
+      xml:
+        name: networkUnblockResponseUnprocessableNetwork
     psd2Request:
       properties:
         amount:

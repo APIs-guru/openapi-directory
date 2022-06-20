@@ -297,6 +297,7 @@ tags:
     name: Messages
     x-apideck-model:
       $ref: "#/components/schemas/Message"
+    x-apideck-resource-id: messages
 paths:
   /sms/messages:
     get:
@@ -970,6 +971,8 @@ components:
       nullable: true
       title: Currency
       type: string
+      x-apideck-enum-coverage-ignore: true
+      x-apideck-enum-id: currencies
       x-enum-elements:
         - description: Unknown currency
           name: UNKNOWN_CURRENCY
@@ -1420,6 +1423,7 @@ components:
             - other
           example: primary
           type: string
+          x-apideck-enum-id: emails.type
           x-graphql-type-name: EmailType
       required:
         - email
@@ -1547,6 +1551,7 @@ components:
           readOnly: true
           title: Direction
           type: string
+          x-apideck-enum-id: messages.direction
         error:
           description: The error returned if your message status is failed or undelivered.
           example:
@@ -1652,6 +1657,7 @@ components:
           readOnly: true
           title: Status
           type: string
+          x-apideck-enum-id: messages.status
         subject:
           example: Picture
           title: Message Subject
@@ -1669,6 +1675,7 @@ components:
           example: sms
           title: Message type
           type: string
+          x-apideck-enum-id: messages.type
         updated_at:
           example: 2020-09-30T07:43:32.000Z
           format: date-time

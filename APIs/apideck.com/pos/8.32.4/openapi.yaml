@@ -297,38 +297,47 @@ tags:
     name: Orders
     x-apideck-model:
       $ref: "#/components/schemas/Order"
+    x-apideck-resource-id: orders
   - description: ""
     name: Payments
     x-apideck-model:
       $ref: "#/components/schemas/PosPayment"
+    x-apideck-resource-id: payments
   - description: ""
     name: Merchants
     x-apideck-model:
       $ref: "#/components/schemas/Merchant"
+    x-apideck-resource-id: merchants
   - description: ""
     name: Locations
     x-apideck-model:
       $ref: "#/components/schemas/Location"
+    x-apideck-resource-id: locations
   - description: ""
     name: Items
     x-apideck-model:
       $ref: "#/components/schemas/Item"
+    x-apideck-resource-id: items
   - description: ""
     name: Modifiers
     x-apideck-model:
       $ref: "#/components/schemas/Modifier"
+    x-apideck-resource-id: modifiers
   - description: ""
     name: Modifier Groups
     x-apideck-model:
       $ref: "#/components/schemas/ModifierGroup"
+    x-apideck-resource-id: modifier-groups
   - description: ""
     name: Order Types
     x-apideck-model:
       $ref: "#/components/schemas/OrderType"
+    x-apideck-resource-id: order-types
   - description: ""
     name: Tenders
     x-apideck-model:
       $ref: "#/components/schemas/Tender"
+    x-apideck-resource-id: tenders
 paths:
   /pos/items:
     get:
@@ -4545,12 +4554,37 @@ components:
             - other
           example: primary
           type: string
+          x-apideck-enum-id: addresses.type
           x-graphql-type-name: AddressType
         website:
           example: https://elonmusk.com
           nullable: true
           type: string
       type: object
+      x-apideck-weights:
+        city: high
+        contact_name: edge-case
+        country: high
+        county: edge-case
+        email: edge-case
+        fax: edge-case
+        id: edge-case
+        latitude: low
+        line1: high
+        line2: low
+        line3: edge-case
+        line4: edge-case
+        longitude: low
+        name: edge-case
+        phone_number: edge-case
+        postal_code: high
+        row_version: edge-case
+        salutation: edge-case
+        state: high
+        street_number: low
+        string: low
+        type: critical
+        website: edge-case
     Available:
       example: true
       nullable: true
@@ -5076,6 +5110,8 @@ components:
       nullable: true
       title: Currency
       type: string
+      x-apideck-enum-coverage-ignore: true
+      x-apideck-enum-id: currencies
       x-enum-elements:
         - description: Unknown currency
           name: UNKNOWN_CURRENCY
@@ -5787,6 +5823,7 @@ components:
             - other
           example: primary
           type: string
+          x-apideck-enum-id: emails.type
           x-graphql-type-name: EmailType
       required:
         - email
@@ -6554,6 +6591,7 @@ components:
           example: fixed
           title: Pricing type
           type: string
+          x-apideck-enum-id: items.pricing_type
         product_type:
           enum:
             - regular
@@ -6561,6 +6599,7 @@ components:
           example: regular
           title: Product type
           type: string
+          x-apideck-enum-id: items.product_type
         sku:
           description: SKU of the item
           example: "11910345"
@@ -6622,6 +6661,7 @@ components:
                 example: fixed
                 title: Pricing type
                 type: string
+                x-apideck-enum-id: items.pricing_type
               sequence:
                 $ref: "#/components/schemas/Sequence"
               sku:
@@ -6699,6 +6739,7 @@ components:
           nullable: true
           title: Status
           type: string
+          x-apideck-enum-id: locations.status
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         updated_by:
@@ -6748,6 +6789,7 @@ components:
           nullable: true
           title: Status
           type: string
+          x-apideck-enum-id: merchants.status
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         updated_by:
@@ -6882,6 +6924,7 @@ components:
           example: single
           title: Indicates whether multiple options from the modifier group can be applied to a single or multiple modifiers
           type: string
+          x-apideck-enum-id: modifier-groups.selection_type
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         updated_by:
@@ -7021,11 +7064,13 @@ components:
                   - line_item
                 example: order
                 type: string
+                x-apideck-enum-id: orders.discounts.scope
               type:
                 enum:
                   - fixed_percentage
                 example: fixed_percentage
                 type: string
+                x-apideck-enum-id: orders.discounts.type
             type: object
           type: array
         employee_id:
@@ -7171,6 +7216,7 @@ components:
                     enum:
                       - scheduled
                     type: string
+                    x-apideck-enum-id: orders.pickup_details.schedule_type
                 type: object
               shipment_details:
                 properties: {}
@@ -7187,12 +7233,14 @@ components:
                   - other
                 title: Fulfillment status
                 type: string
+                x-apideck-enum-id: orders.fulfillments.status
               type:
                 enum:
                   - pickup
                   - shipment
                 example: shipment
                 type: string
+                x-apideck-enum-id: orders.fulfillments.type
             type: object
           type: array
         id:
@@ -7305,6 +7353,7 @@ components:
           example: open
           title: PosPayment status
           type: string
+          x-apideck-enum-id: orders.payment_status
         payments:
           items:
             properties:
@@ -7348,6 +7397,7 @@ components:
                   - rejected
                   - failed
                 type: string
+                x-apideck-enum-id: orders.refunds.status
               tender_id:
                 $ref: "#/components/schemas/Id"
               transaction_id:
@@ -7374,6 +7424,7 @@ components:
           nullable: true
           readOnly: true
           type: string
+          x-apideck-enum-id: orders.source
         state:
           description: "A string describing the state of the order. Clover specific: If no value is set, the state defaults to null, which indicates a hidden order. A hidden order is not displayed in user interfaces and can only be retrieved by its id. When creating an order via the REST API the value must be manually set to 'open'. More info [https://docs.clover.com/reference/orderupdateorder]()"
           example: open
@@ -7390,6 +7441,7 @@ components:
           example: open
           title: Status
           type: string
+          x-apideck-enum-id: orders.status
         table:
           example: 1F
           type: string
@@ -7419,12 +7471,14 @@ components:
                   - order
                   - line_item
                 type: string
+                x-apideck-enum-id: orders.taxes.scope
               type:
                 enum:
                   - unknown
                   - additive
                   - inclusive
                 type: string
+                x-apideck-enum-id: orders.taxes.type
           type: array
         tenders:
           items:
@@ -7450,6 +7504,7 @@ components:
                 example: swiped
                 nullable: true
                 type: string
+                x-apideck-enum-id: orders.tenders.card_entry_method
               card_status:
                 description: The status of the card. Only applicable when the tender type is card.
                 enum:
@@ -7460,6 +7515,7 @@ components:
                 example: authorized
                 nullable: true
                 type: string
+                x-apideck-enum-id: orders.tenders.card_status
               change_back_cash_amount:
                 description: The amount of cash returned to the buyer. Only applicable when the tender type is cash.
                 example: 27500
@@ -7524,6 +7580,7 @@ components:
                   - other
                 example: cash
                 type: string
+                x-apideck-enum-id: orders.tenders.type
             type: object
           type: array
         title:
@@ -7631,6 +7688,7 @@ components:
             - other
           nullable: true
           type: string
+          x-apideck-enum-id: payment-cards.card_brand
         card_type:
           enum:
             - credit
@@ -7640,6 +7698,7 @@ components:
           example: credit
           nullable: true
           type: string
+          x-apideck-enum-id: payment-cards.card_type
         cardholder_name:
           example: John Doe
           nullable: true
@@ -7686,6 +7745,7 @@ components:
           example: prepaid
           nullable: true
           type: string
+          x-apideck-enum-id: payment-cards.prepaid_type
         reference_id:
           description: An optional user-defined reference ID that associates this record with another entity in an external system. For example, a customer ID from an external customer management system.
           example: card-001
@@ -7767,6 +7827,7 @@ components:
             - other
           example: primary
           type: string
+          x-apideck-enum-id: phone_numbers.type
           x-graphql-type-name: PhoneType
       required:
         - number
@@ -7922,6 +7983,7 @@ components:
                 - other
               maxLength: 50
               type: string
+              x-apideck-enum-id: pos-payments.external_details.type
           required:
             - type
             - source
@@ -7964,6 +8026,7 @@ components:
                   - adjustment
                 title: Type
                 type: string
+                x-apideck-enum-id: pos-payments.processing_fees.processing_type
           type: array
         refunded:
           description: The initial amount of money approved for this payment.
@@ -7984,6 +8047,7 @@ components:
             - other
           example: external
           type: string
+          x-apideck-enum-id: pos-payments.source
         source_id:
           example: "12345"
           type: string
@@ -7999,6 +8063,7 @@ components:
           example: approved
           title: Status
           type: string
+          x-apideck-enum-id: pos-payments.status
           x-graphql-type-name: PosPosPaymentStatus
         tax:
           example: 20
@@ -8032,6 +8097,7 @@ components:
                 - other
               maxLength: 50
               type: string
+              x-apideck-enum-id: pos-payments.wallet.status
           title: Wallet details
           type: object
       required:
@@ -8140,6 +8206,7 @@ components:
               - auto_gratuity
               - custom
             type: string
+            x-apideck-enum-id: service-charges.type
         type: object
       type: array
     SocialLink:
@@ -8652,6 +8719,7 @@ components:
             - other
           example: primary
           type: string
+          x-apideck-enum-id: websites.type
           x-graphql-type-name: WebsiteType
         url:
           example: http://example.com

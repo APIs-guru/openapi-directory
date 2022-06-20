@@ -1084,6 +1084,7 @@ components:
           example: oauth2
           readOnly: true
           type: string
+          x-apideck-enum-id: auth_types
         configurable_resources:
           description: List of resources that have settings that can be configured.
           example:
@@ -1132,6 +1133,7 @@ components:
           example: integration
           readOnly: true
           type: string
+          x-apideck-enum-id: oauth_credentials_source
         oauth_grant_type:
           description: "OAuth grant type used by the connector. More info: https://oauth.net/2/grant-types"
           enum:
@@ -1140,6 +1142,7 @@ components:
           example: authorization_code
           readOnly: true
           type: string
+          x-apideck-enum-id: oauth_grant_types
         oauth_scopes:
           description: List of OAuth Scopes available for this connector.
           items:
@@ -1750,6 +1753,7 @@ components:
         - pos
       example: crm
       type: string
+      x-apideck-enum-id: unifies_api
     UnifiedProperty:
       description: Name of the property in our Unified API.
       example: owner_id

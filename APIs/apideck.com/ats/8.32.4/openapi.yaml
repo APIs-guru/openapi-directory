@@ -297,12 +297,15 @@ tags:
     name: Jobs
     x-apideck-model:
       $ref: "#/components/schemas/Job"
+    x-apideck-resource-id: jobs
   - description: ""
     name: Applicants
     x-apideck-model:
       $ref: "#/components/schemas/Applicant"
+    x-apideck-resource-id: applicants
   - description: ""
     name: Employees
+    x-apideck-resource-id: employees
     x-apideck-upcoming: true
 paths:
   /ats/applicants:
@@ -886,12 +889,37 @@ components:
             - other
           example: primary
           type: string
+          x-apideck-enum-id: addresses.type
           x-graphql-type-name: AddressType
         website:
           example: https://elonmusk.com
           nullable: true
           type: string
       type: object
+      x-apideck-weights:
+        city: high
+        contact_name: edge-case
+        country: high
+        county: edge-case
+        email: edge-case
+        fax: edge-case
+        id: edge-case
+        latitude: low
+        line1: high
+        line2: low
+        line3: edge-case
+        line4: edge-case
+        longitude: low
+        name: edge-case
+        phone_number: edge-case
+        postal_code: high
+        row_version: edge-case
+        salutation: edge-case
+        state: high
+        street_number: low
+        string: low
+        type: critical
+        website: edge-case
     Anonymized:
       example: true
       title: Anonymized
@@ -1065,6 +1093,7 @@ components:
                   - other
                 example: primary
                 type: string
+                x-apideck-enum-id: websites.type
                 x-graphql-type-name: WebsiteType
               url:
                 example: http://example.com
@@ -1392,6 +1421,8 @@ components:
       nullable: true
       title: Currency
       type: string
+      x-apideck-enum-coverage-ignore: true
+      x-apideck-enum-id: currencies
       x-enum-elements:
         - description: Unknown currency
           name: UNKNOWN_CURRENCY
@@ -1863,6 +1894,7 @@ components:
             - other
           example: primary
           type: string
+          x-apideck-enum-id: emails.type
           x-graphql-type-name: EmailType
       required:
         - email
@@ -2108,6 +2140,7 @@ components:
           example: full-time
           nullable: true
           type: string
+          x-apideck-enum-id: jobs.employment_terms
         experience:
           description: Level of experience required for the job role.
           example: Director/ Vice President
@@ -2211,6 +2244,7 @@ components:
               - public
               - internal
             type: string
+            x-apideck-enum-id: jobs.visibility
           type: array
       type: object
     JobStatus:
@@ -2224,6 +2258,7 @@ components:
         - private
       example: completed
       type: string
+      x-apideck-enum-id: jobs.status
     JobsFilter:
       additionalProperties: false
       example:
@@ -2423,6 +2458,7 @@ components:
             - other
           example: primary
           type: string
+          x-apideck-enum-id: phone_numbers.type
           x-graphql-type-name: PhoneType
       required:
         - number

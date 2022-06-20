@@ -297,42 +297,52 @@ tags:
     name: Bills
     x-apideck-model:
       $ref: "#/components/schemas/Bill"
+    x-apideck-resource-id: bills
   - description: ""
     name: Company Info
     x-apideck-model:
       $ref: "#/components/schemas/CompanyInfo"
+    x-apideck-resource-id: company-info
   - description: ""
     name: Customers
     x-apideck-model:
       $ref: "#/components/schemas/AccountingCustomer"
+    x-apideck-resource-id: customers
   - description: ""
     name: Invoices
     x-apideck-model:
       $ref: "#/components/schemas/Invoice"
+    x-apideck-resource-id: invoices
   - description: Invoice items are stored from invoice lines to be used later on when creating new invoices.
     name: Invoice Items
     x-apideck-model:
       $ref: "#/components/schemas/InvoiceItem"
+    x-apideck-resource-id: invoice-items
   - description: ""
     name: Ledger Accounts
     x-apideck-model:
       $ref: "#/components/schemas/LedgerAccount"
+    x-apideck-resource-id: ledger-accounts
   - description: ""
     name: Payments
     x-apideck-model:
       $ref: "#/components/schemas/Payment"
+    x-apideck-resource-id: payments
   - description: ""
     name: Suppliers
     x-apideck-model:
       $ref: "#/components/schemas/Supplier"
+    x-apideck-resource-id: suppliers
   - description: ""
     name: Tax Rates
     x-apideck-model:
       $ref: "#/components/schemas/TaxRate"
+    x-apideck-resource-id: tax-rates
   - description: ""
     name: Balance Sheet
     x-apideck-model:
       $ref: "#/components/schemas/BalanceSheet"
+    x-apideck-resource-id: balance-sheet
 paths:
   /accounting/balance-sheet:
     get:
@@ -519,6 +529,7 @@ paths:
                 due_date: '2020-10-30',
                 paid_date: '2020-10-30',
                 po_number: '90000117',
+                reference: '123456',
                 line_items: [
                   {
                     row_id: '12345',
@@ -759,6 +770,7 @@ paths:
                 due_date: '2020-10-30',
                 paid_date: '2020-10-30',
                 po_number: '90000117',
+                reference: '123456',
                 line_items: [
                   {
                     row_id: '12345',
@@ -4023,6 +4035,7 @@ components:
           nullable: true
           title: Status
           type: string
+          x-apideck-enum-id: customers.status
           x-graphql-type-name: CustomerStatus
         suffix:
           $ref: "#/components/schemas/Suffix"
@@ -4041,6 +4054,32 @@ components:
             $ref: "#/components/schemas/Website"
           type: array
       type: object
+      x-apideck-weights:
+        addresses: medium
+        bank_accounts: medium
+        company_name: medium
+        created_at: medium
+        created_by: medium
+        currency: medium
+        display_id: medium
+        display_name: medium
+        emails: medium
+        first_name: medium
+        id: medium
+        individual: medium
+        last_name: medium
+        middle_name: medium
+        notes: medium
+        phone_numbers: medium
+        row_version: medium
+        status: medium
+        suffix: medium
+        tax_number: medium
+        tax_rate: medium
+        title: medium
+        updated_at: medium
+        updated_by: medium
+        websites: medium
       x-graphql-type-name: Customer
     AccountingEventType:
       enum:
@@ -4071,6 +4110,7 @@ components:
         - accounting.supplier.deleted
       example: accounting.invoice.created
       type: string
+      x-apideck-enum-id: accounting.events
     AccountingWebhookEvent:
       allOf:
         - properties:
@@ -4220,12 +4260,37 @@ components:
             - other
           example: primary
           type: string
+          x-apideck-enum-id: addresses.type
           x-graphql-type-name: AddressType
         website:
           example: https://elonmusk.com
           nullable: true
           type: string
       type: object
+      x-apideck-weights:
+        city: high
+        contact_name: edge-case
+        country: high
+        county: edge-case
+        email: edge-case
+        fax: edge-case
+        id: edge-case
+        latitude: low
+        line1: high
+        line2: low
+        line3: edge-case
+        line4: edge-case
+        longitude: low
+        name: edge-case
+        phone_number: edge-case
+        postal_code: high
+        row_version: edge-case
+        salutation: edge-case
+        state: high
+        street_number: low
+        string: low
+        type: critical
+        website: edge-case
     BadRequestResponse:
       properties:
         detail:
@@ -4311,6 +4376,9 @@ components:
                 - total
                 - accounts
               type: object
+              x-apideck-weights:
+                accounts: medium
+                total: medium
             fixed_assets:
               properties:
                 accounts:
@@ -4329,6 +4397,10 @@ components:
                         title: Value
                         type: number
                     type: object
+                    x-apideck-weights:
+                      id: medium
+                      name: medium
+                      value: medium
                     x-graphql-type-name: FixedAssetAccountsList
                   type: array
                 total:
@@ -4340,6 +4412,9 @@ components:
                 - total
                 - accounts
               type: object
+              x-apideck-weights:
+                accounts: medium
+                total: medium
             total:
               description: Total assets
               example: 100000
@@ -4350,6 +4425,10 @@ components:
             - current_assets
             - fixed_assets
           type: object
+          x-apideck-weights:
+            current_assets: medium
+            fixed_assets: medium
+            total: medium
         created_at:
           $ref: "#/components/schemas/CreatedAt"
         created_by:
@@ -4378,6 +4457,10 @@ components:
                     title: Value
                     type: number
                 type: object
+                x-apideck-weights:
+                  id: medium
+                  name: medium
+                  value: medium
                 x-graphql-type-name: EquityItemsList
               type: array
             total:
@@ -4389,6 +4472,9 @@ components:
             - total
             - items
           type: object
+          x-apideck-weights:
+            items: medium
+            total: medium
         id:
           $ref: "#/components/schemas/Id"
         liabilities:
@@ -4415,6 +4501,10 @@ components:
                     title: Value
                     type: number
                 type: object
+                x-apideck-weights:
+                  id: medium
+                  name: medium
+                  value: medium
                 x-graphql-type-name: LiabilityAccountsList
               type: array
             total:
@@ -4426,6 +4516,9 @@ components:
             - total
             - accounts
           type: object
+          x-apideck-weights:
+            accounts: medium
+            total: medium
         report_name:
           description: The name of the report
           example: BalanceSheet
@@ -4448,6 +4541,17 @@ components:
         - liabilities
         - equity
       type: object
+      x-apideck-weights:
+        assets: critical
+        created_at: medium
+        created_by: medium
+        equity: critical
+        id: medium
+        liabilities: critical
+        report_name: medium
+        start_date: medium
+        updated_at: medium
+        updated_by: medium
     BankAccount:
       additionalProperties: false
       properties:
@@ -4473,6 +4577,7 @@ components:
           nullable: true
           title: Account Type
           type: string
+          x-apideck-enum-id: bank-accounts.account_type
         bank_code:
           description: A bank code is a code assigned by a central bank, a bank supervisory body or a Bankers Association in a country to all its licensed member banks or financial institutions.
           example: BNH
@@ -4502,6 +4607,8 @@ components:
           nullable: true
           type: string
       type: object
+      x-apideck-weights:
+        account_number: critical
     Bill:
       additionalProperties: false
       properties:
@@ -4565,6 +4672,12 @@ components:
           nullable: true
           title: Purchase Order number
           type: string
+        reference:
+          description: Optional invoice reference.
+          example: "123456"
+          nullable: true
+          title: Invoice reference
+          type: string
         row_version:
           $ref: "#/components/schemas/RowVersion"
         status:
@@ -4582,6 +4695,7 @@ components:
           nullable: true
           title: Status
           type: string
+          x-apideck-enum-id: invoices.status
         sub_total:
           description: Sub-total amount, normally before tax.
           example: 27500
@@ -4621,6 +4735,31 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+      x-apideck-weights:
+        balance: high
+        bill_date: critical
+        created_at: high
+        created_by: low
+        currency: medium
+        currency_rate: low
+        deposit: low
+        downstream_id: low
+        due_date: critical
+        id: critical
+        line_items: critical
+        po_number: low
+        reference: low
+        row_version: edge-case
+        status: critical
+        sub_total: high
+        supplier: high
+        tax_code: medium
+        tax_inclusive: low
+        terms: low
+        total: critical
+        total_tax: high
+        updated_at: high
+        updated_by: low
     BillLineItem:
       additionalProperties: false
       properties:
@@ -4686,6 +4825,7 @@ components:
           nullable: true
           title: Type
           type: string
+          x-apideck-enum-id: bills.line_items.type
           x-graphql-type-name: BillLineItemType
         unit_of_measure:
           $ref: "#/components/schemas/UnitOfMeasure"
@@ -4924,6 +5064,7 @@ components:
           example: January
           title: The start month of fiscal year.
           type: string
+          x-apideck-enum-id: company-info.fiscal_year_start_month
         id:
           $ref: "#/components/schemas/Id"
         language:
@@ -4950,6 +5091,26 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+      x-apideck-weights:
+        addresses: medium
+        automated_sales_tax: edge-case
+        company_name: critical
+        company_start_date: medium
+        created_at: low
+        created_by: edge-case
+        currency: medium
+        default_sales_tax: edge-case
+        emails: medium
+        fiscal_year_start_month: medium
+        id: medium
+        language: low
+        legal_name: medium
+        phone_numbers: medium
+        row_version: edge-case
+        sales_tax_enabled: edge-case
+        sales_tax_number: medium
+        updated_at: medium
+        updated_by: edge-case
     CompanyName:
       example: SpaceX
       nullable: true
@@ -5033,6 +5194,7 @@ components:
           example: female
           nullable: true
           type: string
+          x-apideck-enum-id: contacts.gender
         id:
           example: "12345"
           readOnly: true
@@ -5117,6 +5279,7 @@ components:
           example: personal
           nullable: true
           type: string
+          x-apideck-enum-id: contacts.type
         updated_at:
           example: 2017-08-12T20:43:21.291Z
           format: date-time
@@ -5591,6 +5754,8 @@ components:
       nullable: true
       title: Currency
       type: string
+      x-apideck-enum-coverage-ignore: true
+      x-apideck-enum-id: currencies
       x-enum-elements:
         - description: Unknown currency
           name: UNKNOWN_CURRENCY
@@ -6281,6 +6446,7 @@ components:
             - other
           example: primary
           type: string
+          x-apideck-enum-id: emails.type
           x-graphql-type-name: EmailType
       required:
         - email
@@ -7030,6 +7196,7 @@ components:
           nullable: true
           title: Status
           type: string
+          x-apideck-enum-id: invoices.status
         sub_total:
           description: Sub-total amount, normally before tax.
           example: 27500
@@ -7081,12 +7248,45 @@ components:
           nullable: true
           title: Invoice type
           type: string
+          x-apideck-enum-id: invoices.type
           x-graphql-type-name: InvoiceType
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+      x-apideck-weights:
+        balance: high
+        billing_address: high
+        created_at: high
+        created_by: low
+        currency: medium
+        currency_rate: low
+        customer: high
+        customer_memo: low
+        deposit: low
+        downstream_id: low
+        due_date: critical
+        id: critical
+        invoice_date: critical
+        invoice_sent: low
+        line_items: critical
+        number: high
+        po_number: low
+        reference: low
+        row_version: edge-case
+        shipping_address: medium
+        status: critical
+        sub_total: high
+        tax_code: medium
+        tax_inclusive: low
+        template_id: edge-case
+        terms: low
+        total: critical
+        total_tax: high
+        type: high
+        updated_at: high
+        updated_by: low
     InvoiceItem:
       additionalProperties: false
       properties:
@@ -7144,6 +7344,11 @@ components:
             unit_price:
               $ref: "#/components/schemas/UnitPrice"
           type: object
+          x-apideck-weights:
+            tax_inclusive: medium
+            tax_rate: medium
+            unit_of_measure: medium
+            unit_price: medium
         purchased:
           description: Item is available for purchase transactions
           example: true
@@ -7165,6 +7370,11 @@ components:
             unit_price:
               $ref: "#/components/schemas/UnitPrice"
           type: object
+          x-apideck-weights:
+            tax_inclusive: medium
+            tax_rate: medium
+            unit_of_measure: medium
+            unit_price: medium
         sold:
           description: Item will be available on sales transactions
           example: true
@@ -7187,6 +7397,7 @@ components:
           nullable: true
           title: Type
           type: string
+          x-apideck-enum-id: invoice-items.type
           x-graphql-type-name: InvoiceItemType
         unit_price:
           $ref: "#/components/schemas/UnitPrice"
@@ -7195,6 +7406,29 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+      x-apideck-weights:
+        active: medium
+        asset_account: medium
+        code: medium
+        created_at: medium
+        created_by: medium
+        description: medium
+        expense_account: medium
+        id: medium
+        income_account: medium
+        inventory_date: medium
+        name: medium
+        purchase_details: medium
+        purchased: medium
+        quantity: medium
+        row_version: medium
+        sales_details: medium
+        sold: medium
+        tracked: medium
+        type: medium
+        unit_price: medium
+        updated_at: medium
+        updated_by: medium
     InvoiceItemAssetAccount:
       $ref: "#/components/schemas/LinkedLedgerAccount"
     InvoiceItemExpenseAccount:
@@ -7280,12 +7514,30 @@ components:
           nullable: true
           title: Type
           type: string
+          x-apideck-enum-id: invoices.lines-items.type
           x-graphql-type-name: InvoiceLineItemType
         unit_of_measure:
           $ref: "#/components/schemas/UnitOfMeasure"
         unit_price:
           $ref: "#/components/schemas/UnitPrice"
       type: object
+      x-apideck-weights:
+        code: medium
+        description: high
+        discount_percentage: low
+        id: high
+        item: critical
+        ledger_account: low
+        line_number: medium
+        quantity: high
+        row_id: edge-case
+        row_version: edge-case
+        tax_amount: high
+        tax_rate: medium
+        total_amount: critical
+        type: medium
+        unit_of_measure: edge-case
+        unit_price: high
     InvoiceResponse:
       properties:
         downstream_id:
@@ -7347,6 +7599,7 @@ components:
           nullable: true
           title: Classification
           type: string
+          x-apideck-enum-id: ledger-accounts.classification
         code:
           description: The code assigned to the account.
           example: "453"
@@ -7450,6 +7703,7 @@ components:
           nullable: true
           title: Account status
           type: string
+          x-apideck-enum-id: ledger-accounts.status
           x-graphql-type-name: LedgerAccountStatus
         sub_account:
           description: Whether the account is a sub account or not.
@@ -7515,12 +7769,44 @@ components:
           example: bank
           title: Type
           type: string
+          x-apideck-enum-id: ledger-accounts.type
           x-graphql-type-name: LedgerAccountType
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+      x-apideck-weights:
+        active: edge-case
+        bank_account: high
+        categories: high
+        classification: edge-case
+        code: low
+        created_at: high
+        created_by: edge-case
+        currency: edge-case
+        current_balance: edge-case
+        description: edge-case
+        display_id: low
+        fully_qualified_name: edge-case
+        header: edge-case
+        id: critical
+        last_reconciliation_date: edge-case
+        level: edge-case
+        name: high
+        nominal_code: low
+        opening_balance: edge-case
+        parent_account: high
+        row_version: edge-case
+        status: medium
+        sub_account: medium
+        sub_accounts: medium
+        sub_type: edge-case
+        tax_rate: edge-case
+        tax_type: edge-case
+        type: high
+        updated_at: high
+        updated_by: edge-case
     LedgerAccounts:
       items:
         $ref: "#/components/schemas/LedgerAccount"
@@ -7558,6 +7844,11 @@ components:
         - id
       title: LinkedCustomer
       type: object
+      x-apideck-weights:
+        company_name: medium
+        display_id: low
+        display_name: medium
+        id: high
       x-graphql-type-name: AccountingLinkedCustomer
     LinkedInvoiceItem:
       properties:
@@ -7829,7 +8120,13 @@ components:
                   - pre_payment
                 title: Allocation type
                 type: string
+                x-apideck-enum-id: allocations.type
                 x-graphql-type-name: AllocationType
+            x-apideck-weights:
+              amount: medium
+              code: medium
+              id: medium
+              type: medium
           type: array
         created_at:
           $ref: "#/components/schemas/CreatedAt"
@@ -7886,6 +8183,7 @@ components:
           example: authorised
           title: Payment status
           type: string
+          x-apideck-enum-id: payments.status
           x-graphql-type-name: PaymentStatus
         total_amount:
           description: Amount of payment
@@ -7912,6 +8210,7 @@ components:
           example: accounts_receivable
           title: Payment Type
           type: string
+          x-apideck-enum-id: payments.type
           x-graphql-type-name: PaymentType
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
@@ -7919,6 +8218,27 @@ components:
         - total_amount
         - transaction_date
       type: object
+      x-apideck-weights:
+        account: medium
+        accounts_receivable_account_id: medium
+        accounts_receivable_account_type: medium
+        allocations: medium
+        created_at: medium
+        currency: medium
+        currency_rate: medium
+        customer: medium
+        id: medium
+        note: medium
+        payment_method: medium
+        payment_method_reference: medium
+        reconciled: medium
+        reference: medium
+        row_version: medium
+        status: medium
+        total_amount: medium
+        transaction_date: medium
+        type: medium
+        updated_at: medium
     PaymentRequiredResponse:
       properties:
         detail:
@@ -7987,6 +8307,7 @@ components:
             - other
           example: primary
           type: string
+          x-apideck-enum-id: phone_numbers.type
           x-graphql-type-name: PhoneType
       required:
         - number
@@ -8092,6 +8413,7 @@ components:
           nullable: true
           title: Status
           type: string
+          x-apideck-enum-id: customers.status
           x-graphql-type-name: CustomerStatus
         suffix:
           $ref: "#/components/schemas/Suffix"
@@ -8110,6 +8432,32 @@ components:
             $ref: "#/components/schemas/Website"
           type: array
       type: object
+      x-apideck-weights:
+        account: medium
+        addresses: medium
+        bank_accounts: medium
+        company_name: medium
+        created_at: medium
+        created_by: medium
+        currency: medium
+        display_name: medium
+        downstream_id: medium
+        emails: medium
+        first_name: medium
+        id: medium
+        last_name: medium
+        middle_name: medium
+        notes: medium
+        phone_numbers: medium
+        row_version: medium
+        status: medium
+        suffix: medium
+        tax_number: medium
+        tax_rate: medium
+        title: medium
+        updated_at: medium
+        updated_by: medium
+        websites: medium
       x-graphql-type-name: Supplier
     Tags:
       example:
@@ -8159,6 +8507,11 @@ components:
                 nullable: true
                 title: TaxRate
                 type: number
+            x-apideck-weights:
+              compound: medium
+              id: medium
+              name: medium
+              rate: medium
           nullable: true
           title: Tax components
           type: array
@@ -8213,6 +8566,7 @@ components:
           nullable: true
           title: Tax rate status
           type: string
+          x-apideck-enum-id: tax-rates.status
           x-graphql-type-name: TaxRateStatus
         tax_payable_account_id:
           description: Unique identifier for the account for tax collected.
@@ -8243,6 +8597,25 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+      x-apideck-weights:
+        code: medium
+        components: medium
+        created_at: medium
+        created_by: medium
+        description: medium
+        effective_tax_rate: medium
+        id: medium
+        name: medium
+        original_tax_rate_id: medium
+        report_tax_type: medium
+        row_version: medium
+        status: medium
+        tax_payable_account_id: medium
+        tax_remitted_account_id: medium
+        total_tax_rate: medium
+        type: medium
+        updated_at: medium
+        updated_by: medium
     TaxRatesFilter:
       additionalProperties: false
       example:
@@ -8700,6 +9073,7 @@ components:
             - other
           example: primary
           type: string
+          x-apideck-enum-id: websites.type
           x-graphql-type-name: WebsiteType
         url:
           example: http://example.com

@@ -1645,6 +1645,7 @@ components:
       example: oauth2
       readOnly: true
       type: string
+      x-apideck-enum-id: auth_types
     BadRequestResponse:
       properties:
         detail:
@@ -1716,6 +1717,7 @@ components:
                       example: custom_fields
                       readOnly: true
                       type: string
+                      x-apideck-enum-id: connections.configuration.defaults.target
                     value:
                       anyOf:
                         - example: GC5000 series
@@ -1859,6 +1861,7 @@ components:
             - requested
           readOnly: true
           type: string
+          x-apideck-enum-id: connections.status
         tag_line:
           example: CRM software solutions and enterprise cloud computing from Salesforce, the leader in customer relationship management (CRM) and PaaS. Free 30 day trial.
           readOnly: true
@@ -1974,6 +1977,7 @@ components:
       example: authorized
       readOnly: true
       type: string
+      x-apideck-enum-id: connections.state
     Consumer:
       properties:
         aggregated_request_count:
@@ -2066,6 +2070,7 @@ components:
             - authorized
           example: authorized
           type: string
+          x-apideck-enum-id: consumer.connections.state
         tag_line:
           example: CRM software solutions and enterprise cloud computing from Salesforce, the leader in customer relationship management (CRM) and PaaS. Free 30 day trial.
           readOnly: true
@@ -2248,6 +2253,7 @@ components:
               - hris.company.deleted
             example: crm.company.created
             type: string
+            x-apideck-enum-id: webhooks.event_type
           title: Subscribed events
           type: array
         execute_base_url:
@@ -2268,6 +2274,7 @@ components:
             - disabled
           example: enabled
           type: string
+          x-apideck-enum-id: webhooks.status
           x-graphql-type-name: WebhookStatus
         unified_api:
           $ref: "#/components/schemas/UnifiedApiId"
@@ -2675,6 +2682,7 @@ components:
             - accounting
           example: vault
           type: string
+          x-apideck-enum-id: logs.unified_api
       required:
         - id
         - parent_id
@@ -2807,6 +2815,7 @@ components:
       example: authorization_code
       readOnly: true
       type: string
+      x-apideck-enum-id: oauth_grant_types
     PaymentRequiredResponse:
       properties:
         detail:
@@ -3065,6 +3074,7 @@ components:
         - pos
       example: crm
       type: string
+      x-apideck-enum-id: unifies_api
     UnprocessableResponse:
       properties:
         detail:
@@ -3118,6 +3128,7 @@ components:
         - vault.connection.token_refresh.failed
       example: vault.connection.created
       type: string
+      x-apideck-enum-id: vault.events
   securitySchemes:
     apiKey:
       description: |
