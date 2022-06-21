@@ -13,17 +13,20 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Resource Manager API
   version: v3
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://cloudresourcemanager.googleapis.com/$discovery/rest?version=v3
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: cloudresourcemanager
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/resource-manager
 tags:
@@ -592,7 +595,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a new TagKey. If another request with the same parameters is sent while the original request is in process, the second request will receive an error. A maximum of 300 TagKeys can exist under a parent at any given time.
+      description: Creates a new TagKey. If another request with the same parameters is sent while the original request is in process, the second request will receive an error. A maximum of 1000 TagKeys can exist under a parent at any given time.
       operationId: cloudresourcemanager.tagKeys.create
       parameters:
         - description: Optional. Set to true to perform validations necessary for creating the resource, but not actually perform the action.
@@ -670,7 +673,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a TagValue as a child of the specified TagKey. If a another request with the same parameters is sent while the original request is in process the second request will receive an error. A maximum of 300 TagValues can exist under a TagKey at any given time.
+      description: Creates a TagValue as a child of the specified TagKey. If a another request with the same parameters is sent while the original request is in process the second request will receive an error. A maximum of 1000 TagValues can exist under a TagKey at any given time.
       operationId: cloudresourcemanager.tagValues.create
       parameters:
         - description: Optional. Set as true to perform the validations necessary for creating the resource, but not actually perform the action.
@@ -2025,3 +2028,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud services and see the email address of your Google Account
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

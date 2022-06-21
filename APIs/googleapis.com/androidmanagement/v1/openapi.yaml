@@ -744,6 +744,17 @@ components:
       schema:
         type: string
   schemas:
+    AdbShellCommandEvent:
+      description: A shell command was issued over ADB via “adb shell command”.
+      properties:
+        shellCmd:
+          description: Shell command that was issued over ADB via "adb shell command". Redacted to empty string on organization-owned managed profile devices.
+          type: string
+      type: object
+    AdbShellInteractiveEvent:
+      description: An ADB interactive shell was opened via “adb shell”. Intentionally empty.
+      properties: {}
+      type: object
     AdvancedSecurityOverrides:
       description: Security policies set to secure values by default. To maintain the security posture of a device, we don't recommend overriding any of the default values.
       properties:
@@ -799,6 +810,43 @@ components:
           description: The minimum desired Android Framework API level. If the device doesn't meet the minimum requirement, this condition is satisfied. Must be greater than zero.
           format: int32
           type: integer
+      type: object
+    AppProcessInfo:
+      description: Information about a process. It contains process name, start time, app Uid, app Pid, seinfo tag, hash of the base APK.
+      properties:
+        apkSha256Hash:
+          description: SHA-256 hash of the base APK, in hexadecimal format.
+          type: string
+        packageNames:
+          description: Package names of all packages that are associated with the particular user id. In most cases, this will be a single package name, the package that has been assigned that user id. If multiple application share a uid then all packages sharing uid will be included.
+          items:
+            type: string
+          type: array
+        pid:
+          description: Process ID.
+          format: int32
+          type: integer
+        processName:
+          description: Process name.
+          type: string
+        seinfo:
+          description: SELinux policy info.
+          type: string
+        startTime:
+          description: Process start time.
+          format: google-datetime
+          type: string
+        uid:
+          description: UID of the package.
+          format: int32
+          type: integer
+      type: object
+    AppProcessStartEvent:
+      description: An app process was started. This is available device-wide on fully managed devices and within the work profile on organization-owned devices with a work profile.
+      properties:
+        processInfo:
+          $ref: "#/components/schemas/AppProcessInfo"
+          description: Information about a process.
       type: object
     AppTrackInfo:
       description: Id to name association of a app track.
@@ -1122,6 +1170,25 @@ components:
           description: Whether removed apps are included in application reports.
           type: boolean
       type: object
+    BatchUsageLogEvents:
+      description: Batched event logs of events from the device.
+      properties:
+        device:
+          description: The name of the device in the form ‘enterprises/{enterpriseId}/devices/{deviceId}’
+          type: string
+        retrievalTime:
+          description: The device timestamp when the batch of events were collected from the device.
+          format: google-datetime
+          type: string
+        usageLogEvents:
+          description: The list of UsageLogEvent that were reported by the device, sorted chronologically by the event time.
+          items:
+            $ref: "#/components/schemas/UsageLogEvent"
+          type: array
+        user:
+          description: The resource name of the user that owns this device in the form ‘enterprises/{enterpriseId}/users/{userId}’.
+          type: string
+      type: object
     BlockAction:
       description: "An action to block access to apps and data on a fully managed device or in a work profile. This action also triggers a device or work profile to displays a user-facing notification with information (where possible) on how to correct the compliance issue. Note: wipeAction must also be specified."
       properties:
@@ -1135,6 +1202,41 @@ components:
             - BLOCK_SCOPE_UNSPECIFIED
             - BLOCK_SCOPE_WORK_PROFILE
             - BLOCK_SCOPE_DEVICE
+          type: string
+      type: object
+    CertAuthorityInstalledEvent:
+      description: A new root certificate was installed into the system's trusted credential storage. This is available device-wide on fully managed devices and within the work profile on organization-owned devices with a work profile.
+      properties:
+        certificate:
+          description: Subject of the certificate.
+          type: string
+        success:
+          description: Whether the installation event succeeded.
+          type: boolean
+        userId:
+          description: The user in which the certificate install event happened. Only available for devices running Android 11 and above.
+          format: int32
+          type: integer
+      type: object
+    CertAuthorityRemovedEvent:
+      description: A root certificate was removed from the system's trusted credential storage. This is available device-wide on fully managed devices and within the work profile on organization-owned devices with a work profile.
+      properties:
+        certificate:
+          description: Subject of the certificate.
+          type: string
+        success:
+          description: Whether the removal succeeded.
+          type: boolean
+        userId:
+          description: The user in which the certificate removal event occurred. Only available for devices running Android 11 and above.
+          format: int32
+          type: integer
+      type: object
+    CertValidationFailureEvent:
+      description: An X.509v3 certificate failed to validate, currently this validation is performed on the Wi-FI access point and failure may be due to a mismatch upon server certificate validation. However it may in the future include other validation events of an X.509v3 certificate.
+      properties:
+        failureReason:
+          description: The reason why certification validation failed.
           type: string
       type: object
     ChoosePrivateKeyRule:
@@ -1254,6 +1356,20 @@ components:
             type: string
           type: array
       type: object
+    ConnectEvent:
+      description: A TCP connect event was initiated through the standard network stack.
+      properties:
+        destinationIpAddress:
+          description: The destination IP address of the connect call.
+          type: string
+        destinationPort:
+          description: The destination port of the connect call.
+          format: int32
+          type: integer
+        packageName:
+          description: The package name of the UID that performed the connect call.
+          type: string
+      type: object
     ContactInfo:
       description: Contact details for managed Google Play enterprises.
       properties:
@@ -1319,6 +1435,13 @@ components:
             - SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_DISALLOWED
             - SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_ALLOWED
           type: string
+      type: object
+    CryptoSelfTestCompletedEvent:
+      description: Validates whether Android’s built-in cryptographic library (BoringSSL) is valid. Should always succeed on device boot, if it fails, the device should be considered untrusted.
+      properties:
+        success:
+          description: Whether the test succeeded.
+          type: boolean
       type: object
     Date:
       description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: A full date, with non-zero year, month, and day values. A month and day, with a zero year (for example, an anniversary). A year on its own, with a zero month and a zero day. A year and month, with a zero day (for example, a credit card expiration date).Related types: google.type.TimeOfDay google.type.DateTime google.protobuf.Timestamp"
@@ -1558,6 +1681,25 @@ components:
           format: int32
           type: integer
       type: object
+    DnsEvent:
+      description: A DNS lookup event was initiated through the standard network stack.
+      properties:
+        hostname:
+          description: The hostname that was looked up.
+          type: string
+        ipAddresses:
+          description: The (possibly truncated) list of the IP addresses returned for DNS lookup (max 10 IPv4 or IPv6 addresses).
+          items:
+            type: string
+          type: array
+        packageName:
+          description: The package name of the UID that performed the DNS lookup.
+          type: string
+        totalIpAddressesReturned:
+          description: The number of IP addresses returned from the DNS lookup event. May be higher than the amount of ip_addresses if there were too many addresses to log.
+          format: int64
+          type: string
+      type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } "
       properties: {}
@@ -1670,6 +1812,20 @@ components:
           type: string
         url:
           description: The absolute URL to the data, which must use either the http or https scheme. Android Device Policy doesn't provide any credentials in the GET request, so the URL must be publicly accessible. Including a long, random component in the URL may be used to prevent attackers from discovering the URL.
+          type: string
+      type: object
+    FilePulledEvent:
+      description: A file was downloaded from the device.
+      properties:
+        filePath:
+          description: The path of the file being pulled.
+          type: string
+      type: object
+    FilePushedEvent:
+      description: A file was uploaded onto the device.
+      properties:
+        filePath:
+          description: The path of the file being pushed.
           type: string
       type: object
     FreezePeriod:
@@ -1804,6 +1960,59 @@ components:
       description: Response on issuing a command. This is currently empty as a placeholder.
       properties: {}
       type: object
+    KeyDestructionEvent:
+      description: A cryptographic key including user installed, admin installed and system maintained private key is removed from the device either by the user or management. This is available device-wide on fully managed devices and within the work profile on organization-owned devices with a work profile.
+      properties:
+        applicationUid:
+          description: UID of the application which owns the key.
+          format: int32
+          type: integer
+        keyAlias:
+          description: Alias of the key.
+          type: string
+        success:
+          description: Whether the operation was successful.
+          type: boolean
+      type: object
+    KeyGeneratedEvent:
+      description: A cryptographic key including user installed, admin installed and system maintained private key is installed on the device either by the user or management.This is available device-wide on fully managed devices and within the work profile on organization-owned devices with a work profile.
+      properties:
+        applicationUid:
+          description: UID of the application which generated the key.
+          format: int32
+          type: integer
+        keyAlias:
+          description: Alias of the key.
+          type: string
+        success:
+          description: Whether the operation was successful.
+          type: boolean
+      type: object
+    KeyImportEvent:
+      description: A cryptographic key including user installed, admin installed and system maintained private key is imported on the device either by the user or management. This is available device-wide on fully managed devices and within the work profile on organization-owned devices with a work profile.
+      properties:
+        applicationUid:
+          description: UID of the application which imported the key
+          format: int32
+          type: integer
+        keyAlias:
+          description: Alias of the key.
+          type: string
+        success:
+          description: Whether the operation was successful.
+          type: boolean
+      type: object
+    KeyIntegrityViolationEvent:
+      description: A cryptographic key including user installed, admin installed and system maintained private key is determined to be corrupted due to storage corruption, hardware failure or some OS issue. This is available device-wide on fully managed devices and within the work profile on organization-owned devices with a work profile.
+      properties:
+        applicationUid:
+          description: UID of the application which owns the key
+          format: int32
+          type: integer
+        keyAlias:
+          description: Alias of the key.
+          type: string
+      type: object
     KeyedAppState:
       description: Keyed app state reported by the app.
       properties:
@@ -1831,6 +2040,24 @@ components:
             - INFO
             - ERROR
           type: string
+      type: object
+    KeyguardDismissAuthAttemptEvent:
+      description: An attempt was made to unlock the device.
+      properties:
+        strongAuthMethodUsed:
+          description: Whether a strong form of authentication (password, PIN, or pattern) was used to unlock device.
+          type: boolean
+        success:
+          description: Whether the unlock attempt was successful.
+          type: boolean
+      type: object
+    KeyguardDismissedEvent:
+      description: The keyguard was dismissed. Intentionally empty.
+      properties: {}
+      type: object
+    KeyguardSecuredEvent:
+      description: The device was locked either by user or timeout. Intentionally empty.
+      properties: {}
       type: object
     KioskCustomization:
       description: Settings controlling the behavior of a device in kiosk mode. To enable kiosk mode, set kioskCustomLauncherEnabled to true or specify an app in the policy with installType KIOSK.
@@ -1952,6 +2179,18 @@ components:
             $ref: "#/components/schemas/WebApp"
           type: array
       type: object
+    LogBufferSizeCriticalEvent:
+      description: The usageLog buffer on the device has reached 90% of its capacity, therefore older events may be dropped. Intentionally empty.
+      properties: {}
+      type: object
+    LoggingStartedEvent:
+      description: usageLog policy has been enabled. Intentionally empty.
+      properties: {}
+      type: object
+    LoggingStoppedEvent:
+      description: usageLog policy has been disabled. Intentionally empty.
+      properties: {}
+      type: object
     ManagedConfigurationTemplate:
       description: The managed configurations template for the app, saved from the managed configurations iframe.
       properties:
@@ -2010,6 +2249,26 @@ components:
           type: string
         value:
           description: The machine-readable value of the entry, which should be used in the configuration. Not localized.
+          type: string
+      type: object
+    MediaMountEvent:
+      description: Removable media was mounted.
+      properties:
+        mountPoint:
+          description: Mount point.
+          type: string
+        volumeLabel:
+          description: Volume label. Redacted to empty string on organization-owned managed profile devices.
+          type: string
+      type: object
+    MediaUnmountEvent:
+      description: Removable media was unmounted.
+      properties:
+        mountPoint:
+          description: Mount point.
+          type: string
+        volumeLabel:
+          description: Volume label. Redacted to empty string on organization-owned managed profile devices.
           type: string
       type: object
     MemoryEvent:
@@ -2190,6 +2449,30 @@ components:
             description: Properties of the object. Contains field @type with type URL.
           description: The normal response of the operation in case of success. If the original method returns no data on success, such as Delete, the response is google.protobuf.Empty. If the original method is standard Get/Create/Update, the response should be the resource. For other methods, the response should have the type XxxResponse, where Xxx is the original method name. For example, if the original method name is TakeSnapshot(), the inferred response type is TakeSnapshotResponse.
           type: object
+      type: object
+    OsShutdownEvent:
+      description: Device was shutdown. Intentionally empty.
+      properties: {}
+      type: object
+    OsStartupEvent:
+      description: Device was started.
+      properties:
+        verifiedBootState:
+          description: Verified Boot state.
+          enum:
+            - VERIFIED_BOOT_STATE_UNSPECIFIED
+            - GREEN
+            - YELLOW
+            - ORANGE
+          type: string
+        verityMode:
+          description: dm-verity mode.
+          enum:
+            - DM_VERITY_MODE_UNSPECIFIED
+            - ENFORCING
+            - IO_ERROR
+            - DISABLED
+          type: string
       type: object
     PackageNameList:
       description: A list of package names.
@@ -2823,6 +3106,21 @@ components:
           format: int32
           type: integer
       type: object
+    RemoteLockEvent:
+      description: The device or profile has been remotely locked via the LOCK command.
+      properties:
+        adminPackageName:
+          description: Package name of the admin app requesting the change.
+          type: string
+        adminUserId:
+          description: User ID of the admin app from the which the change was requested.
+          format: int32
+          type: integer
+        targetUserId:
+          description: User ID in which the change was requested in.
+          format: int32
+          type: integer
+      type: object
     SecurityPosture:
       description: The security posture of the device, as determined by the current device state and the policies applied.
       properties:
@@ -3071,6 +3369,131 @@ components:
             type: string
           type: array
       type: object
+    UsageLogEvent:
+      description: An event logged on the device.
+      properties:
+        adbShellCommandEvent:
+          $ref: "#/components/schemas/AdbShellCommandEvent"
+          description: A shell command was issued over ADB via “adb shell command”. Part of SECURITY_LOGS.
+        adbShellInteractiveEvent:
+          $ref: "#/components/schemas/AdbShellInteractiveEvent"
+          description: An ADB interactive shell was opened via “adb shell”. Part of SECURITY_LOGS.
+        appProcessStartEvent:
+          $ref: "#/components/schemas/AppProcessStartEvent"
+          description: An app process was started. Part of SECURITY_LOGS.
+        certAuthorityInstalledEvent:
+          $ref: "#/components/schemas/CertAuthorityInstalledEvent"
+          description: A new root certificate was installed into the system's trusted credential storage. Part of SECURITY_LOGS.
+        certAuthorityRemovedEvent:
+          $ref: "#/components/schemas/CertAuthorityRemovedEvent"
+          description: A root certificate was removed from the system's trusted credential storage. Part of SECURITY_LOGS.
+        certValidationFailureEvent:
+          $ref: "#/components/schemas/CertValidationFailureEvent"
+          description: An X.509v3 certificate failed to validate, currently this validation is performed on the Wi-FI access point and failure may be due to a mismatch upon server certificate validation. However it may in the future include other validation events of an X.509v3 certificate. Part of SECURITY_LOGS.
+        connectEvent:
+          $ref: "#/components/schemas/ConnectEvent"
+          description: A TCP connect event was initiated through the standard network stack. Part of NETWORK_LOGS.
+        cryptoSelfTestCompletedEvent:
+          $ref: "#/components/schemas/CryptoSelfTestCompletedEvent"
+          description: Validates whether Android’s built-in cryptographic library (BoringSSL) is valid. Should always succeed on device boot, if it fails, the device should be considered untrusted. Part of SECURITY_LOGS.
+        dnsEvent:
+          $ref: "#/components/schemas/DnsEvent"
+          description: A DNS lookup event was initiated through the standard network stack. Part of NETWORK_LOGS.
+        eventId:
+          description: Unique id of the event.
+          format: int64
+          type: string
+        eventTime:
+          description: Device timestamp when the event was logged.
+          format: google-datetime
+          type: string
+        eventType:
+          description: The particular usage log event type that was reported on the device. Use this to determine which event field to access.
+          enum:
+            - EVENT_TYPE_UNSPECIFIED
+            - ADB_SHELL_COMMAND
+            - ADB_SHELL_INTERACTIVE
+            - APP_PROCESS_START
+            - KEYGUARD_DISMISSED
+            - KEYGUARD_DISMISS_AUTH_ATTEMPT
+            - KEYGUARD_SECURED
+            - FILE_PULLED
+            - FILE_PUSHED
+            - CERT_AUTHORITY_INSTALLED
+            - CERT_AUTHORITY_REMOVED
+            - CERT_VALIDATION_FAILURE
+            - CRYPTO_SELF_TEST_COMPLETED
+            - KEY_DESTRUCTION
+            - KEY_GENERATED
+            - KEY_IMPORT
+            - KEY_INTEGRITY_VIOLATION
+            - LOGGING_STARTED
+            - LOGGING_STOPPED
+            - LOG_BUFFER_SIZE_CRITICAL
+            - MEDIA_MOUNT
+            - MEDIA_UNMOUNT
+            - OS_SHUTDOWN
+            - OS_STARTUP
+            - REMOTE_LOCK
+            - WIPE_FAILURE
+            - CONNECT
+            - DNS
+          type: string
+        filePulledEvent:
+          $ref: "#/components/schemas/FilePulledEvent"
+          description: A file was downloaded from the device. Part of SECURITY_LOGS.
+        filePushedEvent:
+          $ref: "#/components/schemas/FilePushedEvent"
+          description: A file was uploaded onto the device. Part of SECURITY_LOGS.
+        keyDestructionEvent:
+          $ref: "#/components/schemas/KeyDestructionEvent"
+          description: A cryptographic key including user installed, admin installed and system maintained private key is removed from the device either by the user or management. Part of SECURITY_LOGS.
+        keyGeneratedEvent:
+          $ref: "#/components/schemas/KeyGeneratedEvent"
+          description: A cryptographic key including user installed, admin installed and system maintained private key is installed on the device either by the user or management. Part of SECURITY_LOGS.
+        keyImportEvent:
+          $ref: "#/components/schemas/KeyImportEvent"
+          description: A cryptographic key including user installed, admin installed and system maintained private key is imported on the device either by the user or management. Part of SECURITY_LOGS.
+        keyIntegrityViolationEvent:
+          $ref: "#/components/schemas/KeyIntegrityViolationEvent"
+          description: A cryptographic key including user installed, admin installed and system maintained private key is determined to be corrupted due to storage corruption, hardware failure or some OS issue. Part of SECURITY_LOGS.
+        keyguardDismissAuthAttemptEvent:
+          $ref: "#/components/schemas/KeyguardDismissAuthAttemptEvent"
+          description: An attempt was made to unlock the device. Part of SECURITY_LOGS.
+        keyguardDismissedEvent:
+          $ref: "#/components/schemas/KeyguardDismissedEvent"
+          description: The keyguard was dismissed. Part of SECURITY_LOGS.
+        keyguardSecuredEvent:
+          $ref: "#/components/schemas/KeyguardSecuredEvent"
+          description: The device was locked either by user or timeout. Part of SECURITY_LOGS.
+        logBufferSizeCriticalEvent:
+          $ref: "#/components/schemas/LogBufferSizeCriticalEvent"
+          description: The audit log buffer has reached 90% of its capacity, therefore older events may be dropped. Part of SECURITY_LOGS.
+        loggingStartedEvent:
+          $ref: "#/components/schemas/LoggingStartedEvent"
+          description: usageLog policy has been enabled. Part of SECURITY_LOGS.
+        loggingStoppedEvent:
+          $ref: "#/components/schemas/LoggingStoppedEvent"
+          description: usageLog policy has been disabled. Part of SECURITY_LOGS.
+        mediaMountEvent:
+          $ref: "#/components/schemas/MediaMountEvent"
+          description: Removable media was mounted. Part of SECURITY_LOGS.
+        mediaUnmountEvent:
+          $ref: "#/components/schemas/MediaUnmountEvent"
+          description: Removable media was unmounted. Part of SECURITY_LOGS.
+        osShutdownEvent:
+          $ref: "#/components/schemas/OsShutdownEvent"
+          description: Device was shutdown. Part of SECURITY_LOGS.
+        osStartupEvent:
+          $ref: "#/components/schemas/OsStartupEvent"
+          description: Device was started. Part of SECURITY_LOGS.
+        remoteLockEvent:
+          $ref: "#/components/schemas/RemoteLockEvent"
+          description: The device or profile has been remotely locked via the LOCK command. Part of SECURITY_LOGS.
+        wipeFailureEvent:
+          $ref: "#/components/schemas/WipeFailureEvent"
+          description: The work profile or company-owned device failed to wipe when when requested. This could be user initiated or admin initiated e.g. delete was received. Part of SECURITY_LOGS.
+      type: object
     User:
       description: A user belonging to an enterprise.
       properties:
@@ -3171,6 +3594,10 @@ components:
           description: Number of days the policy is non-compliant before the device or work profile is wiped. wipeAfterDays must be greater than blockAfterDays.
           format: int32
           type: integer
+      type: object
+    WipeFailureEvent:
+      description: The work profile or company-owned device failed to wipe when when requested. This could be user initiated or admin initiated e.g. delete was received. Intentionally empty.
+      properties: {}
       type: object
   securitySchemes:
     Oauth2:

@@ -1,14 +1,15 @@
-openapi: 3.0.0
+openapi: 3.0.3
 servers:
-  - url: https://unify.apideck.com
+  - description: Production
+    url: https://unify.apideck.com
 info:
   contact:
     email: hello@apideck.com
     url: https://developers.apideck.com
   description: |+
-    Welcome to the SMS API.
+    Welcome to the Lead API.
 
-    You can use this API to access all SMS API endpoints.
+    You can use this API to access all Lead API endpoints.
 
     ## Base URL
 
@@ -271,9 +272,9 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  title: SMS API
-  version: 8.32.4
-  x-apideck-api: sms
+  title: Lead API
+  version: 8.32.5
+  x-apideck-api: lead
   x-apideck-sdk-support: true
   x-apisguru-categories:
     - developer_tools
@@ -281,10 +282,10 @@ info:
     url: https://developers.apideck.com/icon.png
   x-origin:
     - format: openapi
-      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/sms.yml
+      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/lead.yml
       version: "3.0"
   x-providerName: apideck.com
-  x-serviceName: sms
+  x-serviceName: lead
   x-tags:
     - partner
 externalDocs:
@@ -292,17 +293,19 @@ externalDocs:
   url: https://developers.apideck.com
 security:
   - apiKey: []
+    applicationId: []
+    consumerId: []
 tags:
   - description: ""
-    name: Messages
+    name: Leads
     x-apideck-model:
-      $ref: "#/components/schemas/Message"
-    x-apideck-resource-id: messages
+      $ref: "#/components/schemas/Lead"
+    x-apideck-resource-id: leads
 paths:
-  /sms/messages:
+  /lead/leads:
     get:
-      description: List Messages
-      operationId: messagesAll
+      description: List leads
+      operationId: leadsAll
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
@@ -310,9 +313,11 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/leadsFilter"
+        - $ref: "#/components/parameters/leadsSort"
       responses:
         "200":
-          $ref: "#/components/responses/GetMessagesResponse"
+          $ref: "#/components/responses/GetLeadsResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -327,10 +332,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: List Messages
+      summary: List leads
       tags:
-        - Messages
-      x-apideck-api: sms
+        - Leads
+      x-apideck-api: lead
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -344,15 +349,15 @@ paths:
             })
 
             try {
-              const { data } = await apideck.sms.messagesAll({})
+              const { data } = await apideck.lead.leadsAll({})
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: messages
+      x-graphql-field-name: leads
     post:
-      description: Create Message
-      operationId: messagesAdd
+      description: Create lead
+      operationId: leadsAdd
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
@@ -362,11 +367,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Message"
+              $ref: "#/components/schemas/Lead"
         required: true
       responses:
         "201":
-          $ref: "#/components/responses/CreateMessageResponse"
+          $ref: "#/components/responses/CreateLeadResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -381,10 +386,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Create Message
+      summary: Create lead
       tags:
-        - Messages
-      x-apideck-api: sms
+        - Leads
+      x-apideck-api: lead
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -398,29 +403,103 @@ paths:
             })
 
             const params = {
-              message: {
-                from: '+15017122661',
-                to: '+15017122662',
-                subject: 'Picture',
-                body: 'Hi! How are you doing?',
-                type: 'sms',
-                scheduled_at: '2020-09-30T07:43:32.000Z',
-                webhook_url: 'https://unify.apideck.com/webhook/webhooks/eyz329dkffdl4949/x/sms',
-                reference: 'CUST001',
-                messaging_service_id: '123456'
+              lead: {
+                name: 'Elon Musk',
+                company_name: 'Spacex',
+                owner_id: '54321',
+                company_id: '2',
+                contact_id: '2',
+                lead_source: 'Cold Call',
+                first_name: 'Elon',
+                last_name: 'Musk',
+                description: 'A thinker',
+                prefix: 'Sir',
+                title: 'CEO',
+                language: 'EN',
+                status: 'New',
+                monetary_amount: 75000,
+                currency: 'USD',
+                fax: '+12129876543',
+                websites: [
+                  {
+                    id: '12345',
+                    url: 'http://example.com',
+                    type: 'primary'
+                  }
+                ],
+                addresses: [
+                  {
+                    id: '123',
+                    type: 'primary',
+                    string: '25 Spring Street, Blackburn, VIC 3130',
+                    name: 'HQ US',
+                    line1: 'Main street',
+                    line2: 'apt #',
+                    line3: 'Suite #',
+                    line4: 'delivery instructions',
+                    street_number: '25',
+                    city: 'San Francisco',
+                    state: 'CA',
+                    postal_code: '94104',
+                    country: 'US',
+                    latitude: '40.759211',
+                    longitude: '-73.984638',
+                    county: 'Santa Clara',
+                    contact_name: 'Elon Musk',
+                    salutation: 'Mr',
+                    phone_number: '111-111-1111',
+                    fax: '122-111-1111',
+                    email: 'elon@musk.com',
+                    website: 'https://elonmusk.com',
+                    row_version: '1-12345'
+                  }
+                ],
+                social_links: [
+                  {
+                    id: '12345',
+                    url: 'https://www.twitter.com/apideck-io',
+                    type: 'twitter'
+                  }
+                ],
+                phone_numbers: [
+                  {
+                    id: '12345',
+                    country_code: '1',
+                    area_code: '323',
+                    number: '111-111-1111',
+                    extension: '105',
+                    type: 'primary'
+                  }
+                ],
+                emails: [
+                  {
+                    id: '123',
+                    email: 'elon@musk.com',
+                    type: 'primary'
+                  }
+                ],
+                custom_fields: [
+                  {
+                    id: '2389328923893298',
+                    name: 'employee_level',
+                    description: 'Employee Level',
+                    value: 'Uses Salesforce and Marketo'
+                  }
+                ],
+                tags: ['New']
               }
             }
 
             try {
-              const { data } = await apideck.sms.messagesAdd(params)
+              const { data } = await apideck.lead.leadsAdd(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  "/sms/messages/{id}":
+  "/lead/leads/{id}":
     delete:
-      description: Delete Message
-      operationId: messagesDelete
+      description: Delete lead
+      operationId: leadsDelete
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -429,7 +508,7 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/DeleteMessageResponse"
+          $ref: "#/components/responses/DeleteLeadResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -444,10 +523,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Delete Message
+      summary: Delete lead
       tags:
-        - Messages
-      x-apideck-api: sms
+        - Leads
+      x-apideck-api: lead
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -461,7 +540,7 @@ paths:
             })
 
             try {
-              const { data } = await apideck.sms.messagesDelete({
+              const { data } = await apideck.lead.leadsDelete({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
@@ -469,8 +548,8 @@ paths:
               console.error(error)
             }
     get:
-      description: Get Message
-      operationId: messagesOne
+      description: Get lead
+      operationId: leadsOne
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -479,7 +558,7 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/GetMessageResponse"
+          $ref: "#/components/responses/GetLeadResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -494,10 +573,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Get Message
+      summary: Get lead
       tags:
-        - Messages
-      x-apideck-api: sms
+        - Leads
+      x-apideck-api: lead
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -511,7 +590,7 @@ paths:
             })
 
             try {
-              const { data } = await apideck.sms.messagesOne({
+              const { data } = await apideck.lead.leadsOne({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
@@ -519,8 +598,8 @@ paths:
               console.error(error)
             }
     patch:
-      description: Update Message
-      operationId: messagesUpdate
+      description: Update lead
+      operationId: leadsUpdate
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -531,11 +610,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Message"
+              $ref: "#/components/schemas/Lead"
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/UpdateMessageResponse"
+          $ref: "#/components/responses/UpdateLeadResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -550,10 +629,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Update Message
+      summary: Update lead
       tags:
-        - Messages
-      x-apideck-api: sms
+        - Leads
+      x-apideck-api: lead
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -568,21 +647,95 @@ paths:
 
             const params = {
               id: 'id_example',
-              message: {
-                from: '+15017122661',
-                to: '+15017122662',
-                subject: 'Picture',
-                body: 'Hi! How are you doing?',
-                type: 'sms',
-                scheduled_at: '2020-09-30T07:43:32.000Z',
-                webhook_url: 'https://unify.apideck.com/webhook/webhooks/eyz329dkffdl4949/x/sms',
-                reference: 'CUST001',
-                messaging_service_id: '123456'
+              lead: {
+                name: 'Elon Musk',
+                company_name: 'Spacex',
+                owner_id: '54321',
+                company_id: '2',
+                contact_id: '2',
+                lead_source: 'Cold Call',
+                first_name: 'Elon',
+                last_name: 'Musk',
+                description: 'A thinker',
+                prefix: 'Sir',
+                title: 'CEO',
+                language: 'EN',
+                status: 'New',
+                monetary_amount: 75000,
+                currency: 'USD',
+                fax: '+12129876543',
+                websites: [
+                  {
+                    id: '12345',
+                    url: 'http://example.com',
+                    type: 'primary'
+                  }
+                ],
+                addresses: [
+                  {
+                    id: '123',
+                    type: 'primary',
+                    string: '25 Spring Street, Blackburn, VIC 3130',
+                    name: 'HQ US',
+                    line1: 'Main street',
+                    line2: 'apt #',
+                    line3: 'Suite #',
+                    line4: 'delivery instructions',
+                    street_number: '25',
+                    city: 'San Francisco',
+                    state: 'CA',
+                    postal_code: '94104',
+                    country: 'US',
+                    latitude: '40.759211',
+                    longitude: '-73.984638',
+                    county: 'Santa Clara',
+                    contact_name: 'Elon Musk',
+                    salutation: 'Mr',
+                    phone_number: '111-111-1111',
+                    fax: '122-111-1111',
+                    email: 'elon@musk.com',
+                    website: 'https://elonmusk.com',
+                    row_version: '1-12345'
+                  }
+                ],
+                social_links: [
+                  {
+                    id: '12345',
+                    url: 'https://www.twitter.com/apideck-io',
+                    type: 'twitter'
+                  }
+                ],
+                phone_numbers: [
+                  {
+                    id: '12345',
+                    country_code: '1',
+                    area_code: '323',
+                    number: '111-111-1111',
+                    extension: '105',
+                    type: 'primary'
+                  }
+                ],
+                emails: [
+                  {
+                    id: '123',
+                    email: 'elon@musk.com',
+                    type: 'primary'
+                  }
+                ],
+                custom_fields: [
+                  {
+                    id: '2389328923893298',
+                    name: 'employee_level',
+                    description: 'Employee Level',
+                    value: 'Uses Salesforce and Marketo'
+                  }
+                ],
+                tags: ['New']
               }
             }
 
             try {
-              const { data } = await apideck.sms.messagesUpdate(params)
+              const { data } = await apideck.lead.leadsUpdate(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
@@ -617,6 +770,22 @@ components:
       required: true
       schema:
         type: string
+    leadsFilter:
+      description: Apply filters (beta)
+      explode: true
+      in: query
+      name: filter
+      schema:
+        $ref: "#/components/schemas/LeadsFilter"
+      style: deepObject
+    leadsSort:
+      description: Apply sorting (beta)
+      explode: true
+      in: query
+      name: sort
+      schema:
+        $ref: "#/components/schemas/LeadsSort"
+      style: deepObject
     limit:
       description: Number of records to return
       in: query
@@ -634,7 +803,7 @@ components:
         default: false
         type: boolean
     serviceId:
-      description: Provide the service id you want to call (e.g., pipedrive). [See the full list in the connector section.](#section/Connectors) Only needed when a consumer has activated multiple integrations for a Unified API.
+      description: Provide the service id you want to call (e.g., pipedrive). Only needed when a consumer has activated multiple integrations for a Unified API.
       in: header
       name: x-apideck-service-id
       schema:
@@ -646,30 +815,30 @@ components:
           schema:
             $ref: "#/components/schemas/BadRequestResponse"
       description: Bad Request
-    CreateMessageResponse:
+    CreateLeadResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CreateMessageResponse"
-      description: Messages
-    DeleteMessageResponse:
+            $ref: "#/components/schemas/CreateLeadResponse"
+      description: Lead created
+    DeleteLeadResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/DeleteMessageResponse"
-      description: Messages
-    GetMessageResponse:
+            $ref: "#/components/schemas/DeleteLeadResponse"
+      description: Lead deleted
+    GetLeadResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetMessageResponse"
-      description: Messages
-    GetMessagesResponse:
+            $ref: "#/components/schemas/GetLeadResponse"
+      description: Lead
+    GetLeadsResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetMessagesResponse"
-      description: Messages
+            $ref: "#/components/schemas/GetLeadsResponse"
+      description: Leads
     NotFoundResponse:
       content:
         application/json:
@@ -712,13 +881,151 @@ components:
           schema:
             $ref: "#/components/schemas/UnprocessableResponse"
       description: Unprocessable
-    UpdateMessageResponse:
+    UpdateLeadResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UpdateMessageResponse"
-      description: Messages
+            $ref: "#/components/schemas/UpdateLeadResponse"
+      description: Lead updated
   schemas:
+    Address:
+      additionalProperties: false
+      properties:
+        city:
+          description: Name of city.
+          example: San Francisco
+          nullable: true
+          type: string
+        contact_name:
+          example: Elon Musk
+          nullable: true
+          type: string
+        country:
+          description: country code according to ISO 3166-1 alpha-2.
+          example: US
+          nullable: true
+          type: string
+        county:
+          description: Address field that holds a sublocality, such as a county
+          example: Santa Clara
+          nullable: true
+          type: string
+        email:
+          example: elon@musk.com
+          nullable: true
+          type: string
+        fax:
+          example: 122-111-1111
+          nullable: true
+          type: string
+        id:
+          example: "123"
+          nullable: true
+          type: string
+        latitude:
+          example: "40.759211"
+          nullable: true
+          type: string
+        line1:
+          description: "Line 1 of the address e.g. number, street, suite, apt #, etc."
+          example: Main street
+          nullable: true
+          type: string
+        line2:
+          description: Line 2 of the address
+          example: "apt #"
+          nullable: true
+          type: string
+        line3:
+          description: Line 3 of the address
+          example: "Suite #"
+          nullable: true
+          type: string
+        line4:
+          description: Line 4 of the address
+          example: delivery instructions
+          nullable: true
+          type: string
+        longitude:
+          example: "-73.984638"
+          nullable: true
+          type: string
+        name:
+          example: HQ US
+          nullable: true
+          type: string
+        phone_number:
+          example: 111-111-1111
+          nullable: true
+          type: string
+        postal_code:
+          description: Zip code or equivalent.
+          example: "94104"
+          nullable: true
+          type: string
+        row_version:
+          $ref: "#/components/schemas/RowVersion"
+        salutation:
+          example: Mr
+          nullable: true
+          type: string
+        state:
+          description: Name of state
+          example: CA
+          nullable: true
+          type: string
+        street_number:
+          description: Street number
+          example: "25"
+          nullable: true
+          type: string
+        string:
+          example: 25 Spring Street, Blackburn, VIC 3130
+          nullable: true
+          title: The address string. Some APIs don't provide structured address data.
+          type: string
+        type:
+          enum:
+            - primary
+            - secondary
+            - home
+            - office
+            - shipping
+            - billing
+            - other
+          example: primary
+          type: string
+          x-apideck-enum-id: addresses.type
+          x-graphql-type-name: AddressType
+        website:
+          example: https://elonmusk.com
+          nullable: true
+          type: string
+      type: object
+      x-apideck-weights:
+        city: high
+        contact_name: edge-case
+        country: high
+        county: edge-case
+        email: edge-case
+        fax: edge-case
+        id: edge-case
+        latitude: low
+        line1: high
+        line2: low
+        line3: edge-case
+        line4: edge-case
+        longitude: low
+        name: edge-case
+        phone_number: edge-case
+        postal_code: high
+        row_version: edge-case
+        salutation: edge-case
+        state: high
+        street_number: low
+        string: low
+        type: critical
+        website: edge-case
     BadRequestResponse:
       properties:
         detail:
@@ -750,7 +1057,66 @@ components:
           description: The type of error returned
           example: RequestValidationError
           type: string
-    CreateMessageResponse:
+    BankAccount:
+      additionalProperties: false
+      properties:
+        account_name:
+          description: The name which you used in opening your bank account.
+          example: SPACEX LLC
+          nullable: true
+          title: Bank Account Name
+          type: string
+        account_number:
+          description: A bank account number is a number that is tied to your bank account. If you have several bank accounts, such as personal, joint, business (and so on), each account will have a different account number.
+          example: "123465"
+          nullable: true
+          title: Bank Account Number
+          type: string
+        account_type:
+          description: The type of bank account.
+          enum:
+            - bank_account
+            - credit_card
+            - other
+          example: credit_card
+          nullable: true
+          title: Account Type
+          type: string
+          x-apideck-enum-id: bank-accounts.account_type
+        bank_code:
+          description: A bank code is a code assigned by a central bank, a bank supervisory body or a Bankers Association in a country to all its licensed member banks or financial institutions.
+          example: BNH
+          nullable: true
+          title: Bank Code
+          type: string
+        bic:
+          example: AUDSCHGGXXX
+          nullable: true
+          type: string
+        branch_identifier:
+          description: A branch identifier is a unique identifier for a branch of a bank or financial institution.
+          example: "001"
+          nullable: true
+          title: Branch Identifier
+          type: string
+        bsb_number:
+          description: A BSB is a 6 digit numeric code used for identifying the branch of an Australian or New Zealand bank or financial institution.
+          example: 062-001
+          nullable: true
+          title: BSB Number
+          type: string
+        currency:
+          $ref: "#/components/schemas/Currency"
+        iban:
+          example: CH2989144532982975332
+          nullable: true
+          type: string
+      type: object
+      x-apideck-weights:
+        account_number: critical
+        bsb_number: edge-case
+        iban: high
+    CreateLeadResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -760,11 +1126,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Messages
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
-          example: twilio
+          example: zoho-crm
           type: string
         status:
           description: HTTP Response Status
@@ -1370,7 +1736,12 @@ components:
       required:
         - id
       type: object
-    DeleteMessageResponse:
+      x-apideck-weights:
+        description: edge-case
+        id: critical
+        name: medium
+        value: critical
+    DeleteLeadResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -1380,11 +1751,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Messages
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
-          example: twilio
+          example: zoho-crm
           type: string
         status:
           description: HTTP Response Status
@@ -1428,21 +1799,25 @@ components:
       required:
         - email
       type: object
-    GetMessageResponse:
+      x-apideck-weights:
+        email: critical
+        id: edge-case
+        type: critical
+    GetLeadResponse:
       properties:
         data:
-          $ref: "#/components/schemas/Message"
+          $ref: "#/components/schemas/Lead"
         operation:
           description: Operation performed
           example: one
           type: string
         resource:
           description: Unified API resource name
-          example: Messages
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
-          example: twilio
+          example: zoho-crm
           type: string
         status:
           description: HTTP Response Status
@@ -1460,12 +1835,11 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: Message
-    GetMessagesResponse:
+    GetLeadsResponse:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/Message"
+            $ref: "#/components/schemas/Lead"
           type: array
         links:
           $ref: "#/components/schemas/Links"
@@ -1477,11 +1851,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Messages
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
-          example: twilio
+          example: zoho-crm
           type: string
         status:
           description: HTTP Response Status
@@ -1499,7 +1873,242 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: MessageList
+      x-graphql-type-name: LeadList
+    Lead:
+      additionalProperties: false
+      properties:
+        addresses:
+          items:
+            $ref: "#/components/schemas/Address"
+          type: array
+        company_id:
+          example: "2"
+          nullable: true
+          type: string
+        company_name:
+          example: Spacex
+          nullable: true
+          type: string
+        contact_id:
+          example: "2"
+          nullable: true
+          type: string
+        created_at:
+          example: 2020-09-30T07:43:32.000Z
+          readOnly: true
+          type: string
+        currency:
+          $ref: "#/components/schemas/Currency"
+        custom_fields:
+          items:
+            $ref: "#/components/schemas/CustomField"
+          type: array
+        description:
+          example: A thinker
+          nullable: true
+          type: string
+        emails:
+          items:
+            $ref: "#/components/schemas/Email"
+          type: array
+        fax:
+          example: "+12129876543"
+          nullable: true
+          type: string
+        first_name:
+          example: Elon
+          nullable: true
+          type: string
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        language:
+          description: language code according to ISO 639-1. For the United States - EN
+          example: EN
+          nullable: true
+          type: string
+        last_name:
+          example: Musk
+          nullable: true
+          type: string
+        lead_source:
+          example: Cold Call
+          nullable: true
+          type: string
+        monetary_amount:
+          example: 75000
+          nullable: true
+          type: number
+        name:
+          example: Elon Musk
+          minLength: 1
+          type: string
+        owner_id:
+          example: "54321"
+          type: string
+        phone_numbers:
+          items:
+            $ref: "#/components/schemas/PhoneNumber"
+          type: array
+        prefix:
+          example: Sir
+          nullable: true
+          type: string
+        social_links:
+          items:
+            $ref: "#/components/schemas/SocialLink"
+          type: array
+        status:
+          example: New
+          nullable: true
+          type: string
+        tags:
+          $ref: "#/components/schemas/Tags"
+        title:
+          example: CEO
+          nullable: true
+          type: string
+        updated_at:
+          example: 2020-09-30T07:43:32.000Z
+          readOnly: true
+          type: string
+        websites:
+          items:
+            $ref: "#/components/schemas/Website"
+          type: array
+      required:
+        - name
+        - company_name
+      type: object
+      x-apideck-weights:
+        addresses: high
+        company_id: high
+        company_name: high
+        contact_id: low
+        created_at: medium
+        currency: low
+        custom_fields: medium
+        description: low
+        emails: high
+        fax: low
+        first_name: high
+        id: critical
+        language: medium
+        last_name: high
+        lead_source: low
+        monetary_amount: low
+        name: critical
+        owner_id: high
+        phone_numbers: high
+        prefix: low
+        social_links: low
+        status: high
+        tags: low
+        title: high
+        updated_at: medium
+        websites: medium
+      x-pii:
+        - name
+        - email
+        - first_name
+        - last_name
+    LeadEventType:
+      enum:
+        - "*"
+        - lead.lead.created
+        - lead.lead.updated
+        - lead.lead.deleted
+      example: lead.lead.created
+      type: string
+      x-apideck-enum-id: lead.events
+    LeadWebhookEvent:
+      allOf:
+        - properties:
+            entity_id:
+              description: The service provider's ID of the entity that triggered this event
+              example: 123456ASDF
+              type: string
+            entity_type:
+              description: The type entity that triggered this event
+              example: Company
+              type: string
+            entity_url:
+              description: The url to retrieve entity detail.
+              example: https://unify.apideck.com/crm/contacts/123456
+              type: string
+            event_id:
+              description: Unique reference to this request event
+              example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
+              type: string
+            execution_attempt:
+              description: The current count this request event has been attempted
+              example: 2
+              type: number
+            occurred_at:
+              description: ISO Datetime for when the original event occurred
+              example: 2021-10-01T03:14:55.419Z
+              type: string
+            service_id:
+              description: Service provider identifier
+              example: close
+              type: string
+          type: object
+        - properties:
+            event_type:
+              $ref: "#/components/schemas/LeadEventType"
+          type: object
+      x-sdk-exclude: true
+    LeadsFilter:
+      additionalProperties: false
+      example:
+        email: elon@tesla.com
+        first_name: Elon
+        last_name: Musk
+      properties:
+        email:
+          description: E-mail of the lead to filter on
+          example: elon@tesla.com
+          type: string
+        first_name:
+          description: First name of the lead to filter on
+          example: Elon
+          type: string
+        last_name:
+          description: Last name of the lead to filter on
+          example: Musk
+          type: string
+        name:
+          description: Name of the lead to filter on
+          example: Elon Musk
+          type: string
+      type: object
+      x-graphql-type-name: LeadsFilter
+    LeadsSort:
+      additionalProperties: false
+      example:
+        by: created_at
+        direction: desc
+      properties:
+        by:
+          description: The field on which to sort the Leads
+          enum:
+            - created_at
+            - updated_at
+            - name
+            - first_name
+            - last_name
+            - email
+          example: created_at
+          type: string
+          x-apideck-enum-id: leads.sort_by
+          x-graphql-type-name: LeadsSortBy
+        direction:
+          $ref: "#/components/schemas/SortDirection"
+      required:
+        - by
+      type: object
+      x-graphql-type-name: LeadsSort
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:
@@ -1517,185 +2126,6 @@ components:
           example: https://unify.apideck.com/crm/companies?cursor=em9oby1jcm06OnBhZ2U6OjE%3D
           nullable: true
           type: string
-      type: object
-    Message:
-      additionalProperties: false
-      properties:
-        body:
-          description: The message text.
-          example: Hi! How are you doing?
-          maxLength: 1600
-          title: Message Body
-          type: string
-        created_at:
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          readOnly: true
-          title: Created at (timestamp)
-          type: string
-        created_by:
-          example: "12345"
-          nullable: true
-          readOnly: true
-          title: Created by
-          type: string
-        direction:
-          description: The direction of the message.
-          enum:
-            - inbound
-            - outbound-api
-            - outbound-call
-            - outbound-reply
-            - unknown
-          example: outbound-api
-          readOnly: true
-          title: Direction
-          type: string
-          x-apideck-enum-id: messages.direction
-        error:
-          description: The error returned if your message status is failed or undelivered.
-          example:
-            code: X1
-            message: Something went wrong
-          properties:
-            code:
-              description: The error_code provides more information about the failure. If the message was successful, this value is null
-              example: X1
-              readOnly: true
-              title: Error Code
-              type: string
-            message:
-              example: Something went wrong
-              readOnly: true
-              title: Error Message
-              type: string
-          readOnly: true
-          title: Error
-          type: object
-        from:
-          description: The phone number that initiated the message.
-          example: "+15017122661"
-          title: From
-          type: string
-        id:
-          example: "12345"
-          readOnly: true
-          type: string
-        messaging_service_id:
-          description: The ID of the Messaging Service used with the message. In case of Plivo this links to the Powerpack ID.
-          example: "123456"
-          title: Messaging Service ID
-          type: string
-        number_of_media_files:
-          description: The number of media files associated with the message.
-          example: 1
-          readOnly: true
-          title: Number of media files
-          type: integer
-        number_of_units:
-          description: The number of units that make up the complete message. Messages can be split up due to the constraints of the message size.
-          example: 1
-          readOnly: true
-          title: Number of units
-          type: integer
-        price:
-          description: Price of the message.
-          example:
-            currency: USD
-            per_unit: "0.01"
-            total_amount: "0.01"
-          properties:
-            currency:
-              $ref: "#/components/schemas/Currency"
-            per_unit:
-              description: ""
-              example: "0.01"
-              readOnly: true
-              title: Price per unit
-              type: string
-            total_amount:
-              description: ""
-              example: "0.01"
-              readOnly: true
-              title: Price Amount
-              type: string
-          readOnly: true
-          title: Price
-          type: object
-        reference:
-          description: A client reference.
-          example: CUST001
-          title: Reference
-          type: string
-        scheduled_at:
-          description: The scheduled date and time of the message.
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          type: string
-        sent_at:
-          description: The date and time that the message was sent
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          readOnly: true
-          type: string
-        status:
-          description: Status of the delivery of the message.
-          enum:
-            - accepted
-            - scheduled
-            - canceled
-            - queued
-            - sending
-            - sent
-            - failed
-            - delivered
-            - undelivered
-            - receiving
-            - received
-            - read
-          example: sent
-          readOnly: true
-          title: Status
-          type: string
-          x-apideck-enum-id: messages.status
-        subject:
-          example: Picture
-          title: Message Subject
-          type: string
-        to:
-          description: The phone number that received the message.
-          example: "+15017122662"
-          title: Message Body
-          type: string
-        type:
-          description: Set to sms for SMS messages and mms for MMS messages.
-          enum:
-            - sms
-            - mms
-          example: sms
-          title: Message type
-          type: string
-          x-apideck-enum-id: messages.type
-        updated_at:
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          readOnly: true
-          title: Updated at (timestamp)
-          type: string
-        updated_by:
-          example: "12345"
-          nullable: true
-          readOnly: true
-          type: string
-        webhook_url:
-          description: Define a webhook to receive delivery notifications.
-          example: https://unify.apideck.com/webhook/webhooks/eyz329dkffdl4949/x/sms
-          title: Webhook URL
-          type: string
-      required:
-        - from
-        - to
-        - body
       type: object
     Meta:
       description: Response metadata
@@ -1810,6 +2240,96 @@ components:
           description: The type of error returned
           example: RequestLimitError
           type: string
+    PhoneNumber:
+      additionalProperties: false
+      properties:
+        area_code:
+          example: "323"
+          nullable: true
+          title: Area code
+          type: string
+        country_code:
+          example: "1"
+          nullable: true
+          title: Country code
+          type: string
+        extension:
+          example: "105"
+          nullable: true
+          title: Phone extension
+          type: string
+        id:
+          example: "12345"
+          nullable: true
+          type: string
+        number:
+          example: 111-111-1111
+          minLength: 1
+          title: Phone number
+          type: string
+        type:
+          enum:
+            - primary
+            - secondary
+            - home
+            - work
+            - office
+            - mobile
+            - assistant
+            - fax
+            - direct-dial-in
+            - personal
+            - other
+          example: primary
+          type: string
+          x-apideck-enum-id: phone_numbers.type
+          x-graphql-type-name: PhoneType
+      required:
+        - number
+      type: object
+      x-apideck-weights:
+        area_code: edge-case
+        country_code: edge-case
+        extension: edge-case
+        id: edge-case
+        number: critical
+        type: critical
+    RowVersion:
+      example: 1-12345
+      nullable: true
+      title: Row version
+      type: string
+    SocialLink:
+      additionalProperties: false
+      properties:
+        id:
+          example: "12345"
+          nullable: true
+          type: string
+        type:
+          example: twitter
+          nullable: true
+          type: string
+        url:
+          example: https://www.twitter.com/apideck-io
+          minLength: 1
+          type: string
+      required:
+        - url
+      type: object
+      x-apideck-weights:
+        id: edge-case
+        type: critical
+        url: critical
+    SortDirection:
+      default: asc
+      description: The direction in which to sort the results
+      enum:
+        - asc
+        - desc
+      type: string
+      x-apideck-enum-id: sort_direction
+      x-graphql-type-name: SortDirection
     Tags:
       example:
         - New
@@ -1938,7 +2458,7 @@ components:
           description: The type of error returned
           example: InvalidStateError
           type: string
-    UpdateMessageResponse:
+    UpdateLeadResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -1948,11 +2468,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Messages
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
-          example: twilio
+          example: zoho-crm
           type: string
         status:
           description: HTTP Response Status
@@ -1970,6 +2490,35 @@ components:
         - operation
         - data
       type: object
+    Website:
+      additionalProperties: false
+      properties:
+        id:
+          example: "12345"
+          nullable: true
+          type: string
+        type:
+          enum:
+            - primary
+            - secondary
+            - work
+            - personal
+            - other
+          example: primary
+          type: string
+          x-apideck-enum-id: websites.type
+          x-graphql-type-name: WebsiteType
+        url:
+          example: http://example.com
+          minLength: 1
+          type: string
+      required:
+        - url
+      type: object
+      x-apideck-weights:
+        id: edge-case
+        type: critical
+        url: critical
   securitySchemes:
     apiKey:
       description: |
@@ -1992,3 +2541,84 @@ components:
       in: header
       name: Authorization
       type: apiKey
+    applicationId:
+      description: The ID of your Unify application
+      in: header
+      name: x-apideck-app-id
+      type: apiKey
+    consumerId:
+      description: The ID of the consumer which you want to get or push data from
+      in: header
+      name: x-apideck-consumer-id
+      type: apiKey
+x-webhooks:
+  LeadCreated:
+    post:
+      description: Lead Created
+      operationId: leadCreated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            example: lead.lead.created
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LeadWebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Lead Created
+      tags:
+        - Lead
+  LeadDeleted:
+    post:
+      description: Lead Deleted
+      operationId: leadDeleted
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            example: lead.lead.deleted
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LeadWebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Lead Deleted
+      tags:
+        - Lead
+  LeadUpdated:
+    post:
+      description: Lead Updated
+      operationId: leadUpdated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            example: lead.lead.updated
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LeadWebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Lead Updated
+      tags:
+        - Lead
+  x-sdk-exclude: true

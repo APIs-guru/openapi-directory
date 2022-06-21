@@ -12,7 +12,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://www.nexmo.com/terms-of-use
   title: Number Insight API
-  version: 1.2.0
+  version: 1.2.1
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/number-insight.yml
@@ -341,9 +341,9 @@ components:
       nullable: true
       properties:
         active_status:
-          description: Whether the end-user's phone number is active within an operator's `network`.
+          description: Whether the end-user's phone number is active within an operator's `network`. Can be `active`, `inactive` or null.
           example: "true"
-          type: boolean
+          type: string
         handset_status:
           description: Whether the end-user's handset is turned on or off.
           example: On

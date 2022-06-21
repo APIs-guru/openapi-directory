@@ -1951,7 +1951,7 @@ components:
       properties:
         color:
           $ref: "#/components/schemas/Color"
-          description: "The color of the border. Deprecated: Use [color_style]."
+          description: "The color of the border. Deprecated: Use color_style."
         colorStyle:
           $ref: "#/components/schemas/ColorStyle"
           description: The color of the border. If color is also set, this field takes precedence.
@@ -2148,7 +2148,7 @@ components:
             - RIGHT
           type: string
         hyperlinkDisplayType:
-          description: How a hyperlink, if it exists, should be displayed in the cell.
+          description: If one exists, how a hyperlink should be displayed in the cell.
           enum:
             - HYPERLINK_DISPLAY_TYPE_UNSPECIFIED
             - LINKED
@@ -2169,10 +2169,10 @@ components:
           type: string
         textFormat:
           $ref: "#/components/schemas/TextFormat"
-          description: The format of the text in the cell (unless overridden by a format run). Setting a cell-level link here will clear the cell's existing links. Setting the link field in a TextFormatRun will take precedence over the cell-level link.
+          description: The format of the text in the cell (unless overridden by a format run). Setting a cell-level link here clears the cell's existing links. Setting the link field in a TextFormatRun takes precedence over the cell-level link.
         textRotation:
           $ref: "#/components/schemas/TextRotation"
-          description: The rotation applied to text in a cell
+          description: The rotation applied to text in the cell.
         verticalAlignment:
           description: The vertical alignment of the value in the cell.
           enum:

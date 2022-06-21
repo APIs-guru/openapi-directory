@@ -272,7 +272,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: POS API
-  version: 8.32.4
+  version: 8.32.5
   x-apideck-api: pos
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1158,6 +1158,16 @@ paths:
                 owner_id: '12345',
                 main_location_id: '12345',
                 status: 'active',
+                service_charges: [
+                  {
+                    name: 'Charge for delivery',
+                    amount: 27500,
+                    percentage: 12.5,
+                    currency: 'USD',
+                    active: true,
+                    type: 'auto_gratuity'
+                  }
+                ],
                 language: 'EN',
                 currency: 'USD'
               }
@@ -1350,6 +1360,16 @@ paths:
                 owner_id: '12345',
                 main_location_id: '12345',
                 status: 'active',
+                service_charges: [
+                  {
+                    name: 'Charge for delivery',
+                    amount: 27500,
+                    percentage: 12.5,
+                    currency: 'USD',
+                    active: true,
+                    type: 'auto_gratuity'
+                  }
+                ],
                 language: 'EN',
                 currency: 'USD'
               }
@@ -1771,7 +1791,7 @@ paths:
                 alternate_name: 'Modifier New',
                 price_amount: 10,
                 currency: 'USD',
-                modifier_group_id: ['123'],
+                modifier_group_id: '123',
                 available: true
               }
             }
@@ -1940,7 +1960,7 @@ paths:
                 alternate_name: 'Modifier New',
                 price_amount: 10,
                 currency: 'USD',
-                modifier_group_id: ['123'],
+                modifier_group_id: '123',
                 available: true
               }
             }
@@ -2331,7 +2351,6 @@ paths:
                 closed_date: '2022-08-13',
                 reference_id: 'my-order-001',
                 status: 'open',
-                state: 'open',
                 payment_status: 'open',
                 currency: 'USD',
                 title: 'string',
@@ -2453,6 +2472,7 @@ paths:
                     amount: 27500,
                     percentage: 12.5,
                     currency: 'USD',
+                    active: true,
                     type: 'auto_gratuity'
                   }
                 ],
@@ -2715,7 +2735,6 @@ paths:
                 closed_date: '2022-08-13',
                 reference_id: 'my-order-001',
                 status: 'open',
-                state: 'open',
                 payment_status: 'open',
                 currency: 'USD',
                 title: 'string',
@@ -2837,6 +2856,7 @@ paths:
                     amount: 27500,
                     percentage: 12.5,
                     currency: 'USD',
+                    active: true,
                     type: 'auto_gratuity'
                   }
                 ],
@@ -2999,7 +3019,6 @@ paths:
                 closed_date: '2022-08-13',
                 reference_id: 'my-order-001',
                 status: 'open',
-                state: 'open',
                 payment_status: 'open',
                 currency: 'USD',
                 title: 'string',
@@ -3121,6 +3140,7 @@ paths:
                     amount: 27500,
                     percentage: 12.5,
                     currency: 'USD',
+                    active: true,
                     type: 'auto_gratuity'
                   }
                 ],
@@ -3309,7 +3329,7 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: CreateP ayment
+      summary: Create Payment
       tags:
         - Payments
       x-apideck-api: pos
@@ -3431,6 +3451,7 @@ paths:
                     amount: 27500,
                     percentage: 12.5,
                     currency: 'USD',
+                    active: true,
                     type: 'auto_gratuity'
                   }
                 ]
@@ -3702,6 +3723,7 @@ paths:
                     amount: 27500,
                     percentage: 12.5,
                     currency: 'USD',
+                    active: true,
                     type: 'auto_gratuity'
                   }
                 ]
@@ -4068,7 +4090,7 @@ components:
         default: false
         type: boolean
     serviceId:
-      description: Provide the service id you want to call (e.g., pipedrive). [See the full list in the connector section.](#section/Connectors) Only needed when a consumer has activated multiple integrations for a Unified API.
+      description: Provide the service id you want to call (e.g., pipedrive). Only needed when a consumer has activated multiple integrations for a Unified API.
       in: header
       name: x-apideck-service-id
       schema:
@@ -4447,6 +4469,11 @@ components:
             $ref: "#/components/schemas/UpdateTenderResponse"
       description: Tenders
   schemas:
+    Active:
+      example: true
+      nullable: true
+      title: Is active
+      type: boolean
     Address:
       additionalProperties: false
       properties:
@@ -5509,6 +5536,11 @@ components:
       required:
         - id
       type: object
+      x-apideck-weights:
+        description: edge-case
+        id: critical
+        name: medium
+        value: critical
     DeleteItemResponse:
       properties:
         data:
@@ -5828,6 +5860,10 @@ components:
       required:
         - email
       type: object
+      x-apideck-weights:
+        email: critical
+        id: edge-case
+        type: critical
     GetItemResponse:
       properties:
         data:
@@ -6524,6 +6560,10 @@ components:
                 type: array
               name:
                 type: string
+            x-apideck-weights:
+              id: medium
+              image_ids: medium
+              name: medium
           title: Categories
           type: array
         code:
@@ -6571,6 +6611,10 @@ components:
                 example: Option 1
                 title: Name
                 type: string
+            x-apideck-weights:
+              attribute_id: medium
+              id: medium
+              name: medium
           type: array
         present_at_all_locations:
           example: false
@@ -6676,6 +6720,20 @@ components:
                 $ref: "#/components/schemas/UpdatedAt"
               version:
                 $ref: "#/components/schemas/UpdatedBy"
+            x-apideck-weights:
+              created_at: medium
+              id: medium
+              item_id: medium
+              name: medium
+              present_at_all_locations: medium
+              price_amount: medium
+              price_currency: medium
+              pricing_type: medium
+              sequence: medium
+              sku: medium
+              stockable: medium
+              updated_at: medium
+              version: medium
           title: Variations
           type: array
         version:
@@ -6683,6 +6741,33 @@ components:
       required:
         - name
       type: object
+      x-apideck-weights:
+        abbreviation: low
+        absent_at_location_ids: edge-case
+        available: high
+        categories: low
+        code: high
+        cost: medium
+        created_at: medium
+        created_by: edge-case
+        deleted: medium
+        description: medium
+        hidden: medium
+        id: critical
+        idempotency_key: medium
+        name: critical
+        options: low
+        present_at_all_locations: low
+        price_amount: high
+        price_currency: high
+        pricing_type: high
+        product_type: high
+        sku: high
+        tax_ids: medium
+        updated_at: medium
+        updated_by: edge-case
+        variations: low
+        version: medium
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:
@@ -6745,6 +6830,18 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+      x-apideck-weights:
+        address: high
+        business_name: high
+        created_at: medium
+        created_by: edge-case
+        currency: high
+        id: critical
+        merchant_id: high
+        name: critical
+        status: high
+        updated_at: medium
+        updated_by: edge-case
     Merchant:
       additionalProperties: false
       properties:
@@ -6779,6 +6876,10 @@ components:
           example: "12345"
           title: Owner ID
           type: string
+        service_charges:
+          items:
+            $ref: "#/components/schemas/ServiceCharge"
+          type: array
         status:
           description: Status of this merchant.
           enum:
@@ -6795,6 +6896,19 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+      x-apideck-weights:
+        address: medium
+        created_at: medium
+        created_by: edge-case
+        currency: medium
+        id: critical
+        language: medium
+        main_location_id: medium
+        name: critical
+        owner_id: medium
+        status: high
+        updated_at: medium
+        updated_by: edge-case
     Meta:
       description: Response metadata
       properties:
@@ -6840,8 +6954,7 @@ components:
         id:
           $ref: "#/components/schemas/Id"
         modifier_group_id:
-          example:
-            - "123"
+          example: "123"
           title: Modifier group ID
           type: string
         name:
@@ -6860,6 +6973,18 @@ components:
         - name
         - modifier_group_id
       type: object
+      x-apideck-weights:
+        alternate_name: edge-case
+        available: high
+        created_at: medium
+        created_by: edge-case
+        currency: high
+        id: critical
+        modifier_group_id: medium
+        name: critical
+        price_amount: high
+        updated_at: medium
+        updated_by: edge-case
     ModifierGroup:
       additionalProperties: false
       properties:
@@ -6906,6 +7031,13 @@ components:
                 example: 10
                 title: Price amount
                 type: number
+            x-apideck-weights:
+              alternate_name: medium
+              available: medium
+              currency: medium
+              id: medium
+              name: medium
+              price_amount: medium
           type: array
         name:
           example: Modifier
@@ -6930,6 +7062,21 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+      x-apideck-weights:
+        alternate_name: low
+        created_at: medium
+        created_by: edge-case
+        deleted: medium
+        id: critical
+        maximum_allowed: low
+        minimum_required: low
+        modifiers: high
+        name: critical
+        present_at_all_locations: low
+        row_version: edge-case
+        selection_type: medium
+        updated_at: medium
+        updated_by: edge-case
     ModifierGroupFilter:
       additionalProperties: false
       example:
@@ -7042,12 +7189,19 @@ components:
                   $ref: "#/components/schemas/PhoneNumber"
                 type: array
             type: object
+            x-apideck-weights:
+              emails: medium
+              first_name: medium
+              last_name: medium
+              middle_name: medium
+              phone_numbers: medium
           type: array
         discounts:
           items:
             properties:
               amount:
                 example: 27500
+                title: Amount (in cents)
                 type: number
               currency:
                 $ref: "#/components/schemas/Currency"
@@ -7072,6 +7226,14 @@ components:
                 type: string
                 x-apideck-enum-id: orders.discounts.type
             type: object
+            x-apideck-weights:
+              amount: medium
+              currency: medium
+              id: medium
+              name: medium
+              product_id: medium
+              scope: medium
+              type: medium
           type: array
         employee_id:
           example: "12345"
@@ -7123,6 +7285,9 @@ components:
                         maxLength: 250
                         type: string
                     type: object
+                    x-apideck-weights:
+                      buyer_arrived_at: medium
+                      curbside_details: medium
                   expired_at:
                     description: |-
                       Indicating when the fulfillment expired. The timestamp must be in RFC 3339 format
@@ -7204,6 +7369,11 @@ components:
                       phone_number:
                         $ref: "#/components/schemas/PhoneNumber"
                     type: object
+                    x-apideck-weights:
+                      address: medium
+                      customer_id: medium
+                      email: medium
+                      phone_number: medium
                   rejected_at:
                     description: |-
                       Indicating when the fulfillment was rejected. The timestamp must be in RFC 3339 format
@@ -7218,9 +7388,29 @@ components:
                     type: string
                     x-apideck-enum-id: orders.pickup_details.schedule_type
                 type: object
+                x-apideck-weights:
+                  accepted_at: medium
+                  auto_complete_duration: medium
+                  cancel_reason: medium
+                  canceled_at: medium
+                  curbside_pickup_details: medium
+                  expired_at: medium
+                  expires_at: medium
+                  is_curbside_pickup: medium
+                  note: medium
+                  picked_up_at: medium
+                  pickup_at: medium
+                  pickup_window_duration: medium
+                  placed_at: medium
+                  prep_time_duration: medium
+                  ready_at: medium
+                  recipient: medium
+                  rejected_at: medium
+                  schedule_type: medium
               shipment_details:
                 properties: {}
                 type: object
+                x-apideck-weights: {}
               status:
                 description: The state of the fulfillment.
                 enum:
@@ -7242,6 +7432,12 @@ components:
                 type: string
                 x-apideck-enum-id: orders.fulfillments.type
             type: object
+            x-apideck-weights:
+              id: medium
+              pickup_details: medium
+              shipment_details: medium
+              status: medium
+              type: medium
           type: array
         id:
           $ref: "#/components/schemas/Id"
@@ -7253,6 +7449,7 @@ components:
                   properties:
                     amount:
                       example: 27500
+                      title: Amount (in cents)
                       type: number
                     currency:
                       $ref: "#/components/schemas/Currency"
@@ -7261,12 +7458,18 @@ components:
                       type: string
                     id:
                       $ref: "#/components/schemas/Id"
+                  x-apideck-weights:
+                    amount: medium
+                    currency: medium
+                    discount_id: medium
+                    id: medium
                 type: array
               applied_taxes:
                 items:
                   properties:
                     amount:
                       example: 27500
+                      title: Amount (in cents)
                       type: number
                     currency:
                       $ref: "#/components/schemas/Currency"
@@ -7275,6 +7478,11 @@ components:
                     tax_id:
                       example: sales-tax
                       type: string
+                  x-apideck-weights:
+                    amount: medium
+                    currency: medium
+                    id: medium
+                    tax_id: medium
                 type: array
               id:
                 $ref: "#/components/schemas/Id"
@@ -7282,18 +7490,25 @@ components:
                 properties:
                   id:
                     $ref: "#/components/schemas/Id"
+                x-apideck-weights:
+                  id: medium
               modifiers:
                 description: Customizable options – toppings, add-ons, or special requests – create item modifiers. Modifiers that are applied to items will display on your customers’ digital receipts
                 items:
                   properties:
                     amount:
                       example: 27500
+                      title: Amount (in cents)
                       type: number
                     currency:
                       $ref: "#/components/schemas/Currency"
                     name:
                       example: New York Strip Steak - no cheese
                       type: string
+                  x-apideck-weights:
+                    amount: medium
+                    currency: medium
+                    name: medium
                 type: array
               name:
                 example: New York Strip Steak
@@ -7303,21 +7518,33 @@ components:
               total_amount:
                 example: 27500
                 nullable: true
-                title: Total amount
+                title: Total amount (in cents)
                 type: number
               total_discount:
                 example: 3000
                 nullable: true
-                title: Total discount amount
+                title: Total discount amount (in cents)
                 type: number
               total_tax:
                 example: 2000
                 nullable: true
-                title: Tax amount
+                title: Tax amount (in cents)
                 type: number
               unit_price:
                 $ref: "#/components/schemas/UnitPrice"
             type: object
+            x-apideck-weights:
+              applied_discounts: medium
+              applied_taxes: medium
+              id: medium
+              item: medium
+              modifiers: medium
+              name: medium
+              quantity: medium
+              total_amount: medium
+              total_discount: medium
+              total_tax: medium
+              unit_price: medium
           type: array
         location_id:
           example: "12345"
@@ -7359,12 +7586,17 @@ components:
             properties:
               amount:
                 example: 27500
+                title: Amount (in cents)
                 type: number
               currency:
                 $ref: "#/components/schemas/Currency"
               id:
                 $ref: "#/components/schemas/Id"
             type: object
+            x-apideck-weights:
+              amount: medium
+              currency: medium
+              id: medium
           type: array
         reference_id:
           description: An optional user-defined reference ID that associates this record with another entity in an external system. For example, a customer ID from an external customer management system.
@@ -7380,6 +7612,7 @@ components:
             properties:
               amount:
                 example: 27500
+                title: Amount (in cents)
                 type: number
               currency:
                 $ref: "#/components/schemas/Currency"
@@ -7403,6 +7636,15 @@ components:
               transaction_id:
                 $ref: "#/components/schemas/Id"
             type: object
+            x-apideck-weights:
+              amount: medium
+              currency: medium
+              id: medium
+              location_id: medium
+              reason: medium
+              status: medium
+              tender_id: medium
+              transaction_id: medium
           type: array
         seat:
           example: 23F
@@ -7425,12 +7667,8 @@ components:
           readOnly: true
           type: string
           x-apideck-enum-id: orders.source
-        state:
-          description: "A string describing the state of the order. Clover specific: If no value is set, the state defaults to null, which indicates a hidden order. A hidden order is not displayed in user interfaces and can only be retrieved by its id. When creating an order via the REST API the value must be manually set to 'open'. More info [https://docs.clover.com/reference/orderupdateorder]()"
-          example: open
-          title: Status
-          type: string
         status:
+          description: "Order status. Clover specific: If no value is set, the status defaults to hidden, which indicates a hidden order. A hidden order is not displayed in user interfaces and can only be retrieved by its id. When creating an order via the REST API the value must be manually set to 'open'. More info [https://docs.clover.com/reference/orderupdateorder]()"
           enum:
             - open
             - draft
@@ -7438,6 +7676,7 @@ components:
             - delayed
             - voided
             - completed
+            - hidden
           example: open
           title: Status
           type: string
@@ -7450,6 +7689,7 @@ components:
             properties:
               amount:
                 example: 27500
+                title: Amount (in cents)
                 type: number
               auto_applied:
                 description: "Square-only: Determines whether the tax was automatically applied to the order based on the catalog configuration. For an example, see Automatically Apply Taxes to an Order. [https://developer.squareup.com/docs/orders-api/apply-taxes-and-discounts/auto-apply-taxes]()"
@@ -7479,15 +7719,25 @@ components:
                   - inclusive
                 type: string
                 x-apideck-enum-id: orders.taxes.type
+            x-apideck-weights:
+              amount: medium
+              auto_applied: medium
+              currency: medium
+              id: medium
+              name: medium
+              percentage: medium
+              scope: medium
+              type: medium
           type: array
         tenders:
           items:
             properties:
               amount:
                 example: 27500
+                title: Amount
                 type: number
               buyer_tendered_cash_amount:
-                description: The amount of cash tendered by the buyer. Only applicable when the tender type is cash.
+                description: The amount (in cents) of cash tendered by the buyer. Only applicable when the tender type is cash.
                 example: 27500
                 nullable: true
                 type: number
@@ -7517,7 +7767,7 @@ components:
                 type: string
                 x-apideck-enum-id: orders.tenders.card_status
               change_back_cash_amount:
-                description: The amount of cash returned to the buyer. Only applicable when the tender type is cash.
+                description: The amount (in cents) of cash returned to the buyer. Only applicable when the tender type is cash.
                 example: 27500
                 nullable: true
                 type: number
@@ -7539,37 +7789,37 @@ components:
               total_amount:
                 example: 27.5
                 nullable: true
-                title: Total amount
+                title: Total amount (in cents)
                 type: number
               total_discount:
                 example: 3
                 nullable: true
-                title: Total discount
+                title: Total discount (in cents)
                 type: number
               total_processing_fee:
                 example: 0
                 nullable: true
-                title: Total processing fee
+                title: Total processing fee (in cents)
                 type: number
               total_refund:
                 example: 0
                 nullable: true
-                title: Total refund
+                title: Total refund (in cents)
                 type: number
               total_service_charge:
                 example: 0
                 nullable: true
-                title: Total service charge
+                title: Total service charge (in cents)
                 type: number
               total_tax:
                 example: 2.75
                 nullable: true
-                title: Total tax
+                title: Total tax (in cents)
                 type: number
               total_tip:
                 example: 7
                 nullable: true
-                title: Total tax
+                title: Total tax (in cents)
                 type: number
               transaction_id:
                 $ref: "#/components/schemas/Id"
@@ -7582,6 +7832,28 @@ components:
                 type: string
                 x-apideck-enum-id: orders.tenders.type
             type: object
+            x-apideck-weights:
+              amount: medium
+              buyer_tendered_cash_amount: medium
+              card: medium
+              card_entry_method: medium
+              card_status: medium
+              change_back_cash_amount: medium
+              currency: medium
+              id: medium
+              location_id: medium
+              name: medium
+              note: medium
+              payment_id: medium
+              total_amount: medium
+              total_discount: medium
+              total_processing_fee: medium
+              total_refund: medium
+              total_service_charge: medium
+              total_tax: medium
+              total_tip: medium
+              transaction_id: medium
+              type: medium
           type: array
         title:
           title: Title
@@ -7589,32 +7861,32 @@ components:
         total_amount:
           example: 27.5
           nullable: true
-          title: Total amount
+          title: Total amount (in cents)
           type: number
         total_discount:
           example: 3
           nullable: true
-          title: Total discount
+          title: Total discount (in cents)
           type: number
         total_refund:
           example: 0
           nullable: true
-          title: Total refund
+          title: Total refund (in cents)
           type: number
         total_service_charge:
           example: 0
           nullable: true
-          title: Total service charge
+          title: Total service charge (in cents)
           type: number
         total_tax:
           example: 2.75
           nullable: true
-          title: Total tax
+          title: Total tax (in cents)
           type: number
         total_tip:
           example: 7
           nullable: true
-          title: Total tax
+          title: Total tax (in cents)
           type: number
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
@@ -7635,6 +7907,49 @@ components:
         - location_id
         - merchant_id
       type: object
+      x-apideck-weights:
+        closed_date: high
+        created_at: medium
+        created_by: edge-case
+        currency: medium
+        customer_id: medium
+        customers: medium
+        discounts: medium
+        employee_id: medium
+        fulfillments: medium
+        id: critical
+        line_items: medium
+        location_id: critical
+        merchant_id: critical
+        note: medium
+        order_date: critical
+        order_number: high
+        order_type_id: medium
+        payment_status: high
+        payments: medium
+        reference_id: low
+        refunded: medium
+        refunds: medium
+        seat: medium
+        service_charges: medium
+        source: medium
+        state: high
+        status: high
+        table: medium
+        taxes: medium
+        tenders: medium
+        title: high
+        total_amount: high
+        total_discount: medium
+        total_refund: medium
+        total_service_charge: medium
+        total_tax: medium
+        total_tip: medium
+        updated_at: medium
+        updated_by: edge-case
+        version: low
+        voided: medium
+        voided_at: medium
     OrderType:
       additionalProperties: false
       properties:
@@ -7657,6 +7972,14 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+      x-apideck-weights:
+        created_at: medium
+        created_by: edge-case
+        default: medium
+        id: medium
+        name: medium
+        updated_at: medium
+        updated_by: edge-case
     PaymentCard:
       additionalProperties: false
       description: A card's non-confidential details.
@@ -7832,12 +8155,19 @@ components:
       required:
         - number
       type: object
+      x-apideck-weights:
+        area_code: edge-case
+        country_code: edge-case
+        extension: edge-case
+        id: edge-case
+        number: critical
+        type: critical
     PosPayment:
       additionalProperties: false
       properties:
         amount:
           example: 27.5
-          title: Amount
+          title: Amount (in cents)
           type: number
         app_fee:
           description: The amount the developer is taking as a fee for facilitating the payment on behalf of the seller.
@@ -7847,7 +8177,7 @@ components:
         approved:
           description: The initial amount of money approved for this payment.
           example: 37.5
-          title: Approved amount
+          title: Approved amount (in cents)
           type: number
         bank_account:
           description: Card details for this payment. This field is currently not available. Reach out to our team for more info.
@@ -7918,7 +8248,7 @@ components:
           type: object
         change_back_cash_amount:
           example: 20
-          title: Change back cash amount
+          title: Change back cash amount (in cents)
           type: number
         created_at:
           $ref: "#/components/schemas/CreatedAt"
@@ -8013,7 +8343,7 @@ components:
             properties:
               amount:
                 example: 1.05
-                title: Amount
+                title: Amount (in cents)
                 type: number
               effective_at:
                 example: 2020-09-30T07:43:32.000Z
@@ -8031,7 +8361,7 @@ components:
         refunded:
           description: The initial amount of money approved for this payment.
           example: 37.5
-          title: The total amount of the payment refunded to date.
+          title: The total amount (in cents) of the payment refunded to date.
           type: number
         service_charges:
           $ref: "#/components/schemas/ServiceCharges"
@@ -8067,18 +8397,18 @@ components:
           x-graphql-type-name: PosPosPaymentStatus
         tax:
           example: 20
-          title: Tax amount
+          title: Tax amount (in cents)
           type: number
         tender_id:
           example: "12345"
           type: string
         tip:
           example: 7
-          title: Tip amount
+          title: Tip amount (in cents)
           type: number
         total:
           example: 37.5
-          title: Total amount
+          title: Total amount (in cents)
           type: number
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
@@ -8183,32 +8513,45 @@ components:
       nullable: true
       title: Sequence
       type: number
+    ServiceCharge:
+      properties:
+        active:
+          $ref: "#/components/schemas/Active"
+        amount:
+          example: 27500
+          title: Amount (in cents)
+          type: number
+        currency:
+          $ref: "#/components/schemas/Currency"
+        id:
+          $ref: "#/components/schemas/Id"
+        name:
+          description: Service charge name
+          example: Charge for delivery
+          type: string
+        percentage:
+          description: Service charge percentage. Use this field to calculate the amount of the service charge. Pass a percentage and amount at the same time.
+          example: 12.5
+          type: number
+        type:
+          description: The type of the service charge.
+          enum:
+            - auto_gratuity
+            - custom
+          type: string
+          x-apideck-enum-id: service-charges.type
+      type: object
     ServiceCharges:
       description: Optional service charges or gratuity tip applied to the order.
       items:
-        properties:
-          amount:
-            example: 27500
-            type: number
-          currency:
-            $ref: "#/components/schemas/Currency"
-          name:
-            description: Service charge name
-            example: Charge for delivery
-            type: string
-          percentage:
-            description: Service charge percentage. Use this field to calculate the amount of the service charge. Only pass a percentage or amount, not both at the same time.
-            example: 12.5
-            type: number
-          type:
-            description: The type of the service charge.
-            enum:
-              - auto_gratuity
-              - custom
-            type: string
-            x-apideck-enum-id: service-charges.type
-        type: object
+        $ref: "#/components/schemas/ServiceCharge"
       type: array
+      x-apideck-weights:
+        amount: critical
+        currency: high
+        name: high
+        percentage: high
+        type: high
     SocialLink:
       additionalProperties: false
       properties:
@@ -8227,6 +8570,10 @@ components:
       required:
         - url
       type: object
+      x-apideck-weights:
+        id: edge-case
+        type: critical
+        url: critical
     Tags:
       example:
         - New
@@ -8237,10 +8584,7 @@ components:
       additionalProperties: false
       properties:
         active:
-          example: true
-          nullable: true
-          title: Is active
-          type: boolean
+          $ref: "#/components/schemas/Active"
         allows_tipping:
           default: true
           description: Allow tipping on payment from tender
@@ -8272,6 +8616,19 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+      x-apideck-weights:
+        active: medium
+        allows_tipping: medium
+        created_at: medium
+        created_by: edge-case
+        editable: low
+        hidden: low
+        id: critical
+        key: high
+        label: high
+        opens_cash_drawer: low
+        updated_at: medium
+        updated_by: edge-case
     TooManyRequestsResponse:
       properties:
         detail:
@@ -8728,6 +9085,10 @@ components:
       required:
         - url
       type: object
+      x-apideck-weights:
+        id: edge-case
+        type: critical
+        url: critical
   securitySchemes:
     apiKey:
       description: |

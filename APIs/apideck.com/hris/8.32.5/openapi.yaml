@@ -272,7 +272,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: HRIS API
-  version: 8.32.4
+  version: 8.32.5
   x-apideck-api: hris
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1869,7 +1869,7 @@ components:
         default: false
         type: boolean
     serviceId:
-      description: Provide the service id you want to call (e.g., pipedrive). [See the full list in the connector section.](#section/Connectors) Only needed when a consumer has activated multiple integrations for a Unified API.
+      description: Provide the service id you want to call (e.g., pipedrive). Only needed when a consumer has activated multiple integrations for a Unified API.
       in: header
       name: x-apideck-service-id
       schema:
@@ -2222,6 +2222,10 @@ components:
           example: Health Insurance
           type: string
       type: object
+      x-apideck-weights:
+        employee_deduction: high
+        employer_contribution: high
+        name: critical
     CompanyId:
       example: "23456"
       nullable: true
@@ -2263,6 +2267,13 @@ components:
       required:
         - employee_id
       type: object
+      x-apideck-weights:
+        benefits: high
+        deductions: high
+        employee_id: critical
+        gross_pay: critical
+        net_pay: high
+        taxes: high
     CreateDepartmentResponse:
       properties:
         data:
@@ -2959,6 +2970,11 @@ components:
       required:
         - id
       type: object
+      x-apideck-weights:
+        description: edge-case
+        id: critical
+        name: medium
+        value: critical
     Deduction:
       properties:
         amount:
@@ -2970,6 +2986,9 @@ components:
           example: Company Car
           type: string
       type: object
+      x-apideck-weights:
+        amount: critical
+        name: critical
     DeleteDepartmentResponse:
       properties:
         data:
@@ -3096,6 +3115,15 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+      x-apideck-weights:
+        code: medium
+        created_at: medium
+        created_by: edge-case
+        description: low
+        id: critical
+        name: critical
+        updated_at: medium
+        updated_by: edge-case
     Description:
       example: A description
       nullable: true
@@ -3133,6 +3161,10 @@ components:
       required:
         - email
       type: object
+      x-apideck-weights:
+        email: critical
+        id: edge-case
+        type: critical
     Employee:
       additionalProperties: false
       properties:
@@ -3191,6 +3223,14 @@ components:
                 readOnly: false
                 type: number
             type: object
+            x-apideck-weights:
+              currency: high
+              effective_date: low
+              flsa_status: edge-case
+              id: critical
+              job_id: medium
+              payment_unit: medium
+              rate: high
           type: array
         country_of_birth:
           description: country code according to ISO 3166-1 alpha-2.
@@ -3275,6 +3315,9 @@ components:
               type: string
               x-apideck-enum-id: employees.employment_role.type
           type: object
+          x-apideck-weights:
+            sub_type: medium
+            type: critical
         employment_start_date:
           description: A Start Date is the date that the employee started working at the company
           example: 2021-10-26
@@ -3347,6 +3390,17 @@ components:
               title:
                 $ref: "#/components/schemas/Title"
             type: object
+            x-apideck-weights:
+              compensation_rate: medium
+              currency: medium
+              employee_id: edge-case
+              hired_at: medium
+              id: critical
+              is_primary: medium
+              location: medium
+              payment_unit: medium
+              role: medium
+              title: critical
           type: array
         languages:
           items:
@@ -3373,6 +3427,12 @@ components:
               title: Name
               type: string
           type: object
+          x-apideck-weights:
+            email: medium
+            first_name: medium
+            id: critical
+            last_name: medium
+            name: medium
         marital_status:
           example: married
           nullable: true
@@ -3431,6 +3491,10 @@ components:
             required:
               - url
             type: object
+            x-apideck-weights:
+              id: edge-case
+              type: critical
+              url: critical
           type: array
         social_security_number:
           example: "123456789"
@@ -3489,6 +3553,60 @@ components:
           title: Remote
           type: boolean
       type: object
+      x-apideck-weights:
+        addresses: high
+        birthday: high
+        company_id: high
+        company_name: medium
+        compensations: medium
+        country_of_birth: high
+        created_at: medium
+        created_by: edge-case
+        custom_fields: edge-case
+        deleted: medium
+        department: medium
+        description: edge-case
+        dietary_preference: edge-case
+        direct_reports: edge-case
+        display_name: edge-case
+        division: medium
+        emails: high
+        employee_number: high
+        employment_end_date: high
+        employment_role: high
+        employment_start_date: high
+        employment_status: high
+        first_name: critical
+        food_allergies: edge-case
+        gender: high
+        id: medium
+        initials: low
+        jobs: high
+        languages: low
+        last_name: critical
+        manager: medium
+        marital_status: medium
+        middle_name: medium
+        nationalities: high
+        phone_numbers: high
+        photo_url: medium
+        preferred_language: high
+        preferred_name: medium
+        pronouns: medium
+        row_version: edge-case
+        salutation: medium
+        social_links: edge-case
+        social_security_number: edge-case
+        source: edge-case
+        source_id: edge-case
+        tax_code: edge-case
+        tax_id: edge-case
+        team: medium
+        timezone: low
+        title: critical
+        updated_at: high
+        updated_by: edge-case
+        works_remote: low
     EmployeeNumber:
       description: An Employee Number, Employee ID or Employee Code, is a unique number that has been assigned to each individual staff member within a company.
       example: 123456-AB
@@ -3502,6 +3620,9 @@ components:
         payroll:
           $ref: "#/components/schemas/Payroll"
       type: object
+      x-apideck-weights:
+        employee: critical
+        payroll: critical
     EmployeePayrolls:
       properties:
         employee:
@@ -3511,6 +3632,9 @@ components:
             $ref: "#/components/schemas/Payroll"
           type: array
       type: object
+      x-apideck-weights:
+        employee: critical
+        payrolls: critical
     EmployeesFilter:
       additionalProperties: false
       example:
@@ -3954,6 +4078,13 @@ components:
       required:
         - legal_name
       type: object
+      x-apideck-weights:
+        company_number: high
+        debtor_id: edge-case
+        id: critical
+        legal_name: critical
+        subdomain: low
+        updated_at: high
     HrisEventType:
       enum:
         - "*"
@@ -4173,6 +4304,16 @@ components:
         - start_date
         - end_date
       type: object
+      x-apideck-weights:
+        check_date: critical
+        company_id: high
+        compensations: medium
+        end_date: critical
+        id: critical
+        processed: critical
+        processed_date: medium
+        start_date: critical
+        totals: high
     PayrollTotals:
       properties:
         check_amount:
@@ -4277,6 +4418,13 @@ components:
       required:
         - number
       type: object
+      x-apideck-weights:
+        area_code: edge-case
+        country_code: edge-case
+        extension: edge-case
+        id: edge-case
+        number: critical
+        type: critical
     PhotoUrl:
       example: https://unavatar.io/elon-musk
       nullable: true
@@ -4302,6 +4450,10 @@ components:
           example: CA State Income Tax
           type: string
       type: object
+      x-apideck-weights:
+        amount: high
+        employer: high
+        name: high
     Title:
       example: CEO
       nullable: true
@@ -4598,6 +4750,10 @@ components:
       required:
         - url
       type: object
+      x-apideck-weights:
+        id: edge-case
+        type: critical
+        url: critical
   securitySchemes:
     apiKey:
       description: |

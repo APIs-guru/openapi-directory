@@ -698,6 +698,64 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v2/{name}:undelete":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Restores a specified table which was accidentally deleted.
+      operationId: bigtableadmin.projects.instances.tables.undelete
+      parameters:
+        - description: Required. The unique name of the table to be restored. Values are of the form `projects/{project}/instances/{instance}/tables/{table}`.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UndeleteTableRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/bigtable.admin
+          Oauth2c:
+            - https://www.googleapis.com/auth/bigtable.admin
+        - Oauth2:
+            - https://www.googleapis.com/auth/bigtable.admin.table
+          Oauth2c:
+            - https://www.googleapis.com/auth/bigtable.admin.table
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-bigtable.admin
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-bigtable.admin
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-bigtable.admin.table
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-bigtable.admin.table
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v2/{parent}/appProfiles":
     get:
       description: Lists information about app profiles in an instance.
@@ -2657,6 +2715,25 @@ components:
           items:
             type: string
           type: array
+      type: object
+    UndeleteTableMetadata:
+      description: Metadata type for the operation returned by google.bigtable.admin.v2.BigtableTableAdmin.UndeleteTable.
+      properties:
+        endTime:
+          description: If set, the time at which this operation finished or was cancelled.
+          format: google-datetime
+          type: string
+        name:
+          description: The name of the table being restored.
+          type: string
+        startTime:
+          description: The time at which this operation started.
+          format: google-datetime
+          type: string
+      type: object
+    UndeleteTableRequest:
+      description: Request message for google.bigtable.admin.v2.BigtableTableAdmin.UndeleteTable
+      properties: {}
       type: object
     Union:
       description: A GcRule which deletes cells matching any of the given rules.

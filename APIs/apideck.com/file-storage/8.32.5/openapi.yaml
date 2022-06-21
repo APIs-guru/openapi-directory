@@ -272,7 +272,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: File storage API
-  version: 8.32.4
+  version: 8.32.5
   x-apideck-api: file-storage
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1572,7 +1572,7 @@ components:
         default: false
         type: boolean
     serviceId:
-      description: Provide the service id you want to call (e.g., pipedrive). [See the full list in the connector section.](#section/Connectors) Only needed when a consumer has activated multiple integrations for a Unified API.
+      description: Provide the service id you want to call (e.g., pipedrive). Only needed when a consumer has activated multiple integrations for a Unified API.
       in: header
       name: x-apideck-service-id
       schema:
@@ -2225,6 +2225,14 @@ components:
         - name
         - parent_folders
       type: object
+      x-apideck-weights:
+        created_at: high
+        id: critical
+        name: critical
+        parent_folders: high
+        parent_folders_complete: critical
+        size: low
+        updated_at: critical
     GetFileResponse:
       properties:
         data:
@@ -2489,6 +2497,8 @@ components:
       required:
         - id
       type: object
+      x-apideck-weights:
+        id: critical
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:
@@ -2613,6 +2623,8 @@ components:
           type: string
       readOnly: true
       type: object
+      x-apideck-weights:
+        id: critical
     ParentFolderId:
       description: The parent folder to create the new file within.
       example: "1234"
@@ -2687,6 +2699,17 @@ components:
       required:
         - target_id
       type: object
+      x-apideck-weights:
+        created_at: medium
+        download_url: high
+        expires_at: high
+        password: low
+        password_protected: low
+        scope: high
+        target: critical
+        target_id: critical
+        updated_at: medium
+        url: critical
     SharedLinkTarget:
       additionalProperties: false
       properties:
@@ -2702,6 +2725,8 @@ components:
       required:
         - id
       type: object
+      x-apideck-weights:
+        id: critical
     SortDirection:
       default: asc
       description: The direction in which to sort the results
@@ -2849,6 +2874,17 @@ components:
         - name
         - type
       type: object
+      x-apideck-weights:
+        created_at: high
+        downloadable: high
+        id: critical
+        mime_type: high
+        name: critical
+        parent_folders: high
+        parent_folders_complete: critical
+        size: high
+        type: critical
+        updated_at: critical
     UnifiedId:
       properties:
         id:
@@ -3067,6 +3103,13 @@ components:
           readOnly: true
           type: string
       type: object
+      x-apideck-weights:
+        expires_at: medium
+        id: critical
+        parallel_upload_supported: critical
+        part_size: critical
+        success: critical
+        uploaded_byte_range: low
   securitySchemes:
     apiKey:
       description: |
