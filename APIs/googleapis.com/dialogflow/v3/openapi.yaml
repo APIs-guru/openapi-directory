@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://dialogflow.googleapis.com/$discovery/rest?version=v3
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: dialogflow
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/dialogflow/
 tags:
@@ -5234,7 +5235,7 @@ components:
           type: string
       type: object
     GoogleCloudDialogflowCxV3WebhookRequest:
-      description: The request message for a webhook call. The request is sent as a JSON object and the field names will be presented in camel cases.
+      description: The request message for a webhook call. The request is sent as a JSON object and the field names will be presented in camel cases. You may see undocumented fields in an actual request. These fields are used internally by Dialogflow and should be ignored.
       properties:
         detectIntentResponseId:
           description: Always present. The unique identifier of the DetectIntentResponse that will be returned to the API caller.
@@ -6427,7 +6428,7 @@ components:
           type: string
       type: object
     GoogleCloudDialogflowCxV3beta1WebhookRequest:
-      description: The request message for a webhook call. The request is sent as a JSON object and the field names will be presented in camel cases.
+      description: The request message for a webhook call. The request is sent as a JSON object and the field names will be presented in camel cases. You may see undocumented fields in an actual request. These fields are used internally by Dialogflow and should be ignored.
       properties:
         detectIntentResponseId:
           description: Always present. The unique identifier of the DetectIntentResponse that will be returned to the API caller.
@@ -7688,7 +7689,7 @@ components:
           description: "This field is set to: - `false` if the matched intent has required parameters and not all of the required parameter values have been collected. - `true` if all required parameter values have been collected, or if the matched intent doesn't contain any required parameters."
           type: boolean
         cancelsSlotFilling:
-          description: Indicates whether the conversational query triggers a cancellation for slot filling.
+          description: Indicates whether the conversational query triggers a cancellation for slot filling. For more information, see the [cancel slot filling documentation](https://cloud.google.com/dialogflow/es/docs/intents-actions-parameters#cancel).
           type: boolean
         diagnosticInfo:
           additionalProperties:
@@ -9130,7 +9131,7 @@ components:
           description: "This field is set to: - `false` if the matched intent has required parameters and not all of the required parameter values have been collected. - `true` if all required parameter values have been collected, or if the matched intent doesn't contain any required parameters."
           type: boolean
         cancelsSlotFilling:
-          description: Indicates whether the conversational query triggers a cancellation for slot filling.
+          description: Indicates whether the conversational query triggers a cancellation for slot filling. For more information, see the [cancel slot filling documentation](https://cloud.google.com/dialogflow/es/docs/intents-actions-parameters#cancel).
           type: boolean
         diagnosticInfo:
           additionalProperties:

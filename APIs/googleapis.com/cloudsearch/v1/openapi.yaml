@@ -3785,11 +3785,29 @@ components:
           items:
             $ref: "#/components/schemas/Name"
           type: array
+        phoneNumbers:
+          description: The person's phone numbers
+          items:
+            $ref: "#/components/schemas/PhoneNumber"
+          type: array
         photos:
           description: A person's read-only photo. A picture shown next to the person's name to help others recognize the person in search results.
           items:
             $ref: "#/components/schemas/Photo"
           type: array
+      type: object
+    PhoneNumber:
+      description: A person's Phone Number
+      properties:
+        phoneNumber:
+          description: The phone number of the person.
+          type: string
+        type:
+          enum:
+            - OTHER
+            - MOBILE
+            - OFFICE
+          type: string
       type: object
     Photo:
       description: A person's photo.

@@ -308,6 +308,31 @@ paths:
         - Execute
       x-graphql-exclude: true
       x-sdk-exclude: true
+    options:
+      description: |
+        Proxies a downstream OPTION request to a service and injects the necessary credentials into a request stored in Vault. This allows you to have an additional security layer and logging without needing to rely on Unify for normalization.
+        **Note**: Vault will proxy all data to the downstream URL and method/verb in the headers.
+      operationId: optionsProxy
+      parameters:
+        - $ref: "#/components/parameters/x-apideck-consumer-id"
+        - $ref: "#/components/parameters/x-apideck-app-id"
+        - $ref: "#/components/parameters/x-apideck-service-id"
+        - $ref: "#/components/parameters/x-apideck-downstream-url"
+        - $ref: "#/components/parameters/x-apideck-downstream-authorization"
+      responses:
+        "200":
+          $ref: "#/components/responses/Ok"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        default:
+          $ref: "#/components/responses/ProxyError"
+      security:
+        - apiKey: []
+      summary: OPTIONS
+      tags:
+        - Execute
+      x-graphql-exclude: true
+      x-sdk-exclude: true
     patch:
       description: |
         Proxies a downstream PATCH request to a service and injects the necessary credentials into a request stored in Vault. This allows you to have an additional security layer and logging without needing to rely on Unify for normalization.

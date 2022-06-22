@@ -797,7 +797,7 @@ paths:
     get:
       description: |
         This endpoint returns custom settings and their defaults required by connection for a given resource.
-      operationId: connectionsGetSettings
+      operationId: connectionSettingsAll
       parameters:
         - $ref: "#/components/parameters/x-apideck-consumer-id"
         - $ref: "#/components/parameters/x-apideck-app-id"
@@ -844,7 +844,7 @@ paths:
             }
 
             try {
-              const { data } = await apideck.vault.connectionsGetSettings(params)
+              const { data } = await apideck.vault.connectionSettingsAll(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
@@ -852,7 +852,7 @@ paths:
       x-graphql-field-name: connectionSettings
     patch:
       description: Update default values for a connection's resource settings
-      operationId: connectionsUpdateSettings
+      operationId: connectionSettingsUpdate
       parameters:
         - $ref: "#/components/parameters/x-apideck-consumer-id"
         - $ref: "#/components/parameters/x-apideck-app-id"
@@ -932,7 +932,7 @@ paths:
             }
 
             try {
-              const { data } = await apideck.vault.connectionsUpdateSettings(params)
+              const { data } = await apideck.vault.connectionSettingsUpdate(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
@@ -1039,7 +1039,7 @@ paths:
     get:
       description: |
         Get consumer request counts within a given datetime range.
-      operationId: consumersRequestCounts
+      operationId: consumerRequestCountsAll
       parameters:
         - $ref: "#/components/parameters/x-apideck-app-id"
         - $ref: "#/components/parameters/consumer_id"
@@ -1084,12 +1084,12 @@ paths:
             }
 
             try {
-              const { data } = await apideck.vault.consumersRequestCounts(params)
+              const { data } = await apideck.vault.consumerRequestCountsAll(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: consumersRequestCounts
+      x-graphql-field-name: consumerRequestCounts
   /vault/logs:
     get:
       description: |

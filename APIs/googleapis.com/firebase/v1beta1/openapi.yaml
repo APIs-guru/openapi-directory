@@ -1061,7 +1061,8 @@ components:
           description: The key_id of the GCP ApiKey associated with this App. If set must have no restrictions, or only have restrictions that are valid for the associated Firebase App. Cannot be set in create requests, instead an existing valid API Key will be chosen, or if no valid API Keys exist, one will be provisioned for you. Cannot be set to an empty value in update requests.
           type: string
         appId:
-          description: Immutable. The globally unique, Firebase-assigned identifier for the `AndroidApp`. This identifier should be treated as an opaque token, as the data format is not specified.
+          description: Output only. Immutable. The globally unique, Firebase-assigned identifier for the `AndroidApp`. This identifier should be treated as an opaque token, as the data format is not specified.
+          readOnly: true
           type: string
         displayName:
           description: The user-assigned display name for the `AndroidApp`.
@@ -1073,7 +1074,8 @@ components:
           description: Immutable. The canonical package name of the Android app as would appear in the Google Play Developer Console.
           type: string
         projectId:
-          description: Immutable. A user-assigned unique identifier of the parent FirebaseProject for the `AndroidApp`.
+          description: Output only. Immutable. A user-assigned unique identifier of the parent FirebaseProject for the `AndroidApp`.
+          readOnly: true
           type: string
       type: object
     AndroidAppConfig:
@@ -1174,7 +1176,8 @@ components:
           description: The key_id of the GCP ApiKey associated with this App. If set must have no restrictions, or only have restrictions that are valid for the associated Firebase App. Cannot be set in create requests, instead an existing valid API Key will be chosen, or if no valid API Keys exist, one will be provisioned for you. Cannot be set to an empty value in update requests.
           type: string
         appId:
-          description: Immutable. The globally unique, Firebase-assigned identifier for the `IosApp`. This identifier should be treated as an opaque token, as the data format is not specified.
+          description: Output only. Immutable. The globally unique, Firebase-assigned identifier for the `IosApp`. This identifier should be treated as an opaque token, as the data format is not specified.
+          readOnly: true
           type: string
         appStoreId:
           description: The automatically generated Apple ID assigned to the iOS app by Apple in the iOS App Store.
@@ -1189,7 +1192,8 @@ components:
           description: "The resource name of the IosApp, in the format: projects/PROJECT_IDENTIFIER /iosApps/APP_ID * PROJECT_IDENTIFIER: the parent Project's [`ProjectNumber`](../projects#FirebaseProject.FIELDS.project_number) ***(recommended)*** or its [`ProjectId`](../projects#FirebaseProject.FIELDS.project_id). Learn more about using project identifiers in Google's [AIP 2510 standard](https://google.aip.dev/cloud/2510). Note that the value for PROJECT_IDENTIFIER in any response body will be the `ProjectId`. * APP_ID: the globally unique, Firebase-assigned identifier for the App (see [`appId`](../projects.iosApps#IosApp.FIELDS.app_id))."
           type: string
         projectId:
-          description: Immutable. A user-assigned unique identifier of the parent FirebaseProject for the `IosApp`.
+          description: Output only. Immutable. A user-assigned unique identifier of the parent FirebaseProject for the `IosApp`.
+          readOnly: true
           type: string
         teamId:
           description: The Apple Developer Team ID associated with the App in the App Store.
