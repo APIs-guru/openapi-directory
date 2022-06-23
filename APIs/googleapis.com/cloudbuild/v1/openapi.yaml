@@ -489,7 +489,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Runs a `BuildTrigger` at a particular source revision. To run a regional or global trigger, use the POST request that includes the location endpoint in the path. The POST request that does not include the location endpoint in the path can only be used when running global triggers.
+      description: Runs a `BuildTrigger` at a particular source revision.
       operationId: cloudbuild.projects.triggers.run
       parameters:
         - description: Required. ID of the project.
@@ -966,7 +966,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Runs a `BuildTrigger` at a particular source revision. To run a regional or global trigger, use the POST request that includes the location endpoint in the path. The POST request that does not include the location endpoint in the path can only be used when running global triggers.
+      description: Runs a `BuildTrigger` at a particular source revision.
       operationId: cloudbuild.projects.locations.triggers.run
       parameters:
         - description: "The name of the `Trigger` to run. Format: `projects/{project}/locations/{location}/triggers/{trigger}`"
