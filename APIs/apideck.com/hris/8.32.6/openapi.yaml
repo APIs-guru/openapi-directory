@@ -272,7 +272,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: HRIS API
-  version: 8.32.5
+  version: 8.32.6
   x-apideck-api: hris
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1170,7 +1170,7 @@ paths:
                   {
                     id: '3404301363494309004',
                     job_id: '3490439050957906679',
-                    rate: '50.00',
+                    rate: 50,
                     payment_unit: 'hour',
                     flsa_status: 'nonexempt',
                     effective_date: '2021-06-11'
@@ -1493,7 +1493,7 @@ paths:
                   {
                     id: '3404301363494309004',
                     job_id: '3490439050957906679',
-                    rate: '50.00',
+                    rate: 50,
                     payment_unit: 'hour',
                     flsa_status: 'nonexempt',
                     effective_date: '2021-06-11'
@@ -1785,6 +1785,58 @@ paths:
               console.error(error)
             }
       x-graphql-field-name: payroll
+  "/hris/schedules/employees/{employee_id}":
+    get:
+      description: List schedules for employee, a schedule is a work pattern, not the actual worked hours, for an employee.
+      operationId: employeeSchedulesAll
+      parameters:
+        - $ref: "#/components/parameters/employeeId"
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetEmployeeSchedulesResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: List Employee Schedules
+      tags:
+        - Employee Schedules
+      x-apideck-api: hris
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.hris.employeeSchedulesAll({
+                employeeId: 'employee_id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: employeeSchedules
 components:
   parameters:
     applicationId:
@@ -1947,6 +1999,12 @@ components:
           schema:
             $ref: "#/components/schemas/GetEmployeeResponse"
       description: Employees
+    GetEmployeeSchedulesResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetEmployeeSchedulesResponse"
+      description: EmployeeSchedules
     GetEmployeesResponse:
       content:
         application/json:
@@ -3189,7 +3247,7 @@ components:
               id: "3404301363494309004"
               job_id: "3490439050957906679"
               payment_unit: hour
-              rate: "50.00"
+              rate: 50
             properties:
               currency:
                 $ref: "#/components/schemas/Currency"
@@ -3635,6 +3693,15 @@ components:
       x-apideck-weights:
         employee: critical
         payrolls: critical
+    EmployeeSchedules:
+      properties:
+        employee:
+          $ref: "#/components/schemas/Employee"
+        schedules:
+          items:
+            $ref: "#/components/schemas/Schedule"
+          type: array
+      type: object
     EmployeesFilter:
       additionalProperties: false
       example:
@@ -3832,6 +3899,39 @@ components:
         - data
       type: object
       x-graphql-type-name: Employee
+    GetEmployeeSchedulesResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/EmployeeSchedules"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Employees
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: sage-hr
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: EmployeeSchedulesList
     GetEmployeesResponse:
       properties:
         data:
@@ -4435,6 +4535,162 @@ components:
       nullable: true
       title: Row version
       type: string
+    Schedule:
+      additionalProperties: false
+      properties:
+        end_date:
+          description: The end date, inclusive, of the schedule period.
+          example: 2022-04-21
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          type: string
+        id:
+          $ref: "#/components/schemas/Id"
+        start_date:
+          description: The start date, inclusive, of the schedule period.
+          example: 2022-04-08
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          type: string
+        work_pattern:
+          properties:
+            even_weeks:
+              properties:
+                hours_friday:
+                  example: 4
+                  format: double
+                  maximum: 24
+                  minimum: 0
+                  nullable: false
+                  pattern: ^(\d{1,2})(\.\d{1,2})?$
+                  readOnly: false
+                  type: number
+                hours_monday:
+                  example: 8
+                  format: double
+                  maximum: 24
+                  minimum: 0
+                  nullable: false
+                  pattern: ^(\d{1,2})(\.\d{1,2})?$
+                  readOnly: false
+                  type: number
+                hours_saturday:
+                  example: 0
+                  format: double
+                  maximum: 24
+                  minimum: 0
+                  nullable: false
+                  pattern: ^(\d{1,2})(\.\d{1,2})?$
+                  readOnly: false
+                  type: number
+                hours_sunday:
+                  example: 0
+                  format: double
+                  maximum: 24
+                  minimum: 0
+                  nullable: false
+                  pattern: ^(\d{1,2})(\.\d{1,2})?$
+                  readOnly: false
+                  type: number
+                hours_thursday:
+                  example: 7.5
+                  format: double
+                  maximum: 24
+                  minimum: 0
+                  nullable: false
+                  pattern: ^(\d{1,2})(\.\d{1,2})?$
+                  readOnly: false
+                  type: number
+                hours_tuesday:
+                  example: 8
+                  format: double
+                  maximum: 24
+                  minimum: 0
+                  nullable: false
+                  pattern: ^(\d{1,2})(\.\d{1,2})?$
+                  readOnly: false
+                  type: number
+                hours_wednesday:
+                  example: 4
+                  format: double
+                  maximum: 24
+                  minimum: 0
+                  nullable: false
+                  pattern: ^(\d{1,2})(\.\d{1,2})?$
+                  readOnly: false
+                  type: number
+              type: object
+            odd_weeks:
+              properties:
+                hours_friday:
+                  example: 4
+                  format: double
+                  maximum: 24
+                  minimum: 0
+                  nullable: false
+                  pattern: ^(\d{1,2})(\.\d{1,2})?$
+                  readOnly: false
+                  type: number
+                hours_monday:
+                  example: 8
+                  format: double
+                  maximum: 24
+                  minimum: 0
+                  nullable: false
+                  pattern: ^(\d{1,2})(\.\d{1,2})?$
+                  readOnly: false
+                  type: number
+                hours_saturday:
+                  example: 0
+                  format: double
+                  maximum: 24
+                  minimum: 0
+                  nullable: false
+                  pattern: ^(\d{1,2})(\.\d{1,2})?$
+                  readOnly: false
+                  type: number
+                hours_sunday:
+                  example: 0
+                  format: double
+                  maximum: 24
+                  minimum: 0
+                  nullable: false
+                  pattern: ^(\d{1,2})(\.\d{1,2})?$
+                  readOnly: false
+                  type: number
+                hours_thursday:
+                  example: 7.5
+                  format: double
+                  maximum: 24
+                  minimum: 0
+                  nullable: false
+                  pattern: ^(\d{1,2})(\.\d{1,2})?$
+                  readOnly: false
+                  type: number
+                hours_tuesday:
+                  example: 8
+                  format: double
+                  maximum: 24
+                  minimum: 0
+                  nullable: false
+                  pattern: ^(\d{1,2})(\.\d{1,2})?$
+                  readOnly: false
+                  type: number
+                hours_wednesday:
+                  example: 4
+                  format: double
+                  maximum: 24
+                  minimum: 0
+                  nullable: false
+                  pattern: ^(\d{1,2})(\.\d{1,2})?$
+                  readOnly: false
+                  type: number
+              type: object
+          type: object
+      required:
+        - id
+        - start_date
+        - end_date
+        - work_pattern
+      type: object
     Tax:
       properties:
         amount:

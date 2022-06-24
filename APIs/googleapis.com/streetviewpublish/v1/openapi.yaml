@@ -35,6 +35,8 @@ externalDocs:
 tags:
   - name: photo
   - name: photos
+  - name: photoSequence
+  - name: photoSequences
 paths:
   /v1/photo:
     parameters:
@@ -227,6 +229,206 @@ paths:
             - https://www.googleapis.com/auth/streetviewpublish
       tags:
         - photo
+  /v1/photoSequence:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "After the client finishes uploading the PhotoSequence with the returned UploadRef, CreatePhotoSequence extracts a sequence of 360 photos from a video or Extensible Device Metadata (XDM, http://www.xdm.org/) to be published to Street View on Google Maps. `CreatePhotoSequence` returns an Operation, with the PhotoSequence Id set in the `Operation.name` field. This method returns the following error codes: * google.rpc.Code.INVALID_ARGUMENT if the request is malformed. * google.rpc.Code.NOT_FOUND if the upload reference does not exist."
+      operationId: streetviewpublish.photoSequence.create
+      parameters:
+        - description: Required. The input form of PhotoSequence.
+          in: query
+          name: inputType
+          schema:
+            enum:
+              - INPUT_TYPE_UNSPECIFIED
+              - VIDEO
+              - XDM
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PhotoSequence"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/streetviewpublish
+          Oauth2c:
+            - https://www.googleapis.com/auth/streetviewpublish
+      tags:
+        - photoSequence
+  "/v1/photoSequence/{sequenceId}":
+    delete:
+      description: "Deletes a PhotoSequence and its metadata. This method returns the following error codes: * google.rpc.Code.PERMISSION_DENIED if the requesting user did not create the requested photo sequence. * google.rpc.Code.NOT_FOUND if the photo sequence ID does not exist. * google.rpc.Code.FAILED_PRECONDITION if the photo sequence ID is not yet finished processing."
+      operationId: streetviewpublish.photoSequence.delete
+      parameters:
+        - description: Required. ID of the PhotoSequence.
+          in: path
+          name: sequenceId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/streetviewpublish
+          Oauth2c:
+            - https://www.googleapis.com/auth/streetviewpublish
+      tags:
+        - photoSequence
+    get:
+      description: "Gets the metadata of the specified PhotoSequence via the Operation interface. This method returns the following three types of responses: * `Operation.done` = false, if the processing of PhotoSequence is not finished yet. * `Operation.done` = true and `Operation.error` is populated, if there was an error in processing. * `Operation.done` = true and `Operation.response` is poulated, which contains a PhotoSequence message. This method returns the following error codes: * google.rpc.Code.PERMISSION_DENIED if the requesting user did not create the requested PhotoSequence. * google.rpc.Code.NOT_FOUND if the requested PhotoSequence does not exist."
+      operationId: streetviewpublish.photoSequence.get
+      parameters:
+        - description: Required. ID of the photo sequence.
+          in: path
+          name: sequenceId
+          required: true
+          schema:
+            type: string
+        - description: "Optional. The filter expression. For example: `published_status=PUBLISHED`. The filters supported are: `published_status`. See https://google.aip.dev/160 for more information."
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: "Specifies if a download URL for the photo sequence should be returned in `download_url` of individual photos in the PhotoSequence response. > Note: Currently not implemented."
+          in: query
+          name: view
+          schema:
+            enum:
+              - BASIC
+              - INCLUDE_DOWNLOAD_URL
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/streetviewpublish
+          Oauth2c:
+            - https://www.googleapis.com/auth/streetviewpublish
+      tags:
+        - photoSequence
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /v1/photoSequence:startUpload:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates an upload session to start uploading photo sequence data. The upload URL of the returned UploadRef is used to upload the data for the `photoSequence`. After the upload is complete, the UploadRef is used with CreatePhotoSequence to create the PhotoSequence object entry.
+      operationId: streetviewpublish.photoSequence.startUpload
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Empty"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UploadRef"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/streetviewpublish
+          Oauth2c:
+            - https://www.googleapis.com/auth/streetviewpublish
+      tags:
+        - photoSequence
+  /v1/photoSequences:
+    get:
+      description: Lists all the PhotoSequences that belong to the user, in descending CreatePhotoSequence timestamp order.
+      operationId: streetviewpublish.photoSequences.list
+      parameters:
+        - description: 'Optional. The filter expression. For example: `imagery_type=SPHERICAL`. The filters supported are: `imagery_type`, `processing_state`, `min_latitude`, `max_latitude`, `min_longitude`, `max_longitude`, and `filename_query`. See https://google.aip.dev/160 for more information. Filename queries should sent as a Phrase in order to support multple words and special characters by adding escaped quotes. Ex: filename_query="example of a phrase.mp4"'
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. The maximum number of photo sequences to return. `pageSize` must be non-negative. If `pageSize` is zero or is not provided, the default page size of 100 is used. The number of photo sequences returned in the response may be less than `pageSize` if the number of matches is less than `pageSize`. This is currently unimplemented but is in process.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. The nextPageToken value returned from a previous ListPhotoSequences request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListPhotoSequencesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/streetviewpublish
+          Oauth2c:
+            - https://www.googleapis.com/auth/streetviewpublish
+      tags:
+        - photoSequences
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /v1/photos:
     get:
       description: "Lists all the Photos that belong to the user. > Note: Recently created photos that are still being indexed are not returned in the response."
@@ -541,6 +743,25 @@ components:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
       type: object
+    Imu:
+      description: IMU data from the device sensors.
+      properties:
+        accelMpsps:
+          description: The accelerometer measurements in meters/sec^2 with increasing timestamps from devices.
+          items:
+            $ref: "#/components/schemas/Measurement3d"
+          type: array
+        gyroRps:
+          description: The gyroscope measurements in radians/sec with increasing timestamps from devices.
+          items:
+            $ref: "#/components/schemas/Measurement3d"
+          type: array
+        magUt:
+          description: The magnetometer measurements of the magnetic field in microtesla (uT) with increasing timestamps from devices.
+          items:
+            $ref: "#/components/schemas/Measurement3d"
+          type: array
+      type: object
     LatLng:
       description: An object that represents a latitude/longitude pair. This is expressed as a pair of doubles to represent degrees latitude and degrees longitude. Unless specified otherwise, this object must conform to the WGS84 standard. Values must be within normalized ranges.
       properties:
@@ -553,6 +774,16 @@ components:
           format: double
           type: number
       type: object
+    LatLngBounds:
+      description: A rectangle in geographical coordinates.
+      properties:
+        northeast:
+          $ref: "#/components/schemas/LatLng"
+          description: The northeast corner of these bounds.
+        southwest:
+          $ref: "#/components/schemas/LatLng"
+          description: The southwest corner of these bounds.
+      type: object
     Level:
       description: Level information containing level number and its corresponding name.
       properties:
@@ -563,6 +794,18 @@ components:
           description: Optional. Floor number, used for ordering. 0 indicates the ground level, 1 indicates the first level above ground level, -1 indicates the first level under ground level. Non-integer values are OK.
           format: double
           type: number
+      type: object
+    ListPhotoSequencesResponse:
+      description: Response to list all photo sequences that belong to a user.
+      properties:
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+        photoSequences:
+          description: List of photo sequences via Operation interface. The maximum number of items returned is based on the pageSize field in the request. Each item in the list can have three possible states, * `Operation.done` = false, if the processing of PhotoSequence is not finished yet. * `Operation.done` = true and `Operation.error` is populated, if there was an error in processing. * `Operation.done` = true and `Operation.response` contains a PhotoSequence message, In each sequence, only Id is populated.
+          items:
+            $ref: "#/components/schemas/Operation"
+          type: array
       type: object
     ListPhotosResponse:
       description: Response to list all photos that belong to a user.
@@ -575,6 +818,26 @@ components:
           items:
             $ref: "#/components/schemas/Photo"
           type: array
+      type: object
+    Measurement3d:
+      description: A Generic 3d measurement sample.
+      properties:
+        captureTime:
+          description: The timestamp of the IMU measurement.
+          format: google-datetime
+          type: string
+        x:
+          description: The sensor measurement in the x axis.
+          format: float
+          type: number
+        y:
+          description: The sensor measurement in the y axis.
+          format: float
+          type: number
+        z:
+          description: The sensor measurement in the z axis.
+          format: float
+          type: number
       type: object
     Operation:
       description: This resource represents a long-running operation that is the result of a network API call.
@@ -686,6 +949,92 @@ components:
         status:
           $ref: "#/components/schemas/Status"
           description: The status for the operation to get or update a single photo in the batch request.
+      type: object
+    PhotoSequence:
+      description: A sequence of 360 photos along with metadata.
+      properties:
+        captureTimeOverride:
+          description: Optional. Absolute time when the photo sequence starts to be captured. If the photo sequence is a video, this is the start time of the video. If this field is populated in input, it overrides the capture time in the video or XDM file.
+          format: google-datetime
+          type: string
+        distanceMeters:
+          description: Output only. The computed distance of the photo sequence in meters.
+          format: double
+          readOnly: true
+          type: number
+        failureReason:
+          description: Output only. If this sequence has processing_state = FAILED, this will contain the reason why it failed. If the processing_state is any other value, this field will be unset.
+          enum:
+            - PROCESSING_FAILURE_REASON_UNSPECIFIED
+            - LOW_RESOLUTION
+            - DUPLICATE
+            - INSUFFICIENT_GPS
+            - NO_OVERLAP_GPS
+            - INVALID_GPS
+            - FAILED_TO_REFINE_POSITIONS
+            - TAKEDOWN
+            - CORRUPT_VIDEO
+            - INTERNAL
+            - INVALID_VIDEO_FORMAT
+            - INVALID_VIDEO_DIMENSIONS
+            - INVALID_CAPTURE_TIME
+          readOnly: true
+          type: string
+        filename:
+          description: Output only. The filename of the upload. Does not include the directory path. Only available if the sequence was uploaded on a platform that provides the filename.
+          readOnly: true
+          type: string
+        gpsSource:
+          description: Input only. If both raw_gps_timeline and the Camera Motion Metadata Track (CAMM) contain GPS measurements, indicate which takes precedence.
+          enum:
+            - PHOTO_SEQUENCE
+            - CAMERA_MOTION_METADATA_TRACK
+          type: string
+        id:
+          description: Output only. Unique identifier for the photo sequence. This also acts as a long running operation ID if uploading is performed asynchronously.
+          readOnly: true
+          type: string
+        imu:
+          $ref: "#/components/schemas/Imu"
+          description: Input only. Three axis IMU data for the collection. If this data is too large to put in the request, then it should be put in the CAMM track for the video. This data always takes precedence over the equivalent CAMM data, if it exists.
+        photos:
+          description: Output only. Photos with increasing timestamps.
+          items:
+            $ref: "#/components/schemas/Photo"
+          readOnly: true
+          type: array
+        processingState:
+          description: Output only. The processing state of this sequence.
+          enum:
+            - PROCESSING_STATE_UNSPECIFIED
+            - PENDING
+            - PROCESSING
+            - PROCESSED
+            - FAILED
+          readOnly: true
+          type: string
+        rawGpsTimeline:
+          description: Input only. Raw GPS measurements with increasing timestamps from the device that aren't time synced with each photo. These raw measurements will be used to infer the pose of each frame. Required in input when InputType is VIDEO and raw GPS measurements are not in Camera Motion Metadata Track (CAMM). User can indicate which takes precedence using gps_source if raw GPS measurements are provided in both raw_gps_timeline and Camera Motion Metadata Track (CAMM).
+          items:
+            $ref: "#/components/schemas/Pose"
+          type: array
+        sequenceBounds:
+          $ref: "#/components/schemas/LatLngBounds"
+          description: Output only. A rectangular box that encapsulates every image in this photo sequence.
+          readOnly: true
+        uploadReference:
+          $ref: "#/components/schemas/UploadRef"
+          description: Input only. Required when creating photo sequence. The resource name where the bytes of the photo sequence (in the form of video) are uploaded.
+        uploadTime:
+          description: Output only. The time this photo sequence was created in uSV Store service.
+          format: google-datetime
+          readOnly: true
+          type: string
+        viewCount:
+          description: Output only. The total number of views that all the published images in this PhotoSequence have received.
+          format: int64
+          readOnly: true
+          type: string
       type: object
     Place:
       description: Place metadata for an entity.

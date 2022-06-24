@@ -13,15 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Identity API
   version: v1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://cloudidentity.googleapis.com/$discovery/rest?version=v1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: cloudidentity
 externalDocs:
@@ -78,6 +80,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity
+        - Oauth2:
             - https://www.googleapis.com/auth/cloud-identity.devices
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-identity.devices
@@ -122,6 +128,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity
+        - Oauth2:
             - https://www.googleapis.com/auth/cloud-identity.devices
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-identity.devices
@@ -164,6 +174,10 @@ paths:
                 $ref: "#/components/schemas/ListGroupsResponse"
           description: Successful response
       security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-identity.groups
           Oauth2c:
@@ -217,6 +231,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity
+        - Oauth2:
             - https://www.googleapis.com/auth/cloud-identity.groups
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-identity.groups
@@ -249,6 +267,10 @@ paths:
                 $ref: "#/components/schemas/LookupGroupNameResponse"
           description: Successful response
       security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-identity.groups
           Oauth2c:
@@ -313,6 +335,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity
+        - Oauth2:
             - https://www.googleapis.com/auth/cloud-identity.groups
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-identity.groups
@@ -363,6 +389,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity
+        - Oauth2:
             - https://www.googleapis.com/auth/cloud-identity.groups
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-identity.groups
@@ -395,6 +425,10 @@ paths:
                 $ref: "#/components/schemas/Membership"
           description: Successful response
       security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-identity.groups
           Oauth2c:
@@ -450,6 +484,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity
+        - Oauth2:
             - https://www.googleapis.com/auth/cloud-identity.groups
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-identity.groups
@@ -496,6 +534,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity
+        - Oauth2:
             - https://www.googleapis.com/auth/cloud-identity.devices
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-identity.devices
@@ -537,6 +579,10 @@ paths:
                 $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-identity.devices
           Oauth2c:
@@ -580,6 +626,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity
+        - Oauth2:
             - https://www.googleapis.com/auth/cloud-identity.devices
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-identity.devices
@@ -621,6 +671,10 @@ paths:
                 $ref: "#/components/schemas/ModifyMembershipRolesResponse"
           description: Successful response
       security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-identity.groups
           Oauth2c:
@@ -668,6 +722,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity
+        - Oauth2:
             - https://www.googleapis.com/auth/cloud-identity.devices
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-identity.devices
@@ -712,6 +770,10 @@ paths:
                 $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1ListClientStatesResponse"
           description: Successful response
       security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-identity.devices
           Oauth2c:
@@ -779,6 +841,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity
+        - Oauth2:
             - https://www.googleapis.com/auth/cloud-identity.devices
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-identity.devices
@@ -839,6 +905,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity
+        - Oauth2:
             - https://www.googleapis.com/auth/cloud-identity.groups
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-identity.groups
@@ -888,6 +958,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity
+        - Oauth2:
             - https://www.googleapis.com/auth/cloud-identity.groups
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-identity.groups
@@ -921,6 +995,10 @@ paths:
                 $ref: "#/components/schemas/CheckTransitiveMembershipResponse"
           description: Successful response
       security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-identity.groups
           Oauth2c:
@@ -971,6 +1049,10 @@ paths:
                 $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-identity.groups
           Oauth2c:
@@ -1026,6 +1108,10 @@ paths:
                 $ref: "#/components/schemas/LookupMembershipNameResponse"
           description: Successful response
       security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-identity.groups
           Oauth2c:
@@ -1087,6 +1173,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity
+        - Oauth2:
             - https://www.googleapis.com/auth/cloud-identity.groups
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-identity.groups
@@ -1141,6 +1231,10 @@ paths:
                 $ref: "#/components/schemas/SearchTransitiveMembershipsResponse"
           description: Successful response
       security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-identity.groups
           Oauth2c:
@@ -2297,6 +2391,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
+            https://www.googleapis.com/auth/cloud-identity: "Private Service: https://www.googleapis.com/auth/cloud-identity"
             https://www.googleapis.com/auth/cloud-identity.devices: "Private Service: https://www.googleapis.com/auth/cloud-identity.devices"
             https://www.googleapis.com/auth/cloud-identity.devices.lookup: See your device details
             https://www.googleapis.com/auth/cloud-identity.devices.readonly: "Private Service: https://www.googleapis.com/auth/cloud-identity.devices.readonly"
@@ -2310,6 +2405,7 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
+            https://www.googleapis.com/auth/cloud-identity: "Private Service: https://www.googleapis.com/auth/cloud-identity"
             https://www.googleapis.com/auth/cloud-identity.devices: "Private Service: https://www.googleapis.com/auth/cloud-identity.devices"
             https://www.googleapis.com/auth/cloud-identity.devices.lookup: See your device details
             https://www.googleapis.com/auth/cloud-identity.devices.readonly: "Private Service: https://www.googleapis.com/auth/cloud-identity.devices.readonly"
@@ -2318,3 +2414,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

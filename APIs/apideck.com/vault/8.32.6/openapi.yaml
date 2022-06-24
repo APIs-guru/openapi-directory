@@ -164,7 +164,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 8.32.5
+  version: 8.32.6
   x-apideck-api: vault
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -2507,6 +2507,10 @@ components:
                 type: array
             type: object
           type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
         status:
           description: HTTP Response Status
           example: OK
