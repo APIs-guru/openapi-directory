@@ -1606,6 +1606,10 @@ components:
     AwsSourceVmDetails:
       description: Represent the source AWS VM details.
       properties:
+        committedStorageBytes:
+          description: The total size of the disks being migrated in bytes.
+          format: int64
+          type: string
         firmware:
           description: The firmware type of the source VM.
           enum:

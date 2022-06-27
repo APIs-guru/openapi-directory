@@ -229,7 +229,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Specifies which fields to update. Note that the fields `name`, `appId`, and `projectId` are all immutable.
+        - description: Specifies which fields to update. Note that the fields `name`, `appId`, `projectId` and `state` are all immutable
           in: query
           name: updateMask
           schema:
@@ -278,6 +278,11 @@ paths:
           name: pageToken
           schema:
             type: string
+        - description: Controls whether Apps in the DELETED state should be returned. Defaults to false.
+          in: query
+          name: showDeleted
+          schema:
+            type: boolean
       responses:
         "200":
           content:
@@ -475,6 +480,11 @@ paths:
           name: pageToken
           schema:
             type: string
+        - description: Controls whether Apps in the DELETED state should be returned. Defaults to false.
+          in: query
+          name: showDeleted
+          schema:
+            type: boolean
       responses:
         "200":
           content:
@@ -649,6 +659,11 @@ paths:
           name: pageToken
           schema:
             type: string
+        - description: Controls whether Apps in the DELETED state should be returned. Defaults to false.
+          in: query
+          name: showDeleted
+          schema:
+            type: boolean
       responses:
         "200":
           content:
@@ -838,6 +853,11 @@ paths:
           name: pageToken
           schema:
             type: string
+        - description: Controls whether Apps in the DELETED state should be returned. Defaults to false.
+          in: query
+          name: showDeleted
+          schema:
+            type: boolean
       responses:
         "200":
           content:
@@ -1077,6 +1097,14 @@ components:
           description: Output only. Immutable. A user-assigned unique identifier of the parent FirebaseProject for the `AndroidApp`.
           readOnly: true
           type: string
+        state:
+          description: Output only. The lifecycle state of the App.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - DELETED
+          readOnly: true
+          type: string
       type: object
     AndroidAppConfig:
       description: Configuration metadata of a single Firebase App for Android.
@@ -1140,6 +1168,14 @@ components:
             - ANDROID
             - WEB
           type: string
+        state:
+          description: Output only. The lifecycle state of the App.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - DELETED
+          readOnly: true
+          type: string
       type: object
     FirebaseProject:
       description: A `FirebaseProject` is the top-level Firebase entity. It is the container for Firebase Apps, Firebase Hosting sites, storage systems (Firebase Realtime Database, Cloud Firestore, Cloud Storage buckets), and other Firebase and Google Cloud Platform (GCP) resources. You create a `FirebaseProject` by calling AddFirebase and specifying an *existing* [GCP `Project`](https://cloud.google.com/resource-manager/reference/rest/v1/projects). This adds Firebase resources to the existing GCP `Project`. Since a FirebaseProject is actually also a GCP `Project`, a `FirebaseProject` has the same underlying GCP identifiers (`projectNumber` and `projectId`). This allows for easy interop with Google APIs.
@@ -1193,6 +1229,14 @@ components:
           type: string
         projectId:
           description: Output only. Immutable. A user-assigned unique identifier of the parent FirebaseProject for the `IosApp`.
+          readOnly: true
+          type: string
+        state:
+          description: Output only. The lifecycle state of the App.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - DELETED
           readOnly: true
           type: string
         teamId:
@@ -1458,6 +1502,14 @@ components:
           type: string
         projectId:
           description: Output only. Immutable. A user-assigned unique identifier of the parent FirebaseProject for the `WebApp`.
+          readOnly: true
+          type: string
+        state:
+          description: Output only. The lifecycle state of the App.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - DELETED
           readOnly: true
           type: string
         webId:

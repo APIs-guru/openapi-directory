@@ -91,6 +91,7 @@ tags:
   - name: regionInstanceGroupManagers
   - name: regionInstanceGroups
   - name: regionInstances
+  - name: regionInstanceTemplates
   - name: regionInstantSnapshots
   - name: regionNetworkEndpointGroups
   - name: regionNetworkFirewallPolicies
@@ -5838,6 +5839,64 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
+  "/projects/{project}/global/addresses/{address}/move":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Moves the specified address resource from one project to another project.
+      operationId: compute.globalAddresses.move
+      parameters:
+        - description: Source project ID which the Address is moved from.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the address resource to move.
+          in: path
+          name: address
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GlobalAddressesMoveRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - globalAddresses
   "/projects/{project}/global/addresses/{resource}/setLabels":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -20032,6 +20091,70 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
+  "/projects/{project}/regions/{region}/addresses/{address}/move":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Moves the specified address resource.
+      operationId: compute.addresses.move
+      parameters:
+        - description: Source project ID which the Address is moved from.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name of the address resource to move.
+          in: path
+          name: address
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegionAddressesMoveRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - addresses
   "/projects/{project}/regions/{region}/addresses/{resource}/setLabels":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -25650,7 +25773,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Lists the instances in the managed instance group and instances that are scheduled to be created. The list includes any current actions that the group has scheduled for its instances. The orderBy query parameter is not supported.
+      description: Lists the instances in the managed instance group and instances that are scheduled to be created. The list includes any current actions that the group has scheduled for its instances. The orderBy query parameter is not supported. The `pageToken` query parameter is supported only in the alpha and beta API and only if the group's `listManagedInstancesResults` field is set to `PAGINATED`.
       operationId: compute.regionInstanceGroupManagers.listManagedInstances
       parameters:
         - description: Project ID for this request.
@@ -26988,6 +27111,231 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - regionInstanceGroups
+  "/projects/{project}/regions/{region}/instanceTemplates":
+    get:
+      description: Retrieves a list of instance templates that are contained within the specified project and region.
+      operationId: compute.regionInstanceTemplates.list
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the regions for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: "A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq \"double quoted literal\"` `(fieldname1 eq literal) (fieldname2 ne \"literal\")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name \"instance\", you would use `name ne .*instance`."
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)"
+          in: query
+          name: maxResults
+          schema:
+            minimum: 0
+            type: integer
+        - description: Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+          in: query
+          name: returnPartialSuccess
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstanceTemplateList"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - regionInstanceTemplates
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Creates an instance template in the specified project and region using the global instance template whose URL is included in the request.
+      operationId: compute.regionInstanceTemplates.insert
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InstanceTemplate"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - regionInstanceTemplates
+  "/projects/{project}/regions/{region}/instanceTemplates/{instanceTemplate}":
+    delete:
+      description: Deletes the specified instance template. Deleting an instance template is permanent and cannot be undone.
+      operationId: compute.regionInstanceTemplates.delete
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: The name of the instance template to delete.
+          in: path
+          name: instanceTemplate
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - regionInstanceTemplates
+    get:
+      description: Returns the specified instance template. Gets a list of available instance templates by making a list() request.
+      operationId: compute.regionInstanceTemplates.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: The name of the instance template.
+          in: path
+          name: instanceTemplate
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstanceTemplate"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - regionInstanceTemplates
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
   "/projects/{project}/regions/{region}/instances/bulkInsert":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -40392,7 +40740,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Lists all of the instances in the managed instance group. Each instance in the list has a currentAction, which indicates the action that the managed instance group is performing on the instance. For example, if the group is still creating an instance, the currentAction is CREATING. If a previous action failed, the list displays the errors for that failed action. The orderBy query parameter is not supported.
+      description: Lists all of the instances in the managed instance group. Each instance in the list has a currentAction, which indicates the action that the managed instance group is performing on the instance. For example, if the group is still creating an instance, the currentAction is CREATING. If a previous action failed, the list displays the errors for that failed action. The orderBy query parameter is not supported. The `pageToken` query parameter is supported only in the alpha and beta API and only if the group's `listManagedInstancesResults` field is set to `PAGINATED`.
       operationId: compute.instanceGroupManagers.listManagedInstances
       parameters:
         - description: Project ID for this request.
@@ -52433,6 +52781,21 @@ components:
           format: int64
           type: string
       type: object
+    ErrorInfo:
+      description: 'Describes the cause of the error with structured details. Example of an error when contacting the "pubsub.googleapis.com" API when it is not enabled: { "reason": "API_DISABLED" "domain": "googleapis.com" "metadata": { "resource": "projects/123", "service": "pubsub.googleapis.com" } } This response indicates that the pubsub.googleapis.com API is not enabled. Example of an error that is returned when attempting to create a Spanner instance in a region that is out of stock: { "reason": "STOCKOUT" "domain": "spanner.googleapis.com", "metadata": { "availableRegions": "us-central1,us-east2" } }'
+      properties:
+        domain:
+          description: 'The logical grouping to which the "reason" belongs. The error domain is typically the registered service name of the tool or product that generates the error. Example: "pubsub.googleapis.com". If the error is generated by some common infrastructure, the error domain must be a globally unique value that identifies the infrastructure. For Google API infrastructure, the error domain is "googleapis.com".'
+          type: string
+        metadatas:
+          additionalProperties:
+            type: string
+          description: 'Additional structured details about this error. Keys should match /[a-zA-Z0-9-_]/ and be limited to 64 characters in length. When identifying the current value of an exceeded limit, the units should be contained in the key, not the value. For example, rather than {"instanceLimit": "100/request"}, should be returned as, {"instanceLimitPerRequest": "100"}, if the client exceeds the number of instances that can be created in a single (batch) request.'
+          type: object
+        reason:
+          description: The reason of the error. This is a constant value that identifies the proximate cause of the error. Error reasons are unique within a particular domain of errors. This should be at most 63 characters and match /[A-Z0-9_]+/.
+          type: string
+      type: object
     ExchangedPeeringRoute:
       properties:
         destRange:
@@ -53079,6 +53442,9 @@ components:
           description: "[Output Only] Calculation of the complexity of a single firewall policy rule."
           format: int32
           type: integer
+        securityProfileGroup:
+          description: "A fully-qualified URL of a SecurityProfile resource instance. Example: https://networksecurity.googleapis.com/v1/projects/{project}/locations/{location}/securityProfileGroups/my-security-profile-group Must be specified if action = 'apply_profile_group' and cannot be specified for other actions."
+          type: string
         targetResources:
           description: A list of network resource URLs to which this rule applies. This field allows you to control which network's VMs get this rule. If this field is left blank, all VMs within the organization will receive the rule.
           items:
@@ -53244,7 +53610,7 @@ components:
           format: uint64
           type: string
         ipVersion:
-          description: The IP Version that will be used by this forwarding rule. Valid options are IPV4 or IPV6. This can only be specified for an external global forwarding rule.
+          description: The IP Version that will be used by this forwarding rule. Valid options are IPV4 or IPV6.
           enum:
             - IPV4
             - IPV6
@@ -53316,6 +53682,7 @@ components:
           enum:
             - ACCEPTED
             - CLOSED
+            - NEEDS_ATTENTION
             - PENDING
             - REJECTED
             - STATUS_UNSPECIFIED
@@ -53907,6 +54274,15 @@ components:
       properties:
         instance:
           description: Full instance resource URL.
+          type: string
+      type: object
+    GlobalAddressesMoveRequest:
+      properties:
+        description:
+          description: An optional destination address description if intended to be different from the source.
+          type: string
+        destinationAddress:
+          description: "The URL of the destination address to move to. This can be a full or partial URL. For example, the following are all valid URLs to a address: - https://www.googleapis.com/compute/v1/projects/project /global/addresses/address - projects/project/global/addresses/address Note that destination project must be different from the source project. So /global/addresses/address is not valid partial url."
           type: string
       type: object
     GlobalNetworkEndpointGroupsAttachEndpointsRequest:
@@ -54784,6 +55160,25 @@ components:
             - HEALTHY
             - UNHEALTHY
             - UNKNOWN
+          type: string
+      type: object
+    Help:
+      description: Provides links to documentation or for performing an out of band action. For example, if a quota check failed with an error indicating the calling project hasn't enabled the accessed service, this can contain a URL pointing directly to the right place in the developer console to flip the bit.
+      properties:
+        links:
+          description: URL(s) pointing to additional information on handling the current error.
+          items:
+            $ref: "#/components/schemas/HelpLink"
+          type: array
+      type: object
+    HelpLink:
+      description: Describes a URL link.
+      properties:
+        description:
+          description: Describes what the link offers.
+          type: string
+        url:
+          description: The URL of the link.
           type: string
       type: object
     HostRule:
@@ -57535,6 +57930,9 @@ components:
         properties:
           $ref: "#/components/schemas/InstanceProperties"
           description: The instance properties for this instance template.
+        region:
+          description: "[Output Only] URL of the region where the instance template resides. Only applicable for regional resources."
+          type: string
         selfLink:
           description: "[Output Only] The URL for this instance template. The server defines this URL."
           type: string
@@ -59570,6 +59968,16 @@ components:
           description: "Specifies the desired disk type on the node. This disk type must be a local storage type (e.g.: local-ssd). Note that for nodeTemplates, this should be the name of the disk type and not its URL."
           type: string
       type: object
+    LocalizedMessage:
+      description: Provides a localized error message that is safe to return to the user which can be attached to an RPC error.
+      properties:
+        locale:
+          description: 'The locale used following the specification defined at http://www.rfc-editor.org/rfc/bcp/bcp47.txt. Examples are: "en-US", "fr-CH", "es-MX"'
+          type: string
+        message:
+          description: The localized error message in the above locale.
+          type: string
+      type: object
     LocationPolicy:
       description: Configuration for location policy among multiple possible locations (e.g. preferences for zone selection among zones in a single region).
       properties:
@@ -60207,6 +60615,20 @@ components:
                   code:
                     description: "[Output Only] The error type identifier for this error."
                     type: string
+                  errorDetails:
+                    description: "[Output Only] An optional list of messages that contain the error details. There is a set of defined message types to use for providing details.The syntax depends on the error code. For example, QuotaExceededInfo will have details when the error code is QUOTA_EXCEEDED."
+                    items:
+                      properties:
+                        errorInfo:
+                          $ref: "#/components/schemas/ErrorInfo"
+                        help:
+                          $ref: "#/components/schemas/Help"
+                        localizedMessage:
+                          $ref: "#/components/schemas/LocalizedMessage"
+                        quotaInfo:
+                          $ref: "#/components/schemas/QuotaExceededInfo"
+                      type: object
+                    type: array
                   location:
                     description: "[Output Only] Indicates the field in the request that caused the error. This property is optional."
                     type: string
@@ -62643,6 +63065,20 @@ components:
                   code:
                     description: "[Output Only] The error type identifier for this error."
                     type: string
+                  errorDetails:
+                    description: "[Output Only] An optional list of messages that contain the error details. There is a set of defined message types to use for providing details.The syntax depends on the error code. For example, QuotaExceededInfo will have details when the error code is QUOTA_EXCEEDED."
+                    items:
+                      properties:
+                        errorInfo:
+                          $ref: "#/components/schemas/ErrorInfo"
+                        help:
+                          $ref: "#/components/schemas/Help"
+                        localizedMessage:
+                          $ref: "#/components/schemas/LocalizedMessage"
+                        quotaInfo:
+                          $ref: "#/components/schemas/QuotaExceededInfo"
+                      type: object
+                    type: array
                   location:
                     description: "[Output Only] Indicates the field in the request that caused the error. This property is optional."
                     type: string
@@ -64423,6 +64859,25 @@ components:
           format: double
           type: number
       type: object
+    QuotaExceededInfo:
+      description: Additional details for quota exceeded error for resource quota.
+      properties:
+        dimensions:
+          additionalProperties:
+            type: string
+          description: The map holding related quota dimensions.
+          type: object
+        limit:
+          description: Current effective quota limit. The limit's unit depends on the quota type or metric.
+          format: double
+          type: number
+        limitName:
+          description: The name of the quota limit.
+          type: string
+        metricName:
+          description: The Compute Engine quota metric name.
+          type: string
+      type: object
     RbacPolicy:
       properties:
         name:
@@ -64504,6 +64959,15 @@ components:
           items:
             type: string
           type: array
+      type: object
+    RegionAddressesMoveRequest:
+      properties:
+        description:
+          description: An optional destination address description if intended to be different from the source.
+          type: string
+        destinationAddress:
+          description: "The URL of the destination address to move to. This can be a full or partial URL. For example, the following are all valid URLs to a address: - https://www.googleapis.com/compute/v1/projects/project/regions/region /addresses/address - projects/project/regions/region/addresses/address Note that destination project must be different from the source project. So /regions/region/addresses/address is not valid partial url."
+          type: string
       type: object
     RegionAutoscalerList:
       description: Contains a list of autoscalers.
@@ -68094,12 +68558,26 @@ components:
         exceedAction:
           description: Action to take for requests that are above the configured rate limit threshold, to either deny with a specified HTTP response code, or redirect to a different endpoint. Valid options are "deny(status)", where valid values for status are 403, 404, 429, and 502, and "redirect" where the redirect parameters come from exceedRedirectOptions below.
           type: string
+        exceedActionRpcStatus:
+          $ref: "#/components/schemas/SecurityPolicyRuleRateLimitOptionsRpcStatus"
+          description: Specified gRPC response status for proxyless gRPC requests that are above the configured rate limit threshold
         exceedRedirectOptions:
           $ref: "#/components/schemas/SecurityPolicyRuleRedirectOptions"
           description: Parameters defining the redirect action that is used as the exceed action. Cannot be specified if the exceed action is not redirect.
         rateLimitThreshold:
           $ref: "#/components/schemas/SecurityPolicyRuleRateLimitOptionsThreshold"
           description: Threshold at which to begin ratelimiting.
+      type: object
+    SecurityPolicyRuleRateLimitOptionsRpcStatus:
+      description: Simplified google.rpc.Status type (omitting details).
+      properties:
+        code:
+          description: The status code, which should be an enum value of google.rpc.Code.
+          format: int32
+          type: integer
+        message:
+          description: A developer-facing error message, which should be in English.
+          type: string
       type: object
     SecurityPolicyRuleRateLimitOptionsThreshold:
       properties:
@@ -68378,6 +68856,7 @@ components:
           enum:
             - ACCEPTED
             - CLOSED
+            - NEEDS_ATTENTION
             - PENDING
             - REJECTED
             - STATUS_UNSPECIFIED

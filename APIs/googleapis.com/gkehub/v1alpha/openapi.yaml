@@ -2382,6 +2382,9 @@ components:
         logDeniesEnabled:
           description: Logs all denies and dry run failures.
           type: boolean
+        monitoring:
+          $ref: "#/components/schemas/PolicyControllerMonitoringConfig"
+          description: Monitoring specifies the configuration of monitoring.
         mutationEnabled:
           description: Enables the ability to mutate resources using Policy Controller.
           type: boolean
@@ -2450,6 +2453,19 @@ components:
             - CLUSTER_ERROR
             - HUB_ERROR
           type: string
+      type: object
+    PolicyControllerMonitoringConfig:
+      description: 'MonitoringConfig specifies the backends Policy Controller should export metrics to. For example, to specify metrics should be exported to Cloud Monitoring and Prometheus, specify backends: ["cloudmonitoring", "prometheus"]'
+      properties:
+        backends:
+          description: Specifies the list of backends Policy Controller will export to. An empty list would effectively disable metrics export.
+          items:
+            enum:
+              - MONITORING_BACKEND_UNSPECIFIED
+              - PROMETHEUS
+              - CLOUD_MONITORING
+            type: string
+          type: array
       type: object
     PolicyControllerTemplateLibraryConfig:
       description: The config specifying which default library templates to install.

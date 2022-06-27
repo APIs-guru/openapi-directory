@@ -19,12 +19,11 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://gkehub.googleapis.com/$discovery/rest?version=v1beta
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: gkehub
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/anthos/multicluster-management/connect/registering-a-cluster
 tags:
@@ -1705,6 +1704,9 @@ components:
         logDeniesEnabled:
           description: Logs all denies and dry run failures.
           type: boolean
+        monitoring:
+          $ref: "#/components/schemas/PolicyControllerMonitoringConfig"
+          description: Monitoring specifies the configuration of monitoring.
         referentialRulesEnabled:
           description: Enables the ability to use Constraint Templates that reference to objects other than the object currently being evaluated.
           type: boolean
@@ -1770,6 +1772,19 @@ components:
             - CLUSTER_ERROR
             - HUB_ERROR
           type: string
+      type: object
+    PolicyControllerMonitoringConfig:
+      description: 'MonitoringConfig specifies the backends Policy Controller should export metrics to. For example, to specify metrics should be exported to Cloud Monitoring and Prometheus, specify backends: ["cloudmonitoring", "prometheus"]'
+      properties:
+        backends:
+          description: Specifies the list of backends Policy Controller will export to. An empty list would effectively disable metrics export.
+          items:
+            enum:
+              - MONITORING_BACKEND_UNSPECIFIED
+              - PROMETHEUS
+              - CLOUD_MONITORING
+            type: string
+          type: array
       type: object
     PolicyControllerTemplateLibraryConfig:
       description: The config specifying which default library templates to install.

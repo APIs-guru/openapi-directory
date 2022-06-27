@@ -23,9 +23,9 @@ info:
     - format: google
       url: https://beyondcorp.googleapis.com/$discovery/rest?version=v1alpha
       version: v1
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: beyondcorp
-  x-preferred: false
 externalDocs:
   url: https://cloud.google.com/
 tags:
@@ -517,7 +517,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. User-settable AppConnection resource ID. * Must start with a letter. * Must contain between 4-63 characters from (/a-z-/). * Must end with a number or a letter.
+        - description: Optional. User-settable AppConnection resource ID. * Must start with a letter. * Must contain between 4-63 characters from `/a-z-/`. * Must end with a number or a letter.
           in: query
           name: appConnectionId
           schema:
@@ -670,7 +670,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. User-settable AppConnector resource ID. * Must start with a letter. * Must contain between 4-63 characters from (/a-z-/). * Must end with a number or a letter.
+        - description: Optional. User-settable AppConnector resource ID. * Must start with a letter. * Must contain between 4-63 characters from `/a-z-/`. * Must end with a number or a letter.
           in: query
           name: appConnectorId
           schema:
@@ -771,7 +771,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. User-settable AppGateway resource ID. * Must start with a letter. * Must contain between 4-63 characters from (/a-z-/). * Must end with a number or a letter.
+        - description: Optional. User-settable AppGateway resource ID. * Must start with a letter. * Must contain between 4-63 characters from `/a-z-/`. * Must end with a number or a letter.
           in: query
           name: appGatewayId
           schema:
@@ -872,7 +872,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. User-settable client connector service resource ID. * Must start with a letter. * Must contain between 4-63 characters from (/a-z-/). * Must end with a number or a letter. A random system generated name will be assigned if not specified by the user.
+        - description: Optional. User-settable client connector service resource ID. * Must start with a letter. * Must contain between 4-63 characters from `/a-z-/`. * Must end with a number or a letter. A random system generated name will be assigned if not specified by the user.
           in: query
           name: clientConnectorServiceId
           schema:
@@ -973,7 +973,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. User-settable client gateway resource ID. * Must start with a letter. * Must contain between 4-63 characters from (/a-z-/). * Must end with a number or a letter.
+        - description: Optional. User-settable client gateway resource ID. * Must start with a letter. * Must contain between 4-63 characters from `/a-z-/`. * Must end with a number or a letter.
           in: query
           name: clientGatewayId
           schema:
@@ -1074,7 +1074,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. User-settable connection resource ID. * Must start with a letter. * Must contain between 4-63 characters from (/a-z-/). * Must end with a number or a letter.
+        - description: Optional. User-settable connection resource ID. * Must start with a letter. * Must contain between 4-63 characters from `/a-z-/`. * Must end with a number or a letter.
           in: query
           name: connectionId
           schema:
@@ -1227,7 +1227,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. User-settable connector resource ID. * Must start with a letter. * Must contain between 4-63 characters from (/a-z-/). * Must end with a number or a letter.
+        - description: Optional. User-settable connector resource ID. * Must start with a letter. * Must contain between 4-63 characters from `/a-z-/`. * Must end with a number or a letter.
           in: query
           name: connectorId
           schema:
@@ -2349,14 +2349,32 @@ components:
           description: Email address of the service account.
           type: string
       type: object
+    GoogleCloudBeyondcorpAppconnectorsV1alphaContainerHealthDetails:
+      description: ContainerHealthDetails reflects the health details of a container.
+      properties:
+        currentConfigVersion:
+          description: The version of the current config.
+          type: string
+        errorMsg:
+          description: The latest error message.
+          type: string
+        expectedConfigVersion:
+          description: The version of the expected config.
+          type: string
+        extendedStatus:
+          additionalProperties:
+            type: string
+          description: The extended status. Such as ExitCode, StartedAt, FinishedAt, etc.
+          type: object
+      type: object
     GoogleCloudBeyondcorpAppconnectorsV1alphaImageConfig:
       description: ImageConfig defines the control plane images to run.
       properties:
         stableImage:
-          description: The stable image that the remote agent will fallback to if the target image fails.
+          description: "The stable image that the remote agent will fallback to if the target image fails. Format would be a gcr image path, e.g.: gcr.io/PROJECT-ID/my-image:tag1"
           type: string
         targetImage:
-          description: The initial image the remote agent will attempt to run for the control plane.
+          description: "The initial image the remote agent will attempt to run for the control plane. Format would be a gcr image path, e.g.: gcr.io/PROJECT-ID/my-image:tag1"
           type: string
       type: object
     GoogleCloudBeyondcorpAppconnectorsV1alphaListAppConnectorsResponse:
@@ -2381,7 +2399,7 @@ components:
       properties:
         pubsubNotification:
           $ref: "#/components/schemas/GoogleCloudBeyondcorpAppconnectorsV1alphaNotificationConfigCloudPubSubNotificationConfig"
-          description: Pub/Sub topic for AppConnector to subscribe and receive notifications from `projects/{project}/topics/{pubsub_topic}`
+          description: Cloud Pub/Sub Configuration to receive notifications.
       type: object
     GoogleCloudBeyondcorpAppconnectorsV1alphaNotificationConfigCloudPubSubNotificationConfig:
       description: The configuration for Pub/Sub messaging for the AppConnector.
@@ -2389,6 +2407,10 @@ components:
         pubsubSubscription:
           description: The Pub/Sub subscription the AppConnector uses to receive notifications.
           type: string
+      type: object
+    GoogleCloudBeyondcorpAppconnectorsV1alphaRemoteAgentDetails:
+      description: RemoteAgentDetails reflects the details of a remote agent.
+      properties: {}
       type: object
     GoogleCloudBeyondcorpAppconnectorsV1alphaReportStatusRequest:
       description: Request report the connector status.
@@ -2438,6 +2460,36 @@ components:
         time:
           description: The timestamp to collect the info. It is suggested to be set by the topmost level resource only.
           format: google-datetime
+          type: string
+      type: object
+    GoogleCloudBeyondcorpApplicationsV1alphaApplicationOperationMetadata:
+      description: Represents the metadata of the long-running operation.
+      properties:
+        createTime:
+          description: Output only. The time the operation was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        endTime:
+          description: Output only. The time the operation finished running.
+          format: google-datetime
+          readOnly: true
+          type: string
+        requestedCancellation:
+          description: Output only. Identifies whether the user has requested cancellation of the operation. Operations that have been cancelled successfully have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+          readOnly: true
+          type: boolean
+        statusMessage:
+          description: Output only. Human-readable status of the operation, if any.
+          readOnly: true
+          type: string
+        target:
+          description: Output only. Server-defined resource path for the target of the operation.
+          readOnly: true
+          type: string
+        verb:
+          description: Output only. Name of the verb executed by the operation.
+          readOnly: true
           type: string
       type: object
     GoogleCloudLocationListLocationsResponse:
