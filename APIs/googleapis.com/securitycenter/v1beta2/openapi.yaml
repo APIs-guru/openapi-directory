@@ -1236,6 +1236,31 @@ components:
           $ref: "#/components/schemas/YaraRuleSignature"
           description: Signature indicating that a YARA rule was matched.
       type: object
+    RapidVulnerabilityDetectionSettings:
+      description: Resource capturing the settings for the Rapid Vulnerability Detection service.
+      properties:
+        modules:
+          additionalProperties:
+            $ref: "#/components/schemas/Config"
+          description: The configurations including the state of enablement for the service's different modules. The absence of a module in the map implies its configuration is inherited from its parent's.
+          type: object
+        name:
+          description: "The resource name of the RapidVulnerabilityDetectionSettings. Formats: * organizations/{organization}/rapidVulnerabilityDetectionSettings * folders/{folder}/rapidVulnerabilityDetectionSettings * projects/{project}/rapidVulnerabilityDetectionSettings"
+          type: string
+        serviceEnablementState:
+          description: The state of enablement for the service at its level of the resource hierarchy. A DISABLED state will override all module enablement_states to DISABLED.
+          enum:
+            - ENABLEMENT_STATE_UNSPECIFIED
+            - INHERITED
+            - ENABLED
+            - DISABLED
+          type: string
+        updateTime:
+          description: Output only. The time the settings were last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
     Reference:
       description: Additional Links
       properties:

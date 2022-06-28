@@ -63,10 +63,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets a python package.
-      operationId: artifactregistry.projects.locations.repositories.pythonPackages.get
+      description: Gets a version
+      operationId: artifactregistry.projects.locations.repositories.packages.versions.get
       parameters:
-        - description: Required. The name of the python package.
+        - description: The name of the version to retrieve.
           in: path
           name: name
           required: true
@@ -86,7 +86,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PythonPackage"
+                $ref: "#/components/schemas/Version"
           description: Successful response
       security:
         - Oauth2:
@@ -397,108 +397,6 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/mavenArtifacts":
-    get:
-      description: Lists maven artifacts.
-      operationId: artifactregistry.projects.locations.repositories.mavenArtifacts.list
-      parameters:
-        - description: Required. The name of the parent resource whose maven artifacts will be listed.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: The maximum number of artifacts to return.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: The next_page_token value returned from a previous list request, if any.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListMavenArtifactsResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/npmPackages":
-    get:
-      description: Lists npm packages.
-      operationId: artifactregistry.projects.locations.repositories.npmPackages.list
-      parameters:
-        - description: Required. The name of the parent resource whose npm packages will be listed.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: The maximum number of artifacts to return.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: The next_page_token value returned from a previous list request, if any.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListNpmPackagesResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/packages":
     get:
       description: Lists packages.
@@ -526,57 +424,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListPackagesResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/pythonPackages":
-    get:
-      description: Lists python packages.
-      operationId: artifactregistry.projects.locations.repositories.pythonPackages.list
-      parameters:
-        - description: Required. The name of the parent resource whose python packages will be listed.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: The maximum number of artifacts to return.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: The next_page_token value returned from a previous list request, if any.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListPythonPackagesResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -1414,30 +1261,6 @@ components:
           description: The standard List next-page token.
           type: string
       type: object
-    ListMavenArtifactsResponse:
-      description: The response from listing maven artifacts.
-      properties:
-        mavenArtifacts:
-          description: The maven artifacts returned.
-          items:
-            $ref: "#/components/schemas/MavenArtifact"
-          type: array
-        nextPageToken:
-          description: The token to retrieve the next page of artifacts, or empty if there are no more artifacts to return.
-          type: string
-      type: object
-    ListNpmPackagesResponse:
-      description: The response from listing npm packages.
-      properties:
-        nextPageToken:
-          description: The token to retrieve the next page of artifacts, or empty if there are no more artifacts to return.
-          type: string
-        npmPackages:
-          description: The npm packages returned.
-          items:
-            $ref: "#/components/schemas/NpmPackage"
-          type: array
-      type: object
     ListPackagesResponse:
       description: The response from listing packages.
       properties:
@@ -1448,18 +1271,6 @@ components:
           description: The packages returned.
           items:
             $ref: "#/components/schemas/Package"
-          type: array
-      type: object
-    ListPythonPackagesResponse:
-      description: The response from listing python packages.
-      properties:
-        nextPageToken:
-          description: The token to retrieve the next page of artifacts, or empty if there are no more artifacts to return.
-          type: string
-        pythonPackages:
-          description: The python packages returned.
-          items:
-            $ref: "#/components/schemas/PythonPackage"
           type: array
       type: object
     ListRepositoriesResponse:
@@ -1521,35 +1332,6 @@ components:
           description: 'Resource name for the location, which may vary between implementations. For example: `"projects/example-project/locations/us-east1"`'
           type: string
       type: object
-    MavenArtifact:
-      description: MavenArtifact represents a maven artifact.
-      properties:
-        artifactId:
-          description: Artifact ID for the artifact.
-          type: string
-        createTime:
-          description: Output only. Time the artifact was created.
-          format: google-datetime
-          readOnly: true
-          type: string
-        groupId:
-          description: "Group ID for the artifact. Example: com.google.guava"
-          type: string
-        name:
-          description: Required. registry_location, project_id, repository_name and maven_artifact forms a unique artifact For example, "projects/test-project/locations/us-west4/repositories/test-repo/mavenArtifacts/ com.google.guava:guava:31.0-jre", where "us-west4" is the registry_location, "test-project" is the project_id, "test-repo" is the repository_name and "com.google.guava:guava:31.0-jre" is the maven artifact.
-          type: string
-        pomUri:
-          description: "Required. URL to access the pom file of the artifact. Example: us-west4-maven.pkg.dev/test-project/test-repo/com/google/guava/guava/31.0/guava-31.0.pom"
-          type: string
-        updateTime:
-          description: Output only. Time the artifact was updated.
-          format: google-datetime
-          readOnly: true
-          type: string
-        version:
-          description: Version of this artifact.
-          type: string
-      type: object
     MavenRepositoryConfig:
       description: MavenRepositoryConfig is maven related repository details. Provides additional configuration details for repositories of the maven format type.
       properties:
@@ -1562,34 +1344,6 @@ components:
             - VERSION_POLICY_UNSPECIFIED
             - RELEASE
             - SNAPSHOT
-          type: string
-      type: object
-    NpmPackage:
-      description: NpmPackage represents an npm artifact.
-      properties:
-        createTime:
-          description: Output only. Time the package was created.
-          format: google-datetime
-          readOnly: true
-          type: string
-        name:
-          description: Required. registry_location, project_id, repository_name and npm_package forms a unique package For example, "projects/test-project/locations/us-west4/repositories/test-repo/npmPackages/ npm_test:1.0.0", where "us-west4" is the registry_location, "test-project" is the project_id, "test-repo" is the repository_name and npm_test:1.0.0" is the npm package.
-          type: string
-        packageName:
-          description: Package for the artifact.
-          type: string
-        tags:
-          description: Tags attached to this package.
-          items:
-            type: string
-          type: array
-        updateTime:
-          description: Output only. Time the package was updated.
-          format: google-datetime
-          readOnly: true
-          type: string
-        version:
-          description: Version of this package.
           type: string
       type: object
     Operation:
@@ -1669,32 +1423,6 @@ components:
           description: "The name of the project's settings. Always of the form: projects/{project-id}/projectSettings In update request: never set In response: always set"
           type: string
       type: object
-    PythonPackage:
-      description: PythonPackage represents a python artifact.
-      properties:
-        createTime:
-          description: Output only. Time the package was created.
-          format: google-datetime
-          readOnly: true
-          type: string
-        name:
-          description: Required. registry_location, project_id, repository_name and python_package forms a unique package name:`projects//locations//repository//pythonPackages/`. For example, "projects/test-project/locations/us-west4/repositories/test-repo/pythonPackages/ python_package:1.0.0", where "us-west4" is the registry_location, "test-project" is the project_id, "test-repo" is the repository_name and python_package:1.0.0" is the python package.
-          type: string
-        packageName:
-          description: Package for the artifact.
-          type: string
-        updateTime:
-          description: Output only. Time the package was updated.
-          format: google-datetime
-          readOnly: true
-          type: string
-        uri:
-          description: "Required. URL to access the package. Example: us-west4-python.pkg.dev/test-project/test-repo/python_package/file-name-1.0.0.tar.gz"
-          type: string
-        version:
-          description: Version of this package.
-          type: string
-      type: object
     Repository:
       description: A Repository for storing artifacts with a specific format.
       properties:
@@ -1715,7 +1443,6 @@ components:
             - APT
             - YUM
             - PYTHON
-            - KFP
           type: string
         kmsKeyName:
           description: "The Cloud KMS resource name of the customer managed encryption key that's used to encrypt the contents of the Repository. Has the form: `projects/my-project/locations/my-region/keyRings/my-kr/cryptoKeys/my-key`. This value may not be changed after the Repository has been created."

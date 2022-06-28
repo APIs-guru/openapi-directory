@@ -655,6 +655,7 @@ components:
             - FILTER_MEDIA_TYPE
             - FILTER_AUDIO_FEED_TYPE_NAME
             - FILTER_TRUEVIEW_TARGETING_EXPANSION
+            - FILTER_PUBLISHER_TRAFFIC_SOURCE
           type: string
         value:
           description: Filter value.
@@ -1005,6 +1006,7 @@ components:
               - FILTER_MEDIA_TYPE
               - FILTER_AUDIO_FEED_TYPE_NAME
               - FILTER_TRUEVIEW_TARGETING_EXPANSION
+              - FILTER_PUBLISHER_TRAFFIC_SOURCE
             type: string
           type: array
         includeInviteData:
@@ -1861,6 +1863,7 @@ components:
             - FILTER_MEDIA_TYPE
             - FILTER_AUDIO_FEED_TYPE_NAME
             - FILTER_TRUEVIEW_TARGETING_EXPANSION
+            - FILTER_PUBLISHER_TRAFFIC_SOURCE
           type: string
         match:
           description: Indicates how the filter should be matched to the value.

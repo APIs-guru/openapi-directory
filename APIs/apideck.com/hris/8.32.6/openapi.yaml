@@ -318,6 +318,11 @@ tags:
     x-apideck-model:
       $ref: "#/components/schemas/EmployeePayroll"
     x-apideck-resource-id: employee-payrolls
+  - description: ""
+    name: Employee Schedules
+    x-apideck-model:
+      $ref: "#/components/schemas/EmployeeSchedules"
+    x-apideck-resource-id: employee-schedules
 paths:
   /hris/companies:
     get:
@@ -4691,6 +4696,11 @@ components:
         - end_date
         - work_pattern
       type: object
+      x-apideck-weights:
+        end_date: critical
+        id: critical
+        start_date: critical
+        work_pattern: critical
     Tax:
       properties:
         amount:

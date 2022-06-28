@@ -859,6 +859,10 @@ components:
             - CA_REGIONS_AND_SUPPORT
             - ITAR
           type: string
+        complianceStatus:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsVersioningV1mainWorkloadComplianceStatus"
+          description: Output only. Count of active Violations in the Workload.
+          readOnly: true
         createTime:
           description: Output only. Immutable. The Workload creation timestamp.
           format: google-datetime
@@ -926,6 +930,14 @@ components:
         kmsSettings:
           $ref: "#/components/schemas/GoogleCloudAssuredworkloadsVersioningV1mainWorkloadKMSSettings"
           description: Input only. Immutable. Settings used to create a CMEK crypto key.
+      type: object
+    GoogleCloudAssuredworkloadsVersioningV1mainWorkloadComplianceStatus:
+      description: Represents the Compliance Status of this workload
+      properties:
+        activeViolationCount:
+          description: Optional. Count of active Violations in the Workload.
+          format: int32
+          type: integer
       type: object
     GoogleCloudAssuredworkloadsVersioningV1mainWorkloadFedrampHighSettings:
       description: Settings specific to resources needed for FedRAMP High.

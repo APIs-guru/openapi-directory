@@ -3167,6 +3167,9 @@ components:
         confidentialNodes:
           $ref: "#/components/schemas/ConfidentialNodes"
           description: Configuration of Confidential Nodes. All the nodes in the cluster will be Confidential VM once enabled.
+        costManagementConfig:
+          $ref: "#/components/schemas/CostManagementConfig"
+          description: Configuration for the fine-grained cost management feature.
         createTime:
           description: "[Output only] The time the cluster was created, in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format."
           type: string
@@ -3428,6 +3431,9 @@ components:
         desiredClusterTelemetry:
           $ref: "#/components/schemas/ClusterTelemetry"
           description: The desired telemetry integration for the cluster.
+        desiredCostManagementConfig:
+          $ref: "#/components/schemas/CostManagementConfig"
+          description: The desired configuration for the fine-grained cost management feature.
         desiredDatabaseEncryption:
           $ref: "#/components/schemas/DatabaseEncryption"
           description: Configuration of etcd encryption.
@@ -3583,6 +3589,13 @@ components:
       properties:
         enabled:
           description: Whether to enable consumption metering for this cluster. If enabled, a second BigQuery table will be created to hold resource consumption records.
+          type: boolean
+      type: object
+    CostManagementConfig:
+      description: Configuration for fine-grained cost management feature.
+      properties:
+        enabled:
+          description: Whether the feature is enabled or not.
           type: boolean
       type: object
     CreateClusterRequest:
