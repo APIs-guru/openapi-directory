@@ -1748,7 +1748,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Insert cuepoints in a broadcast
-      operationId: youtube.youtube.v3.liveBroadcasts.cuepoint.create
+      operationId: youtube.liveBroadcasts.insertCuepoint
       parameters:
         - description: Broadcast to insert ads to, or equivalently `external_video_id` for internal use.
           in: query
@@ -1786,6 +1786,10 @@ paths:
           name: resource.durationSecs
           schema:
             type: integer
+        - in: query
+          name: resource.etag
+          schema:
+            type: string
         - description: The identifier for cuepoint resource.
           in: query
           name: resource.id
@@ -1809,7 +1813,7 @@ paths:
                 $ref: "#/components/schemas/Cuepoint"
           description: Successful response
       tags:
-        - youtube
+        - liveBroadcasts
   /youtube/v3/liveBroadcasts/transition:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -6819,6 +6823,8 @@ components:
           description: The duration of this cuepoint.
           format: uint32
           type: integer
+        etag:
+          type: string
         id:
           description: The identifier for cuepoint resource.
           type: string
