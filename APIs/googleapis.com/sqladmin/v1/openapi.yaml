@@ -2089,59 +2089,6 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - users
-  "/v1/projects/{project}/instances/{instance}/users/{name}":
-    get:
-      description: Retrieves a resource containing information about a user.
-      operationId: sql.users.get
-      parameters:
-        - description: Project ID of the project that contains the instance.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: Database instance ID. This does not include the project ID.
-          in: path
-          name: instance
-          required: true
-          schema:
-            type: string
-        - description: User of the instance. If the database user has a host, this is specified as {username}@{host} else as {username}.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/User"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/sqlservice.admin
-          Oauth2c:
-            - https://www.googleapis.com/auth/sqlservice.admin
-      tags:
-        - users
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
   "/v1/projects/{project}/instances/{instance}/verifyExternalSyncSettings":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -3665,7 +3612,6 @@ components:
             - RESCHEDULE_MAINTENANCE
             - START_EXTERNAL_SYNC
             - LOG_CLEANUP
-            - AUTO_RESTART
           type: string
         selfLink:
           description: The URI of this resource.
@@ -4275,14 +4221,6 @@ components:
     User:
       description: A Cloud SQL user resource.
       properties:
-        dualPasswordType:
-          description: Dual password status for the user.
-          enum:
-            - DUAL_PASSWORD_TYPE_UNSPECIFIED
-            - NO_MODIFY_DUAL_PASSWORD
-            - NO_DUAL_PASSWORD
-            - DUAL_PASSWORD
-          type: string
         etag:
           description: This field is deprecated and will be removed from a future version of the API.
           type: string
@@ -4326,9 +4264,6 @@ components:
           type: integer
         enableFailedAttemptsCheck:
           description: If true, failed login attempts check will be enabled.
-          type: boolean
-        enablePasswordVerification:
-          description: If true, the user must specify the current password before changing the password. This flag is supported only for MySQL.
           type: boolean
         passwordExpirationDuration:
           description: Expiration duration after password is updated.

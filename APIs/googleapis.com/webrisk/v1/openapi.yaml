@@ -53,6 +53,7 @@ paths:
                 - MALWARE
                 - SOCIAL_ENGINEERING
                 - UNWANTED_SOFTWARE
+                - HIGH_RECALL
               type: string
             type: array
           style: form
@@ -119,6 +120,7 @@ paths:
               - MALWARE
               - SOCIAL_ENGINEERING
               - UNWANTED_SOFTWARE
+              - HIGH_RECALL
             type: string
         - description: The current version token of the client for the requested list (the client version that was received from the last successful diff). If the client does not have a version token (this is the first time calling ComputeThreatListDiff), this may be left empty and a full database snapshot will be returned.
           in: query
@@ -167,6 +169,7 @@ paths:
                 - MALWARE
                 - SOCIAL_ENGINEERING
                 - UNWANTED_SOFTWARE
+                - HIGH_RECALL
               type: string
             type: array
           style: form
@@ -609,6 +612,7 @@ components:
               - MALWARE
               - SOCIAL_ENGINEERING
               - UNWANTED_SOFTWARE
+              - HIGH_RECALL
             type: string
           type: array
       type: object
@@ -633,6 +637,7 @@ components:
               - MALWARE
               - SOCIAL_ENGINEERING
               - UNWANTED_SOFTWARE
+              - HIGH_RECALL
             type: string
           type: array
       type: object
@@ -647,6 +652,7 @@ components:
               - MALWARE
               - SOCIAL_ENGINEERING
               - UNWANTED_SOFTWARE
+              - HIGH_RECALL
             type: string
           type: array
         uri:
