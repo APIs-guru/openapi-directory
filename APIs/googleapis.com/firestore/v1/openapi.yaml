@@ -819,11 +819,6 @@ paths:
           name: databaseId
           schema:
             type: string
-        - description: If set, validate the request and preview the response, but do not actually create the database.
-          in: query
-          name: validateOnly
-          schema:
-            type: boolean
       requestBody:
         content:
           application/json:

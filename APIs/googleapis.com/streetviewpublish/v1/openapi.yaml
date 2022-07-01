@@ -743,6 +743,18 @@ components:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
       type: object
+    GpsDataGapFailureDetails:
+      description: Details related to ProcessingFailureReason#GPS_DATA_GAP.
+      properties:
+        gapDuration:
+          description: The duration of the gap in GPS data that was found.
+          format: google-duration
+          type: string
+        gapTime:
+          description: Relative time (from the start of the video stream) when the gap started.
+          format: google-duration
+          type: string
+      type: object
     Imu:
       description: IMU data from the device sensors.
       properties:
@@ -761,6 +773,26 @@ components:
           items:
             $ref: "#/components/schemas/Measurement3d"
           type: array
+      type: object
+    ImuDataGapFailureDetails:
+      description: Details related to ProcessingFailureReason#IMU_DATA_GAP.
+      properties:
+        gapDuration:
+          description: The duration of the gap in IMU data that was found.
+          format: google-duration
+          type: string
+        gapTime:
+          description: Relative time (from the start of the video stream) when the gap started.
+          format: google-duration
+          type: string
+      type: object
+    InsufficientGpsFailureDetails:
+      description: Details related to ProcessingFailureReason#INSUFFICIENT_GPS.
+      properties:
+        gpsPointsFound:
+          description: The number of GPS points that were found in the video.
+          format: int32
+          type: integer
       type: object
     LatLng:
       description: An object that represents a latitude/longitude pair. This is expressed as a pair of doubles to represent degrees latitude and degrees longitude. Unless specified otherwise, this object must conform to the WGS84 standard. Values must be within normalized ranges.
@@ -838,6 +870,14 @@ components:
           description: The sensor measurement in the z axis.
           format: float
           type: number
+      type: object
+    NotOutdoorsFailureDetails:
+      description: Details related to ProcessingFailureReason#NOT_OUTDOORS.
+      properties:
+        time:
+          description: Relative time (from the start of the video stream) when an indoor frame was found.
+          format: google-duration
+          type: string
       type: object
     Operation:
       description: This resource represents a long-running operation that is the result of a network API call.
@@ -962,6 +1002,10 @@ components:
           format: double
           readOnly: true
           type: number
+        failureDetails:
+          $ref: "#/components/schemas/ProcessingFailureDetails"
+          description: Output only. If this sequence has `failure_reason` set, this may contain additional details about the failure.
+          readOnly: true
         failureReason:
           description: Output only. If this sequence has processing_state = FAILED, this will contain the reason why it failed. If the processing_state is any other value, this field will be unset.
           enum:
@@ -978,6 +1022,12 @@ components:
             - INVALID_VIDEO_FORMAT
             - INVALID_VIDEO_DIMENSIONS
             - INVALID_CAPTURE_TIME
+            - GPS_DATA_GAP
+            - JUMPY_GPS
+            - INVALID_IMU
+            - IMU_DATA_GAP
+            - UNSUPPORTED_CAMERA
+            - NOT_OUTDOORS
           readOnly: true
           type: string
         filename:
@@ -1084,6 +1134,22 @@ components:
           description: Roll, measured in degrees. Value must be >= 0 and <360. A value of 0 means level with the horizon. NaN indicates an unmeasured quantity.
           format: double
           type: number
+      type: object
+    ProcessingFailureDetails:
+      description: Additional details to accompany the ProcessingFailureReason enum. This message is always expected to be used in conjunction with ProcessingFailureReason, and the oneof value set in this message should match the FailureReason.
+      properties:
+        gpsDataGapDetails:
+          $ref: "#/components/schemas/GpsDataGapFailureDetails"
+          description: See GpsDataGapFailureDetails.
+        imuDataGapDetails:
+          $ref: "#/components/schemas/ImuDataGapFailureDetails"
+          description: See ImuDataGapFailureDetails.
+        insufficientGpsDetails:
+          $ref: "#/components/schemas/InsufficientGpsFailureDetails"
+          description: See InsufficientGpsFailureDetails.
+        notOutdoorsDetails:
+          $ref: "#/components/schemas/NotOutdoorsFailureDetails"
+          description: See NotOutdoorsFailureDetails.
       type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."

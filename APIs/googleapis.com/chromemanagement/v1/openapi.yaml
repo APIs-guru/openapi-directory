@@ -913,6 +913,14 @@ components:
             - X64
           readOnly: true
           type: string
+        keylockerConfigured:
+          description: Output only. Whether keylocker is configured.`TRUE` = Enabled; `FALSE` = disabled. Only reported if keylockerSupported = `TRUE`.
+          readOnly: true
+          type: boolean
+        keylockerSupported:
+          description: Output only. Whether keylocker is supported.
+          readOnly: true
+          type: boolean
         maxClockSpeed:
           description: Output only. The max CPU clock speed in kHz.
           format: int32
@@ -1122,6 +1130,25 @@ components:
           readOnly: true
           type: string
       type: object
+    GoogleChromeManagementV1HttpsLatencyRoutineData:
+      description: Data that describes the result of the HTTPS latency diagnostics routine, with the HTTPS requests issued to Google websites.
+      properties:
+        latency:
+          description: Output only. HTTPS latency if routine succeeded or failed because of HIGH_LATENCY or VERY_HIGH_LATENCY.
+          format: google-duration
+          readOnly: true
+          type: string
+        problem:
+          description: Output only. HTTPS latency routine problem if a problem occurred.
+          enum:
+            - HTTPS_LATENCY_PROBLEM_UNSPECIFIED
+            - FAILED_DNS_RESOLUTIONS
+            - FAILED_HTTPS_REQUESTS
+            - HIGH_LATENCY
+            - VERY_HIGH_LATENCY
+          readOnly: true
+          type: string
+      type: object
     GoogleChromeManagementV1InstalledApp:
       description: Describes an installed app.
       properties:
@@ -1212,6 +1239,10 @@ components:
           format: int64
           readOnly: true
           type: string
+        totalMemoryEncryption:
+          $ref: "#/components/schemas/GoogleChromeManagementV1TotalMemoryEncryptionInfo"
+          description: Output only. Total memory encryption info for the device.
+          readOnly: true
         totalRamBytes:
           description: Output only. Total RAM in bytes.
           format: int64
@@ -1242,15 +1273,106 @@ components:
           readOnly: true
           type: string
       type: object
+    GoogleChromeManagementV1NetworkDevice:
+      description: Network device.
+      properties:
+        iccid:
+          description: Output only. The integrated circuit card ID associated with the device's sim card.
+          readOnly: true
+          type: string
+        imei:
+          description: Output only. IMEI (if applicable) of the corresponding network device.
+          readOnly: true
+          type: string
+        macAddress:
+          description: Output only. MAC address (if applicable) of the corresponding network device.
+          readOnly: true
+          type: string
+        mdn:
+          description: Output only. The mobile directory number associated with the device's sim card.
+          readOnly: true
+          type: string
+        meid:
+          description: Output only. MEID (if applicable) of the corresponding network device.
+          readOnly: true
+          type: string
+        type:
+          description: Output only. Network device type.
+          enum:
+            - NETWORK_DEVICE_TYPE_UNSPECIFIED
+            - CELLULAR_DEVICE
+            - ETHERNET_DEVICE
+            - WIFI_DEVICE
+          readOnly: true
+          type: string
+      type: object
+    GoogleChromeManagementV1NetworkDiagnosticsReport:
+      description: Network testing results to determine the health of the device's network connection, for example whether the HTTPS latency is high or normal.
+      properties:
+        httpsLatencyData:
+          $ref: "#/components/schemas/GoogleChromeManagementV1HttpsLatencyRoutineData"
+          description: Output only. HTTPS latency test data.
+          readOnly: true
+        reportTime:
+          description: Output only. Timestamp of when the diagnostics were collected.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    GoogleChromeManagementV1NetworkInfo:
+      description: Network devices info.
+      properties:
+        networkDevices:
+          description: Output only. List of network devices.
+          items:
+            $ref: "#/components/schemas/GoogleChromeManagementV1NetworkDevice"
+          readOnly: true
+          type: array
+      type: object
     GoogleChromeManagementV1NetworkStatusReport:
       description: State of visible/configured networks.
       properties:
+        connectionState:
+          description: Output only. Current connection state of the network.
+          enum:
+            - NETWORK_CONNECTION_STATE_UNSPECIFIED
+            - ONLINE
+            - CONNECTED
+            - PORTAL
+            - CONNECTING
+            - NOT_CONNECTED
+          readOnly: true
+          type: string
+        connectionType:
+          description: Output only. Network connection type.
+          enum:
+            - NETWORK_TYPE_UNSPECIFIED
+            - CELLULAR
+            - ETHERNET
+            - TETHER
+            - VPN
+            - WIFI
+          readOnly: true
+          type: string
+        encryptionOn:
+          description: Output only. Whether the wifi encryption key is turned off.
+          readOnly: true
+          type: boolean
         gatewayIpAddress:
           description: Output only. Gateway IP address.
           readOnly: true
           type: string
+        guid:
+          description: Output only. Network connection guid.
+          readOnly: true
+          type: string
         lanIpAddress:
           description: Output only. LAN IP address.
+          readOnly: true
+          type: string
+        receivingBitRateMbps:
+          description: Output only. Receiving bit rate measured in megabytes per second.
+          format: int64
           readOnly: true
           type: string
         reportTime:
@@ -1268,6 +1390,25 @@ components:
           format: int32
           readOnly: true
           type: integer
+        transmissionBitRateMbps:
+          description: Output only. Transmission bit rate measured in megabytes per second.
+          format: int64
+          readOnly: true
+          type: string
+        transmissionPowerDbm:
+          description: Output only. Transmission power measured in decibels.
+          format: int32
+          readOnly: true
+          type: integer
+        wifiLinkQuality:
+          description: Output only. Wifi link quality. Value ranges from [0, 70]. 0 indicates no signal and 70 indicates a strong signal.
+          format: int64
+          readOnly: true
+          type: string
+        wifiPowerManagementEnabled:
+          description: Output only. Wifi power management enabled
+          readOnly: true
+          type: boolean
       type: object
     GoogleChromeManagementV1OsUpdateStatus:
       description: Contains information regarding the current OS update status.
@@ -1417,6 +1558,16 @@ components:
           description: Output only. Resource name of the device.
           readOnly: true
           type: string
+        networkDiagnosticsReport:
+          description: Output only. Network diagnostics collected periodically.
+          items:
+            $ref: "#/components/schemas/GoogleChromeManagementV1NetworkDiagnosticsReport"
+          readOnly: true
+          type: array
+        networkInfo:
+          $ref: "#/components/schemas/GoogleChromeManagementV1NetworkInfo"
+          description: Output only. Network devices information.
+          readOnly: true
         networkStatusReport:
           description: Output only. Network specs collected periodically.
           items:
@@ -1447,6 +1598,56 @@ components:
             $ref: "#/components/schemas/GoogleChromeManagementV1StorageStatusReport"
           readOnly: true
           type: array
+        thunderboltInfo:
+          description: Output only. Information on Thunderbolt bus.
+          items:
+            $ref: "#/components/schemas/GoogleChromeManagementV1ThunderboltInfo"
+          readOnly: true
+          type: array
+      type: object
+    GoogleChromeManagementV1ThunderboltInfo:
+      description: Thunderbolt bus info.
+      properties:
+        securityLevel:
+          description: Security level of the Thunderbolt bus.
+          enum:
+            - THUNDERBOLT_SECURITY_LEVEL_UNSPECIFIED
+            - THUNDERBOLT_SECURITY_NONE_LEVEL
+            - THUNDERBOLT_SECURITY_USER_LEVEL
+            - THUNDERBOLT_SECURITY_SECURE_LEVEL
+            - THUNDERBOLT_SECURITY_DP_ONLY_LEVEL
+            - THUNDERBOLT_SECURITY_USB_ONLY_LEVEL
+            - THUNDERBOLT_SECURITY_NO_PCIE_LEVEL
+          type: string
+      type: object
+    GoogleChromeManagementV1TotalMemoryEncryptionInfo:
+      description: Memory encryption information of a device.
+      properties:
+        encryptionAlgorithm:
+          description: Memory encryption algorithm.
+          enum:
+            - MEMORY_ENCRYPTION_ALGORITHM_UNSPECIFIED
+            - MEMORY_ENCRYPTION_ALGORITHM_UNKNOWN
+            - MEMORY_ENCRYPTION_ALGORITHM_AES_XTS_128
+            - MEMORY_ENCRYPTION_ALGORITHM_AES_XTS_256
+          type: string
+        encryptionState:
+          description: The state of memory encryption on the device.
+          enum:
+            - MEMORY_ENCRYPTION_STATE_UNSPECIFIED
+            - MEMORY_ENCRYPTION_STATE_UNKNOWN
+            - MEMORY_ENCRYPTION_STATE_DISABLED
+            - MEMORY_ENCRYPTION_STATE_TME
+            - MEMORY_ENCRYPTION_STATE_MKTME
+          type: string
+        keyLength:
+          description: The length of the encryption keys.
+          format: int64
+          type: string
+        maxKeys:
+          description: The maximum number of keys that can be used for encryption.
+          format: int64
+          type: string
       type: object
     GoogleRpcStatus:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."

@@ -13,15 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Service Directory API
   version: v1beta1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://servicedirectory.googleapis.com/$discovery/rest?version=v1beta1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: servicedirectory
 externalDocs:
@@ -506,7 +508,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Gets the IAM Policy for a resource (namespace or service only).
-      operationId: servicedirectory.projects.locations.namespaces.services.getIamPolicy
+      operationId: servicedirectory.projects.locations.namespaces.serviceWorkloads.getIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
@@ -548,7 +550,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Sets the IAM Policy for a resource (namespace or service only).
-      operationId: servicedirectory.projects.locations.namespaces.services.setIamPolicy
+      operationId: servicedirectory.projects.locations.namespaces.serviceWorkloads.setIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being specified. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
@@ -589,8 +591,8 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Tests IAM permissions for a resource (namespace or service only).
-      operationId: servicedirectory.projects.locations.namespaces.services.testIamPermissions
+      description: Tests IAM permissions for a resource (namespace, service or service workload only).
+      operationId: servicedirectory.projects.locations.namespaces.serviceWorkloads.testIamPermissions
       parameters:
         - description: "REQUIRED: The resource for which the policy detail is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
@@ -973,3 +975,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}
