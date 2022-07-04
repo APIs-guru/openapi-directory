@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://eventarc.googleapis.com/$discovery/rest?version=v1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: eventarc
 externalDocs:
@@ -878,6 +878,9 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        cryptoKeyName:
+          description: Optional. Resource name of a KMS crypto key (managed by the user) used to encrypt/decrypt their event data. It must match the pattern `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
+          type: string
         name:
           description: Required. The resource name of the channel. Must be unique within the location on the project and must be in `projects/{project}/locations/{location}/channels/{channel_id}` format.
           type: string
@@ -925,7 +928,7 @@ components:
           description: Required. The name of the connection.
           type: string
         uid:
-          description: Output only. / Output only. Server assigned ID of the resource. The server guarantees uniqueness and immutability until deleted.
+          description: Output only. Server assigned ID of the resource. The server guarantees uniqueness and immutability until deleted.
           readOnly: true
           type: string
         updateTime:
@@ -1057,6 +1060,21 @@ components:
           description: Required. Name of the GKE service.
           type: string
       type: object
+    GoogleChannelConfig:
+      description: A GoogleChannelConfig is a resource that stores the custom settings respected by Eventarc first-party triggers in the matching region. Once configured, first-party event data will be protected using the specified custom managed encryption key instead of Google-managed encryption keys.
+      properties:
+        cryptoKeyName:
+          description: Optional. Resource name of a KMS crypto key (managed by the user) used to encrypt/decrypt their event data. It must match the pattern `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
+          type: string
+        name:
+          description: Required. The resource name of the config. Must be in the format of, `projects/{project}/locations/{location}/googleChannelConfig`.
+          type: string
+        updateTime:
+          description: Output only. The last-modified time.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
     GoogleLongrunningCancelOperationRequest:
       description: The request message for Operations.CancelOperation.
       properties: {}
@@ -1123,7 +1141,7 @@ components:
             $ref: "#/components/schemas/ChannelConnection"
           type: array
         nextPageToken:
-          description: A page token that can be sent to ListChannelConnections to request the next page. If this is empty, then there are no more pages.
+          description: A page token that can be sent to `ListChannelConnections` to request the next page. If this is empty, then there are no more pages.
           type: string
         unreachable:
           description: Unreachable resources, if any.
@@ -1140,7 +1158,7 @@ components:
             $ref: "#/components/schemas/Channel"
           type: array
         nextPageToken:
-          description: A page token that can be sent to ListChannels to request the next page. If this is empty, then there are no more pages.
+          description: A page token that can be sent to `ListChannels` to request the next page. If this is empty, then there are no more pages.
           type: string
         unreachable:
           description: Unreachable resources, if any.
@@ -1164,7 +1182,7 @@ components:
       description: The response message for the `ListProviders` method.
       properties:
         nextPageToken:
-          description: A page token that can be sent to ListProviders to request the next page. If this is empty, then there are no more pages.
+          description: A page token that can be sent to `ListProviders` to request the next page. If this is empty, then there are no more pages.
           type: string
         providers:
           description: The requested providers, up to the number specified in `page_size`.
@@ -1181,7 +1199,7 @@ components:
       description: The response message for the `ListTriggers` method.
       properties:
         nextPageToken:
-          description: A page token that can be sent to ListTriggers to request the next page. If this is empty, then there are no more pages.
+          description: A page token that can be sent to `ListTriggers` to request the next page. If this is empty, then there are no more pages.
           type: string
         triggers:
           description: The requested triggers, up to the number specified in `page_size`.

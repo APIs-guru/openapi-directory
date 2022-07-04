@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.0.1
 servers:
   - url: https://api.nexmo.com/v1/messages
 info:
@@ -1194,7 +1194,7 @@ components:
         viber_service:
           properties:
             category:
-              description: The use of different category tags enables the business to send messages for different use cases. For Viber Service Messages the first message sent from a business to a user must be personal, informative & a targeted message - not promotional. By default Vonage sends the `transaction` category to Viber Service Messages.
+              description: The use of different category tags enables the business to send messages for different use cases. For Viber Business Messages the first message sent from a business to a user must be personal, informative & a targeted message - not promotional. By default Vonage sends the `transaction` category to Viber Business Messages.
               enum:
                 - transaction
                 - promotion
@@ -1574,7 +1574,7 @@ x-errors:
   "1250":
     description: Unroutable  -  The chosen route to send your message is not available. This is because the phone number is either currently on an unsupported network or on a pre-paid or reseller account that could not receive a message sent by from. To resolve this issue either email us at support@nexmo.com or create a helpdesk ticket at https://help.nexmo.com.
   "1260":
-    description: Destination unreachable  -  The message could not be delivered to the phone number. If using Viber Service Messages your account might not be enabled for this country.
+    description: Destination unreachable  -  The message could not be delivered to the phone number. If using Viber Business Messages your account might not be enabled for this country.
   "1270":
     description: Subscriber Age Restriction  -  The carrier blocked this message because the content is not suitable for to based on age restrictions.
   "1280":

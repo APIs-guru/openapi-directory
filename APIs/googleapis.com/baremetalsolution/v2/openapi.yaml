@@ -1557,6 +1557,9 @@ components:
           enum:
             - STATE_UNSPECIFIED
             - PROVISIONED
+            - CREATING
+            - UPDATING
+            - DELETING
           type: string
         volume:
           description: The volume containing the share.
