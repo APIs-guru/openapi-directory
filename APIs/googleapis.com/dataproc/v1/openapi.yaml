@@ -1944,6 +1944,12 @@ components:
     ClusterOperationMetadata:
       description: Metadata describing the operation.
       properties:
+        childOperationIds:
+          description: Output only. Child operation ids
+          items:
+            type: string
+          readOnly: true
+          type: array
         clusterName:
           description: Output only. Name of the cluster for the operation.
           readOnly: true
@@ -2041,6 +2047,7 @@ components:
             - STOPPING
             - STOPPED
             - STARTING
+            - REPAIRING
           readOnly: true
           type: string
         stateStartTime:
@@ -2068,7 +2075,7 @@ components:
       description: Dataproc metric config.
       properties:
         metrics:
-          description: Required. Metrics to enable.
+          description: Required. Metrics sources to enable.
           items:
             $ref: "#/components/schemas/Metric"
           type: array
@@ -2099,7 +2106,7 @@ components:
           description: 'Optional. Interface type of local SSDs (default is "scsi"). Valid values: "scsi" (Small Computer System Interface), "nvme" (Non-Volatile Memory Express). See local SSD performance (https://cloud.google.com/compute/docs/disks/local-ssd#performance).'
           type: string
         numLocalSsds:
-          description: Optional. Number of attached SSDs, from 0 to 4 (default is 0). If SSDs are not attached, the boot disk is used to store runtime logs and HDFS (https://hadoop.apache.org/docs/r1.2.1/hdfs_user_guide.html) data. If one or more SSDs are attached, this runtime bulk data is spread across them, and the boot disk contains only basic config and installed binaries.
+          description: "Optional. Number of attached SSDs, from 0 to 8 (default is 0). If SSDs are not attached, the boot disk is used to store runtime logs and HDFS (https://hadoop.apache.org/docs/r1.2.1/hdfs_user_guide.html) data. If one or more SSDs are attached, this runtime bulk data is spread across them, and the boot disk contains only basic config and installed binaries.Note: Local SSD options may vary by machine type and number of vCPUs selected."
           format: int32
           type: integer
       type: object
@@ -2267,7 +2274,7 @@ components:
             $ref: "#/components/schemas/GkeNodePoolAcceleratorConfig"
           type: array
         bootDiskKmsKey:
-          description: "Optional. The Customer Managed Encryption Key (CMEK) (https://cloud.google.com/compute/docs/disks/customer-managed-encryption) used to encrypt the boot disk attached to each node in the node pool. Specify the key using the following format: projects/KEY_PROJECT_ID /locations/LOCATION/keyRings/RING_NAME/cryptoKeys/KEY_NAME."
+          description: "Optional. The Customer Managed Encryption Key (CMEK) (https://cloud.google.com/kubernetes-engine/docs/how-to/using-cmek) used to encrypt the boot disk attached to each node in the node pool. Specify the key using the following format: projects/KEY_PROJECT_ID/locations/LOCATION /keyRings/RING_NAME/cryptoKeys/KEY_NAME."
           type: string
         localSsdCount:
           description: Optional. The number of local SSD disks to attach to the node, which is limited by the maximum number of disks allowable per zone (see Adding Local SSDs (https://cloud.google.com/compute/docs/disks/local-ssd)).
@@ -2934,15 +2941,15 @@ components:
           type: string
       type: object
     Metric:
-      description: The metric source to enable, with any optional metrics, to override Dataproc default metrics.
+      description: A Dataproc OSS metric.
       properties:
         metricOverrides:
-          description: Optional. Optional Metrics to override the Dataproc default metrics configured for the metric source.
+          description: "Optional. Specify one or more available OSS metrics (https://cloud.google.com/dataproc/docs/guides/monitoring#available_oss_metrics) to collect for the metric course (for the SPARK metric source, any Spark metric (https://spark.apache.org/docs/latest/monitoring.html#metrics) can be specified).Provide metrics in the following format: METRIC_SOURCE: INSTANCE:GROUP:METRIC Use camelcase as appropriate.Examples: yarn:ResourceManager:QueueMetrics:AppsCompleted spark:driver:DAGScheduler:job.allJobs sparkHistoryServer:JVM:Memory:NonHeapMemoryUsage.committed hiveserver2:JVM:Memory:NonHeapMemoryUsage.used Notes: Only the specified overridden metrics will be collected for the metric source. For example, if one or more spark:executive metrics are listed as metric overrides, other SPARK metrics will not be collected. The collection of the default metrics for other OSS metric sources is unaffected. For example, if both SPARK andd YARN metric sources are enabled, and overrides are provided for Spark metrics only, all default YARN metrics will be collected."
           items:
             type: string
           type: array
         metricSource:
-          description: Required. MetricSource to enable.
+          description: Required. Default metrics are collected unless metricOverrides are specified for the metric source (see Available OSS metrics (https://cloud.google.com/dataproc/docs/guides/monitoring#available_oss_metrics) for more information).
           enum:
             - METRIC_SOURCE_UNSPECIFIED
             - MONITORING_AGENT_DEFAULTS
