@@ -733,6 +733,18 @@ components:
           readOnly: true
           type: integer
       type: object
+    GoogleCloudPaymentsResellerSubscriptionV1ServicePeriod:
+      description: A description of what time period or moment in time the product or service is being delivered over.
+      properties:
+        endTime:
+          description: Optional. The end time of the service period. Time is exclusive.
+          format: google-datetime
+          type: string
+        startTime:
+          description: Required. The start time of the service period. Time is inclusive.
+          format: google-datetime
+          type: string
+      type: object
     GoogleCloudPaymentsResellerSubscriptionV1Subscription:
       description: A Subscription resource managed by 3P Partners.
       properties:
@@ -844,7 +856,7 @@ components:
           type: string
       type: object
     GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItem:
-      description: "Individual line item definition of a subscription. Next id: 6"
+      description: "Individual line item definition of a subscription. Next id: 8"
       properties:
         description:
           description: Output only. Description of this line item.
@@ -860,8 +872,20 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1SubscriptionPromotionSpec"
           type: array
+        oneTimeRecurrenceDetails:
+          $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemOneTimeRecurrenceDetails"
+          description: Output only. Details only set for a ONE_TIME recurrence line item.
+          readOnly: true
         product:
           description: Required. Product resource name that identifies one the line item The format is 'partners/{partner_id}/products/{product_id}'.
+          type: string
+        recurrenceType:
+          description: Output only. The recurrence type of the line item.
+          enum:
+            - LINE_ITEM_RECURRENCE_TYPE_UNSPECIFIED
+            - LINE_ITEM_RECURRENCE_TYPE_PERIODIC
+            - LINE_ITEM_RECURRENCE_TYPE_ONE_TIME
+          readOnly: true
           type: string
         state:
           description: Output only. The state of the line item.
@@ -874,6 +898,13 @@ components:
             - LINE_ITEM_STATE_DEACTIVATING
           readOnly: true
           type: string
+      type: object
+    GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemOneTimeRecurrenceDetails:
+      description: Details for a ONE_TIME recurrence line item.
+      properties:
+        servicePeriod:
+          $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1ServicePeriod"
+          description: The service period of the ONE_TIME line item.
       type: object
     GoogleCloudPaymentsResellerSubscriptionV1SubscriptionPromotionSpec:
       description: Describes the spec for one promotion.

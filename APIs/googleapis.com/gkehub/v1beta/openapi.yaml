@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://gkehub.googleapis.com/$discovery/rest?version=v1beta
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: gkehub
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/anthos/multicluster-management/connect/registering-a-cluster
 tags:
@@ -1130,6 +1131,9 @@ components:
         monitoring:
           $ref: "#/components/schemas/ConfigManagementPolicyControllerMonitoring"
           description: Monitoring specifies the configuration of monitoring.
+        mutationEnabled:
+          description: Enable or disable mutation in policy controller. If true, mutation CRDs, webhook and controller deployment will be deployed to the cluster.
+          type: boolean
         referentialRulesEnabled:
           description: Enables the ability to use Constraint Templates that reference to objects other than the object currently being evaluated.
           type: boolean
@@ -1543,7 +1547,7 @@ components:
           description: Identity Service-specific state.
         metering:
           $ref: "#/components/schemas/MeteringMembershipState"
-          description: Metering-specific spec.
+          description: Metering-specific state.
         policycontroller:
           $ref: "#/components/schemas/PolicyControllerMembershipState"
           description: Policycontroller-specific state.

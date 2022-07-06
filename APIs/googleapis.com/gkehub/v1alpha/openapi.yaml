@@ -1490,7 +1490,7 @@ components:
           $ref: "#/components/schemas/ConfigManagementPolicyControllerMonitoring"
           description: Monitoring specifies the configuration of monitoring.
         mutationEnabled:
-          description: Enable users to try out mutation for PolicyController.
+          description: Enable or disable mutation in policy controller. If true, mutation CRDs, webhook and controller deployment will be deployed to the cluster.
           type: boolean
         referentialRulesEnabled:
           description: Enables the ability to use Constraint Templates that reference to objects other than the object currently being evaluated.
@@ -2175,7 +2175,7 @@ components:
           description: Identity Service-specific state.
         metering:
           $ref: "#/components/schemas/MeteringMembershipState"
-          description: Metering-specific spec.
+          description: Metering-specific state.
         policycontroller:
           $ref: "#/components/schemas/PolicyControllerMembershipState"
           description: Policycontroller-specific state.
