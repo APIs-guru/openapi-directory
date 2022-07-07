@@ -166,7 +166,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Required. The field paths to be updated, comma separated if there are multiple. Currently supported field paths: * text * cards * attachment"
+        - description: "Required. The field paths to update. Separate multiple values with commas. Currently supported field paths: - text - cards (Requires [service account authentication](/chat/api/guides/auth/service-accounts).) - attachment"
           in: query
           name: updateMask
           schema:
