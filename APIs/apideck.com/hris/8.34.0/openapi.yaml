@@ -272,7 +272,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: HRIS API
-  version: 8.32.6
+  version: 8.34.0
   x-apideck-api: hris
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -323,6 +323,11 @@ tags:
     x-apideck-model:
       $ref: "#/components/schemas/EmployeeSchedules"
     x-apideck-resource-id: employee-schedules
+  - description: ""
+    name: Jobs
+    x-apideck-model:
+      $ref: "#/components/schemas/HrisJobs"
+    x-apideck-resource-id: jobs
 paths:
   /hris/companies:
     get:
@@ -1094,6 +1099,15 @@ paths:
                 salutation: 'Mr',
                 title: 'CEO',
                 marital_status: 'married',
+                partner: {
+                  first_name: 'Elon',
+                  last_name: 'Musk',
+                  middle_name: 'D.',
+                  gender: 'male',
+                  initials: 'EM',
+                  birthday: '2000-08-12',
+                  deceased_on: '2000-08-12'
+                },
                 division: 'Europe',
                 department: 'R&D',
                 team: {
@@ -1122,6 +1136,7 @@ paths:
                 ],
                 social_security_number: '123456789',
                 birthday: '2000-08-12',
+                deceased_on: '2000-08-12',
                 country_of_birth: 'US',
                 description: 'A description',
                 gender: 'male',
@@ -1139,6 +1154,8 @@ paths:
                   {
                     title: 'CEO',
                     role: 'Sales',
+                    start_date: '2020-08-12',
+                    end_date: '2020-08-12',
                     compensation_rate: 72000,
                     currency: 'USD',
                     payment_unit: 'year',
@@ -1417,6 +1434,15 @@ paths:
                 salutation: 'Mr',
                 title: 'CEO',
                 marital_status: 'married',
+                partner: {
+                  first_name: 'Elon',
+                  last_name: 'Musk',
+                  middle_name: 'D.',
+                  gender: 'male',
+                  initials: 'EM',
+                  birthday: '2000-08-12',
+                  deceased_on: '2000-08-12'
+                },
                 division: 'Europe',
                 department: 'R&D',
                 team: {
@@ -1445,6 +1471,7 @@ paths:
                 ],
                 social_security_number: '123456789',
                 birthday: '2000-08-12',
+                deceased_on: '2000-08-12',
                 country_of_birth: 'US',
                 description: 'A description',
                 gender: 'male',
@@ -1462,6 +1489,8 @@ paths:
                   {
                     title: 'CEO',
                     role: 'Sales',
+                    start_date: '2020-08-12',
+                    end_date: '2020-08-12',
                     compensation_rate: 72000,
                     currency: 'USD',
                     payment_unit: 'year',
@@ -1575,6 +1604,113 @@ paths:
 
             try {
               const { data } = await apideck.hris.employeesUpdate(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/hris/jobs/employees/{employee_id}":
+    get:
+      description: List Jobs for employee.
+      operationId: jobsAll
+      parameters:
+        - $ref: "#/components/parameters/employeeId"
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetHrisJobsResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: List Jobs
+      tags:
+        - Jobs
+      x-apideck-api: hris
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.hris.jobsAll({
+                employeeId: 'employee_id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: jobs
+  "/hris/jobs/employees/{employee_id}/jobs/{job_id}":
+    get:
+      description: A Job for employee.
+      operationId: jobsOne
+      parameters:
+        - $ref: "#/components/parameters/jobId"
+        - $ref: "#/components/parameters/employeeId"
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetHrisJobResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: One Job
+      tags:
+        - Jobs
+      x-apideck-api: hris
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              jobId: 'job_id_example',
+              employeeId: 'employee_id_example'
+            }
+
+            try {
+              const { data } = await apideck.hris.jobsOne(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
@@ -1894,6 +2030,13 @@ components:
       required: true
       schema:
         type: string
+    jobId:
+      description: ID of the job you are acting upon.
+      in: path
+      name: job_id
+      required: true
+      schema:
+        type: string
     limit:
       description: Number of records to return
       in: query
@@ -2028,6 +2171,18 @@ components:
           schema:
             $ref: "#/components/schemas/GetHrisCompanyResponse"
       description: Company
+    GetHrisJobResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetHrisJobResponse"
+      description: Job
+    GetHrisJobsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetHrisJobsResponse"
+      description: Jobs
     GetPayrollResponse:
       content:
         application/json:
@@ -3310,6 +3465,11 @@ components:
           items:
             $ref: "#/components/schemas/CustomField"
           type: array
+        deceased_on:
+          example: 2000-08-12
+          format: date
+          nullable: true
+          type: string
         deleted:
           example: true
           nullable: true
@@ -3428,6 +3588,11 @@ components:
                 $ref: "#/components/schemas/Currency"
               employee_id:
                 $ref: "#/components/schemas/Id"
+              end_date:
+                example: 2020-08-12
+                format: date
+                nullable: true
+                type: string
               hired_at:
                 example: 2020-08-12
                 format: date
@@ -3450,6 +3615,11 @@ components:
                 nullable: true
                 title: Job role
                 type: string
+              start_date:
+                example: 2020-08-12
+                format: date
+                nullable: true
+                type: string
               title:
                 $ref: "#/components/schemas/Title"
             type: object
@@ -3457,12 +3627,14 @@ components:
               compensation_rate: medium
               currency: medium
               employee_id: edge-case
+              end_date: high
               hired_at: medium
               id: critical
               is_primary: medium
               location: medium
               payment_unit: medium
               role: medium
+              start_date: high
               title: critical
           type: array
         languages:
@@ -3511,6 +3683,42 @@ components:
             title: Nationality
             type: string
           type: array
+        partner:
+          additionalProperties: false
+          properties:
+            birthday:
+              example: 2000-08-12
+              format: date
+              nullable: true
+              type: string
+            deceased_on:
+              example: 2000-08-12
+              format: date
+              nullable: true
+              type: string
+            first_name:
+              $ref: "#/components/schemas/FirstName"
+            gender:
+              $ref: "#/components/schemas/Gender"
+            id:
+              $ref: "#/components/schemas/Id"
+            initials:
+              example: EM
+              nullable: true
+              title: Initials
+              type: string
+            last_name:
+              $ref: "#/components/schemas/LastName"
+            middle_name:
+              $ref: "#/components/schemas/MiddleName"
+          type: object
+          x-apideck-weights:
+            birthday: low
+            deceased_on: low
+            first_name: critical
+            id: low
+            initials: medium
+            last_name: critical
         phone_numbers:
           items:
             $ref: "#/components/schemas/PhoneNumber"
@@ -3626,6 +3834,7 @@ components:
         created_at: medium
         created_by: edge-case
         custom_fields: edge-case
+        deceased_on: low
         deleted: medium
         department: medium
         description: edge-case
@@ -3651,6 +3860,7 @@ components:
         marital_status: medium
         middle_name: medium
         nationalities: high
+        partner: low
         phone_numbers: high
         photo_url: medium
         preferred_language: high
@@ -4048,6 +4258,72 @@ components:
         - data
       type: object
       x-graphql-type-name: HrisCompany
+    GetHrisJobResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/HrisJob"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Employees
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: sage-hr
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: Job
+    GetHrisJobsResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/HrisJobs"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Employees
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: sage-hr
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: JobsList
     GetPayrollResponse:
       properties:
         data:
@@ -4201,6 +4477,67 @@ components:
         - hris.company.deleted
       example: hris.employee.created
       type: string
+    HrisJob:
+      properties:
+        department:
+          description: Department name
+          example: Brussels Office
+          nullable: true
+          type: string
+        employee_id:
+          description: Id of the employee
+          type: string
+        employment_status:
+          enum:
+            - active
+            - inactive
+            - terminated
+            - other
+          example: active
+          nullable: true
+          type: string
+          x-apideck-enum-id: employees.employment_status
+        end_date:
+          example: 2020-08-12
+          format: date
+          nullable: true
+          type: string
+        id:
+          $ref: "#/components/schemas/Id"
+        location:
+          additionalProperties: false
+          properties:
+            name:
+              example: HQ US
+              nullable: true
+              type: string
+          type: object
+        start_date:
+          example: 2020-08-12
+          format: date
+          nullable: true
+          type: string
+        title:
+          $ref: "#/components/schemas/Title"
+      type: object
+      x-apideck-weights:
+        department: medium
+        employee_id: critical
+        employment_status: high
+        end_date: high
+        id: critical
+        location: medium
+        start_date: high
+        title: critical
+    HrisJobs:
+      properties:
+        employee:
+          $ref: "#/components/schemas/Employee"
+        jobs:
+          items:
+            $ref: "#/components/schemas/HrisJob"
+          type: array
+      type: object
     Id:
       example: "12345"
       readOnly: true

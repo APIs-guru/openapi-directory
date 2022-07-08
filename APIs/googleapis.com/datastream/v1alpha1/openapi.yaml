@@ -2013,7 +2013,7 @@ components:
       description: The VPC Peering configuration is used to create VPC peering between Datastream and the consumer's VPC.
       properties:
         subnet:
-          description: Required. A free subnet for peering. (CIDR of /29) TODO(b/172995841) add validators.
+          description: Required. A free subnet for peering. (CIDR of /29)
           type: string
         vpcName:
           description: Required. fully qualified name of the VPC Datastream will peer to.
