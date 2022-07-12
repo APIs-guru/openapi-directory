@@ -1812,6 +1812,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/Cuepoint"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/youtubepartner
+          Oauth2c:
+            - https://www.googleapis.com/auth/youtubepartner
       tags:
         - liveBroadcasts
   /youtube/v3/liveBroadcasts/transition:
@@ -9435,7 +9440,7 @@ components:
           type: string
       type: object
     VideoStatus:
-      description: "Basic details about a video category, such as its localized title. Next Id: 17"
+      description: "Basic details about a video category, such as its localized title. Next Id: 18"
       properties:
         embeddable:
           description: This value indicates if the video can be embedded on another website. @mutable youtube.videos.insert youtube.videos.update

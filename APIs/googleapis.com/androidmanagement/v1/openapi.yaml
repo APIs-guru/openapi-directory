@@ -818,7 +818,7 @@ components:
           description: SHA-256 hash of the base APK, in hexadecimal format.
           type: string
         packageNames:
-          description: Package names of all packages that are associated with the particular user id. In most cases, this will be a single package name, the package that has been assigned that user id. If multiple application share a uid then all packages sharing uid will be included.
+          description: Package names of all packages that are associated with the particular user ID. In most cases, this will be a single package name, the package that has been assigned that user ID. If multiple application share a UID then all packages sharing UID will be included.
           items:
             type: string
           type: array
@@ -1067,6 +1067,8 @@ components:
               - PERMISSION_GRANT
               - PACKAGE_ACCESS
               - ENABLE_SYSTEM_APP
+              - NETWORK_ACTIVITY_LOGS
+              - SECURITY_LOGS
             type: string
           type: array
         disabled:
@@ -1718,7 +1720,7 @@ components:
             - PERSONAL_USAGE_DISALLOWED
           type: string
         duration:
-          description: The length of time the enrollment token is valid, ranging from 1 minute to 90 days. If not specified, the default duration is 1 hour.
+          description: The length of time the enrollment token is valid, ranging from 1 minute to Durations.MAX_VALUE (https://developers.google.com/protocol-buffers/docs/reference/java/com/google/protobuf/util/Durations.html#MAX_VALUE), approximately 10,000 years. If not specified, the default duration is 1 hour. Please note that if requested duration causes the resulting expiration_timestamp to exceed Timestamps.MAX_VALUE (https://developers.google.com/protocol-buffers/docs/reference/java/com/google/protobuf/util/Timestamps.html#MAX_VALUE), then expiration_timestamp is coerced to Timestamps.MAX_VALUE.
           format: google-duration
           type: string
         expirationTimestamp:
@@ -3392,13 +3394,13 @@ components:
           description: An X.509v3 certificate failed to validate, currently this validation is performed on the Wi-FI access point and failure may be due to a mismatch upon server certificate validation. However it may in the future include other validation events of an X.509v3 certificate. Part of SECURITY_LOGS.
         connectEvent:
           $ref: "#/components/schemas/ConnectEvent"
-          description: A TCP connect event was initiated through the standard network stack. Part of NETWORK_LOGS.
+          description: A TCP connect event was initiated through the standard network stack. Part of NETWORK_ACTIVITY_LOGS.
         cryptoSelfTestCompletedEvent:
           $ref: "#/components/schemas/CryptoSelfTestCompletedEvent"
           description: Validates whether Android’s built-in cryptographic library (BoringSSL) is valid. Should always succeed on device boot, if it fails, the device should be considered untrusted. Part of SECURITY_LOGS.
         dnsEvent:
           $ref: "#/components/schemas/DnsEvent"
-          description: A DNS lookup event was initiated through the standard network stack. Part of NETWORK_LOGS.
+          description: A DNS lookup event was initiated through the standard network stack. Part of NETWORK_ACTIVITY_LOGS.
         eventId:
           description: Unique id of the event.
           format: int64
@@ -3492,7 +3494,7 @@ components:
           description: The device or profile has been remotely locked via the LOCK command. Part of SECURITY_LOGS.
         wipeFailureEvent:
           $ref: "#/components/schemas/WipeFailureEvent"
-          description: The work profile or company-owned device failed to wipe when when requested. This could be user initiated or admin initiated e.g. delete was received. Part of SECURITY_LOGS.
+          description: The work profile or company-owned device failed to wipe when requested. This could be user initiated or admin initiated e.g. delete was received. Part of SECURITY_LOGS.
       type: object
     User:
       description: A user belonging to an enterprise.
@@ -3596,7 +3598,7 @@ components:
           type: integer
       type: object
     WipeFailureEvent:
-      description: The work profile or company-owned device failed to wipe when when requested. This could be user initiated or admin initiated e.g. delete was received. Intentionally empty.
+      description: The work profile or company-owned device failed to wipe when requested. This could be user initiated or admin initiated e.g. delete was received. Intentionally empty.
       properties: {}
       type: object
   securitySchemes:

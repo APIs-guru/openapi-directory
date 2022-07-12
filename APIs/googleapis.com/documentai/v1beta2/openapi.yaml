@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://documentai.googleapis.com/$discovery/rest?version=v1beta2
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: documentai
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/document-ai/docs/
 tags:
@@ -823,6 +824,19 @@ components:
           format: google-datetime
           type: string
       type: object
+    GoogleCloudDocumentaiV1beta1Barcode:
+      description: Encodes the detailed information of a barcode.
+      properties:
+        format:
+          description: "Format of a barcode. The supported formats are: CODE_128: Code 128 type. CODE_39: Code 39 type. CODE_93: Code 93 type. CODABAR: Codabar type. DATA_MATRIX: 2D Data Matrix type. ITF: ITF type. EAN_13: EAN-13 type. EAN_8: EAN-8 type. QR_CODE: 2D QR code type. UPC_A: UPC-A type. UPC_E: UPC-E type. PDF417: PDF417 type. AZTEC: 2D Aztec code type. DATABAR: GS1 DataBar code type."
+          type: string
+        rawValue:
+          description: Raw value encoded in the barcode. For example, 'MEBKM:TITLE:Google;URL:https://www.google.com;;'.
+          type: string
+        valueFormat:
+          description: "Value format describes the format of the value that a barcode encodes. The supported formats are: CONTACT_INFO: Contact information. EMAIL: Email address. ISBN: ISBN identifier. PHONE: Phone number. PRODUCT: Product. SMS: SMS message. TEXT: Text string. URL: URL address. WIFI: Wifi information. GEO: Geo-localization. CALENDAR_EVENT: Calendar event. DRIVER_LICENSE: Driver's license."
+          type: string
+      type: object
     GoogleCloudDocumentaiV1beta1BatchProcessDocumentsResponse:
       description: Response to an batch document processing request. This is returned in the LRO Operation after the operation is complete.
       properties:
@@ -993,6 +1007,11 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageBlock"
           type: array
+        detectedBarcodes:
+          description: A list of detected barcodes.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageDetectedBarcode"
+          type: array
         detectedLanguages:
           description: A list of detected languages together with confidence.
           items:
@@ -1108,6 +1127,16 @@ components:
         provenance:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentProvenance"
           description: The history of this annotation.
+      type: object
+    GoogleCloudDocumentaiV1beta1DocumentPageDetectedBarcode:
+      description: A detected barcode.
+      properties:
+        barcode:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1Barcode"
+          description: Detailed barcode information of the DetectedBarcode.
+        layout:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageLayout"
+          description: Layout for DetectedBarcode.
       type: object
     GoogleCloudDocumentaiV1beta1DocumentPageDetectedLanguage:
       description: Detected language for a structural component.
@@ -1643,6 +1672,19 @@ components:
           description: "Resource name of the AutoML model. Format: `projects/{project-id}/locations/{location-id}/models/{model-id}`."
           type: string
       type: object
+    GoogleCloudDocumentaiV1beta2Barcode:
+      description: Encodes the detailed information of a barcode.
+      properties:
+        format:
+          description: "Format of a barcode. The supported formats are: CODE_128: Code 128 type. CODE_39: Code 39 type. CODE_93: Code 93 type. CODABAR: Codabar type. DATA_MATRIX: 2D Data Matrix type. ITF: ITF type. EAN_13: EAN-13 type. EAN_8: EAN-8 type. QR_CODE: 2D QR code type. UPC_A: UPC-A type. UPC_E: UPC-E type. PDF417: PDF417 type. AZTEC: 2D Aztec code type. DATABAR: GS1 DataBar code type."
+          type: string
+        rawValue:
+          description: Raw value encoded in the barcode. For example, 'MEBKM:TITLE:Google;URL:https://www.google.com;;'.
+          type: string
+        valueFormat:
+          description: "Value format describes the format of the value that a barcode encodes. The supported formats are: CONTACT_INFO: Contact information. EMAIL: Email address. ISBN: ISBN identifier. PHONE: Phone number. PRODUCT: Product. SMS: SMS message. TEXT: Text string. URL: URL address. WIFI: Wifi information. GEO: Geo-localization. CALENDAR_EVENT: Calendar event. DRIVER_LICENSE: Driver's license."
+          type: string
+      type: object
     GoogleCloudDocumentaiV1beta2BatchProcessDocumentsRequest:
       description: Request to batch process documents as an asynchronous operation. The output is written to Cloud Storage as JSON in the [Document] format.
       properties:
@@ -1841,6 +1883,11 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageBlock"
           type: array
+        detectedBarcodes:
+          description: A list of detected barcodes.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageDetectedBarcode"
+          type: array
         detectedLanguages:
           description: A list of detected languages together with confidence.
           items:
@@ -1956,6 +2003,16 @@ components:
         provenance:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentProvenance"
           description: The history of this annotation.
+      type: object
+    GoogleCloudDocumentaiV1beta2DocumentPageDetectedBarcode:
+      description: A detected barcode.
+      properties:
+        barcode:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2Barcode"
+          description: Detailed barcode information of the DetectedBarcode.
+        layout:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageLayout"
+          description: Layout for DetectedBarcode.
       type: object
     GoogleCloudDocumentaiV1beta2DocumentPageDetectedLanguage:
       description: Detected language for a structural component.
@@ -2950,7 +3007,7 @@ components:
           type: string
       type: object
     GoogleTypePostalAddress:
-      description: "Represents a postal address, e.g. for postal delivery or payments addresses. Given a postal address, a postal service can deliver items to a premise, P.O. Box or similar. It is not intended to model geographical locations (roads, towns, mountains). In typical usage an address would be created via user input or from importing existing data, depending on the type of process. Advice on address input / editing: - Use an i18n-ready address widget such as https://github.com/google/libaddressinput) - Users should not be presented with UI elements for input or editing of fields outside countries where that field is used. For more guidance on how to use this schema, please see: https://support.google.com/business/answer/6397478"
+      description: "Represents a postal address, e.g. for postal delivery or payments addresses. Given a postal address, a postal service can deliver items to a premise, P.O. Box or similar. It is not intended to model geographical locations (roads, towns, mountains). In typical usage an address would be created via user input or from importing existing data, depending on the type of process. Advice on address input / editing: - Use an internationalization-ready address widget such as https://github.com/google/libaddressinput) - Users should not be presented with UI elements for input or editing of fields outside countries where that field is used. For more guidance on how to use this schema, please see: https://support.google.com/business/answer/6397478"
       properties:
         addressLines:
           description: Unstructured address lines describing the lower levels of an address. Because values in address_lines do not have type information and may sometimes contain multiple values in a single field (e.g. "Austin, TX"), it is important that the line order is clear. The order of address lines should be "envelope order" for the country/region of the address. In places where this can vary (e.g. Japan), address_language is used to make it explicit (e.g. "ja" for large-to-small ordering and "ja-Latn" or "en" for small-to-large). This way, the most specific line of an address can be selected based on the language. The minimum permitted structural representation of an address consists of a region_code with all remaining information placed in the address_lines. It would be possible to format such an address very approximately without geocoding, but no semantic reasoning could be made about any of the address components until it was at least partially resolved. Creating an address only containing a region_code and address_lines, and then geocoding is the recommended way to handle completely unstructured addresses (as opposed to guessing which parts of the address should be localities or administrative areas).

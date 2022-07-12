@@ -34,10 +34,10 @@ tags:
 paths:
   /queries:
     get:
-      description: Retrieves stored queries.
+      description: Lists queries created by the current user.
       operationId: doubleclickbidmanager.queries.list
       parameters:
-        - description: 'Name of a field used to order results. The default sorting order is ascending. To specify descending order for a field, append a " desc" suffix. For example "metadata.title desc". Sorting is only supported for the following fields: * queryId * metadata.title'
+        - description: 'Name of a field used to order results. The default sorting order is ascending. To specify descending order for a field, append a " desc" suffix. For example "metadata.title desc". Sorting is only supported for the following fields: * `queryId` * `metadata.title`'
           in: query
           name: orderBy
           schema:
@@ -102,10 +102,10 @@ paths:
         - queries
   "/queries/{queryId}":
     delete:
-      description: Deletes a stored query as well as the associated stored reports.
+      description: Deletes a query as well as the associated reports.
       operationId: doubleclickbidmanager.queries.delete
       parameters:
-        - description: Required. Query ID to delete.
+        - description: Required. ID of query to delete.
           in: path
           name: queryId
           required: true
@@ -122,10 +122,10 @@ paths:
       tags:
         - queries
     get:
-      description: Retrieves a stored query.
+      description: Retrieves a query.
       operationId: doubleclickbidmanager.queries.get
       parameters:
-        - description: Required. Query ID to retrieve.
+        - description: Required. ID of query to retrieve.
           in: path
           name: queryId
           required: true
@@ -159,16 +159,16 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/queries/{queryId}/reports":
     get:
-      description: Lists reports.
+      description: Lists reports associated with a query.
       operationId: doubleclickbidmanager.queries.reports.list
       parameters:
-        - description: Required. Query ID with which the reports are associated.
+        - description: Required. ID of the query with which the reports are associated.
           in: path
           name: queryId
           required: true
           schema:
             type: string
-        - description: 'Name of a field used to order results. The default sorting order is ascending. To specify descending order for a field, append a " desc" suffix. For example "key.reportId desc". Sorting is only supported for the following fields: * key.reportId'
+        - description: 'Name of a field used to order results. The default sorting order is ascending. To specify descending order for a field, append a " desc" suffix. For example "key.reportId desc". Sorting is only supported for the following fields: * `key.reportId`'
           in: query
           name: orderBy
           schema:
@@ -211,7 +211,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/queries/{queryId}/reports/{reportId}":
     get:
-      description: Retrieves a stored report.
+      description: Retrieves a report.
       operationId: doubleclickbidmanager.queries.reports.get
       parameters:
         - description: Required. ID of the query the report is associated with.
@@ -269,7 +269,7 @@ paths:
       description: Runs a stored query to generate a report.
       operationId: doubleclickbidmanager.queries.run
       parameters:
-        - description: Required. Query ID to run.
+        - description: Required. ID of query to run.
           in: path
           name: queryId
           required: true
@@ -466,22 +466,20 @@ components:
           type: string
       type: object
     ListQueriesResponse:
-      description: Represents a list of queries.
       properties:
         nextPageToken:
-          description: A token, which can be sent as `page_token` to retrieve the next page of queries. If this field is omitted, there are no subsequent pages.
+          description: A token, which can be sent as page_token to retrieve the next page of queries. If this field is omitted, there are no subsequent pages.
           type: string
         queries:
-          description: Retrieved queries.
+          description: The list of queries.
           items:
             $ref: "#/components/schemas/Query"
           type: array
       type: object
     ListReportsResponse:
-      description: Represents a list of reports.
       properties:
         nextPageToken:
-          description: A token, which can be sent as `page_token` to retrieve the next page of reports. If this field is omitted, there are no subsequent pages.
+          description: A token, which can be sent as page_token to retrieve the next page of reports. If this field is omitted, there are no subsequent pages.
           type: string
         reports:
           description: Retrieved reports.
@@ -521,7 +519,7 @@ components:
           $ref: "#/components/schemas/Options"
           description: Additional query options.
         type:
-          description: Report type.
+          description: The type of the report. The type of the report will dictate what dimesions, filters, and metrics can be used.
           enum:
             - REPORT_TYPE_UNSPECIFIED
             - STANDARD
@@ -546,7 +544,7 @@ components:
             $ref: "#/components/schemas/EventFilter"
           type: array
         pathMatchPosition:
-          description: Indicates the position of the path the filter should match to (first, last, or any event in path).
+          description: The position of the path the filter should match to (first, last, or any event in path).
           enum:
             - PATH_MATCH_POSITION_UNSPECIFIED
             - ANY
@@ -567,13 +565,13 @@ components:
           type: array
       type: object
     PathQueryOptionsFilter:
-      description: Dimension Filter on path events.
+      description: Dimension filter on path events.
       properties:
         filter:
           description: Dimension the filter is applied to.
           type: string
         match:
-          description: Indicates how the filter should be matched to the value.
+          description: Match logic of the filter.
           enum:
             - UNKNOWN
             - EXACT
@@ -582,7 +580,7 @@ components:
             - WILDCARD_EXPRESSION
           type: string
         values:
-          description: Value to filter on.
+          description: Values to filter on.
           items:
             type: string
           type: array
@@ -603,14 +601,14 @@ components:
           type: string
         schedule:
           $ref: "#/components/schemas/QuerySchedule"
-          description: Information on how often and when to run a query.
+          description: Information on how often and when to run a query. If `ONE_TIME` is set to the frequency field, the query will only be run at the time of creation.
       type: object
     QueryMetadata:
       description: Query metadata.
       properties:
         dataRange:
           $ref: "#/components/schemas/DataRange"
-          description: Range of report data.
+          description: Range of report data. All reports will be based on the same time zone as used by the advertiser.
         format:
           description: Format of the generated report.
           enum:
@@ -622,7 +620,7 @@ components:
           description: Whether to send an email notification when a report is ready. Defaults to false.
           type: boolean
         shareEmailAddress:
-          description: List of email addresses which are sent email notifications when the report is finished. Separate from `sendNotification`.
+          description: List of email addresses which are sent email notifications when the report is finished. Separate from send_notification.
           items:
             type: string
           type: array
@@ -631,7 +629,7 @@ components:
           type: string
       type: object
     QuerySchedule:
-      description: Information on how frequently and when to run a query.
+      description: Information on when and how frequently to run a query.
       properties:
         endDate:
           $ref: "#/components/schemas/Date"
