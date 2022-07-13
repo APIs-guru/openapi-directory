@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://ondemandscanning.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: ondemandscanning
 externalDocs:
@@ -401,6 +401,14 @@ components:
           description: The alias name.
           type: string
       type: object
+    AnalysisCompleted:
+      description: Indicates which analysis completed successfully. Multiple types of analysis can be performed on a single resource.
+      properties:
+        analysisType:
+          items:
+            type: string
+          type: array
+      type: object
     AnalyzePackagesMetadata:
       description: AnalyzePackagesMetadata contains metadata for an active scan of a container image.
       properties:
@@ -754,6 +762,13 @@ components:
     DiscoveryOccurrence:
       description: Provides information about the analysis status of a discovered resource.
       properties:
+        analysisCompleted:
+          $ref: "#/components/schemas/AnalysisCompleted"
+        analysisError:
+          description: Indicates any errors encountered during analysis of a resource. There could be 0 or more of these errors.
+          items:
+            $ref: "#/components/schemas/Status"
+          type: array
         analysisStatus:
           description: The status of discovery for the resource.
           enum:
@@ -761,6 +776,7 @@ components:
             - PENDING
             - SCANNING
             - FINISHED_SUCCESS
+            - COMPLETE
             - FINISHED_FAILED
             - FINISHED_UNSUPPORTED
           type: string
