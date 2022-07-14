@@ -727,6 +727,14 @@ components:
           description: The alias name.
           type: string
       type: object
+    AnalysisCompleted:
+      description: Indicates which analysis completed successfully. Multiple types of analysis can be performed on a single resource.
+      properties:
+        analysisType:
+          items:
+            type: string
+          type: array
+      type: object
     Artifact:
       description: Artifact describes a build product.
       properties:
@@ -1957,6 +1965,13 @@ components:
     DiscoveryOccurrence:
       description: Provides information about the analysis status of a discovered resource.
       properties:
+        analysisCompleted:
+          $ref: "#/components/schemas/AnalysisCompleted"
+        analysisError:
+          description: Indicates any errors encountered during analysis of a resource. There could be 0 or more of these errors.
+          items:
+            $ref: "#/components/schemas/Status"
+          type: array
         analysisStatus:
           description: The status of discovery for the resource.
           enum:
@@ -1964,6 +1979,7 @@ components:
             - PENDING
             - SCANNING
             - FINISHED_SUCCESS
+            - COMPLETE
             - FINISHED_FAILED
             - FINISHED_UNSUPPORTED
           type: string

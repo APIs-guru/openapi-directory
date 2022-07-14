@@ -129,7 +129,6 @@ tags:
   - name: vpnGateways
   - name: vpnTunnels
   - name: zoneOperations
-  - name: zoneQueuedResources
   - name: zones
 paths:
   /locations/global/firewallPolicies:
@@ -42873,7 +42872,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Creates multiple instances. Count specifies the number of instances to create. For more information, see About bulk creation of VMs.
+      description: Creates multiple instances. Count specifies the number of instances to create.
       operationId: compute.instances.bulkInsert
       parameters:
         - description: Project ID for this request.
@@ -48142,290 +48141,6 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - zoneOperations
-  "/projects/{project}/zones/{zone}/queuedResources":
-    get:
-      description: Retrieves the list of QueuedResource resources.
-      operationId: compute.zoneQueuedResources.list
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: Name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          schema:
-            type: string
-        - description: "A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq \"double quoted literal\"` `(fieldname1 eq literal) (fieldname2 ne \"literal\")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name \"instance\", you would use `name ne .*instance`."
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)"
-          in: query
-          name: maxResults
-          schema:
-            minimum: 0
-            type: integer
-        - description: Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-          in: query
-          name: orderBy
-          schema:
-            type: string
-        - description: Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-          in: query
-          name: returnPartialSuccess
-          schema:
-            type: boolean
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/QueuedResourceList"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute.readonly
-      tags:
-        - zoneQueuedResources
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/userIp"
-    post:
-      description: Creates a QueuedResource.
-      operationId: compute.zoneQueuedResources.insert
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: Name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          schema:
-            type: string
-        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-          in: query
-          name: requestId
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/QueuedResource"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-      tags:
-        - zoneQueuedResources
-  "/projects/{project}/zones/{zone}/queuedResources/{queuedResource}":
-    delete:
-      description: Deletes a QueuedResource. For a QueuedResource in ACCEPTED state, call cancel on the resource before deleting, to make sure no VMs have been provisioned and may require cleaning up. For a QueuedResource in PROVISIONING state the request to delete is registered for execution following the provisioning.
-      operationId: compute.zoneQueuedResources.delete
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: Name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          schema:
-            type: string
-        - description: Name of the QueuedResource to delete.
-          in: path
-          name: queuedResource
-          required: true
-          schema:
-            type: string
-        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-          in: query
-          name: requestId
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-      tags:
-        - zoneQueuedResources
-    get:
-      description: Returns the specified QueuedResource resource.
-      operationId: compute.zoneQueuedResources.get
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: Name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          schema:
-            type: string
-        - description: Name of the QueuedResource resource to return.
-          in: path
-          name: queuedResource
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/QueuedResource"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute.readonly
-      tags:
-        - zoneQueuedResources
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/userIp"
-  "/projects/{project}/zones/{zone}/queuedResources/{queuedResource}/cancel":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/userIp"
-    post:
-      description: Cancels a QueuedResource. Only a resource in ACCEPTED state may be cancelled.
-      operationId: compute.zoneQueuedResources.cancel
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: Name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          schema:
-            type: string
-        - description: Name of the QueuedResource to cancel.
-          in: path
-          name: queuedResource
-          required: true
-          schema:
-            type: string
-        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-          in: query
-          name: requestId
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-      tags:
-        - zoneQueuedResources
   "/projects/{project}/zones/{zone}/reservations":
     get:
       description: A list of all the reservations that have been configured for the specified project in specified zone.
@@ -50202,11 +49917,6 @@ components:
           items:
             type: string
           type: array
-        resourceManagerTags:
-          additionalProperties:
-            type: string
-          description: Resource manager tags to be bound to the disk. Tag keys and values have the same definition as resource manager tags. Keys must be in the format `tagKeys/{tag_key_id}`, and values are in the format `tagValues/456`. The field is ignored (both PUT & PATCH) when empty.
-          type: object
         resourcePolicies:
           description: Resource policies applied to this disk for automatic snapshot creations. Specified using the full or partial URL. For instance template, specify only the resource policy name.
           items:
@@ -50794,7 +50504,7 @@ components:
           format: float
           type: number
         maxUtilization:
-          description: Optional parameter to define a target capacity for the UTILIZATION balancing mode. The valid range is [0.0, 1.0]. For usage guidelines, see Utilization balancing mode.
+          description: Optional parameter to define a target capacity for the UTILIZATIONbalancing mode. The valid range is [0.0, 1.0]. For usage guidelines, see Utilization balancing mode.
           format: float
           type: number
       type: object
@@ -51816,7 +51526,7 @@ components:
           description: The instance properties defining the VM instances to be created. Required if sourceInstanceTemplate is not provided.
         locationPolicy:
           $ref: "#/components/schemas/LocationPolicy"
-          description: Policy for chosing target zone. For more information, see Create VMs in bulk .
+          description: Policy for chosing target zone.
         minCount:
           description: The minimum number of instances to create. If no min_count is specified then count is used as the default value. If min_count instances cannot be created, then no instances will be created and instances already created will be deleted.
           format: int64
@@ -52396,34 +52106,6 @@ components:
           format: int32
           type: integer
       type: object
-    CustomErrorResponsePolicy:
-      description: Specifies the custom error response policy that must be applied when the backend service or backend bucket responds with an error.
-      properties:
-        errorResponseRules:
-          description: Specifies rules for returning error responses. In a given policy, if you specify rules for both a range of error codes as well as rules for specific error codes then rules with specific error codes have a higher priority. For example, assume that you configure a rule for 401 (Un-authorized) code, and another for all 4 series error codes (4XX). If the backend service returns a 401, then the rule for 401 will be applied. However if the backend service returns a 403, the rule for 4xx takes effect.
-          items:
-            $ref: "#/components/schemas/CustomErrorResponsePolicyCustomErrorResponseRule"
-          type: array
-        errorService:
-          description: "The full or partial URL to the BackendBucket resource that contains the custom error content. Examples are: - https://www.googleapis.com/compute/v1/projects/project/global/backendBuckets/myBackendBucket - compute/v1/projects/project/global/backendBuckets/myBackendBucket - global/backendBuckets/myBackendBucket If errorService is not specified at lower levels like pathMatcher, pathRule and routeRule, an errorService specified at a higher level in the UrlMap will be used. If UrlMap.defaultCustomErrorResponsePolicy contains one or more errorResponseRules[], it must specify errorService. If load balancer cannot reach the backendBucket, a simple Not Found Error will be returned, with the original response code (or overrideResponseCode if configured). errorService is not supported for internal or regional HTTP/HTTPS load balancers."
-          type: string
-      type: object
-    CustomErrorResponsePolicyCustomErrorResponseRule:
-      description: Specifies the mapping between the response code that will be returned along with the custom error content and the response code returned by the backend service.
-      properties:
-        matchResponseCodes:
-          description: "Valid values include: - A number between 400 and 599: For example 401 or 503, in which case the load balancer applies the policy if the error code exactly matches this value. - 5xx: Load Balancer will apply the policy if the backend service responds with any response code in the range of 500 to 599. - 4xx: Load Balancer will apply the policy if the backend service responds with any response code in the range of 400 to 499. Values must be unique within matchResponseCodes and across all errorResponseRules of CustomErrorResponsePolicy."
-          items:
-            type: string
-          type: array
-        overrideResponseCode:
-          description: The HTTP status code returned with the response containing the custom error content. If overrideResponseCode is not supplied, the same response code returned by the original backend bucket or backend service is returned to the client.
-          format: int32
-          type: integer
-        path:
-          description: "The full path to a file within backendBucket . For example: /errors/defaultError.html path must start with a leading slash. path cannot have trailing slashes. If the file is not available in backendBucket or the load balancer cannot reach the BackendBucket, a simple Not Found Error is returned to the client. The value must be from 1 to 1024 characters"
-          type: string
-      type: object
     CustomerEncryptionKey:
       properties:
         kmsKeyName:
@@ -52570,9 +52252,6 @@ components:
         options:
           description: Internal use only.
           type: string
-        params:
-          $ref: "#/components/schemas/DiskParams"
-          description: Input only. [Input Only] Additional params passed with the request, but not persisted as part of resource payload.
         physicalBlockSizeBytes:
           description: Physical block size of the persistent disk, in bytes. If not present in a request, a default value is used. The currently supported size is 4096, other sizes may be added in the future. If an unsupported value is requested, the error message will list the supported values for the caller's project.
           format: int64
@@ -52874,15 +52553,6 @@ components:
         targetDisk:
           description: "The URL of the target disk to move. This can be a full or partial URL. For example, the following are all valid URLs to a disk: - https://www.googleapis.com/compute/v1/projects/project/zones/zone /disks/disk - projects/project/zones/zone/disks/disk - zones/zone/disks/disk "
           type: string
-      type: object
-    DiskParams:
-      description: Additional disk params.
-      properties:
-        resourceManagerTags:
-          additionalProperties:
-            type: string
-          description: Resource manager tags to be bound to the disk. Tag keys and values have the same definition as resource manager tags. Keys must be in the format `tagKeys/{tag_key_id}`, and values are in the format `tagValues/456`. The field is ignored (both PUT & PATCH) when empty.
-          type: object
       type: object
     DiskResourceStatus:
       properties:
@@ -56036,9 +55706,6 @@ components:
     HttpRouteRule:
       description: The HttpRouteRule setting specifies how to match an HTTP request and the corresponding routing action that load balancing proxies perform.
       properties:
-        customErrorResponsePolicy:
-          $ref: "#/components/schemas/CustomErrorResponsePolicy"
-          description: "customErrorResponsePolicy specifies how the Load Balancer returns error responses when BackendServiceor BackendBucket responds with an error. If a policy for an error code is not configured for the RouteRule, a policy for the error code configured in pathMatcher.defaultCustomErrorResponsePolicy is applied. If one is not specified in pathMatcher.defaultCustomErrorResponsePolicy, the policy configured in UrlMap.defaultCustomErrorResponsePolicy takes effect. For example, consider a UrlMap with the following configuration: - UrlMap.defaultCustomErrorResponsePolicy are configured with policies for 5xx and 4xx errors - A RouteRule for /coming_soon/ is configured for the error code 404. If the request is for www.myotherdomain.com and a 404 is encountered, the policy under UrlMap.defaultCustomErrorResponsePolicy takes effect. If a 404 response is encountered for the request www.example.com/current_events/, the pathMatcher's policy takes effect. If however, the request for www.example.com/coming_soon/ encounters a 404, the policy in RouteRule.customErrorResponsePolicy takes effect. If any of the requests in this example encounter a 500 error code, the policy at UrlMap.defaultCustomErrorResponsePolicy takes effect. When used in conjunction with routeRules.routeAction.retryPolicy, retries take precedence. Only once all retries are exhausted, the customErrorResponsePolicy is applied. While attempting a retry, if load balancer is successful in reaching the service, the customErrorResponsePolicy is ignored and the response from the service is returned to the client. customErrorResponsePolicy is supported only for Global External HTTP(S) load balancing."
         description:
           description: The short description conveying the intent of this routeRule. The description can have a maximum length of 1024 characters.
           type: string
@@ -60655,7 +60322,7 @@ components:
           $ref: "#/components/schemas/LocationPolicyLocationConstraints"
           description: Constraints that the caller requires on the result distribution in this zone.
         preference:
-          description: Preference for a given location. Set to either ALLOW or DENY.
+          description: Preference for a given location.
           enum:
             - ALLOW
             - DENY
@@ -64505,9 +64172,6 @@ components:
     PathMatcher:
       description: A matcher for the path portion of the URL. The BackendService from the longest-matched rule will serve the URL. If no rule was matched, the default service is used.
       properties:
-        defaultCustomErrorResponsePolicy:
-          $ref: "#/components/schemas/CustomErrorResponsePolicy"
-          description: "defaultCustomErrorResponsePolicy specifies how the Load Balancer returns error responses when BackendServiceor BackendBucket responds with an error. This policy takes effect at the PathMatcher level and applies only when no policy has been defined for the error code at lower levels like RouteRule and PathRule within this PathMatcher. If an error code does not have a policy defined in defaultCustomErrorResponsePolicy, then a policy defined for the error code in UrlMap.defaultCustomErrorResponsePolicy takes effect. For example, consider a UrlMap with the following configuration: - UrlMap.defaultCustomErrorResponsePolicy is configured with policies for 5xx and 4xx errors - A RouteRule for /coming_soon/ is configured for the error code 404. If the request is for www.myotherdomain.com and a 404 is encountered, the policy under UrlMap.defaultCustomErrorResponsePolicy takes effect. If a 404 response is encountered for the request www.example.com/current_events/, the pathMatcher's policy takes effect. If however, the request for www.example.com/coming_soon/ encounters a 404, the policy in RouteRule.customErrorResponsePolicy takes effect. If any of the requests in this example encounter a 500 error code, the policy at UrlMap.defaultCustomErrorResponsePolicy takes effect. When used in conjunction with pathMatcher.defaultRouteAction.retryPolicy, retries take precedence. Only once all retries are exhausted, the defaultCustomErrorResponsePolicy is applied. While attempting a retry, if load balancer is successful in reaching the service, the defaultCustomErrorResponsePolicy is ignored and the response from the service is returned to the client. defaultCustomErrorResponsePolicy is supported only for Global External HTTP(S) load balancing."
         defaultRouteAction:
           $ref: "#/components/schemas/HttpRouteAction"
           description: defaultRouteAction takes effect when none of the pathRules or routeRules match. The load balancer performs advanced routing actions, such as URL rewrites and header transformations, before forwarding the request to the selected backend. If defaultRouteAction specifies any weightedBackendServices, defaultService must not be set. Conversely if defaultService is set, defaultRouteAction cannot contain any weightedBackendServices. Only one of defaultRouteAction or defaultUrlRedirect must be set. UrlMaps for external HTTP(S) load balancers support only the urlRewrite action within a path matcher's defaultRouteAction.
@@ -64540,9 +64204,6 @@ components:
     PathRule:
       description: A path-matching rule for a URL. If matched, will use the specified BackendService to handle the traffic arriving at this URL.
       properties:
-        customErrorResponsePolicy:
-          $ref: "#/components/schemas/CustomErrorResponsePolicy"
-          description: "customErrorResponsePolicy specifies how the Load Balancer returns error responses when BackendServiceor BackendBucket responds with an error. If a policy for an error code is not configured for the PathRule, a policy for the error code configured in pathMatcher.defaultCustomErrorResponsePolicy is applied. If one is not specified in pathMatcher.defaultCustomErrorResponsePolicy, the policy configured in UrlMap.defaultCustomErrorResponsePolicy takes effect. For example, consider a UrlMap with the following configuration: - UrlMap.defaultCustomErrorResponsePolicy are configured with policies for 5xx and 4xx errors - A PathRule for /coming_soon/ is configured for the error code 404. If the request is for www.myotherdomain.com and a 404 is encountered, the policy under UrlMap.defaultCustomErrorResponsePolicy takes effect. If a 404 response is encountered for the request www.example.com/current_events/, the pathMatcher's policy takes effect. If however, the request for www.example.com/coming_soon/ encounters a 404, the policy in PathRule.customErrorResponsePolicy takes effect. If any of the requests in this example encounter a 500 error code, the policy at UrlMap.defaultCustomErrorResponsePolicy takes effect. customErrorResponsePolicy is supported only for Global External HTTP(S) load balancing."
         paths:
           description: "The list of path patterns to match. Each must start with / and the only place a * is allowed is at the end following a /. The string fed to the path matcher does not include any text after the first ? or #, and those chars are not allowed here."
           items:
@@ -65354,190 +65015,6 @@ components:
             message:
               description: "[Output Only] A human-readable description of the warning code."
               type: string
-          type: object
-      type: object
-    QueuedResource:
-      description: QueuedResource represents a request for future capacity. The capacity is delivered in the form of other GCE resources, either Instances or Reservations.
-      properties:
-        bulkInsertInstanceResource:
-          $ref: "#/components/schemas/BulkInsertInstanceResource"
-          description: Specification of VM instances to create.
-        creationTimestamp:
-          description: "[Output Only] Creation timestamp in RFC3339 text format."
-          type: string
-        description:
-          description: An optional description of this resource. Provide this property when you create the resource.
-          type: string
-        id:
-          description: "[Output Only] The unique identifier for the resource. This identifier is defined by the server."
-          format: uint64
-          type: string
-        kind:
-          default: compute#queuedResource
-          description: "[Output Only] Type of the resource. Always compute#queuedResource for QueuedResources."
-          type: string
-        name:
-          description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
-          pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
-          type: string
-        queuingPolicy:
-          $ref: "#/components/schemas/QueuingPolicy"
-          description: Queuing parameters for the requested capacity.
-        region:
-          description: "[Output Only] URL of the region where the resource resides. Only applicable for regional resources. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body."
-          type: string
-        selfLink:
-          description: "[Output only] Server-defined URL for the resource."
-          type: string
-        selfLinkWithId:
-          description: "[Output Only] Server-defined URL for this resource with the resource id."
-          type: string
-        state:
-          description: "[Output only] High-level status of the request."
-          enum:
-            - ACCEPTED
-            - CANCELLED
-            - CREATING
-            - DELETING
-            - FAILED
-            - PROVISIONING
-            - STATE_UNSPECIFIED
-            - SUCCEEDED
-          type: string
-        status:
-          $ref: "#/components/schemas/QueuedResourceStatus"
-          description: "[Output only] Result of queuing and provisioning based on deferred capacity."
-        zone:
-          description: "[Output Only] URL of the zone where the resource resides. Only applicable for zonal resources. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body."
-          type: string
-      type: object
-    QueuedResourceList:
-      properties:
-        etag:
-          type: string
-        id:
-          description: Unique identifier for the resource; defined by the server.
-          type: string
-        items:
-          description: A list of QueuedResource resources.
-          items:
-            $ref: "#/components/schemas/QueuedResource"
-          type: array
-        kind:
-          default: compute#queuedResourceList
-          description: Type of resource.
-          type: string
-        nextPageToken:
-          description: This token allows you to get the next page of results for maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.
-          type: string
-        selfLink:
-          description: "[Output only] Server-defined URL for this resource."
-          type: string
-        unreachables:
-          description: "[Output only] Unreachable resources."
-          items:
-            type: string
-          type: array
-        warning:
-          description: Informational warning message.
-          properties:
-            code:
-              description: "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response."
-              enum:
-                - CLEANUP_FAILED
-                - DEPRECATED_RESOURCE_USED
-                - DEPRECATED_TYPE_USED
-                - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
-                - EXPERIMENTAL_TYPE_USED
-                - EXTERNAL_API_WARNING
-                - FIELD_VALUE_OVERRIDEN
-                - INJECTED_KERNELS_DEPRECATED
-                - LARGE_DEPLOYMENT_WARNING
-                - MISSING_TYPE_DEPENDENCY
-                - NEXT_HOP_ADDRESS_NOT_ASSIGNED
-                - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
-                - NEXT_HOP_INSTANCE_NOT_FOUND
-                - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
-                - NEXT_HOP_NOT_RUNNING
-                - NOT_CRITICAL_ERROR
-                - NO_RESULTS_ON_PAGE
-                - PARTIAL_SUCCESS
-                - REQUIRED_TOS_AGREEMENT
-                - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
-                - RESOURCE_NOT_DELETED
-                - SCHEMA_VALIDATION_IGNORED
-                - SINGLE_INSTANCE_PROPERTY_TEMPLATE
-                - UNDECLARED_PROPERTIES
-                - UNREACHABLE
-              type: string
-            data:
-              description: '[Output Only] Metadata about this warning in key: value format. For example: "data": [ { "key": "scope", "value": "zones/us-east1-d" } '
-              items:
-                properties:
-                  key:
-                    description: "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding)."
-                    type: string
-                  value:
-                    description: "[Output Only] A warning data value corresponding to the key."
-                    type: string
-                type: object
-              type: array
-            message:
-              description: "[Output Only] A human-readable description of the warning code."
-              type: string
-          type: object
-      type: object
-    QueuedResourceStatus:
-      description: "[Output only] Result of queuing and provisioning based on deferred capacity."
-      properties:
-        failedData:
-          $ref: "#/components/schemas/QueuedResourceStatusFailedData"
-          description: Additional status detail for the FAILED state.
-        provisioningOperations:
-          description: "[Output only] Fully qualified URL of the provisioning GCE operation to track the provisioning along with provisioning errors. The referenced operation may not exist after having been deleted or expired."
-          items:
-            type: string
-          type: array
-        queuingPolicy:
-          $ref: "#/components/schemas/QueuingPolicy"
-          description: Constraints for the time when the resource(s) start provisioning. Always exposed as absolute times.
-      type: object
-    QueuedResourceStatusFailedData:
-      description: Additional status detail for the FAILED state.
-      properties:
-        error:
-          description: The error(s) that caused the QueuedResource to enter the FAILED state.
-          properties:
-            errors:
-              description: "[Output Only] The array of errors encountered while processing this operation."
-              items:
-                properties:
-                  code:
-                    description: "[Output Only] The error type identifier for this error."
-                    type: string
-                  errorDetails:
-                    description: "[Output Only] An optional list of messages that contain the error details. There is a set of defined message types to use for providing details.The syntax depends on the error code. For example, QuotaExceededInfo will have details when the error code is QUOTA_EXCEEDED."
-                    items:
-                      properties:
-                        errorInfo:
-                          $ref: "#/components/schemas/ErrorInfo"
-                        help:
-                          $ref: "#/components/schemas/Help"
-                        localizedMessage:
-                          $ref: "#/components/schemas/LocalizedMessage"
-                        quotaInfo:
-                          $ref: "#/components/schemas/QuotaExceededInfo"
-                      type: object
-                    type: array
-                  location:
-                    description: "[Output Only] Indicates the field in the request that caused the error. This property is optional."
-                    type: string
-                  message:
-                    description: "[Output Only] An optional, human-readable error message."
-                    type: string
-                type: object
-              type: array
           type: object
       type: object
     QueuingPolicy:
@@ -73366,9 +72843,6 @@ components:
         creationTimestamp:
           description: "[Output Only] Creation timestamp in RFC3339 text format."
           type: string
-        defaultCustomErrorResponsePolicy:
-          $ref: "#/components/schemas/CustomErrorResponsePolicy"
-          description: "defaultCustomErrorResponsePolicy specifies how the Load Balancer returns error responses when BackendServiceor BackendBucket responds with an error. This policy takes effect at the Load Balancer level and applies only when no policy has been defined for the error code at lower levels like PathMatcher, RouteRule and PathRule within this UrlMap. For example, consider a UrlMap with the following configuration: - defaultCustomErrorResponsePolicy containing policies for responding to 5xx and 4xx errors - A PathMatcher configured for *.example.com has defaultCustomErrorResponsePolicy for 4xx. If a request for http://www.example.com/ encounters a 404, the policy in pathMatcher.defaultCustomErrorResponsePolicy will be enforced. When the request for http://www.example.com/ encounters a 502, the policy in UrlMap.defaultCustomErrorResponsePolicy will be enforced. When a request that does not match any host in *.example.com such as http://www.myotherexample.com/, encounters a 404, UrlMap.defaultCustomErrorResponsePolicy takes effect. When used in conjunction with defaultRouteAction.retryPolicy, retries take precedence. Only once all retries are exhausted, the defaultCustomErrorResponsePolicy is applied. While attempting a retry, if load balancer is successful in reaching the service, the defaultCustomErrorResponsePolicy is ignored and the response from the service is returned to the client. defaultCustomErrorResponsePolicy is supported only for Global External HTTP(S) load balancing."
         defaultRouteAction:
           $ref: "#/components/schemas/HttpRouteAction"
           description: defaultRouteAction takes effect when none of the hostRules match. The load balancer performs advanced routing actions, such as URL rewrites and header transformations, before forwarding the request to the selected backend. If defaultRouteAction specifies any weightedBackendServices, defaultService must not be set. Conversely if defaultService is set, defaultRouteAction cannot contain any weightedBackendServices. Only one of defaultRouteAction or defaultUrlRedirect must be set. UrlMaps for external HTTP(S) load balancers support only the urlRewrite action within defaultRouteAction. defaultRouteAction has no effect when the URL map is bound to a target gRPC proxy that has the validateForProxyless field set to true.
