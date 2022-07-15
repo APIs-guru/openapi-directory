@@ -804,6 +804,7 @@ components:
             - EXECUTION_REASON_UNDEFINED
             - JOB_STATUS_SERVICE_POLLING_ERROR
             - NON_ZERO_EXIT_CODE
+            - CANCELLED
           type: string
         lastTransitionTime:
           description: Last time the condition transitioned from one status to another.
@@ -905,6 +906,9 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudRunV2VolumeMount"
           type: array
+        workingDir:
+          description: Container's working directory. If not specified, the container runtime's default will be used, which might be configured in the container image.
+          type: string
       type: object
     GoogleCloudRunV2ContainerPort:
       description: ContainerPort represents a network port in a single container.
@@ -1493,7 +1497,7 @@ components:
       description: The secret's value will be presented as the content of a file whose name is defined in the item path. If no items are defined, the name of the file is the secret.
       properties:
         defaultMode:
-          description: "Integer representation of mode bits to use on created files by default. Must be a value between 0000 and 0777 (octal), defaulting to 0644. Directories within the path are not affected by this setting. Notes * Internally, a umask of 0222 will be applied to any non-zero value. * This is an integer representation of the mode bits. So, the octal integer value should look exactly as the chmod numeric notation with a leading zero. Some examples: for chmod 777 (a=rwx), set to 0777 (octal) or 511 (base-10). For chmod 640 (u=rw,g=r), set to 0640 (octal) or 416 (base-10). For chmod 755 (u=rwx,g=rx,o=rx), set to 0755 (octal) or 493 (base-10). * This might be in conflict with other options that affect the file mode, like fsGroup, and the result can be other mode bits set. This might be in conflict with other options that affect the file mode, like fsGroup, and as a result, other mode bits could be set."
+          description: "Integer representation of mode bits to use on created files by default. Must be a value between 0000 and 0777 (octal), defaulting to 0444. Directories within the path are not affected by this setting. Notes * Internally, a umask of 0222 will be applied to any non-zero value. * This is an integer representation of the mode bits. So, the octal integer value should look exactly as the chmod numeric notation with a leading zero. Some examples: for chmod 777 (a=rwx), set to 0777 (octal) or 511 (base-10). For chmod 640 (u=rw,g=r), set to 0640 (octal) or 416 (base-10). For chmod 755 (u=rwx,g=rx,o=rx), set to 0755 (octal) or 493 (base-10). * This might be in conflict with other options that affect the file mode, like fsGroup, and the result can be other mode bits set. This might be in conflict with other options that affect the file mode, like fsGroup, and as a result, other mode bits could be set."
           format: int32
           type: integer
         items:

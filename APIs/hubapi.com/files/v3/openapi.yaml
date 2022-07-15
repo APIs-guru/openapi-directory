@@ -58,7 +58,6 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
         - oauth2_legacy:
             - files
       summary: Upload file
@@ -84,7 +83,6 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
         - oauth2_legacy:
             - files
       summary: Import a file from a URL into the file manager.
@@ -115,7 +113,6 @@ paths:
       security:
         - oauth2_legacy:
             - files.ui_hidden.read
-        - hapikey: []
         - oauth2_legacy:
             - files
       summary: Check import status.
@@ -340,7 +337,6 @@ paths:
       security:
         - oauth2_legacy:
             - files.ui_hidden.read
-        - hapikey: []
         - oauth2_legacy:
             - files
       summary: Search files
@@ -367,7 +363,6 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
         - oauth2_legacy:
             - files
       summary: Delete file
@@ -407,7 +402,6 @@ paths:
       security:
         - oauth2_legacy:
             - files.ui_hidden.read
-        - hapikey: []
         - oauth2_legacy:
             - files
       summary: Get file.
@@ -443,7 +437,6 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
         - oauth2_legacy:
             - files
       summary: update file properties
@@ -487,7 +480,6 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
         - oauth2_legacy:
             - files
       summary: Replace file.
@@ -514,7 +506,6 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
         - oauth2_legacy:
             - files
       summary: GDPR delete
@@ -576,7 +567,6 @@ paths:
       security:
         - oauth2_legacy:
             - files.ui_hidden.read
-        - hapikey: []
         - oauth2_legacy:
             - files
       summary: Get signed URL to access private file.
@@ -603,7 +593,6 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
         - oauth2_legacy:
             - files
       summary: Create folder.
@@ -753,7 +742,6 @@ paths:
       security:
         - oauth2_legacy:
             - files.ui_hidden.read
-        - hapikey: []
         - oauth2_legacy:
             - files
       summary: Search folders
@@ -780,7 +768,6 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
         - oauth2_legacy:
             - files
       summary: Update folder properties
@@ -809,7 +796,6 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
         - oauth2_legacy:
             - files
       summary: Check folder update status.
@@ -836,7 +822,6 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
         - oauth2_legacy:
             - files
       summary: Delete folder.
@@ -877,7 +862,6 @@ paths:
       security:
         - oauth2_legacy:
             - files.ui_hidden.read
-        - hapikey: []
         - oauth2_legacy:
             - files
       summary: Get folder
@@ -904,7 +888,6 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
         - oauth2_legacy:
             - files
       summary: Delete folder.
@@ -945,7 +928,6 @@ paths:
       security:
         - oauth2_legacy:
             - files.ui_hidden.read
-        - hapikey: []
         - oauth2_legacy:
             - files
       summary: Get folder.
@@ -1586,10 +1568,6 @@ components:
         - status
       type: object
   securitySchemes:
-    hapikey:
-      in: query
-      name: hapikey
-      type: apiKey
     oauth2_legacy:
       flows:
         authorizationCode:

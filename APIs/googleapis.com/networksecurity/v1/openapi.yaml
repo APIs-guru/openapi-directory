@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://networksecurity.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: networksecurity
 externalDocs:
@@ -803,7 +803,7 @@ components:
       description: Specification of traffic destination attributes.
       properties:
         hosts:
-          description: Required. List of host names to match. Matched against the ":authority" header in http requests. At least one host should match. Each host can be an exact match, or a prefix match (example "mydomain.*") or a suffix match (example // *.myorg.com") or a presence(any) match "*".
+          description: Required. List of host names to match. Matched against the ":authority" header in http requests. At least one host should match. Each host can be an exact match, or a prefix match (example "mydomain.*") or a suffix match (example "*.myorg.com") or a presence (any) match "*".
           items:
             type: string
           type: array
@@ -856,7 +856,7 @@ components:
       description: Specification of the GRPC Endpoint.
       properties:
         targetUri:
-          description: Required. The target URI of the gRPC endpoint. Only UDS path is supported, and should start with “unix:”.
+          description: Required. The target URI of the gRPC endpoint. Only UDS path is supported, and should start with "unix:".
           type: string
       type: object
     GoogleIamV1AuditConfig:
@@ -955,7 +955,7 @@ components:
           type: array
       type: object
     HttpHeaderMatch:
-      description: Specification of HTTP header match atrributes.
+      description: Specification of HTTP header match attributes.
       properties:
         headerName:
           description: Required. The name of the HTTP header to match. For matching against the HTTP request's authority, use a headerMatch with the header name ":authority". For matching a request's method, use the headerName ":method".
@@ -1170,7 +1170,7 @@ components:
             type: string
           type: array
         principals:
-          description: Optional. List of peer identities to match for authorization. At least one principal should match. Each peer can be an exact match, or a prefix match (example, "namespace/*") or a suffix match (example, // */service-account") or a presence match "*". Authorization based on the principal name without certificate validation (configured by ServerTlsPolicy resource) is considered insecure.
+          description: Optional. List of peer identities to match for authorization. At least one principal should match. Each peer can be an exact match, or a prefix match (example, "namespace/*") or a suffix match (example, "*/service-account") or a presence match "*". Authorization based on the principal name without certificate validation (configured by ServerTlsPolicy resource) is considered insecure.
           items:
             type: string
           type: array
@@ -1221,5 +1221,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

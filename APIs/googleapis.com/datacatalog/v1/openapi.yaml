@@ -13,17 +13,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Google Cloud Data Catalog API
   version: v1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://datacatalog.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: datacatalog
 externalDocs:
@@ -1406,6 +1404,9 @@ components:
         description:
           description: Optional. Description of the column. Default value is an empty string. The description must be a UTF-8 string with the maximum size of 2000 bytes.
           type: string
+        lookerColumnSpec:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1ColumnSchemaLookerColumnSpec"
+          description: Looker specific column info of this column.
         mode:
           description: Optional. A column's mode indicates whether values in this column are required, nullable, or repeated. Only `NULLABLE`, `REQUIRED`, and `REPEATED` values are supported. Default mode is `NULLABLE`.
           type: string
@@ -1416,6 +1417,20 @@ components:
           type: array
         type:
           description: Required. Type of the column. Must be a UTF-8 string with the maximum size of 128 bytes.
+          type: string
+      type: object
+    GoogleCloudDatacatalogV1ColumnSchemaLookerColumnSpec:
+      description: Column info specific to Looker System.
+      properties:
+        type:
+          description: Looker specific column type of this column.
+          enum:
+            - LOOKER_COLUMN_TYPE_UNSPECIFIED
+            - DIMENSION
+            - DIMENSION_GROUP
+            - FILTER
+            - MEASURE
+            - PAREMETER
           type: string
       type: object
     GoogleCloudDatacatalogV1Contacts:
@@ -2458,5 +2473,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

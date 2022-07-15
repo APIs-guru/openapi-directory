@@ -1774,37 +1774,11 @@ paths:
               type: string
             type: array
           style: form
-        - in: query
-          name: resource.cueType
-          schema:
-            enum:
-              - cueTypeUnspecified
-              - cueTypeAd
-            type: string
-        - description: The duration of this cuepoint.
-          in: query
-          name: resource.durationSecs
-          schema:
-            type: integer
-        - in: query
-          name: resource.etag
-          schema:
-            type: string
-        - description: The identifier for cuepoint resource.
-          in: query
-          name: resource.id
-          schema:
-            type: string
-        - description: The time when the cuepoint should be inserted by offset to the broadcast actual start time.
-          in: query
-          name: resource.insertionOffsetTimeMs
-          schema:
-            type: string
-        - description: The wall clock time at which the cuepoint should be inserted. Only one of insertion_offset_time_ms and walltime_ms may be set at a time.
-          in: query
-          name: resource.walltimeMs
-          schema:
-            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Cuepoint"
       responses:
         "200":
           content:
