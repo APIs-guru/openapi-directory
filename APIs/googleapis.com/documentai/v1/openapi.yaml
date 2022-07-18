@@ -1393,7 +1393,7 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/GoogleRpcStatus"
-          description: The status of the processing of the document.
+          description: The error encountered while attempting to process the document. Empty if there are no errors.
       type: object
     GoogleCloudDocumentaiV1BatchProcessRequest:
       description: Request message for batch process document method.
@@ -4470,7 +4470,7 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/GoogleRpcStatus"
-          description: The status of the processing of the document.
+          description: The error encountered while attempting to process the document. Empty if there are no errors.
       type: object
     GoogleCloudDocumentaiV1beta3BatchProcessResponse:
       description: Response message for batch process document method.

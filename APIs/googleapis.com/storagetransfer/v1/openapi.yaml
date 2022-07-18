@@ -689,6 +689,25 @@ components:
           description: Required. AWS secret access key. This field is not returned in RPC responses.
           type: string
       type: object
+    AwsS3CompatibleData:
+      description: An AwsS3CompatibleData resource.
+      properties:
+        bucketName:
+          description: Required. Specifies the name of the bucket.
+          type: string
+        endpoint:
+          description: Required. Specifies the endpoint of the storage service.
+          type: string
+        path:
+          description: Specifies the root path to transfer objects. Must be an empty string or full path name that ends with a '/'. This field is treated as an object prefix. As such, it should generally not begin with a '/'.
+          type: string
+        region:
+          description: Specifies the region to sign requests with. This can be left blank if requests should be signed with an empty region.
+          type: string
+        s3Metadata:
+          $ref: "#/components/schemas/S3CompatibleMetadata"
+          description: A S3 compatible metadata.
+      type: object
     AwsS3Data:
       description: An AwsS3Data resource can be a data source, but not a data sink. In an AwsS3Data resource, an object's name is the S3 object's key name.
       properties:
@@ -1065,6 +1084,38 @@ components:
           description: Required. The ID of the Google Cloud project that owns the transfer job.
           type: string
       type: object
+    S3CompatibleMetadata:
+      description: S3CompatibleMetadata contains the metadata fields that apply to the basic types of S3-compatible data providers.
+      properties:
+        authMethod:
+          description: Specifies the authentication and authorization method used by the storage service. When not specified, Transfer Service will attempt to determine right auth method to use.
+          enum:
+            - AUTH_METHOD_UNSPECIFIED
+            - AUTH_METHOD_AWS_SIGNATURE_V4
+            - AUTH_METHOD_AWS_SIGNATURE_V2
+          type: string
+        listApi:
+          description: The Listing API to use for discovering objects. When not specified, Transfer Service will attempt to determine the right API to use.
+          enum:
+            - LIST_API_UNSPECIFIED
+            - LIST_OBJECTS_V2
+            - LIST_OBJECTS
+          type: string
+        protocol:
+          description: Specifies the network protocol of the agent. When not specified, the default value of NetworkProtocol NETWORK_PROTOCOL_HTTPS is used.
+          enum:
+            - NETWORK_PROTOCOL_UNSPECIFIED
+            - NETWORK_PROTOCOL_HTTPS
+            - NETWORK_PROTOCOL_HTTP
+          type: string
+        requestModel:
+          description: Specifies the API request model used to call the storage service. When not specified, the default value of RequestModel REQUEST_MODEL_VIRTUAL_HOSTED_STYLE is used.
+          enum:
+            - REQUEST_MODEL_UNSPECIFIED
+            - REQUEST_MODEL_VIRTUAL_HOSTED_STYLE
+            - REQUEST_MODEL_PATH_STYLE
+          type: string
+      type: object
     Schedule:
       description: Transfers can be scheduled to recur or to run just once.
       properties:
@@ -1326,7 +1377,7 @@ components:
           type: boolean
         metadataOptions:
           $ref: "#/components/schemas/MetadataOptions"
-          description: Represents the selected metadata options for a transfer job. This feature is in Preview.
+          description: Represents the selected metadata options for a transfer job.
         overwriteObjectsAlreadyExistingInSink:
           description: When to overwrite objects that already exist in the sink. The default is that only objects that are different from the source are ovewritten. If true, all objects in the sink whose name matches an object in the source are overwritten with the source object.
           type: boolean
@@ -1342,6 +1393,9 @@ components:
     TransferSpec:
       description: Configuration for running a transfer.
       properties:
+        awsS3CompatibleDataSource:
+          $ref: "#/components/schemas/AwsS3CompatibleData"
+          description: An AWS S3 compatible data source.
         awsS3DataSource:
           $ref: "#/components/schemas/AwsS3Data"
           description: An AWS S3 data source.

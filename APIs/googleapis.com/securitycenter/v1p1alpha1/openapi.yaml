@@ -246,6 +246,31 @@ components:
           description: What kind of user agent is associated, e.g. operating system shells, embedded or stand-alone applications, etc.
           type: string
       type: object
+    AccessReview:
+      description: Conveys information about a Kubernetes access review (e.g. kubectl auth can-i ...) that was involved in a finding.
+      properties:
+        group:
+          description: Group is the API Group of the Resource. "*" means all.
+          type: string
+        name:
+          description: Name is the name of the resource being requested. Empty means all.
+          type: string
+        ns:
+          description: Namespace of the action being requested. Currently, there is no distinction between no namespace and all namespaces. Both are represented by "" (empty).
+          type: string
+        resource:
+          description: Resource is the optional resource type requested. "*" means all.
+          type: string
+        subresource:
+          description: Subresource is the optional subresource type.
+          type: string
+        verb:
+          description: 'Verb is a Kubernetes resource API verb, like: get, list, watch, create, update, delete, proxy. "*" means all.'
+          type: string
+        version:
+          description: Version is the API Version of the Resource. "*" means all.
+          type: string
+      type: object
     Compliance:
       description: Contains compliance information about a security standard indicating unmet recommendations.
       properties:
@@ -304,6 +329,24 @@ components:
           items:
             $ref: "#/components/schemas/Contact"
           type: array
+      type: object
+    Container:
+      description: Container associated with the finding.
+      properties:
+        imageId:
+          description: Optional container image id, when provided by the container runtime. Uniquely identifies the container image launched using a container image digest.
+          type: string
+        labels:
+          description: Container labels, as provided by the container runtime.
+          items:
+            $ref: "#/components/schemas/Label"
+          type: array
+        name:
+          description: Container name.
+          type: string
+        uri:
+          description: Container image URI provided when configuring a pod/container. May identify a container image version using mutable tags.
+          type: string
       type: object
     Cve:
       description: "CVE stands for Common Vulnerabilities and Exposures. More information: https://cve.mitre.org"
@@ -493,9 +536,14 @@ components:
         contacts:
           additionalProperties:
             $ref: "#/components/schemas/ContactDetails"
-          description: 'Output only. Map containing the point of contacts for the given finding. The key represents the type of contact, while the value contains a list of all the contacts that pertain. Please refer to: https://cloud.google.com/resource-manager/docs/managing-notification-contacts#notification-categories { "security":[ { "contact":{ "email":"person1@company.com" } }, { "contact":{ "email":“person2@company.com” } } ] }'
+          description: 'Output only. Map containing the point of contacts for the given finding. The key represents the type of contact, while the value contains a list of all the contacts that pertain. Please refer to: https://cloud.google.com/resource-manager/docs/managing-notification-contacts#notification-categories { "security": { "contacts": [ { "email": "person1@company.com" }, { "email": "person2@company.com" } ] }'
           readOnly: true
           type: object
+        containers:
+          description: Containers associated with the finding. containers provides information for both Kubernetes and non-Kubernetes containers.
+          items:
+            $ref: "#/components/schemas/Container"
+          type: array
         createTime:
           description: The time at which the finding was created in Security Command Center.
           format: google-datetime
@@ -537,6 +585,9 @@ components:
         indicator:
           $ref: "#/components/schemas/Indicator"
           description: "Represents what's commonly known as an Indicator of compromise (IoC) in computer forensics. This is an artifact observed on a network or in an operating system that, with high confidence, indicates a computer intrusion. Reference: https://en.wikipedia.org/wiki/Indicator_of_compromise"
+        kubernetes:
+          $ref: "#/components/schemas/Kubernetes"
+          description: Kubernetes resources associated with the finding.
         mitreAttack:
           $ref: "#/components/schemas/MitreAttack"
           description: "MITRE ATT&CK tactics and techniques related to this finding. See: https://attack.mitre.org"
@@ -651,6 +702,24 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+      type: object
+    GoogleCloudSecuritycenterV1Binding:
+      description: Represents a Kubernetes RoleBinding or ClusterRoleBinding.
+      properties:
+        name:
+          description: Name for binding.
+          type: string
+        ns:
+          description: Namespace for binding.
+          type: string
+        role:
+          $ref: "#/components/schemas/Role"
+          description: The Role or ClusterRole referenced by the binding.
+        subjects:
+          description: Represents the subjects(s) bound to the role. Not always available for PATCH requests.
+          items:
+            $ref: "#/components/schemas/Subject"
+          type: array
       type: object
     GoogleCloudSecuritycenterV1BulkMuteFindingsResponse:
       description: The response to a BulkMute request. Contains the LRO information.
@@ -953,6 +1022,50 @@ components:
             $ref: "#/components/schemas/ProcessSignature"
           type: array
       type: object
+    Kubernetes:
+      description: Kubernetes related attributes.
+      properties:
+        accessReviews:
+          description: Provides information on any Kubernetes access reviews (i.e. privilege checks) relevant to the finding.
+          items:
+            $ref: "#/components/schemas/AccessReview"
+          type: array
+        bindings:
+          description: Provides Kubernetes role binding information for findings that involve RoleBindings or ClusterRoleBindings.
+          items:
+            $ref: "#/components/schemas/GoogleCloudSecuritycenterV1Binding"
+          type: array
+        nodePools:
+          description: GKE Node Pools associated with the finding. This field will contain NodePool information for each Node, when it is available.
+          items:
+            $ref: "#/components/schemas/NodePool"
+          type: array
+        nodes:
+          description: Provides Kubernetes Node information.
+          items:
+            $ref: "#/components/schemas/Node"
+          type: array
+        pods:
+          description: Kubernetes Pods associated with the finding. This field will contain Pod records for each container that is owned by a Pod.
+          items:
+            $ref: "#/components/schemas/Pod"
+          type: array
+        roles:
+          description: Provides Kubernetes role information for findings that involve Roles or ClusterRoles.
+          items:
+            $ref: "#/components/schemas/Role"
+          type: array
+      type: object
+    Label:
+      description: Label represents a generic name=value label. Label has separate name and value fields to support filtering with contains().
+      properties:
+        name:
+          description: Label name.
+          type: string
+        value:
+          description: Label value.
+          type: string
+      type: object
     ListOperationsResponse:
       description: The response message for Operations.ListOperations.
       properties:
@@ -1037,6 +1150,7 @@ components:
               - DATA_DESTRUCTION
               - DOMAIN_POLICY_MODIFICATION
               - IMPAIR_DEFENSES
+              - NETWORK_SERVICE_DISCOVERY
             type: string
           type: array
         primaryTactic:
@@ -1094,11 +1208,31 @@ components:
               - DATA_DESTRUCTION
               - DOMAIN_POLICY_MODIFICATION
               - IMPAIR_DEFENSES
+              - NETWORK_SERVICE_DISCOVERY
             type: string
           type: array
         version:
           description: The MITRE ATT&CK version referenced by the above fields. E.g. "8".
           type: string
+      type: object
+    Node:
+      description: Kubernetes Nodes associated with the finding.
+      properties:
+        name:
+          description: Full Resource name of the Compute Engine VM running the cluster node.
+          type: string
+      type: object
+    NodePool:
+      description: Provides GKE Node Pool information.
+      properties:
+        name:
+          description: Kubernetes Node pool name.
+          type: string
+        nodes:
+          description: Nodes associated with the finding.
+          items:
+            $ref: "#/components/schemas/Node"
+          type: array
       type: object
     Operation:
       description: This resource represents a long-running operation that is the result of a network API call.
@@ -1122,6 +1256,26 @@ components:
             description: Properties of the object. Contains field @type with type URL.
           description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
+      type: object
+    Pod:
+      description: Kubernetes Pod.
+      properties:
+        containers:
+          description: Pod containers associated with this finding, if any.
+          items:
+            $ref: "#/components/schemas/Container"
+          type: array
+        labels:
+          description: Pod labels. For Kubernetes containers, these are applied to the container.
+          items:
+            $ref: "#/components/schemas/Label"
+          type: array
+        name:
+          description: Kubernetes Pod name.
+          type: string
+        ns:
+          description: Kubernetes Pod namespace.
+          type: string
       type: object
     Process:
       description: Represents an operating system process.
@@ -1185,6 +1339,23 @@ components:
           description: Uri for the mentioned source e.g. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-34527.
           type: string
       type: object
+    Role:
+      description: Kubernetes Role or ClusterRole.
+      properties:
+        kind:
+          description: Role type.
+          enum:
+            - KIND_UNSPECIFIED
+            - ROLE
+            - CLUSTER_ROLE
+          type: string
+        name:
+          description: Role name.
+          type: string
+        ns:
+          description: Role namespace.
+          type: string
+      type: object
     SecurityMarks:
       description: User specified security marks that are attached to the parent Security Command Center resource. Security marks are scoped within a Security Command Center organization -- they can be modified and viewed by all users who have proper permissions on the organization.
       properties:
@@ -1216,6 +1387,24 @@ components:
           type: array
         message:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
+          type: string
+      type: object
+    Subject:
+      description: Represents a Kubernetes Subject.
+      properties:
+        kind:
+          description: Authentication type for subject.
+          enum:
+            - AUTH_TYPE_UNSPECIFIED
+            - USER
+            - SERVICEACCOUNT
+            - GROUP
+          type: string
+        name:
+          description: Name for subject.
+          type: string
+        ns:
+          description: Namespace for subject.
           type: string
       type: object
     Vulnerability:

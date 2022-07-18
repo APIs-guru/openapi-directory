@@ -934,6 +934,10 @@ components:
     GoogleCloudAssuredworkloadsVersioningV1mainWorkloadComplianceStatus:
       description: Represents the Compliance Status of this workload
       properties:
+        acknowledgedViolationCount:
+          description: Count of acknowledged violations in the Workload.
+          format: int32
+          type: integer
         activeViolationCount:
           description: Count of active Violations in the Workload.
           format: int32

@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://documentai.googleapis.com/$discovery/rest?version=v1beta2
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: documentai
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/document-ai/docs/
 tags:
@@ -639,7 +640,7 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/GoogleRpcStatus"
-          description: The status of the processing of the document.
+          description: The error encountered while attempting to process the document. Empty if there are no errors.
       type: object
     GoogleCloudDocumentaiV1BatchProcessResponse:
       description: Response message for batch process document method.
@@ -2700,7 +2701,7 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/GoogleRpcStatus"
-          description: The status of the processing of the document.
+          description: The error encountered while attempting to process the document. Empty if there are no errors.
       type: object
     GoogleCloudDocumentaiV1beta3BatchProcessResponse:
       description: Response message for batch process document method.
