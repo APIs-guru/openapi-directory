@@ -6,7 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: Beyondcorp Enterprise provides identity and context aware access controls for enterprise resources and enables zero-trust access. Using the Beyondcorp Enterprise APIs, enterprises can set up multi-cloud and on-prem connectivity using the App Connector hybrid connectivity solution.
+  description: Beyondcorp Enterprise provides identity and context aware access controls for enterprise resources and enables zero-trust access. Using the Beyondcorp Enterprise APIs, enterprises can set up multi-cloud and on-prem connectivity solutions.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -30,6 +30,85 @@ externalDocs:
 tags:
   - name: projects
 paths:
+  "/v1/{appConnector}:reportStatus":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Report status for a given connector.
+      operationId: beyondcorp.projects.locations.appConnectors.reportStatus
+      parameters:
+        - description: "Required. BeyondCorp Connector name using the form: `projects/{project_id}/locations/{location_id}/connectors/{connector}`"
+          in: path
+          name: appConnector
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudBeyondcorpAppconnectorsV1ReportStatusRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{appConnector}:resolveInstanceConfig":
+    get:
+      description: Get instance config for a given AppConnector. An internal method called by a AppConnector to get its container config.
+      operationId: beyondcorp.projects.locations.appConnectors.resolveInstanceConfig
+      parameters:
+        - description: "Required. BeyondCorp AppConnector name using the form: `projects/{project_id}/locations/{location_id}/appConnectors/{app_connector}`"
+          in: path
+          name: appConnector
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudBeyondcorpAppconnectorsV1ResolveInstanceConfigResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{name}":
     delete:
       description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
@@ -41,6 +120,16 @@ paths:
           required: true
           schema:
             type: string
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes after the first request. For example, consider a situation where you make an initial request and t he request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+        - description: Optional. If set, validates request by executing a dry-run which would not alter the resource in any way.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
       responses:
         "200":
           content:
@@ -91,6 +180,55 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Updates the parameters of a single ClientConnectorService.
+      operationId: beyondcorp.projects.locations.clientConnectorServices.patch
+      parameters:
+        - description: Required. Name of resource. The name is ignored during creation.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Optional. If set as true, will create the resource if it is not found.
+          in: query
+          name: allowMissing
+          schema:
+            type: boolean
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and t he request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+        - description: "Required. Field mask is used to specify the fields to be overwritten in the ClientConnectorService resource by the update. The fields specified in the update_mask are relative to the resource, not the full request. A field will be overwritten if it is in the mask. If the user does not provide a mask then all fields will be overwritten. Mutable fields: display_name, ingress.config.destination_routes."
+          in: query
+          name: updateMask
+          schema:
+            type: string
+        - description: Optional. If set, validates request by executing a dry-run which would not alter the resource in any way.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClientConnectorService"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{name}/locations":
     get:
       description: Lists information about the supported locations for this service.
@@ -229,6 +367,563 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/appConnections":
+    get:
+      description: Lists AppConnections in a given project and location.
+      operationId: beyondcorp.projects.locations.appConnections.list
+      parameters:
+        - description: "Required. The resource name of the AppConnection location using the form: `projects/{project_id}/locations/{location_id}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. A filter specifying constraints of a list operation.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Specifies the ordering of results. See [Sorting order](https://cloud.google.com/apis/design/design_patterns#sorting_order) for more information.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. The maximum number of items to return. If not specified, a default value of 50 will be used by the service. Regardless of the page_size value, the response may include a partial list and a caller should only rely on response's next_page_token to determine if there are more instances left to be queried.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. The next_page_token value returned from a previous ListAppConnectionsRequest, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudBeyondcorpAppconnectionsV1ListAppConnectionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new AppConnection in a given project and location.
+      operationId: beyondcorp.projects.locations.appConnections.create
+      parameters:
+        - description: "Required. The resource project name of the AppConnection location using the form: `projects/{project_id}/locations/{location_id}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. User-settable AppConnection resource ID. * Must start with a letter. * Must contain between 4-63 characters from `/a-z-/`. * Must end with a number or a letter.
+          in: query
+          name: appConnectionId
+          schema:
+            type: string
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and t he request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+        - description: Optional. If set, validates request by executing a dry-run which would not alter the resource in any way.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudBeyondcorpAppconnectionsV1AppConnection"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/appConnections:resolve":
+    get:
+      description: Resolves AppConnections details for a given AppConnector. An internal method called by a connector to find AppConnections to connect to.
+      operationId: beyondcorp.projects.locations.appConnections.resolve
+      parameters:
+        - description: "Required. The resource name of the AppConnection location using the form: `projects/{project_id}/locations/{location_id}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Required. BeyondCorp Connector name of the connector associated with those AppConnections using the form: `projects/{project_id}/locations/{location_id}/appConnectors/{app_connector_id}`"
+          in: query
+          name: appConnectorId
+          schema:
+            type: string
+        - description: Optional. The maximum number of items to return. If not specified, a default value of 50 will be used by the service. Regardless of the page_size value, the response may include a partial list and a caller should only rely on response's next_page_token to determine if there are more instances left to be queried.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. The next_page_token value returned from a previous ResolveAppConnectionsResponse, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudBeyondcorpAppconnectionsV1ResolveAppConnectionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{parent}/appConnectors":
+    get:
+      description: Lists AppConnectors in a given project and location.
+      operationId: beyondcorp.projects.locations.appConnectors.list
+      parameters:
+        - description: "Required. The resource name of the AppConnector location using the form: `projects/{project_id}/locations/{location_id}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. A filter specifying constraints of a list operation.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Specifies the ordering of results. See [Sorting order](https://cloud.google.com/apis/design/design_patterns#sorting_order) for more information.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. The maximum number of items to return. If not specified, a default value of 50 will be used by the service. Regardless of the page_size value, the response may include a partial list and a caller should only rely on response's next_page_token to determine if there are more instances left to be queried.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. The next_page_token value returned from a previous ListAppConnectorsRequest, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudBeyondcorpAppconnectorsV1ListAppConnectorsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new AppConnector in a given project and location.
+      operationId: beyondcorp.projects.locations.appConnectors.create
+      parameters:
+        - description: "Required. The resource project name of the AppConnector location using the form: `projects/{project_id}/locations/{location_id}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. User-settable AppConnector resource ID. * Must start with a letter. * Must contain between 4-63 characters from `/a-z-/`. * Must end with a number or a letter.
+          in: query
+          name: appConnectorId
+          schema:
+            type: string
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and t he request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+        - description: Optional. If set, validates request by executing a dry-run which would not alter the resource in any way.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudBeyondcorpAppconnectorsV1AppConnector"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/appGateways":
+    get:
+      description: Lists AppGateways in a given project and location.
+      operationId: beyondcorp.projects.locations.appGateways.list
+      parameters:
+        - description: "Required. The resource name of the AppGateway location using the form: `projects/{project_id}/locations/{location_id}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. A filter specifying constraints of a list operation.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Specifies the ordering of results. See [Sorting order](https://cloud.google.com/apis/design/design_patterns#sorting_order) for more information.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. The maximum number of items to return. If not specified, a default value of 50 will be used by the service. Regardless of the page_size value, the response may include a partial list and a caller should only rely on response's next_page_token to determine if there are more instances left to be queried.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. The next_page_token value returned from a previous ListAppGatewaysRequest, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAppGatewaysResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new AppGateway in a given project and location.
+      operationId: beyondcorp.projects.locations.appGateways.create
+      parameters:
+        - description: "Required. The resource project name of the AppGateway location using the form: `projects/{project_id}/locations/{location_id}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. User-settable AppGateway resource ID. * Must start with a letter. * Must contain between 4-63 characters from `/a-z-/`. * Must end with a number or a letter.
+          in: query
+          name: appGatewayId
+          schema:
+            type: string
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and t he request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+        - description: Optional. If set, validates request by executing a dry-run which would not alter the resource in any way.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AppGateway"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/clientConnectorServices":
+    get:
+      description: Lists ClientConnectorServices in a given project and location.
+      operationId: beyondcorp.projects.locations.clientConnectorServices.list
+      parameters:
+        - description: Required. Parent value for ListClientConnectorServicesRequest.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Filtering results.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Hint for how to order the results.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. Requested page size. Server may return fewer items than requested. If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A token identifying a page of results the server should return.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListClientConnectorServicesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new ClientConnectorService in a given project and location.
+      operationId: beyondcorp.projects.locations.clientConnectorServices.create
+      parameters:
+        - description: Required. Value for parent.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. User-settable client connector service resource ID. * Must start with a letter. * Must contain between 4-63 characters from `/a-z-/`. * Must end with a number or a letter. A random system generated name will be assigned if not specified by the user.
+          in: query
+          name: clientConnectorServiceId
+          schema:
+            type: string
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and t he request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+        - description: Optional. If set, validates request by executing a dry-run which would not alter the resource in any way.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClientConnectorService"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/clientGateways":
+    get:
+      description: Lists ClientGateways in a given project and location.
+      operationId: beyondcorp.projects.locations.clientGateways.list
+      parameters:
+        - description: Required. Parent value for ListClientGatewaysRequest.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Filtering results.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Hint for how to order the results.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. Requested page size. Server may return fewer items than requested. If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A token identifying a page of results the server should return.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListClientGatewaysResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new ClientGateway in a given project and location.
+      operationId: beyondcorp.projects.locations.clientGateways.create
+      parameters:
+        - description: Required. Value for parent.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. User-settable client gateway resource ID. * Must start with a letter. * Must contain between 4-63 characters from `/a-z-/`. * Must end with a number or a letter.
+          in: query
+          name: clientGatewayId
+          schema:
+            type: string
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and t he request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+        - description: Optional. If set, validates request by executing a dry-run which would not alter the resource in any way.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClientGateway"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
           description: Successful response
       security:
         - Oauth2:
@@ -439,6 +1134,256 @@ components:
       schema:
         type: string
   schemas:
+    AllocatedConnection:
+      description: Allocated connection of the AppGateway.
+      properties:
+        ingressPort:
+          description: Required. The ingress port of an allocated connection
+          format: int32
+          type: integer
+        pscUri:
+          description: Required. The PSC uri of an allocated connection
+          type: string
+      type: object
+    AppGateway:
+      description: A BeyondCorp AppGateway resource represents a BeyondCorp protected AppGateway to a remote application. It creates all the necessary GCP components needed for creating a BeyondCorp protected AppGateway. Multiple connectors can be authorised for a single AppGateway.
+      properties:
+        allocatedConnections:
+          description: Output only. A list of connections allocated for the Gateway
+          items:
+            $ref: "#/components/schemas/AllocatedConnection"
+          readOnly: true
+          type: array
+        createTime:
+          description: Output only. Timestamp when the resource was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        displayName:
+          description: Optional. An arbitrary user-provided name for the AppGateway. Cannot exceed 64 characters.
+          type: string
+        hostType:
+          description: Required. The type of hosting used by the AppGateway.
+          enum:
+            - HOST_TYPE_UNSPECIFIED
+            - GCP_REGIONAL_MIG
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. Resource labels to represent user provided metadata.
+          type: object
+        name:
+          description: Required. Unique resource name of the AppGateway. The name is ignored when creating an AppGateway.
+          type: string
+        state:
+          description: Output only. The current state of the AppGateway.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - CREATED
+            - UPDATING
+            - DELETING
+            - DOWN
+          readOnly: true
+          type: string
+        type:
+          description: Required. The type of network connectivity used by the AppGateway.
+          enum:
+            - TYPE_UNSPECIFIED
+            - TCP_PROXY
+          type: string
+        uid:
+          description: Output only. A unique identifier for the instance generated by the system.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. Timestamp when the resource was last modified.
+          format: google-datetime
+          readOnly: true
+          type: string
+        uri:
+          description: Output only. Server-defined URI for this resource.
+          readOnly: true
+          type: string
+      type: object
+    AppGatewayOperationMetadata:
+      description: Represents the metadata of the long-running operation.
+      properties:
+        apiVersion:
+          description: Output only. API version used to start the operation.
+          readOnly: true
+          type: string
+        createTime:
+          description: Output only. The time the operation was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        endTime:
+          description: Output only. The time the operation finished running.
+          format: google-datetime
+          readOnly: true
+          type: string
+        requestedCancellation:
+          description: Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+          readOnly: true
+          type: boolean
+        statusMessage:
+          description: Output only. Human-readable status of the operation, if any.
+          readOnly: true
+          type: string
+        target:
+          description: Output only. Server-defined resource path for the target of the operation.
+          readOnly: true
+          type: string
+        verb:
+          description: Output only. Name of the verb executed by the operation.
+          readOnly: true
+          type: string
+      type: object
+    ClientConnectorService:
+      description: Message describing ClientConnectorService object.
+      properties:
+        createTime:
+          description: Output only. [Output only] Create time stamp.
+          format: google-datetime
+          readOnly: true
+          type: string
+        displayName:
+          description: Optional. User-provided name. The display name should follow certain format. * Must be 6 to 30 characters in length. * Can only contain lowercase letters, numbers, and hyphens. * Must start with a letter.
+          type: string
+        egress:
+          $ref: "#/components/schemas/Egress"
+          description: Required. The details of the egress settings.
+        ingress:
+          $ref: "#/components/schemas/Ingress"
+          description: Required. The details of the ingress settings.
+        name:
+          description: Required. Name of resource. The name is ignored during creation.
+          type: string
+        state:
+          description: Output only. The operational state of the ClientConnectorService.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - UPDATING
+            - DELETING
+            - RUNNING
+            - DOWN
+            - ERROR
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. [Output only] Update time stamp.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    ClientConnectorServiceOperationMetadata:
+      description: Represents the metadata of the long-running operation.
+      properties:
+        apiVersion:
+          description: Output only. API version used to start the operation.
+          readOnly: true
+          type: string
+        createTime:
+          description: Output only. The time the operation was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        endTime:
+          description: Output only. The time the operation finished running.
+          format: google-datetime
+          readOnly: true
+          type: string
+        requestedCancellation:
+          description: Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+          readOnly: true
+          type: boolean
+        statusMessage:
+          description: Output only. Human-readable status of the operation, if any.
+          readOnly: true
+          type: string
+        target:
+          description: Output only. Server-defined resource path for the target of the operation.
+          readOnly: true
+          type: string
+        verb:
+          description: Output only. Name of the verb executed by the operation.
+          readOnly: true
+          type: string
+      type: object
+    ClientGateway:
+      description: Message describing ClientGateway object.
+      properties:
+        clientConnectorService:
+          description: "Output only. The client connector service name that the client gateway is associated to. Client Connector Services, named as follows: `projects/{project_id}/locations/{location_id}/client_connector_services/{client_connector_service_id}`."
+          readOnly: true
+          type: string
+        createTime:
+          description: Output only. [Output only] Create time stamp.
+          format: google-datetime
+          readOnly: true
+          type: string
+        id:
+          description: Output only. A unique identifier for the instance generated by the system.
+          readOnly: true
+          type: string
+        name:
+          description: Required. name of resource. The name is ignored during creation.
+          type: string
+        state:
+          description: Output only. The operational state of the gateway.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - UPDATING
+            - DELETING
+            - RUNNING
+            - DOWN
+            - ERROR
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. [Output only] Update time stamp.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    ClientGatewayOperationMetadata:
+      description: Represents the metadata of the long-running operation.
+      properties:
+        apiVersion:
+          description: Output only. API version used to start the operation.
+          readOnly: true
+          type: string
+        createTime:
+          description: Output only. The time the operation was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        endTime:
+          description: Output only. The time the operation finished running.
+          format: google-datetime
+          readOnly: true
+          type: string
+        requestedCancellation:
+          description: Output only. Identifies whether the user has requested cancellation of the operation. Operations that have been cancelled successfully have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+          readOnly: true
+          type: boolean
+        statusMessage:
+          description: Output only. Human-readable status of the operation, if any.
+          readOnly: true
+          type: string
+        target:
+          description: Output only. Server-defined resource path for the target of the operation.
+          readOnly: true
+          type: string
+        verb:
+          description: Output only. Name of the verb executed by the operation.
+          readOnly: true
+          type: string
+      type: object
     CloudSecurityZerotrustApplinkAppConnectorProtoConnectionConfig:
       description: ConnectionConfig represents a Connection Configuration object.
       properties:
@@ -499,9 +1444,211 @@ components:
       description: LogAgentDetails reflects the details of a log agent.
       properties: {}
       type: object
+    Config:
+      description: The basic ingress config for ClientGateways.
+      properties:
+        destinationRoutes:
+          description: Required. The settings used to configure basic ClientGateways.
+          items:
+            $ref: "#/components/schemas/DestinationRoute"
+          type: array
+        transportProtocol:
+          description: Required. Immutable. The transport protocol used between the client and the server.
+          enum:
+            - TRANSPORT_PROTOCOL_UNSPECIFIED
+            - TCP
+          type: string
+      type: object
+    DestinationRoute:
+      description: The setting used to configure ClientGateways. It is adding routes to the client's routing table after the connection is established.
+      properties:
+        address:
+          description: Required. The network address of the subnet for which the packet is routed to the ClientGateway.
+          type: string
+        netmask:
+          description: Required. The network mask of the subnet for which the packet is routed to the ClientGateway.
+          type: string
+      type: object
+    Egress:
+      description: The details of the egress info. One of the following options should be set.
+      properties:
+        peeredVpc:
+          $ref: "#/components/schemas/PeeredVpc"
+          description: A VPC from the consumer project.
+      type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
+      type: object
+    GoogleCloudBeyondcorpAppconnectionsV1AppConnection:
+      description: A BeyondCorp AppConnection resource represents a BeyondCorp protected AppConnection to a remote application. It creates all the necessary GCP components needed for creating a BeyondCorp protected AppConnection. Multiple connectors can be authorised for a single AppConnection.
+      properties:
+        applicationEndpoint:
+          $ref: "#/components/schemas/GoogleCloudBeyondcorpAppconnectionsV1AppConnectionApplicationEndpoint"
+          description: Required. Address of the remote application endpoint for the BeyondCorp AppConnection.
+        connectors:
+          description: Optional. List of [google.cloud.beyondcorp.v1main.Connector.name] that are authorised to be associated with this AppConnection.
+          items:
+            type: string
+          type: array
+        createTime:
+          description: Output only. Timestamp when the resource was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        displayName:
+          description: Optional. An arbitrary user-provided name for the AppConnection. Cannot exceed 64 characters.
+          type: string
+        gateway:
+          $ref: "#/components/schemas/GoogleCloudBeyondcorpAppconnectionsV1AppConnectionGateway"
+          description: Optional. Gateway used by the AppConnection.
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. Resource labels to represent user provided metadata.
+          type: object
+        name:
+          description: Required. Unique resource name of the AppConnection. The name is ignored when creating a AppConnection.
+          type: string
+        state:
+          description: Output only. The current state of the AppConnection.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - CREATED
+            - UPDATING
+            - DELETING
+            - DOWN
+          readOnly: true
+          type: string
+        type:
+          description: Required. The type of network connectivity used by the AppConnection.
+          enum:
+            - TYPE_UNSPECIFIED
+            - TCP_PROXY
+          type: string
+        uid:
+          description: Output only. A unique identifier for the instance generated by the system.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. Timestamp when the resource was last modified.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudBeyondcorpAppconnectionsV1AppConnectionApplicationEndpoint:
+      description: ApplicationEndpoint represents a remote application endpoint.
+      properties:
+        host:
+          description: Required. Hostname or IP address of the remote application endpoint.
+          type: string
+        port:
+          description: Required. Port of the remote application endpoint.
+          format: int32
+          type: integer
+      type: object
+    GoogleCloudBeyondcorpAppconnectionsV1AppConnectionGateway:
+      description: Gateway represents a user facing component that serves as an entrance to enable connectivity.
+      properties:
+        appGateway:
+          description: "Required. AppGateway name in following format: `projects/{project_id}/locations/{location_id}/appgateways/{gateway_id}`"
+          type: string
+        ingressPort:
+          description: Output only. Ingress port reserved on the gateways for this AppConnection, if not specified or zero, the default port is 19443.
+          format: int32
+          readOnly: true
+          type: integer
+        type:
+          description: Required. The type of hosting used by the gateway.
+          enum:
+            - TYPE_UNSPECIFIED
+            - GCP_REGIONAL_MIG
+          type: string
+        uri:
+          description: Output only. Server-defined URI for this resource.
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudBeyondcorpAppconnectionsV1AppConnectionOperationMetadata:
+      description: Represents the metadata of the long-running operation.
+      properties:
+        apiVersion:
+          description: Output only. API version used to start the operation.
+          readOnly: true
+          type: string
+        createTime:
+          description: Output only. The time the operation was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        endTime:
+          description: Output only. The time the operation finished running.
+          format: google-datetime
+          readOnly: true
+          type: string
+        requestedCancellation:
+          description: Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+          readOnly: true
+          type: boolean
+        statusMessage:
+          description: Output only. Human-readable status of the operation, if any.
+          readOnly: true
+          type: string
+        target:
+          description: Output only. Server-defined resource path for the target of the operation.
+          readOnly: true
+          type: string
+        verb:
+          description: Output only. Name of the verb executed by the operation.
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudBeyondcorpAppconnectionsV1ListAppConnectionsResponse:
+      description: Response message for BeyondCorp.ListAppConnections.
+      properties:
+        appConnections:
+          description: A list of BeyondCorp AppConnections in the project.
+          items:
+            $ref: "#/components/schemas/GoogleCloudBeyondcorpAppconnectionsV1AppConnection"
+          type: array
+        nextPageToken:
+          description: A token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+        unreachable:
+          description: A list of locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudBeyondcorpAppconnectionsV1ResolveAppConnectionsResponse:
+      description: Response message for BeyondCorp.ResolveAppConnections.
+      properties:
+        appConnectionDetails:
+          description: A list of BeyondCorp AppConnections with details in the project.
+          items:
+            $ref: "#/components/schemas/GoogleCloudBeyondcorpAppconnectionsV1ResolveAppConnectionsResponseAppConnectionDetails"
+          type: array
+        nextPageToken:
+          description: A token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+        unreachable:
+          description: A list of locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudBeyondcorpAppconnectionsV1ResolveAppConnectionsResponseAppConnectionDetails:
+      description: Details of the AppConnection.
+      properties:
+        appConnection:
+          $ref: "#/components/schemas/GoogleCloudBeyondcorpAppconnectionsV1AppConnection"
+          description: A BeyondCorp AppConnection in the project.
+        recentMigVms:
+          description: If type=GCP_REGIONAL_MIG, contains most recent VM instances, like `https://www.googleapis.com/compute/v1/projects/{project_id}/zones/{zone_id}/instances/{instance_id}`.
+          items:
+            type: string
+          type: array
       type: object
     GoogleCloudBeyondcorpAppconnectionsV1alphaAppConnectionOperationMetadata:
       description: Represents the metadata of the long-running operation.
@@ -535,6 +1682,232 @@ components:
         verb:
           description: Output only. Name of the verb executed by the operation.
           readOnly: true
+          type: string
+      type: object
+    GoogleCloudBeyondcorpAppconnectorsV1AppConnector:
+      description: A BeyondCorp connector resource that represents an application facing component deployed proximal to and with direct access to the application instances. It is used to establish connectivity between the remote enterprise environment and GCP. It initiates connections to the applications and can proxy the data from users over the connection.
+      properties:
+        createTime:
+          description: Output only. Timestamp when the resource was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        displayName:
+          description: Optional. An arbitrary user-provided name for the AppConnector. Cannot exceed 64 characters.
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. Resource labels to represent user provided metadata.
+          type: object
+        name:
+          description: Required. Unique resource name of the AppConnector. The name is ignored when creating a AppConnector.
+          type: string
+        principalInfo:
+          $ref: "#/components/schemas/GoogleCloudBeyondcorpAppconnectorsV1AppConnectorPrincipalInfo"
+          description: Required. Principal information about the Identity of the AppConnector.
+        resourceInfo:
+          $ref: "#/components/schemas/GoogleCloudBeyondcorpAppconnectorsV1ResourceInfo"
+          description: Optional. Resource info of the connector.
+        state:
+          description: Output only. The current state of the AppConnector.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - CREATED
+            - UPDATING
+            - DELETING
+            - DOWN
+          readOnly: true
+          type: string
+        uid:
+          description: Output only. A unique identifier for the instance generated by the system.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. Timestamp when the resource was last modified.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudBeyondcorpAppconnectorsV1AppConnectorInstanceConfig:
+      description: AppConnectorInstanceConfig defines the instance config of a AppConnector.
+      properties:
+        imageConfig:
+          $ref: "#/components/schemas/GoogleCloudBeyondcorpAppconnectorsV1ImageConfig"
+          description: ImageConfig defines the GCR images to run for the remote agent's control plane.
+        instanceConfig:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: The SLM instance agent configuration.
+          type: object
+        notificationConfig:
+          $ref: "#/components/schemas/GoogleCloudBeyondcorpAppconnectorsV1NotificationConfig"
+          description: NotificationConfig defines the notification mechanism that the remote instance should subscribe to in order to receive notification.
+        sequenceNumber:
+          description: Required. A monotonically increasing number generated and maintained by the API provider. Every time a config changes in the backend, the sequenceNumber should be bumped up to reflect the change.
+          format: int64
+          type: string
+      type: object
+    GoogleCloudBeyondcorpAppconnectorsV1AppConnectorOperationMetadata:
+      description: Represents the metadata of the long-running operation.
+      properties:
+        apiVersion:
+          description: Output only. API version used to start the operation.
+          readOnly: true
+          type: string
+        createTime:
+          description: Output only. The time the operation was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        endTime:
+          description: Output only. The time the operation finished running.
+          format: google-datetime
+          readOnly: true
+          type: string
+        requestedCancellation:
+          description: Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+          readOnly: true
+          type: boolean
+        statusMessage:
+          description: Output only. Human-readable status of the operation, if any.
+          readOnly: true
+          type: string
+        target:
+          description: Output only. Server-defined resource path for the target of the operation.
+          readOnly: true
+          type: string
+        verb:
+          description: Output only. Name of the verb executed by the operation.
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudBeyondcorpAppconnectorsV1AppConnectorPrincipalInfo:
+      description: PrincipalInfo represents an Identity oneof.
+      properties:
+        serviceAccount:
+          $ref: "#/components/schemas/GoogleCloudBeyondcorpAppconnectorsV1AppConnectorPrincipalInfoServiceAccount"
+          description: A GCP service account.
+      type: object
+    GoogleCloudBeyondcorpAppconnectorsV1AppConnectorPrincipalInfoServiceAccount:
+      description: ServiceAccount represents a GCP service account.
+      properties:
+        email:
+          description: Email address of the service account.
+          type: string
+      type: object
+    GoogleCloudBeyondcorpAppconnectorsV1ContainerHealthDetails:
+      description: ContainerHealthDetails reflects the health details of a container.
+      properties:
+        currentConfigVersion:
+          description: The version of the current config.
+          type: string
+        errorMsg:
+          description: The latest error message.
+          type: string
+        expectedConfigVersion:
+          description: The version of the expected config.
+          type: string
+        extendedStatus:
+          additionalProperties:
+            type: string
+          description: The extended status. Such as ExitCode, StartedAt, FinishedAt, etc.
+          type: object
+      type: object
+    GoogleCloudBeyondcorpAppconnectorsV1ImageConfig:
+      description: ImageConfig defines the control plane images to run.
+      properties:
+        stableImage:
+          description: "The stable image that the remote agent will fallback to if the target image fails. Format would be a gcr image path, e.g.: gcr.io/PROJECT-ID/my-image:tag1"
+          type: string
+        targetImage:
+          description: "The initial image the remote agent will attempt to run for the control plane. Format would be a gcr image path, e.g.: gcr.io/PROJECT-ID/my-image:tag1"
+          type: string
+      type: object
+    GoogleCloudBeyondcorpAppconnectorsV1ListAppConnectorsResponse:
+      description: Response message for BeyondCorp.ListAppConnectors.
+      properties:
+        appConnectors:
+          description: A list of BeyondCorp AppConnectors in the project.
+          items:
+            $ref: "#/components/schemas/GoogleCloudBeyondcorpAppconnectorsV1AppConnector"
+          type: array
+        nextPageToken:
+          description: A token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+        unreachable:
+          description: A list of locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudBeyondcorpAppconnectorsV1NotificationConfig:
+      description: NotificationConfig defines the mechanisms to notify instance agent.
+      properties:
+        pubsubNotification:
+          $ref: "#/components/schemas/GoogleCloudBeyondcorpAppconnectorsV1NotificationConfigCloudPubSubNotificationConfig"
+          description: Cloud Pub/Sub Configuration to receive notifications.
+      type: object
+    GoogleCloudBeyondcorpAppconnectorsV1NotificationConfigCloudPubSubNotificationConfig:
+      description: The configuration for Pub/Sub messaging for the AppConnector.
+      properties:
+        pubsubSubscription:
+          description: The Pub/Sub subscription the AppConnector uses to receive notifications.
+          type: string
+      type: object
+    GoogleCloudBeyondcorpAppconnectorsV1RemoteAgentDetails:
+      description: RemoteAgentDetails reflects the details of a remote agent.
+      properties: {}
+      type: object
+    GoogleCloudBeyondcorpAppconnectorsV1ReportStatusRequest:
+      description: Request report the connector status.
+      properties:
+        requestId:
+          description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and t he request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          type: string
+        resourceInfo:
+          $ref: "#/components/schemas/GoogleCloudBeyondcorpAppconnectorsV1ResourceInfo"
+          description: Required. Resource info of the connector.
+        validateOnly:
+          description: Optional. If set, validates request by executing a dry-run which would not alter the resource in any way.
+          type: boolean
+      type: object
+    GoogleCloudBeyondcorpAppconnectorsV1ResolveInstanceConfigResponse:
+      description: Response message for BeyondCorp.ResolveInstanceConfig.
+      properties:
+        instanceConfig:
+          $ref: "#/components/schemas/GoogleCloudBeyondcorpAppconnectorsV1AppConnectorInstanceConfig"
+          description: AppConnectorInstanceConfig.
+      type: object
+    GoogleCloudBeyondcorpAppconnectorsV1ResourceInfo:
+      description: "ResourceInfo represents the information/status of an app connector resource. Such as: - remote_agent - container - runtime - appgateway - appconnector - appconnection - tunnel - logagent"
+      properties:
+        id:
+          description: Required. Unique Id for the resource.
+          type: string
+        resource:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: Specific details for the resource. This is for internal use only.
+          type: object
+        status:
+          description: Overall health status. Overall status is derived based on the status of each sub level resources.
+          enum:
+            - HEALTH_STATUS_UNSPECIFIED
+            - HEALTHY
+            - UNHEALTHY
+            - UNRESPONSIVE
+            - DEGRADED
+          type: string
+        sub:
+          description: List of Info for the sub level resources.
+          items:
+            $ref: "#/components/schemas/GoogleCloudBeyondcorpAppconnectorsV1ResourceInfo"
+          type: array
+        time:
+          description: The timestamp to collect the info. It is suggested to be set by the topmost level resource only.
+          format: google-datetime
           type: string
       type: object
     GoogleCloudBeyondcorpAppconnectorsV1alphaAppConnectorOperationMetadata:
@@ -1016,6 +2389,71 @@ components:
           type: string
         title:
           description: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
+          type: string
+      type: object
+    Ingress:
+      description: Settings of how to connect to the ClientGateway. One of the following options should be set.
+      properties:
+        config:
+          $ref: "#/components/schemas/Config"
+          description: The basic ingress config for ClientGateways.
+      type: object
+    ListAppGatewaysResponse:
+      description: Response message for BeyondCorp.ListAppGateways.
+      properties:
+        appGateways:
+          description: A list of BeyondCorp AppGateways in the project.
+          items:
+            $ref: "#/components/schemas/AppGateway"
+          type: array
+        nextPageToken:
+          description: A token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+        unreachable:
+          description: A list of locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    ListClientConnectorServicesResponse:
+      description: Message for response to listing ClientConnectorServices.
+      properties:
+        clientConnectorServices:
+          description: The list of ClientConnectorService.
+          items:
+            $ref: "#/components/schemas/ClientConnectorService"
+          type: array
+        nextPageToken:
+          description: A token identifying a page of results the server should return.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    ListClientGatewaysResponse:
+      description: Message for response to listing ClientGateways.
+      properties:
+        clientGateways:
+          description: The list of ClientGateway.
+          items:
+            $ref: "#/components/schemas/ClientGateway"
+          type: array
+        nextPageToken:
+          description: A token identifying a page of results the server should return.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    PeeredVpc:
+      description: The peered VPC owned by the consumer project.
+      properties:
+        networkVpc:
+          description: Required. The name of the peered VPC owned by the consumer project.
           type: string
       type: object
     Tunnelv1ProtoTunnelerError:

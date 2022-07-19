@@ -13,17 +13,20 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Deployment Manager V2 API
   version: v2beta
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://deploymentmanager.googleapis.com/$discovery/rest?version=v2beta
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: deploymentmanager
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/deployment-manager
 tags:
@@ -2375,6 +2378,7 @@ components:
                   - PARTIAL_SUCCESS
                   - LARGE_DEPLOYMENT_WARNING
                   - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
+                  - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 type: string
               data:
                 description: '[Output Only] Metadata about this warning in key: value format. For example: "data": [ { "key": "scope", "value": "zones/us-east1-d" } '
@@ -2539,6 +2543,7 @@ components:
                   - PARTIAL_SUCCESS
                   - LARGE_DEPLOYMENT_WARNING
                   - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
+                  - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 type: string
               data:
                 description: '[Output Only] Metadata about this warning in key: value format. For example: "data": [ { "key": "scope", "value": "zones/us-east1-d" } '
@@ -2650,6 +2655,7 @@ components:
                   - PARTIAL_SUCCESS
                   - LARGE_DEPLOYMENT_WARNING
                   - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
+                  - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 type: string
               data:
                 description: '[Output Only] Metadata about this warning in key: value format. For example: "data": [ { "key": "scope", "value": "zones/us-east1-d" } '
@@ -2952,3 +2958,5 @@ components:
             https://www.googleapis.com/auth/ndev.cloudman.readonly: View your Google Cloud Platform management resources and deployment status information
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

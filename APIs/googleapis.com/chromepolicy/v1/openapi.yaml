@@ -28,7 +28,50 @@ externalDocs:
   url: http://developers.google.com/chrome/policy
 tags:
   - name: customers
+  - name: media
 paths:
+  "/v1/{customer}/policies/files:uploadPolicyFile":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates an enterprise file from the content provided by user. Returns a public download url for end user.
+      operationId: chromepolicy.media.upload
+      parameters:
+        - description: Required. The customer for which the file upload will apply.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              $ref: "#/components/schemas/GoogleChromePolicyV1UploadPolicyFileRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleChromePolicyV1UploadPolicyFileResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chrome.management.policy
+          Oauth2c:
+            - https://www.googleapis.com/auth/chrome.management.policy
+      tags:
+        - media
   "/v1/{customer}/policies/orgunits:batchInherit":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -642,6 +685,20 @@ components:
           $ref: "#/components/schemas/GoogleChromePolicyV1PolicyValue"
           description: Output only. The resolved value of the policy.
           readOnly: true
+      type: object
+    GoogleChromePolicyV1UploadPolicyFileRequest:
+      description: "Request message for uploading a file for a policy. Next ID: 5"
+      properties:
+        policyField:
+          description: Required. The fully qualified policy schema and field name this file is uploaded for. This information will be used to validate the content type of the file.
+          type: string
+      type: object
+    GoogleChromePolicyV1UploadPolicyFileResponse:
+      description: "Response message for downloading an uploaded file. Next ID: 2"
+      properties:
+        downloadUri:
+          description: The uri for end user to download the file.
+          type: string
       type: object
     GoogleProtobufEmpty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
