@@ -13,15 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Identity-Aware Proxy API
   version: v1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://iap.googleapis.com/$discovery/rest?version=v1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: iap
 externalDocs:
@@ -672,10 +674,16 @@ components:
         generateTroubleshootingUri:
           description: Whether to generate a troubleshooting URL on access denied events to this application.
           type: boolean
+        remediationTokenGenerationEnabled:
+          description: Whether to generate remediation token on access denied events to this application.
+          type: boolean
       type: object
     AccessSettings:
       description: Access related settings for IAP protected apps.
       properties:
+        allowedDomainsSettings:
+          $ref: "#/components/schemas/AllowedDomainsSettings"
+          description: Settings to configure and enable allowed domains.
         corsSettings:
           $ref: "#/components/schemas/CorsSettings"
           description: Configuration to allow cross-origin requests via IAP.
@@ -691,6 +699,18 @@ components:
         reauthSettings:
           $ref: "#/components/schemas/ReauthSettings"
           description: Settings to configure reauthentication policies in IAP.
+      type: object
+    AllowedDomainsSettings:
+      description: Configuration for IAP allowed domains. Allows the customers to restrict access to the app by only allowing requests from the listed trusted domains.
+      properties:
+        domains:
+          description: List of trusted domains.
+          items:
+            type: string
+          type: array
+        enable:
+          description: Configuration for customers to opt in for the feature.
+          type: boolean
       type: object
     ApplicationSettings:
       description: Wrapper over application specific settings for IAP.
@@ -746,7 +766,7 @@ components:
           type: boolean
       type: object
     CsmSettings:
-      description: Configuration for RCTokens generated for service mesh workloads protected by IAP. RCTokens are IAP generated JWTs that can be verified at the application. The RCToken is primarily used for service mesh deployments, and can be scoped to a single mesh by configuring the audience field accordingly
+      description: Configuration for RCToken generated for service mesh workloads protected by IAP. RCToken are IAP generated JWTs that can be verified at the application. The RCToken is primarily used for service mesh deployments, and can be scoped to a single mesh by configuring the audience field accordingly.
       properties:
         rctokenAud:
           description: Audience claim set in the generated RCToken. This value is not validated by IAP.
@@ -925,7 +945,6 @@ components:
           enum:
             - METHOD_UNSPECIFIED
             - LOGIN
-            - PASSWORD
             - SECURE_KEY
           type: string
         policyType:
@@ -1017,3 +1036,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

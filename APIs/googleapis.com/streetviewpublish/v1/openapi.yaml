@@ -744,7 +744,7 @@ components:
       properties: {}
       type: object
     GpsDataGapFailureDetails:
-      description: Details related to ProcessingFailureReason#GPS_DATA_GAP.
+      description: Details related to ProcessingFailureReason#GPS_DATA_GAP. If there are multiple GPS data gaps, only the one with the largest duration is reported here.
       properties:
         gapDuration:
           description: The duration of the gap in GPS data that was found.
@@ -775,7 +775,7 @@ components:
           type: array
       type: object
     ImuDataGapFailureDetails:
-      description: Details related to ProcessingFailureReason#IMU_DATA_GAP.
+      description: Details related to ProcessingFailureReason#IMU_DATA_GAP. If there are multiple IMU data gaps, only the one with the largest duration is reported here.
       properties:
         gapDuration:
           description: The duration of the gap in IMU data that was found.
@@ -872,7 +872,7 @@ components:
           type: number
       type: object
     NotOutdoorsFailureDetails:
-      description: Details related to ProcessingFailureReason#NOT_OUTDOORS.
+      description: Details related to ProcessingFailureReason#NOT_OUTDOORS. If there are multiple indoor frames found, the first frame is recorded here.
       properties:
         time:
           description: Relative time (from the start of the video stream) when an indoor frame was found.

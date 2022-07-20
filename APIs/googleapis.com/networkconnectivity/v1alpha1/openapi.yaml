@@ -6,7 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: The Network Connectivity API provides access to Network Connectivity Center.
+  description: This API enables connectivity with and between Google Cloud resources.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -32,7 +32,7 @@ tags:
 paths:
   "/v1alpha1/{name}":
     delete:
-      description: Deletes a single Spoke.
+      description: Deletes a Network Connectivity Center spoke.
       operationId: networkconnectivity.projects.locations.spokes.delete
       parameters:
         - description: Required. The name of the Spoke to delete.
@@ -61,7 +61,7 @@ paths:
       tags:
         - projects
     get:
-      description: Gets details of a single Spoke.
+      description: Gets details about a Network Connectivity Center spoke.
       operationId: networkconnectivity.projects.locations.spokes.get
       parameters:
         - description: Required. The name of Spoke resource.
@@ -97,7 +97,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates the parameters of a single Spoke.
+      description: Updates the parameters of a Network Connectivity Center spoke.
       operationId: networkconnectivity.projects.locations.spokes.patch
       parameters:
         - description: Immutable. The name of a Spoke resource.
@@ -283,7 +283,7 @@ paths:
         - projects
   "/v1alpha1/{parent}/hubs":
     get:
-      description: Lists Hubs in a given project and location.
+      description: Lists the Network Connectivity Center hubs associated with a given project.
       operationId: networkconnectivity.projects.locations.global.hubs.list
       parameters:
         - description: Required. The parent resource's name.
@@ -339,7 +339,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a new Hub in a given project and location.
+      description: Creates a new Network Connectivity Center hub in the specified project.
       operationId: networkconnectivity.projects.locations.global.hubs.create
       parameters:
         - description: Required. The parent resource's name of the Hub.
@@ -379,7 +379,7 @@ paths:
         - projects
   "/v1alpha1/{parent}/spokes":
     get:
-      description: Lists Spokes in a given project and location.
+      description: Lists the Network Connectivity Center spokes in a specified project and location.
       operationId: networkconnectivity.projects.locations.spokes.list
       parameters:
         - description: Required. The parent's resource name.
@@ -435,7 +435,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a new Spoke in a given project and location.
+      description: Creates a Network Connectivity Center spoke.
       operationId: networkconnectivity.projects.locations.spokes.create
       parameters:
         - description: Required. The parent's resource name of the Spoke.
@@ -827,6 +827,7 @@ components:
             - CREATING
             - ACTIVE
             - DELETING
+            - UPDATING
           readOnly: true
           type: string
         uniqueId:
@@ -1029,6 +1030,7 @@ components:
             - CREATING
             - ACTIVE
             - DELETING
+            - UPDATING
           readOnly: true
           type: string
         uniqueId:

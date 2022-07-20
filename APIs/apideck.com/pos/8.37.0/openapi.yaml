@@ -272,7 +272,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: POS API
-  version: 8.34.0
+  version: 8.37.0
   x-apideck-api: pos
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -452,6 +452,8 @@ paths:
                 tax_ids: ['12345', '67890'],
                 absent_at_location_ids: ['12345', '67890'],
                 present_at_all_locations: false,
+                available_for_pickup: false,
+                available_online: false,
                 sku: '11910345',
                 code: '11910345',
                 categories: [
@@ -479,6 +481,11 @@ paths:
                     price_amount: 10,
                     price_currency: 'USD',
                     image_ids: ['12345', '67890']
+                  }
+                ],
+                modifier_groups: [
+                  {
+                    id: '12345'
                   }
                 ],
                 available: true,
@@ -658,6 +665,8 @@ paths:
                 tax_ids: ['12345', '67890'],
                 absent_at_location_ids: ['12345', '67890'],
                 present_at_all_locations: false,
+                available_for_pickup: false,
+                available_online: false,
                 sku: '11910345',
                 code: '11910345',
                 categories: [
@@ -685,6 +694,11 @@ paths:
                     price_amount: 10,
                     price_currency: 'USD',
                     image_ids: ['12345', '67890']
+                  }
+                ],
+                modifier_groups: [
+                  {
+                    id: '12345'
                   }
                 ],
                 available: true,
@@ -1787,6 +1801,7 @@ paths:
 
             const params = {
               modifier: {
+                idempotency_key: 'random_string',
                 name: 'Modifier',
                 alternate_name: 'Modifier New',
                 price_amount: 10,
@@ -1956,6 +1971,7 @@ paths:
             const params = {
               id: 'id_example',
               modifier: {
+                idempotency_key: 'random_string',
                 name: 'Modifier',
                 alternate_name: 'Modifier New',
                 price_amount: 10,
@@ -6543,6 +6559,14 @@ components:
           type: array
         available:
           $ref: "#/components/schemas/Available"
+        available_for_pickup:
+          example: false
+          title: If true, the item can be added to pickup orders from the merchant's online store.
+          type: boolean
+        available_online:
+          example: false
+          title: If true, the item can be added to shipping orders from the merchant's online store.
+          type: boolean
         categories:
           example:
             - id: "12345"
@@ -6592,6 +6616,17 @@ components:
           type: string
         idempotency_key:
           $ref: "#/components/schemas/IdempotencyKey"
+        modifier_groups:
+          example:
+            - id: "12345"
+          items:
+            properties:
+              id:
+                $ref: "#/components/schemas/Id"
+            x-apideck-weights:
+              id: medium
+          title: Variations
+          type: array
         name:
           example: Cocoa
           title: Name
@@ -6745,6 +6780,8 @@ components:
         abbreviation: low
         absent_at_location_ids: edge-case
         available: high
+        available_for_pickup: edge-case
+        available_online: edge-case
         categories: low
         code: high
         cost: medium
@@ -6755,6 +6792,7 @@ components:
         hidden: medium
         id: critical
         idempotency_key: medium
+        modifier_groups: low
         name: critical
         options: low
         present_at_all_locations: low
@@ -6953,6 +6991,8 @@ components:
           $ref: "#/components/schemas/Currency"
         id:
           $ref: "#/components/schemas/Id"
+        idempotency_key:
+          $ref: "#/components/schemas/IdempotencyKey"
         modifier_group_id:
           example: "123"
           title: Modifier group ID

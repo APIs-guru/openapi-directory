@@ -6,7 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: The Network Connectivity API provides access to Network Connectivity Center.
+  description: This API enables connectivity with and between Google Cloud resources.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -32,7 +32,7 @@ tags:
 paths:
   "/v1/{name}":
     delete:
-      description: Deletes the specified spoke.
+      description: Deletes a Network Connectivity Center spoke.
       operationId: networkconnectivity.projects.locations.spokes.delete
       parameters:
         - description: Required. The name of the spoke to delete.
@@ -61,7 +61,7 @@ paths:
       tags:
         - projects
     get:
-      description: Gets details about the specified spoke.
+      description: Gets details about a Network Connectivity Center spoke.
       operationId: networkconnectivity.projects.locations.spokes.get
       parameters:
         - description: Required. The name of the spoke resource.
@@ -97,7 +97,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates the parameters of the specified spoke.
+      description: Updates the parameters of a Network Connectivity Center spoke.
       operationId: networkconnectivity.projects.locations.spokes.patch
       parameters:
         - description: "Immutable. The name of the spoke. Spoke names must be unique. They use the following form: `projects/{project_number}/locations/{region}/spokes/{spoke_id}`"
@@ -283,7 +283,7 @@ paths:
         - projects
   "/v1/{parent}/hubs":
     get:
-      description: Lists hubs in a given project.
+      description: Lists the Network Connectivity Center hubs associated with a given project.
       operationId: networkconnectivity.projects.locations.global.hubs.list
       parameters:
         - description: Required. The parent resource's name.
@@ -339,7 +339,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a new hub in the specified project.
+      description: Creates a new Network Connectivity Center hub in the specified project.
       operationId: networkconnectivity.projects.locations.global.hubs.create
       parameters:
         - description: Required. The parent resource.
@@ -379,7 +379,7 @@ paths:
         - projects
   "/v1/{parent}/spokes":
     get:
-      description: Lists the spokes in the specified project and location.
+      description: Lists the Network Connectivity Center spokes in a specified project and location.
       operationId: networkconnectivity.projects.locations.spokes.list
       parameters:
         - description: Required. The parent resource.
@@ -435,7 +435,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a spoke in the specified project and location.
+      description: Creates a Network Connectivity Center spoke.
       operationId: networkconnectivity.projects.locations.spokes.create
       parameters:
         - description: Required. The parent resource.
@@ -797,7 +797,7 @@ components:
           type: string
       type: object
     Hub:
-      description: A hub is a collection of spokes. A single hub can contain spokes from multiple regions. However, if any of a hub's spokes use the data transfer feature, the resources associated with those spokes must all reside in the same VPC network. Spokes that do not use data transfer can be associated with any VPC network in your project.
+      description: A Network Connectivity Center hub is a collection of spokes. A single hub can contain spokes from multiple regions. However, if any of a hub's spokes use the data transfer feature, the resources associated with those spokes must all reside in the same VPC network. Spokes that do not use data transfer can be associated with any VPC network in your project.
       properties:
         createTime:
           description: Output only. The time the hub was created.
@@ -827,6 +827,7 @@ components:
             - CREATING
             - ACTIVE
             - DELETING
+            - UPDATING
           readOnly: true
           type: string
         uniqueId:
@@ -1024,7 +1025,7 @@ components:
           type: string
       type: object
     RoutingVPC:
-      description: RoutingVPC contains information about the VPC networks that are associated with a hub's spokes.
+      description: RoutingVPC contains information about the VPC networks associated with the spokes of a Network Connectivity Center hub.
       properties:
         requiredForNewSiteToSiteDataTransferSpokes:
           description: Output only. If true, indicates that this VPC network is currently associated with spokes that use the data transfer feature (spokes where the site_to_site_data_transfer field is set to true). If you create new spokes that use data transfer, they must be associated with this VPC network. At most, one VPC network will have this field set to true.
@@ -1046,7 +1047,7 @@ components:
           type: string
       type: object
     Spoke:
-      description: "A spoke represents a connection between your Google Cloud network resources and a non-Google-Cloud network. When you create a spoke, you associate it with a hub. You must also identify a value for exactly one of the following fields: * linked_vpn_tunnels * linked_interconnect_attachments * linked_router_appliance_instances"
+      description: "A Network Connectivity Center spoke represents a connection between your Google Cloud network resources and a non-Google-Cloud network. When you create a spoke, you associate it with a hub. You must also identify a value for exactly one of the following fields: * linked_vpn_tunnels * linked_interconnect_attachments * linked_router_appliance_instances"
       properties:
         createTime:
           description: Output only. The time the spoke was created.
@@ -1083,6 +1084,7 @@ components:
             - CREATING
             - ACTIVE
             - DELETING
+            - UPDATING
           readOnly: true
           type: string
         uniqueId:
