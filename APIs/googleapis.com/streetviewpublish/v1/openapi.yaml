@@ -750,7 +750,7 @@ components:
           description: The duration of the gap in GPS data that was found.
           format: google-duration
           type: string
-        gapTime:
+        gapStartTime:
           description: Relative time (from the start of the video stream) when the gap started.
           format: google-duration
           type: string
@@ -781,7 +781,7 @@ components:
           description: The duration of the gap in IMU data that was found.
           format: google-duration
           type: string
-        gapTime:
+        gapStartTime:
           description: Relative time (from the start of the video stream) when the gap started.
           format: google-duration
           type: string
@@ -874,7 +874,7 @@ components:
     NotOutdoorsFailureDetails:
       description: Details related to ProcessingFailureReason#NOT_OUTDOORS. If there are multiple indoor frames found, the first frame is recorded here.
       properties:
-        time:
+        startTime:
           description: Relative time (from the start of the video stream) when an indoor frame was found.
           format: google-duration
           type: string

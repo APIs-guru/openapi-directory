@@ -1083,6 +1083,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: Optional. Filters to restrict results to specific answer records. Marked deprecated as it hasn't been, and isn't currently, supported. For more information about filtering, see [API Filtering](https://aip.dev/160).
+          in: query
+          name: filter
+          schema:
+            type: string
         - description: Optional. The maximum number of records to return in a single page. The server may return fewer records than this. If unspecified, we use 10. The maximum is 100.
           in: query
           name: pageSize
@@ -7992,7 +7997,7 @@ components:
           description: The event to be processed.
         text:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2TextInput"
-          description: The natural language text to be processed.
+          description: The natural language text to be processed. Text length must not exceed 256 character for virtual agent interactions.
       type: object
     GoogleCloudDialogflowV2QueryParameters:
       description: Represents the parameters of the conversational query.
@@ -8446,7 +8451,7 @@ components:
           description: Required. The language of this conversational query. See [Language Support](https://cloud.google.com/dialogflow/docs/reference/language) for a list of the currently supported language codes. Note that queries in the same session do not necessarily need to specify the same language.
           type: string
         text:
-          description: Required. The UTF-8 encoded natural language text to be processed. Text length must not exceed 256 characters.
+          description: Required. The UTF-8 encoded natural language text to be processed. Text length must not exceed 256 characters for virtual agent interactions.
           type: string
       type: object
     GoogleCloudDialogflowV2TextToSpeechSettings:

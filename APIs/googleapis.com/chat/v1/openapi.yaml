@@ -790,7 +790,7 @@ components:
             $ref: "#/components/schemas/GoogleAppsCardV1ActionParameter"
           type: array
         persistValues:
-          description: Indicates whether form values persist after the action. The default value is `false`. If `true`, form values remain after the action is triggered. When using [LoadIndicator.NONE](workspace/add-ons/reference/rpc/google.apps.card.v1#loadindicator) for actions, `persist_values` = `true`is recommended, as it ensures that any changes made by the user after form or on change actions are sent to the server are not overwritten by the response. If `false`, the form values are cleared when the action is triggered. When `persist_values` is set to `false`, it is strongly recommended that the card use [LoadIndicator.SPINNER](workspace/add-ons/reference/rpc/google.apps.card.v1#loadindicator) for all actions, as this locks the UI to ensure no changes are made by the user while the action is being processed.
+          description: Indicates whether form values persist after the action. The default value is `false`. If `true`, form values remain after the action is triggered. When using [LoadIndicator.NONE](workspace/add-ons/reference/rpc/google.apps.card.v1#loadindicator) for actions, `persist_values` = `true`is recommended, as it ensures that any changes made by the user after form or on change actions are sent to the server are not overwritten by the response. If `false`, the form values are cleared when the action is triggered. When `persist_values` is set to `false`, it is strongly recommended that the card use [LoadIndicator.SPINNER](workspace/add-ons/reference/rpc/google.apps.card.v1#loadindicator) for all actions, as this locks the UI to ensure no changes are made by the user while the action is being processed. Not supported by Google Chat apps.
           type: boolean
       type: object
     GoogleAppsCardV1ActionParameter:
@@ -801,19 +801,6 @@ components:
           type: string
         value:
           description: The value of the parameter.
-          type: string
-      type: object
-    GoogleAppsCardV1AppUri:
-      description: Represents the platform specific uri/intent to open for each client.
-      properties:
-        androidIntent:
-          $ref: "#/components/schemas/GoogleAppsCardV1Intent"
-          description: An intent object to be opened in the corresponding android hosting app.
-        companionUri:
-          description: A companion uri string to be opened in the chat companion window. on the web.
-          type: string
-        iosUri:
-          description: A uri string to be opened in the corresponding iOS hosting app.
           type: string
       type: object
     GoogleAppsCardV1BorderStyle:
@@ -874,7 +861,7 @@ components:
             $ref: "#/components/schemas/GoogleAppsCardV1CardAction"
           type: array
         displayStyle:
-          description: The display style for `peekCardHeader`.
+          description: The `peekCardHeader` display style for. Not supported by Google Chat apps.
           enum:
             - DISPLAY_STYLE_UNSPECIFIED
             - PEEK
@@ -891,7 +878,7 @@ components:
           type: string
         peekCardHeader:
           $ref: "#/components/schemas/GoogleAppsCardV1CardHeader"
-          description: When displaying contextual content, the peek card header acts as a placeholder so that the user can navigate forward between the homepage cards and the contextual cards.
+          description: When displaying contextual content, the peek card header acts as a placeholder so that the user can navigate forward between the homepage cards and the contextual cards. Not supported by Google Chat apps.
         sections:
           description: Sections are separated by a line divider.
           items:
@@ -1005,16 +992,6 @@ components:
     GoogleAppsCardV1Divider:
       description: A divider that appears in between widgets.
       properties: {}
-      type: object
-    GoogleAppsCardV1ExtraData:
-      description: Extra data for an android intent. Valid keys are defined in the hosting app contract.
-      properties:
-        key:
-          description: A key for the intent extra data.
-          type: string
-        value:
-          description: Value for the given extra data key.
-          type: string
       type: object
     GoogleAppsCardV1Grid:
       description: Represents a Grid widget that displays items in a configurable grid layout.
@@ -1133,18 +1110,6 @@ components:
             - RECTANGLE_4_3
           type: string
       type: object
-    GoogleAppsCardV1Intent:
-      description: Android intent.
-      properties:
-        extraData:
-          description: A list of extra data for the android intent. For example, for a calendar event edit intent, the event title information can be passed as extra data.
-          items:
-            $ref: "#/components/schemas/GoogleAppsCardV1ExtraData"
-          type: array
-        intentAction:
-          description: "An android intent action string for the {@link android.content.Intent} object. For example: for the view intent action type, a valid value will be android.content.Intent.ACTION_VIEW."
-          type: string
-      type: object
     GoogleAppsCardV1OnClick:
       description: Represents the response to an `onClick` event.
       properties:
@@ -1164,9 +1129,6 @@ components:
     GoogleAppsCardV1OpenLink:
       description: Represents an `onClick` event that opens a hyperlink.
       properties:
-        appUri:
-          $ref: "#/components/schemas/GoogleAppsCardV1AppUri"
-          description: "Represents the platform specific uri/intent to open on each client. For example: A companion_url will open in a companion window on the web. An iOS URL and android intent will open in the corresponding hosting apps. If these platform specific URLs can't be handled correctly, i.e. if the companion isn't supported on web and the hosting apps aren't available on the mobile platforms then the `uri` will open in a new browser window on all the platforms."
         onClose:
           description: Whether the client forgets about a link after opening it, or observes it until the window closes. Not supported by Chat apps.
           enum:
@@ -1312,7 +1274,7 @@ components:
           type: string
       type: object
     GoogleAppsCardV1TextParagraph:
-      description: A paragraph of text that supports formatting. See [Text formatting](workspace/add-ons/concepts/widgets#text_formatting") for details.
+      description: A paragraph of text that supports formatting. See [Text formatting](workspace/add-ons/concepts/widgets#text_formatting) for details.
       properties:
         text:
           description: The text that's shown in the widget.
@@ -1545,6 +1507,14 @@ components:
           description: "A Google Chat user or app. Format: `users/{user}` or `users/app` When `users/{user}`, represents a [person](https://developers.google.com/people/api/rest/v1/people) in the People API or a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. When `users/app`, represents a Chat app creating membership for itself."
         name:
           description: "Resource name of the membership. Format: spaces/{space}/members/{member}"
+          type: string
+        role:
+          description: Output only. User's role within a Chat space, which determines their permitted actions in the space.
+          enum:
+            - MEMBERSHIP_ROLE_UNSPECIFIED
+            - ROLE_MEMBER
+            - ROLE_MANAGER
+          readOnly: true
           type: string
         state:
           description: Output only. State of the membership.
