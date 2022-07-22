@@ -1878,6 +1878,10 @@ components:
           description: Output only. location_id of the runtime location. E.g. "us-west1".
           readOnly: true
           type: string
+        name:
+          description: "Output only. Name of the runtimeConfig resource. Format: projects/{project}/locations/{location}/runtimeConfig"
+          readOnly: true
+          type: string
         runtimeEndpoint:
           description: Output only. The endpoint of the connectors runtime ingress.
           readOnly: true

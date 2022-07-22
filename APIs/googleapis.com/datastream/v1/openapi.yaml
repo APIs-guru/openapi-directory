@@ -1513,6 +1513,10 @@ components:
         includeObjects:
           $ref: "#/components/schemas/MysqlRdbms"
           description: MySQL objects to retrieve from the source.
+        maxConcurrentCdcTasks:
+          description: Maximum number of concurrent CDC tasks. The number should be non negative. If not set (or set to 0), the system's default value will be used.
+          format: int32
+          type: integer
       type: object
     MysqlSslConfig:
       description: MySQL SSL configuration information.
@@ -1715,6 +1719,13 @@ components:
         includeObjects:
           $ref: "#/components/schemas/OracleRdbms"
           description: Oracle objects to include in the stream.
+        maxConcurrentCdcTasks:
+          description: Maximum number of concurrent CDC tasks. The number should be non negative. If not set (or set to 0), the system's default value will be used.
+          format: int32
+          type: integer
+        streamLargeObjects:
+          $ref: "#/components/schemas/StreamLargeObjects"
+          description: Stream large object values.
       type: object
     OracleTable:
       description: Oracle table.
@@ -1938,6 +1949,10 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+      type: object
+    StreamLargeObjects:
+      description: Configuration to stream large object values.
+      properties: {}
       type: object
     StreamObject:
       description: A specific stream object (e.g a specific DB table).

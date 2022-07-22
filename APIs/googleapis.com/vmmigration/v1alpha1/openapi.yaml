@@ -6,7 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: "Use the Migrate for Compute Engine API to programmatically migrate workloads. "
+  description: "Use the Migrate to Virtual Machines API to programmatically migrate workloads. "
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -26,7 +26,7 @@ info:
   x-providerName: googleapis.com
   x-serviceName: vmmigration
 externalDocs:
-  url: https://cloud.google.com/migrate/compute-engine
+  url: https://cloud.google.com/migrate/virtual-machines
 tags:
   - name: projects
 paths:
@@ -1073,63 +1073,6 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{parent}/replicationCycles":
-    get:
-      description: Lists ReplicationCycles in a given MigratingVM.
-      operationId: vmmigration.projects.locations.sources.migratingVms.replicationCycles.list
-      parameters:
-        - description: Required. The parent, which owns this collection of ReplicationCycles.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: Optional. The filter request.
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: Optional. the order by fields for the result.
-          in: query
-          name: orderBy
-          schema:
-            type: string
-        - description: Optional. The maximum number of replication cycles to return. The service may return fewer than this value. If unspecified, at most 100 migrating VMs will be returned. The maximum value is 100; values above 100 will be coerced to 100.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: Required. A page token, received from a previous `ListReplicationCycles` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListReplicationCycles` must match the call that provided the page token.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListReplicationCyclesResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
   "/v1alpha1/{parent}/sources":
     get:
       description: Lists Sources in a given project and location.
@@ -1606,21 +1549,6 @@ components:
         newDeployableAppliance:
           $ref: "#/components/schemas/ApplianceVersion"
           description: The newest deployable version of the appliance. The current appliance can't be updated into this version, and the owner must manually deploy this OVA to a new appliance.
-      type: object
-    AwsSourceVmDetails:
-      description: Represent the source AWS VM details.
-      properties:
-        committedStorageBytes:
-          description: The total size of the disks being migrated in bytes.
-          format: int64
-          type: string
-        firmware:
-          description: The firmware type of the source VM.
-          enum:
-            - FIRMWARE_UNSPECIFIED
-            - EFI
-            - BIOS
-          type: string
       type: object
     CancelCloneJobRequest:
       description: Request message for 'CancelCloneJob' request.
@@ -2282,26 +2210,6 @@ components:
             $ref: "#/components/schemas/Operation"
           type: array
       type: object
-    ListReplicationCyclesResponse:
-      description: Response message for 'ListReplicationCycles' request.
-      properties:
-        nextPageToken:
-          description: Output only. A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
-          readOnly: true
-          type: string
-        replicationCycles:
-          description: Output only. The list of replication cycles response.
-          items:
-            $ref: "#/components/schemas/ReplicationCycle"
-          readOnly: true
-          type: array
-        unreachable:
-          description: Output only. Locations that could not be reached.
-          items:
-            type: string
-          readOnly: true
-          type: array
-      type: object
     ListSourcesResponse:
       description: Response message for 'ListSources' request.
       properties:
@@ -2398,10 +2306,6 @@ components:
     MigratingVm:
       description: MigratingVm describes the VM that will be migrated from a Source environment and its replication state.
       properties:
-        awsSourceVmDetails:
-          $ref: "#/components/schemas/AwsSourceVmDetails"
-          description: Output only. Details of the VM from an AWS source.
-          readOnly: true
         computeEngineTargetDefaults:
           $ref: "#/components/schemas/ComputeEngineTargetDefaults"
           description: Details of the target VM in Compute Engine.
