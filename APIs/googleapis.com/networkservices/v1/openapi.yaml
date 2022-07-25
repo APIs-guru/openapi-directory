@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://networkservices.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: networkservices
 externalDocs:
@@ -529,7 +529,7 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: The value returned by the last `ListHttpRoutesResponse` Indicates that this is a continuation of a prior `ListRouters` call, and that the system should return the next page of data.
+        - description: The value returned by the last `ListHttpRoutesResponse` Indicates that this is a continuation of a prior `ListHttpRoutes` call, and that the system should return the next page of data.
           in: query
           name: pageToken
           schema:
@@ -772,7 +772,7 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: The value returned by the last `ListTcpRoutesResponse` Indicates that this is a continuation of a prior `ListRouters` call, and that the system should return the next page of data.
+        - description: The value returned by the last `ListTcpRoutesResponse` Indicates that this is a continuation of a prior `ListTcpRoutes` call, and that the system should return the next page of data.
           in: query
           name: pageToken
           schema:
@@ -853,7 +853,7 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: The value returned by the last `ListTlsRoutesResponse` Indicates that this is a continuation of a prior `ListRouters` call, and that the system should return the next page of data.
+        - description: The value returned by the last `ListTlsRoutesResponse` Indicates that this is a continuation of a prior `ListTlsRoutes` call, and that the system should return the next page of data.
           in: query
           name: pageToken
           schema:
@@ -1288,7 +1288,7 @@ components:
           description: Required. Name of the Gateway resource. It matches pattern `projects/*/locations/*/gateways/`.
           type: string
         ports:
-          description: Required. One or more ports that the Gateway must receive traffic on. The proxy binds to the ports specified. Gateway listen on 0.0.0.0 on the ports specified below.
+          description: Required. One or more port numbers (1-65535), on which the Gateway will receive traffic. The proxy binds to the specified ports. Gateways of type 'SECURE_WEB_GATEWAY' are limited to 1 port. Gateways of type 'OPEN_MESH' listen on 0.0.0.0 and support multiple ports.
           items:
             format: int32
             type: integer
@@ -1304,7 +1304,7 @@ components:
           description: Optional. A fully-qualified ServerTLSPolicy URL reference. Specifies how TLS traffic is terminated. If empty, TLS termination is disabled.
           type: string
         type:
-          description: Immutable. The type of the customer managed gateway.
+          description: Immutable. The type of the customer managed gateway. This field is required. If unspecified, an error is returned.
           enum:
             - TYPE_UNSPECIFIED
             - OPEN_MESH
@@ -1451,7 +1451,7 @@ components:
       description: The specifications for retries.
       properties:
         numRetries:
-          description: Specifies the allowed number of retries. This number must be > 0. If not specpfied, default to 1.
+          description: Specifies the allowed number of retries. This number must be > 0. If not specified, default to 1.
           format: uint32
           type: integer
         retryConditions:

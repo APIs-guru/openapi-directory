@@ -2622,7 +2622,7 @@ components:
             - DELETED
           type: string
         type:
-          description: The type of this run; can be either "AUTOMATED" or "ON_DEMAND". This field defaults to "ON_DEMAND" and is ignored, when specified for insert requests.
+          description: The type of this run; can be either "AUTOMATED" or "ON_DEMAND" or "FINAL". This field defaults to "ON_DEMAND" and is ignored, when specified for insert requests.
           enum:
             - SQL_BACKUP_RUN_TYPE_UNSPECIFIED
             - AUTOMATED
@@ -2917,7 +2917,7 @@ components:
             type: string
           type: array
         rootPassword:
-          description: Initial root password. Use only on creation.
+          description: Initial root password. Use only on creation. You must set root passwords before you can connect to PostgreSQL instances.
           type: string
         satisfiesPzs:
           description: The status indicating if instance satisfiesPzs. Reserved for future use.

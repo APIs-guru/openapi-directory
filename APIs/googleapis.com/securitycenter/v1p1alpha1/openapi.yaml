@@ -1021,6 +1021,11 @@ components:
           items:
             $ref: "#/components/schemas/ProcessSignature"
           type: array
+        uris:
+          description: The list of URIs associated to the Findings
+          items:
+            type: string
+          type: array
       type: object
     Kubernetes:
       description: Kubernetes related attributes.

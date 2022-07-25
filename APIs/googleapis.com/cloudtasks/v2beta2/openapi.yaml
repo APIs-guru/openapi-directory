@@ -13,20 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Tasks API
   version: v2beta2
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://cloudtasks.googleapis.com/$discovery/rest?version=v2beta2
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: cloudtasks
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/tasks/
 tags:
@@ -244,7 +241,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates and buffers a new task without the need to explicitly define a Task message. The queue must be an http queue (i.e., must have HTTP target). This method is used for a simplified application of Cloud Tasks queues in buffer and rate limitting HTTP requests.
+      description: "Note: This feature is in its experimental stage. You must request access to the API through the [Cloud Tasks BufferQueues Experiment Signup form](https://forms.gle/X8Zr5hiXH5tTGFqh8). Creates and buffers a new task without the need to explicitly define a Task message. The queue must be an http queue (i.e., must have HTTP target). This method is used for a simplified application of Cloud Tasks queues in buffer and rate limitting HTTP requests."
       operationId: cloudtasks.projects.locations.queues.buffer
       parameters:
         - description: "Required. The queue name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID` The queue must already exist."
@@ -967,6 +964,8 @@ components:
             - HEAD
             - PUT
             - DELETE
+            - PATCH
+            - OPTIONS
           type: string
         payload:
           description: Payload. The payload will be sent as the HTTP message body. A message body, and thus a payload, is allowed only if the HTTP method is POST or PUT. It is an error to set a data payload on a task with an incompatible HttpMethod.
@@ -1167,6 +1166,8 @@ components:
             - HEAD
             - PUT
             - DELETE
+            - PATCH
+            - OPTIONS
           type: string
         oauthToken:
           $ref: "#/components/schemas/OAuthToken"
@@ -1195,6 +1196,8 @@ components:
             - HEAD
             - PUT
             - DELETE
+            - PATCH
+            - OPTIONS
           type: string
         oauthToken:
           $ref: "#/components/schemas/OAuthToken"
@@ -1645,5 +1648,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}
