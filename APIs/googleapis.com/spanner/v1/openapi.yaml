@@ -2419,6 +2419,27 @@ components:
           $ref: "#/components/schemas/Type"
           description: The type of the field.
       type: object
+    FreeInstanceMetadata:
+      description: Free instance specific metadata that is kept even after an instance has been upgraded for tracking purposes.
+      properties:
+        expireBehavior:
+          description: Specifies the expiration behavior of a free instance. The default of ExpireBehavior is `REMOVE_AFTER_GRACE_PERIOD`. This can be modified during or after creation, and before expiration.
+          enum:
+            - EXPIRE_BEHAVIOR_UNSPECIFIED
+            - FREE_TO_PROVISIONED
+            - REMOVE_AFTER_GRACE_PERIOD
+          type: string
+        expireTime:
+          description: Output only. Timestamp after which the instance will either be upgraded or scheduled for deletion after a grace period. ExpireBehavior is used to choose between upgrading or scheduling the free instance for deletion. This timestamp is set during the creation of a free instance.
+          format: google-datetime
+          readOnly: true
+          type: string
+        upgradeTime:
+          description: Output only. If present, the timestamp at which the free instance was upgraded to a provisioned instance.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
     GetDatabaseDdlResponse:
       description: The response for GetDatabaseDdl.
       properties:
@@ -2481,6 +2502,16 @@ components:
           items:
             type: string
           type: array
+        freeInstanceMetadata:
+          $ref: "#/components/schemas/FreeInstanceMetadata"
+          description: Free instance metadata. Only populated for free instances.
+        instanceType:
+          description: The `InstanceType` of the current instance.
+          enum:
+            - INSTANCE_TYPE_UNSPECIFIED
+            - PROVISIONED
+            - FREE_INSTANCE
+          type: string
         labels:
           additionalProperties:
             type: string
@@ -2516,6 +2547,16 @@ components:
       properties:
         displayName:
           description: The name of this instance configuration as it appears in UIs.
+          type: string
+        freeInstanceAvailability:
+          description: Output only. Describes whether free instances are available to be created in this instance config.
+          enum:
+            - FREE_INSTANCE_AVAILABILITY_UNSPECIFIED
+            - AVAILABLE
+            - UNSUPPORTED
+            - DISABLED
+            - QUOTA_EXCEEDED
+          readOnly: true
           type: string
         leaderOptions:
           description: Allowed values of the "default_leader" schema option for databases in instances that use this instance configuration.
@@ -2913,7 +2954,7 @@ components:
           $ref: "#/components/schemas/ResultSetStats"
           description: Query plan and execution statistics for the statement that produced this streaming result set. These can be requested by setting ExecuteSqlRequest.query_mode and are sent only once with the last response in the stream. This field will also be present in the last response for DML statements.
         values:
-          description: 'A streamed result set consists of a stream of values, which might be split into many `PartialResultSet` messages to accommodate large rows and/or large values. Every N complete values defines a row, where N is equal to the number of entries in metadata.row_type.fields. Most values are encoded based on type as described here. It is possible that the last value in values is "chunked", meaning that the rest of the value is sent in subsequent `PartialResultSet`(s). This is denoted by the chunked_value field. Two or more chunked values can be merged to form a complete value as follows: * `bool/number/null`: cannot be chunked * `string`: concatenate the strings * `list`: concatenate the lists. If the last element in a list is a `string`, `list`, or `object`, merge it with the first element in the next list by applying these rules recursively. * `object`: concatenate the (field name, field value) pairs. If a field name is duplicated, then apply these rules recursively to merge the field values. Some examples of merging: # Strings are concatenated. "foo", "bar" => "foobar" # Lists of non-strings are concatenated. [2, 3], [4] => [2, 3, 4] # Lists are concatenated, but the last and first elements are merged # because they are strings. ["a", "b"], ["c", "d"] => ["a", "bc", "d"] # Lists are concatenated, but the last and first elements are merged # because they are lists. Recursively, the last and first elements # of the inner lists are merged because they are strings. ["a", ["b", "c"]], [["d"], "e"] => ["a", ["b", "cd"], "e"] # Non-overlapping object fields are combined. {"a": "1"}, {"b": "2"} => {"a": "1", "b": 2"} # Overlapping object fields are merged. {"a": "1"}, {"a": "2"} => {"a": "12"} # Examples of merging objects containing lists of strings. {"a": ["1"]}, {"a": ["2"]} => {"a": ["12"]} For a more complete example, suppose a streaming SQL query is yielding a result set whose rows contain a single string field. The following `PartialResultSet`s might be yielded: { "metadata": { ... } "values": ["Hello", "W"] "chunked_value": true "resume_token": "Af65..." } { "values": ["orl"] "chunked_value": true "resume_token": "Bqp2..." } { "values": ["d"] "resume_token": "Zx1B..." } This sequence of `PartialResultSet`s encodes two rows, one containing the field value `"Hello"`, and a second containing the field value `"World" = "W" + "orl" + "d"`.'
+          description: 'A streamed result set consists of a stream of values, which might be split into many `PartialResultSet` messages to accommodate large rows and/or large values. Every N complete values defines a row, where N is equal to the number of entries in metadata.row_type.fields. Most values are encoded based on type as described here. It is possible that the last value in values is "chunked", meaning that the rest of the value is sent in subsequent `PartialResultSet`(s). This is denoted by the chunked_value field. Two or more chunked values can be merged to form a complete value as follows: * `bool/number/null`: cannot be chunked * `string`: concatenate the strings * `list`: concatenate the lists. If the last element in a list is a `string`, `list`, or `object`, merge it with the first element in the next list by applying these rules recursively. * `object`: concatenate the (field name, field value) pairs. If a field name is duplicated, then apply these rules recursively to merge the field values. Some examples of merging: # Strings are concatenated. "foo", "bar" => "foobar" # Lists of non-strings are concatenated. [2, 3], [4] => [2, 3, 4] # Lists are concatenated, but the last and first elements are merged # because they are strings. ["a", "b"], ["c", "d"] => ["a", "bc", "d"] # Lists are concatenated, but the last and first elements are merged # because they are lists. Recursively, the last and first elements # of the inner lists are merged because they are strings. ["a", ["b", "c"]], [["d"], "e"] => ["a", ["b", "cd"], "e"] # Non-overlapping object fields are combined. {"a": "1"}, {"b": "2"} => {"a": "1", "b": 2"} # Overlapping object fields are merged. {"a": "1"}, {"a": "2"} => {"a": "12"} # Examples of merging objects containing lists of strings. {"a": ["1"]}, {"a": ["2"]} => {"a": ["12"]} For a more complete example, suppose a streaming SQL query is yielding a result set whose rows contain a single string field. The following `PartialResultSet`s might be yielded: { "metadata": { ... } "values": ["Hello", "W"] "chunked_value": true "resume_token": "Af65..." } { "values": ["orl"] "chunked_value": true } { "values": ["d"] "resume_token": "Zx1B..." } This sequence of `PartialResultSet`s encodes two rows, one containing the field value `"Hello"`, and a second containing the field value `"World" = "W" + "orl" + "d"`. Not all `PartialResultSet`s contain a `resume_token`. Execution can only be resumed from a previously yielded `resume_token`. For the above sequence of `PartialResultSet`s, resuming the query with `"resume_token": "Af65..."` will yield results from the `PartialResultSet` with value `["orl"]`.'
           items: {}
           type: array
       type: object

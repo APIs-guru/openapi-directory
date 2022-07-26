@@ -1638,6 +1638,13 @@ components:
           items:
             $ref: "#/components/schemas/TableDataSet"
           type: array
+        metricVisualization:
+          description: Optional. Store rendering strategy
+          enum:
+            - METRIC_VISUALIZATION_UNSPECIFIED
+            - NUMBER
+            - BAR
+          type: string
       type: object
     Type:
       description: A protocol buffer message type.

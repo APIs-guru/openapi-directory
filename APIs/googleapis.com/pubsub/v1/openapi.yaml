@@ -989,7 +989,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Pulls messages from the server. The server may return `UNAVAILABLE` if there are too many concurrent pull requests pending for the given subscription.
+      description: Pulls messages from the server.
       operationId: pubsub.projects.subscriptions.pull
       parameters:
         - description: Required. The subscription from which messages should be pulled. Format is `projects/{project}/subscriptions/{sub}`.

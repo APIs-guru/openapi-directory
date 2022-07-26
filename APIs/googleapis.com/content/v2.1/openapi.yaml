@@ -32,7 +32,6 @@ externalDocs:
 tags:
   - name: accounts
   - name: accountstatuses
-  - name: accountstatusesbyexternalsellerid
   - name: accounttax
   - name: buyongoogleprograms
   - name: collections
@@ -1691,58 +1690,6 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - accountstatuses
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/{merchantId}/accountstatusesbyexternalsellerid/{externalSellerId}":
-    get:
-      description: Gets status of the account with the specified external_seller_id belonging to the MCA with the specified merchant_id.
-      operationId: content.accountstatusesbyexternalsellerid.get
-      parameters:
-        - description: Required. The ID of the MCA containing the seller.
-          in: path
-          name: merchantId
-          required: true
-          schema:
-            type: string
-        - description: Required. The External Seller ID of the seller account to be retrieved.
-          in: path
-          name: externalSellerId
-          required: true
-          schema:
-            type: string
-        - description: If set, only issues for the specified destinations are returned, otherwise only issues for the Shopping destination.
-          explode: true
-          in: query
-          name: destinations
-          schema:
-            items:
-              type: string
-            type: array
-          style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AccountStatus"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/content
-          Oauth2c:
-            - https://www.googleapis.com/auth/content
-      tags:
-        - accountstatusesbyexternalsellerid
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -7920,7 +7867,7 @@ components:
           type: integer
         errors:
           $ref: "#/components/schemas/Errors"
-          description: A list of errors defined if and only if the request failed.
+          description: A list of errors for failed custombatch entries. *Note:* Schema errors fail the whole request.
         kind:
           description: 'Identifies what kind of resource this is. Value: the fixed string "`content#accountsCustomBatchResponseEntry`"'
           type: string
@@ -8051,7 +7998,7 @@ components:
           type: integer
         errors:
           $ref: "#/components/schemas/Errors"
-          description: A list of errors defined if and only if the request failed.
+          description: A list of errors for failed custombatch entries. *Note:* Schema errors fail the whole request.
       type: object
     AccountstatusesListResponse:
       properties:
@@ -8119,7 +8066,7 @@ components:
           type: integer
         errors:
           $ref: "#/components/schemas/Errors"
-          description: A list of errors defined if and only if the request failed.
+          description: A list of errors for failed custombatch entries. *Note:* Schema errors fail the whole request.
         kind:
           description: 'Identifies what kind of resource this is. Value: the fixed string "`content#accounttaxCustomBatchResponseEntry`"'
           type: string
@@ -8708,7 +8655,7 @@ components:
           description: The requested data feed. Defined if and only if the request was successful.
         errors:
           $ref: "#/components/schemas/Errors"
-          description: A list of errors defined if and only if the request failed.
+          description: A list of errors for failed custombatch entries. *Note:* Schema errors fail the whole request.
       type: object
     DatafeedsFetchNowResponse:
       properties:
@@ -8785,7 +8732,7 @@ components:
           description: The requested data feed status. Defined if and only if the request was successful.
         errors:
           $ref: "#/components/schemas/Errors"
-          description: A list of errors defined if and only if the request failed.
+          description: A list of errors for failed custombatch entries. *Note:* Schema errors fail the whole request.
       type: object
     DatafeedstatusesListResponse:
       properties:
@@ -9645,7 +9592,7 @@ components:
           type: integer
         errors:
           $ref: "#/components/schemas/Errors"
-          description: A list of errors defined if and only if the request failed.
+          description: A list of errors for failed custombatch entries. *Note:* Schema errors fail the whole request.
         kind:
           description: 'Identifies what kind of resource this is. Value: the fixed string "`content#localinventoryCustomBatchResponseEntry`"'
           type: string
@@ -12470,7 +12417,7 @@ components:
           type: integer
         errors:
           $ref: "#/components/schemas/Errors"
-          description: A list of errors defined if and only if the request failed.
+          description: A list of errors for failed custombatch entries. *Note:* Schema errors fail the whole request.
         kind:
           description: 'Identifies what kind of resource this is. Value: the fixed string "`content#productsCustomBatchResponseEntry`"'
           type: string
@@ -12545,7 +12492,7 @@ components:
           type: integer
         errors:
           $ref: "#/components/schemas/Errors"
-          description: A list of errors, if the request failed.
+          description: A list of errors for failed custombatch entries. *Note:* Schema errors fail the whole request.
         kind:
           description: 'Identifies what kind of resource this is. Value: the fixed string "`content#productstatusesCustomBatchResponseEntry`"'
           type: string
@@ -12921,7 +12868,7 @@ components:
           type: integer
         errors:
           $ref: "#/components/schemas/Errors"
-          description: A list of errors defined if and only if the request failed.
+          description: A list of errors for failed custombatch entries. *Note:* Schema errors fail the whole request.
         kind:
           description: 'Identifies what kind of resource this is. Value: the fixed string "`content#regionalinventoryCustomBatchResponseEntry`".'
           type: string
@@ -14039,7 +13986,7 @@ components:
           type: integer
         errors:
           $ref: "#/components/schemas/Errors"
-          description: A list of errors defined if, and only if, the request failed.
+          description: A list of errors for failed custombatch entries. *Note:* Schema errors fail the whole request.
         kind:
           description: 'Identifies what kind of resource this is. Value: the fixed string "`content#shippingsettingsCustomBatchResponseEntry`"'
           type: string

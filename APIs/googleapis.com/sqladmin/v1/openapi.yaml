@@ -3883,6 +3883,9 @@ components:
         databaseReplicationEnabled:
           description: "Configuration specific to read replica instances. Indicates whether replication is enabled or not. WARNING: Changing this restarts the instance."
           type: boolean
+        deletionProtectionEnabled:
+          description: Configuration to protect against accidental instance deletion.
+          type: boolean
         denyMaintenancePeriods:
           description: Deny maintenance periods
           items:

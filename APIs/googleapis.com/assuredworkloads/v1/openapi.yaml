@@ -402,7 +402,6 @@ components:
             - EU_REGIONS_AND_SUPPORT
             - CA_REGIONS_AND_SUPPORT
             - ITAR
-            - AU_REGIONS_AND_US_SUPPORT
           type: string
         createTime:
           description: Optional. Time when the operation was created.
@@ -462,7 +461,6 @@ components:
             - EU_REGIONS_AND_SUPPORT
             - CA_REGIONS_AND_SUPPORT
             - ITAR
-            - AU_REGIONS_AND_US_SUPPORT
           type: string
         createTime:
           description: Output only. Immutable. The Workload creation timestamp.
@@ -603,7 +601,6 @@ components:
             - EU_REGIONS_AND_SUPPORT
             - CA_REGIONS_AND_SUPPORT
             - ITAR
-            - AU_REGIONS_AND_US_SUPPORT
           type: string
         createTime:
           description: Optional. Time when the operation was created.
@@ -644,7 +641,6 @@ components:
             - EU_REGIONS_AND_SUPPORT
             - CA_REGIONS_AND_SUPPORT
             - ITAR
-            - AU_REGIONS_AND_US_SUPPORT
           type: string
         createTime:
           description: Output only. Immutable. The Workload creation timestamp.
@@ -822,7 +818,6 @@ components:
             - EU_REGIONS_AND_SUPPORT
             - CA_REGIONS_AND_SUPPORT
             - ITAR
-            - AU_REGIONS_AND_US_SUPPORT
           type: string
         createTime:
           description: Optional. Time when the operation was created.
@@ -863,7 +858,6 @@ components:
             - EU_REGIONS_AND_SUPPORT
             - CA_REGIONS_AND_SUPPORT
             - ITAR
-            - AU_REGIONS_AND_US_SUPPORT
           type: string
         complianceStatus:
           $ref: "#/components/schemas/GoogleCloudAssuredworkloadsVersioningV1mainWorkloadComplianceStatus"
@@ -941,11 +935,11 @@ components:
       description: Represents the Compliance Status of this workload
       properties:
         acknowledgedViolationCount:
-          description: Count of active Violations which are acknowledged in the Workload.
+          description: Count of acknowledged violations in the Workload.
           format: int32
           type: integer
         activeViolationCount:
-          description: Count of active Violations which haven't been acknowledged.
+          description: Count of active Violations in the Workload.
           format: int32
           type: integer
       type: object

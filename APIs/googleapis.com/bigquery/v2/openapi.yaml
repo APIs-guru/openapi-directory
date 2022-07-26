@@ -2540,6 +2540,9 @@ components:
         null_marker:
           description: "[Optional] An custom string that will represent a NULL value in CSV import data."
           type: string
+        preserveAsciiControlCharacters:
+          description: "[Optional] Preserves the embedded ASCII control characters (the first 32 characters in the ASCII-table, from '\\x00' to '\\x1F') when loading from CSV. Only applicable to CSV, ignored for other formats."
+          type: boolean
         quote:
           default: '"'
           description: "[Optional] The value that is used to quote data sections in a CSV file. BigQuery converts the string to ISO-8859-1 encoding, and then uses the first byte of the encoded string to split the data in its raw, binary state. The default value is a double-quote ('\"'). If your data does not contain quoted sections, set the property value to an empty string. If your data contains quoted newline characters, you must also set the allowQuotedNewlines property to true."
@@ -3067,6 +3070,9 @@ components:
         parquetOptions:
           $ref: "#/components/schemas/ParquetOptions"
           description: Additional properties to set if sourceFormat is set to Parquet.
+        referenceFileSchemaUri:
+          description: "[Optional] Provide a referencing file with the expected table schema. Enabled for the format: AVRO, PARQUET, ORC."
+          type: string
         schema:
           $ref: "#/components/schemas/TableSchema"
           description: "[Optional] The schema for the data. Schema is required for CSV and JSON formats. Schema is disallowed for Google Cloud Bigtable, Cloud Datastore backups, and Avro formats."
@@ -3584,6 +3590,9 @@ components:
         rangePartitioning:
           $ref: "#/components/schemas/RangePartitioning"
           description: "[TrustedTester] Range partitioning specification for this table. Only one of timePartitioning and rangePartitioning should be specified."
+        referenceFileSchemaUri:
+          description: "User provided referencing file with the expected reader schema, Available for the format: AVRO, PARQUET, ORC."
+          type: string
         schema:
           $ref: "#/components/schemas/TableSchema"
           description: "[Optional] The schema for the destination table. The schema can be omitted if the destination table already exists, or if you're loading data from Google Cloud Datastore."
@@ -4580,7 +4589,7 @@ components:
           format: int64
           type: string
         pendingUnits:
-          description: Total parallel units of work remaining for the active stages.
+          description: Total units of work remaining for the query. This number can be revised (increased or decreased) while the query is running.
           format: int64
           type: string
         totalSlotMs:
