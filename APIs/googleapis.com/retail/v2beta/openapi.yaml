@@ -1778,6 +1778,16 @@ components:
       description: Response of the ProductService.AddLocalInventories API. Currently empty because there is no meaningful response populated from the ProductService.AddLocalInventories method.
       properties: {}
       type: object
+    GoogleCloudRetailV2alphaBigQueryOutputResult:
+      description: A BigQuery output result.
+      properties:
+        datasetId:
+          description: The ID of a BigQuery Dataset.
+          type: string
+        tableId:
+          description: The ID of a BigQuery Table.
+          type: string
+      type: object
     GoogleCloudRetailV2alphaCreateModelMetadata:
       description: Metadata associated with a create operation.
       properties:
@@ -1815,6 +1825,9 @@ components:
         errorsConfig:
           $ref: "#/components/schemas/GoogleCloudRetailV2alphaExportErrorsConfig"
           description: This field is never set.
+        outputResult:
+          $ref: "#/components/schemas/GoogleCloudRetailV2alphaOutputResult"
+          description: Output result indicating where the data were exported to.
       type: object
     GoogleCloudRetailV2alphaExportUserEventsResponse:
       description: Response of the ExportUserEventsRequest. If the long running operation was successful, then this message is returned by the google.longrunning.Operations.response field if the operation was successful.
@@ -1827,6 +1840,9 @@ components:
         errorsConfig:
           $ref: "#/components/schemas/GoogleCloudRetailV2alphaExportErrorsConfig"
           description: This field is never set.
+        outputResult:
+          $ref: "#/components/schemas/GoogleCloudRetailV2alphaOutputResult"
+          description: Output result indicating where the data were exported to.
       type: object
     GoogleCloudRetailV2alphaImportCompletionDataResponse:
       description: Response of the ImportCompletionDataRequest. If the long running operation is done, this message is returned by the google.longrunning.Operations.response field if the operation is successful.
@@ -1945,6 +1961,12 @@ components:
             - ALL_TUNING_DISABLED
             - PERIODIC_TUNING_ENABLED
           type: string
+        servingConfigLists:
+          description: Output only. The list of valid serving configs associated with the PageOptimizationConfig.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRetailV2alphaModelServingConfigList"
+          readOnly: true
+          type: array
         servingState:
           description: "Output only. The serving state of the model: ACTIVE, NOT_ACTIVE."
           enum:
@@ -2016,6 +2038,24 @@ components:
         displayName:
           description: Optional. The name to display for the panel.
           type: string
+      type: object
+    GoogleCloudRetailV2alphaModelServingConfigList:
+      description: Represents an ordered combination of valid serving configs, which / may be used for PAGE_OPTIMIZATION recommendations.
+      properties:
+        servingConfigIds:
+          description: Optional. A set of valid serving configs that may be used for PAGE_OPTIMIZATION.
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudRetailV2alphaOutputResult:
+      description: Output result.
+      properties:
+        bigqueryResult:
+          description: Export result in BigQuery.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRetailV2alphaBigQueryOutputResult"
+          type: array
       type: object
     GoogleCloudRetailV2alphaPurgeMetadata:
       description: Metadata related to the progress of the Purge operation. This will be returned by the google.longrunning.Operation.metadata field.
@@ -2223,6 +2263,16 @@ components:
           items:
             type: string
           type: array
+      type: object
+    GoogleCloudRetailV2betaBigQueryOutputResult:
+      description: A BigQuery output result.
+      properties:
+        datasetId:
+          description: The ID of a BigQuery Dataset.
+          type: string
+        tableId:
+          description: The ID of a BigQuery Table.
+          type: string
       type: object
     GoogleCloudRetailV2betaBigQuerySource:
       description: BigQuery source import data from.
@@ -2543,6 +2593,9 @@ components:
         errorsConfig:
           $ref: "#/components/schemas/GoogleCloudRetailV2betaExportErrorsConfig"
           description: This field is never set.
+        outputResult:
+          $ref: "#/components/schemas/GoogleCloudRetailV2betaOutputResult"
+          description: Output result indicating where the data were exported to.
       type: object
     GoogleCloudRetailV2betaExportUserEventsResponse:
       description: Response of the ExportUserEventsRequest. If the long running operation was successful, then this message is returned by the google.longrunning.Operations.response field if the operation was successful.
@@ -2555,6 +2608,9 @@ components:
         errorsConfig:
           $ref: "#/components/schemas/GoogleCloudRetailV2betaExportErrorsConfig"
           description: This field is never set.
+        outputResult:
+          $ref: "#/components/schemas/GoogleCloudRetailV2betaOutputResult"
+          description: Output result indicating where the data were exported to.
       type: object
     GoogleCloudRetailV2betaFulfillmentInfo:
       description: Fulfillment information, such as the store IDs for in-store pickup or region IDs for different shipping methods.
@@ -2842,6 +2898,15 @@ components:
           description: Links between Merchant Center accounts and branches.
           items:
             $ref: "#/components/schemas/GoogleCloudRetailV2betaMerchantCenterLink"
+          type: array
+      type: object
+    GoogleCloudRetailV2betaOutputResult:
+      description: Output result.
+      properties:
+        bigqueryResult:
+          description: Export result in BigQuery.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRetailV2betaBigQueryOutputResult"
           type: array
       type: object
     GoogleCloudRetailV2betaPredictRequest:

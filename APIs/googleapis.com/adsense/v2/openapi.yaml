@@ -1495,7 +1495,8 @@ components:
           readOnly: true
           type: string
         name:
-          description: "Resource name of the account. Format: accounts/pub-[0-9]+"
+          description: "Output only. Resource name of the account. Format: accounts/pub-[0-9]+"
+          readOnly: true
           type: string
         pendingTasks:
           description: Output only. Outstanding tasks that need to be completed as part of the sign-up process for a new account. e.g. "billing-profile-creation", "phone-pin-verification".
@@ -1524,7 +1525,8 @@ components:
       description: Representation of an ad client. An ad client represents a user's subscription with a specific AdSense product.
       properties:
         name:
-          description: "Resource name of the ad client. Format: accounts/{account}/adclients/{adclient}"
+          description: "Output only. Resource name of the ad client. Format: accounts/{account}/adclients/{adclient}"
+          readOnly: true
           type: string
         productCode:
           description: Output only. Reporting product code of the ad client. For example, "AFC" for AdSense for Content. Corresponds to the `PRODUCT_CODE` dimension, and present only if the ad client supports reporting.
@@ -1570,7 +1572,8 @@ components:
           description: Required. Display name of the ad unit, as provided when the ad unit was created.
           type: string
         name:
-          description: "Resource name of the ad unit. Format: accounts/{account}/adclients/{adclient}/adunits/{adunit}"
+          description: "Output only. Resource name of the ad unit. Format: accounts/{account}/adclients/{adclient}/adunits/{adunit}"
+          readOnly: true
           type: string
         reportingDimensionId:
           description: Output only. Unique ID of the ad unit as used in the `AD_UNIT_ID` reporting dimension.
@@ -1600,7 +1603,8 @@ components:
           readOnly: true
           type: string
         name:
-          description: "Resource name of the alert. Format: accounts/{account}/alerts/{alert}"
+          description: "Output only. Resource name of the alert. Format: accounts/{account}/alerts/{alert}"
+          readOnly: true
           type: string
         severity:
           description: Output only. Severity of this alert.
@@ -1647,7 +1651,8 @@ components:
           description: Required. Display name of the custom channel.
           type: string
         name:
-          description: "Resource name of the custom channel. Format: accounts/{account}/adclients/{adclient}/customchannels/{customchannel}"
+          description: "Output only. Resource name of the custom channel. Format: accounts/{account}/adclients/{adclient}/customchannels/{customchannel}"
+          readOnly: true
           type: string
         reportingDimensionId:
           description: Output only. Unique ID of the custom channel as used in the `CUSTOM_CHANNEL_ID` reporting dimension.
@@ -1859,7 +1864,8 @@ components:
           description: Output only. For paid earnings, the date that the payment was credited. For unpaid earnings, this field is empty. Payment dates are always returned in the billing timezone (America/Los_Angeles).
           readOnly: true
         name:
-          description: "Resource name of the payment. Format: - accounts/{account}/payments/unpaid for unpaid (current) AdSense earnings. - accounts/{account}/payments/youtube-unpaid for unpaid (current) YouTube earnings. - accounts/{account}/payments/yyyy-MM-dd for paid AdSense earnings. - accounts/{account}/payments/youtube-yyyy-MM-dd for paid YouTube earnings. "
+          description: "Output only. Resource name of the payment. Format: - accounts/{account}/payments/unpaid for unpaid (current) AdSense earnings. - accounts/{account}/payments/youtube-unpaid for unpaid (current) YouTube earnings. - accounts/{account}/payments/yyyy-MM-dd for paid AdSense earnings. - accounts/{account}/payments/youtube-yyyy-MM-dd for paid YouTube earnings."
+          readOnly: true
           type: string
       type: object
     ReportResult:
@@ -1910,7 +1916,8 @@ components:
       description: Representation of a saved report.
       properties:
         name:
-          description: "Resource name of the report. Format: accounts/{account}/reports/{report}"
+          description: "Output only. Resource name of the report. Format: accounts/{account}/reports/{report}"
+          readOnly: true
           type: string
         title:
           description: Report title as specified by publisher.
@@ -1926,7 +1933,8 @@ components:
           description: Domain (or subdomain) of the site, e.g. "example.com" or "www.example.com". This is used in the `OWNED_SITE_DOMAIN_NAME` reporting dimension.
           type: string
         name:
-          description: "Resource name of a site. Format: accounts/{account}/sites/{site}"
+          description: "Output only. Resource name of a site. Format: accounts/{account}/sites/{site}"
+          readOnly: true
           type: string
         reportingDimensionId:
           description: Output only. Unique ID of the site as used in the `OWNED_SITE_ID` reporting dimension.
@@ -1957,7 +1965,8 @@ components:
       description: Representation of a URL channel. URL channels allow you to track the performance of particular pages in your site; see [URL channels](https://support.google.com/adsense/answer/2923836) for more information.
       properties:
         name:
-          description: "Resource name of the URL channel. Format: accounts/{account}/adclients/{adclient}/urlchannels/{urlchannel}"
+          description: "Output only. Resource name of the URL channel. Format: accounts/{account}/adclients/{adclient}/urlchannels/{urlchannel}"
+          readOnly: true
           type: string
         reportingDimensionId:
           description: Output only. Unique ID of the custom channel as used in the `URL_CHANNEL_ID` reporting dimension.

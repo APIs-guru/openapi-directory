@@ -166,7 +166,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Required. The field paths to update. Separate multiple values with commas. Currently supported field paths: - text - cards (Requires [service account authentication](/chat/api/guides/auth/service-accounts).) - attachment"
+        - description: "Required. The field paths to update. Separate multiple values with commas. Currently supported field paths: - text - cards (Requires [service account authentication](/chat/api/guides/auth/service-accounts).) "
           in: query
           name: updateMask
           schema:
@@ -1663,17 +1663,30 @@ components:
           description: Output only. Whether the space is a DM between a Chat app and a single human.
           readOnly: true
           type: boolean
+        spaceDetails:
+          $ref: "#/components/schemas/SpaceDetails"
+          description: Details about the space including description and rules.
         threaded:
           description: Output only. Whether messages are threaded in this space.
           readOnly: true
           type: boolean
         type:
-          description: "Output only. Deprecated: Use `single_user_bot_dm` or `space_type` (developer preview) instead. The type of a space."
+          description: "Output only. Deprecated: Use `singleUserBotDm` or `spaceType` (developer preview) instead. The type of a space."
           enum:
             - TYPE_UNSPECIFIED
             - ROOM
             - DM
           readOnly: true
+          type: string
+      type: object
+    SpaceDetails:
+      description: Details about the space including description and rules.
+      properties:
+        description:
+          description: Optional. A description of the space. It could describe the space's discussion topic, functional purpose, or participants.
+          type: string
+        guidelines:
+          description: Optional. The space's rules, expectations, and etiquette.
           type: string
       type: object
     Status:
