@@ -580,6 +580,16 @@ components:
           description: "The title must be specified. The header has a fixed height: if both a title and subtitle is specified, each will take up 1 line. If only the title is specified, it will take up both lines."
           type: string
       type: object
+    CardWithId:
+      description: Widgets for Chat apps to specify.
+      properties:
+        card:
+          $ref: "#/components/schemas/GoogleAppsCardV1Card"
+          description: Card proto that allows Chat apps to specify UI elements and editable widgets.
+        cardId:
+          description: Required for `cardsV2` messages. Chat app-specified identifier for this widget. Scoped within a message.
+          type: string
+      type: object
     ChatAppLogEntry:
       description: JSON payload of error messages. If the Cloud Logging API is enabled, these error messages are logged to [Google Cloud Logging](https://cloud.google.com/logging/docs).
       properties:
@@ -1550,6 +1560,11 @@ components:
           description: "Rich, formatted and interactive cards that can be used to display UI elements such as: formatted texts, buttons, clickable images. Cards are normally displayed below the plain-text body of the message."
           items:
             $ref: "#/components/schemas/Card"
+          type: array
+        cardsV2:
+          description: "Richly formatted and interactive cards that display UI elements and editable widgets, such as: - Formatted text - Buttons - Clickable images - Checkboxes - Radio buttons - Input widgets. Cards are usually displayed below the text-body of a Chat message, but can situationally appear other places, such as [dialogs](https://developers.google.com/chat/how-tos/dialogs). The `cardId` is a unique identifier among cards in the same message and for identifying user input values. Currently supported widgets include: - `TextParagraph` - `DecoratedText` - `Image` - `ButtonList`"
+          items:
+            $ref: "#/components/schemas/CardWithId"
           type: array
         createTime:
           description: Output only. The time at which the message was created in Google Chat server.

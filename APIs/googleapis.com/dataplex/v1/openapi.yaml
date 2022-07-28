@@ -2770,6 +2770,9 @@ components:
     GoogleCloudDataplexV1SessionEvent:
       description: These messages contain information about sessions within an environment. The monitored resource is 'Environment'.
       properties:
+        eventSucceeded:
+          description: The status of the event.
+          type: boolean
         message:
           description: The log message.
           type: string
@@ -2786,10 +2789,18 @@ components:
             - START
             - STOP
             - QUERY
+            - CREATE
+          type: string
+        unassignedDuration:
+          description: The idle duration of a warm pooled session before it is assigned to user.
+          format: google-duration
           type: string
         userId:
-          description: The information about the user that created the session.
+          description: The information about the user that created the session. It will be the email address of the user.
           type: string
+        warmPoolEnabled:
+          description: If the session is a warm pooled session.
+          type: boolean
       type: object
     GoogleCloudDataplexV1SessionEventQueryDetail:
       description: Execution details of the query.
@@ -2954,7 +2965,7 @@ components:
           format: google-duration
           type: string
         project:
-          description: Optional. The project in which jobs are run. By default, the project containing the Lake is used. If a project is provided, the executionspec.service_account must belong to this same project.
+          description: Optional. The project in which jobs are run. By default, the project containing the Lake is used. If a project is provided, the ExecutionSpec.service_account must belong to this project.
           type: string
         serviceAccount:
           description: Required. Service account to use to execute a task. If not provided, the default Compute service account for the project is used.

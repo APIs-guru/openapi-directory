@@ -989,6 +989,13 @@ components:
         roleGrant:
           $ref: "#/components/schemas/RoleGrant"
           description: Role grant configuration for the config variable.
+        state:
+          description: State of the config variable.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - DEPRECATED
+          type: string
         validationRegex:
           description: Regular expression in RE2 syntax used for validating the `value` of a `ConfigVariable`.
           type: string
