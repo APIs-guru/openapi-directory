@@ -43,6 +43,7 @@ paths:
       security:
         - oauth2_legacy:
             - automation
+        - hapikey: []
       summary: Complete a batch of callbacks
       tags:
         - Callbacks
@@ -75,6 +76,7 @@ paths:
       security:
         - oauth2_legacy:
             - automation
+        - hapikey: []
       summary: Complete a callback
       tags:
         - Callbacks
@@ -1774,6 +1776,10 @@ components:
       type: object
   securitySchemes:
     developer_hapikey:
+      in: query
+      name: hapikey
+      type: apiKey
+    hapikey:
       in: query
       name: hapikey
       type: apiKey

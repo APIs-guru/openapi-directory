@@ -37,6 +37,7 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
+        - hapikey: []
         - oauth2_legacy:
             - conversations.visitor_identification.tokens.create
       summary: Generate a token
@@ -160,6 +161,10 @@ components:
         - token
       type: object
   securitySchemes:
+    hapikey:
+      in: query
+      name: hapikey
+      type: apiKey
     oauth2_legacy:
       flows:
         authorizationCode:

@@ -107,6 +107,7 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
+        - hapikey: []
         - oauth2_legacy:
             - business-intelligence
       summary: Returns a collection of events matching a query.
@@ -279,6 +280,10 @@ components:
           $ref: "#/components/schemas/NextPage"
       type: object
   securitySchemes:
+    hapikey:
+      in: query
+      name: hapikey
+      type: apiKey
     oauth2_legacy:
       flows:
         authorizationCode:

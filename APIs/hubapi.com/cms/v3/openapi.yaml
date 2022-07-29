@@ -177,7 +177,8 @@ paths:
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
-      security: []
+      security:
+        - hapikey: []
       summary: Get current domains
       tags:
         - Domains
@@ -232,7 +233,8 @@ paths:
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
-      security: []
+      security:
+        - hapikey: []
       summary: Get a single domain
       tags:
         - Domains
@@ -702,6 +704,11 @@ components:
         next:
           $ref: "#/components/schemas/NextPage"
       type: object
+  securitySchemes:
+    hapikey:
+      in: query
+      name: hapikey
+      type: apiKey
 x-hubspot-available-client-libraries:
   - PHP
   - Node

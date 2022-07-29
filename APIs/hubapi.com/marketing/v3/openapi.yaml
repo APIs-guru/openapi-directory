@@ -50,6 +50,7 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
+        - hapikey: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       summary: Create a marketing event
@@ -70,6 +71,7 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
+        - hapikey: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       summary: Delete multiple marketing events
@@ -98,6 +100,7 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
+        - hapikey: []
         - oauth2_legacy:
             - crm.objects.marketing_events.read
       summary: Search for marketing events
@@ -124,6 +127,7 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
+        - hapikey: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       summary: Create or update multiple marketing events
@@ -157,6 +161,7 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
+        - hapikey: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       summary: Delete a marketing event
@@ -192,6 +197,7 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
+        - hapikey: []
         - oauth2_legacy:
             - crm.objects.marketing_events.read
       summary: Get a marketing event
@@ -234,6 +240,7 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
+        - hapikey: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       summary: Update a marketing event
@@ -268,6 +275,7 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
+        - hapikey: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       summary: Create or update a marketing event
@@ -304,6 +312,7 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
+        - hapikey: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       summary: Mark a marketing event as cancelled
@@ -349,6 +358,7 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
+        - hapikey: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       summary: Record
@@ -394,6 +404,7 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
+        - hapikey: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       summary: Record
@@ -423,6 +434,7 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
+        - hapikey: []
         - developer_hapikey: []
       summary: Retrieve the application settings
       tags:
@@ -457,6 +469,7 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
+        - hapikey: []
         - developer_hapikey: []
       summary: Update the application settings
       tags:
@@ -1174,6 +1187,10 @@ components:
       type: object
   securitySchemes:
     developer_hapikey:
+      in: query
+      name: hapikey
+      type: apiKey
+    hapikey:
       in: query
       name: hapikey
       type: apiKey

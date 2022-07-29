@@ -63,6 +63,7 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
+        - hapikey: []
         - oauth2_legacy:
             - communication_preferences.read_write
         - oauth2_legacy:
@@ -110,6 +111,7 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
+        - hapikey: []
         - oauth2_legacy:
             - communication_preferences.read_write
         - oauth2_legacy:
@@ -148,6 +150,7 @@ paths:
       security:
         - oauth2_legacy:
             - communication_preferences.write
+        - hapikey: []
         - oauth2_legacy:
             - communication_preferences.read_write
       summary: Subscribe a contact
@@ -184,6 +187,7 @@ paths:
       security:
         - oauth2_legacy:
             - communication_preferences.write
+        - hapikey: []
         - oauth2_legacy:
             - communication_preferences.read_write
       summary: Unsubscribe a contact
@@ -428,6 +432,10 @@ components:
         - subscriptionDefinitions
       type: object
   securitySchemes:
+    hapikey:
+      in: query
+      name: hapikey
+      type: apiKey
     oauth2_legacy:
       flows:
         authorizationCode:
