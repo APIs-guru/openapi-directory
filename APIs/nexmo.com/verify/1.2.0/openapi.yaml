@@ -206,7 +206,14 @@ paths:
       summary: Verify Control
   /network-unblock:
     post:
-      description: Request to unblock a network that has been blocked due to potential fraud detection
+      description: |-
+        Request to unblock a network that has been blocked due to potential fraud detection
+        <div class="Vlt-callout Vlt-callout--critical">
+          <div class="Vlt-callout__content">
+            <h4>Network Unblock is switched off by default.</h4>
+            Please contact Sales to enable the Network Unblock API for your account.
+          </div>
+        </div>
       operationId: networkUnblock
       requestBody:
         content:

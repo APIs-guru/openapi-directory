@@ -507,7 +507,7 @@ paths:
         - properties
   "/v1alpha/{parent}/audiences":
     get:
-      description: Lists Audiences on a property.
+      description: Lists Audiences on a property. Audiences created before 2020 may not be supported.
       operationId: analyticsadmin.properties.audiences.list
       parameters:
         - description: "Required. Example format: properties/1234"
