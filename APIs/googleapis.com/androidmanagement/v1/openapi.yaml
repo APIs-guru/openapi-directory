@@ -2383,6 +2383,7 @@ components:
             - PASSWORD_POLICIES_PASSWORD_EXPIRED
             - PASSWORD_POLICIES_PASSWORD_NOT_SUFFICIENT
             - ONC_WIFI_INVALID_VALUE
+            - ONC_WIFI_API_LEVEL
           type: string
       type: object
     NonComplianceDetailCondition:
@@ -3227,7 +3228,7 @@ components:
       properties:
         oncWifiContext:
           $ref: "#/components/schemas/OncWifiContext"
-          description: Additional context for non-compliance related to Wi-Fi configuration. See ONC_WIFI_INVALID_VALUE.
+          description: Additional context for non-compliance related to Wi-Fi configuration. See ONC_WIFI_INVALID_VALUE and ONC_WIFI_API_LEVEL
         passwordPoliciesContext:
           $ref: "#/components/schemas/PasswordPoliciesContext"
           description: Additional context for non-compliance related to password policies. See PASSWORD_POLICIES_PASSWORD_EXPIRED and PASSWORD_POLICIES_PASSWORD_NOT_SUFFICIENT.

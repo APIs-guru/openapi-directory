@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://ondemandscanning.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: ondemandscanning
 externalDocs:
@@ -775,8 +775,8 @@ components:
             - ANALYSIS_STATUS_UNSPECIFIED
             - PENDING
             - SCANNING
-            - FINISHED_SUCCESS
             - COMPLETE
+            - FINISHED_SUCCESS
             - FINISHED_FAILED
             - FINISHED_UNSUPPORTED
           type: string
