@@ -4667,13 +4667,13 @@ components:
       description: Options for a remote user-defined function.
       properties:
         connection:
-          description: Fully qualified name of the user-provided connection object which holds the authentication information to send requests to the remote service. projects/{project_id}/locations/{location_id}/connections/{connection_id}
+          description: 'Fully qualified name of the user-provided connection object which holds the authentication information to send requests to the remote service. Format: ```"projects/{projectId}/locations/{locationId}/connections/{connectionId}"```'
           type: string
         endpoint:
-          description: Endpoint of the user-provided remote service (e.g. a function url in Google Cloud Functions).
+          description: Endpoint of the user-provided remote service, e.g. ```https://us-east1-my_gcf_project.cloudfunctions.net/remote_add```
           type: string
         maxBatchingRows:
-          description: Max number of rows in each batch sent to the remote service. If absent or if 0, it means no limit.
+          description: Max number of rows in each batch sent to the remote service. If absent or if 0, BigQuery dynamically decides the number of rows in a batch.
           format: int64
           type: string
         userDefinedContext:

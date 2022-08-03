@@ -13,20 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Resource Manager API
   version: v3
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://cloudresourcemanager.googleapis.com/$discovery/rest?version=v3
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: cloudresourcemanager
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/resource-manager
 tags:
@@ -735,7 +732,7 @@ paths:
       tags:
         - tagValues
     get:
-      description: Retrieves TagValue. If the TagValue or namespaced name does not exist, or if the user does not have permission to view it, this method will return `PERMISSION_DENIED`.
+      description: Retrieves a TagValue. This method will return `PERMISSION_DENIED` if the value does not exist or the user does not have permission to view it.
       operationId: cloudresourcemanager.tagValues.get
       parameters:
         - description: Required. Resource name for TagValue to be fetched in the format `tagValues/456`.
@@ -1348,10 +1345,10 @@ components:
           description: Indicates the inheritance status of a tag value attached to the given resource. If the tag value is inherited from one of the resource's ancestors, inherited will be true. If false, then the tag value is directly attached to the resource, inherited will be false.
           type: boolean
         namespacedTagKey:
-          description: The namespaced_name of the TagKey, in the format of `{organization_id}/{tag_key_short_name}`
+          description: The namespaced_name of the TagKey. Now only supported in the format of `{organization_id}/{tag_key_short_name}`. Other formats will be supported when we add non-org parented tags.
           type: string
         namespacedTagValue:
-          description: Namespaced name of the TagValue. Must be in the format `{organization_id}/{tag_key_short_name}/{tag_value_short_name}`.
+          description: Namespaced name of the TagValue. Now only supported in the format `{organization_id}/{tag_key_short_name}/{tag_value_short_name}`. Other formats will be supported when we add non-org parented tags.
           type: string
         tagKey:
           description: The name of the TagKey, in the format `tagKeys/{id}`, such as `tagKeys/123`.
@@ -1939,7 +1936,7 @@ components:
           description: Immutable. Resource name for TagValue in the format `tagValues/456`.
           type: string
         namespacedName:
-          description: Output only. Namespaced name of the TagValue. Must be in the format `{organization_id}/{tag_key_short_name}/{short_name}`.
+          description: Output only. Namespaced name of the TagValue. Now only supported in the format `{organization_id}/{tag_key_short_name}/{short_name}`. Other formats will be supported when we add non-org parented tags.
           readOnly: true
           type: string
         parent:
@@ -2028,5 +2025,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud services and see the email address of your Google Account
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}
