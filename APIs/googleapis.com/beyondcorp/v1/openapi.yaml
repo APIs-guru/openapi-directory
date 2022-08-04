@@ -74,7 +74,7 @@ paths:
         - projects
   "/v1/{appConnector}:resolveInstanceConfig":
     get:
-      description: Get instance config for a given AppConnector. An internal method called by a AppConnector to get its container config.
+      description: Gets instance configuration for a given AppConnector. An internal method called by a AppConnector to get its container config.
       operationId: beyondcorp.projects.locations.appConnectors.resolveInstanceConfig
       parameters:
         - description: "Required. BeyondCorp AppConnector name using the form: `projects/{project_id}/locations/{location_id}/appConnectors/{app_connector}`"
@@ -1559,6 +1559,10 @@ components:
           format: int32
           readOnly: true
           type: integer
+        l7psc:
+          description: Output only. L7 private service connection for this resource.
+          readOnly: true
+          type: string
         type:
           description: Required. The type of hosting used by the gateway.
           enum:
