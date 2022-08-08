@@ -193,7 +193,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "The list of fields to update. The only currently supported fields are: `snapshot_auto_delete_behavior` `snapshot_schedule_policy_name` 'labels' 'snapshot_enabled' 'snapshot_reservation_detail.reserved_space_percent'"
+        - description: "The list of fields to update. The only currently supported fields are: 'labels'"
           in: query
           name: updateMask
           schema:
@@ -1950,6 +1950,10 @@ components:
           description: The size, in GiB, that this storage volume has expanded as a result of an auto grow policy. In the absence of auto-grow, the value is 0.
           format: int64
           type: string
+        bootVolume:
+          description: Output only. Whether this volume is a boot volume. A boot volume is one which contains a boot LUN.
+          readOnly: true
+          type: boolean
         currentSizeGib:
           description: The current size of this storage volume, in GiB, including space reserved for snapshots. This size might be different than the requested size if the storage volume has been configured with auto grow or auto shrink.
           format: int64

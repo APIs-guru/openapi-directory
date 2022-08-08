@@ -846,7 +846,7 @@ paths:
       description: Lists Cloud Spanner database roles.
       operationId: spanner.projects.instances.databases.databaseRoles.list
       parameters:
-        - description: Required. The database whose roles should be listed. Values are of the form `projects//instances//databases//databaseRoles`.
+        - description: Required. The database whose roles should be listed. Values are of the form `projects//instances//databases/`.
           in: path
           name: parent
           required: true

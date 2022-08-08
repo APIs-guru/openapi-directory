@@ -72,6 +72,178 @@ paths:
             - https://www.googleapis.com/auth/chrome.management.policy
       tags:
         - media
+  "/v1/{customer}/policies/groups:batchDelete":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Delete multiple policy values that are applied to a specific group. All targets must have the same target format. That is to say that they must point to the same target resource and must have the same keys specified in `additionalTargetKeyNames`, though the values for those keys may be different. On failure the request will return the error details as part of the google.rpc.Status.
+      operationId: chromepolicy.customers.policies.groups.batchDelete
+      parameters:
+        - description: ID of the Google Workspace account or literal "my_customer" for the customer associated to the request.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleChromePolicyV1BatchDeleteGroupPoliciesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleProtobufEmpty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chrome.management.policy
+          Oauth2c:
+            - https://www.googleapis.com/auth/chrome.management.policy
+      tags:
+        - customers
+  "/v1/{customer}/policies/groups:batchModify":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Modify multiple policy values that are applied to a specific group. All targets must have the same target format. That is to say that they must point to the same target resource and must have the same keys specified in `additionalTargetKeyNames`, though the values for those keys may be different. On failure the request will return the error details as part of the google.rpc.Status.
+      operationId: chromepolicy.customers.policies.groups.batchModify
+      parameters:
+        - description: ID of the Google Workspace account or literal "my_customer" for the customer associated to the request.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleChromePolicyV1BatchModifyGroupPoliciesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleProtobufEmpty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chrome.management.policy
+          Oauth2c:
+            - https://www.googleapis.com/auth/chrome.management.policy
+      tags:
+        - customers
+  "/v1/{customer}/policies/groups:listGroupPriorityOrdering":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Retrieve a group priority ordering for an app. The target app must be supplied in `additionalTargetKeyNames` in the PolicyTargetKey. On failure the request will return the error details as part of the google.rpc.Status.
+      operationId: chromepolicy.customers.policies.groups.listGroupPriorityOrdering
+      parameters:
+        - description: Required. ID of the Google Workspace account or literal "my_customer" for the customer associated to the request.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleChromePolicyV1ListGroupPriorityOrderingRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleChromePolicyV1ListGroupPriorityOrderingResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chrome.management.policy
+          Oauth2c:
+            - https://www.googleapis.com/auth/chrome.management.policy
+        - Oauth2:
+            - https://www.googleapis.com/auth/chrome.management.policy.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chrome.management.policy.readonly
+      tags:
+        - customers
+  "/v1/{customer}/policies/groups:updateGroupPriorityOrdering":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Update a group priority ordering for an app. The target app must be supplied in `additionalTargetKeyNames` in the PolicyTargetKey. On failure the request will return the error details as part of the google.rpc.Status.
+      operationId: chromepolicy.customers.policies.groups.updateGroupPriorityOrdering
+      parameters:
+        - description: Required. ID of the Google Workspace account or literal "my_customer" for the customer associated to the request.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleChromePolicyV1UpdateGroupPriorityOrderingRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleProtobufEmpty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chrome.management.policy
+          Oauth2c:
+            - https://www.googleapis.com/auth/chrome.management.policy
+      tags:
+        - customers
   "/v1/{customer}/policies/orgunits:batchInherit":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -403,6 +575,15 @@ components:
           description: Key description.
           type: string
       type: object
+    GoogleChromePolicyV1BatchDeleteGroupPoliciesRequest:
+      description: Request message for specifying that multiple policy values will be deleted.
+      properties:
+        requests:
+          description: "List of policies that will be deleted as defined by the `requests`. All requests in the list must follow these restrictions: 1. All schemas in the list must have the same root namespace. 2. All `policyTargetKey.targetResource` values must point to a group resource. 3. All `policyTargetKey` values must have the same `app_id` key name in the `additionalTargetKeys`. 4. No two modification requests can reference the same `policySchema` + ` policyTargetKey` pair. "
+          items:
+            $ref: "#/components/schemas/GoogleChromePolicyV1DeleteGroupPolicyRequest"
+          type: array
+      type: object
     GoogleChromePolicyV1BatchInheritOrgUnitPoliciesRequest:
       description: Request message for specifying that multiple policy values inherit their value from their parents.
       properties:
@@ -410,6 +591,15 @@ components:
           description: "List of policies that have to inherit their values as defined by the `requests`. All requests in the list must follow these restrictions: 1. All schemas in the list must have the same root namespace. 2. All `policyTargetKey.targetResource` values must point to an org unit resource. 3. All `policyTargetKey` values must have the same key names in the ` additionalTargetKeys`. This also means if one of the targets has an empty `additionalTargetKeys` map, all of the targets must have an empty `additionalTargetKeys` map. 4. No two modification requests can reference the same `policySchema` + ` policyTargetKey` pair. "
           items:
             $ref: "#/components/schemas/GoogleChromePolicyV1InheritOrgUnitPolicyRequest"
+          type: array
+      type: object
+    GoogleChromePolicyV1BatchModifyGroupPoliciesRequest:
+      description: Request message for modifying multiple policy values for a specific group-based target.
+      properties:
+        requests:
+          description: "List of policies to modify as defined by the `requests`. All requests in the list must follow these restrictions: 1. All schemas in the list must have the same root namespace. 2. All `policyTargetKey.targetResource` values must point to a group resource. 3. All `policyTargetKey` values must have the same `app_id` key name in the `additionalTargetKeys`. 4. No two modification requests can reference the same `policySchema` + ` policyTargetKey` pair. "
+          items:
+            $ref: "#/components/schemas/GoogleChromePolicyV1ModifyGroupPolicyRequest"
           type: array
       type: object
     GoogleChromePolicyV1BatchModifyOrgUnitPoliciesRequest:
@@ -421,6 +611,16 @@ components:
             $ref: "#/components/schemas/GoogleChromePolicyV1ModifyOrgUnitPolicyRequest"
           type: array
       type: object
+    GoogleChromePolicyV1DeleteGroupPolicyRequest:
+      description: Request parameters for deleting the policy value of a specific group target.
+      properties:
+        policySchema:
+          description: The fully qualified name of the policy schema that is being inherited.
+          type: string
+        policyTargetKey:
+          $ref: "#/components/schemas/GoogleChromePolicyV1PolicyTargetKey"
+          description: Required. The key of the target for which we want to modify a policy. The target resource must point to a Group.
+      type: object
     GoogleChromePolicyV1InheritOrgUnitPolicyRequest:
       description: Request parameters for inheriting policy value of a specific org unit target from the policy value of its parent org unit.
       properties:
@@ -430,6 +630,34 @@ components:
         policyTargetKey:
           $ref: "#/components/schemas/GoogleChromePolicyV1PolicyTargetKey"
           description: Required. The key of the target for which we want to modify a policy. The target resource must point to an Org Unit.
+      type: object
+    GoogleChromePolicyV1ListGroupPriorityOrderingRequest:
+      description: Request message for listing the group priority ordering of an app.
+      properties:
+        policyNamespace:
+          description: Required. The namespace of the policy type for the request.
+          type: string
+        policyTargetKey:
+          $ref: "#/components/schemas/GoogleChromePolicyV1PolicyTargetKey"
+          description: Required. The key of the target for which we want to retrieve the group priority ordering. The target resource must point to an app.
+      type: object
+    GoogleChromePolicyV1ListGroupPriorityOrderingResponse:
+      description: Response message for listing the group priority ordering of an app.
+      properties:
+        groupIds:
+          description: Output only. The group IDs, in priority ordering.
+          items:
+            type: string
+          readOnly: true
+          type: array
+        policyNamespace:
+          description: Output only. The namespace of the policy type of the group IDs.
+          readOnly: true
+          type: string
+        policyTargetKey:
+          $ref: "#/components/schemas/GoogleChromePolicyV1PolicyTargetKey"
+          description: Output only. The target resource for which the group priority ordering has been retrieved.
+          readOnly: true
       type: object
     GoogleChromePolicyV1ListPolicySchemasResponse:
       description: Response message for listing policy schemas that match a filter.
@@ -442,6 +670,20 @@ components:
           items:
             $ref: "#/components/schemas/GoogleChromePolicyV1PolicySchema"
           type: array
+      type: object
+    GoogleChromePolicyV1ModifyGroupPolicyRequest:
+      description: Request parameters for modifying a policy value for a specific group target.
+      properties:
+        policyTargetKey:
+          $ref: "#/components/schemas/GoogleChromePolicyV1PolicyTargetKey"
+          description: Required. The key of the target for which we want to modify a policy. The target resource must point to a Group.
+        policyValue:
+          $ref: "#/components/schemas/GoogleChromePolicyV1PolicyValue"
+          description: The new value for the policy.
+        updateMask:
+          description: Required. Policy fields to update. Only fields in this mask will be updated; other fields in `policy_value` will be ignored (even if they have values). If a field is in this list it must have a value in 'policy_value'.
+          format: google-fieldmask
+          type: string
       type: object
     GoogleChromePolicyV1ModifyOrgUnitPolicyRequest:
       description: Request parameters for modifying a policy value for a specific org unit target.
@@ -685,6 +927,21 @@ components:
           $ref: "#/components/schemas/GoogleChromePolicyV1PolicyValue"
           description: Output only. The resolved value of the policy.
           readOnly: true
+      type: object
+    GoogleChromePolicyV1UpdateGroupPriorityOrderingRequest:
+      description: Request message for updating the group priority ordering of an app.
+      properties:
+        groupIds:
+          description: Required. The group IDs, in desired priority ordering.
+          items:
+            type: string
+          type: array
+        policyNamespace:
+          description: Required. The namespace of the policy type for the request.
+          type: string
+        policyTargetKey:
+          $ref: "#/components/schemas/GoogleChromePolicyV1PolicyTargetKey"
+          description: Required. The key of the target for which we want to update the group priority ordering. The target resource must point to an app.
       type: object
     GoogleChromePolicyV1UploadPolicyFileRequest:
       description: "Request message for uploading a file for a policy. Next ID: 5"

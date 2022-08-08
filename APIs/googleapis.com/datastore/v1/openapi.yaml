@@ -861,7 +861,7 @@ components:
       description: The request for Datastore.AllocateIds.
       properties:
         databaseId:
-          description: The ID of the database against which to make the request. '(default)' is not allowed; please use empty string '' to refer the default database.
+          description: If not empty, the ID of the database against which to make the request.
           type: string
         keys:
           description: Required. A list of keys with incomplete key paths for which to allocate IDs. No key may be reserved/read-only.
@@ -891,7 +891,7 @@ components:
       description: The request for Datastore.BeginTransaction.
       properties:
         databaseId:
-          description: The ID of the database against which to make the request. '(default)' is not allowed; please use empty string '' to refer the default database.
+          description: If not empty, the ID of the database against which to make the request.
           type: string
         transactionOptions:
           $ref: "#/components/schemas/TransactionOptions"
@@ -909,7 +909,7 @@ components:
       description: The request for Datastore.Commit.
       properties:
         databaseId:
-          description: The ID of the database against which to make the request. '(default)' is not allowed; please use empty string '' to refer the default database.
+          description: If not empty, the ID of the database against which to make the request.
           type: string
         mode:
           description: The type of commit to perform. Defaults to `TRANSACTIONAL`.
@@ -1510,7 +1510,7 @@ components:
       description: The request for Datastore.Lookup.
       properties:
         databaseId:
-          description: The ID of the database against which to make the request. '(default)' is not allowed; please use empty string '' to refer the default database.
+          description: If not empty, the ID of the database against which to make the request.
           type: string
         keys:
           description: Required. Keys of entities to look up.
@@ -1766,7 +1766,7 @@ components:
       description: The options shared by read requests.
       properties:
         readConsistency:
-          description: The non-transactional read consistency to use.
+          description: The non-transactional read consistency to use. Cannot be set to `STRONG` for global queries.
           enum:
             - READ_CONSISTENCY_UNSPECIFIED
             - STRONG
@@ -1793,7 +1793,7 @@ components:
       description: The request for Datastore.ReserveIds.
       properties:
         databaseId:
-          description: The ID of the database against which to make the request. '(default)' is not allowed; please use empty string '' to refer the default database.
+          description: If not empty, the ID of the database against which to make the request.
           type: string
         keys:
           description: Required. A list of keys with complete key paths whose numeric IDs should not be auto-allocated.
@@ -1809,7 +1809,7 @@ components:
       description: The request for Datastore.Rollback.
       properties:
         databaseId:
-          description: The ID of the database against which to make the request. '(default)' is not allowed; please use empty string '' to refer the default database.
+          description: If not empty, the ID of the database against which to make the request.
           type: string
         transaction:
           description: Required. The transaction identifier, returned by a call to Datastore.BeginTransaction.
@@ -1824,7 +1824,7 @@ components:
       description: The request for Datastore.RunQuery.
       properties:
         databaseId:
-          description: The ID of the database against which to make the request. '(default)' is not allowed; please use empty string '' to refer the default database.
+          description: If not empty, the ID of the database against which to make the request.
           type: string
         gqlQuery:
           $ref: "#/components/schemas/GqlQuery"

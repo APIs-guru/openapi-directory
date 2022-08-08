@@ -915,6 +915,12 @@ components:
     AuthorizationCodeLink:
       description: This configuration captures the details required to render an authorization link for the OAuth Authorization Code Flow.
       properties:
+        clientId:
+          description: The client ID assigned to the GCP Connectors OAuth app for the connector data source.
+          type: string
+        enablePkce:
+          description: Whether to enable PKCE for the auth code flow.
+          type: boolean
         scopes:
           description: The scopes for which the user will authorize GCP Connectors on the connector data source.
           items:

@@ -1766,6 +1766,20 @@ components:
             $ref: "#/components/schemas/AdSize"
           type: array
       type: object
+    InventoryTypeTargeting:
+      description: Targeting of the inventory types a bid request can originate from.
+      properties:
+        inventoryTypes:
+          description: The list of targeted inventory types for the bid request.
+          items:
+            enum:
+              - INVENTORY_TYPE_UNSPECIFIED
+              - BROWSER
+              - MOBILE_APP
+              - VIDEO_PLAYER
+            type: string
+          type: array
+      type: object
     ListAuctionPackagesResponse:
       description: Response message for listing auction packages.
       properties:
@@ -1863,6 +1877,10 @@ components:
         inventorySizeTargeting:
           $ref: "#/components/schemas/InventorySizeTargeting"
           description: Output only. Inventory sizes to be included/excluded.
+          readOnly: true
+        inventoryTypeTargeting:
+          $ref: "#/components/schemas/InventoryTypeTargeting"
+          description: Output only. Inventory type targeting information.
           readOnly: true
         placementTargeting:
           $ref: "#/components/schemas/PlacementTargeting"

@@ -8,7 +8,7 @@ info:
     url: https://developer.nexmo.com/
   description: The Messages API consolidates and normalises exchanges across all messaging channels. It allows you to use a single API to interact with our various channels such as SMS, MMS, WhatsApp, Viber and Facebook Messenger
   title: Messages API
-  version: 1.1.1
+  version: 1.2.0
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/messages-olympus.yml
@@ -1481,6 +1481,39 @@ components:
                 - undeliverable
                 - read
               example: read
+            usage:
+              properties:
+                currency:
+                  description: The charge currency in ISO 4217 format.
+                  enum:
+                    - EUR
+                  example: EUR
+                  type: string
+                price:
+                  description: The charge amount as a stringified number. For WhatsApp this is the default Vonage charge per conversation.
+                  example: "0.0333"
+                  type: string
+              type: object
+            whatsapp:
+              description: An object contining meta-data related to the WhatsApp message that triggered this callback. Only present for callbacks with a `status` of `delivered`.
+              properties:
+                conversation:
+                  description: An object contining data for the conversation to which the message relates.
+                  properties:
+                    id:
+                      description: The id of the conversation.
+                      example: "1234567890"
+                      type: string
+                    origin:
+                      description: An object contining data related to the origin of the conversation.
+                      properties:
+                        type:
+                          description: The conversation type.
+                          example: user_initiated
+                          type: string
+                      type: object
+                  type: object
+              type: object
           title: WhatsApp
           x-tab-id: WhatsApp
     vCard:
