@@ -341,6 +341,9 @@ components:
         gender:
           description: The target gender of the product. For more information, see https://support.google.com/manufacturers/answer/6124116#gender.
           type: string
+        grocery:
+          $ref: "#/components/schemas/Grocery"
+          description: Grocery Attributes. For more information, see go/mfc-nutrition-attributes.
         gtin:
           description: The Global Trade Item Number (GTIN) of the product. For more information, see https://support.google.com/manufacturers/answer/6124116#gtin.
           items:
@@ -363,6 +366,9 @@ components:
         mpn:
           description: The Manufacturer Part Number (MPN) of the product. For more information, see https://support.google.com/manufacturers/answer/6124116#mpn.
           type: string
+        nutrition:
+          $ref: "#/components/schemas/Nutrition"
+          description: Nutrition Attributes. For more information, see go/mfc-nutrition-attributes.
         pattern:
           description: The pattern of the product. For more information, see https://support.google.com/manufacturers/answer/6124116#pattern.
           type: string
@@ -484,6 +490,52 @@ components:
           description: A detailed description of the feature.
           type: string
       type: object
+    FloatUnit:
+      description: Combination of float amout and unit.
+      properties:
+        amount:
+          description: amount.
+          format: double
+          type: number
+        unit:
+          description: unit.
+          type: string
+      type: object
+    Grocery:
+      properties:
+        activeIngredients:
+          description: Active ingredients.
+          type: string
+        alcoholByVolume:
+          description: Alcohol by volume.
+          format: double
+          type: number
+        allergens:
+          description: Allergens.
+          type: string
+        derivedNutritionClaim:
+          description: Derived nutrition claim.
+          items:
+            type: string
+          type: array
+        directions:
+          description: Directions.
+          type: string
+        indications:
+          description: Indications.
+          type: string
+        ingredients:
+          description: Ingredients.
+          type: string
+        nutritionClaim:
+          description: Nutrition claim.
+          items:
+            type: string
+          type: array
+        storageInstructions:
+          description: Storage instructions.
+          type: string
+      type: object
     Image:
       description: An image.
       properties:
@@ -564,6 +616,156 @@ components:
             $ref: "#/components/schemas/Product"
           type: array
       type: object
+    Nutrition:
+      properties:
+        addedSugars:
+          $ref: "#/components/schemas/FloatUnit"
+          description: Added sugars.
+        addedSugarsDailyPercentage:
+          description: Added sugars daily percentage.
+          format: double
+          type: number
+        calcium:
+          $ref: "#/components/schemas/FloatUnit"
+          description: Calcium.
+        calciumDailyPercentage:
+          description: Calcium daily percentage.
+          format: double
+          type: number
+        cholesterol:
+          $ref: "#/components/schemas/FloatUnit"
+          description: Cholesterol.
+        cholesterolDailyPercentage:
+          description: Cholesterol daily percentage.
+          format: double
+          type: number
+        dietaryFiber:
+          $ref: "#/components/schemas/FloatUnit"
+          description: Dietary fiber.
+        dietaryFiberDailyPercentage:
+          description: Dietary fiber daily percentage.
+          format: double
+          type: number
+        energy:
+          $ref: "#/components/schemas/FloatUnit"
+          description: Mandatory Nutrition Facts. Energy.
+        energyFromFat:
+          $ref: "#/components/schemas/FloatUnit"
+          description: Energy from fat.
+        folateDailyPercentage:
+          description: Folate daily percentage.
+          format: double
+          type: number
+        folateFolicAcid:
+          $ref: "#/components/schemas/FloatUnit"
+          description: Folate folic acid.
+        folateMcgDfe:
+          description: Folate mcg DFE.
+          format: double
+          type: number
+        iron:
+          $ref: "#/components/schemas/FloatUnit"
+          description: Iron.
+        ironDailyPercentage:
+          description: Iron daily percentage.
+          format: double
+          type: number
+        monounsaturatedFat:
+          $ref: "#/components/schemas/FloatUnit"
+          description: Monounsaturated fat.
+        nutritionFactMeasure:
+          description: Nutrition fact measure.
+          type: string
+        polyols:
+          $ref: "#/components/schemas/FloatUnit"
+          description: Polyols.
+        polyunsaturatedFat:
+          $ref: "#/components/schemas/FloatUnit"
+          description: Polyunsaturated fat.
+        potassium:
+          $ref: "#/components/schemas/FloatUnit"
+          description: Potassium.
+        potassiumDailyPercentage:
+          description: Potassium daily percentage.
+          format: double
+          type: number
+        preparedSizeDescription:
+          description: Prepared size description.
+          type: string
+        protein:
+          $ref: "#/components/schemas/FloatUnit"
+          description: Protein.
+        proteinDailyPercentage:
+          description: Protein daily percentage.
+          format: double
+          type: number
+        saturatedFat:
+          $ref: "#/components/schemas/FloatUnit"
+          description: Saturated fat.
+        saturatedFatDailyPercentage:
+          description: Saturated fat daily percentage.
+          format: double
+          type: number
+        servingSizeDescription:
+          description: Food Serving Size. Serving size description.
+          type: string
+        servingSizeMeasure:
+          $ref: "#/components/schemas/FloatUnit"
+          description: Serving size measure.
+        servingsPerContainer:
+          description: Servings per container.
+          type: string
+        sodium:
+          $ref: "#/components/schemas/FloatUnit"
+          description: Sodium.
+        sodiumDailyPercentage:
+          description: Sodium daily percentage.
+          format: double
+          type: number
+        starch:
+          $ref: "#/components/schemas/FloatUnit"
+          description: Starch.
+        totalCarbohydrate:
+          $ref: "#/components/schemas/FloatUnit"
+          description: Total carbohydrate.
+        totalCarbohydrateDailyPercentage:
+          description: Total carbohydrate daily percentage.
+          format: double
+          type: number
+        totalFat:
+          $ref: "#/components/schemas/FloatUnit"
+          description: Total fat.
+        totalFatDailyPercentage:
+          description: Total fat daily percentage.
+          format: double
+          type: number
+        totalSugars:
+          $ref: "#/components/schemas/FloatUnit"
+          description: Total sugars.
+        totalSugarsDailyPercentage:
+          description: Total sugars daily percentage.
+          format: double
+          type: number
+        transFat:
+          $ref: "#/components/schemas/FloatUnit"
+          description: Trans fat.
+        transFatDailyPercentage:
+          description: Trans fat daily percentage.
+          format: double
+          type: number
+        vitaminD:
+          $ref: "#/components/schemas/FloatUnit"
+          description: Vitamin D.
+        vitaminDDailyPercentage:
+          description: Vitamin D daily percentage.
+          format: double
+          type: number
+        voluntaryNutritionFact:
+          description: Voluntary nutrition fact.
+          items:
+            $ref: "#/components/schemas/VoluntaryNutritionFact"
+          type: array
+      type: object
     Price:
       description: A price.
       properties:
@@ -618,6 +820,20 @@ components:
         sectionName:
           description: A short section name that can be reused between multiple product details.
           type: string
+      type: object
+    VoluntaryNutritionFact:
+      description: Voluntary Nutrition Facts.
+      properties:
+        dailyPercentage:
+          description: Daily percentage.
+          format: double
+          type: number
+        name:
+          description: Name.
+          type: string
+        value:
+          $ref: "#/components/schemas/FloatUnit"
+          description: Value.
       type: object
   securitySchemes:
     Oauth2:

@@ -1828,6 +1828,10 @@ components:
           description: The name of the package that caused the dialog.
           type: string
       type: object
+    DetectedAppSplashScreen:
+      description: A notification that Robo detected a splash screen provided by app (vs. Android OS splash screen).
+      properties: {}
+      type: object
     DeviceOutOfMemory:
       description: A warning that device ran out of memory
       properties: {}
@@ -3061,6 +3065,7 @@ components:
             - unityException
             - deviceOutOfMemory
             - logcatCollectionError
+            - detectedAppSplashScreen
           type: string
         warning:
           $ref: "#/components/schemas/Any"

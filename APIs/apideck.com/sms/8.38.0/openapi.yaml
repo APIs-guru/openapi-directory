@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.0.0
 servers:
   - url: https://unify.apideck.com
 info:
@@ -6,9 +6,9 @@ info:
     email: hello@apideck.com
     url: https://developers.apideck.com
   description: |+
-    Welcome to the Webhook API.
+    Welcome to the SMS API.
 
-    You can use this API to access all Webhook API endpoints.
+    You can use this API to access all SMS API endpoints.
 
     ## Base URL
 
@@ -271,9 +271,9 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  title: Webhook API
-  version: 8.37.1
-  x-apideck-api: webhook
+  title: SMS API
+  version: 8.38.0
+  x-apideck-api: sms
   x-apideck-sdk-support: true
   x-apisguru-categories:
     - developer_tools
@@ -281,10 +281,10 @@ info:
     url: https://developers.apideck.com/icon.png
   x-origin:
     - format: openapi
-      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/webhook.yml
+      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/sms.yml
       version: "3.0"
   x-providerName: apideck.com
-  x-serviceName: webhook
+  x-serviceName: sms
   x-tags:
     - partner
 externalDocs:
@@ -294,22 +294,25 @@ security:
   - apiKey: []
 tags:
   - description: ""
-    name: Webhooks
+    name: Messages
     x-apideck-model:
-      $ref: "#/components/schemas/Webhook"
+      $ref: "#/components/schemas/Message"
+    x-apideck-resource-id: messages
 paths:
-  /webhook/logs:
+  /sms/messages:
     get:
-      description: List event logs
-      operationId: eventLogsAll
+      description: List Messages
+      operationId: messagesAll
       parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
-        - $ref: "#/components/parameters/filter"
       responses:
         "200":
-          $ref: "#/components/responses/GetWebhookEventLogsResponse"
+          $ref: "#/components/responses/GetMessagesResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -324,10 +327,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: List event logs
+      summary: List Messages
       tags:
-        - Webhooks
-      x-apideck-api: webhook
+        - Messages
+      x-apideck-api: sms
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -336,77 +339,34 @@ paths:
 
             const apideck = new Apideck({
               apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID'
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
             })
 
             try {
-              const { data } = await apideck.webhook.eventLogsAll({})
+              const { data } = await apideck.sms.messagesAll({})
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: eventLogs
-  /webhook/webhooks:
-    get:
-      description: List webhooks
-      operationId: webhooksAll
-      parameters:
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/cursor"
-        - $ref: "#/components/parameters/limit"
-      responses:
-        "200":
-          $ref: "#/components/responses/GetWebhooksResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: List webhooks
-      tags:
-        - Webhooks
-      x-apideck-api: webhook
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID'
-            })
-
-            try {
-              const { data } = await apideck.webhook.webhooksAll({})
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-      x-graphql-field-name: webhooks
+      x-graphql-field-name: messages
     post:
-      description: Create webhook
-      operationId: webhooksAdd
+      description: Create Message
+      operationId: messagesAdd
       parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateWebhookRequest"
+              $ref: "#/components/schemas/Message"
         required: true
       responses:
         "201":
-          $ref: "#/components/responses/CreateWebhookResponse"
+          $ref: "#/components/responses/CreateMessageResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -421,10 +381,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Create webhook
+      summary: Create Message
       tags:
-        - Webhooks
-      x-apideck-api: webhook
+        - Messages
+      x-apideck-api: sms
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -433,35 +393,43 @@ paths:
 
             const apideck = new Apideck({
               apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID'
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
             })
 
             const params = {
-              webhook: {
-                description: 'A description',
-                unified_api: 'crm',
-                status: 'enabled',
-                delivery_url: 'https://example.com/my/webhook/endpoint',
-                events: ['vault.connection.created', 'vault.connection.updated']
+              message: {
+                from: '+15017122661',
+                to: '+15017122662',
+                subject: 'Picture',
+                body: 'Hi! How are you doing?',
+                type: 'sms',
+                scheduled_at: '2020-09-30T07:43:32.000Z',
+                webhook_url: 'https://unify.apideck.com/webhook/webhooks/eyz329dkffdl4949/x/sms',
+                reference: 'CUST001',
+                messaging_service_id: '123456'
               }
             }
 
             try {
-              const { data } = await apideck.webhook.webhooksAdd(params)
+              const { data } = await apideck.sms.messagesAdd(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  "/webhook/webhooks/{id}":
+  "/sms/messages/{id}":
     delete:
-      description: Delete webhook
-      operationId: webhooksDelete
+      description: Delete Message
+      operationId: messagesDelete
       parameters:
-        - $ref: "#/components/parameters/webhookToken"
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/DeleteWebhookResponse"
+          $ref: "#/components/responses/DeleteMessageResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -476,10 +444,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Delete webhook
+      summary: Delete Message
       tags:
-        - Webhooks
-      x-apideck-api: webhook
+        - Messages
+      x-apideck-api: sms
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -488,11 +456,12 @@ paths:
 
             const apideck = new Apideck({
               apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID'
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
             })
 
             try {
-              const { data } = await apideck.webhook.webhooksDelete({
+              const { data } = await apideck.sms.messagesDelete({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
@@ -500,14 +469,17 @@ paths:
               console.error(error)
             }
     get:
-      description: Get webhook
-      operationId: webhooksOne
+      description: Get Message
+      operationId: messagesOne
       parameters:
-        - $ref: "#/components/parameters/webhookToken"
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/GetWebhookResponse"
+          $ref: "#/components/responses/GetMessageResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -522,10 +494,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Get webhook
+      summary: Get Message
       tags:
-        - Webhooks
-      x-apideck-api: webhook
+        - Messages
+      x-apideck-api: sms
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -534,11 +506,12 @@ paths:
 
             const apideck = new Apideck({
               apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID'
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
             })
 
             try {
-              const { data } = await apideck.webhook.webhooksOne({
+              const { data } = await apideck.sms.messagesOne({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
@@ -546,20 +519,23 @@ paths:
               console.error(error)
             }
     patch:
-      description: Update webhook
-      operationId: webhooksUpdate
+      description: Update Message
+      operationId: messagesUpdate
       parameters:
-        - $ref: "#/components/parameters/webhookToken"
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateWebhookRequest"
+              $ref: "#/components/schemas/Message"
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/UpdateWebhookResponse"
+          $ref: "#/components/responses/UpdateMessageResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -574,10 +550,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Update webhook
+      summary: Update Message
       tags:
-        - Webhooks
-      x-apideck-api: webhook
+        - Messages
+      x-apideck-api: sms
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -586,147 +562,31 @@ paths:
 
             const apideck = new Apideck({
               apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID'
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
             })
 
             const params = {
               id: 'id_example',
-              webhook: {
-                description: 'A description',
-                status: 'enabled',
-                delivery_url: 'https://example.com/my/webhook/endpoint',
-                events: ['vault.connection.created', 'vault.connection.updated']
+              message: {
+                from: '+15017122661',
+                to: '+15017122662',
+                subject: 'Picture',
+                body: 'Hi! How are you doing?',
+                type: 'sms',
+                scheduled_at: '2020-09-30T07:43:32.000Z',
+                webhook_url: 'https://unify.apideck.com/webhook/webhooks/eyz329dkffdl4949/x/sms',
+                reference: 'CUST001',
+                messaging_service_id: '123456'
               }
             }
 
             try {
-              const { data } = await apideck.webhook.webhooksUpdate(params)
+              const { data } = await apideck.sms.messagesUpdate(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  "/webhook/webhooks/{id}/execute/{serviceId}":
-    post:
-      description: Execute a webhook
-      operationId: webhooksExecute
-      parameters:
-        - $ref: "#/components/parameters/webhookToken"
-        - $ref: "#/components/parameters/serviceId"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              oneOf:
-                - $ref: "#/components/schemas/ExecuteWebhookEventRequest"
-                - $ref: "#/components/schemas/ExecuteWebhookEventsRequest"
-        required: true
-      responses:
-        "200":
-          $ref: "#/components/responses/ExecuteWebhookResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Execute a webhook
-      tags:
-        - Webhooks
-      x-apideck-api: webhook
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY'
-            })
-
-            const params = {
-              id: 'id_example',
-              serviceId: 'serviceId_example',
-              webhooksExecute: {}
-            }
-
-            try {
-              const { data } = await apideck.webhook.webhooksExecute(params)
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-      x-graphql-exclude: true
-      x-internal: true
-      x-sdk-exclude: true
-  "/webhook/webhooks/{id}/x/{serviceId}":
-    post:
-      description: Execute a webhook
-      operationId: webhooksShortExecute
-      parameters:
-        - $ref: "#/components/parameters/webhookToken"
-        - $ref: "#/components/parameters/serviceId"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              oneOf:
-                - $ref: "#/components/schemas/ExecuteWebhookEventRequest"
-                - $ref: "#/components/schemas/ExecuteWebhookEventsRequest"
-        required: true
-      responses:
-        "200":
-          $ref: "#/components/responses/ExecuteWebhookResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Execute a webhook
-      tags:
-        - Webhooks
-      x-apideck-api: webhook
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY'
-            })
-
-            const params = {
-              id: 'id_example',
-              serviceId: 'serviceId_example',
-              webhooksShortExecute: {}
-            }
-
-            try {
-              const { data } = await apideck.webhook.webhooksShortExecute(params)
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-      x-graphql-exclude: true
-      x-internal: true
-      x-sdk-exclude: true
 components:
   parameters:
     applicationId:
@@ -750,14 +610,6 @@ components:
       schema:
         nullable: true
         type: string
-    filter:
-      description: Filter results
-      explode: true
-      in: query
-      name: filter
-      schema:
-        $ref: "#/components/schemas/WebhookEventLogsFilter"
-      style: deepObject
     id:
       description: ID of the record you are acting upon.
       in: path
@@ -774,18 +626,17 @@ components:
         maximum: 200
         minimum: 1
         type: integer
-    serviceId:
-      description: Service provider ID.
-      in: path
-      name: serviceId
-      required: true
+    raw:
+      description: Include raw response. Mostly used for debugging purposes
+      in: query
+      name: raw
       schema:
-        type: string
-    webhookToken:
-      description: JWT Webhook token that represents the unifiedApi and applicationId associated to the event source.
-      in: path
-      name: id
-      required: true
+        default: false
+        type: boolean
+    serviceId:
+      description: Provide the service id you want to call (e.g., pipedrive). Only needed when a consumer has activated multiple integrations for a Unified API.
+      in: header
+      name: x-apideck-service-id
       schema:
         type: string
   responses:
@@ -795,42 +646,30 @@ components:
           schema:
             $ref: "#/components/schemas/BadRequestResponse"
       description: Bad Request
-    CreateWebhookResponse:
+    CreateMessageResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CreateWebhookResponse"
-      description: Webhooks
-    DeleteWebhookResponse:
+            $ref: "#/components/schemas/CreateMessageResponse"
+      description: Messages
+    DeleteMessageResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/DeleteWebhookResponse"
-      description: Webhooks
-    ExecuteWebhookResponse:
+            $ref: "#/components/schemas/DeleteMessageResponse"
+      description: Messages
+    GetMessageResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ExecuteWebhookResponse"
-      description: Execute Webhook
-    GetWebhookEventLogsResponse:
+            $ref: "#/components/schemas/GetMessageResponse"
+      description: Messages
+    GetMessagesResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetWebhookEventLogsResponse"
-      description: EventLogs
-    GetWebhookResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/GetWebhookResponse"
-      description: Webhooks
-    GetWebhooksResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/GetWebhooksResponse"
-      description: Webhooks
+            $ref: "#/components/schemas/GetMessagesResponse"
+      description: Messages
     NotFoundResponse:
       content:
         application/json:
@@ -849,6 +688,12 @@ components:
           schema:
             $ref: "#/components/schemas/PaymentRequiredResponse"
       description: Payment Required
+    TooManyRequestsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/TooManyRequestsResponse"
+      description: Too Many Requests
     UnauthorizedResponse:
       content:
         application/json:
@@ -867,17 +712,13 @@ components:
           schema:
             $ref: "#/components/schemas/UnprocessableResponse"
       description: Unprocessable
-    UpdateWebhookResponse:
+    UpdateMessageResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UpdateWebhookResponse"
-      description: Webhooks
+            $ref: "#/components/schemas/UpdateMessageResponse"
+      description: Messages
   schemas:
-    ApplicationId:
-      description: ID of your Apideck Application
-      example: "1111"
-      type: string
     BadRequestResponse:
       properties:
         detail:
@@ -909,40 +750,647 @@ components:
           description: The type of error returned
           example: RequestValidationError
           type: string
-    ConsumerId:
-      description: Consumer identifier
-      example: test_consumer_id
+    CreateMessageResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Messages
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: twilio
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    Currency:
+      description: Indicates the associated currency for an amount of money. Values correspond to [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
+      enum:
+        - UNKNOWN_CURRENCY
+        - AED
+        - AFN
+        - ALL
+        - AMD
+        - ANG
+        - AOA
+        - ARS
+        - AUD
+        - AWG
+        - AZN
+        - BAM
+        - BBD
+        - BDT
+        - BGN
+        - BHD
+        - BIF
+        - BMD
+        - BND
+        - BOB
+        - BOV
+        - BRL
+        - BSD
+        - BTN
+        - BWP
+        - BYR
+        - BZD
+        - CAD
+        - CDF
+        - CHE
+        - CHF
+        - CHW
+        - CLF
+        - CLP
+        - CNY
+        - COP
+        - COU
+        - CRC
+        - CUC
+        - CUP
+        - CVE
+        - CZK
+        - DJF
+        - DKK
+        - DOP
+        - DZD
+        - EGP
+        - ERN
+        - ETB
+        - EUR
+        - FJD
+        - FKP
+        - GBP
+        - GEL
+        - GHS
+        - GIP
+        - GMD
+        - GNF
+        - GTQ
+        - GYD
+        - HKD
+        - HNL
+        - HRK
+        - HTG
+        - HUF
+        - IDR
+        - ILS
+        - INR
+        - IQD
+        - IRR
+        - ISK
+        - JMD
+        - JOD
+        - JPY
+        - KES
+        - KGS
+        - KHR
+        - KMF
+        - KPW
+        - KRW
+        - KWD
+        - KYD
+        - KZT
+        - LAK
+        - LBP
+        - LKR
+        - LRD
+        - LSL
+        - LTL
+        - LVL
+        - LYD
+        - MAD
+        - MDL
+        - MGA
+        - MKD
+        - MMK
+        - MNT
+        - MOP
+        - MRO
+        - MUR
+        - MVR
+        - MWK
+        - MXN
+        - MXV
+        - MYR
+        - MZN
+        - NAD
+        - NGN
+        - NIO
+        - NOK
+        - NPR
+        - NZD
+        - OMR
+        - PAB
+        - PEN
+        - PGK
+        - PHP
+        - PKR
+        - PLN
+        - PYG
+        - QAR
+        - RON
+        - RSD
+        - RUB
+        - RWF
+        - SAR
+        - SBD
+        - SCR
+        - SDG
+        - SEK
+        - SGD
+        - SHP
+        - SLL
+        - SOS
+        - SRD
+        - SSP
+        - STD
+        - SVC
+        - SYP
+        - SZL
+        - THB
+        - TJS
+        - TMT
+        - TND
+        - TOP
+        - TRC
+        - TRY
+        - TTD
+        - TWD
+        - TZS
+        - UAH
+        - UGX
+        - USD
+        - USN
+        - USS
+        - UYI
+        - UYU
+        - UZS
+        - VEF
+        - VND
+        - VUV
+        - WST
+        - XAF
+        - XAG
+        - XAU
+        - XBA
+        - XBB
+        - XBC
+        - XBD
+        - XCD
+        - XDR
+        - XOF
+        - XPD
+        - XPF
+        - XPT
+        - XTS
+        - XXX
+        - YER
+        - ZAR
+        - ZMK
+        - ZMW
+        - BTC
+      example: USD
+      nullable: true
+      title: Currency
       type: string
-    CreateWebhookRequest:
+      x-apideck-enum-coverage-ignore: true
+      x-apideck-enum-id: currencies
+      x-enum-elements:
+        - description: Unknown currency
+          name: UNKNOWN_CURRENCY
+        - description: United Arab Emirates dirham
+          name: AED
+        - description: Afghan afghani
+          name: AFN
+        - description: Albanian lek
+          name: ALL
+        - description: Armenian dram
+          name: AMD
+        - description: Netherlands Antillean guilder
+          name: ANG
+        - description: Angolan kwanza
+          name: AOA
+        - description: Argentine peso
+          name: ARS
+        - description: Australian dollar
+          name: AUD
+        - description: Aruban florin
+          name: AWG
+        - description: Azerbaijani manat
+          name: AZN
+        - description: Bosnia and Herzegovina convertible mark
+          name: BAM
+        - description: Barbados dollar
+          name: BBD
+        - description: Bangladeshi taka
+          name: BDT
+        - description: Bulgarian lev
+          name: BGN
+        - description: Bahraini dinar
+          name: BHD
+        - description: Burundian franc
+          name: BIF
+        - description: Bermudian dollar
+          name: BMD
+        - description: Brunei dollar
+          name: BND
+        - description: Boliviano
+          name: BOB
+        - description: Bolivian Mvdol
+          name: BOV
+        - description: Brazilian real
+          name: BRL
+        - description: Bahamian dollar
+          name: BSD
+        - description: Bhutanese ngultrum
+          name: BTN
+        - description: Botswana pula
+          name: BWP
+        - description: Belarusian ruble
+          name: BYR
+        - description: Belize dollar
+          name: BZD
+        - description: Canadian dollar
+          name: CAD
+        - description: Congolese franc
+          name: CDF
+        - description: WIR Euro
+          name: CHE
+        - description: Swiss franc
+          name: CHF
+        - description: WIR Franc
+          name: CHW
+        - description: Unidad de Fomento
+          name: CLF
+        - description: Chilean peso
+          name: CLP
+        - description: Chinese yuan
+          name: CNY
+        - description: Colombian peso
+          name: COP
+        - description: Unidad de Valor Real
+          name: COU
+        - description: Costa Rican colon
+          name: CRC
+        - description: Cuban convertible peso
+          name: CUC
+        - description: Cuban peso
+          name: CUP
+        - description: Cape Verdean escudo
+          name: CVE
+        - description: Czech koruna
+          name: CZK
+        - description: Djiboutian franc
+          name: DJF
+        - description: Danish krone
+          name: DKK
+        - description: Dominican peso
+          name: DOP
+        - description: Algerian dinar
+          name: DZD
+        - description: Egyptian pound
+          name: EGP
+        - description: Eritrean nakfa
+          name: ERN
+        - description: Ethiopian birr
+          name: ETB
+        - description: Euro
+          name: EUR
+        - description: Fiji dollar
+          name: FJD
+        - description: Falkland Islands pound
+          name: FKP
+        - description: Pound sterling
+          name: GBP
+        - description: Georgian lari
+          name: GEL
+        - description: Ghanaian cedi
+          name: GHS
+        - description: Gibraltar pound
+          name: GIP
+        - description: Gambian dalasi
+          name: GMD
+        - description: Guinean franc
+          name: GNF
+        - description: Guatemalan quetzal
+          name: GTQ
+        - description: Guyanese dollar
+          name: GYD
+        - description: Hong Kong dollar
+          name: HKD
+        - description: Honduran lempira
+          name: HNL
+        - description: Croatian kuna
+          name: HRK
+        - description: Haitian gourde
+          name: HTG
+        - description: Hungarian forint
+          name: HUF
+        - description: Indonesian rupiah
+          name: IDR
+        - description: Israeli new shekel
+          name: ILS
+        - description: Indian rupee
+          name: INR
+        - description: Iraqi dinar
+          name: IQD
+        - description: Iranian rial
+          name: IRR
+        - description: Icelandic króna
+          name: ISK
+        - description: Jamaican dollar
+          name: JMD
+        - description: Jordanian dinar
+          name: JOD
+        - description: Japanese yen
+          name: JPY
+        - description: Kenyan shilling
+          name: KES
+        - description: Kyrgyzstani som
+          name: KGS
+        - description: Cambodian riel
+          name: KHR
+        - description: Comoro franc
+          name: KMF
+        - description: North Korean won
+          name: KPW
+        - description: South Korean won
+          name: KRW
+        - description: Kuwaiti dinar
+          name: KWD
+        - description: Cayman Islands dollar
+          name: KYD
+        - description: Kazakhstani tenge
+          name: KZT
+        - description: Lao kip
+          name: LAK
+        - description: Lebanese pound
+          name: LBP
+        - description: Sri Lankan rupee
+          name: LKR
+        - description: Liberian dollar
+          name: LRD
+        - description: Lesotho loti
+          name: LSL
+        - description: Lithuanian litas
+          name: LTL
+        - description: Latvian lats
+          name: LVL
+        - description: Libyan dinar
+          name: LYD
+        - description: Moroccan dirham
+          name: MAD
+        - description: Moldovan leu
+          name: MDL
+        - description: Malagasy ariary
+          name: MGA
+        - description: Macedonian denar
+          name: MKD
+        - description: Myanmar kyat
+          name: MMK
+        - description: Mongolian tögrög
+          name: MNT
+        - description: Macanese pataca
+          name: MOP
+        - description: Mauritanian ouguiya
+          name: MRO
+        - description: Mauritian rupee
+          name: MUR
+        - description: Maldivian rufiyaa
+          name: MVR
+        - description: Malawian kwacha
+          name: MWK
+        - description: Mexican peso
+          name: MXN
+        - description: Mexican Unidad de Inversion
+          name: MXV
+        - description: Malaysian ringgit
+          name: MYR
+        - description: Mozambican metical
+          name: MZN
+        - description: Namibian dollar
+          name: NAD
+        - description: Nigerian naira
+          name: NGN
+        - description: Nicaraguan córdoba
+          name: NIO
+        - description: Norwegian krone
+          name: NOK
+        - description: Nepalese rupee
+          name: NPR
+        - description: New Zealand dollar
+          name: NZD
+        - description: Omani rial
+          name: OMR
+        - description: Panamanian balboa
+          name: PAB
+        - description: Peruvian sol
+          name: PEN
+        - description: Papua New Guinean kina
+          name: PGK
+        - description: Philippine peso
+          name: PHP
+        - description: Pakistani rupee
+          name: PKR
+        - description: Polish złoty
+          name: PLN
+        - description: Paraguayan guaraní
+          name: PYG
+        - description: Qatari riyal
+          name: QAR
+        - description: Romanian leu
+          name: RON
+        - description: Serbian dinar
+          name: RSD
+        - description: Russian ruble
+          name: RUB
+        - description: Rwandan franc
+          name: RWF
+        - description: Saudi riyal
+          name: SAR
+        - description: Solomon Islands dollar
+          name: SBD
+        - description: Seychelles rupee
+          name: SCR
+        - description: Sudanese pound
+          name: SDG
+        - description: Swedish krona
+          name: SEK
+        - description: Singapore dollar
+          name: SGD
+        - description: Saint Helena pound
+          name: SHP
+        - description: Sierra Leonean leone
+          name: SLL
+        - description: Somali shilling
+          name: SOS
+        - description: Surinamese dollar
+          name: SRD
+        - description: South Sudanese pound
+          name: SSP
+        - description: São Tomé and Príncipe dobra
+          name: STD
+        - description: Salvadoran colón
+          name: SVC
+        - description: Syrian pound
+          name: SYP
+        - description: Swazi lilangeni
+          name: SZL
+        - description: Thai baht
+          name: THB
+        - description: Tajikstani somoni
+          name: TJS
+        - description: Turkmenistan manat
+          name: TMT
+        - description: Tunisian dinar
+          name: TND
+        - description: Tongan pa'anga
+          name: TOP
+        - description: Turkish lira
+          name: TRY
+        - description: Trinidad and Tobago dollar
+          name: TTD
+        - description: New Taiwan dollar
+          name: TWD
+        - description: Tanzanian shilling
+          name: TZS
+        - description: Ukrainian hryvnia
+          name: UAH
+        - description: Ugandan shilling
+          name: UGX
+        - description: United States dollar
+          name: USD
+        - description: United States dollar (next day)
+          name: USN
+        - description: United States dollar (same day)
+          name: USS
+        - description: Uruguay Peso en Unidedades Indexadas
+          name: UYI
+        - description: Uruguyan peso
+          name: UYU
+        - description: Uzbekistan som
+          name: UZS
+        - description: Venezuelan bolívar soberano
+          name: VEF
+        - description: Vietnamese đồng
+          name: VND
+        - description: Vanuatu vatu
+          name: VUV
+        - description: Samoan tala
+          name: WST
+        - description: CFA franc BEAC
+          name: XAF
+        - description: Silver
+          name: XAG
+        - description: Gold
+          name: XAU
+        - description: European Composite Unit
+          name: XBA
+        - description: European Monetary Unit
+          name: XBB
+        - description: European Unit of Account 9
+          name: XBC
+        - description: European Unit of Account 17
+          name: XBD
+        - description: East Caribbean dollar
+          name: XCD
+        - description: Special drawing rights (International Monetary Fund)
+          name: XDR
+        - description: CFA franc BCEAO
+          name: XOF
+        - description: Palladium
+          name: XPD
+        - description: CFP franc
+          name: XPF
+        - description: Platinum
+          name: XPT
+        - description: Code reserved for testing
+          name: XTS
+        - description: No currency
+          name: XXX
+        - description: Yemeni rial
+          name: YER
+        - description: South African rand
+          name: ZAR
+        - description: Zambian kwacha
+          name: ZMK
+        - description: Zambian kwacha
+          name: ZMW
+        - description: Bitcoin
+          name: BTC
+    CustomField:
       additionalProperties: false
       properties:
-        delivery_url:
-          $ref: "#/components/schemas/DeliveryUrl"
         description:
-          $ref: "#/components/schemas/Description"
-        events:
-          description: The list of subscribed events for this webhook. [`*`] indicates that all events are enabled.
-          example:
-            - vault.connection.created
-            - vault.connection.updated
-          items:
-            $ref: "#/components/schemas/WebhookEventType"
-          title: Subscribed events
-          type: array
-        status:
-          $ref: "#/components/schemas/Status"
-        unified_api:
-          $ref: "#/components/schemas/UnifiedApiId"
+          description: More information about the custom field
+          example: Employee Level
+          title: Description
+          type: string
+        id:
+          example: "2389328923893298"
+          title: ID
+          type: string
+        name:
+          description: Name of the custom field.
+          example: employee_level
+          title: Name
+          type: string
+        value:
+          anyOf:
+            - example: Uses Salesforce and Marketo
+              nullable: true
+              type: string
+            - example: 10
+              nullable: true
+              type: number
+            - example: true
+              nullable: true
+              type: boolean
+            - items:
+                type: string
+              type: array
       required:
-        - delivery_url
-        - status
-        - events
-        - unified_api
+        - id
       type: object
-    CreateWebhookResponse:
+      x-apideck-weights:
+        description: edge-case
+        id: critical
+        name: medium
+        value: critical
+    DeleteMessageResponse:
       properties:
         data:
-          $ref: "#/components/schemas/Webhook"
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Messages
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: twilio
+          type: string
         status:
           description: HTTP Response Status
           example: OK
@@ -954,18 +1402,57 @@ components:
       required:
         - status_code
         - status
+        - service
+        - resource
+        - operation
         - data
       type: object
-    CreatedAt:
-      example: 2020-09-30T07:43:32.000Z
-      format: date-time
-      readOnly: true
-      title: Created at (timestamp)
-      type: string
-    DeleteWebhookResponse:
+    Email:
+      additionalProperties: false
+      properties:
+        email:
+          example: elon@musk.com
+          format: email
+          minLength: 1
+          type: string
+        id:
+          example: "123"
+          type: string
+        type:
+          enum:
+            - primary
+            - secondary
+            - work
+            - personal
+            - billing
+            - other
+          example: primary
+          type: string
+          x-apideck-enum-id: emails.type
+          x-graphql-type-name: EmailType
+      required:
+        - email
+      type: object
+      x-apideck-weights:
+        email: critical
+        id: edge-case
+        type: critical
+    GetMessageResponse:
       properties:
         data:
-          $ref: "#/components/schemas/Webhook"
+          $ref: "#/components/schemas/Message"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Messages
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: twilio
+          type: string
         status:
           description: HTTP Response Status
           example: OK
@@ -977,109 +1464,34 @@ components:
       required:
         - status_code
         - status
+        - service
+        - resource
+        - operation
         - data
       type: object
-    DeliveryUrl:
-      description: The delivery url of the webhook endpoint.
-      example: https://example.com/my/webhook/endpoint
-      format: uri
-      pattern: ^(https?)://
-      type: string
-    Description:
-      example: A description
-      nullable: true
-      title: Description
-      type: string
-    ExecuteBaseUrl:
-      description: The Unify Base URL events from connectors will be sent to after service id is appended.
-      example: https://unify.apideck.com/webhook/webhooks/1234/execute
-      format: uri
-      pattern: ^(https?)://
-      readOnly: true
-      type: string
-    ExecuteWebhookEventRequest:
-      additionalProperties: true
-      type: object
-    ExecuteWebhookEventsRequest:
-      items:
-        additionalProperties: true
-        type: object
-      type: array
-    ExecuteWebhookResponse:
-      properties:
-        request_id:
-          description: UUID of the request received
-          example: c6af9ac6-7b61-11e6-9a41-93e8deadbeef
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-        timestamp:
-          description: ISO Dtae time webhook event was received
-          example: 2021-10-01T08:26:28.039Z
-          type: string
-      required:
-        - status_code
-        - status
-        - data
-      type: object
-    GetWebhookEventLogsResponse:
-      properties:
-        data:
-          items:
-            $ref: "#/components/schemas/WebhookEventLog"
-          type: array
-        links:
-          $ref: "#/components/schemas/Links"
-        meta:
-          $ref: "#/components/schemas/Meta"
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - data
-      type: object
-      x-graphql-type-name: EventLogList
-    GetWebhookResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/Webhook"
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - data
-      type: object
-      x-graphql-type-name: Webhook
-    GetWebhooksResponse:
+      x-graphql-type-name: Message
+    GetMessagesResponse:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/Webhook"
+            $ref: "#/components/schemas/Message"
           type: array
         links:
           $ref: "#/components/schemas/Links"
         meta:
           $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Messages
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: twilio
+          type: string
         status:
           description: HTTP Response Status
           example: OK
@@ -1091,9 +1503,12 @@ components:
       required:
         - status_code
         - status
+        - service
+        - resource
+        - operation
         - data
       type: object
-      x-graphql-type-name: WebhookList
+      x-graphql-type-name: MessageList
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:
@@ -1112,6 +1527,199 @@ components:
           nullable: true
           type: string
       type: object
+    Message:
+      additionalProperties: false
+      properties:
+        body:
+          description: The message text.
+          example: Hi! How are you doing?
+          maxLength: 1600
+          title: Message Body
+          type: string
+        created_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          readOnly: true
+          title: Created at (timestamp)
+          type: string
+        created_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          title: Created by
+          type: string
+        direction:
+          description: The direction of the message.
+          enum:
+            - inbound
+            - outbound-api
+            - outbound-call
+            - outbound-reply
+            - unknown
+          example: outbound-api
+          readOnly: true
+          title: Direction
+          type: string
+          x-apideck-enum-id: messages.direction
+        error:
+          description: The error returned if your message status is failed or undelivered.
+          example:
+            code: X1
+            message: Something went wrong
+          properties:
+            code:
+              description: The error_code provides more information about the failure. If the message was successful, this value is null
+              example: X1
+              readOnly: true
+              title: Error Code
+              type: string
+            message:
+              example: Something went wrong
+              readOnly: true
+              title: Error Message
+              type: string
+          readOnly: true
+          title: Error
+          type: object
+        from:
+          description: The phone number that initiated the message.
+          example: "+15017122661"
+          title: From
+          type: string
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        messaging_service_id:
+          description: The ID of the Messaging Service used with the message. In case of Plivo this links to the Powerpack ID.
+          example: "123456"
+          title: Messaging Service ID
+          type: string
+        number_of_media_files:
+          description: The number of media files associated with the message.
+          example: 1
+          readOnly: true
+          title: Number of media files
+          type: integer
+        number_of_units:
+          description: The number of units that make up the complete message. Messages can be split up due to the constraints of the message size.
+          example: 1
+          readOnly: true
+          title: Number of units
+          type: integer
+        price:
+          description: Price of the message.
+          example:
+            currency: USD
+            per_unit: "0.01"
+            total_amount: "0.01"
+          properties:
+            currency:
+              $ref: "#/components/schemas/Currency"
+            per_unit:
+              description: ""
+              example: "0.01"
+              readOnly: true
+              title: Price per unit
+              type: string
+            total_amount:
+              description: ""
+              example: "0.01"
+              readOnly: true
+              title: Price Amount
+              type: string
+          readOnly: true
+          title: Price
+          type: object
+        reference:
+          description: A client reference.
+          example: CUST001
+          title: Reference
+          type: string
+        scheduled_at:
+          description: The scheduled date and time of the message.
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          type: string
+        sent_at:
+          description: The date and time that the message was sent
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          readOnly: true
+          type: string
+        status:
+          description: Status of the delivery of the message.
+          enum:
+            - accepted
+            - scheduled
+            - canceled
+            - queued
+            - sending
+            - sent
+            - failed
+            - delivered
+            - undelivered
+            - receiving
+            - received
+            - read
+          example: sent
+          readOnly: true
+          title: Status
+          type: string
+          x-apideck-enum-id: messages.status
+        subject:
+          example: Picture
+          title: Message Subject
+          type: string
+        to:
+          description: The phone number that received the message.
+          example: "+15017122662"
+          title: Message Body
+          type: string
+        type:
+          description: Set to sms for SMS messages and mms for MMS messages.
+          enum:
+            - sms
+            - mms
+          example: sms
+          title: Message type
+          type: string
+          x-apideck-enum-id: messages.type
+        updated_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          readOnly: true
+          title: Updated at (timestamp)
+          type: string
+        updated_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          type: string
+        webhook_url:
+          description: Define a webhook to receive delivery notifications.
+          example: https://unify.apideck.com/webhook/webhooks/eyz329dkffdl4949/x/sms
+          title: Webhook URL
+          type: string
+      required:
+        - from
+        - to
+        - body
+      type: object
+      x-apideck-weights:
+        body: critical
+        error: edge-case
+        from: critical
+        id: critical
+        messaging_service_id: edge-case
+        number_of_media_files: edge-case
+        number_of_units: low
+        price: edge-case
+        status: high
+        subject: medium
+        to: critical
+        type: high
+        webhook_url: low
     Meta:
       description: Response metadata
       properties:
@@ -1225,19 +1833,42 @@ components:
           description: The type of error returned
           example: RequestLimitError
           type: string
-    ServiceId:
-      description: Service provider identifier
-      example: close
-      type: string
-    Status:
-      description: The status of the webhook.
-      enum:
-        - enabled
-        - disabled
-      example: enabled
-      type: string
-      x-apideck-enum-id: webhooks.status
-      x-graphql-type-name: WebhookStatus
+    Tags:
+      example:
+        - New
+      items:
+        type: string
+      type: array
+    TooManyRequestsResponse:
+      properties:
+        detail:
+          properties:
+            context:
+              type: string
+            error:
+              additionalProperties: true
+              type: object
+          type: object
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 6585)
+          example: Too Many Requests
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Connector Rate Limit Error
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#connectorratelimiterror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 429
+          type: number
+        type_name:
+          description: The type of error returned
+          example: ConnectorRateLimitError
+          type: string
     UnauthorizedResponse:
       properties:
         detail:
@@ -1295,34 +1926,15 @@ components:
           description: The type of error returned
           example: RequestHeadersValidationError
           type: string
-    UnifiedApiId:
-      description: Name of Apideck Unified API
-      enum:
-        - vault
-        - lead
-        - crm
-        - accounting
-        - file-storage
-        - spreadsheet
-        - email
-        - script
-        - sms
-        - team-messaging
-        - ecommerce
-        - payroll
-        - customer-support
-        - time-registration
-        - transactional-email
-        - hcm
-        - form
-        - csp
-        - email-marketing
-        - ats
-        - hris
-        - pos
-      example: crm
-      type: string
-      x-apideck-enum-id: unifies_api
+    UnifiedId:
+      properties:
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+      required:
+        - id
+      title: UnifiedId
     UnprocessableResponse:
       properties:
         detail:
@@ -1349,29 +1961,22 @@ components:
           description: The type of error returned
           example: InvalidStateError
           type: string
-    UpdateWebhookRequest:
-      additionalProperties: false
-      properties:
-        delivery_url:
-          $ref: "#/components/schemas/DeliveryUrl"
-        description:
-          $ref: "#/components/schemas/Description"
-        events:
-          description: The list of subscribed events for this webhook. [`*`] indicates that all events are enabled.
-          example:
-            - vault.connection.created
-            - vault.connection.updated
-          items:
-            $ref: "#/components/schemas/WebhookEventType"
-          title: Subscribed events
-          type: array
-        status:
-          $ref: "#/components/schemas/Status"
-      type: object
-    UpdateWebhookResponse:
+    UpdateMessageResponse:
       properties:
         data:
-          $ref: "#/components/schemas/Webhook"
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Messages
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: twilio
+          type: string
         status:
           description: HTTP Response Status
           example: OK
@@ -1383,299 +1988,11 @@ components:
       required:
         - status_code
         - status
+        - service
+        - resource
+        - operation
         - data
       type: object
-    UpdatedAt:
-      example: 2020-09-30T07:43:32.000Z
-      format: date-time
-      readOnly: true
-      title: Updated at (timestamp)
-      type: string
-    Webhook:
-      additionalProperties: false
-      properties:
-        created_at:
-          $ref: "#/components/schemas/CreatedAt"
-        delivery_url:
-          $ref: "#/components/schemas/DeliveryUrl"
-        description:
-          $ref: "#/components/schemas/Description"
-        events:
-          description: The list of subscribed events for this webhook. [`*`] indicates that all events are enabled.
-          example:
-            - vault.connection.created
-            - vault.connection.updated
-          items:
-            $ref: "#/components/schemas/WebhookEventType"
-          title: Subscribed events
-          type: array
-        execute_base_url:
-          $ref: "#/components/schemas/ExecuteBaseUrl"
-        id:
-          example: "1234"
-          readOnly: true
-          type: string
-        status:
-          $ref: "#/components/schemas/Status"
-        unified_api:
-          $ref: "#/components/schemas/UnifiedApiId"
-        updated_at:
-          $ref: "#/components/schemas/UpdatedAt"
-      required:
-        - delivery_url
-        - status
-        - events
-        - unified_api
-        - execute_base_url
-      type: object
-    WebhookEvent:
-      properties:
-        entity_id:
-          description: The service provider's ID of the entity that triggered this event
-          example: 123456ASDF
-          type: string
-        entity_type:
-          description: The type entity that triggered this event
-          example: Company
-          type: string
-        entity_url:
-          description: The url to retrieve entity detail.
-          example: https://unify.apideck.com/crm/contacts/123456
-          type: string
-        event_id:
-          description: Unique reference to this request event
-          example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
-          type: string
-        event_type:
-          $ref: "#/components/schemas/WebhookEventType"
-        execution_attempt:
-          description: The current count this request event has been attempted
-          example: 2
-          type: number
-        occurred_at:
-          description: ISO Datetime for when the original event occurred
-          example: 2021-10-01T03:14:55.419Z
-          format: date-time
-          type: string
-        service_id:
-          $ref: "#/components/schemas/ServiceId"
-      type: object
-      x-sdk-exclude: true
-    WebhookEventLog:
-      additionalProperties: false
-      properties:
-        application_id:
-          $ref: "#/components/schemas/ApplicationId"
-        attempts:
-          description: record of each attempt to call webhook endpoint
-          items:
-            properties:
-              execution_attempt:
-                description: Number of attempts webhook endpoint was called before a success was returned or eventually failed
-                example: 3
-                type: number
-              status_code:
-                description: HTTP Status code that was returned.
-                example: 200
-                type: integer
-              success:
-                description: Whether or not the request was successful.
-                example: true
-                type: boolean
-              timestamp:
-                description: ISO Date and time when the request was made.
-                example: 2021-07-12T14:26:17.420Z
-                type: string
-            type: object
-          type: array
-        consumer_id:
-          $ref: "#/components/schemas/ConsumerId"
-        endpoint:
-          description: The URL of the webhook endpoint.
-          example: https://example.com/my/webhook/endpoint
-          format: uri
-          pattern: ^(https?)://
-          type: string
-        entity_type:
-          description: Name of the Entity described by the attributes delivered within payload
-          example: Connection
-          type: string
-        event_type:
-          description: Name of source event that webhook is subscribed to.
-          example: vault.connection.updated
-          type: string
-        execution_attempt:
-          description: Number of attempts webhook endpoint was called before a success was returned or eventually failed
-          example: 3
-          type: number
-        http_method:
-          description: HTTP Method of request to endpoint.
-          example: GET
-          type: string
-        id:
-          example: 1d174c4d-fe9e-4377-a76c-6da22fe9cd87
-          type: string
-        request_body:
-          description: The JSON stringified payload that was delivered to the webhook endpoint.
-          example: '{"entity":{"id":"2222+test_user_id","application_id":"2222","consumer_id":"test_user_id","name":"ActiveCampaign","icon":"https://res.cloudinary.com/apideck/image/upload/v1529455970/catalog/activecampaign/icon128x128.png","logo":"https://www.activecampaign.com/site/assets/social-2x.png","unified_api":"crm","service_id":"activecampaign","auth_type":"apiKey","enabled":true,"tag_line":"Integrated email marketing, marketing automation, and small business CRM. Save time while growing your business with sales automation.","website":"https://www.activecampaign.com/","settings":{"instance_url":"https://eu28.salesforce.com","base_url":"https://updated.api-us1.com"},"metadata":{"plan":"enterprise","account":{"name":"My Company"}},"state":"callable","created_at":"2021-09-10T10:39:49.628Z","updated_at":"2021-09-10T10:39:52.715Z"},"entityType":"Connection"}'
-          type: string
-        response_body:
-          description: The JSON stringified response that was returned from the webhook endpoint.
-          example: '{"status":"OK"}'
-          type: string
-        retry_scheduled:
-          description: If the request has not hit the max retry limit and will be retried.
-          example: true
-          type: boolean
-        service:
-          additionalProperties: false
-          description: Apideck service provider associated with event.
-          properties:
-            id:
-              description: Apideck service provider id.
-              example: 101-data-solution
-              type: string
-            name:
-              description: Apideck service provider name.
-              example: 101 Data Solution
-              type: string
-          required:
-            - id
-            - name
-          type: object
-        status_code:
-          description: HTTP Status code that was returned.
-          example: 200
-          type: integer
-        success:
-          description: Whether or not the request was successful.
-          example: true
-          type: boolean
-        timestamp:
-          description: ISO Date and time when the request was made.
-          example: 2021-07-12T14:26:17.420Z
-          type: string
-        unified_api:
-          $ref: "#/components/schemas/UnifiedApiId"
-      type: object
-    WebhookEventLogsFilter:
-      properties:
-        consumer_id:
-          example: test_user_id
-          nullable: true
-          type: string
-        entity_type:
-          example: Connection
-          nullable: true
-          type: string
-        event_type:
-          example: vault.connection.callable
-          nullable: true
-          type: string
-        exclude_apis:
-          example: vault,proxy
-          nullable: true
-          type: string
-        service:
-          nullable: true
-          properties:
-            id:
-              type: string
-          type: object
-      type: object
-      x-graphql-type-name: WebhookEventLogsFilter
-    WebhookEventType:
-      enum:
-        - "*"
-        - crm.activity.created
-        - crm.activity.updated
-        - crm.activity.deleted
-        - crm.company.created
-        - crm.company.updated
-        - crm.company.deleted
-        - crm.contact.created
-        - crm.contact.updated
-        - crm.contact.deleted
-        - crm.lead.created
-        - crm.lead.updated
-        - crm.lead.deleted
-        - crm.note.created
-        - crm.notes.updated
-        - crm.notes.deleted
-        - crm.opportunity.created
-        - crm.opportunity.updated
-        - crm.opportunity.deleted
-        - lead.lead.created
-        - lead.lead.updated
-        - lead.lead.deleted
-        - vault.connection.created
-        - vault.connection.updated
-        - vault.connection.deleted
-        - vault.connection.callable
-        - vault.connection.token_refresh.failed
-        - ats.job.created
-        - ats.job.updated
-        - ats.job.deleted
-        - ats.applicant.created
-        - ats.applicant.updated
-        - ats.applicant.deleted
-        - accounting.customer.created
-        - accounting.customer.updated
-        - accounting.customer.deleted
-        - accounting.invoice.created
-        - accounting.invoice.updated
-        - accounting.invoice.deleted
-        - accounting.invoice_item.created
-        - accounting.invoice_item.updated
-        - accounting.invoice_item.deleted
-        - accounting.ledger_account.created
-        - accounting.ledger_account.updated
-        - accounting.ledger_account.deleted
-        - accounting.tax_rate.created
-        - accounting.tax_rate.updated
-        - accounting.tax_rate.deleted
-        - accounting.bill.created
-        - accounting.bill.updated
-        - accounting.bill.deleted
-        - accounting.payment.created
-        - accounting.payment.updated
-        - accounting.payment.deleted
-        - accounting.supplier.created
-        - accounting.supplier.updated
-        - accounting.supplier.deleted
-        - pos.order.created
-        - pos.order.updated
-        - pos.order.deleted
-        - pos.product.created
-        - pos.product.updated
-        - pos.product.deleted
-        - pos.payment.created
-        - pos.payment.updated
-        - pos.payment.deleted
-        - pos.merchant.created
-        - pos.merchant.updated
-        - pos.merchant.deleted
-        - pos.location.created
-        - pos.location.updated
-        - pos.location.deleted
-        - pos.item.created
-        - pos.item.updated
-        - pos.item.deleted
-        - pos.modifier.created
-        - pos.modifier.updated
-        - pos.modifier.deleted
-        - pos.modifier-group.created
-        - pos.modifier-group.updated
-        - pos.modifier-group.deleted
-        - hris.employee.created
-        - hris.employee.updated
-        - hris.employee.deleted
-        - hris.company.created
-        - hris.company.updated
-        - hris.company.deleted
-      example: crm.company.created
-      type: string
-      x-apideck-enum-id: webhooks.event_type
   securitySchemes:
     apiKey:
       description: |

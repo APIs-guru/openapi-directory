@@ -272,7 +272,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: File storage API
-  version: 8.37.1
+  version: 8.38.0
   x-apideck-api: file-storage
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -313,7 +313,569 @@ tags:
     x-apideck-model:
       $ref: "#/components/schemas/UploadSession"
     x-apideck-resource-id: upload-sessions
+  - description: ""
+    name: Drives
+    x-apideck-model:
+      $ref: "#/components/schemas/Drive"
+    x-apideck-resource-id: drives
+  - description: ""
+    name: Drive Groups
+    x-apideck-model:
+      $ref: "#/components/schemas/DriveGroup"
+    x-apideck-resource-id: drive-groups
 paths:
+  /file-storage/drive-groups:
+    get:
+      description: List DriveGroups
+      operationId: driveGroupsAll
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/driveGroupsFilter"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetDriveGroupsResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: List DriveGroups
+      tags:
+        - Drive Groups
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.driveGroupsAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: driveGroups
+    post:
+      description: Create DriveGroup
+      operationId: driveGroupsAdd
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DriveGroup"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateDriveGroupResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Create DriveGroup
+      tags:
+        - Drive Groups
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              driveGroup: {
+                name: 'accounting',
+                display_name: 'accounting',
+                description: 'A description'
+              }
+            }
+
+            try {
+              const { data } = await apideck.fileStorage.driveGroupsAdd(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/file-storage/drive-groups/{id}":
+    delete:
+      description: Delete DriveGroup
+      operationId: driveGroupsDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeleteDriveGroupResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Delete DriveGroup
+      tags:
+        - Drive Groups
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.driveGroupsDelete({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    get:
+      description: Get DriveGroup
+      operationId: driveGroupsOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetDriveGroupResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get DriveGroup
+      tags:
+        - Drive Groups
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.driveGroupsOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    patch:
+      description: Update DriveGroup
+      operationId: driveGroupsUpdate
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DriveGroup"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdateDriveGroupResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Update DriveGroup
+      tags:
+        - Drive Groups
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              id: 'id_example',
+              driveGroup: {
+                name: 'accounting',
+                display_name: 'accounting',
+                description: 'A description'
+              }
+            }
+
+            try {
+              const { data } = await apideck.fileStorage.driveGroupsUpdate(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  /file-storage/drives:
+    get:
+      description: List Drives
+      operationId: drivesAll
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/drivesFilter"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetDrivesResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: List Drives
+      tags:
+        - Drives
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.drivesAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: drives
+    post:
+      description: Create Drive
+      operationId: drivesAdd
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Drive"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateDriveResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Create Drive
+      tags:
+        - Drives
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              drive: {
+                name: 'Project Resources',
+                description: 'A description'
+              }
+            }
+
+            try {
+              const { data } = await apideck.fileStorage.drivesAdd(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/file-storage/drives/{id}":
+    delete:
+      description: Delete Drive
+      operationId: drivesDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeleteDriveResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Delete Drive
+      tags:
+        - Drives
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.drivesDelete({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    get:
+      description: Get Drive
+      operationId: drivesOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetDriveResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get Drive
+      tags:
+        - Drives
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.drivesOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    patch:
+      description: Update Drive
+      operationId: drivesUpdate
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Drive"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdateDriveResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Update Drive
+      tags:
+        - Drives
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              id: 'id_example',
+              drive: {
+                name: 'Project Resources',
+                description: 'A description'
+              }
+            }
+
+            try {
+              const { data } = await apideck.fileStorage.drivesUpdate(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
   /file-storage/files:
     get:
       description: List Files
@@ -687,7 +1249,8 @@ paths:
               folder: {
                 name: 'Documents',
                 description: 'My Personal Documents',
-                parent_folder_id: '1234'
+                parent_folder_id: '1234',
+                drive_id: '1234'
               }
             }
 
@@ -1255,6 +1818,7 @@ paths:
               uploadSession: {
                 name: 'Documents',
                 parent_folder_id: '1234',
+                drive_id: '1234',
                 size: 1810673
               }
             }
@@ -1513,6 +2077,22 @@ components:
       schema:
         nullable: true
         type: string
+    driveGroupsFilter:
+      description: Apply filters (beta)
+      explode: true
+      in: query
+      name: filter
+      schema:
+        $ref: "#/components/schemas/DriveGroupsFilter"
+      style: deepObject
+    drivesFilter:
+      description: Apply filters (beta)
+      explode: true
+      in: query
+      name: filter
+      schema:
+        $ref: "#/components/schemas/DrivesFilter"
+      style: deepObject
     filesFilter:
       description: Apply filters (beta)
       explode: true
@@ -1584,6 +2164,18 @@ components:
           schema:
             $ref: "#/components/schemas/BadRequestResponse"
       description: Bad Request
+    CreateDriveGroupResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateDriveGroupResponse"
+      description: DriveGroups
+    CreateDriveResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateDriveResponse"
+      description: Drives
     CreateFileResponse:
       content:
         application/json:
@@ -1608,6 +2200,18 @@ components:
           schema:
             $ref: "#/components/schemas/CreateUploadSessionResponse"
       description: UploadSessions
+    DeleteDriveGroupResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DeleteDriveGroupResponse"
+      description: DriveGroups
+    DeleteDriveResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DeleteDriveResponse"
+      description: Drives
     DeleteFileResponse:
       content:
         application/json:
@@ -1632,6 +2236,30 @@ components:
           schema:
             $ref: "#/components/schemas/DeleteUploadSessionResponse"
       description: UploadSessions
+    GetDriveGroupResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetDriveGroupResponse"
+      description: DriveGroups
+    GetDriveGroupsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetDriveGroupsResponse"
+      description: DriveGroups
+    GetDriveResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetDriveResponse"
+      description: Drives
+    GetDrivesResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetDrivesResponse"
+      description: Drives
     GetFileDownloadResponse:
       content:
         "*/*":
@@ -1723,6 +2351,18 @@ components:
           schema:
             $ref: "#/components/schemas/UnprocessableResponse"
       description: Unprocessable
+    UpdateDriveGroupResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateDriveGroupResponse"
+      description: DriveGroups
+    UpdateDriveResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateDriveResponse"
+      description: Drives
     UpdateFileResponse:
       content:
         application/json:
@@ -1793,12 +2433,80 @@ components:
       required:
         - parent_folder_id
       type: object
+    CreateDriveGroupResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: DriveGroups
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: google-drive
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    CreateDriveResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Drives
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: google-drive
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     CreateFileRequest:
       additionalProperties: false
       properties:
         description:
           description: Optional description of the file.
           example: My Personal Documents
+          type: string
+        drive_id:
+          description: ID of the drive to upload to.
+          example: "1234"
           type: string
         name:
           description: The name of the file.
@@ -1848,6 +2556,10 @@ components:
         description:
           description: Optional description of the folder.
           example: My Personal Documents
+          type: string
+        drive_id:
+          description: ID of the drive to create the folder in.
+          example: "1234"
           type: string
         id:
           $ref: "#/components/schemas/Id"
@@ -1928,6 +2640,10 @@ components:
     CreateUploadSessionRequest:
       additionalProperties: false
       properties:
+        drive_id:
+          description: ID of the drive to upload to.
+          example: "1234"
+          type: string
         name:
           description: The name of the file.
           example: Documents
@@ -1985,6 +2701,70 @@ components:
       readOnly: true
       title: Created by
       type: string
+    DeleteDriveGroupResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: DriveGroups
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: google-drive
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    DeleteDriveResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Drives
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: google-drive
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     DeleteFileResponse:
       properties:
         data:
@@ -2113,6 +2893,99 @@ components:
         - operation
         - data
       type: object
+    Description:
+      example: A description
+      nullable: true
+      title: Description
+      type: string
+    DownstreamId:
+      description: The third-party API ID of original entity
+      example: "12345"
+      nullable: true
+      readOnly: true
+      type: string
+    Drive:
+      additionalProperties: false
+      properties:
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        created_by:
+          $ref: "#/components/schemas/CreatedBy"
+        description:
+          $ref: "#/components/schemas/Description"
+        id:
+          $ref: "#/components/schemas/Id"
+        name:
+          description: The name of the drive
+          example: Project Resources
+          type: string
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+        updated_by:
+          $ref: "#/components/schemas/UpdatedBy"
+      required:
+        - id
+        - name
+      type: object
+      x-apideck-weights:
+        created_at: critical
+        created_by: edge-case
+        id: critical
+        name: critical
+        updated_at: critical
+        updated_by: edge-case
+    DriveGroup:
+      additionalProperties: false
+      properties:
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        created_by:
+          $ref: "#/components/schemas/CreatedBy"
+        description:
+          $ref: "#/components/schemas/Description"
+        display_name:
+          description: The display name of the drive group
+          example: accounting
+          type: string
+        id:
+          $ref: "#/components/schemas/Id"
+        name:
+          description: The name of the drive group
+          example: accounting
+          type: string
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+        updated_by:
+          $ref: "#/components/schemas/UpdatedBy"
+      required:
+        - id
+        - name
+      type: object
+      x-apideck-weights:
+        created_at: critical
+        created_by: edge-case
+        id: critical
+        name: critical
+        updated_at: critical
+        updated_by: edge-case
+    DriveGroupsFilter:
+      additionalProperties: false
+      properties:
+        parent_group_id:
+          description: ID of the drive group to filter on
+          example: "1234"
+          type: string
+      type: object
+      x-graphql-type-name: DriveGroupsFilter
+    DrivesFilter:
+      additionalProperties: false
+      properties:
+        group_id:
+          description: ID of the drive group to filter on
+          example: "1234"
+          type: string
+      type: object
+      x-graphql-type-name: DrivesFilter
     ExpiresAt:
       example: 2022-09-30T07:43:32.000Z
       format: date-time
@@ -2137,6 +3010,10 @@ components:
     FilesFilter:
       additionalProperties: false
       properties:
+        drive_id:
+          description: ID of the drive to filter on
+          example: "1234"
+          type: string
         folder_id:
           description: ID of the folder to filter on. The root folder has an alias "root"
           example: root
@@ -2151,6 +3028,10 @@ components:
       example:
         query: logo jpg
       properties:
+        drive_id:
+          description: ID of the drive to filter on
+          example: "1234"
+          type: string
         query:
           description: The query to search for. May match across multiple fields.
           example: logo jpg
@@ -2231,6 +3112,150 @@ components:
         parent_folders_complete: critical
         size: low
         updated_at: critical
+    GetDriveGroupResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/DriveGroup"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: DriveGroups
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: google-drive
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: DriveGroup
+    GetDriveGroupsResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/DriveGroup"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: DriveGroups
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: google-drive
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: DriveGroupList
+    GetDriveResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/Drive"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Drives
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: google-drive
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: Drive
+    GetDrivesResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Drive"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Drives
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: google-drive
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: DriveList
     GetFileResponse:
       properties:
         data:
@@ -2835,6 +3860,8 @@ components:
         downloadable:
           description: Whether the current user can download this file
           type: boolean
+        downstream_id:
+          $ref: "#/components/schemas/DownstreamId"
         id:
           $ref: "#/components/schemas/Id"
         mime_type:
@@ -2875,6 +3902,7 @@ components:
       x-apideck-weights:
         created_at: high
         downloadable: high
+        downstream_id: edge-case
         id: critical
         mime_type: high
         name: critical
@@ -2918,6 +3946,70 @@ components:
           description: The type of error returned
           example: InvalidStateError
           type: string
+    UpdateDriveGroupResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: DriveGroups
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: google-drive
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    UpdateDriveResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Drives
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: google-drive
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     UpdateFileResponse:
       properties:
         data:

@@ -1123,90 +1123,6 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{orgenv}/securityStats:queryTabularStats":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Retrieve security statistics as tabular rows.
-      operationId: apigee.organizations.environments.securityStats.queryTabularStats
-      parameters:
-        - description: Required. Should be of the form organizations//environments/.
-          in: path
-          name: orgenv
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudApigeeV1QueryTabularStatsRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudApigeeV1QueryTabularStatsResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - organizations
-  "/v1/{orgenv}/securityStats:queryTimeSeriesStats":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Retrieve security statistics as a collection of time series.
-      operationId: apigee.organizations.environments.securityStats.queryTimeSeriesStats
-      parameters:
-        - description: Required. Should be of the form organizations//environments/.
-          in: path
-          name: orgenv
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudApigeeV1QueryTimeSeriesStatsRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudApigeeV1QueryTimeSeriesStatsResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - organizations
   "/v1/{org}:setAddons":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -6223,9 +6139,6 @@ components:
         name:
           description: Required. Name of the environment. Values must match the regular expression `^[.\\p{Alnum}-_]{1,255}$`
           type: string
-        nodeConfig:
-          $ref: "#/components/schemas/GoogleCloudApigeeV1NodeConfig"
-          description: Optional. NodeConfig of the environment.
         properties:
           $ref: "#/components/schemas/GoogleCloudApigeeV1Properties"
           description: Optional. Key-value pairs that may be used for customizing the environment.
@@ -7151,30 +7064,6 @@ components:
           items: {}
           type: array
       type: object
-    GoogleCloudApigeeV1MetricAggregation:
-      description: The optionally aggregated metric to query with its ordering.
-      properties:
-        aggregation:
-          description: Aggregation function associated with the metric.
-          enum:
-            - AGGREGATION_FUNCTION_UNSPECIFIED
-            - AVG
-            - SUM
-            - MIN
-            - MAX
-            - COUNT_DISTINCT
-          type: string
-        name:
-          description: Name of the metric
-          type: string
-        order:
-          description: Ordering for this aggregation in the result. For time series this is ignored since the ordering of points depends only on the timestamp, not the values.
-          enum:
-            - ORDER_UNSPECIFIED
-            - ASCENDING
-            - DESCENDING
-          type: string
-      type: object
     GoogleCloudApigeeV1MonetizationConfig:
       description: Configuration for the Monetization add-on.
       properties:
@@ -7201,23 +7090,6 @@ components:
             - ACTIVE
             - DELETING
           readOnly: true
-          type: string
-      type: object
-    GoogleCloudApigeeV1NodeConfig:
-      description: NodeConfig for setting the min/max number of nodes associated with the environment.
-      properties:
-        currentAggregateNodeCount:
-          description: Output only. The current total number of gateway nodes that each environment currently has across all instances.
-          format: int64
-          readOnly: true
-          type: string
-        maxNodeCount:
-          description: Optional. The maximum total number of gateway nodes that the is reserved for all instances that has the specified environment. If not specified, the default is determined by the recommended maximum number of nodes for that gateway.
-          format: int64
-          type: string
-        minNodeCount:
-          description: Optional. The minimum total number of gateway nodes that the is reserved for all instances that has the specified environment. If not specified, the default is determined by the recommended minimum number of nodes for that gateway.
-          format: int64
           type: string
       type: object
     GoogleCloudApigeeV1Operation:
@@ -7375,7 +7247,6 @@ components:
             - BILLING_TYPE_UNSPECIFIED
             - SUBSCRIPTION
             - EVALUATION
-            - PAYG
           type: string
         caCertificate:
           description: Output only. Base64-encoded public certificate for the root CA of the Apigee organization. Valid only when [RuntimeType](#RuntimeType) is `CLOUD`.
@@ -7641,126 +7512,6 @@ components:
         value:
           description: Operand value should be provided when operator is set.
           type: string
-      type: object
-    GoogleCloudApigeeV1QueryTabularStatsRequest:
-      description: Request payload representing the query to be run for fetching security statistics as rows.
-      properties:
-        dimensions:
-          description: Required. List of dimension names to group the aggregations by.
-          items:
-            type: string
-          type: array
-        filter:
-          description: Filter further on specific dimension values. Follows the same grammar as custom report's filter expressions. Example, apiproxy eq 'foobar'. https://cloud.google.com/apigee/docs/api-platform/analytics/analytics-reference#filters
-          type: string
-        metrics:
-          description: Required. List of metrics and their aggregations.
-          items:
-            $ref: "#/components/schemas/GoogleCloudApigeeV1MetricAggregation"
-          type: array
-        pageSize:
-          description: Page size represents the number of rows.
-          format: int32
-          type: integer
-        pageToken:
-          description: Identifies a sequence of rows.
-          type: string
-        timeRange:
-          $ref: "#/components/schemas/GoogleTypeInterval"
-          description: Time range for the stats.
-      type: object
-    GoogleCloudApigeeV1QueryTabularStatsResponse:
-      description: Encapsulates two kinds of stats that are results of the dimensions and aggregations requested. - Tabular rows. - Time series data. Example of tabular rows, Represents security stats results as a row of flat values.
-      properties:
-        columns:
-          description: Column names corresponding to the same order as the inner values in the stats field.
-          items:
-            type: string
-          type: array
-        nextPageToken:
-          description: Next page token.
-          type: string
-        values:
-          description: Resultant rows from the executed query.
-          items:
-            items: {}
-            type: array
-          type: array
-      type: object
-    GoogleCloudApigeeV1QueryTimeSeriesStatsRequest:
-      description: QueryTimeSeriesStatsRequest represents a query that returns a collection of time series sequences grouped by their values.
-      properties:
-        dimensions:
-          description: List of dimension names to group the aggregations by. If no dimensions are passed, a single trend line representing the requested metric aggregations grouped by environment is returned.
-          items:
-            type: string
-          type: array
-        filter:
-          description: Filter further on specific dimension values. Follows the same grammar as custom report's filter expressions. Example, apiproxy eq 'foobar'. https://cloud.google.com/apigee/docs/api-platform/analytics/analytics-reference#filters
-          type: string
-        metrics:
-          description: Required. List of metrics and their aggregations.
-          items:
-            $ref: "#/components/schemas/GoogleCloudApigeeV1MetricAggregation"
-          type: array
-        pageSize:
-          description: Page size represents the number of time series sequences, one per unique set of dimensions and their values.
-          format: int32
-          type: integer
-        pageToken:
-          description: Page token stands for a specific collection of time series sequences.
-          type: string
-        timeRange:
-          $ref: "#/components/schemas/GoogleTypeInterval"
-          description: Required. Time range for the stats.
-        timestampOrder:
-          description: Order the sequences in increasing or decreasing order of timestamps. Default is descending order of timestamps (latest first).
-          enum:
-            - ORDER_UNSPECIFIED
-            - ASCENDING
-            - DESCENDING
-          type: string
-        windowSize:
-          description: Time buckets to group the stats by.
-          enum:
-            - WINDOW_SIZE_UNSPECIFIED
-            - MINUTE
-            - HOUR
-            - DAY
-            - MONTH
-          type: string
-      type: object
-    GoogleCloudApigeeV1QueryTimeSeriesStatsResponse:
-      description: Represents security stats result as a collection of time series sequences.
-      properties:
-        columns:
-          description: Column names corresponding to the same order as the inner values in the stats field.
-          items:
-            type: string
-          type: array
-        nextPageToken:
-          description: Next page token.
-          type: string
-        values:
-          description: Results of the query returned as a JSON array.
-          items:
-            $ref: "#/components/schemas/GoogleCloudApigeeV1QueryTimeSeriesStatsResponseSequence"
-          type: array
-      type: object
-    GoogleCloudApigeeV1QueryTimeSeriesStatsResponseSequence:
-      description: A sequence of time series.
-      properties:
-        dimensions:
-          additionalProperties:
-            type: string
-          description: Map of dimensions and their values that uniquely identifies a time series sequence.
-          type: object
-        points:
-          description: List of points. First value of each inner list is a timestamp.
-          items:
-            items: {}
-            type: array
-          type: array
       type: object
     GoogleCloudApigeeV1Quota:
       description: Quota contains the essential parameters needed that can be applied on the resources, methods, API source combination associated with this API product. While Quota is optional, setting it prevents requests from exceeding the provisioned parameters.
@@ -8981,7 +8732,7 @@ components:
           $ref: "#/components/schemas/GoogleTypeExpr"
           description: The condition that is associated with this binding. If the condition evaluates to `true`, then this binding applies to the current request. If the condition evaluates to `false`, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
         members:
-          description: "Specifies the principals requesting access for a Google Cloud resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a Google service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `serviceAccount:{projectid}.svc.id.goog[{namespace}/{kubernetes-sa}]`: An identifier for a [Kubernetes service account](https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts). For example, `my-project.svc.id.goog[my-namespace/my-kubernetes-sa]`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. "
+          description: "Specifies the principals requesting access for a Google Cloud resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. "
           items:
             type: string
           type: array
