@@ -1878,7 +1878,7 @@ paths:
       description: CompleteNodePoolUpgrade will signal an on-going node pool upgrade to complete.
       operationId: container.projects.locations.clusters.nodePools.completeUpgrade
       parameters:
-        - description: The name (project, location, cluster, node pool id) of the node pool to complete upgrade. Specified in the format 'projects/*/locations/*/clusters/*/nodePools/*'.
+        - description: The name (project, location, cluster, node pool id) of the node pool to complete upgrade. Specified in the format `projects/*/locations/*/clusters/*/nodePools/*`.
           in: path
           name: name
           required: true
@@ -3082,7 +3082,7 @@ components:
           $ref: "#/components/schemas/NodeManagement"
           description: NodeManagement configuration for this NodePool.
         minCpuPlatform:
-          description: 'Deprecated. Minimum CPU platform to be used for NAP created node pools. The instance may be scheduled on the specified or newer CPU platform. Applicable values are the friendly names of CPU platforms, such as minCpuPlatform: Intel Haswell or minCpuPlatform: Intel Sandy Bridge. For more information, read [how to specify min CPU platform](https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform) This field is deprecated, min_cpu_platform should be specified using cloud.google.com/requested-min-cpu-platform label selector on the pod. To unset the min cpu platform field pass "automatic" as field value.'
+          description: 'Deprecated. Minimum CPU platform to be used for NAP created node pools. The instance may be scheduled on the specified or newer CPU platform. Applicable values are the friendly names of CPU platforms, such as minCpuPlatform: Intel Haswell or minCpuPlatform: Intel Sandy Bridge. For more information, read [how to specify min CPU platform](https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform) This field is deprecated, min_cpu_platform should be specified using https://cloud.google.com/requested-min-cpu-platform label selector on the pod. To unset the min cpu platform field pass "automatic" as field value.'
           type: string
         oauthScopes:
           description: 'The set of Google API scopes to be made available on all of the node VMs under the "default" service account. The following scopes are recommended, but not required, and by default are not included: * `https://www.googleapis.com/auth/compute` is required for mounting persistent storage on your nodes. * `https://www.googleapis.com/auth/devstorage.read_only` is required for communicating with **gcr.io** (the [Google Container Registry](https://cloud.google.com/container-registry/)). If unspecified, no scopes are added, unless Cloud Logging or Cloud Monitoring are enabled, in which case their required scopes will be added.'
@@ -3120,7 +3120,7 @@ components:
       description: Configuration for Binary Authorization.
       properties:
         enabled:
-          description: Enable Binary Authorization for this cluster. If enabled, all container images will be validated by Binary Authorization.
+          description: This field is deprecated. Leave this unset and instead configure BinaryAuthorization using evaluation_mode. If evaluation_mode is set to anything other than EVALUATION_MODE_UNSPECIFIED, this field is ignored.
           type: boolean
         evaluationMode:
           description: Mode of operation for binauthz policy evaluation. Currently the only options are equivalent to enable/disable. If unspecified, defaults to DISABLED.
@@ -4181,7 +4181,7 @@ components:
           description: Contains the name of the resource requested. Specified in the format `projects/*/locations/*`.
           type: string
         recommended:
-          description: Whether the location is recomended for GKE cluster scheduling.
+          description: Whether the location is recommended for GKE cluster scheduling.
           type: boolean
         type:
           description: Contains the type of location this Location is for. Regional or Zonal.
@@ -4542,7 +4542,7 @@ components:
       properties:
         gcfsConfig:
           $ref: "#/components/schemas/GcfsConfig"
-          description: GCFS (Google Container File System, a.k.a. Riptide) options.
+          description: GCFS (Google Container File System, also known as Riptide) options.
       type: object
     NodeKubeletConfig:
       description: Node kubelet configs.
