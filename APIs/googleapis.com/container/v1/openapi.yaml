@@ -1878,7 +1878,7 @@ paths:
       description: CompleteNodePoolUpgrade will signal an on-going node pool upgrade to complete.
       operationId: container.projects.locations.clusters.nodePools.completeUpgrade
       parameters:
-        - description: The name (project, location, cluster, node pool id) of the node pool to complete upgrade. Specified in the format 'projects/*/locations/*/clusters/*/nodePools/*'.
+        - description: The name (project, location, cluster, node pool id) of the node pool to complete upgrade. Specified in the format `projects/*/locations/*/clusters/*/nodePools/*`.
           in: path
           name: name
           required: true
@@ -3032,7 +3032,7 @@ components:
           $ref: "#/components/schemas/NodeManagement"
           description: Specifies the node management options for NAP created node-pools.
         minCpuPlatform:
-          description: 'Deprecated. Minimum CPU platform to be used for NAP created node pools. The instance may be scheduled on the specified or newer CPU platform. Applicable values are the friendly names of CPU platforms, such as minCpuPlatform: Intel Haswell or minCpuPlatform: Intel Sandy Bridge. For more information, read [how to specify min CPU platform](https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform) This field is deprecated, min_cpu_platform should be specified using cloud.google.com/requested-min-cpu-platform label selector on the pod. To unset the min cpu platform field pass "automatic" as field value.'
+          description: 'Deprecated. Minimum CPU platform to be used for NAP created node pools. The instance may be scheduled on the specified or newer CPU platform. Applicable values are the friendly names of CPU platforms, such as minCpuPlatform: Intel Haswell or minCpuPlatform: Intel Sandy Bridge. For more information, read [how to specify min CPU platform](https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform) This field is deprecated, min_cpu_platform should be specified using https://cloud.google.com/requested-min-cpu-platform label selector on the pod. To unset the min cpu platform field pass "automatic" as field value.'
           type: string
         oauthScopes:
           description: Scopes that are used by NAP when creating node pools.
@@ -3060,7 +3060,7 @@ components:
       description: Configuration for Binary Authorization.
       properties:
         enabled:
-          description: Enable Binary Authorization for this cluster. If enabled, all container images will be validated by Binary Authorization.
+          description: This field is deprecated. Leave this unset and instead configure BinaryAuthorization using evaluation_mode. If evaluation_mode is set to anything other than EVALUATION_MODE_UNSPECIFIED, this field is ignored.
           type: boolean
         evaluationMode:
           description: Mode of operation for binauthz policy evaluation. Currently the only options are equivalent to enable/disable. If unspecified, defaults to DISABLED.
@@ -4283,7 +4283,7 @@ components:
       properties:
         gcfsConfig:
           $ref: "#/components/schemas/GcfsConfig"
-          description: GCFS (Google Container File System, a.k.a. Riptide) options.
+          description: GCFS (Google Container File System, also known as Riptide) options.
       type: object
     NodeKubeletConfig:
       description: Node kubelet configs.

@@ -714,7 +714,8 @@ components:
       description: State of the latest attempt to authorize a domain for certificate issuance.
       properties:
         details:
-          description: Human readable explanation for reaching the state. Provided to help address the configuration issues. Not guaranteed to be stable. For programmatic access use Reason enum.
+          description: Output only. Human readable explanation for reaching the state. Provided to help address the configuration issues. Not guaranteed to be stable. For programmatic access use FailureReason enum.
+          readOnly: true
           type: string
         domain:
           description: Domain name of the authorization attempt.
@@ -729,12 +730,13 @@ components:
           readOnly: true
           type: string
         state:
-          description: State of the domain for managed certificate issuance.
+          description: Output only. State of the domain for managed certificate issuance.
           enum:
             - STATE_UNSPECIFIED
             - AUTHORIZING
             - AUTHORIZED
             - FAILED
+          readOnly: true
           type: string
       type: object
     CancelOperationRequest:
@@ -927,28 +929,33 @@ components:
       description: Describes a Target Proxy which uses this Certificate Map.
       properties:
         ipConfigs:
-          description: IP configurations for this Target Proxy where the Certificate Map is serving.
+          description: Output only. IP configurations for this Target Proxy where the Certificate Map is serving.
           items:
             $ref: "#/components/schemas/IpConfig"
+          readOnly: true
           type: array
         targetHttpsProxy:
-          description: "This field returns the resource name in the following format: `//compute.googleapis.com/projects/*/global/targetHttpsProxies/*`."
+          description: "Output only. This field returns the resource name in the following format: `//compute.googleapis.com/projects/*/global/targetHttpsProxies/*`."
+          readOnly: true
           type: string
         targetSslProxy:
-          description: "This field returns the resource name in the following format: `//compute.googleapis.com/projects/*/global/targetSslProxies/*`."
+          description: "Output only. This field returns the resource name in the following format: `//compute.googleapis.com/projects/*/global/targetSslProxies/*`."
+          readOnly: true
           type: string
       type: object
     IpConfig:
       description: Defines IP configuration where this Certificate Map is serving.
       properties:
         ipAddress:
-          description: An external IP address.
+          description: Output only. An external IP address.
+          readOnly: true
           type: string
         ports:
-          description: Ports.
+          description: Output only. Ports.
           items:
             format: uint32
             type: integer
+          readOnly: true
           type: array
       type: object
     ListCertificateMapEntriesResponse:
@@ -1087,7 +1094,8 @@ components:
           type: array
         provisioningIssue:
           $ref: "#/components/schemas/ProvisioningIssue"
-          description: Information about issues with provisioning a Managed Certificate.
+          description: Output only. Information about issues with provisioning a Managed Certificate.
+          readOnly: true
         state:
           description: Output only. State of the managed certificate resource.
           enum:
@@ -1152,14 +1160,16 @@ components:
       description: Information about issues with provisioning a Managed Certificate.
       properties:
         details:
-          description: Human readable explanation about the issue. Provided to help address the configuration issues. Not guaranteed to be stable. For programmatic access use Reason enum.
+          description: Output only. Human readable explanation about the issue. Provided to help address the configuration issues. Not guaranteed to be stable. For programmatic access use Reason enum.
+          readOnly: true
           type: string
         reason:
-          description: Reason for provisioning failures.
+          description: Output only. Reason for provisioning failures.
           enum:
             - REASON_UNSPECIFIED
             - AUTHORIZATION_ISSUE
             - RATE_LIMITED
+          readOnly: true
           type: string
       type: object
     SelfManagedCertificate:

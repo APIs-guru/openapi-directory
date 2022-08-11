@@ -1192,7 +1192,7 @@ components:
       description: The options shared by read requests.
       properties:
         readConsistency:
-          description: The non-transactional read consistency to use. Cannot be set to `STRONG` for global queries.
+          description: The non-transactional read consistency to use.
           enum:
             - READ_CONSISTENCY_UNSPECIFIED
             - STRONG
@@ -1219,7 +1219,7 @@ components:
       description: The request for Datastore.ReserveIds.
       properties:
         databaseId:
-          description: If not empty, the ID of the database against which to make the request.
+          description: The ID of the database against which to make the request. '(default)' is not allowed; please use empty string '' to refer the default database.
           type: string
         keys:
           description: Required. A list of keys with complete key paths whose numeric IDs should not be auto-allocated.
