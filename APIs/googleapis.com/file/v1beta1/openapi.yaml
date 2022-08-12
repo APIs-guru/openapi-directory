@@ -375,7 +375,7 @@ paths:
       description: Lists all backups in a project for either a specified location or for all locations.
       operationId: file.projects.locations.backups.list
       parameters:
-        - description: Required. The project and location for which to retrieve backup information, in the format `projects/{project_id}/locations/{location}`. In Cloud Filestore, backup locations map to GCP regions, for example **us-west1**. To retrieve backup information for all locations, use "-" for the `{location}` value.
+        - description: Required. The project and location for which to retrieve backup information, in the format `projects/{project_id}/locations/{location}`. In Filestore, backup locations map to GCP regions, for example **us-west1**. To retrieve backup information for all locations, use "-" for the `{location}` value.
           in: path
           name: parent
           required: true
@@ -431,7 +431,7 @@ paths:
       description: Creates a backup.
       operationId: file.projects.locations.backups.create
       parameters:
-        - description: Required. The backup's project and location, in the format `projects/{project_id}/locations/{location}`. In Cloud Filestore, backup locations map to GCP regions, for example **us-west1**.
+        - description: Required. The backup's project and location, in the format `projects/{project_id}/locations/{location}`. In Filestore, backup locations map to GCP regions, for example **us-west1**.
           in: path
           name: parent
           required: true
@@ -522,7 +522,7 @@ paths:
       description: Creates an instance. When creating from a backup, the capacity of the new instance needs to be equal to or larger than the capacity of the backup (and also equal to or larger than the minimum capacity of the tier).
       operationId: file.projects.locations.instances.create
       parameters:
-        - description: Required. The instance's project and location, in the format `projects/{project_id}/locations/{location}`. In Cloud Filestore, locations map to GCP zones, for example **us-west1-b**.
+        - description: Required. The instance's project and location, in the format `projects/{project_id}/locations/{location}`. In Filestore, locations map to GCP zones, for example **us-west1-b**.
           in: path
           name: parent
           required: true
@@ -811,7 +811,7 @@ components:
         type: string
   schemas:
     Backup:
-      description: A Cloud Filestore backup.
+      description: A Filestore backup.
       properties:
         capacityGb:
           description: Output only. Capacity of the source file share when the backup was created.
@@ -848,13 +848,13 @@ components:
           readOnly: true
           type: boolean
         sourceFileShare:
-          description: Name of the file share in the source Cloud Filestore instance that the backup is created from.
+          description: Name of the file share in the source Filestore instance that the backup is created from.
           type: string
         sourceInstance:
-          description: The resource name of the source Cloud Filestore instance, in the format `projects/{project_id}/locations/{location_id}/instances/{instance_id}`, used to create this backup.
+          description: The resource name of the source Filestore instance, in the format `projects/{project_id}/locations/{location_id}/instances/{instance_id}`, used to create this backup.
           type: string
         sourceInstanceTier:
-          description: Output only. The service tier of the source Cloud Filestore instance that this backup is created from.
+          description: Output only. The service tier of the source Filestore instance that this backup is created from.
           enum:
             - TIER_UNSPECIFIED
             - STANDARD
@@ -933,7 +933,7 @@ components:
       description: File share configuration for the instance.
       properties:
         capacityGb:
-          description: File share capacity in gigabytes (GB). Cloud Filestore defines 1 GB as 1024^3 bytes.
+          description: File share capacity in gigabytes (GB). Filestore defines 1 GB as 1024^3 bytes.
           format: int64
           type: string
         name:
@@ -1137,7 +1137,7 @@ components:
           type: string
       type: object
     Instance:
-      description: A Cloud Filestore instance.
+      description: A Filestore instance.
       properties:
         capacityGb:
           description: The storage capacity of the instance in gigabytes (GB = 1024^3 bytes). This capacity can be increased up to `max_capacity_gb` GB in multipliers of `capacity_step_size_gb` GB.
@@ -1418,7 +1418,7 @@ components:
           description: The name of the Google Compute Engine [VPC network](https://cloud.google.com/vpc/docs/vpc) to which the instance is connected.
           type: string
         reservedIpRange:
-          description: Optional, reserved_ip_range can have one of the following two types of values. * CIDR range value when using DIRECT_PEERING connect mode. * [Allocated IP address range](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-internal-ip-address) when using PRIVATE_SERVICE_ACCESS connect mode. When the name of an allocated IP address range is specified, it must be one of the ranges associated with the private service access connection. When specified as a direct CIDR value, it must be a /29 CIDR block for Basic tier, a /24 CIDR block for High Scale tier, or a /26 CIDR block for Enterprise tier in one of the [internal IP address ranges](https://www.arin.net/reference/research/statistics/address_filters/) that identifies the range of IP addresses reserved for this instance. For example, 10.0.0.0/29, 192.168.0.0/24, or 192.168.0.0/26, respectively. The range you specify can't overlap with either existing subnets or assigned IP address ranges for other Cloud Filestore instances in the selected VPC network.
+          description: Optional, reserved_ip_range can have one of the following two types of values. * CIDR range value when using DIRECT_PEERING connect mode. * [Allocated IP address range](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-internal-ip-address) when using PRIVATE_SERVICE_ACCESS connect mode. When the name of an allocated IP address range is specified, it must be one of the ranges associated with the private service access connection. When specified as a direct CIDR value, it must be a /29 CIDR block for Basic tier, a /24 CIDR block for High Scale tier, or a /26 CIDR block for Enterprise tier in one of the [internal IP address ranges](https://www.arin.net/reference/research/statistics/address_filters/) that identifies the range of IP addresses reserved for this instance. For example, 10.0.0.0/29, 192.168.0.0/24, or 192.168.0.0/26, respectively. The range you specify can't overlap with either existing subnets or assigned IP address ranges for other Filestore instances in the selected VPC network.
           type: string
       type: object
     NfsExportOptions:
@@ -1513,7 +1513,7 @@ components:
       description: RestoreInstanceRequest restores an existing instance's file share from a snapshot or backup.
       properties:
         fileShare:
-          description: Required. Name of the file share in the Cloud Filestore instance that the snapshot is being restored to.
+          description: Required. Name of the file share in the Filestore instance that the snapshot is being restored to.
           type: string
         sourceBackup:
           description: The resource name of the backup, in the format `projects/{project_id}/locations/{location_id}/backups/{backup_id}`.
@@ -1553,10 +1553,10 @@ components:
           description: Time within the window to start the operations.
       type: object
     Share:
-      description: A Cloud Filestore share.
+      description: A Filestore share.
       properties:
         capacityGb:
-          description: File share capacity in gigabytes (GB). Cloud Filestore defines 1 GB as 1024^3 bytes. Must be greater than 0.
+          description: File share capacity in gigabytes (GB). Filestore defines 1 GB as 1024^3 bytes. Must be greater than 0.
           format: int64
           type: string
         createTime:
@@ -1595,7 +1595,7 @@ components:
           type: string
       type: object
     Snapshot:
-      description: A Cloud Filestore snapshot.
+      description: A Filestore snapshot.
       properties:
         createTime:
           description: Output only. The time when the snapshot was created.
@@ -1676,6 +1676,9 @@ components:
             - UPDATE_CHANNEL_UNSPECIFIED
             - EARLIER
             - LATER
+            - WEEK1
+            - WEEK2
+            - WEEK5
           type: string
         denyMaintenancePeriods:
           description: Deny Maintenance Period that is applied to resource to indicate when maintenance is forbidden. User can specify zero or more non-overlapping deny periods. Maximum number of deny_maintenance_periods expected is one.

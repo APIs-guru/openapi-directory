@@ -3742,6 +3742,15 @@ components:
           format: int32
           type: integer
       type: object
+    HotKeyDebuggingInfo:
+      description: Information useful for debugging a hot key detection.
+      properties:
+        detectedHotKeys:
+          additionalProperties:
+            $ref: "#/components/schemas/HotKeyInfo"
+          description: Debugging information for each detected hot key. Keyed by a hash of the key.
+          type: object
+      type: object
     HotKeyDetection:
       description: Proto describing a hot key detected on a given WorkItem.
       properties:
@@ -3755,6 +3764,20 @@ components:
         userStepName:
           description: User-provided name of the step that contains this hot key.
           type: string
+      type: object
+    HotKeyInfo:
+      description: Information about a hot key.
+      properties:
+        hotKeyAge:
+          description: The age of the hot key measured from when it was first detected.
+          format: google-duration
+          type: string
+        key:
+          description: 'A detected hot key that is causing limited parallelism. This field will be populated only if the following flag is set to true: "--enable_hot_key_logging".'
+          type: string
+        keyTruncated:
+          description: If true, then the above key is truncated and cannot be deserialized. This occurs if the key above is populated and the key size is >5MB.
+          type: boolean
       type: object
     InstructionInput:
       description: An input of an instruction, as a reference to an output of a producer instruction.
@@ -5308,6 +5331,9 @@ components:
             - EXECUTION_STATE_FAILED
             - EXECUTION_STATE_CANCELLED
           type: string
+        stragglerSummary:
+          $ref: "#/components/schemas/StragglerSummary"
+          description: Straggler summary for this stage.
       type: object
     StateFamilyConfig:
       description: State family configuration.
@@ -5351,6 +5377,40 @@ components:
             description: Properties of the object.
           description: Named properties associated with the step. Each kind of predefined step has its own required set of properties. Must be provided on Create. Only retrieved with JOB_VIEW_ALL.
           type: object
+      type: object
+    StragglerDebuggingInfo:
+      description: Information useful for debugging a straggler. Each type will provide specialized debugging information relevant for a particular cause. The StragglerDebuggingInfo will be 1:1 mapping to the StragglerCause enum.
+      properties:
+        hotKey:
+          $ref: "#/components/schemas/HotKeyDebuggingInfo"
+          description: Hot key debugging details.
+      type: object
+    StragglerInfo:
+      description: Information useful for straggler identification and debugging.
+      properties:
+        causes:
+          additionalProperties:
+            $ref: "#/components/schemas/StragglerDebuggingInfo"
+          description: The straggler causes, keyed by the string representation of the StragglerCause enum and contains specialized debugging information for each straggler cause.
+          type: object
+        startTime:
+          description: The time when the work item attempt became a straggler.
+          format: google-datetime
+          type: string
+      type: object
+    StragglerSummary:
+      description: Summarized straggler identification details.
+      properties:
+        stragglerCauseCount:
+          additionalProperties:
+            format: int64
+            type: string
+          description: Aggregated counts of straggler causes, keyed by the string representation of the StragglerCause enum.
+          type: object
+        totalStragglerCount:
+          description: The total count of stragglers.
+          format: int64
+          type: string
       type: object
     StreamLocation:
       description: Describes a stream of data, either as input to be processed or as output of a streaming Dataflow job.
@@ -5769,6 +5829,9 @@ components:
             - EXECUTION_STATE_FAILED
             - EXECUTION_STATE_CANCELLED
           type: string
+        stragglerInfo:
+          $ref: "#/components/schemas/StragglerInfo"
+          description: Information about straggler detections for this work item.
         taskId:
           description: Name of this work item.
           type: string

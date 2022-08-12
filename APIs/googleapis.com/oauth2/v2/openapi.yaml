@@ -244,7 +244,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/userinfo.email: View your email address
+            https://www.googleapis.com/auth/userinfo.email: See your primary Google Account email address
             https://www.googleapis.com/auth/userinfo.profile: See your personal info, including any personal info you've made publicly available
             openid: Associate you with your personal info on Google
       type: oauth2
@@ -254,7 +254,7 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/userinfo.email: View your email address
+            https://www.googleapis.com/auth/userinfo.email: See your primary Google Account email address
             https://www.googleapis.com/auth/userinfo.profile: See your personal info, including any personal info you've made publicly available
             openid: Associate you with your personal info on Google
           tokenUrl: https://accounts.google.com/o/oauth2/token
