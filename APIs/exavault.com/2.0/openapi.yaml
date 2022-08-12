@@ -7656,9 +7656,6 @@ components:
           type: array
         branding:
           description: Branding flag. Set to `true` if the account has branding functionality enabled.
-          enum:
-            - true
-            - false
           example: true
           type: boolean
         brandingSettings:
@@ -7679,9 +7676,6 @@ components:
           type: string
         customDomain:
           description: Custom domain flag. Set to `true` if account type allows custom domain functionality.
-          enum:
-            - true
-            - false
           example: true
           type: boolean
         customSignature:
@@ -8351,9 +8345,6 @@ components:
           type: array
         sendEmail:
           description: Whether or not an email will send when the notification is triggered.
-          enum:
-            - true
-            - false
           example: true
           type: boolean
         shareId:
@@ -8720,9 +8711,6 @@ components:
           type: string
         previewable:
           description: Can resource be previewed. Property equals `null` if resource `type` is dir.
-          enum:
-            - true
-            - false
           example: true
           type: boolean
         size:
@@ -9123,16 +9111,10 @@ components:
           type: string
         expired:
           description: True if the share has expired.
-          enum:
-            - true
-            - false
           example: false
           type: boolean
         fileDropCreateFolders:
           description: Flag to show if separate folders should be created for each file upload to receive folder.
-          enum:
-            - true
-            - false
           example: false
           type: boolean
         formId:
@@ -9140,16 +9122,10 @@ components:
           type: integer
         hasNotification:
           description: True if share has notification.
-          enum:
-            - true
-            - false
           example: false
           type: boolean
         hasPassword:
           description: True if the share has password.
-          enum:
-            - true
-            - false
           example: false
           type: boolean
         hash:
@@ -9158,9 +9134,6 @@ components:
           type: string
         inherited:
           description: True if share inherited from parent folder.
-          enum:
-            - true
-            - false
           example: false
           type: boolean
         messages:
@@ -9190,9 +9163,6 @@ components:
           type: array
         public:
           description: True if the share has a public url.
-          enum:
-            - true
-            - false
           example: true
           type: boolean
         recipients:
@@ -9331,16 +9301,10 @@ components:
           type: integer
         received:
           description: Set to true if recipient has accessed the share. Note this is set to true when the recipient clicks the link to access the share; not when they download a file.
-          enum:
-            - true
-            - false
           example: false
           type: boolean
         sent:
           description: Set to true if invite email was sent; false otherwise.
-          enum:
-            - true
-            - false
           example: true
           type: boolean
         shareId:
