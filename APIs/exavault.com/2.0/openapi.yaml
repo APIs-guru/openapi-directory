@@ -7712,9 +7712,8 @@ components:
           type: boolean
         status:
           description: Account status flag. A one (1) means the account is active; zero (0) means it is suspended.
-          enum:
-            - 1
-            - 0
+          format: int32
+          type: integer
           example: 1
         userCount:
           description: Current number of users on the account.
@@ -9188,9 +9187,6 @@ components:
           type: string
         status:
           description: Share activity status. Can be active (1) or deactivated (0).
-          enum:
-            - 0
-            - 1
           example: 1
           format: int32
           type: integer
@@ -9469,9 +9465,6 @@ components:
           type: string
         status:
           description: Indicates user activity status. `0` means the user is locked and cannot log in. `1` means the user is active and can log in.
-          enum:
-            - 0
-            - 1
           example: 1
           format: int32
           type: integer
