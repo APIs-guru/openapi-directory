@@ -296,6 +296,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: The field to order the results by.
+          in: query
+          name: orderBy
+          schema:
+            type: string
         - description: The maximum number of artifacts to return.
           in: query
           name: pageSize
@@ -1214,6 +1219,11 @@ components:
           items:
             type: string
           type: array
+        updateTime:
+          description: Output only. The time when the docker image was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
         uploadTime:
           description: Time the image was uploaded.
           format: google-datetime
