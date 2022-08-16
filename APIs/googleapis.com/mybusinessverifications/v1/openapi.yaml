@@ -397,7 +397,7 @@ components:
       properties:
         location:
           $ref: "#/components/schemas/Location"
-          description: Required. The target location.
+          description: "Required. The target location. Note: The location information should exactly match the target Location, otherwise the generated verification token won't be able to verify the target Location."
       type: object
     GenerateVerificationTokenResponse:
       description: Response message for Verifications.GenerateVerificationToken.

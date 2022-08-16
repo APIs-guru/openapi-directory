@@ -205,6 +205,82 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v2/{parent}/customConstraints":
+    get:
+      description: Retrieves all of the `CustomConstraints` that exist on a particular organization resource.
+      operationId: orgpolicy.organizations.customConstraints.list
+      parameters:
+        - description: "Required. The target Cloud resource that parents the set of custom constraints that will be returned from this call. Must be in one of the following forms: * `organizations/{organization_id}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Size of the pages to be returned. This is currently unsupported and will be ignored. The server may at any point start using this field to limit page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Page token used to retrieve the next page. This is currently unsupported and will be ignored. The server may at any point start using this field.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudOrgpolicyV2ListCustomConstraintsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a CustomConstraint. Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the organization does not exist. Returns a `google.rpc.Status` with `google.rpc.Code.ALREADY_EXISTS` if the constraint already exists on the given organization.
+      operationId: orgpolicy.organizations.customConstraints.create
+      parameters:
+        - description: "Required. Must be in the following form: * `organizations/{organization_id}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudOrgpolicyV2CustomConstraint"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudOrgpolicyV2CustomConstraint"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
   "/v2/{parent}/policies":
     get:
       description: Retrieves all of the `Policies` that exist on a particular resource.
@@ -407,6 +483,44 @@ components:
           description: Indicates whether subtrees of Cloud Resource Manager resource hierarchy can be used in `Policy.allowed_values` and `Policy.denied_values`. For example, `"under:folders/123"` would match any resource under the 'folders/123' folder.
           type: boolean
       type: object
+    GoogleCloudOrgpolicyV2CustomConstraint:
+      description: A custom constraint defined by customers which can *only* be applied to the given resource types and organization. By creating a custom constraint, customers can applied policies of this custom constraint. *Creating a custom constraint itself does NOT apply any policy enforcement*.
+      properties:
+        actionType:
+          description: Allow or deny type.
+          enum:
+            - ACTION_TYPE_UNSPECIFIED
+            - ALLOW
+            - DENY
+          type: string
+        condition:
+          description: "Org policy condition/expression. For example: `resource.instanceName.matches(\"[production|test]_.*_(\\d)+\")'` or, `resource.management.auto_upgrade == true`"
+          type: string
+        description:
+          description: Detailed information about this custom policy constraint.
+          type: string
+        displayName:
+          description: One line display name for the UI.
+          type: string
+        methodTypes:
+          description: All the operations being applied for this constraint.
+          items:
+            enum:
+              - METHOD_TYPE_UNSPECIFIED
+              - CREATE
+              - UPDATE
+              - DELETE
+            type: string
+          type: array
+        name:
+          description: 'Immutable. Name of the constraint. This is unique within the organization. Format of the name should be * `organizations/{organization_id}/customConstraints/{custom_constraint_id}` Example : "organizations/123/customConstraints/custom.createOnlyE2TypeVms"'
+          type: string
+        resourceTypes:
+          description: 'Immutable. The Resource Instance type on which this policy applies to. Format will be of the form : "/" Example: * `compute.googleapis.com/Instance`.'
+          items:
+            type: string
+          type: array
+      type: object
     GoogleCloudOrgpolicyV2ListConstraintsResponse:
       description: The response returned from the ListConstraints method.
       properties:
@@ -417,6 +531,18 @@ components:
           type: array
         nextPageToken:
           description: Page token used to retrieve the next page. This is currently not used.
+          type: string
+      type: object
+    GoogleCloudOrgpolicyV2ListCustomConstraintsResponse:
+      description: The response returned from the ListCustomConstraints method. It will be empty if no `CustomConstraints` are set on the organization resource.
+      properties:
+        customConstraints:
+          description: All `CustomConstraints` that exist on the organization resource. It will be empty if no `CustomConstraints` are set.
+          items:
+            $ref: "#/components/schemas/GoogleCloudOrgpolicyV2CustomConstraint"
+          type: array
+        nextPageToken:
+          description: Page token used to retrieve the next page. This is currently not used, but the server may at any point start supplying a valid token.
           type: string
       type: object
     GoogleCloudOrgpolicyV2ListPoliciesResponse:

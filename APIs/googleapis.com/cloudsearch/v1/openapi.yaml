@@ -2399,6 +2399,47 @@ components:
           readOnly: true
           type: array
       type: object
+    AclFixRequest:
+      description: The request set by clients to instruct Backend how the user intend to fix the ACL. Technically it's not a request to ACL Fixer, because Backend uses /DriveService.Share to modify Drive ACLs.
+      properties:
+        recipientEmails:
+          description: "For Spaces messages: This field is ignored. For DMs messages: The list of email addresses that should be added to the Drive item's ACL. In general, the list should not be empty when the boolean \"should_fix\" field is set; otherwise, the list should be empty. During transition - when clients do not specify this field but the \"should_fix\" is true, we follow the legacy behavior: share to all users in the DM regardless of emails. This behavior is being phased out."
+          items:
+            type: string
+          type: array
+        role:
+          enum:
+            - UNKNOWN
+            - READER
+            - COMMENTER
+            - WRITER
+          type: string
+        shouldFix:
+          description: Whether to attempt to fix the ACL by adding the room or DM members to the Drive file's ACL.
+          type: boolean
+      type: object
+    AclFixStatus:
+      description: The message reconstructed based on information in the response of /PermissionFixOptionsService.Query (or the Apiary API that wraps it). Indicates the ability of the requester to change the access to the Drive file for the room roster or the DM members. Used in GetMessagePreviewMetadataResponse only.
+      properties:
+        fixability:
+          enum:
+            - UNKNOWN
+            - ALREADY_ACCESSIBLE
+            - CAN_FIX
+            - CANNOT_FIX
+            - ACL_FIXER_ERROR
+          type: string
+        fixableEmailAddress:
+          description: List of recipient email addresses for which access can be granted. This field contains the same email addresses from the GetMessagePreviewMetadata request if all recipients can be successfully added to the ACL as determined by Drive ACL Fixer. For now, the field is non-empty if and only if the "fixability" value is "CAN_FIX".
+          items:
+            type: string
+          type: array
+        outOfDomainWarningEmailAddress:
+          description: List of recipient email addresses for which an out-of-domain-sharing warning must be shown, stating that these email addresses are not in the Google Apps organization that the requested item belong to. Empty if all recipients are in the same Google Apps organization.
+          items:
+            type: string
+          type: array
+      type: object
     AclInfo:
       description: "Next tag: 4"
       properties:
@@ -2429,17 +2470,47 @@ components:
         value:
           type: string
       type: object
+    AffectedMembership:
+      description: Earlier we used to populate just the affected_members list and inferred the new membership state (roles didn't exist back then) from the Type. go/dynamite-finra required backend to know the previous membership state to reconstruct membership history. The proper solution involved cleaning up up Type enum, but it was used in many, many places. This was added as a stop-gap solution to unblock FINRA without breaking everything. Later role update and target audience update started relying on this to communicate information to clients about what transition happened. So this is now required to be populated and should be in sync with affected_members for new messages.
+      properties:
+        affectedMember:
+          $ref: "#/components/schemas/MemberId"
+        priorMembershipRole:
+          enum:
+            - ROLE_UNKNOWN
+            - ROLE_NONE
+            - ROLE_INVITEE
+            - ROLE_MEMBER
+            - ROLE_OWNER
+          type: string
+        priorMembershipState:
+          enum:
+            - MEMBER_UNKNOWN
+            - MEMBER_INVITED
+            - MEMBER_JOINED
+            - MEMBER_NOT_A_MEMBER
+            - MEMBER_FAILED
+          type: string
+        targetMembershipRole:
+          enum:
+            - ROLE_UNKNOWN
+            - ROLE_NONE
+            - ROLE_INVITEE
+            - ROLE_MEMBER
+            - ROLE_OWNER
+          type: string
+      type: object
     AllAuthenticatedUsersProto:
       description: Represents a principal who has authenticated as any kind of user which the application understands. This is typically used for "wiki-like" security, where anyone is allowed access so long as they can be held accountable for that access. Since the purpose is knowing whom to blame, it is up to the application to decide what kinds of users it knows how to blame. For example, an application might choose to include GAIA users in "all authenticated users", but not include MDB users. Nothing here.
       properties: {}
       type: object
-    AppsDynamiteAnnotation:
+    Annotation:
       description: "NOTE WHEN ADDING NEW PROTO FIELDS: Be sure to add datapol annotations to new fields with potential PII, so they get scrubbed when logging protos for errors. NEXT TAG: 29"
       properties:
         babelPlaceholderMetadata:
-          $ref: "#/components/schemas/AppsDynamiteBabelPlaceholderMetadata"
+          $ref: "#/components/schemas/BabelPlaceholderMetadata"
         cardCapabilityMetadata:
-          $ref: "#/components/schemas/AppsDynamiteCardCapabilityMetadata"
+          $ref: "#/components/schemas/CardCapabilityMetadata"
           description: LINT.ThenChange(//depot/google3/java/com/google/apps/dynamite/v1/backend/action/common/SystemMessageHelper.java)
         chipRenderType:
           description: Whether the annotation should be rendered as a chip. If this is missing or unspecified, fallback to should_not_render on the metadata.
@@ -2450,25 +2521,25 @@ components:
             - DO_NOT_RENDER
           type: string
         consentedAppUnfurlMetadata:
-          $ref: "#/components/schemas/AppsDynamiteConsentedAppUnfurlMetadata"
+          $ref: "#/components/schemas/ConsentedAppUnfurlMetadata"
         customEmojiMetadata:
-          $ref: "#/components/schemas/AppsDynamiteCustomEmojiMetadata"
+          $ref: "#/components/schemas/CustomEmojiMetadata"
         dataLossPreventionMetadata:
-          $ref: "#/components/schemas/AppsDynamiteDataLossPreventionMetadata"
+          $ref: "#/components/schemas/DataLossPreventionMetadata"
         driveMetadata:
-          $ref: "#/components/schemas/AppsDynamiteDriveMetadata"
+          $ref: "#/components/schemas/DriveMetadata"
           description: Chip annotations
         formatMetadata:
-          $ref: "#/components/schemas/AppsDynamiteFormatMetadata"
+          $ref: "#/components/schemas/FormatMetadata"
         groupRetentionSettingsUpdated:
-          $ref: "#/components/schemas/AppsDynamiteGroupRetentionSettingsUpdatedMetaData"
+          $ref: "#/components/schemas/GroupRetentionSettingsUpdatedMetaData"
         gsuiteIntegrationMetadata:
-          $ref: "#/components/schemas/AppsDynamiteGsuiteIntegrationMetadata"
+          $ref: "#/components/schemas/GsuiteIntegrationMetadata"
           description: Metadata for 1P integrations like tasks, calendar. These are supported only through integration server as 1P integrations use the integration API (which in turn uses backend API with special permissions) to post messages. Clients should never set this. LINT.IfChange
         incomingWebhookChangedMetadata:
-          $ref: "#/components/schemas/AppsDynamiteIncomingWebhookChangedMetadata"
+          $ref: "#/components/schemas/IncomingWebhookChangedMetadata"
         integrationConfigUpdated:
-          $ref: "#/components/schemas/AppsDynamiteIntegrationConfigUpdatedMetadata"
+          $ref: "#/components/schemas/IntegrationConfigUpdatedMetadata"
           description: LINT.ThenChange(//depot/google3/java/com/google/apps/dynamite/v1/backend/action/common/SystemMessageHelper.java)
         length:
           description: Length of the text_body substring beginning from start_index the Annotation corresponds to.
@@ -2478,20 +2549,20 @@ components:
           description: A unique client-assigned ID for this annotation. This is helpful in matching the back-filled annotations to the original annotations on client side, without having to re-parse the message.
           type: string
         membershipChanged:
-          $ref: "#/components/schemas/AppsDynamiteMembershipChangedMetadata"
+          $ref: "#/components/schemas/MembershipChangedMetadata"
           description: Metadata for system messages. Clients should never set this. LINT.IfChange
         readReceiptsSettingsMetadata:
-          $ref: "#/components/schemas/AppsDynamiteReadReceiptsSettingsUpdatedMetadata"
+          $ref: "#/components/schemas/ReadReceiptsSettingsUpdatedMetadata"
         requiredMessageFeaturesMetadata:
-          $ref: "#/components/schemas/AppsDynamiteRequiredMessageFeaturesMetadata"
+          $ref: "#/components/schemas/RequiredMessageFeaturesMetadata"
           description: Metadata that defines all of the required features that must be rendered in the message. Clients can use this to see whether they support the entire message, or show a fallback chip otherwise. See go/message-quoting-client-to-server for details. LINT.ThenChange( //depot/google3/java/com/google/apps/dynamite/v1/allshared/parser/AnnotationSanitizer.java, //depot/google3/java/com/google/apps/dynamite/v1/backend/action/common/SystemMessageHelper.java, //depot/google3/java/com/google/caribou/eli/mediation/chat/AnnotationTranslator.java )
         roomUpdated:
-          $ref: "#/components/schemas/AppsDynamiteRoomUpdatedMetadata"
+          $ref: "#/components/schemas/RoomUpdatedMetadata"
         serverInvalidated:
           description: "Whether or not the annotation is invalidated by the server. Example of situations for invalidation include: when the URL is malformed, or when Drive item ID is rejected by Drive Service."
           type: boolean
         slashCommandMetadata:
-          $ref: "#/components/schemas/AppsDynamiteSlashCommandMetadata"
+          $ref: "#/components/schemas/SlashCommandMetadata"
         startIndex:
           description: Start index (0-indexed) of the Message text the Annotation corresponds to, inclusive.
           format: int32
@@ -2533,18 +2604,18 @@ components:
           description: A unique server-assigned ID for this annotation. This is helpful in matching annotation objects when fetched from service.
           type: string
         uploadMetadata:
-          $ref: "#/components/schemas/AppsDynamiteUploadMetadata"
+          $ref: "#/components/schemas/UploadMetadata"
         urlMetadata:
-          $ref: "#/components/schemas/AppsDynamiteUrlMetadata"
+          $ref: "#/components/schemas/UrlMetadata"
         userMentionMetadata:
-          $ref: "#/components/schemas/AppsDynamiteUserMentionMetadata"
+          $ref: "#/components/schemas/UserMentionMetadata"
           description: Metadata that clients can set for annotations. LINT.IfChange In-text annotations
         videoCallMetadata:
-          $ref: "#/components/schemas/AppsDynamiteVideoCallMetadata"
+          $ref: "#/components/schemas/VideoCallMetadata"
         youtubeMetadata:
-          $ref: "#/components/schemas/AppsDynamiteYoutubeMetadata"
+          $ref: "#/components/schemas/YoutubeMetadata"
       type: object
-    AppsDynamiteAppId:
+    AppId:
       description: Identifier of an App.
       properties:
         appType:
@@ -2573,1174 +2644,6 @@ components:
         id:
           description: Numeric identifier of the App. Set to Project number for 1/3P Apps. For Webhook, this is WebhookId. Determined & set by the 1P API from App credentials on the side channel.
           format: int64
-          type: string
-      type: object
-    AppsDynamiteAttachment:
-      description: Attachments that follow the message text.
-      properties:
-        addOnData:
-          $ref: "#/components/schemas/GoogleChatV1ContextualAddOnMarkup"
-          description: Revised version of Gmail AddOn attachment approved by API design review.
-        appId:
-          $ref: "#/components/schemas/AppsDynamiteUserId"
-          description: The userId for the bot/app that created this data, to be used for attribution of attachments when the attachment was not created by the message sender.
-        attachmentId:
-          description: To identify an attachment within repeated in a message
-          type: string
-        cardAddOnData:
-          $ref: "#/components/schemas/AppsDynamiteSharedCard"
-          description: Card AddOn attachment with the possibility for specifying editable widgets.
-        deprecatedAddOnData:
-          $ref: "#/components/schemas/ContextualAddOnMarkup"
-          description: Deprecated version of Gmail AddOn attachment.
-        slackData:
-          $ref: "#/components/schemas/AppsDynamiteV1ApiCompatV1Attachment"
-          description: Slack attachment.
-        slackDataImageUrlHeight:
-          description: The height of image url as fetched by fife. This field is asynchronously filled.
-          format: int32
-          type: integer
-      type: object
-    AppsDynamiteBabelMessageProps:
-      description: Container for Babel (Hangouts Classic) only message properties. The properties here will not be consumed by Dynamite clients. They are relevant only for Hangouts Classic.
-      properties:
-        clientGeneratedId:
-          description: Babel clients locally generate this ID to dedupe against the async fanout.
-          format: int64
-          type: string
-        contentExtension:
-          $ref: "#/components/schemas/ChatContentExtension"
-          description: Stores additional Babel-specific properties (such as event metadata).
-        deliveryMedium:
-          $ref: "#/components/schemas/DeliveryMedium"
-          description: Stores the delivery source of messages (such as phone number for SMS).
-        eventId:
-          description: Primary identifier used by Hangouts Classic for its events (messages).
-          type: string
-        messageContent:
-          $ref: "#/components/schemas/MessageContent"
-          description: Stores message segments (text content) and attachments (media URLs).
-        wasUpdatedByBackfill:
-          description: Whether or not these message properties were backfilled by go/dinnertrain.
-          type: boolean
-      type: object
-    AppsDynamiteBabelPlaceholderMetadata:
-      description: Annotation metadata for Babel-only items that signals which type of placeholder message should be displayed in Babel clients.
-      properties:
-        deleteMetadata:
-          $ref: "#/components/schemas/AppsDynamiteBabelPlaceholderMetadataDeleteMetadata"
-        editMetadata:
-          $ref: "#/components/schemas/AppsDynamiteBabelPlaceholderMetadataEditMetadata"
-        hangoutVideoMetadata:
-          $ref: "#/components/schemas/AppsDynamiteBabelPlaceholderMetadataHangoutVideoEventMetadata"
-      type: object
-    AppsDynamiteBabelPlaceholderMetadataDeleteMetadata:
-      description: A message delete in Dynamite inserts a Babel-only item containing this field. This is only inserted for messages before the source-of-truth flip. See go/hsc-message-deletions for more details.
-      properties: {}
-      type: object
-    AppsDynamiteBabelPlaceholderMetadataEditMetadata:
-      description: A message edit in Dynamite inserts a Babel-only item containing this field.
-      properties: {}
-      type: object
-    AppsDynamiteBabelPlaceholderMetadataHangoutVideoEventMetadata:
-      description: A message representing the Hangout video start/end events in Babel
-      properties:
-        hangoutVideoType:
-          enum:
-            - UNKNOWN_HANGOUT_VIDEO_EVENT_TYPE
-            - VIDEO_START
-            - VIDEO_END
-          type: string
-      type: object
-    AppsDynamiteBackendDlpScanSummary:
-      description: A summary of a DLP scan event. This is a summary and should contain the minimum amount of data required to identify and process DLP scans. It is written to Starcast and encoded & returned to the client on attachment upload.
-      properties:
-        scanId:
-          description: The scan ID of the corresponding {@link DlpViolationScanRecord} in the {@link EphemeralDlpScans} Spanner table. This can be used to fetch additional details about the scan, e.g. for audit logging.
-          type: string
-        scanNotApplicableForContext:
-          description: Indicates that was no attempt to scan a message or attachment because it was not applicable in the given context (e.g. atomic mutuate). If this is true, scan_outcome should not be set. This flag is used to identify messages that DLP did not attempt to scan for monitoring scan coverage. Contents that DLP attempted to scan but skipped can be identified by DlpScanOutcome.SCAN_SKIPPED_* reasons.
-          type: boolean
-        scanOutcome:
-          description: The outcome of a DLP Scan. If this is set, scan_not_applicable_for_context should not be true.
-          enum:
-            - SCAN_UNKNOWN_OUTCOME
-            - SCAN_SUCCEEDED_NO_VIOLATION
-            - SCAN_SUCCEEDED_BLOCK
-            - SCAN_SUCCEEDED_WARN
-            - SCAN_SUCCEEDED_AUDIT_ONLY
-            - SCAN_FAILURE_EXCEPTION
-            - SCAN_FAILURE_TIMEOUT
-            - SCAN_FAILURE_ALL_RULES_FAILED
-            - SCAN_FAILURE_ILLEGAL_STATE_FOR_ATTACHMENTS
-            - SCAN_SKIPPED_EXPERIMENT_DISABLED
-            - SCAN_SKIPPED_CONSUMER
-            - SCAN_SKIPPED_NON_HUMAN_USER
-            - SCAN_SKIPPED_NO_MESSAGE
-            - SCAN_SKIPPED_USER_ACKNOWLEDGED_WARNING
-            - SCAN_SKIPPED_MESSAGE_FROM_UNSUPPORTED_ORIGIN
-            - SCAN_RULE_EVALUATION_SKIPPED_NO_RULES_FOUND
-            - SCAN_RULE_EVALUATION_SKIPPED_NO_APPLICABLE_RULES_FOR_ACTION_PARAMS
-            - SCAN_RULE_EVALUATION_SKIPPED_NO_APPLICABLE_RULES_FOR_TRIGGER
-            - SCAN_RULE_EVALUATION_SKIPPED_CHANGELING_PERMANENT_ERROR
-            - SCAN_RULE_EVALUATION_SKIPPED_CHANGELING_EMPTY_RESPONSE
-            - SCAN_SUCCEEDED_WITH_FAILURES_NO_VIOLATION
-            - SCAN_SUCCEEDED_WITH_FAILURES_BLOCK
-            - SCAN_SUCCEEDED_WITH_FAILURES_WARN
-            - SCAN_SUCCEEDED_WITH_FAILURES_AUDIT_ONLY
-          type: string
-      type: object
-    AppsDynamiteBackendLabelsCommunalLabelTag:
-      description: An individual instance (or "tag") of a label configured as a communal type that's associated with a message.
-      properties:
-        creatorUserId:
-          description: Gaia ID of the user who added the tag, if any. Not present for any tags automatically created by server-side processing.
-          format: int64
-          type: string
-        labelId:
-          description: 'A string ID representing the label. Possible ID values are documented at go/chat-labels-howto:ids. Example: "^*t_p" for "Pinned".'
-          type: string
-      type: object
-    AppsDynamiteBackendLabelsPersonalLabelTag:
-      description: An individual instance (or "tag") of a label configured as a personal type that's associated with a message.
-      properties:
-        labelId:
-          description: 'A string ID representing the label. Possible ID values are documented at go/chat-labels-howto:ids. Examples: "^t" for "Starred", "^nu" for "Nudged".'
-          type: string
-      type: object
-    AppsDynamiteBotResponse:
-      description: Information about a bot response, branched from shared/bot_response.proto without frontend User proto as we never store it.
-      properties:
-        botId:
-          $ref: "#/components/schemas/AppsDynamiteUserId"
-        requiredAction:
-          enum:
-            - UNKNOWN_SETUP_TYPE
-            - CONFIGURATION
-            - AUTHENTICATION
-          type: string
-        responseType:
-          enum:
-            - UNKNOWN_RESPONSE_TYPE
-            - ERROR
-            - SETUP_REQUIRED
-            - DISABLED_BY_ADMIN
-            - DISABLED_BY_DEVELOPER
-            - PRIVATE
-          type: string
-        setupUrl:
-          description: URL for setting up bot.
-          type: string
-      type: object
-    AppsDynamiteCardCapabilityMetadata:
-      properties:
-        requiredCapabilities:
-          description: "NEXT TAG : 2"
-          items:
-            enum:
-              - UNKNOWN
-              - SUPPORTS_BASE_CARDS
-            type: string
-          type: array
-      type: object
-    AppsDynamiteConsentedAppUnfurlMetadata:
-      description: Annotation metadata app unfurl consent.
-      properties:
-        clientSpecifiedAppId:
-          $ref: "#/components/schemas/AppsDynamiteUserId"
-          description: Client specified AppId, which will not be sanitized and is untrusted.
-      type: object
-    AppsDynamiteContentReport:
-      properties:
-        reportCreateTimestamp:
-          description: The time at which the report is generated. Always populated when it is in a response.
-          format: google-datetime
-          type: string
-        reportJustification:
-          $ref: "#/components/schemas/AppsDynamiteContentReportJustification"
-          description: Additional user-provided justification on the report. Optional.
-        reportType:
-          $ref: "#/components/schemas/AppsDynamiteSharedContentReportType"
-          description: Type of the report. Always populated when it is in a response.
-        reporterUserId:
-          $ref: "#/components/schemas/AppsDynamiteUserId"
-          description: User ID of the reporter. Always populated when it is in a response.
-        revisionCreateTimestamp:
-          description: Create timestamp of the revisions of the message when it's reported. Always populated when it is in a response.
-          format: google-datetime
-          type: string
-      type: object
-    AppsDynamiteContentReportJustification:
-      properties:
-        userJustification:
-          description: Optional. User-generated free-text justification for the content report.
-          type: string
-      type: object
-    AppsDynamiteCustomEmojiMetadata:
-      properties:
-        customEmoji:
-          $ref: "#/components/schemas/AppsDynamiteSharedCustomEmoji"
-      type: object
-    AppsDynamiteCustomerId:
-      description: Represents a GSuite customer ID. Obfuscated with CustomerIdObfuscator.
-      properties:
-        customerId:
-          type: string
-      type: object
-    AppsDynamiteDataLossPreventionMetadata:
-      description: Annotation metadata for Data Loss Prevention that pertains to DLP violation on message send or edit events. It is used for client -> BE communication and other downstream process in BE (e.g. storage and audit logging), and it should never be returned to the client.
-      properties:
-        dlpScanSummary:
-          $ref: "#/components/schemas/AppsDynamiteBackendDlpScanSummary"
-          description: The DLP scan summary that should only be set after the message is scanned in the Chat backend.
-        warnAcknowledged:
-          description: Flag set by client on message resend to bypass WARN violation.
-          type: boolean
-      type: object
-    AppsDynamiteDmId:
-      properties:
-        dmId:
-          description: Unique server assigned Id, per Direct Message Space.
-          type: string
-      type: object
-    AppsDynamiteDriveMetadata:
-      description: Annotation metadata for Drive artifacts.
-      properties:
-        aclFixRequest:
-          $ref: "#/components/schemas/AppsDynamiteDriveMetadataAclFixRequest"
-        aclFixStatus:
-          $ref: "#/components/schemas/AppsDynamiteDriveMetadataAclFixStatus"
-        canEdit:
-          description: Can the current user edit this resource
-          type: boolean
-        canShare:
-          description: Can the current user share this resource
-          type: boolean
-        canView:
-          description: Can the current user view this resource
-          type: boolean
-        driveAction:
-          description: DriveAction for organizing this file in Drive. If the user does not have access to the Drive file, the value will be DriveAction.DRIVE_ACTION_UNSPECIFIED. This field is only set when part of a FileResult in a ListFilesResponse.
-          enum:
-            - DRIVE_ACTION_UNSPECIFIED
-            - ADD_TO_DRIVE
-            - ORGANIZE
-            - ADD_SHORTCUT
-            - ADD_ANOTHER_SHORTCUT
-          type: string
-        driveState:
-          enum:
-            - DRIVE_STATE_UNSPECIFIED
-            - IN_MY_DRIVE
-            - IN_TEAM_DRIVE
-            - SHARED_IN_DRIVE
-            - NOT_IN_DRIVE
-          type: string
-        embedUrl:
-          $ref: "#/components/schemas/TrustedResourceUrlProto"
-          description: Output only. Trusted Resource URL for drive file embedding.
-          readOnly: true
-        encryptedDocId:
-          description: Indicates whether the Drive link contains an encrypted doc ID. If true, Dynamite should not attempt to query the doc ID in Drive Service. See go/docid-encryption for details.
-          type: boolean
-        encryptedResourceKey:
-          description: "This is deprecated and unneeded. TODO (b/182479059): Remove this."
-          type: string
-        externalMimetype:
-          description: "External mimetype of the Drive Resource (Useful for creating Drive URL) See: http://b/35219462"
-          type: string
-        id:
-          description: Drive resource ID of the artifact.
-          type: string
-        isDownloadRestricted:
-          description: Deprecated. Whether the setting to restrict downloads is enabled for this file. This was previously used to determine whether to hide the download and print buttons in the UI, but is no longer used by clients, because Projector now independently queries Drive to ensure that we have the most up-to-date value.
-          type: boolean
-        isOwner:
-          description: If the current user is the Drive file's owner. The field is currently only set for Annotations for the ListFiles action (as opposed to fetching Topics/Messages with Drive annotations).
-          type: boolean
-        legacyUploadMetadata:
-          $ref: "#/components/schemas/AppsDynamiteDriveMetadataLegacyUploadMetadata"
-          description: Only present if this DriveMetadata is converted from an UploadMetadata.
-        mimetype:
-          description: Mimetype of the Drive Resource
-          type: string
-        organizationDisplayName:
-          description: The display name of the organization owning the Drive item.
-          type: string
-        shortcutAuthorizedItemId:
-          $ref: "#/components/schemas/AuthorizedItemId"
-          description: Shortcut ID of this drive file in the shared drive, which is associated with a named room this file was shared in. Shortcuts will not be created for DMs or unnamed rooms. This is populated after the DriveMetadata is migrated to shared drive. go/chat-shared-drive-uploads.
-        shouldNotRender:
-          description: If this field is set to true, server should still contact external backends to get metadata for search but clients should not render this chip.
-          type: boolean
-        thumbnailHeight:
-          description: Thumbnail image of the Drive Resource
-          format: int32
-          type: integer
-        thumbnailUrl:
-          description: Thumbnail image of the Drive Resource
-          type: string
-        thumbnailWidth:
-          description: Thumbnail image of the Drive Resource
-          format: int32
-          type: integer
-        title:
-          description: Title of the Drive Resource
-          type: string
-        urlFragment:
-          description: 'Url string fragment that generally indicates the specific location in the linked file. Example: #header=h.123abc456. If the fragment is not present this will not be present and therefore default to an empty string. The "#" will not be included.'
-          type: string
-        wrappedResourceKey:
-          $ref: "#/components/schemas/WrappedResourceKey"
-          description: This is considered SPII and should not be logged.
-      type: object
-    AppsDynamiteDriveMetadataAclFixRequest:
-      description: The request set by clients to instruct Backend how the user intend to fix the ACL. Technically it's not a request to ACL Fixer, because Backend uses /DriveService.Share to modify Drive ACLs.
-      properties:
-        recipientEmails:
-          description: "For Spaces messages: This field is ignored. For DMs messages: The list of email addresses that should be added to the Drive item's ACL. In general, the list should not be empty when the boolean \"should_fix\" field is set; otherwise, the list should be empty. During transition - when clients do not specify this field but the \"should_fix\" is true, we follow the legacy behavior: share to all users in the DM regardless of emails. This behavior is being phased out."
-          items:
-            type: string
-          type: array
-        role:
-          enum:
-            - UNKNOWN
-            - READER
-            - COMMENTER
-            - WRITER
-          type: string
-        shouldFix:
-          description: Whether to attempt to fix the ACL by adding the room or DM members to the Drive file's ACL.
-          type: boolean
-      type: object
-    AppsDynamiteDriveMetadataAclFixStatus:
-      description: The message reconstructed based on information in the response of /PermissionFixOptionsService.Query (or the Apiary API that wraps it). Indicates the ability of the requester to change the access to the Drive file for the room roster or the DM members. Used in GetMessagePreviewMetadataResponse only.
-      properties:
-        fixability:
-          enum:
-            - UNKNOWN
-            - ALREADY_ACCESSIBLE
-            - CAN_FIX
-            - CANNOT_FIX
-            - ACL_FIXER_ERROR
-          type: string
-        fixableEmailAddress:
-          description: List of recipient email addresses for which access can be granted. This field contains the same email addresses from the GetMessagePreviewMetadata request if all recipients can be successfully added to the ACL as determined by Drive ACL Fixer. For now, the field is non-empty if and only if the "fixability" value is "CAN_FIX".
-          items:
-            type: string
-          type: array
-        outOfDomainWarningEmailAddress:
-          description: List of recipient email addresses for which an out-of-domain-sharing warning must be shown, stating that these email addresses are not in the Google Apps organization that the requested item belong to. Empty if all recipients are in the same Google Apps organization.
-          items:
-            type: string
-          type: array
-      type: object
-    AppsDynamiteDriveMetadataLegacyUploadMetadata:
-      description: The original UploadMetadata that this DriveMetadata was converted from.
-      properties:
-        legacyUniqueId:
-          description: A unique ID generated from legacy UploadMetadata. This is used for interopping URLs after uploading blob to shared drive. Links in Classic might break without this. go/drive-file-attachment-interop-from-dynamite.
-          type: string
-        uploadMetadata:
-          $ref: "#/components/schemas/AppsDynamiteUploadMetadata"
-          description: The blob in this UploadMetadata has been uploaded to shared drive. This UploadMetadata is no longer attached to a message. go/shared-drive-data-migration.
-      type: object
-    AppsDynamiteFormatMetadata:
-      description: Annotation metadata for markup formatting
-      properties:
-        fontColor:
-          description: "Font color is set if and only if format_type is FONT_COLOR. The components are stored as (alpha << 24) | (red << 16) | (green << 8) | blue. Clients should always set the alpha component to 0xFF. NEXT TAG: 3"
-          format: uint32
-          type: integer
-        formatType:
-          description: LINT.ThenChange(//depot/google3/apps/dynamite/v1/web/datakeys/annotated_span.proto)
-          enum:
-            - TYPE_UNSPECIFIED
-            - BOLD
-            - ITALIC
-            - STRIKE
-            - SOURCE_CODE
-            - MONOSPACE
-            - HIDDEN
-            - MONOSPACE_BLOCK
-            - UNDERLINE
-            - FONT_COLOR
-            - BULLETED_LIST
-            - BULLETED_LIST_ITEM
-            - CLIENT_HIDDEN
-          type: string
-      type: object
-    AppsDynamiteFrontendBotInfo:
-      description: Bot-specific profile information.
-      properties:
-        appId:
-          $ref: "#/components/schemas/AppsDynamiteAppId"
-          description: Identifier of the application associated with the bot.
-        botAvatarUrl:
-          description: URL for the avatar picture of the User in dynamite. This field should be populated if the request is FetchBotCategories/ListBotCatalogEntries
-          type: string
-        botName:
-          description: Non-unique, user-defined display name of the Bot. This field should be populated if the request is FetchBotCategories/ListBotCatalogEntries.
-          type: string
-        description:
-          description: Short description for the bot.
-          type: string
-        developerName:
-          description: Name of bot developer.
-          type: string
-        marketPlaceBannerUrl:
-          description: URL for the banner image in GSuite Market Place. The banner will be 220x140.
-          type: string
-        status:
-          description: Indicates whether bot is enabled/disabled.
-          enum:
-            - UNKNOWN_STATUS
-            - ENABLED
-            - DISABLED_BY_DEVELOPER
-          type: string
-        supportUrls:
-          $ref: "#/components/schemas/AppsDynamiteFrontendBotInfoSupportUrls"
-          description: Urls with additional information related to the bot. This field should always be set even if all the fields within it are empty, so that it is convenient for clients to work with this field in javascript.
-        supportedUses:
-          description: The supported uses are limited according to the user that made the request. If the user does not have permission to use the bot, the list will be empty. This could occur for non whitelisted bots in the catalog.
-          items:
-            enum:
-              - UNKNOWN
-              - CAN_ADD_TO_DM
-              - CAN_ADD_TO_ROOM
-              - CAN_ADD_TO_HUMAN_DM
-            type: string
-          type: array
-        whitelistStatus:
-          enum:
-            - UNSPECIFIED_STATUS
-            - ALLOWED
-            - ALL_BOTS_DISABLED_BY_ADMIN
-            - BOT_NOT_WHITELISTED_BY_ADMIN
-          type: string
-      type: object
-    AppsDynamiteFrontendBotInfoSupportUrls:
-      description: Urls with additional bot related information.
-      properties:
-        adminConfigUrl:
-          description: Link to the admin configuration webpage for the bot. Configured by Pantheon, may be empty.
-          type: string
-        deletionPolicyUrl:
-          description: Link to the deletion policy webpage for the bot. Configured by Pantheon, may be empty.
-          type: string
-        privacyPolicyUrl:
-          description: Link to the privacy policy webpage for the bot. May be empty.
-          type: string
-        setupUrl:
-          description: Link to the setup webpage for the bot. Configured by Pantheon, may be empty.
-          type: string
-        supportUrl:
-          description: Link to the support webpage for the developer of the bot. May be empty.
-          type: string
-        tosUrl:
-          description: Link to the terms of service webpage for the bot. May be empty.
-          type: string
-      type: object
-    AppsDynamiteFrontendMember:
-      properties:
-        roster:
-          $ref: "#/components/schemas/AppsDynamiteFrontendRoster"
-        user:
-          $ref: "#/components/schemas/AppsDynamiteFrontendUser"
-      type: object
-    AppsDynamiteFrontendRoster:
-      description: Roster profile information.
-      properties:
-        avatarUrl:
-          type: string
-        id:
-          $ref: "#/components/schemas/AppsDynamiteRosterId"
-        membershipCount:
-          format: int32
-          type: integer
-        name:
-          type: string
-        rosterGaiaKey:
-          description: Roster gaia key, usually an email address. Set in looking up rosters response.
-          type: string
-        rosterState:
-          description: Roster deletion state - considered active unless set to deleted
-          enum:
-            - ROSTER_STATE_UNKNOWN
-            - ROSTER_ACTIVE
-            - ROSTER_DELETED
-          type: string
-      type: object
-    AppsDynamiteFrontendUser:
-      description: User profile information. This user is not necessarily member of a space.
-      properties:
-        avatarUrl:
-          description: URL for the avatar picture of the User in dynamite
-          type: string
-        blockRelationship:
-          $ref: "#/components/schemas/AppsDynamiteSharedUserBlockRelationship"
-          description: Information about whether the user is blocked by requester and/or has blocked requester.
-        botInfo:
-          $ref: "#/components/schemas/AppsDynamiteFrontendBotInfo"
-          description: Bot-specific profile information. Leave it empty for human users.
-        deleted:
-          description: Deleted flag, if true, means User has been soft-deleted/purged Deprecated. Use user_account_state field instead.
-          type: boolean
-        email:
-          description: Email ID of the user
-          type: string
-        firstName:
-          description: First or given name of the user
-          type: string
-        gender:
-          description: Gender of the user
-          type: string
-        id:
-          $ref: "#/components/schemas/AppsDynamiteUserId"
-          description: UserId
-        isAnonymous:
-          description: Set to true if none of the depending services (Gaia, PeopleApi) returns any info for this user.
-          type: boolean
-        lastName:
-          description: Last or family name of the user
-          type: string
-        name:
-          description: Non-unique, user-defined display name of the User
-          type: string
-        organizationInfo:
-          $ref: "#/components/schemas/AppsDynamiteSharedOrganizationInfo"
-          description: Information about whether the user is a consumer user, or the GSuite customer that they belong to.
-        phoneNumber:
-          description: Phone number(s) of the user
-          items:
-            $ref: "#/components/schemas/AppsDynamiteSharedPhoneNumber"
-          type: array
-        userAccountState:
-          description: State of user's Gaia Account
-          enum:
-            - UNKNOWN_USER_ACCOUNT_STATE
-            - ENABLED
-            - DISABLED
-            - DELETED
-            - TEMPORARY_UNAVAILABLE
-          type: string
-        userProfileVisibility:
-          description: Visibility of user's Profile
-          enum:
-            - UNKNOWN_USER_PROFILE_VISIBILITY
-            - FULL_PROFILE
-            - PRIMARY_MAIL
-            - INVITEE_EMAIL
-            - DELETED_USER
-            - UNKNOWN_USER
-            - FAILURE
-          type: string
-      type: object
-    AppsDynamiteGroupId:
-      description: Id representing a group that could be a space, a chat, or a direct message space. Which ID is set here will determine which group
-      properties:
-        dmId:
-          $ref: "#/components/schemas/AppsDynamiteDmId"
-          description: Unique, immutable ID of the Direct Message Space
-        spaceId:
-          $ref: "#/components/schemas/AppsDynamiteSpaceId"
-          description: Unique, immutable ID of the Space
-      type: object
-    AppsDynamiteGroupRetentionSettingsUpdatedMetaData:
-      properties:
-        initiator:
-          $ref: "#/components/schemas/AppsDynamiteUserId"
-          description: The user who triggered the retention settings update
-        retentionSettings:
-          $ref: "#/components/schemas/AppsDynamiteSharedRetentionSettings"
-          description: The updated space retention settings
-      type: object
-    AppsDynamiteGsuiteIntegrationMetadata:
-      description: Annotation metadata for an GsuiteIntegration artifact.
-      properties:
-        activityFeedData:
-          $ref: "#/components/schemas/AppsDynamiteSharedActivityFeedAnnotationData"
-        assistantData:
-          $ref: "#/components/schemas/AppsDynamiteSharedAssistantAnnotationData"
-        calendarEventData:
-          $ref: "#/components/schemas/AppsDynamiteSharedCalendarEventAnnotationData"
-        callData:
-          $ref: "#/components/schemas/AppsDynamiteSharedCallAnnotationData"
-          description: Data used to render call artifacts.
-        clientType:
-          enum:
-            - UNKNOWN_CLIENT_TYPE
-            - MEET
-            - TASKS
-            - CALENDAR_EVENT
-            - ASSISTANT
-            - ACTIVITY_FEED_SERVICE
-          type: string
-        indexableTexts:
-          description: A list of all strings that are to be indexed for this 1P chip. Each string in this list would be the contents of a single string field in the 1P chip. Eg. For Tasks[title = “hello world”, description = “good bye”]. If we want to index only the title, this would be set to [“hello world”]. If both title and description, then this would be [“hello world”, “good bye”]. Please make sure that the contents of this field is a subset of strings that are rendered as part of the 1P Chip.
-          items:
-            type: string
-          type: array
-        tasksData:
-          $ref: "#/components/schemas/AppsDynamiteSharedTasksAnnotationData"
-      type: object
-    AppsDynamiteIncomingWebhookChangedMetadata:
-      description: "Annotation metadata to display system messages for incoming webhook events. Next Tag: 7"
-      properties:
-        incomingWebhookName:
-          description: The webhook name at the time of the change. Used in Spanner storage, BE API responses and FE API responses.
-          type: string
-        initiatorId:
-          $ref: "#/components/schemas/AppsDynamiteUserId"
-          description: The user id of the user whose action triggered this system message. Used in Spanner storage, BE API responses and FE API responses.
-        initiatorProfile:
-          $ref: "#/components/schemas/AppsDynamiteFrontendUser"
-          description: Complete profile when ListTopicsRequest FetchOptions.USER is set. Otherwise, only the id will be filled in. Used in FE API responses.
-        obfuscatedIncomingWebhookId:
-          description: The webhook id of the incoming webhook in question. This field should not be used to load webhook information dynamically and is only present for debugging purposes. Used in Spanner storage, BE API responses and FE API responses.
-          type: string
-        oldIncomingWebhookName:
-          description: Only populated for UPDATED_NAME and UPDATED_NAME_AND_AVATAR events, where the webhook name was changed. Used in Spanner storage, BE API responses and FE API responses.
-          type: string
-        type:
-          description: Used in Spanner storage, BE API responses and FE API responses.
-          enum:
-            - UNSPECIFIED
-            - ADDED
-            - UPDATED
-            - REMOVED
-            - UPDATED_NAME
-            - UPDATED_AVATAR
-            - UPDATED_NAME_AND_AVATAR
-          type: string
-      type: object
-    AppsDynamiteIntegrationConfigMutation:
-      properties:
-        addApp:
-          $ref: "#/components/schemas/AppsDynamiteAppId"
-          description: Add an app using its identifier.
-        addPinnedItem:
-          $ref: "#/components/schemas/AppsDynamitePinnedItemId"
-          description: Add a pinned tab using its identifier.
-        removeApp:
-          $ref: "#/components/schemas/AppsDynamiteAppId"
-          description: Remove an active app using its identifier.
-        removePinnedItem:
-          $ref: "#/components/schemas/AppsDynamitePinnedItemId"
-          description: Remove an active pinned tab using its identifier.
-      type: object
-    AppsDynamiteIntegrationConfigUpdatedMetadata:
-      description: Annotation metadata to display system message for integration config updated event. This metadata is stored in spanner, and can be dispatched to clients without any field modification or transformation.
-      properties:
-        initiatorId:
-          $ref: "#/components/schemas/AppsDynamiteUserId"
-          description: The user whose action triggered this system message.
-        mutations:
-          description: A list of updates applied on the integration config.
-          items:
-            $ref: "#/components/schemas/AppsDynamiteIntegrationConfigMutation"
-          type: array
-      type: object
-    AppsDynamiteInviteeInfo:
-      description: Invitee information from a Dynamite invitation. See go/dynamite-invitee-mgmt.
-      properties:
-        email:
-          description: Email as typed by the user when invited to Room or DM. This value will be canonicalized and hashed before retained in storage.
-          type: string
-        userId:
-          $ref: "#/components/schemas/AppsDynamiteUserId"
-          description: Unique, immutable ID of the User.
-      type: object
-    AppsDynamiteMemberId:
-      description: Eventually this can be updated to a oneOf User, Space (for nested spaces), Bots or Service, as and when these use cases come up.
-      properties:
-        rosterId:
-          $ref: "#/components/schemas/AppsDynamiteRosterId"
-          description: Unique, immutable ID of the Roster.
-        userId:
-          $ref: "#/components/schemas/AppsDynamiteUserId"
-          description: Unique, immutable ID of the User.
-      type: object
-    AppsDynamiteMembershipChangedMetadata:
-      description: Annotation metadata to display system messages for membership changes.
-      properties:
-        affectedMemberProfiles:
-          items:
-            $ref: "#/components/schemas/AppsDynamiteFrontendMember"
-          type: array
-        affectedMembers:
-          description: List of users and rosters whose membership status changed.
-          items:
-            $ref: "#/components/schemas/AppsDynamiteMemberId"
-          type: array
-        affectedMemberships:
-          items:
-            $ref: "#/components/schemas/AppsDynamiteMembershipChangedMetadataAffectedMembership"
-          type: array
-        initiator:
-          $ref: "#/components/schemas/AppsDynamiteUserId"
-          description: The user whose action triggered this system message.
-        initiatorProfile:
-          $ref: "#/components/schemas/AppsDynamiteFrontendUser"
-          description: Complete member profiles, when ListTopicsRequest FetchOptions.USER is set. Otherwise, only the id will be filled in.
-        type:
-          enum:
-            - TYPE_UNSPECIFIED
-            - INVITED
-            - JOINED
-            - ADDED
-            - REMOVED
-            - LEFT
-            - BOT_ADDED
-            - BOT_REMOVED
-            - KICKED_DUE_TO_OTR_CONFLICT
-            - ROLE_UPDATED
-            - ROLE_TARGET_AUDIENCE_UPDATED
-          type: string
-      type: object
-    AppsDynamiteMembershipChangedMetadataAffectedMembership:
-      description: Earlier we used to populate just the affected_members list and inferred the new membership state (roles didn't exist back then) from the Type. go/dynamite-finra required backend to know the previous membership state to reconstruct membership history. The proper solution involved cleaning up up Type enum, but it was used in many, many places. This was added as a stop-gap solution to unblock FINRA without breaking everything. Later role update and target audience update started relying on this to communicate information to clients about what transition happened. So this is now required to be populated and should be in sync with affected_members for new messages.
-      properties:
-        affectedMember:
-          $ref: "#/components/schemas/AppsDynamiteMemberId"
-        priorMembershipRole:
-          enum:
-            - ROLE_UNKNOWN
-            - ROLE_NONE
-            - ROLE_INVITEE
-            - ROLE_MEMBER
-            - ROLE_OWNER
-          type: string
-        priorMembershipState:
-          enum:
-            - MEMBER_UNKNOWN
-            - MEMBER_INVITED
-            - MEMBER_JOINED
-            - MEMBER_NOT_A_MEMBER
-            - MEMBER_FAILED
-          type: string
-        targetMembershipRole:
-          enum:
-            - ROLE_UNKNOWN
-            - ROLE_NONE
-            - ROLE_INVITEE
-            - ROLE_MEMBER
-            - ROLE_OWNER
-          type: string
-      type: object
-    AppsDynamiteMessage:
-      description: Message posted to a Space.
-      properties:
-        annotations:
-          description: Annotations parsed and extracted from the text body.
-          items:
-            $ref: "#/components/schemas/AppsDynamiteAnnotation"
-          type: array
-        appProfile:
-          $ref: "#/components/schemas/AppsDynamiteSharedAppProfile"
-          description: Custom display profile info for apps. Leave the field empty for real users.
-        attachments:
-          description: Attachments parsed from incoming webhooks
-          items:
-            $ref: "#/components/schemas/AppsDynamiteAttachment"
-          type: array
-        attributes:
-          $ref: "#/components/schemas/AppsDynamiteMessageAttributes"
-          description: Lightweight message attributes which values are calculated and set in the servers.
-        botResponses:
-          description: Responses from bots indicating if extra auth/config is needed.
-          items:
-            $ref: "#/components/schemas/AppsDynamiteBotResponse"
-          type: array
-        communalLabels:
-          description: Communal labels associated with a message. These exist on the message itself regardless of which user fetches them. Order of entries is arbitrary and will not list duplicates of the same label_id. See go/chat-labels-design for details.
-          items:
-            $ref: "#/components/schemas/AppsDynamiteBackendLabelsCommunalLabelTag"
-          type: array
-        contentReportSummary:
-          $ref: "#/components/schemas/AppsDynamiteMessageContentReportSummary"
-          readOnly: true
-        createTime:
-          description: Time when the Message was posted in microseconds.
-          format: int64
-          type: string
-        creatorId:
-          $ref: "#/components/schemas/AppsDynamiteUserId"
-          description: ID of the User who posted the Message. This includes information to identify if this was posted by an App on behalf of a user.
-        deletableBy:
-          description: Indicates who can delete the message. This field is set on the read path (e.g. ListTopics) but doesn’t have any effect on the write path (e.g. CreateMessageRequest).
-          enum:
-            - PERMISSION_UNSPECIFIED
-            - PERMISSION_NO_ONE
-            - PERMISSION_CREATOR
-            - PERMISSION_MEMBER
-          type: string
-        deleteTime:
-          description: Time when the Message was deleted in microseconds. This field is set to nonzero value only for Messages deleted globally.
-          format: int64
-          type: string
-        deleteTimeForRequester:
-          description: Time when the Message was per-user deleted by the message requester in microseconds. This field is set to nonzero value only for Message per-user deleted by the requester.
-          format: int64
-          type: string
-        deletedByVault:
-          description: Was this message deleted by Vault (Only used for Vault support) This is false if message is live or message was deleted by user.
-          type: boolean
-        dlpScanOutcome:
-          description: "Data Loss Prevention scan information for this message. Messages are evaluated in the backend on create message/topic and edit message actions. DEPRECATED: use dlp_scan_summary instead."
-          enum:
-            - SCAN_UNKNOWN_OUTCOME
-            - SCAN_SUCCEEDED_NO_VIOLATION
-            - SCAN_SUCCEEDED_BLOCK
-            - SCAN_SUCCEEDED_WARN
-            - SCAN_SUCCEEDED_AUDIT_ONLY
-            - SCAN_FAILURE_EXCEPTION
-            - SCAN_FAILURE_TIMEOUT
-            - SCAN_FAILURE_ALL_RULES_FAILED
-            - SCAN_FAILURE_ILLEGAL_STATE_FOR_ATTACHMENTS
-            - SCAN_SKIPPED_EXPERIMENT_DISABLED
-            - SCAN_SKIPPED_CONSUMER
-            - SCAN_SKIPPED_NON_HUMAN_USER
-            - SCAN_SKIPPED_NO_MESSAGE
-            - SCAN_SKIPPED_USER_ACKNOWLEDGED_WARNING
-            - SCAN_SKIPPED_MESSAGE_FROM_UNSUPPORTED_ORIGIN
-            - SCAN_RULE_EVALUATION_SKIPPED_NO_RULES_FOUND
-            - SCAN_RULE_EVALUATION_SKIPPED_NO_APPLICABLE_RULES_FOR_ACTION_PARAMS
-            - SCAN_RULE_EVALUATION_SKIPPED_NO_APPLICABLE_RULES_FOR_TRIGGER
-            - SCAN_RULE_EVALUATION_SKIPPED_CHANGELING_PERMANENT_ERROR
-            - SCAN_RULE_EVALUATION_SKIPPED_CHANGELING_EMPTY_RESPONSE
-            - SCAN_SUCCEEDED_WITH_FAILURES_NO_VIOLATION
-            - SCAN_SUCCEEDED_WITH_FAILURES_BLOCK
-            - SCAN_SUCCEEDED_WITH_FAILURES_WARN
-            - SCAN_SUCCEEDED_WITH_FAILURES_AUDIT_ONLY
-          type: string
-        dlpScanSummary:
-          $ref: "#/components/schemas/AppsDynamiteBackendDlpScanSummary"
-          description: Data Loss Prevention scan information for this message. Messages are evaluated in the backend on create message/topic and edit message actions.
-        editableBy:
-          description: Indicates who can edit the message. This field is set on the read path (e.g. ListTopics) but doesn’t have any effect on the write path (e.g. CreateMessageRequest).
-          enum:
-            - PERMISSION_UNSPECIFIED
-            - PERMISSION_NO_ONE
-            - PERMISSION_CREATOR
-            - PERMISSION_MEMBER
-          type: string
-        fallbackText:
-          description: A plain-text description of the attachment, used when clients cannot display formatted attachment (e.g. mobile push notifications).
-          type: string
-        id:
-          $ref: "#/components/schemas/AppsDynamiteMessageId"
-          description: ID of the resource.
-        isInlineReply:
-          description: Output only. Indicates if the message is an inline reply. Set to true only if the message's ParentPath is non-NULL. Currently, only inline replies have non-NULL ParentPath. See go/chat-be-inline-reply-indicator.
-          readOnly: true
-          type: boolean
-        lastEditTime:
-          description: If the message was edited by a user, timestamp of the last edit, in microseconds.
-          format: int64
-          type: string
-        lastUpdateTime:
-          description: Time when the Message text was last updated in microseconds.
-          format: int64
-          type: string
-        localId:
-          description: A unique id specified on the client side.
-          type: string
-        messageIntegrationPayload:
-          $ref: "#/components/schemas/AppsDynamiteSharedMessageIntegrationPayload"
-          description: An optional payload (restricted to 1P applications) that will be stored with this message. This can only be set by the 1P API and should be used to deliver additional data such a 1P sync version, 1P entity ID to the client for more advanced functionality [Eg. inform Group Tasks tab of new version while linking, fetch & render a live Task/Meet call tile].
-        messageOrigin:
-          description: Where the message was posted from
-          enum:
-            - ORIGIN_NOT_SET
-            - ORIGIN_DYNAMITE
-            - ORIGIN_BABEL_INTEROP_LIVE
-            - ORIGIN_BABEL_INTEROP_RETRY
-            - ORIGIN_BABEL
-            - ORIGIN_BABEL_DUAL_WRITE
-            - ORIGIN_BABEL_DUAL_WRITE_RETRY
-            - ORIGIN_BACKFILL_FROM_PAPYRUS
-            - ORIGIN_BACKFILL_FROM_GMAIL_ARCHIVE
-          type: string
-        messageState:
-          description: State of the message, indicating whether the message is visible to all members in the group or is only visible to the sender only, or the private_message_viewer if it is set.
-          enum:
-            - PUBLIC
-            - PRIVATE
-          type: string
-        originAppSuggestions:
-          description: Indicates if this message contains any suggestions that were provided by any Apps.
-          items:
-            $ref: "#/components/schemas/AppsDynamiteSharedOriginAppSuggestion"
-          type: array
-        personalLabels:
-          description: "Personal labels associated with a message for the viewing user. Order of entries is arbitrary and will not list duplicates of the same label_id. See go/chat-labels-design for details. NOTE: This will be unpopulated in the case of SpaceChangelog events."
-          items:
-            $ref: "#/components/schemas/AppsDynamiteBackendLabelsPersonalLabelTag"
-          type: array
-        privateMessageInfos:
-          description: A list of per-user private information. This is deprecated, because we no longer plan to support partially private messages or private messages for multiple users. The message_state and private_message_viewer fields should be sufficient for this infrastructure.
-          items:
-            $ref: "#/components/schemas/AppsDynamitePrivateMessageInfo"
-          type: array
-        privateMessageViewer:
-          $ref: "#/components/schemas/AppsDynamiteUserId"
-          description: Should only be set if the Message State is PRIVATE. If set, the message content is only visible to this user (and any apps associated with the message), as well as the message creator. If unset, a private message is visible to the message creator only.
-        props:
-          $ref: "#/components/schemas/AppsDynamiteMessageProps"
-          description: Contains additional (currently Hangouts Classic only) properties applicable to this message.
-        quotedByState:
-          description: Output only. Whether this message has been quoted by another message or not. Used by clients to handle message edit flows for messages that have been quoted.
-          enum:
-            - QUOTED_BY_STATE_UNSPECIFIED
-            - QUOTED_BY_STATE_HAS_BEEN_QUOTED
-            - QUOTED_BY_STATE_HAS_NOT_BEEN_QUOTED
-          readOnly: true
-          type: string
-        quotedMessageMetadata:
-          $ref: "#/components/schemas/AppsDynamiteQuotedMessageMetadata"
-          description: Output only. Metadata for a message that is quoted by this message.
-          readOnly: true
-        reactions:
-          description: A list of user reactions to this message. Ordered by the timestamp of the first reaction, ascending (oldest to newest).
-          items:
-            $ref: "#/components/schemas/AppsDynamiteSharedReaction"
-          type: array
-        reports:
-          description: Output only. Details of content reports. Set only when the request asks for it.
-          items:
-            $ref: "#/components/schemas/AppsDynamiteContentReport"
-          readOnly: true
-          type: array
-        retentionSettings:
-          $ref: "#/components/schemas/AppsDynamiteSharedRetentionSettings"
-          description: The retention settings of the message.
-        secondaryMessageKey:
-          description: A client-specified string that can be used to uniquely identify a message in a space, in lieu of `id.message_id`.
-          type: string
-        textBody:
-          description: Plaintext body of the Message.
-          type: string
-        tombstoneMetadata:
-          $ref: "#/components/schemas/AppsDynamiteTombstoneMetadata"
-          description: Information for the stoning of a Message.
-        updaterId:
-          $ref: "#/components/schemas/AppsDynamiteUserId"
-          description: ID of the User who last updated (created/edited/deleted) the Message. This includes information to identify if this was updated by an App on behalf of a user.
-        uploadMetadata:
-          description: UploadMetadata b/36864213 is an ongoing effort to move UploadMetadata out of annotations field and save it to upload_metadata field only. After the migration, UploadMetadata will only be saved in this field.
-          items:
-            $ref: "#/components/schemas/AppsDynamiteUploadMetadata"
-          type: array
-      type: object
-    AppsDynamiteMessageAttributes:
-      description: "Stores tombstone message attributes: go/tombstone-message-attributes-overview"
-      properties:
-        isTombstone:
-          description: "If true: message is a tombstone in the client. Default false."
-          type: boolean
-      type: object
-    AppsDynamiteMessageContentReportSummary:
-      description: Summarized info of content reports. Usually less expensive to fetch than to fetch all detailed reports. Set only when the request asks for it.
-      properties:
-        numberReports:
-          description: Total number of reports attached to this (revision of) message.
-          format: int32
-          type: integer
-        numberReportsAllRevisions:
-          description: Totoal number of reports attached to all revisions of this message (i.e. since creation). Set only when the request asks for it.
-          format: int32
-          type: integer
-      type: object
-    AppsDynamiteMessageId:
-      description: Primary key for Message resource.
-      properties:
-        messageId:
-          description: Opaque, server-assigned ID of the Message. While this ID is guaranteed to be unique within the Space, it's not guaranteed to be globally unique.
-          type: string
-        parentId:
-          $ref: "#/components/schemas/AppsDynamiteMessageParentId"
-          description: ID of the Message's immediate parent.
-      type: object
-    AppsDynamiteMessageInfo:
-      properties:
-        message:
-          $ref: "#/components/schemas/AppsDynamiteMessage"
-          description: The content of a matching message.
-        searcherMembershipState:
-          description: Searcher's membership state in the space where the message is posted.
-          enum:
-            - MEMBER_UNKNOWN
-            - MEMBER_INVITED
-            - MEMBER_JOINED
-            - MEMBER_NOT_A_MEMBER
-            - MEMBER_FAILED
-          type: string
-      type: object
-    AppsDynamiteMessageParentId:
-      description: Primary key identifying Message resource's immediate parent. For top-level Messages, either topic_id or chat_id is populated. For replies, message_id is populated with the topic Message's ID.
-      properties:
-        topicId:
-          $ref: "#/components/schemas/AppsDynamiteTopicId"
-          description: "ID of the Topic this Message is posted to. NEXT TAG : 5"
-      type: object
-    AppsDynamiteMessageProps:
-      description: Container for storing properties applicable to messages. For now (until storage consolidation is complete), it will only be used for babel props. In the future it could be used to house Dynamite properties for experimenting/rapid prototyping.
-      properties:
-        babelProps:
-          $ref: "#/components/schemas/AppsDynamiteBabelMessageProps"
-      type: object
-    AppsDynamitePinnedItemId:
-      properties:
-        driveId:
-          description: Identifier for a Drive file (e.g. Docs, Sheets, Slides).
-          type: string
-      type: object
-    AppsDynamitePrivateMessageInfo:
-      description: Private message information specific to a given user.
-      properties:
-        annotations:
-          description: Annotations private to {@code userId}.
-          items:
-            $ref: "#/components/schemas/AppsDynamiteAnnotation"
-          type: array
-        attachments:
-          description: Attachments private to {@code userId}.
-          items:
-            $ref: "#/components/schemas/AppsDynamiteAttachment"
-          type: array
-        contextualAddOnMarkup:
-          items:
-            $ref: "#/components/schemas/GoogleChatV1ContextualAddOnMarkup"
-          type: array
-        gsuiteIntegrationMetadata:
-          items:
-            $ref: "#/components/schemas/AppsDynamiteGsuiteIntegrationMetadata"
-          type: array
-        text:
-          description: "Text private to {@code user_id}. Initial restriction: Only one of public text or private text is rendered on the client. So if public text is set, private text is ignored."
-          type: string
-        userId:
-          $ref: "#/components/schemas/AppsDynamiteUserId"
-          description: Required. The elements in this struct are visible to this user.
-      type: object
-    AppsDynamiteQuotedMessageMetadata:
-      description: "Quote metadata: go/message-quoting-be-dd-v2. This proto is only used on the read path. For the request proto, refer to `QuotedMessagePayload`. Fields are either derived from storage directly from the Item this metadata belongs to, or is hydrated at read time from another Item read. Note: QuotedMessageMetadata proto is similar to Message proto with less field. Reasons to differtiate QuotedMessageMetadata from Message are: 1. Not all fields for original message is applicable for quoted message. (E.g. reactions, is_inline_reply, etc.), thus separting out for confusion. 2. We don't support nested message quoting. For more detailed discussion, please see http://shortn/_VsSXQb2C7P. For future reference: if your new feature/field will be supported in message quoting feature (go/chat-quoting-prd), you will need to add that field within QuotedMessageMetadata"
-      properties:
-        annotations:
-          description: Output only. Snapshot of the annotations of the quoted message.
-          items:
-            $ref: "#/components/schemas/AppsDynamiteAnnotation"
-          readOnly: true
-          type: array
-        appProfile:
-          $ref: "#/components/schemas/AppsDynamiteSharedAppProfile"
-          description: Output only. Custom display profile info for apps. Will be empty for real users.
-          readOnly: true
-        botAttachmentState:
-          description: Output only. The bot attachment state of the quoted message. Used by clients to display a bot attachment indicator in the UI.
-          enum:
-            - BOT_ATTACHMENT_STATE_UNSPECIFIED
-            - BOT_ATTACHMENT_STATE_HAS_BOT_ATTACHMENT
-            - BOT_ATTACHMENT_STATE_NO_BOT_ATTACHMENT
-          readOnly: true
-          type: string
-        creatorId:
-          $ref: "#/components/schemas/AppsDynamiteUserId"
-          description: Output only. ID of the User who posted the quoted message. This includes information to identify if the quoted message was posted by an App on behalf of a user.
-          readOnly: true
-        lastUpdateTimeWhenQuotedMicros:
-          description: The `last_update_time` of the original message when the client initiated the quote creation. This is derived from the request payload passed from clients. Used to fetch the quoted message contents at a specific time on the read path. This field is populated from storage directly.
-          format: int64
-          type: string
-        messageId:
-          $ref: "#/components/schemas/AppsDynamiteMessageId"
-          description: MessageId of the original message that is being quoted. This is derived from the request payload passed from clients. This field is populated from storage directly.
-        messageState:
-          description: Output only. The state of the quoted message. Used by clients to display tombstones for quotes that reference a deleted message.
-          enum:
-            - MESSAGE_STATE_UNSPECIFIED
-            - MESSAGE_STATE_ACTIVE
-            - MESSAGE_STATE_DELETED
-          readOnly: true
-          type: string
-        retentionSettings:
-          $ref: "#/components/schemas/AppsDynamiteSharedRetentionSettings"
-          description: Output only. The retention (OTR) settings of the quoted message.
-          readOnly: true
-        textBody:
-          description: Output only. Snapshot of the text body of the quoted message.
-          readOnly: true
-          type: string
-        uploadMetadata:
-          description: "Output only. Upload metadata of the quoted message. NEXT TAG: 11"
-          items:
-            $ref: "#/components/schemas/AppsDynamiteUploadMetadata"
-          readOnly: true
-          type: array
-      type: object
-    AppsDynamiteReadReceiptsSettingsUpdatedMetadata:
-      properties:
-        readReceiptsEnabled:
-          description: The new read receipts state.
-          type: boolean
-      type: object
-    AppsDynamiteRequiredMessageFeaturesMetadata:
-      description: A list of capabilities that are used in this message.
-      properties:
-        requiredFeatures:
-          items:
-            enum:
-              - REQUIRED_FEATURE_UNSPECIFIED
-              - REQUIRED_FEATURE_MESSAGE_QUOTING
-            type: string
-          type: array
-      type: object
-    AppsDynamiteRoomUpdatedMetadata:
-      properties:
-        groupDetailsMetadata:
-          $ref: "#/components/schemas/AppsDynamiteRoomUpdatedMetadataGroupDetailsUpdatedMetadata"
-        groupLinkSharingEnabled:
-          type: boolean
-        initiator:
-          $ref: "#/components/schemas/AppsDynamiteFrontendUser"
-          description: The user who initiated this room update. Complete member profiles, when ListTopicsRequest FetchOptions.USER is set. Otherwise, only the id will be filled in.
-        initiatorType:
-          description: The type of the user who initiated this room update.
-          enum:
-            - INITIATOR_TYPE_UNSPECIFIED
-            - INITIATOR_TYPE_END_USER
-            - INITIATOR_TYPE_ADMIN
-          type: string
-        name:
-          description: What was updated in the room.
-          type: string
-        renameMetadata:
-          $ref: "#/components/schemas/AppsDynamiteRoomUpdatedMetadataRoomRenameMetadata"
-        visibility:
-          $ref: "#/components/schemas/AppsDynamiteSharedGroupVisibility"
-          description: "DEPRECATED: See GroupVisibility proto definition."
-      type: object
-    AppsDynamiteRoomUpdatedMetadataGroupDetailsUpdatedMetadata:
-      properties:
-        newGroupDetails:
-          $ref: "#/components/schemas/AppsDynamiteSharedGroupDetails"
-        prevGroupDetails:
-          $ref: "#/components/schemas/AppsDynamiteSharedGroupDetails"
-      type: object
-    AppsDynamiteRoomUpdatedMetadataRoomRenameMetadata:
-      properties:
-        newName:
-          type: string
-        prevName:
-          description: "NEXT_TAG: 3"
-          type: string
-      type: object
-    AppsDynamiteRosterId:
-      description: Primary key for Roster resource.
-      properties:
-        id:
-          description: Opaque, server-assigned ID of the Roster.
           type: string
       type: object
     AppsDynamiteSharedAction:
@@ -3805,7 +2708,7 @@ components:
           format: int32
           type: integer
         updaterToShow:
-          $ref: "#/components/schemas/AppsDynamiteUserId"
+          $ref: "#/components/schemas/UserId"
           description: The updater for clients to show.
       type: object
     AppsDynamiteSharedAppProfile:
@@ -3957,16 +2860,16 @@ components:
             - SCAN_SUCCEEDED_WITH_FAILURES_AUDIT_ONLY
           type: string
         dlpScanSummary:
-          $ref: "#/components/schemas/AppsDynamiteBackendDlpScanSummary"
+          $ref: "#/components/schemas/DlpScanSummary"
           description: Summary of a Data Loss Prevention (DLP) scan of the attachment. Attachments are evaluated in the backend when they are uploaded.
         groupId:
-          $ref: "#/components/schemas/AppsDynamiteGroupId"
+          $ref: "#/components/schemas/GroupId"
           description: GroupId to which this attachment is uploaded.
         originalDimension:
           $ref: "#/components/schemas/AppsDynamiteSharedDimension"
           description: Original dimension of the content. Only set for image attachments.
         quoteReplyMessageId:
-          $ref: "#/components/schemas/AppsDynamiteMessageId"
+          $ref: "#/components/schemas/MessageId"
           description: The message id of a quote reply referencing this attachment. When present, this attachment has been quoted in a reply message. Normally, the attachment is fetched through the message id in the blob_path, but in the case of a quote reply, the blob_path would contain the quoted message id. Thus this message id field is needed to fetch the quote reply message instead. This field is conditionally populated at read time for quotes and never persisted in storage. See go/message-quoting-attachments for more context.
         sha256:
           description: The SHA256 hash of the attachment bytes.
@@ -4164,7 +3067,7 @@ components:
           description: Identify the button/action that created the suggestion. A simple example would be a card button within the stream, or the id which can identify a specific suggestion.
           type: string
         suggestionMessageId:
-          $ref: "#/components/schemas/AppsDynamiteMessageId"
+          $ref: "#/components/schemas/MessageId"
           description: The message_id for the message that was posted by the app/bot.
       type: object
     AppsDynamiteSharedCardSection:
@@ -4378,7 +3281,7 @@ components:
           format: int64
           type: string
         creatorUserId:
-          $ref: "#/components/schemas/AppsDynamiteUserId"
+          $ref: "#/components/schemas/UserId"
           description: This field should *never* be persisted to Spanner.
         deleteTimeMicros:
           description: Time when the emoji was deleted, in microseconds. This field may be present in Spanner, within the server, or in public APIs. Only present if the emoji has been deleted.
@@ -4389,7 +3292,7 @@ components:
           readOnly: true
           type: string
         ownerCustomerId:
-          $ref: "#/components/schemas/AppsDynamiteCustomerId"
+          $ref: "#/components/schemas/CustomerId"
           description: This field should *never* be persisted to Spanner.
         readToken:
           description: Opaque token that clients use to construct the URL for accessing the custom emoji’s image data. This field is intended for API consumption, and should *never* be persisted to Spanner.
@@ -4741,7 +3644,7 @@ components:
           description: Whether the person is the recipient of the suggestions.
           type: boolean
         user:
-          $ref: "#/components/schemas/AppsDynamiteUserId"
+          $ref: "#/components/schemas/UserId"
           description: Obfuscated user ID.
       type: object
     AppsDynamiteSharedMeetMetadata:
@@ -4758,7 +3661,7 @@ components:
       description: Information that references a Dynamite chat message.
       properties:
         messageId:
-          $ref: "#/components/schemas/AppsDynamiteMessageId"
+          $ref: "#/components/schemas/MessageId"
           description: Id of the source chat message. This is kept here because the top-level message ID to refers the AF message ID.
         topicReadTimeUsec:
           description: Timestamp of when the topic containing the message has been read by the user. This is populated if the message references an inline reply, in which case the space may be marked as read but the topic still has unread messages.
@@ -4862,13 +3765,13 @@ components:
     AppsDynamiteSharedOrganizationInfoCustomerInfo:
       properties:
         customerId:
-          $ref: "#/components/schemas/AppsDynamiteCustomerId"
+          $ref: "#/components/schemas/CustomerId"
       type: object
     AppsDynamiteSharedOriginAppSuggestion:
       description: Stores the suggestion provided by apps/bots.
       properties:
         appId:
-          $ref: "#/components/schemas/AppsDynamiteAppId"
+          $ref: "#/components/schemas/AppId"
         cardClickSuggestion:
           $ref: "#/components/schemas/AppsDynamiteSharedCardClickSuggestion"
       type: object
@@ -4959,7 +3862,7 @@ components:
         description:
           type: string
         groupId:
-          $ref: "#/components/schemas/AppsDynamiteGroupId"
+          $ref: "#/components/schemas/GroupId"
         inviterEmail:
           description: The email address of the user that invited the calling user to the room, if available. This field will only be populated for direct invites, it will be empty if the user was indirectly invited to the group.
           type: string
@@ -5019,7 +3922,7 @@ components:
     AppsDynamiteSharedTasksAnnotationDataAssigneeChange:
       properties:
         oldAssignee:
-          $ref: "#/components/schemas/AppsDynamiteUserId"
+          $ref: "#/components/schemas/UserId"
           description: Obfuscated user ID of previous assignee. Not set if the task was originally not assigned.
       type: object
     AppsDynamiteSharedTasksAnnotationDataCompletionChange:
@@ -5035,7 +3938,7 @@ components:
       description: All relevant task properties for a Chat message.
       properties:
         assignee:
-          $ref: "#/components/schemas/AppsDynamiteUserId"
+          $ref: "#/components/schemas/UserId"
           description: Obfuscated user ID of new assignee. Not set if the task doesn't have an assignee.
         completed:
           description: Whether the task is marked as completed.
@@ -5171,209 +4074,6 @@ components:
           $ref: "#/components/schemas/AppsDynamiteSharedTextParagraph"
           description: 'Displays a text paragraph in this widget. For example, the following JSON creates a bolded text: ``` "textParagraph": { "text": " *bold text*" } ```'
       type: object
-    AppsDynamiteSlashCommandMetadata:
-      description: Annotation metadata for slash commands (/).
-      properties:
-        argumentsHint:
-          description: Hint string for the arguments expected by the slash command.
-          type: string
-        commandId:
-          description: Unique id for the slash command.
-          format: int64
-          type: string
-        commandName:
-          description: Name of the slash command.
-          type: string
-        id:
-          $ref: "#/components/schemas/AppsDynamiteUserId"
-          description: ID of the bot which owns the slash command.
-        triggersDialog:
-          description: Whether or not this slash command should trigger a dialog.
-          type: boolean
-        type:
-          enum:
-            - TYPE_UNSPECIFIED
-            - ADD
-            - INVOKE
-            - FAILED_TO_ADD
-          type: string
-      type: object
-    AppsDynamiteSpaceId:
-      description: Primary key for Space resource.
-      properties:
-        spaceId:
-          description: Unique, immutable ID of the Space
-          type: string
-      type: object
-    AppsDynamiteTombstoneMetadata:
-      description: "Tombstoning is the act of leaving a contextual trace when deleting a message. See more: go/tombstone-prd, go/hub-dynamite-tombstones-server-design-v2."
-      properties:
-        tombstoneType:
-          description: Indicates the type of Tombstone.
-          enum:
-            - TOMBSTONE_UNSPECIFIED
-            - CREATOR
-            - ROOM_OWNER
-            - ADMIN
-            - APP_MESSAGE_EXPIRY
-            - CREATOR_VIA_APP
-            - ROOM_OWNER_VIA_APP
-          type: string
-      type: object
-    AppsDynamiteTopicId:
-      properties:
-        groupId:
-          $ref: "#/components/schemas/AppsDynamiteGroupId"
-          description: The Space or DM that the topic belongs to.
-        topicId:
-          description: "Opaque, server-assigned ID of the Topic. While this ID is guaranteed to be unique within the Space, it's not guaranteed to be globally unique. Internal usage: this field can be empty in the following cases: 1. To create the first message in a topic. 2. To list last N messages of a Space (regardless of topic)."
-          type: string
-      type: object
-    AppsDynamiteUploadMetadata:
-      description: Annotation metadata for user Upload artifacts.
-      properties:
-        attachmentToken:
-          description: Opaque token. Clients shall simply pass it back to the Backend. This field will NOT be saved into storage.
-          type: string
-        backendUploadMetadata:
-          $ref: "#/components/schemas/AppsDynamiteSharedBackendUploadMetadata"
-          description: Information about the uploaded attachment that is only used in Backend. This field will NOT be sent out of Google.
-        clonedAuthorizedItemId:
-          $ref: "#/components/schemas/AuthorizedItemId"
-          description: The "new" secure identifier for Drive files. Should be used instead of the deprecated string drive_id field above. This should only be set if the upload file has been added to Drive. Note that older Drive files that do not have a ResourceKey should still use this field, with the resource_key field unset.
-        clonedDriveAction:
-          description: DriveAction for organizing the cloned version of this upload in Drive, if the file has been added to Drive. This field is not set if the file has not been added to Drive. Additionally, this field is only set when part of a FileResult in a ListFilesResponse.
-          enum:
-            - DRIVE_ACTION_UNSPECIFIED
-            - ADD_TO_DRIVE
-            - ORGANIZE
-            - ADD_SHORTCUT
-            - ADD_ANOTHER_SHORTCUT
-          type: string
-        clonedDriveId:
-          description: "Reference to a Drive ID, if this upload file has been previously cloned to Drive. Note: this is deprecated in favor of the AuthorizedItemId below."
-          type: string
-        contentName:
-          description: The original file name for the content, not the full path.
-          type: string
-        contentType:
-          description: "Type is from Scotty's best_guess by default: http://google3/uploader/agent/scotty_agent.proto?l=51&rcl=140889785"
-          type: string
-        dlpMetricsMetadata:
-          $ref: "#/components/schemas/AppsDynamiteSharedDlpMetricsMetadata"
-          description: The metrics metadata of the Data Loss Prevention attachment scan.
-        localId:
-          description: A copy of the LocalId in Annotation. This field is supposed to be filled by server only.
-          type: string
-        originalDimension:
-          $ref: "#/components/schemas/AppsDynamiteSharedDimension"
-          description: Original dimension of the content. Only set for image attachments.
-        videoReference:
-          $ref: "#/components/schemas/AppsDynamiteSharedVideoReference"
-          description: Reference to a transcoded video attachment. Only set for video attachments.
-        virusScanResult:
-          description: Result for a virus scan. It's duplicated in the above field apps.dynamite.shared.BackendUploadMetadata
-          enum:
-            - UNKNOWN_VIRUS_SCAN_RESULT
-            - CLEAN
-            - INFECTED
-            - ERROR
-            - POLICY_VIOLATION
-          type: string
-      type: object
-    AppsDynamiteUrlMetadata:
-      description: Annotation metadata for a Weblink. In case of pasted link it can qualify to be other types in addition to being a URL - like DRIVE_DOC/DRIVE_SHEET and so on. The URL metadata will also be present and it's up to the client to decide which metadata to render it with. These fields are filled in using page render service.
-      properties:
-        domain:
-          description: Domain for this url. If it's an IP address the address is returned.
-          type: string
-        gwsUrl:
-          $ref: "#/components/schemas/SafeUrlProto"
-          description: The signed GWS URL.
-        gwsUrlExpirationTimestamp:
-          description: The expiration timestamp for GWS URL, only set when gws_url is set.
-          format: int64
-          type: string
-        imageHeight:
-          description: "Dimensions of the image: height. This field is string to match with page render service response. Deprecated. Use int_image_height instead."
-          type: string
-        imageUrl:
-          description: Representative image of the website.
-          type: string
-        imageWidth:
-          description: "Dimensions of the image: width. This field is string to match with page render service response. Deprecated. Use int_image_height instead."
-          type: string
-        intImageHeight:
-          description: "Dimensions of the image: height."
-          format: int32
-          type: integer
-        intImageWidth:
-          description: "Dimensions of the image: width."
-          format: int32
-          type: integer
-        mimeType:
-          description: "Mime type of the content (Currently mapped from Page Render Service ItemType) Note that this is not necessarily the mime type of the http resource. For example a text/html from youtube or vimeo may actually be classified as a video type. Then we shall mark it as video/* since we don't know exactly what type of video it is. NEXT TAG : 16"
-          type: string
-        redirectUrl:
-          $ref: "#/components/schemas/SafeUrlProto"
-          description: The stable redirect URL pointing to frontend server.
-        shouldNotRender:
-          description: If the UrlMetadata is missing data for rendering a chip. Deprecated. Use Annotation.ChipRenderType instead.
-          type: boolean
-        snippet:
-          description: Snippet/small description of the weblink.
-          type: string
-        title:
-          description: Title of the Weblink.
-          type: string
-        url:
-          $ref: "#/components/schemas/SafeUrlProto"
-          description: The original URL.
-      type: object
-    AppsDynamiteUserId:
-      description: Primary key for User resource.
-      properties:
-        actingUserId:
-          description: Optional. Opaque, server-assigned ID of the user profile associated with App/user acting on behalf of the human user. This is currently only set when a 3P application is acting on the user's behalf.
-          type: string
-        id:
-          description: Opaque, server-assigned ID of the User.
-          type: string
-        originAppId:
-          $ref: "#/components/schemas/AppsDynamiteAppId"
-          description: Optional. Identifier of the App involved (directly or on behalf of a human creator) in creating this message. This is not set if the user posted a message directly, but is used in the case of, for example, a message being generated by a 1P integration based on a user action (creating an event, creating a task etc). This should only be used on the BE. For clients, please use the field in the FE message proto instead (google3/apps/dynamite/v1/frontend/api/message.proto?q=origin_app_id).
-        type:
-          description: "Clients do not need to send UserType to Backend, but Backend will always send this field to clients per the following rule: 1. For HUMAN Ids, the field is empty but by default .getType() will return HUMAN. 2. For BOT Ids, the field is ALWAYS set to BOT."
-          enum:
-            - HUMAN
-            - BOT
-          type: string
-      type: object
-    AppsDynamiteUserMentionMetadata:
-      description: Annotation metadata for user mentions (+/@/-).
-      properties:
-        displayName:
-          description: Display name of the mentioned user. This field should remain empty when clients resolve a UserMention annotation. It will be filled in when a UserMention is generated by the Integration Server.
-          type: string
-        gender:
-          description: Gender of the mentioned user. One of "female", "male" or "other". Used for choosing accurate translations for strings that contain the UserMention, when these need to be constructed (e.g. task assignment update message). This field should remain empty when clients resolve a UserMention. It will be filled in when a UserMention is generated by the Integration Server.
-          type: string
-        id:
-          $ref: "#/components/schemas/AppsDynamiteUserId"
-          description: To be deprecated. Use invitee_info field instead. ID of the User mentioned. This field should remain empty when type == MENTION_ALL.
-        inviteeInfo:
-          $ref: "#/components/schemas/AppsDynamiteInviteeInfo"
-          description: Invitee UserId and email used when mentioned. This field should remain empty when type == MENTION_ALL. Invitee_info.email is only used when a user is @-mentioned with an email address, and it will be empty when clients get messages from Backend.
-        type:
-          enum:
-            - TYPE_UNSPECIFIED
-            - INVITE
-            - UNINVITE
-            - MENTION
-            - MENTION_ALL
-            - FAILED_TO_ADD
-          type: string
-      type: object
     AppsDynamiteV1ApiCompatV1Action:
       description: "Interactive objects inside a message. Documentation: - https://api.slack.com/docs/message-buttons"
       properties:
@@ -5493,47 +4193,31 @@ components:
           description: The text value of the field.
           type: string
       type: object
-    AppsDynamiteVideoCallMetadata:
+    Attachment:
+      description: Attachments that follow the message text.
       properties:
-        meetingSpace:
-          $ref: "#/components/schemas/MeetingSpace"
-          description: Thor meeting space.
-        shouldNotRender:
-          description: If this field is set to true, server should still contact external backends to get metadata for search but clients should not render this chip.
-          type: boolean
-        wasCreatedInCurrentGroup:
-          description: Whether this meeting space was created via Dynamite in this Dynamite group.
-          type: boolean
-      type: object
-    AppsDynamiteYoutubeMetadata:
-      description: Annotation metadata for YouTube artifact.
-      properties:
-        id:
-          description: YouTube resource ID of the artifact.
+        addOnData:
+          $ref: "#/components/schemas/GoogleChatV1ContextualAddOnMarkup"
+          description: Revised version of Gmail AddOn attachment approved by API design review.
+        appId:
+          $ref: "#/components/schemas/UserId"
+          description: The userId for the bot/app that created this data, to be used for attribution of attachments when the attachment was not created by the message sender.
+        attachmentId:
+          description: To identify an attachment within repeated in a message
           type: string
-        shouldNotRender:
-          description: If this field is set to true, server should still contact external backends to get metadata for search but clients should not render this chip.
-          type: boolean
-        startTime:
-          description: YouTube query parameter for timestamp. YouTube specific flag that allows users to embed time token when sharing a link. This property contains parsed time token in seconds.
+        cardAddOnData:
+          $ref: "#/components/schemas/AppsDynamiteSharedCard"
+          description: Card AddOn attachment with the possibility for specifying editable widgets.
+        deprecatedAddOnData:
+          $ref: "#/components/schemas/ContextualAddOnMarkup"
+          description: Deprecated version of Gmail AddOn attachment.
+        slackData:
+          $ref: "#/components/schemas/AppsDynamiteV1ApiCompatV1Attachment"
+          description: Slack attachment.
+        slackDataImageUrlHeight:
+          description: The height of image url as fetched by fife. This field is asynchronously filled.
           format: int32
           type: integer
-      type: object
-    Attachment:
-      description: An Attachment represents a linked entity associated with a piece of social content. This may be a 1st-party or 3rd-party entity. In the Papyrus context, an Attachment is part of a Cent, and sits alongside the main content of the cent, which is represented as a sequence of Segments. Right now an Attachment is just a wrapper around an Embed, but we provide the extra layer of abstraction since, as Embeds move to separate storage in Briefcase, we may want to add additional fields that are not part of the Embed proper, but that (for example) relate to the usage of the linked content within the particular post/cent.
-      properties:
-        embedItem:
-          $ref: "#/components/schemas/EmbedClientItem"
-          description: An embed represents an external entity. See go/es-embeds.
-        id:
-          description: An id to uniquely identify an attachment when several attachments are in a collection.
-          type: string
-      type: object
-    AttachmentMetadata:
-      description: An attachment uploaded in Dynamite and its filename.
-      properties:
-        filename:
-          type: string
       type: object
     AuditLoggingSettings:
       description: Represents the settings for Cloud audit logging
@@ -5573,6 +4257,39 @@ components:
         text:
           type: string
       type: object
+    BabelMessageProps:
+      description: Container for Babel (Hangouts Classic) only message properties. The properties here will not be consumed by Dynamite clients. They are relevant only for Hangouts Classic.
+      properties:
+        clientGeneratedId:
+          description: Babel clients locally generate this ID to dedupe against the async fanout.
+          format: int64
+          type: string
+        contentExtension:
+          $ref: "#/components/schemas/ChatContentExtension"
+          description: Stores additional Babel-specific properties (such as event metadata).
+        deliveryMedium:
+          $ref: "#/components/schemas/DeliveryMedium"
+          description: Stores the delivery source of messages (such as phone number for SMS).
+        eventId:
+          description: Primary identifier used by Hangouts Classic for its events (messages).
+          type: string
+        messageContent:
+          $ref: "#/components/schemas/ChatConserverMessageContent"
+          description: Stores message segments (text content) and attachments (media URLs).
+        wasUpdatedByBackfill:
+          description: Whether or not these message properties were backfilled by go/dinnertrain.
+          type: boolean
+      type: object
+    BabelPlaceholderMetadata:
+      description: Annotation metadata for Babel-only items that signals which type of placeholder message should be displayed in Babel clients.
+      properties:
+        deleteMetadata:
+          $ref: "#/components/schemas/DeleteMetadata"
+        editMetadata:
+          $ref: "#/components/schemas/EditMetadata"
+        hangoutVideoMetadata:
+          $ref: "#/components/schemas/HangoutVideoEventMetadata"
+      type: object
     BooleanOperatorOptions:
       description: Used to provide a search operator for boolean properties. This is optional. Search operators let users restrict the query to specific fields relevant to the type of item being searched.
       properties:
@@ -5605,9 +4322,78 @@ components:
             - STROKE
           type: string
       type: object
-    BotMessageMetadata:
-      description: A bot sent a message in Dynamite.
-      properties: {}
+    BotInfo:
+      description: Bot-specific profile information.
+      properties:
+        appId:
+          $ref: "#/components/schemas/AppId"
+          description: Identifier of the application associated with the bot.
+        botAvatarUrl:
+          description: URL for the avatar picture of the User in dynamite. This field should be populated if the request is FetchBotCategories/ListBotCatalogEntries
+          type: string
+        botName:
+          description: Non-unique, user-defined display name of the Bot. This field should be populated if the request is FetchBotCategories/ListBotCatalogEntries.
+          type: string
+        description:
+          description: Short description for the bot.
+          type: string
+        developerName:
+          description: Name of bot developer.
+          type: string
+        marketPlaceBannerUrl:
+          description: URL for the banner image in GSuite Market Place. The banner will be 220x140.
+          type: string
+        status:
+          description: Indicates whether bot is enabled/disabled.
+          enum:
+            - UNKNOWN_STATUS
+            - ENABLED
+            - DISABLED_BY_DEVELOPER
+          type: string
+        supportUrls:
+          $ref: "#/components/schemas/SupportUrls"
+          description: Urls with additional information related to the bot. This field should always be set even if all the fields within it are empty, so that it is convenient for clients to work with this field in javascript.
+        supportedUses:
+          description: The supported uses are limited according to the user that made the request. If the user does not have permission to use the bot, the list will be empty. This could occur for non whitelisted bots in the catalog.
+          items:
+            enum:
+              - UNKNOWN
+              - CAN_ADD_TO_DM
+              - CAN_ADD_TO_ROOM
+              - CAN_ADD_TO_HUMAN_DM
+            type: string
+          type: array
+        whitelistStatus:
+          enum:
+            - UNSPECIFIED_STATUS
+            - ALLOWED
+            - ALL_BOTS_DISABLED_BY_ADMIN
+            - BOT_NOT_WHITELISTED_BY_ADMIN
+          type: string
+      type: object
+    BotResponse:
+      description: Information about a bot response, branched from shared/bot_response.proto without frontend User proto as we never store it.
+      properties:
+        botId:
+          $ref: "#/components/schemas/UserId"
+        requiredAction:
+          enum:
+            - UNKNOWN_SETUP_TYPE
+            - CONFIGURATION
+            - AUTHENTICATION
+          type: string
+        responseType:
+          enum:
+            - UNKNOWN_RESPONSE_TYPE
+            - ERROR
+            - SETUP_REQUIRED
+            - DISABLED_BY_ADMIN
+            - DISABLED_BY_DEVELOPER
+            - PRIVATE
+          type: string
+        setupUrl:
+          description: URL for setting up bot.
+          type: string
       type: object
     BroadcastAccess:
       description: Broadcast access information of a meeting space.
@@ -5655,10 +4441,6 @@ components:
         textButton:
           $ref: "#/components/schemas/TextButton"
       type: object
-    CalendarEventMetadata:
-      description: A Calendar event message in Dynamite.
-      properties: {}
-      type: object
     CallInfo:
       description: Contains information regarding an ongoing conference (aka call) for a meeting space.
       properties:
@@ -5688,6 +4470,9 @@ components:
           description: Output only. The calendar event ID of a Google Calendar event that the meeting space is associated with. If the meeting space is not associated with an event in Google Calendar, this field is empty. For recurring events, it refers to the recurring instance associated with the current call, as determined by the server.
           readOnly: true
           type: string
+        chatConfig:
+          $ref: "#/components/schemas/ChatConfig"
+          description: Configuration for the chat for this conference.
         coActivity:
           $ref: "#/components/schemas/CoActivity"
           description: The current co-activity session, or unset if there is none in progress. A co-activity session can be initiated by devices in JOINED state . Initiator of the co-activity is expected to populate this field to start the session. Once clients detect that the co-activity has finished, any JOINED device can clear this field to end the co-activity session. In the case of switching activities, the initiator of the new activity merely needs to override this with the new co-activity data, and all connected clients are expected to handle the transition gracefully.
@@ -5827,6 +4612,17 @@ components:
         onClick:
           $ref: "#/components/schemas/OnClick"
       type: object
+    CardCapabilityMetadata:
+      properties:
+        requiredCapabilities:
+          description: "NEXT TAG : 2"
+          items:
+            enum:
+              - UNKNOWN
+              - SUPPORTS_BASE_CARDS
+            type: string
+          type: array
+      type: object
     CardHeader:
       properties:
         imageAltText:
@@ -5848,6 +4644,87 @@ components:
           description: "The title must be specified. The header has a fixed height: if both a title and subtitle is specified, each will take up 1 line. If only the title is specified, it will take up both lines. The header is rendered in collapsed and detailed view."
           type: string
       type: object
+    ChatConfig:
+      description: Configuration of the in meeting chat.
+      properties:
+        chatType:
+          description: The Type of chat this Conference is currently using.
+          enum:
+            - CHAT_TYPE_UNSPECIFIED
+            - MEET_CHAT
+            - GOOGLE_CHAT
+          type: string
+        googleChatConfig:
+          $ref: "#/components/schemas/GoogleChatConfig"
+          description: The configuration of Google Chat when selected.
+      type: object
+    ChatConserverDynamitePlaceholderMetadata:
+      description: Metadata used as inputs to the localization that is performed on Dynamite-originated messages that are incompatible with Hangouts clients. See go/localization-of-system-messages for more details.
+      properties:
+        attachmentMetadata:
+          $ref: "#/components/schemas/ChatConserverDynamitePlaceholderMetadataAttachmentMetadata"
+        botMessageMetadata:
+          $ref: "#/components/schemas/ChatConserverDynamitePlaceholderMetadataBotMessageMetadata"
+        calendarEventMetadata:
+          $ref: "#/components/schemas/ChatConserverDynamitePlaceholderMetadataCalendarEventMetadata"
+        deleteMetadata:
+          $ref: "#/components/schemas/ChatConserverDynamitePlaceholderMetadataDeleteMetadata"
+        editMetadata:
+          $ref: "#/components/schemas/ChatConserverDynamitePlaceholderMetadataEditMetadata"
+        spaceUrl:
+          description: The space URL embedded in the localized string.
+          type: string
+        tasksMetadata:
+          $ref: "#/components/schemas/ChatConserverDynamitePlaceholderMetadataTasksMetadata"
+        videoCallMetadata:
+          $ref: "#/components/schemas/ChatConserverDynamitePlaceholderMetadataVideoCallMetadata"
+      type: object
+    ChatConserverDynamitePlaceholderMetadataAttachmentMetadata:
+      description: An attachment uploaded in Dynamite and its filename.
+      properties:
+        filename:
+          type: string
+      type: object
+    ChatConserverDynamitePlaceholderMetadataBotMessageMetadata:
+      description: A bot sent a message in Dynamite.
+      properties: {}
+      type: object
+    ChatConserverDynamitePlaceholderMetadataCalendarEventMetadata:
+      description: A Calendar event message in Dynamite.
+      properties: {}
+      type: object
+    ChatConserverDynamitePlaceholderMetadataDeleteMetadata:
+      description: A message was deleted in Dynamite.
+      properties: {}
+      type: object
+    ChatConserverDynamitePlaceholderMetadataEditMetadata:
+      description: An edit was made in Dynamite.
+      properties: {}
+      type: object
+    ChatConserverDynamitePlaceholderMetadataTasksMetadata:
+      description: A Tasks message in Dynamite.
+      properties: {}
+      type: object
+    ChatConserverDynamitePlaceholderMetadataVideoCallMetadata:
+      description: A Meet initiated in Dynamite and its URL.
+      properties:
+        meetingUrl:
+          type: string
+      type: object
+    ChatConserverMessageContent:
+      description: The content of a chat message, which includes 0 or more segments along with 0 or more embeds, which represent various attachment types (like photos).
+      properties:
+        attachment:
+          description: Items attached to this message, such as photos. This should *NOT* be set by clients. It will be automatically set from media uploaded along with this request and using the information provided in existing_media.
+          items:
+            $ref: "#/components/schemas/SocialCommonAttachmentAttachment"
+          type: array
+        segment:
+          description: The text part of the message content. Segments are concatenated together to yield the full message. A message can have zero or more segments.
+          items:
+            $ref: "#/components/schemas/Segment"
+          type: array
+      type: object
     ChatContentExtension:
       description: "NEXT ID: 12"
       properties:
@@ -5857,7 +4734,7 @@ components:
             $ref: "#/components/schemas/EventAnnotation"
           type: array
         dynamitePlaceholderMetadata:
-          $ref: "#/components/schemas/DynamitePlaceholderMetadata"
+          $ref: "#/components/schemas/ChatConserverDynamitePlaceholderMetadata"
           description: This metadata informs how the placeholder string will be localized dynamically in Hangouts. See go/localization-of-system-messages. This is only used as part of REGULAR_CHAT_MESSAGE events.
         eventOtrStatus:
           description: Is this event OnTR or OffTR? Since some events can be ON_THE_RECORD and have an expiration_timestamp (for example enterprise retention users) we need to store the otr status.
@@ -5976,6 +4853,17 @@ components:
           format: float
           type: number
       type: object
+    CommunalLabelTag:
+      description: An individual instance (or "tag") of a label configured as a communal type that's associated with a message.
+      properties:
+        creatorUserId:
+          description: Gaia ID of the user who added the tag, if any. Not present for any tags automatically created by server-side processing.
+          format: int64
+          type: string
+        labelId:
+          description: 'A string ID representing the label. Possible ID values are documented at go/chat-labels-howto:ids. Example: "^*t_p" for "Pinned".'
+          type: string
+      type: object
     CompositeFilter:
       properties:
         logicOperator:
@@ -5991,6 +4879,13 @@ components:
             $ref: "#/components/schemas/Filter"
           type: array
       type: object
+    ConsentedAppUnfurlMetadata:
+      description: Annotation metadata app unfurl consent.
+      properties:
+        clientSpecifiedAppId:
+          $ref: "#/components/schemas/UserId"
+          description: Client specified AppId, which will not be sanitized and is untrusted.
+      type: object
     ContactGroupProto:
       description: A group of contacts for a given user, as described in http://cs/p#google3/focus/backend/proto/backend.proto Historically (and in still-existing ACLs), this was used to represent Google+ circles as well as contact groups, but this use is now deprecated. New code should use the CIRCLE principal type to represent Google+ circles.
       properties:
@@ -6005,6 +4900,44 @@ components:
           description: If present, then tests for membership in this ContactGroup must use data known to be at least as fresh as the given (FBS-assigned) timestamp. See http://go/fbs-consistent-read-after-important-write Before using this, be sure that any service checking authorization against this group supports checking consistency timestamps. For example, as of 12/2011, Keystore only supports this for the Moonshine configuration, and in others authorization checks will fail if the timestamp is present.
           format: int64
           type: string
+      type: object
+    ContentReport:
+      properties:
+        reportCreateTimestamp:
+          description: The time at which the report is generated. Always populated when it is in a response.
+          format: google-datetime
+          type: string
+        reportJustification:
+          $ref: "#/components/schemas/ContentReportJustification"
+          description: Additional user-provided justification on the report. Optional.
+        reportType:
+          $ref: "#/components/schemas/AppsDynamiteSharedContentReportType"
+          description: Type of the report. Always populated when it is in a response.
+        reporterUserId:
+          $ref: "#/components/schemas/UserId"
+          description: User ID of the reporter. Always populated when it is in a response.
+        revisionCreateTimestamp:
+          description: Create timestamp of the revisions of the message when it's reported. Always populated when it is in a response.
+          format: google-datetime
+          type: string
+      type: object
+    ContentReportJustification:
+      properties:
+        userJustification:
+          description: Optional. User-generated free-text justification for the content report.
+          type: string
+      type: object
+    ContentReportSummary:
+      description: Summarized info of content reports. Usually less expensive to fetch than to fetch all detailed reports. Set only when the request asks for it.
+      properties:
+        numberReports:
+          description: Total number of reports attached to this (revision of) message.
+          format: int32
+          type: integer
+        numberReportsAllRevisions:
+          description: Totoal number of reports attached to all revisions of this message (i.e. since creation). Set only when the request asks for it.
+          format: int32
+          type: integer
       type: object
     ContextAttribute:
       description: A named attribute associated with an item which can be used for influencing the ranking of the item based on the context in the request.
@@ -6039,6 +4972,17 @@ components:
         wrappedKey:
           description: The wrapped CSE key used by this conference.
           format: byte
+          type: string
+      type: object
+    CustomEmojiMetadata:
+      properties:
+        customEmoji:
+          $ref: "#/components/schemas/AppsDynamiteSharedCustomEmoji"
+      type: object
+    CustomerId:
+      description: Represents a GSuite customer ID. Obfuscated with CustomerIdObfuscator.
+      properties:
+        customerId:
           type: string
       type: object
     CustomerIndexStats:
@@ -6111,6 +5055,16 @@ components:
           description: The count of unique active users in the past thirty days
           format: int64
           type: string
+      type: object
+    DataLossPreventionMetadata:
+      description: Annotation metadata for Data Loss Prevention that pertains to DLP violation on message send or edit events. It is used for client -> BE communication and other downstream process in BE (e.g. storage and audit logging), and it should never be returned to the client.
+      properties:
+        dlpScanSummary:
+          $ref: "#/components/schemas/DlpScanSummary"
+          description: The DLP scan summary that should only be set after the message is scanned in the Chat backend.
+        warnAcknowledged:
+          description: Flag set by client on message resend to bypass WARN violation.
+          type: boolean
       type: object
     DataSource:
       description: Datasource is a logical namespace for items to be indexed. All items must belong to a datasource. This is the prerequisite before items can be indexed into Cloud Search.
@@ -6272,7 +5226,7 @@ components:
           type: string
       type: object
     DeleteMetadata:
-      description: A message was deleted in Dynamite.
+      description: A message delete in Dynamite inserts a Babel-only item containing this field. This is only inserted for messages before the source-of-truth flip. See go/hsc-message-deletions for more details.
       properties: {}
       type: object
     DeleteQueueItemsRequest:
@@ -6310,6 +5264,50 @@ components:
       type: object
     Divider:
       properties: {}
+      type: object
+    DlpScanSummary:
+      description: A summary of a DLP scan event. This is a summary and should contain the minimum amount of data required to identify and process DLP scans. It is written to Starcast and encoded & returned to the client on attachment upload.
+      properties:
+        scanId:
+          description: The scan ID of the corresponding {@link DlpViolationScanRecord} in the {@link EphemeralDlpScans} Spanner table. This can be used to fetch additional details about the scan, e.g. for audit logging.
+          type: string
+        scanNotApplicableForContext:
+          description: Indicates that was no attempt to scan a message or attachment because it was not applicable in the given context (e.g. atomic mutuate). If this is true, scan_outcome should not be set. This flag is used to identify messages that DLP did not attempt to scan for monitoring scan coverage. Contents that DLP attempted to scan but skipped can be identified by DlpScanOutcome.SCAN_SKIPPED_* reasons.
+          type: boolean
+        scanOutcome:
+          description: The outcome of a DLP Scan. If this is set, scan_not_applicable_for_context should not be true.
+          enum:
+            - SCAN_UNKNOWN_OUTCOME
+            - SCAN_SUCCEEDED_NO_VIOLATION
+            - SCAN_SUCCEEDED_BLOCK
+            - SCAN_SUCCEEDED_WARN
+            - SCAN_SUCCEEDED_AUDIT_ONLY
+            - SCAN_FAILURE_EXCEPTION
+            - SCAN_FAILURE_TIMEOUT
+            - SCAN_FAILURE_ALL_RULES_FAILED
+            - SCAN_FAILURE_ILLEGAL_STATE_FOR_ATTACHMENTS
+            - SCAN_SKIPPED_EXPERIMENT_DISABLED
+            - SCAN_SKIPPED_CONSUMER
+            - SCAN_SKIPPED_NON_HUMAN_USER
+            - SCAN_SKIPPED_NO_MESSAGE
+            - SCAN_SKIPPED_USER_ACKNOWLEDGED_WARNING
+            - SCAN_SKIPPED_MESSAGE_FROM_UNSUPPORTED_ORIGIN
+            - SCAN_RULE_EVALUATION_SKIPPED_NO_RULES_FOUND
+            - SCAN_RULE_EVALUATION_SKIPPED_NO_APPLICABLE_RULES_FOR_ACTION_PARAMS
+            - SCAN_RULE_EVALUATION_SKIPPED_NO_APPLICABLE_RULES_FOR_TRIGGER
+            - SCAN_RULE_EVALUATION_SKIPPED_CHANGELING_PERMANENT_ERROR
+            - SCAN_RULE_EVALUATION_SKIPPED_CHANGELING_EMPTY_RESPONSE
+            - SCAN_SUCCEEDED_WITH_FAILURES_NO_VIOLATION
+            - SCAN_SUCCEEDED_WITH_FAILURES_BLOCK
+            - SCAN_SUCCEEDED_WITH_FAILURES_WARN
+            - SCAN_SUCCEEDED_WITH_FAILURES_AUDIT_ONLY
+          type: string
+      type: object
+    DmId:
+      properties:
+        dmId:
+          description: Unique server assigned Id, per Direct Message Space.
+          type: string
       type: object
     DocumentInfo:
       description: Information on a document attached to an active conference.
@@ -6361,6 +5359,97 @@ components:
             - STARRED
           type: string
       type: object
+    DriveMetadata:
+      description: Annotation metadata for Drive artifacts.
+      properties:
+        aclFixRequest:
+          $ref: "#/components/schemas/AclFixRequest"
+        aclFixStatus:
+          $ref: "#/components/schemas/AclFixStatus"
+        canEdit:
+          description: Can the current user edit this resource
+          type: boolean
+        canShare:
+          description: Can the current user share this resource
+          type: boolean
+        canView:
+          description: Can the current user view this resource
+          type: boolean
+        driveAction:
+          description: DriveAction for organizing this file in Drive. If the user does not have access to the Drive file, the value will be DriveAction.DRIVE_ACTION_UNSPECIFIED. This field is only set when part of a FileResult in a ListFilesResponse.
+          enum:
+            - DRIVE_ACTION_UNSPECIFIED
+            - ADD_TO_DRIVE
+            - ORGANIZE
+            - ADD_SHORTCUT
+            - ADD_ANOTHER_SHORTCUT
+          type: string
+        driveState:
+          enum:
+            - DRIVE_STATE_UNSPECIFIED
+            - IN_MY_DRIVE
+            - IN_TEAM_DRIVE
+            - SHARED_IN_DRIVE
+            - NOT_IN_DRIVE
+          type: string
+        embedUrl:
+          $ref: "#/components/schemas/TrustedResourceUrlProto"
+          description: Output only. Trusted Resource URL for drive file embedding.
+          readOnly: true
+        encryptedDocId:
+          description: Indicates whether the Drive link contains an encrypted doc ID. If true, Dynamite should not attempt to query the doc ID in Drive Service. See go/docid-encryption for details.
+          type: boolean
+        encryptedResourceKey:
+          description: "This is deprecated and unneeded. TODO (b/182479059): Remove this."
+          type: string
+        externalMimetype:
+          description: "External mimetype of the Drive Resource (Useful for creating Drive URL) See: http://b/35219462"
+          type: string
+        id:
+          description: Drive resource ID of the artifact.
+          type: string
+        isDownloadRestricted:
+          description: Deprecated. Whether the setting to restrict downloads is enabled for this file. This was previously used to determine whether to hide the download and print buttons in the UI, but is no longer used by clients, because Projector now independently queries Drive to ensure that we have the most up-to-date value.
+          type: boolean
+        isOwner:
+          description: If the current user is the Drive file's owner. The field is currently only set for Annotations for the ListFiles action (as opposed to fetching Topics/Messages with Drive annotations).
+          type: boolean
+        legacyUploadMetadata:
+          $ref: "#/components/schemas/LegacyUploadMetadata"
+          description: Only present if this DriveMetadata is converted from an UploadMetadata.
+        mimetype:
+          description: Mimetype of the Drive Resource
+          type: string
+        organizationDisplayName:
+          description: The display name of the organization owning the Drive item.
+          type: string
+        shortcutAuthorizedItemId:
+          $ref: "#/components/schemas/AuthorizedItemId"
+          description: Shortcut ID of this drive file in the shared drive, which is associated with a named room this file was shared in. Shortcuts will not be created for DMs or unnamed rooms. This is populated after the DriveMetadata is migrated to shared drive. go/chat-shared-drive-uploads.
+        shouldNotRender:
+          description: If this field is set to true, server should still contact external backends to get metadata for search but clients should not render this chip.
+          type: boolean
+        thumbnailHeight:
+          description: Thumbnail image of the Drive Resource
+          format: int32
+          type: integer
+        thumbnailUrl:
+          description: Thumbnail image of the Drive Resource
+          type: string
+        thumbnailWidth:
+          description: Thumbnail image of the Drive Resource
+          format: int32
+          type: integer
+        title:
+          description: Title of the Drive Resource
+          type: string
+        urlFragment:
+          description: 'Url string fragment that generally indicates the specific location in the linked file. Example: #header=h.123abc456. If the fragment is not present this will not be present and therefore default to an empty string. The "#" will not be included.'
+          type: string
+        wrappedResourceKey:
+          $ref: "#/components/schemas/WrappedResourceKey"
+          description: This is considered SPII and should not be logged.
+      type: object
     DriveMimeTypeRestrict:
       description: Drive mime-type search restricts (e.g. "type:pdf").
       properties:
@@ -6395,27 +5484,6 @@ components:
             - LAST_30_DAYS
             - LAST_90_DAYS
           type: string
-      type: object
-    DynamitePlaceholderMetadata:
-      description: Metadata used as inputs to the localization that is performed on Dynamite-originated messages that are incompatible with Hangouts clients. See go/localization-of-system-messages for more details.
-      properties:
-        attachmentMetadata:
-          $ref: "#/components/schemas/AttachmentMetadata"
-        botMessageMetadata:
-          $ref: "#/components/schemas/BotMessageMetadata"
-        calendarEventMetadata:
-          $ref: "#/components/schemas/CalendarEventMetadata"
-        deleteMetadata:
-          $ref: "#/components/schemas/DeleteMetadata"
-        editMetadata:
-          $ref: "#/components/schemas/EditMetadata"
-        spaceUrl:
-          description: The space URL embedded in the localized string.
-          type: string
-        tasksMetadata:
-          $ref: "#/components/schemas/TasksMetadata"
-        videoCallMetadata:
-          $ref: "#/components/schemas/VideoCallMetadata"
       type: object
     DynamiteSpacesScoringInfo:
       description: This is the proto for holding space level scoring information. This data is used for logging in query-api server and for testing purposes.
@@ -6470,14 +5538,26 @@ components:
           type: number
       type: object
     EditMetadata:
-      description: An edit was made in Dynamite.
+      description: A message edit in Dynamite inserts a Babel-only item containing this field.
       properties: {}
       type: object
     EmailAddress:
       description: A person's email address.
       properties:
+        customType:
+          description: If the value of type is custom, this property contains the custom type string.
+          type: string
         emailAddress:
           description: The email address.
+          type: string
+        emailUrl:
+          description: The URL to send email.
+          type: string
+        primary:
+          description: Indicates if this is the user's primary email. Only one entry can be marked as primary.
+          type: boolean
+        type:
+          description: 'The type of the email account. Acceptable values are: "custom", "home", "other", "work".'
           type: string
       type: object
     EmailOwnerProto:
@@ -7133,6 +6213,31 @@ components:
           description: Indicates whether form values persist after the action. When false, the Apps Script is responsible for persisting values, by setting any form field values using the formInputs in the event. Disabling this behavior can be used if the add-on needs the ability to clear form fields, for example, as with persistent values, there is no means for clearing existing values. When disabling persistent values, it is strongly recommended that the add-on use LoadIndicator.SPINNER for all events, as this locks the UI to ensure no changes are made by the user while the action is being processed. When using LoadIndicator.NONE for any of the actions, persistent values are recommended, as it ensures that any changes made by the user after form / on change actions are sent to the server are not overwritten by the response. Persistent values disabled by default. While we recommend persistent values be used in the typical use case, we do not enable by default, as doing so would change the current behavior of existing add-ons in prod.
           type: boolean
       type: object
+    FormatMetadata:
+      description: Annotation metadata for markup formatting
+      properties:
+        fontColor:
+          description: "Font color is set if and only if format_type is FONT_COLOR. The components are stored as (alpha << 24) | (red << 16) | (green << 8) | blue. Clients should always set the alpha component to 0xFF. NEXT TAG: 3"
+          format: uint32
+          type: integer
+        formatType:
+          description: LINT.ThenChange(//depot/google3/apps/dynamite/v1/web/datakeys/annotated_span.proto)
+          enum:
+            - TYPE_UNSPECIFIED
+            - BOLD
+            - ITALIC
+            - STRIKE
+            - SOURCE_CODE
+            - MONOSPACE
+            - HIDDEN
+            - MONOSPACE_BLOCK
+            - UNDERLINE
+            - FONT_COLOR
+            - BULLETED_LIST
+            - BULLETED_LIST_ITEM
+            - CLIENT_HIDDEN
+          type: string
+      type: object
     Formatting:
       description: Formatting information for a segment.
       properties:
@@ -7298,6 +6403,13 @@ components:
           items:
             $ref: "#/components/schemas/SearchApplicationUserStats"
           type: array
+      type: object
+    GoogleChatConfig:
+      description: Configuration of the Google Chat in Meet.
+      properties:
+        chatGroupId:
+          description: ID of the Chat group.
+          type: string
       type: object
     GoogleChatV1ContextualAddOnMarkup:
       description: The markup for developers to specify the contents of a contextual AddOn.
@@ -7685,6 +6797,23 @@ components:
           description: Text properties.
           type: string
       type: object
+    GroupDetailsUpdatedMetadata:
+      properties:
+        newGroupDetails:
+          $ref: "#/components/schemas/AppsDynamiteSharedGroupDetails"
+        prevGroupDetails:
+          $ref: "#/components/schemas/AppsDynamiteSharedGroupDetails"
+      type: object
+    GroupId:
+      description: Id representing a group that could be a space, a chat, or a direct message space. Which ID is set here will determine which group
+      properties:
+        dmId:
+          $ref: "#/components/schemas/DmId"
+          description: Unique, immutable ID of the Direct Message Space
+        spaceId:
+          $ref: "#/components/schemas/SpaceId"
+          description: Unique, immutable ID of the Space
+      type: object
     GroupLinkSharingModificationEvent:
       properties:
         newStatus:
@@ -7694,6 +6823,44 @@ components:
             - LINK_SHARING_OFF
             - NOT_AVAILABLE
           type: string
+      type: object
+    GroupRetentionSettingsUpdatedMetaData:
+      properties:
+        initiator:
+          $ref: "#/components/schemas/UserId"
+          description: The user who triggered the retention settings update
+        retentionSettings:
+          $ref: "#/components/schemas/AppsDynamiteSharedRetentionSettings"
+          description: The updated space retention settings
+      type: object
+    GsuiteIntegrationMetadata:
+      description: Annotation metadata for an GsuiteIntegration artifact.
+      properties:
+        activityFeedData:
+          $ref: "#/components/schemas/AppsDynamiteSharedActivityFeedAnnotationData"
+        assistantData:
+          $ref: "#/components/schemas/AppsDynamiteSharedAssistantAnnotationData"
+        calendarEventData:
+          $ref: "#/components/schemas/AppsDynamiteSharedCalendarEventAnnotationData"
+        callData:
+          $ref: "#/components/schemas/AppsDynamiteSharedCallAnnotationData"
+          description: Data used to render call artifacts.
+        clientType:
+          enum:
+            - UNKNOWN_CLIENT_TYPE
+            - MEET
+            - TASKS
+            - CALENDAR_EVENT
+            - ASSISTANT
+            - ACTIVITY_FEED_SERVICE
+          type: string
+        indexableTexts:
+          description: A list of all strings that are to be indexed for this 1P chip. Each string in this list would be the contents of a single string field in the 1P chip. Eg. For Tasks[title = “hello world”, description = “good bye”]. If we want to index only the title, this would be set to [“hello world”]. If both title and description, then this would be [“hello world”, “good bye”]. Please make sure that the contents of this field is a subset of strings that are rendered as part of the 1P Chip.
+          items:
+            type: string
+          type: array
+        tasksData:
+          $ref: "#/components/schemas/AppsDynamiteSharedTasksAnnotationData"
       type: object
     HangoutEvent:
       properties:
@@ -7718,6 +6885,16 @@ components:
             - END_HANGOUT
             - HANGOUT_COMING_SOON
             - ONGOING_HANGOUT
+          type: string
+      type: object
+    HangoutVideoEventMetadata:
+      description: A message representing the Hangout video start/end events in Babel
+      properties:
+        hangoutVideoType:
+          enum:
+            - UNKNOWN_HANGOUT_VIDEO_EVENT_TYPE
+            - VIDEO_START
+            - VIDEO_END
           type: string
       type: object
     HashtagData:
@@ -7968,6 +7145,36 @@ components:
         text:
           type: string
       type: object
+    IncomingWebhookChangedMetadata:
+      description: "Annotation metadata to display system messages for incoming webhook events. Next Tag: 7"
+      properties:
+        incomingWebhookName:
+          description: The webhook name at the time of the change. Used in Spanner storage, BE API responses and FE API responses.
+          type: string
+        initiatorId:
+          $ref: "#/components/schemas/UserId"
+          description: The user id of the user whose action triggered this system message. Used in Spanner storage, BE API responses and FE API responses.
+        initiatorProfile:
+          $ref: "#/components/schemas/User"
+          description: Complete profile when ListTopicsRequest FetchOptions.USER is set. Otherwise, only the id will be filled in. Used in FE API responses.
+        obfuscatedIncomingWebhookId:
+          description: The webhook id of the incoming webhook in question. This field should not be used to load webhook information dynamically and is only present for debugging purposes. Used in Spanner storage, BE API responses and FE API responses.
+          type: string
+        oldIncomingWebhookName:
+          description: Only populated for UPDATED_NAME and UPDATED_NAME_AND_AVATAR events, where the webhook name was changed. Used in Spanner storage, BE API responses and FE API responses.
+          type: string
+        type:
+          description: Used in Spanner storage, BE API responses and FE API responses.
+          enum:
+            - UNSPECIFIED
+            - ADDED
+            - UPDATED
+            - REMOVED
+            - UPDATED_NAME
+            - UPDATED_AVATAR
+            - UPDATED_NAME_AND_AVATAR
+          type: string
+      type: object
     IndexItemOptions:
       properties:
         allowUnknownGsuitePrincipals:
@@ -8043,6 +7250,33 @@ components:
             type: string
           type: array
       type: object
+    IntegrationConfigMutation:
+      properties:
+        addApp:
+          $ref: "#/components/schemas/AppId"
+          description: Add an app using its identifier.
+        addPinnedItem:
+          $ref: "#/components/schemas/PinnedItemId"
+          description: Add a pinned tab using its identifier.
+        removeApp:
+          $ref: "#/components/schemas/AppId"
+          description: Remove an active app using its identifier.
+        removePinnedItem:
+          $ref: "#/components/schemas/PinnedItemId"
+          description: Remove an active pinned tab using its identifier.
+      type: object
+    IntegrationConfigUpdatedMetadata:
+      description: Annotation metadata to display system message for integration config updated event. This metadata is stored in spanner, and can be dispatched to clients without any field modification or transformation.
+      properties:
+        initiatorId:
+          $ref: "#/components/schemas/UserId"
+          description: The user whose action triggered this system message.
+        mutations:
+          description: A list of updates applied on the integration config.
+          items:
+            $ref: "#/components/schemas/IntegrationConfigMutation"
+          type: array
+      type: object
     Interaction:
       description: Represents an interaction between a user and an item.
       properties:
@@ -8066,6 +7300,16 @@ components:
           items:
             $ref: "#/components/schemas/StoredParticipantId"
           type: array
+      type: object
+    InviteeInfo:
+      description: Invitee information from a Dynamite invitation. See go/dynamite-invitee-mgmt.
+      properties:
+        email:
+          description: Email as typed by the user when invited to Room or DM. This value will be canonicalized and hashed before retained in storage.
+          type: string
+        userId:
+          $ref: "#/components/schemas/UserId"
+          description: Unique, immutable ID of the User.
       type: object
     Item:
       description: Represents a single object that is an item in the search index, such as a file, folder, or a database record.
@@ -8358,11 +7602,21 @@ components:
         userName:
           type: string
       type: object
+    LegacyUploadMetadata:
+      description: The original UploadMetadata that this DriveMetadata was converted from.
+      properties:
+        legacyUniqueId:
+          description: A unique ID generated from legacy UploadMetadata. This is used for interopping URLs after uploading blob to shared drive. Links in Classic might break without this. go/drive-file-attachment-interop-from-dynamite.
+          type: string
+        uploadMetadata:
+          $ref: "#/components/schemas/UploadMetadata"
+          description: The blob in this UploadMetadata has been uploaded to shared drive. This UploadMetadata is no longer attached to a message. go/shared-drive-data-migration.
+      type: object
     LinkData:
       description: Link metadata, for LINK segments. Anchor text should be stored in the "text" field of the Segment, which can also serve as a fallback.
       properties:
         attachment:
-          $ref: "#/components/schemas/Attachment"
+          $ref: "#/components/schemas/SocialCommonAttachmentAttachment"
           description: 'An Attachment represents the structured entity to which we are linking. It contains an Embed (apps/tacotown/proto/embeds/embed_client.proto) with fields specific to the appropriate type of linked entity. For example, if we are linking to a photo album, the Embed may include the album ID and gaia ID of the creator. Clients that understand the Embed type within the Attachment may construct and/or decorate their link appropriately e.g. to make use of type-specific functionality or first-party integrations. The link_target and (if appropriate) display_url fields must still be set even when an Attachment is present, so that clients who do not know how to interpret the Attachment can fall back to those fields, and render the Segment as an ordinary web link. N.B. Even when an Attachment is present, the intention of a "LINK" Segment is for the Segment to be presented inline with the rest of the text of a post or comment, with a clickable link or other UI suitable for inlining (though the client may modify the UI based on Attachment data, e.g. to add appropriate hovers, icons, etc.). When an entity is intended to be rendered separately from the main body of the post/comment, a separate Attachment proto can be added outside the set of Segments. N.B. Within the Attachment, fields of EmbedClientItem have their own visibility annotations, which should be enforced separately from Segment visibility annotations. See: apps/tacotown/proto/embeds/embed_annotations.proto'
         attachmentRenderHint:
           description: The hint to use when rendering the associated attachment. Ignored if there is no associated attachment.
@@ -8549,6 +7803,23 @@ components:
           $ref: "#/components/schemas/UniversalPhoneAccess"
           description: A universal phone access method for this meeting space. Can be unset.
       type: object
+    Member:
+      properties:
+        roster:
+          $ref: "#/components/schemas/Roster"
+        user:
+          $ref: "#/components/schemas/User"
+      type: object
+    MemberId:
+      description: Eventually this can be updated to a oneOf User, Space (for nested spaces), Bots or Service, as and when these use cases come up.
+      properties:
+        rosterId:
+          $ref: "#/components/schemas/RosterId"
+          description: Unique, immutable ID of the Roster.
+        userId:
+          $ref: "#/components/schemas/UserId"
+          description: Unique, immutable ID of the User.
+      type: object
     MembershipChangeEvent:
       properties:
         leaveReason:
@@ -8566,6 +7837,43 @@ components:
           enum:
             - JOIN
             - LEAVE
+          type: string
+      type: object
+    MembershipChangedMetadata:
+      description: Annotation metadata to display system messages for membership changes.
+      properties:
+        affectedMemberProfiles:
+          items:
+            $ref: "#/components/schemas/Member"
+          type: array
+        affectedMembers:
+          description: List of users and rosters whose membership status changed.
+          items:
+            $ref: "#/components/schemas/MemberId"
+          type: array
+        affectedMemberships:
+          items:
+            $ref: "#/components/schemas/AffectedMembership"
+          type: array
+        initiator:
+          $ref: "#/components/schemas/UserId"
+          description: The user whose action triggered this system message.
+        initiatorProfile:
+          $ref: "#/components/schemas/User"
+          description: Complete member profiles, when ListTopicsRequest FetchOptions.USER is set. Otherwise, only the id will be filled in.
+        type:
+          enum:
+            - TYPE_UNSPECIFIED
+            - INVITED
+            - JOINED
+            - ADDED
+            - REMOVED
+            - LEFT
+            - BOT_ADDED
+            - BOT_REMOVED
+            - KICKED_DUE_TO_OTR_CONFLICT
+            - ROLE_UPDATED
+            - ROLE_TARGET_AUDIENCE_UPDATED
           type: string
       type: object
     Menu:
@@ -8596,19 +7904,255 @@ components:
           description: The value associated with this item which will be sent back to app scripts. Client should use as a form input value.
           type: string
       type: object
-    MessageContent:
-      description: The content of a chat message, which includes 0 or more segments along with 0 or more embeds, which represent various attachment types (like photos).
+    Message:
+      description: Message posted to a Space.
       properties:
-        attachment:
-          description: Items attached to this message, such as photos. This should *NOT* be set by clients. It will be automatically set from media uploaded along with this request and using the information provided in existing_media.
+        annotations:
+          description: Annotations parsed and extracted from the text body.
+          items:
+            $ref: "#/components/schemas/Annotation"
+          type: array
+        appProfile:
+          $ref: "#/components/schemas/AppsDynamiteSharedAppProfile"
+          description: Custom display profile info for apps. Leave the field empty for real users.
+        attachments:
+          description: Attachments parsed from incoming webhooks
           items:
             $ref: "#/components/schemas/Attachment"
           type: array
-        segment:
-          description: The text part of the message content. Segments are concatenated together to yield the full message. A message can have zero or more segments.
+        attributes:
+          $ref: "#/components/schemas/MessageAttributes"
+          description: Lightweight message attributes which values are calculated and set in the servers.
+        botResponses:
+          description: Responses from bots indicating if extra auth/config is needed.
           items:
-            $ref: "#/components/schemas/Segment"
+            $ref: "#/components/schemas/BotResponse"
           type: array
+        communalLabels:
+          description: Communal labels associated with a message. These exist on the message itself regardless of which user fetches them. Order of entries is arbitrary and will not list duplicates of the same label_id. See go/chat-labels-design for details.
+          items:
+            $ref: "#/components/schemas/CommunalLabelTag"
+          type: array
+        contentReportSummary:
+          $ref: "#/components/schemas/ContentReportSummary"
+          readOnly: true
+        createTime:
+          description: Time when the Message was posted in microseconds.
+          format: int64
+          type: string
+        creatorId:
+          $ref: "#/components/schemas/UserId"
+          description: ID of the User who posted the Message. This includes information to identify if this was posted by an App on behalf of a user.
+        deletableBy:
+          description: Indicates who can delete the message. This field is set on the read path (e.g. ListTopics) but doesn’t have any effect on the write path (e.g. CreateMessageRequest).
+          enum:
+            - PERMISSION_UNSPECIFIED
+            - PERMISSION_NO_ONE
+            - PERMISSION_CREATOR
+            - PERMISSION_MEMBER
+          type: string
+        deleteTime:
+          description: Time when the Message was deleted in microseconds. This field is set to nonzero value only for Messages deleted globally.
+          format: int64
+          type: string
+        deleteTimeForRequester:
+          description: Time when the Message was per-user deleted by the message requester in microseconds. This field is set to nonzero value only for Message per-user deleted by the requester.
+          format: int64
+          type: string
+        deletedByVault:
+          description: Was this message deleted by Vault (Only used for Vault support) This is false if message is live or message was deleted by user.
+          type: boolean
+        dlpScanOutcome:
+          description: "Data Loss Prevention scan information for this message. Messages are evaluated in the backend on create message/topic and edit message actions. DEPRECATED: use dlp_scan_summary instead."
+          enum:
+            - SCAN_UNKNOWN_OUTCOME
+            - SCAN_SUCCEEDED_NO_VIOLATION
+            - SCAN_SUCCEEDED_BLOCK
+            - SCAN_SUCCEEDED_WARN
+            - SCAN_SUCCEEDED_AUDIT_ONLY
+            - SCAN_FAILURE_EXCEPTION
+            - SCAN_FAILURE_TIMEOUT
+            - SCAN_FAILURE_ALL_RULES_FAILED
+            - SCAN_FAILURE_ILLEGAL_STATE_FOR_ATTACHMENTS
+            - SCAN_SKIPPED_EXPERIMENT_DISABLED
+            - SCAN_SKIPPED_CONSUMER
+            - SCAN_SKIPPED_NON_HUMAN_USER
+            - SCAN_SKIPPED_NO_MESSAGE
+            - SCAN_SKIPPED_USER_ACKNOWLEDGED_WARNING
+            - SCAN_SKIPPED_MESSAGE_FROM_UNSUPPORTED_ORIGIN
+            - SCAN_RULE_EVALUATION_SKIPPED_NO_RULES_FOUND
+            - SCAN_RULE_EVALUATION_SKIPPED_NO_APPLICABLE_RULES_FOR_ACTION_PARAMS
+            - SCAN_RULE_EVALUATION_SKIPPED_NO_APPLICABLE_RULES_FOR_TRIGGER
+            - SCAN_RULE_EVALUATION_SKIPPED_CHANGELING_PERMANENT_ERROR
+            - SCAN_RULE_EVALUATION_SKIPPED_CHANGELING_EMPTY_RESPONSE
+            - SCAN_SUCCEEDED_WITH_FAILURES_NO_VIOLATION
+            - SCAN_SUCCEEDED_WITH_FAILURES_BLOCK
+            - SCAN_SUCCEEDED_WITH_FAILURES_WARN
+            - SCAN_SUCCEEDED_WITH_FAILURES_AUDIT_ONLY
+          type: string
+        dlpScanSummary:
+          $ref: "#/components/schemas/DlpScanSummary"
+          description: Data Loss Prevention scan information for this message. Messages are evaluated in the backend on create message/topic and edit message actions.
+        editableBy:
+          description: Indicates who can edit the message. This field is set on the read path (e.g. ListTopics) but doesn’t have any effect on the write path (e.g. CreateMessageRequest).
+          enum:
+            - PERMISSION_UNSPECIFIED
+            - PERMISSION_NO_ONE
+            - PERMISSION_CREATOR
+            - PERMISSION_MEMBER
+          type: string
+        fallbackText:
+          description: A plain-text description of the attachment, used when clients cannot display formatted attachment (e.g. mobile push notifications).
+          type: string
+        id:
+          $ref: "#/components/schemas/MessageId"
+          description: ID of the resource.
+        isInlineReply:
+          description: Output only. Indicates if the message is an inline reply. Set to true only if the message's ParentPath is non-NULL. Currently, only inline replies have non-NULL ParentPath. See go/chat-be-inline-reply-indicator.
+          readOnly: true
+          type: boolean
+        lastEditTime:
+          description: If the message was edited by a user, timestamp of the last edit, in microseconds.
+          format: int64
+          type: string
+        lastUpdateTime:
+          description: Time when the Message text was last updated in microseconds.
+          format: int64
+          type: string
+        localId:
+          description: A unique id specified on the client side.
+          type: string
+        messageIntegrationPayload:
+          $ref: "#/components/schemas/AppsDynamiteSharedMessageIntegrationPayload"
+          description: An optional payload (restricted to 1P applications) that will be stored with this message. This can only be set by the 1P API and should be used to deliver additional data such a 1P sync version, 1P entity ID to the client for more advanced functionality [Eg. inform Group Tasks tab of new version while linking, fetch & render a live Task/Meet call tile].
+        messageOrigin:
+          description: Where the message was posted from
+          enum:
+            - ORIGIN_NOT_SET
+            - ORIGIN_DYNAMITE
+            - ORIGIN_BABEL_INTEROP_LIVE
+            - ORIGIN_BABEL_INTEROP_RETRY
+            - ORIGIN_BABEL
+            - ORIGIN_BABEL_DUAL_WRITE
+            - ORIGIN_BABEL_DUAL_WRITE_RETRY
+            - ORIGIN_BACKFILL_FROM_PAPYRUS
+            - ORIGIN_BACKFILL_FROM_GMAIL_ARCHIVE
+          type: string
+        messageState:
+          description: State of the message, indicating whether the message is visible to all members in the group or is only visible to the sender only, or the private_message_viewer if it is set.
+          enum:
+            - PUBLIC
+            - PRIVATE
+          type: string
+        originAppSuggestions:
+          description: Indicates if this message contains any suggestions that were provided by any Apps.
+          items:
+            $ref: "#/components/schemas/AppsDynamiteSharedOriginAppSuggestion"
+          type: array
+        personalLabels:
+          description: "Personal labels associated with a message for the viewing user. Order of entries is arbitrary and will not list duplicates of the same label_id. See go/chat-labels-design for details. NOTE: This will be unpopulated in the case of SpaceChangelog events."
+          items:
+            $ref: "#/components/schemas/PersonalLabelTag"
+          type: array
+        privateMessageInfos:
+          description: A list of per-user private information. This is deprecated, because we no longer plan to support partially private messages or private messages for multiple users. The message_state and private_message_viewer fields should be sufficient for this infrastructure.
+          items:
+            $ref: "#/components/schemas/PrivateMessageInfo"
+          type: array
+        privateMessageViewer:
+          $ref: "#/components/schemas/UserId"
+          description: Should only be set if the Message State is PRIVATE. If set, the message content is only visible to this user (and any apps associated with the message), as well as the message creator. If unset, a private message is visible to the message creator only.
+        props:
+          $ref: "#/components/schemas/MessageProps"
+          description: Contains additional (currently Hangouts Classic only) properties applicable to this message.
+        quotedByState:
+          description: Output only. Whether this message has been quoted by another message or not. Used by clients to handle message edit flows for messages that have been quoted.
+          enum:
+            - QUOTED_BY_STATE_UNSPECIFIED
+            - QUOTED_BY_STATE_HAS_BEEN_QUOTED
+            - QUOTED_BY_STATE_HAS_NOT_BEEN_QUOTED
+          readOnly: true
+          type: string
+        quotedMessageMetadata:
+          $ref: "#/components/schemas/QuotedMessageMetadata"
+          description: Output only. Metadata for a message that is quoted by this message.
+          readOnly: true
+        reactions:
+          description: A list of user reactions to this message. Ordered by the timestamp of the first reaction, ascending (oldest to newest).
+          items:
+            $ref: "#/components/schemas/AppsDynamiteSharedReaction"
+          type: array
+        reports:
+          description: Output only. Details of content reports. Set only when the request asks for it.
+          items:
+            $ref: "#/components/schemas/ContentReport"
+          readOnly: true
+          type: array
+        retentionSettings:
+          $ref: "#/components/schemas/AppsDynamiteSharedRetentionSettings"
+          description: The retention settings of the message.
+        secondaryMessageKey:
+          description: A client-specified string that can be used to uniquely identify a message in a space, in lieu of `id.message_id`.
+          type: string
+        textBody:
+          description: Plaintext body of the Message.
+          type: string
+        tombstoneMetadata:
+          $ref: "#/components/schemas/TombstoneMetadata"
+          description: Information for the stoning of a Message.
+        updaterId:
+          $ref: "#/components/schemas/UserId"
+          description: ID of the User who last updated (created/edited/deleted) the Message. This includes information to identify if this was updated by an App on behalf of a user.
+        uploadMetadata:
+          description: UploadMetadata b/36864213 is an ongoing effort to move UploadMetadata out of annotations field and save it to upload_metadata field only. After the migration, UploadMetadata will only be saved in this field.
+          items:
+            $ref: "#/components/schemas/UploadMetadata"
+          type: array
+      type: object
+    MessageAttributes:
+      description: "Stores tombstone message attributes: go/tombstone-message-attributes-overview"
+      properties:
+        isTombstone:
+          description: "If true: message is a tombstone in the client. Default false."
+          type: boolean
+      type: object
+    MessageId:
+      description: Primary key for Message resource.
+      properties:
+        messageId:
+          description: Opaque, server-assigned ID of the Message. While this ID is guaranteed to be unique within the Space, it's not guaranteed to be globally unique.
+          type: string
+        parentId:
+          $ref: "#/components/schemas/MessageParentId"
+          description: ID of the Message's immediate parent.
+      type: object
+    MessageInfo:
+      properties:
+        message:
+          $ref: "#/components/schemas/Message"
+          description: The content of a matching message.
+        searcherMembershipState:
+          description: Searcher's membership state in the space where the message is posted.
+          enum:
+            - MEMBER_UNKNOWN
+            - MEMBER_INVITED
+            - MEMBER_JOINED
+            - MEMBER_NOT_A_MEMBER
+            - MEMBER_FAILED
+          type: string
+      type: object
+    MessageParentId:
+      description: Primary key identifying Message resource's immediate parent. For top-level Messages, either topic_id or chat_id is populated. For replies, message_id is populated with the topic Message's ID.
+      properties:
+        topicId:
+          $ref: "#/components/schemas/TopicId"
+          description: "ID of the Topic this Message is posted to. NEXT TAG : 5"
+      type: object
+    MessageProps:
+      description: Container for storing properties applicable to messages. For now (until storage consolidation is complete), it will only be used for babel props. In the future it could be used to house Dynamite properties for experimenting/rapid prototyping.
+      properties:
+        babelProps:
+          $ref: "#/components/schemas/BabelMessageProps"
       type: object
     Metadata:
       description: Metadata of a matched search result.
@@ -8917,6 +8461,13 @@ components:
             $ref: "#/components/schemas/Photo"
           type: array
       type: object
+    PersonalLabelTag:
+      description: An individual instance (or "tag") of a label configured as a personal type that's associated with a message.
+      properties:
+        labelId:
+          description: 'A string ID representing the label. Possible ID values are documented at go/chat-labels-howto:ids. Examples: "^t" for "Starred", "^nu" for "Nudged".'
+          type: string
+      type: object
     PhoneAccess:
       description: Phone access contains information required to dial into a conference using a regional phone number and a PIN that is specific to that phone number.
       properties:
@@ -8954,6 +8505,12 @@ components:
       properties:
         url:
           description: The URL of the photo.
+          type: string
+      type: object
+    PinnedItemId:
+      properties:
+        driveId:
+          description: Identifier for a Drive file (e.g. Docs, Sheets, Slides).
           type: string
       type: object
     PollItemsRequest:
@@ -9139,6 +8696,34 @@ components:
         zwiebackSession:
           $ref: "#/components/schemas/ZwiebackSessionProto"
           description: scope = ZWIEBACK_SESSION
+      type: object
+    PrivateMessageInfo:
+      description: Private message information specific to a given user.
+      properties:
+        annotations:
+          description: Annotations private to {@code userId}.
+          items:
+            $ref: "#/components/schemas/Annotation"
+          type: array
+        attachments:
+          description: Attachments private to {@code userId}.
+          items:
+            $ref: "#/components/schemas/Attachment"
+          type: array
+        contextualAddOnMarkup:
+          items:
+            $ref: "#/components/schemas/GoogleChatV1ContextualAddOnMarkup"
+          type: array
+        gsuiteIntegrationMetadata:
+          items:
+            $ref: "#/components/schemas/GsuiteIntegrationMetadata"
+          type: array
+        text:
+          description: "Text private to {@code user_id}. Initial restriction: Only one of public text or private text is rendered on the client. So if public text is set, private text is ignored."
+          type: string
+        userId:
+          $ref: "#/components/schemas/UserId"
+          description: Required. The elements in this struct are visible to this user.
       type: object
     ProcessingError:
       properties:
@@ -9416,6 +9001,61 @@ components:
       description: This field does not contain anything as of now and is just used as an indicator that the suggest result was a phrase completion.
       properties: {}
       type: object
+    QuotedMessageMetadata:
+      description: "Quote metadata: go/message-quoting-be-dd-v2. This proto is only used on the read path. For the request proto, refer to `QuotedMessagePayload`. Fields are either derived from storage directly from the Item this metadata belongs to, or is hydrated at read time from another Item read. Note: QuotedMessageMetadata proto is similar to Message proto with less field. Reasons to differtiate QuotedMessageMetadata from Message are: 1. Not all fields for original message is applicable for quoted message. (E.g. reactions, is_inline_reply, etc.), thus separting out for confusion. 2. We don't support nested message quoting. For more detailed discussion, please see http://shortn/_VsSXQb2C7P. For future reference: if your new feature/field will be supported in message quoting feature (go/chat-quoting-prd), you will need to add that field within QuotedMessageMetadata"
+      properties:
+        annotations:
+          description: Output only. Snapshot of the annotations of the quoted message.
+          items:
+            $ref: "#/components/schemas/Annotation"
+          readOnly: true
+          type: array
+        appProfile:
+          $ref: "#/components/schemas/AppsDynamiteSharedAppProfile"
+          description: Output only. Custom display profile info for apps. Will be empty for real users.
+          readOnly: true
+        botAttachmentState:
+          description: Output only. The bot attachment state of the quoted message. Used by clients to display a bot attachment indicator in the UI.
+          enum:
+            - BOT_ATTACHMENT_STATE_UNSPECIFIED
+            - BOT_ATTACHMENT_STATE_HAS_BOT_ATTACHMENT
+            - BOT_ATTACHMENT_STATE_NO_BOT_ATTACHMENT
+          readOnly: true
+          type: string
+        creatorId:
+          $ref: "#/components/schemas/UserId"
+          description: Output only. ID of the User who posted the quoted message. This includes information to identify if the quoted message was posted by an App on behalf of a user.
+          readOnly: true
+        lastUpdateTimeWhenQuotedMicros:
+          description: The `last_update_time` of the original message when the client initiated the quote creation. This is derived from the request payload passed from clients. Used to fetch the quoted message contents at a specific time on the read path. This field is populated from storage directly.
+          format: int64
+          type: string
+        messageId:
+          $ref: "#/components/schemas/MessageId"
+          description: MessageId of the original message that is being quoted. This is derived from the request payload passed from clients. This field is populated from storage directly.
+        messageState:
+          description: Output only. The state of the quoted message. Used by clients to display tombstones for quotes that reference a deleted message.
+          enum:
+            - MESSAGE_STATE_UNSPECIFIED
+            - MESSAGE_STATE_ACTIVE
+            - MESSAGE_STATE_DELETED
+          readOnly: true
+          type: string
+        retentionSettings:
+          $ref: "#/components/schemas/AppsDynamiteSharedRetentionSettings"
+          description: Output only. The retention (OTR) settings of the quoted message.
+          readOnly: true
+        textBody:
+          description: Output only. Snapshot of the text body of the quoted message.
+          readOnly: true
+          type: string
+        uploadMetadata:
+          description: "Output only. Upload metadata of the quoted message. NEXT TAG: 11"
+          items:
+            $ref: "#/components/schemas/UploadMetadata"
+          readOnly: true
+          type: array
+      type: object
     RbacRoleProto:
       description: Principal associated with a given RBAC role. This principal is used by Sphinx Provisioning Service for RBAC (go/cedi-auth) provisionable (go/sphinx-rbacz-design).
       properties:
@@ -9443,6 +9083,12 @@ components:
         emoji:
           description: Unicode string representing a single emoji.
           type: string
+      type: object
+    ReadReceiptsSettingsUpdatedMetadata:
+      properties:
+        readReceiptsEnabled:
+          description: The new read receipts state.
+          type: boolean
       type: object
     RecordingEvent:
       description: A recording event is something that happens to the recording in a conference.
@@ -9559,6 +9205,17 @@ components:
           description: Current user's time zone id, such as "America/Los_Angeles" or "Australia/Sydney". These IDs are defined by [Unicode Common Locale Data Repository (CLDR)](http://cldr.unicode.org/) project, and currently available in the file [timezone.xml](http://unicode.org/repos/cldr/trunk/common/bcp47/timezone.xml). This field is used to correctly interpret date and time queries. If this field is not specified, the default time zone (UTC) is used.
           type: string
       type: object
+    RequiredMessageFeaturesMetadata:
+      description: A list of capabilities that are used in this message.
+      properties:
+        requiredFeatures:
+          items:
+            enum:
+              - REQUIRED_FEATURE_UNSPECIFIED
+              - REQUIRED_FEATURE_MESSAGE_QUOTING
+            type: string
+          type: array
+      type: object
     ResetSearchApplicationRequest:
       properties:
         debugOptions:
@@ -9581,6 +9238,12 @@ components:
     ResponseDebugInfo:
       description: Debugging information about the response.
       properties:
+        enabledExperiments:
+          description: Experiments enabled in QAPI.
+          items:
+            format: int32
+            type: integer
+          type: array
         formattedDebugInfo:
           description: General debug info formatted for display.
           type: string
@@ -9659,6 +9322,69 @@ components:
             - HIGH
             - LOW
             - NONE
+          type: string
+      type: object
+    RoomRenameMetadata:
+      properties:
+        newName:
+          type: string
+        prevName:
+          description: "NEXT_TAG: 3"
+          type: string
+      type: object
+    RoomUpdatedMetadata:
+      properties:
+        groupDetailsMetadata:
+          $ref: "#/components/schemas/GroupDetailsUpdatedMetadata"
+        groupLinkSharingEnabled:
+          type: boolean
+        initiator:
+          $ref: "#/components/schemas/User"
+          description: The user who initiated this room update. Complete member profiles, when ListTopicsRequest FetchOptions.USER is set. Otherwise, only the id will be filled in.
+        initiatorType:
+          description: The type of the user who initiated this room update.
+          enum:
+            - INITIATOR_TYPE_UNSPECIFIED
+            - INITIATOR_TYPE_END_USER
+            - INITIATOR_TYPE_ADMIN
+          type: string
+        name:
+          description: What was updated in the room.
+          type: string
+        renameMetadata:
+          $ref: "#/components/schemas/RoomRenameMetadata"
+        visibility:
+          $ref: "#/components/schemas/AppsDynamiteSharedGroupVisibility"
+          description: "DEPRECATED: See GroupVisibility proto definition."
+      type: object
+    Roster:
+      description: Roster profile information.
+      properties:
+        avatarUrl:
+          type: string
+        id:
+          $ref: "#/components/schemas/RosterId"
+        membershipCount:
+          format: int32
+          type: integer
+        name:
+          type: string
+        rosterGaiaKey:
+          description: Roster gaia key, usually an email address. Set in looking up rosters response.
+          type: string
+        rosterState:
+          description: Roster deletion state - considered active unless set to deleted
+          enum:
+            - ROSTER_STATE_UNKNOWN
+            - ROSTER_ACTIVE
+            - ROSTER_DELETED
+          type: string
+      type: object
+    RosterId:
+      description: Primary key for Roster resource.
+      properties:
+        id:
+          description: Opaque, server-assigned ID of the Roster.
           type: string
       type: object
     SafeUrlProto:
@@ -10156,6 +9882,33 @@ components:
             - REKE
           type: string
       type: object
+    SlashCommandMetadata:
+      description: Annotation metadata for slash commands (/).
+      properties:
+        argumentsHint:
+          description: Hint string for the arguments expected by the slash command.
+          type: string
+        commandId:
+          description: Unique id for the slash command.
+          format: int64
+          type: string
+        commandName:
+          description: Name of the slash command.
+          type: string
+        id:
+          $ref: "#/components/schemas/UserId"
+          description: ID of the bot which owns the slash command.
+        triggersDialog:
+          description: Whether or not this slash command should trigger a dialog.
+          type: boolean
+        type:
+          enum:
+            - TYPE_UNSPECIFIED
+            - ADD
+            - INVOKE
+            - FAILED_TO_ADD
+          type: string
+      type: object
     Snippet:
       description: Snippet of the search result, which summarizes the content of the resulting page.
       properties:
@@ -10166,6 +9919,16 @@ components:
           type: array
         snippet:
           description: The snippet of the document. The snippet of the document. May contain escaped HTML character that should be unescaped prior to rendering.
+          type: string
+      type: object
+    SocialCommonAttachmentAttachment:
+      description: An Attachment represents a linked entity associated with a piece of social content. This may be a 1st-party or 3rd-party entity. In the Papyrus context, an Attachment is part of a Cent, and sits alongside the main content of the cent, which is represented as a sequence of Segments. Right now an Attachment is just a wrapper around an Embed, but we provide the extra layer of abstraction since, as Embeds move to separate storage in Briefcase, we may want to add additional fields that are not part of the Embed proper, but that (for example) relate to the usage of the linked content within the particular post/cent.
+      properties:
+        embedItem:
+          $ref: "#/components/schemas/EmbedClientItem"
+          description: An embed represents an external entity. See go/es-embeds.
+        id:
+          description: An id to uniquely identify an attachment when several attachments are in a collection.
           type: string
       type: object
     SocialGraphNodeProto:
@@ -10261,6 +10024,13 @@ components:
             - DEFAULT
             - LOW
             - HIGH
+          type: string
+      type: object
+    SpaceId:
+      description: Primary key for Space resource.
+      properties:
+        spaceId:
+          description: Unique, immutable ID of the Space
           type: string
       type: object
     SpellResult:
@@ -10421,6 +10191,28 @@ components:
           description: The suggested query that will be used for search, when the user clicks on the suggestion
           type: string
       type: object
+    SupportUrls:
+      description: Urls with additional bot related information.
+      properties:
+        adminConfigUrl:
+          description: Link to the admin configuration webpage for the bot. Configured by Pantheon, may be empty.
+          type: string
+        deletionPolicyUrl:
+          description: Link to the deletion policy webpage for the bot. Configured by Pantheon, may be empty.
+          type: string
+        privacyPolicyUrl:
+          description: Link to the privacy policy webpage for the bot. May be empty.
+          type: string
+        setupUrl:
+          description: Link to the setup webpage for the bot. Configured by Pantheon, may be empty.
+          type: string
+        supportUrl:
+          description: Link to the support webpage for the developer of the bot. May be empty.
+          type: string
+        tosUrl:
+          description: Link to the terms of service webpage for the bot. May be empty.
+          type: string
+      type: object
     SwitchWidget:
       properties:
         controlType:
@@ -10439,10 +10231,6 @@ components:
         value:
           description: The value is what is passed back in apps script callback.
           type: string
-      type: object
-    TasksMetadata:
-      description: A Tasks message in Dynamite.
-      properties: {}
       type: object
     TextButton:
       properties:
@@ -10572,6 +10360,21 @@ components:
             type: string
           type: array
       type: object
+    TombstoneMetadata:
+      description: "Tombstoning is the act of leaving a contextual trace when deleting a message. See more: go/tombstone-prd, go/hub-dynamite-tombstones-server-design-v2."
+      properties:
+        tombstoneType:
+          description: Indicates the type of Tombstone.
+          enum:
+            - TOMBSTONE_UNSPECIFIED
+            - CREATOR
+            - ROOM_OWNER
+            - ADMIN
+            - APP_MESSAGE_EXPIRY
+            - CREATOR_VIA_APP
+            - ROOM_OWNER_VIA_APP
+          type: string
+      type: object
     Toolbar:
       description: The Toolbar markup has been deprecated. The information is now specified in the manifest.
       properties:
@@ -10581,6 +10384,15 @@ components:
         iconUrl:
           type: string
         name:
+          type: string
+      type: object
+    TopicId:
+      properties:
+        groupId:
+          $ref: "#/components/schemas/GroupId"
+          description: The Space or DM that the topic belongs to.
+        topicId:
+          description: "Opaque, server-assigned ID of the Topic. While this ID is guaranteed to be unique within the Space, it's not guaranteed to be globally unique. Internal usage: this field can be empty in the following cases: 1. To create the first message in a topic. 2. To list last N messages of a Space (regardless of topic)."
           type: string
       type: object
     TranscriptionSessionInfo:
@@ -10676,6 +10488,172 @@ components:
           description: The name of the content reference. The maximum length is 2048 characters.
           type: string
       type: object
+    UploadMetadata:
+      description: Annotation metadata for user Upload artifacts.
+      properties:
+        attachmentToken:
+          description: Opaque token. Clients shall simply pass it back to the Backend. This field will NOT be saved into storage.
+          type: string
+        backendUploadMetadata:
+          $ref: "#/components/schemas/AppsDynamiteSharedBackendUploadMetadata"
+          description: Information about the uploaded attachment that is only used in Backend. This field will NOT be sent out of Google.
+        clonedAuthorizedItemId:
+          $ref: "#/components/schemas/AuthorizedItemId"
+          description: The "new" secure identifier for Drive files. Should be used instead of the deprecated string drive_id field above. This should only be set if the upload file has been added to Drive. Note that older Drive files that do not have a ResourceKey should still use this field, with the resource_key field unset.
+        clonedDriveAction:
+          description: DriveAction for organizing the cloned version of this upload in Drive, if the file has been added to Drive. This field is not set if the file has not been added to Drive. Additionally, this field is only set when part of a FileResult in a ListFilesResponse.
+          enum:
+            - DRIVE_ACTION_UNSPECIFIED
+            - ADD_TO_DRIVE
+            - ORGANIZE
+            - ADD_SHORTCUT
+            - ADD_ANOTHER_SHORTCUT
+          type: string
+        clonedDriveId:
+          description: "Reference to a Drive ID, if this upload file has been previously cloned to Drive. Note: this is deprecated in favor of the AuthorizedItemId below."
+          type: string
+        contentName:
+          description: The original file name for the content, not the full path.
+          type: string
+        contentType:
+          description: "Type is from Scotty's best_guess by default: http://google3/uploader/agent/scotty_agent.proto?l=51&rcl=140889785"
+          type: string
+        dlpMetricsMetadata:
+          $ref: "#/components/schemas/AppsDynamiteSharedDlpMetricsMetadata"
+          description: The metrics metadata of the Data Loss Prevention attachment scan.
+        localId:
+          description: A copy of the LocalId in Annotation. This field is supposed to be filled by server only.
+          type: string
+        originalDimension:
+          $ref: "#/components/schemas/AppsDynamiteSharedDimension"
+          description: Original dimension of the content. Only set for image attachments.
+        videoReference:
+          $ref: "#/components/schemas/AppsDynamiteSharedVideoReference"
+          description: Reference to a transcoded video attachment. Only set for video attachments.
+        virusScanResult:
+          description: Result for a virus scan. It's duplicated in the above field apps.dynamite.shared.BackendUploadMetadata
+          enum:
+            - UNKNOWN_VIRUS_SCAN_RESULT
+            - CLEAN
+            - INFECTED
+            - ERROR
+            - POLICY_VIOLATION
+          type: string
+      type: object
+    UrlMetadata:
+      description: Annotation metadata for a Weblink. In case of pasted link it can qualify to be other types in addition to being a URL - like DRIVE_DOC/DRIVE_SHEET and so on. The URL metadata will also be present and it's up to the client to decide which metadata to render it with. These fields are filled in using page render service.
+      properties:
+        domain:
+          description: Domain for this url. If it's an IP address the address is returned.
+          type: string
+        gwsUrl:
+          $ref: "#/components/schemas/SafeUrlProto"
+          description: The signed GWS URL.
+        gwsUrlExpirationTimestamp:
+          description: The expiration timestamp for GWS URL, only set when gws_url is set.
+          format: int64
+          type: string
+        imageHeight:
+          description: "Dimensions of the image: height. This field is string to match with page render service response. Deprecated. Use int_image_height instead."
+          type: string
+        imageUrl:
+          description: Representative image of the website.
+          type: string
+        imageWidth:
+          description: "Dimensions of the image: width. This field is string to match with page render service response. Deprecated. Use int_image_height instead."
+          type: string
+        intImageHeight:
+          description: "Dimensions of the image: height."
+          format: int32
+          type: integer
+        intImageWidth:
+          description: "Dimensions of the image: width."
+          format: int32
+          type: integer
+        mimeType:
+          description: "Mime type of the content (Currently mapped from Page Render Service ItemType) Note that this is not necessarily the mime type of the http resource. For example a text/html from youtube or vimeo may actually be classified as a video type. Then we shall mark it as video/* since we don't know exactly what type of video it is. NEXT TAG : 16"
+          type: string
+        redirectUrl:
+          $ref: "#/components/schemas/SafeUrlProto"
+          description: The stable redirect URL pointing to frontend server.
+        shouldNotRender:
+          description: If the UrlMetadata is missing data for rendering a chip. Deprecated. Use Annotation.ChipRenderType instead.
+          type: boolean
+        snippet:
+          description: Snippet/small description of the weblink.
+          type: string
+        title:
+          description: Title of the Weblink.
+          type: string
+        url:
+          $ref: "#/components/schemas/SafeUrlProto"
+          description: The original URL.
+      type: object
+    User:
+      description: User profile information. This user is not necessarily member of a space.
+      properties:
+        avatarUrl:
+          description: URL for the avatar picture of the User in dynamite
+          type: string
+        blockRelationship:
+          $ref: "#/components/schemas/AppsDynamiteSharedUserBlockRelationship"
+          description: Information about whether the user is blocked by requester and/or has blocked requester.
+        botInfo:
+          $ref: "#/components/schemas/BotInfo"
+          description: Bot-specific profile information. Leave it empty for human users.
+        deleted:
+          description: Deleted flag, if true, means User has been soft-deleted/purged Deprecated. Use user_account_state field instead.
+          type: boolean
+        email:
+          description: Email ID of the user
+          type: string
+        firstName:
+          description: First or given name of the user
+          type: string
+        gender:
+          description: Gender of the user
+          type: string
+        id:
+          $ref: "#/components/schemas/UserId"
+          description: UserId
+        isAnonymous:
+          description: Set to true if none of the depending services (Gaia, PeopleApi) returns any info for this user.
+          type: boolean
+        lastName:
+          description: Last or family name of the user
+          type: string
+        name:
+          description: Non-unique, user-defined display name of the User
+          type: string
+        organizationInfo:
+          $ref: "#/components/schemas/AppsDynamiteSharedOrganizationInfo"
+          description: Information about whether the user is a consumer user, or the GSuite customer that they belong to.
+        phoneNumber:
+          description: Phone number(s) of the user
+          items:
+            $ref: "#/components/schemas/AppsDynamiteSharedPhoneNumber"
+          type: array
+        userAccountState:
+          description: State of user's Gaia Account
+          enum:
+            - UNKNOWN_USER_ACCOUNT_STATE
+            - ENABLED
+            - DISABLED
+            - DELETED
+            - TEMPORARY_UNAVAILABLE
+          type: string
+        userProfileVisibility:
+          description: Visibility of user's Profile
+          enum:
+            - UNKNOWN_USER_PROFILE_VISIBILITY
+            - FULL_PROFILE
+            - PRIMARY_MAIL
+            - INVITEE_EMAIL
+            - DELETED_USER
+            - UNKNOWN_USER
+            - FAILURE
+          type: string
+      type: object
     UserDisplayInfo:
       description: Resource for displaying user info
       properties:
@@ -10684,6 +10662,25 @@ components:
           type: string
         displayName:
           description: The name to show for this user
+          type: string
+      type: object
+    UserId:
+      description: Primary key for User resource.
+      properties:
+        actingUserId:
+          description: Optional. Opaque, server-assigned ID of the user profile associated with App/user acting on behalf of the human user. This is currently only set when a 3P application is acting on the user's behalf.
+          type: string
+        id:
+          description: Opaque, server-assigned ID of the User.
+          type: string
+        originAppId:
+          $ref: "#/components/schemas/AppId"
+          description: Optional. Identifier of the App involved (directly or on behalf of a human creator) in creating this message. This is not set if the user posted a message directly, but is used in the case of, for example, a message being generated by a 1P integration based on a user action (creating an event, creating a task etc). This should only be used on the BE. For clients, please use the field in the FE message proto instead (google3/apps/dynamite/v1/frontend/api/message.proto?q=origin_app_id).
+        type:
+          description: "Clients do not need to send UserType to Backend, but Backend will always send this field to clients per the following rule: 1. For HUMAN Ids, the field is empty but by default .getType() will return HUMAN. 2. For BOT Ids, the field is ALWAYS set to BOT."
+          enum:
+            - HUMAN
+            - BOT
           type: string
       type: object
     UserInfo:
@@ -10708,7 +10705,7 @@ components:
           format: int64
           type: string
         updaterToShowUserId:
-          $ref: "#/components/schemas/AppsDynamiteUserId"
+          $ref: "#/components/schemas/UserId"
           description: The updater for clients to show used for Dynamite Chat items.
       type: object
     UserMentionData:
@@ -10725,6 +10722,31 @@ components:
           type: string
         userId:
           description: "An obfuscated gaia ID:"
+          type: string
+      type: object
+    UserMentionMetadata:
+      description: Annotation metadata for user mentions (+/@/-).
+      properties:
+        displayName:
+          description: Display name of the mentioned user. This field should remain empty when clients resolve a UserMention annotation. It will be filled in when a UserMention is generated by the Integration Server.
+          type: string
+        gender:
+          description: Gender of the mentioned user. One of "female", "male" or "other". Used for choosing accurate translations for strings that contain the UserMention, when these need to be constructed (e.g. task assignment update message). This field should remain empty when clients resolve a UserMention. It will be filled in when a UserMention is generated by the Integration Server.
+          type: string
+        id:
+          $ref: "#/components/schemas/UserId"
+          description: To be deprecated. Use invitee_info field instead. ID of the User mentioned. This field should remain empty when type == MENTION_ALL.
+        inviteeInfo:
+          $ref: "#/components/schemas/InviteeInfo"
+          description: Invitee UserId and email used when mentioned. This field should remain empty when type == MENTION_ALL. Invitee_info.email is only used when a user is @-mentioned with an email address, and it will be empty when clients get messages from Backend.
+        type:
+          enum:
+            - TYPE_UNSPECIFIED
+            - INVITE
+            - UNINVITE
+            - MENTION
+            - MENTION_ALL
+            - FAILED_TO_ADD
           type: string
       type: object
     VPCSettings:
@@ -10762,10 +10784,16 @@ components:
           description: The value to be compared with.
       type: object
     VideoCallMetadata:
-      description: A Meet initiated in Dynamite and its URL.
       properties:
-        meetingUrl:
-          type: string
+        meetingSpace:
+          $ref: "#/components/schemas/MeetingSpace"
+          description: Thor meeting space.
+        shouldNotRender:
+          description: If this field is set to true, server should still contact external backends to get metadata for search but clients should not render this chip.
+          type: boolean
+        wasCreatedInCurrentGroup:
+          description: Whether this meeting space was created via Dynamite in this Dynamite group.
+          type: boolean
       type: object
     VideoInfo:
       description: "Next tag: 2"
@@ -10915,6 +10943,20 @@ components:
           description: Output only. A URL that can be used to watch the meeting broadcast. Will be populated by the backend.
           readOnly: true
           type: string
+      type: object
+    YoutubeMetadata:
+      description: Annotation metadata for YouTube artifact.
+      properties:
+        id:
+          description: YouTube resource ID of the artifact.
+          type: string
+        shouldNotRender:
+          description: If this field is set to true, server should still contact external backends to get metadata for search but clients should not render this chip.
+          type: boolean
+        startTime:
+          description: YouTube query parameter for timestamp. YouTube specific flag that allows users to embed time token when sharing a link. This property contains parsed time token in seconds.
+          format: int32
+          type: integer
       type: object
     YoutubeUserProto:
       properties:

@@ -1,6 +1,6 @@
 openapi: 3.0.0
 servers:
-  - url: https://dfareporting.googleapis.com/
+  - url: https://dfareporting.googleapis.com/dfareporting/v3.5
 info:
   contact:
     name: Google
@@ -91,7 +91,7 @@ tags:
   - name: userRoles
   - name: videoFormats
 paths:
-  "/dfareporting/v3.5/reports/{reportId}/files/{fileId}":
+  "/reports/{reportId}/files/{fileId}":
     get:
       description: Retrieves a report file by its report ID and file ID. This method supports media download.
       operationId: dfareporting.files.get
@@ -134,7 +134,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  /dfareporting/v3.5/userprofiles:
+  /userprofiles:
     get:
       description: Retrieves list of user profiles for a user.
       operationId: dfareporting.userProfiles.list
@@ -172,7 +172,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}":
+  "/userprofiles/{profileId}":
     get:
       description: Gets one user profile by ID.
       operationId: dfareporting.userProfiles.get
@@ -217,7 +217,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/accountActiveAdSummaries/{summaryAccountId}":
+  "/userprofiles/{profileId}/accountActiveAdSummaries/{summaryAccountId}":
     get:
       description: Gets the account's active ad summary by account ID.
       operationId: dfareporting.accountActiveAdSummaries.get
@@ -260,7 +260,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/accountPermissionGroups":
+  "/userprofiles/{profileId}/accountPermissionGroups":
     get:
       description: Retrieves the list of account permission groups.
       operationId: dfareporting.accountPermissionGroups.list
@@ -297,7 +297,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/accountPermissionGroups/{id}":
+  "/userprofiles/{profileId}/accountPermissionGroups/{id}":
     get:
       description: Gets one account permission group by ID.
       operationId: dfareporting.accountPermissionGroups.get
@@ -340,7 +340,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/accountPermissions":
+  "/userprofiles/{profileId}/accountPermissions":
     get:
       description: Retrieves the list of account permissions.
       operationId: dfareporting.accountPermissions.list
@@ -377,7 +377,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/accountPermissions/{id}":
+  "/userprofiles/{profileId}/accountPermissions/{id}":
     get:
       description: Gets one account permission by ID.
       operationId: dfareporting.accountPermissions.get
@@ -420,7 +420,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/accountUserProfiles":
+  "/userprofiles/{profileId}/accountUserProfiles":
     get:
       description: Retrieves a list of account user profiles, possibly filtered. This method supports paging.
       operationId: dfareporting.accountUserProfiles.list
@@ -607,7 +607,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - accountUserProfiles
-  "/dfareporting/v3.5/userprofiles/{profileId}/accountUserProfiles/{id}":
+  "/userprofiles/{profileId}/accountUserProfiles/{id}":
     get:
       description: Gets one account user profile by ID.
       operationId: dfareporting.accountUserProfiles.get
@@ -650,7 +650,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/accounts":
+  "/userprofiles/{profileId}/accounts":
     get:
       description: Retrieves the list of accounts, possibly filtered. This method supports paging.
       operationId: dfareporting.accounts.list
@@ -798,7 +798,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - accounts
-  "/dfareporting/v3.5/userprofiles/{profileId}/accounts/{id}":
+  "/userprofiles/{profileId}/accounts/{id}":
     get:
       description: Gets one account by ID.
       operationId: dfareporting.accounts.get
@@ -841,7 +841,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/ads":
+  "/userprofiles/{profileId}/ads":
     get:
       description: Retrieves a list of ads, possibly filtered. This method supports paging.
       operationId: dfareporting.ads.list
@@ -1147,7 +1147,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - ads
-  "/dfareporting/v3.5/userprofiles/{profileId}/ads/{id}":
+  "/userprofiles/{profileId}/ads/{id}":
     get:
       description: Gets one ad by ID.
       operationId: dfareporting.ads.get
@@ -1190,7 +1190,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/advertiserGroups":
+  "/userprofiles/{profileId}/advertiserGroups":
     get:
       description: Retrieves a list of advertiser groups, possibly filtered. This method supports paging.
       operationId: dfareporting.advertiserGroups.list
@@ -1362,7 +1362,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - advertiserGroups
-  "/dfareporting/v3.5/userprofiles/{profileId}/advertiserGroups/{id}":
+  "/userprofiles/{profileId}/advertiserGroups/{id}":
     delete:
       description: Deletes an existing advertiser group.
       operationId: dfareporting.advertiserGroups.delete
@@ -1431,7 +1431,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/advertiserLandingPages":
+  "/userprofiles/{profileId}/advertiserLandingPages":
     get:
       description: Retrieves a list of landing pages.
       operationId: dfareporting.advertiserLandingPages.list
@@ -1631,7 +1631,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - advertiserLandingPages
-  "/dfareporting/v3.5/userprofiles/{profileId}/advertiserLandingPages/{id}":
+  "/userprofiles/{profileId}/advertiserLandingPages/{id}":
     get:
       description: Gets one landing page by ID.
       operationId: dfareporting.advertiserLandingPages.get
@@ -1674,7 +1674,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/advertisers":
+  "/userprofiles/{profileId}/advertisers":
     get:
       description: Retrieves a list of advertisers, possibly filtered. This method supports paging.
       operationId: dfareporting.advertisers.list
@@ -1887,7 +1887,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - advertisers
-  "/dfareporting/v3.5/userprofiles/{profileId}/advertisers/{id}":
+  "/userprofiles/{profileId}/advertisers/{id}":
     get:
       description: Gets one advertiser by ID.
       operationId: dfareporting.advertisers.get
@@ -1930,7 +1930,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/browsers":
+  "/userprofiles/{profileId}/browsers":
     get:
       description: Retrieves a list of browsers.
       operationId: dfareporting.browsers.list
@@ -1967,7 +1967,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/campaigns":
+  "/userprofiles/{profileId}/campaigns":
     get:
       description: Retrieves a list of campaigns, possibly filtered. This method supports paging.
       operationId: dfareporting.campaigns.list
@@ -2186,7 +2186,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - campaigns
-  "/dfareporting/v3.5/userprofiles/{profileId}/campaigns/{campaignId}/campaignCreativeAssociations":
+  "/userprofiles/{profileId}/campaigns/{campaignId}/campaignCreativeAssociations":
     get:
       description: Retrieves the list of creative IDs associated with the specified campaign. This method supports paging.
       operationId: dfareporting.campaignCreativeAssociations.list
@@ -2284,7 +2284,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - campaignCreativeAssociations
-  "/dfareporting/v3.5/userprofiles/{profileId}/campaigns/{id}":
+  "/userprofiles/{profileId}/campaigns/{id}":
     get:
       description: Gets one campaign by ID.
       operationId: dfareporting.campaigns.get
@@ -2327,7 +2327,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/changeLogs":
+  "/userprofiles/{profileId}/changeLogs":
     get:
       description: Retrieves a list of change logs. This method supports paging.
       operationId: dfareporting.changeLogs.list
@@ -2488,7 +2488,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/changeLogs/{id}":
+  "/userprofiles/{profileId}/changeLogs/{id}":
     get:
       description: Gets one change log by ID.
       operationId: dfareporting.changeLogs.get
@@ -2531,7 +2531,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/cities":
+  "/userprofiles/{profileId}/cities":
     get:
       description: Retrieves a list of cities, possibly filtered.
       operationId: dfareporting.cities.list
@@ -2600,7 +2600,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/connectionTypes":
+  "/userprofiles/{profileId}/connectionTypes":
     get:
       description: Retrieves a list of connection types.
       operationId: dfareporting.connectionTypes.list
@@ -2637,7 +2637,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/connectionTypes/{id}":
+  "/userprofiles/{profileId}/connectionTypes/{id}":
     get:
       description: Gets one connection type by ID.
       operationId: dfareporting.connectionTypes.get
@@ -2680,7 +2680,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/contentCategories":
+  "/userprofiles/{profileId}/contentCategories":
     get:
       description: Retrieves a list of content categories, possibly filtered. This method supports paging.
       operationId: dfareporting.contentCategories.list
@@ -2852,7 +2852,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - contentCategories
-  "/dfareporting/v3.5/userprofiles/{profileId}/contentCategories/{id}":
+  "/userprofiles/{profileId}/contentCategories/{id}":
     delete:
       description: Deletes an existing content category.
       operationId: dfareporting.contentCategories.delete
@@ -2921,7 +2921,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/conversions/batchinsert":
+  "/userprofiles/{profileId}/conversions/batchinsert":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2963,7 +2963,7 @@ paths:
             - https://www.googleapis.com/auth/ddmconversions
       tags:
         - conversions
-  "/dfareporting/v3.5/userprofiles/{profileId}/conversions/batchupdate":
+  "/userprofiles/{profileId}/conversions/batchupdate":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3005,7 +3005,7 @@ paths:
             - https://www.googleapis.com/auth/ddmconversions
       tags:
         - conversions
-  "/dfareporting/v3.5/userprofiles/{profileId}/countries":
+  "/userprofiles/{profileId}/countries":
     get:
       description: Retrieves a list of countries.
       operationId: dfareporting.countries.list
@@ -3042,7 +3042,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/countries/{dartId}":
+  "/userprofiles/{profileId}/countries/{dartId}":
     get:
       description: Gets one country by ID.
       operationId: dfareporting.countries.get
@@ -3085,7 +3085,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/creativeAssets/{advertiserId}/creativeAssets":
+  "/userprofiles/{profileId}/creativeAssets/{advertiserId}/creativeAssets":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3133,7 +3133,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - creativeAssets
-  "/dfareporting/v3.5/userprofiles/{profileId}/creativeFields":
+  "/userprofiles/{profileId}/creativeFields":
     get:
       description: Retrieves a list of creative fields, possibly filtered. This method supports paging.
       operationId: dfareporting.creativeFields.list
@@ -3314,7 +3314,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - creativeFields
-  "/dfareporting/v3.5/userprofiles/{profileId}/creativeFields/{creativeFieldId}/creativeFieldValues":
+  "/userprofiles/{profileId}/creativeFields/{creativeFieldId}/creativeFieldValues":
     get:
       description: Retrieves a list of creative field values, possibly filtered. This method supports paging.
       operationId: dfareporting.creativeFieldValues.list
@@ -3510,7 +3510,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - creativeFieldValues
-  "/dfareporting/v3.5/userprofiles/{profileId}/creativeFields/{creativeFieldId}/creativeFieldValues/{id}":
+  "/userprofiles/{profileId}/creativeFields/{creativeFieldId}/creativeFieldValues/{id}":
     delete:
       description: Deletes an existing creative field value.
       operationId: dfareporting.creativeFieldValues.delete
@@ -3591,7 +3591,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/creativeFields/{id}":
+  "/userprofiles/{profileId}/creativeFields/{id}":
     delete:
       description: Deletes an existing creative field.
       operationId: dfareporting.creativeFields.delete
@@ -3660,7 +3660,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/creativeGroups":
+  "/userprofiles/{profileId}/creativeGroups":
     get:
       description: Retrieves a list of creative groups, possibly filtered. This method supports paging.
       operationId: dfareporting.creativeGroups.list
@@ -3848,7 +3848,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - creativeGroups
-  "/dfareporting/v3.5/userprofiles/{profileId}/creativeGroups/{id}":
+  "/userprofiles/{profileId}/creativeGroups/{id}":
     get:
       description: Gets one creative group by ID.
       operationId: dfareporting.creativeGroups.get
@@ -3891,7 +3891,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/creatives":
+  "/userprofiles/{profileId}/creatives":
     get:
       description: Retrieves a list of creatives, possibly filtered. This method supports paging.
       operationId: dfareporting.creatives.list
@@ -4159,7 +4159,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - creatives
-  "/dfareporting/v3.5/userprofiles/{profileId}/creatives/{id}":
+  "/userprofiles/{profileId}/creatives/{id}":
     get:
       description: Gets one creative by ID.
       operationId: dfareporting.creatives.get
@@ -4202,7 +4202,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/dimensionvalues/query":
+  "/userprofiles/{profileId}/dimensionvalues/query":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -4256,7 +4256,7 @@ paths:
             - https://www.googleapis.com/auth/dfareporting
       tags:
         - dimensionValues
-  "/dfareporting/v3.5/userprofiles/{profileId}/directorySites":
+  "/userprofiles/{profileId}/directorySites":
     get:
       description: Retrieves a list of directory sites, possibly filtered. This method supports paging.
       operationId: dfareporting.directorySites.list
@@ -4389,7 +4389,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - directorySites
-  "/dfareporting/v3.5/userprofiles/{profileId}/directorySites/{id}":
+  "/userprofiles/{profileId}/directorySites/{id}":
     get:
       description: Gets one directory site by ID.
       operationId: dfareporting.directorySites.get
@@ -4432,7 +4432,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/dynamicTargetingKeys":
+  "/userprofiles/{profileId}/dynamicTargetingKeys":
     get:
       description: Retrieves a list of dynamic targeting keys.
       operationId: dfareporting.dynamicTargetingKeys.list
@@ -4527,7 +4527,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - dynamicTargetingKeys
-  "/dfareporting/v3.5/userprofiles/{profileId}/dynamicTargetingKeys/{objectId}":
+  "/userprofiles/{profileId}/dynamicTargetingKeys/{objectId}":
     delete:
       description: Deletes an existing dynamic targeting key.
       operationId: dfareporting.dynamicTargetingKeys.delete
@@ -4583,7 +4583,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/eventTags":
+  "/userprofiles/{profileId}/eventTags":
     get:
       description: Retrieves a list of event tags, possibly filtered.
       operationId: dfareporting.eventTags.list
@@ -4781,7 +4781,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - eventTags
-  "/dfareporting/v3.5/userprofiles/{profileId}/eventTags/{id}":
+  "/userprofiles/{profileId}/eventTags/{id}":
     delete:
       description: Deletes an existing event tag.
       operationId: dfareporting.eventTags.delete
@@ -4850,7 +4850,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/files":
+  "/userprofiles/{profileId}/files":
     get:
       description: Lists files for a user profile.
       operationId: dfareporting.files.list
@@ -4924,7 +4924,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/floodlightActivities":
+  "/userprofiles/{profileId}/floodlightActivities":
     get:
       description: Retrieves a list of floodlight activities, possibly filtered. This method supports paging.
       operationId: dfareporting.floodlightActivities.list
@@ -5138,7 +5138,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - floodlightActivities
-  "/dfareporting/v3.5/userprofiles/{profileId}/floodlightActivities/generatetag":
+  "/userprofiles/{profileId}/floodlightActivities/generatetag":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -5180,7 +5180,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - floodlightActivities
-  "/dfareporting/v3.5/userprofiles/{profileId}/floodlightActivities/{id}":
+  "/userprofiles/{profileId}/floodlightActivities/{id}":
     delete:
       description: Deletes an existing floodlight activity.
       operationId: dfareporting.floodlightActivities.delete
@@ -5249,7 +5249,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/floodlightActivityGroups":
+  "/userprofiles/{profileId}/floodlightActivityGroups":
     get:
       description: Retrieves a list of floodlight activity groups, possibly filtered. This method supports paging.
       operationId: dfareporting.floodlightActivityGroups.list
@@ -5439,7 +5439,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - floodlightActivityGroups
-  "/dfareporting/v3.5/userprofiles/{profileId}/floodlightActivityGroups/{id}":
+  "/userprofiles/{profileId}/floodlightActivityGroups/{id}":
     get:
       description: Gets one floodlight activity group by ID.
       operationId: dfareporting.floodlightActivityGroups.get
@@ -5482,7 +5482,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/floodlightConfigurations":
+  "/userprofiles/{profileId}/floodlightConfigurations":
     get:
       description: Retrieves a list of floodlight configurations, possibly filtered.
       operationId: dfareporting.floodlightConfigurations.list
@@ -5592,7 +5592,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - floodlightConfigurations
-  "/dfareporting/v3.5/userprofiles/{profileId}/floodlightConfigurations/{id}":
+  "/userprofiles/{profileId}/floodlightConfigurations/{id}":
     get:
       description: Gets one floodlight configuration by ID.
       operationId: dfareporting.floodlightConfigurations.get
@@ -5635,7 +5635,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/languages":
+  "/userprofiles/{profileId}/languages":
     get:
       description: Retrieves a list of languages.
       operationId: dfareporting.languages.list
@@ -5672,7 +5672,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/metros":
+  "/userprofiles/{profileId}/metros":
     get:
       description: Retrieves a list of metros.
       operationId: dfareporting.metros.list
@@ -5709,7 +5709,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/mobileApps":
+  "/userprofiles/{profileId}/mobileApps":
     get:
       description: Retrieves list of available mobile apps.
       operationId: dfareporting.mobileApps.list
@@ -5793,7 +5793,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/mobileApps/{id}":
+  "/userprofiles/{profileId}/mobileApps/{id}":
     get:
       description: Gets one mobile app by ID.
       operationId: dfareporting.mobileApps.get
@@ -5836,7 +5836,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/mobileCarriers":
+  "/userprofiles/{profileId}/mobileCarriers":
     get:
       description: Retrieves a list of mobile carriers.
       operationId: dfareporting.mobileCarriers.list
@@ -5873,7 +5873,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/mobileCarriers/{id}":
+  "/userprofiles/{profileId}/mobileCarriers/{id}":
     get:
       description: Gets one mobile carrier by ID.
       operationId: dfareporting.mobileCarriers.get
@@ -5916,7 +5916,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/operatingSystemVersions":
+  "/userprofiles/{profileId}/operatingSystemVersions":
     get:
       description: Retrieves a list of operating system versions.
       operationId: dfareporting.operatingSystemVersions.list
@@ -5953,7 +5953,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/operatingSystemVersions/{id}":
+  "/userprofiles/{profileId}/operatingSystemVersions/{id}":
     get:
       description: Gets one operating system version by ID.
       operationId: dfareporting.operatingSystemVersions.get
@@ -5996,7 +5996,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/operatingSystems":
+  "/userprofiles/{profileId}/operatingSystems":
     get:
       description: Retrieves a list of operating systems.
       operationId: dfareporting.operatingSystems.list
@@ -6033,7 +6033,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/operatingSystems/{dartId}":
+  "/userprofiles/{profileId}/operatingSystems/{dartId}":
     get:
       description: Gets one operating system by DART ID.
       operationId: dfareporting.operatingSystems.get
@@ -6076,7 +6076,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/placementGroups":
+  "/userprofiles/{profileId}/placementGroups":
     get:
       description: Retrieves a list of placement groups, possibly filtered. This method supports paging.
       operationId: dfareporting.placementGroups.list
@@ -6351,7 +6351,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - placementGroups
-  "/dfareporting/v3.5/userprofiles/{profileId}/placementGroups/{id}":
+  "/userprofiles/{profileId}/placementGroups/{id}":
     get:
       description: Gets one placement group by ID.
       operationId: dfareporting.placementGroups.get
@@ -6394,7 +6394,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/placementStrategies":
+  "/userprofiles/{profileId}/placementStrategies":
     get:
       description: Retrieves a list of placement strategies, possibly filtered. This method supports paging.
       operationId: dfareporting.placementStrategies.list
@@ -6566,7 +6566,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - placementStrategies
-  "/dfareporting/v3.5/userprofiles/{profileId}/placementStrategies/{id}":
+  "/userprofiles/{profileId}/placementStrategies/{id}":
     delete:
       description: Deletes an existing placement strategy.
       operationId: dfareporting.placementStrategies.delete
@@ -6635,7 +6635,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/placements":
+  "/userprofiles/{profileId}/placements":
     get:
       description: Retrieves a list of placements, possibly filtered. This method supports paging.
       operationId: dfareporting.placements.list
@@ -6944,7 +6944,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - placements
-  "/dfareporting/v3.5/userprofiles/{profileId}/placements/generatetags":
+  "/userprofiles/{profileId}/placements/generatetags":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -7025,7 +7025,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - placements
-  "/dfareporting/v3.5/userprofiles/{profileId}/placements/{id}":
+  "/userprofiles/{profileId}/placements/{id}":
     get:
       description: Gets one placement by ID.
       operationId: dfareporting.placements.get
@@ -7068,7 +7068,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/platformTypes":
+  "/userprofiles/{profileId}/platformTypes":
     get:
       description: Retrieves a list of platform types.
       operationId: dfareporting.platformTypes.list
@@ -7105,7 +7105,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/platformTypes/{id}":
+  "/userprofiles/{profileId}/platformTypes/{id}":
     get:
       description: Gets one platform type by ID.
       operationId: dfareporting.platformTypes.get
@@ -7148,7 +7148,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/postalCodes":
+  "/userprofiles/{profileId}/postalCodes":
     get:
       description: Retrieves a list of postal codes.
       operationId: dfareporting.postalCodes.list
@@ -7185,7 +7185,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/postalCodes/{code}":
+  "/userprofiles/{profileId}/postalCodes/{code}":
     get:
       description: Gets one postal code by ID.
       operationId: dfareporting.postalCodes.get
@@ -7228,7 +7228,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/projects":
+  "/userprofiles/{profileId}/projects":
     get:
       description: Retrieves a list of projects, possibly filtered. This method supports paging .
       operationId: dfareporting.projects.list
@@ -7316,7 +7316,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/projects/{id}":
+  "/userprofiles/{profileId}/projects/{id}":
     get:
       description: Gets one project by ID.
       operationId: dfareporting.projects.get
@@ -7359,7 +7359,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/projects/{projectId}/inventoryItems":
+  "/userprofiles/{profileId}/projects/{projectId}/inventoryItems":
     get:
       description: Retrieves a list of inventory items, possibly filtered. This method supports paging.
       operationId: dfareporting.inventoryItems.list
@@ -7470,7 +7470,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/projects/{projectId}/inventoryItems/{id}":
+  "/userprofiles/{profileId}/projects/{projectId}/inventoryItems/{id}":
     get:
       description: Gets one inventory item by ID.
       operationId: dfareporting.inventoryItems.get
@@ -7519,7 +7519,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/projects/{projectId}/orderDocuments":
+  "/userprofiles/{profileId}/projects/{projectId}/orderDocuments":
     get:
       description: Retrieves a list of order documents, possibly filtered. This method supports paging.
       operationId: dfareporting.orderDocuments.list
@@ -7627,7 +7627,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/projects/{projectId}/orderDocuments/{id}":
+  "/userprofiles/{profileId}/projects/{projectId}/orderDocuments/{id}":
     get:
       description: Gets one order document by ID.
       operationId: dfareporting.orderDocuments.get
@@ -7676,7 +7676,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/projects/{projectId}/orders":
+  "/userprofiles/{profileId}/projects/{projectId}/orders":
     get:
       description: Retrieves a list of orders, possibly filtered. This method supports paging.
       operationId: dfareporting.orders.list
@@ -7770,7 +7770,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/projects/{projectId}/orders/{id}":
+  "/userprofiles/{profileId}/projects/{projectId}/orders/{id}":
     get:
       description: Gets one order by ID.
       operationId: dfareporting.orders.get
@@ -7819,7 +7819,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/regions":
+  "/userprofiles/{profileId}/regions":
     get:
       description: Retrieves a list of regions.
       operationId: dfareporting.regions.list
@@ -7856,7 +7856,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/remarketingListShares":
+  "/userprofiles/{profileId}/remarketingListShares":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -7933,7 +7933,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - remarketingListShares
-  "/dfareporting/v3.5/userprofiles/{profileId}/remarketingListShares/{remarketingListId}":
+  "/userprofiles/{profileId}/remarketingListShares/{remarketingListId}":
     get:
       description: Gets one remarketing list share by remarketing list ID.
       operationId: dfareporting.remarketingListShares.get
@@ -7976,7 +7976,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/remarketingLists":
+  "/userprofiles/{profileId}/remarketingLists":
     get:
       description: Retrieves a list of remarketing lists, possibly filtered. This method supports paging.
       operationId: dfareporting.remarketingLists.list
@@ -8155,7 +8155,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - remarketingLists
-  "/dfareporting/v3.5/userprofiles/{profileId}/remarketingLists/{id}":
+  "/userprofiles/{profileId}/remarketingLists/{id}":
     get:
       description: Gets one remarketing list by ID.
       operationId: dfareporting.remarketingLists.get
@@ -8198,7 +8198,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/reports":
+  "/userprofiles/{profileId}/reports":
     get:
       description: Retrieves list of reports.
       operationId: dfareporting.reports.list
@@ -8301,7 +8301,7 @@ paths:
             - https://www.googleapis.com/auth/dfareporting
       tags:
         - reports
-  "/dfareporting/v3.5/userprofiles/{profileId}/reports/compatiblefields/query":
+  "/userprofiles/{profileId}/reports/compatiblefields/query":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -8343,7 +8343,7 @@ paths:
             - https://www.googleapis.com/auth/dfareporting
       tags:
         - reports
-  "/dfareporting/v3.5/userprofiles/{profileId}/reports/{reportId}":
+  "/userprofiles/{profileId}/reports/{reportId}":
     delete:
       description: Deletes a report by its ID.
       operationId: dfareporting.reports.delete
@@ -8482,7 +8482,7 @@ paths:
             - https://www.googleapis.com/auth/dfareporting
       tags:
         - reports
-  "/dfareporting/v3.5/userprofiles/{profileId}/reports/{reportId}/files":
+  "/userprofiles/{profileId}/reports/{reportId}/files":
     get:
       description: Lists files for a report.
       operationId: dfareporting.reports.files.list
@@ -8553,7 +8553,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/reports/{reportId}/files/{fileId}":
+  "/userprofiles/{profileId}/reports/{reportId}/files/{fileId}":
     get:
       description: Retrieves a report file by its report ID and file ID. This method supports media download.
       operationId: dfareporting.reports.files.get
@@ -8602,7 +8602,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/reports/{reportId}/run":
+  "/userprofiles/{profileId}/reports/{reportId}/run":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -8650,7 +8650,7 @@ paths:
             - https://www.googleapis.com/auth/dfareporting
       tags:
         - reports
-  "/dfareporting/v3.5/userprofiles/{profileId}/sites":
+  "/userprofiles/{profileId}/sites":
     get:
       description: Retrieves a list of sites, possibly filtered. This method supports paging.
       operationId: dfareporting.sites.list
@@ -8875,7 +8875,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - sites
-  "/dfareporting/v3.5/userprofiles/{profileId}/sites/{id}":
+  "/userprofiles/{profileId}/sites/{id}":
     get:
       description: Gets one site by ID.
       operationId: dfareporting.sites.get
@@ -8918,7 +8918,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/sizes":
+  "/userprofiles/{profileId}/sizes":
     get:
       description: Retrieves a list of sizes, possibly filtered. Retrieved sizes are globally unique and may include values not currently in use by your account. Due to this, the list of sizes returned by this method may differ from the list seen in the Trafficking UI.
       operationId: dfareporting.sizes.list
@@ -9012,7 +9012,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - sizes
-  "/dfareporting/v3.5/userprofiles/{profileId}/sizes/{id}":
+  "/userprofiles/{profileId}/sizes/{id}":
     get:
       description: Gets one size by ID.
       operationId: dfareporting.sizes.get
@@ -9055,7 +9055,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/subaccounts":
+  "/userprofiles/{profileId}/subaccounts":
     get:
       description: Gets a list of subaccounts, possibly filtered. This method supports paging.
       operationId: dfareporting.subaccounts.list
@@ -9227,7 +9227,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - subaccounts
-  "/dfareporting/v3.5/userprofiles/{profileId}/subaccounts/{id}":
+  "/userprofiles/{profileId}/subaccounts/{id}":
     get:
       description: Gets one subaccount by ID.
       operationId: dfareporting.subaccounts.get
@@ -9270,7 +9270,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/targetableRemarketingLists":
+  "/userprofiles/{profileId}/targetableRemarketingLists":
     get:
       description: Retrieves a list of targetable remarketing lists, possibly filtered. This method supports paging.
       operationId: dfareporting.targetableRemarketingLists.list
@@ -9351,7 +9351,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/targetableRemarketingLists/{id}":
+  "/userprofiles/{profileId}/targetableRemarketingLists/{id}":
     get:
       description: Gets one remarketing list by ID.
       operationId: dfareporting.targetableRemarketingLists.get
@@ -9394,7 +9394,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/targetingTemplates":
+  "/userprofiles/{profileId}/targetingTemplates":
     get:
       description: Retrieves a list of targeting templates, optionally filtered. This method supports paging.
       operationId: dfareporting.targetingTemplates.list
@@ -9571,7 +9571,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - targetingTemplates
-  "/dfareporting/v3.5/userprofiles/{profileId}/targetingTemplates/{id}":
+  "/userprofiles/{profileId}/targetingTemplates/{id}":
     get:
       description: Gets one targeting template by ID.
       operationId: dfareporting.targetingTemplates.get
@@ -9614,7 +9614,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/userRolePermissionGroups":
+  "/userprofiles/{profileId}/userRolePermissionGroups":
     get:
       description: Gets a list of all supported user role permission groups.
       operationId: dfareporting.userRolePermissionGroups.list
@@ -9651,7 +9651,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/userRolePermissionGroups/{id}":
+  "/userprofiles/{profileId}/userRolePermissionGroups/{id}":
     get:
       description: Gets one user role permission group by ID.
       operationId: dfareporting.userRolePermissionGroups.get
@@ -9694,7 +9694,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/userRolePermissions":
+  "/userprofiles/{profileId}/userRolePermissions":
     get:
       description: Gets a list of user role permissions, possibly filtered.
       operationId: dfareporting.userRolePermissions.list
@@ -9740,7 +9740,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/userRolePermissions/{id}":
+  "/userprofiles/{profileId}/userRolePermissions/{id}":
     get:
       description: Gets one user role permission by ID.
       operationId: dfareporting.userRolePermissions.get
@@ -9783,7 +9783,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/userRoles":
+  "/userprofiles/{profileId}/userRoles":
     get:
       description: Retrieves a list of user roles, possibly filtered. This method supports paging.
       operationId: dfareporting.userRoles.list
@@ -9965,7 +9965,7 @@ paths:
             - https://www.googleapis.com/auth/dfatrafficking
       tags:
         - userRoles
-  "/dfareporting/v3.5/userprofiles/{profileId}/userRoles/{id}":
+  "/userprofiles/{profileId}/userRoles/{id}":
     delete:
       description: Deletes an existing user role.
       operationId: dfareporting.userRoles.delete
@@ -10034,7 +10034,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/videoFormats":
+  "/userprofiles/{profileId}/videoFormats":
     get:
       description: Lists available video formats.
       operationId: dfareporting.videoFormats.list
@@ -10071,7 +10071,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dfareporting/v3.5/userprofiles/{profileId}/videoFormats/{id}":
+  "/userprofiles/{profileId}/videoFormats/{id}":
     get:
       description: Gets one video format by ID.
       operationId: dfareporting.videoFormats.get

@@ -96,7 +96,6 @@ tags:
   - name: regionInstantSnapshots
   - name: regionNetworkEndpointGroups
   - name: regionNetworkFirewallPolicies
-  - name: regionNetworks
   - name: regionNotificationEndpoints
   - name: regionOperations
   - name: regions
@@ -22159,7 +22158,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/RegionDisksStopGroupAsyncReplicationRequest"
+              $ref: "#/components/schemas/DisksStopGroupAsyncReplicationResource"
       responses:
         "200":
           content:
@@ -29098,416 +29097,6 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
-  "/projects/{project}/regions/{region}/networks":
-    get:
-      description: Retrieves the list of networks available to the specified project in the given region.
-      operationId: compute.regionNetworks.list
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: Name of the region scoping this request.
-          in: path
-          name: region
-          required: true
-          schema:
-            type: string
-        - description: "A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq \"double quoted literal\"` `(fieldname1 eq literal) (fieldname2 ne \"literal\")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name \"instance\", you would use `name ne .*instance`."
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)"
-          in: query
-          name: maxResults
-          schema:
-            minimum: 0
-            type: integer
-        - description: Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-          in: query
-          name: orderBy
-          schema:
-            type: string
-        - description: Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-          in: query
-          name: returnPartialSuccess
-          schema:
-            type: boolean
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NetworkList"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute.readonly
-      tags:
-        - regionNetworks
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/userIp"
-    post:
-      description: Creates a network in the specified project and region using the data included in the request.
-      operationId: compute.regionNetworks.insert
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: Name of the region scoping this request.
-          in: path
-          name: region
-          required: true
-          schema:
-            type: string
-        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-          in: query
-          name: requestId
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Network"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-      tags:
-        - regionNetworks
-  "/projects/{project}/regions/{region}/networks/{network}":
-    delete:
-      description: Deletes the specified network.
-      operationId: compute.regionNetworks.delete
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: Name of the region scoping this request.
-          in: path
-          name: region
-          required: true
-          schema:
-            type: string
-        - description: Name of the network to delete.
-          in: path
-          name: network
-          required: true
-          schema:
-            type: string
-        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-          in: query
-          name: requestId
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-      tags:
-        - regionNetworks
-    get:
-      description: Returns the specified network.
-      operationId: compute.regionNetworks.get
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: Name of the region scoping this request.
-          in: path
-          name: region
-          required: true
-          schema:
-            type: string
-        - description: Name of the network to return.
-          in: path
-          name: network
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Network"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute.readonly
-      tags:
-        - regionNetworks
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/userIp"
-  "/projects/{project}/regions/{region}/networks/{resource}/getIamPolicy":
-    get:
-      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
-      operationId: compute.regionNetworks.getIamPolicy
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: The name of the region for this request.
-          in: path
-          name: region
-          required: true
-          schema:
-            type: string
-        - description: Name or id of the resource for this request.
-          in: path
-          name: resource
-          required: true
-          schema:
-            type: string
-        - description: Requested IAM Policy version.
-          in: query
-          name: optionsRequestedPolicyVersion
-          schema:
-            type: integer
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Policy"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute.readonly
-      tags:
-        - regionNetworks
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/userIp"
-  "/projects/{project}/regions/{region}/networks/{resource}/setIamPolicy":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/userIp"
-    post:
-      description: Sets the access control policy on the specified resource. Replaces any existing policy.
-      operationId: compute.regionNetworks.setIamPolicy
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: The name of the region for this request.
-          in: path
-          name: region
-          required: true
-          schema:
-            type: string
-        - description: Name or id of the resource for this request.
-          in: path
-          name: resource
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/RegionSetPolicyRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Policy"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-      tags:
-        - regionNetworks
-  "/projects/{project}/regions/{region}/networks/{resource}/testIamPermissions":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/userIp"
-    post:
-      description: Returns permissions that a caller has on the specified resource.
-      operationId: compute.regionNetworks.testIamPermissions
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: The name of the region for this request.
-          in: path
-          name: region
-          required: true
-          schema:
-            type: string
-        - description: Name or id of the resource for this request.
-          in: path
-          name: resource
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/TestPermissionsRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TestPermissionsResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute.readonly
-      tags:
-        - regionNetworks
   "/projects/{project}/regions/{region}/nodeTemplates":
     get:
       description: Retrieves a list of node templates available to the specified project.
@@ -38961,7 +38550,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/DisksStopGroupAsyncReplicationRequest"
+              $ref: "#/components/schemas/DisksStopGroupAsyncReplicationResource"
       responses:
         "200":
           content:
@@ -47591,6 +47180,70 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - nodeGroups
+  "/projects/{project}/zones/{zone}/nodeGroups/{nodeGroup}/simulateMaintenanceEvent":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Simulates maintenance event on specified nodes from the node group.
+      operationId: compute.nodeGroups.simulateMaintenanceEvent
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: Name of the NodeGroup resource whose nodes will go under maintenance simulation.
+          in: path
+          name: nodeGroup
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NodeGroupsSimulateMaintenanceEventRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - nodeGroups
   "/projects/{project}/zones/{zone}/nodeGroups/{resource}/getIamPolicy":
     get:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
@@ -50220,6 +49873,10 @@ components:
           description: Indicates how many IOPS to provision for the disk. This sets the number of I/O operations per second that the disk can handle. Values must be between 10,000 and 120,000. For more details, see the Extreme persistent disk documentation.
           format: int64
           type: string
+        provisionedThroughput:
+          description: Indicates how much throughput to provision for the disk. This sets the number of throughput mb per second that the disk can handle. Values must be between 1 and 7,124.
+          format: int64
+          type: string
         replicaZones:
           description: URLs of the zones where the disk should be replicated to. Only applicable for regional resources.
           items:
@@ -51823,7 +51480,7 @@ components:
           $ref: "#/components/schemas/Expr"
           description: The condition that is associated with this binding. If the condition evaluates to `true`, then this binding applies to the current request. If the condition evaluates to `false`, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
         members:
-          description: "Specifies the principals requesting access for a Google Cloud resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. "
+          description: "Specifies the principals requesting access for a Google Cloud resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a Google service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `serviceAccount:{projectid}.svc.id.goog[{namespace}/{kubernetes-sa}]`: An identifier for a [Kubernetes service account](https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts). For example, `my-project.svc.id.goog[my-namespace/my-kubernetes-sa]`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. "
           items:
             type: string
           type: array
@@ -52614,6 +52271,10 @@ components:
           description: Indicates how many IOPS to provision for the disk. This sets the number of I/O operations per second that the disk can handle. Values must be between 10,000 and 120,000. For more details, see the Extreme persistent disk documentation.
           format: int64
           type: string
+        provisionedThroughput:
+          description: Indicates how much throughput to provision for the disk. This sets the number of throughput mb per second that the disk can handle. Values must be between 1 and 7,124.
+          format: int64
+          type: string
         region:
           description: "[Output Only] URL of the region where the disk resides. Only applicable for regional resources. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body."
           type: string
@@ -53285,7 +52946,8 @@ components:
           description: "The secondary disk to stop asynchronous replication to. Supplied if and only if the target disk is a primary disk in an asynchronously replicated pair. You can provide this as a partial or full URL to the resource. For example, the following are valid values: - https://www.googleapis.com/compute/v1/projects/project/zones/zone /disks/disk - https://www.googleapis.com/compute/v1/projects/project/regions/region /disks/disk - projects/project/zones/zone/disks/disk - projects/project/regions/region/disks/disk - zones/zone/disks/disk - regions/region/disks/disk "
           type: string
       type: object
-    DisksStopGroupAsyncReplicationRequest:
+    DisksStopGroupAsyncReplicationResource:
+      description: A transient resource used in compute.disks.stopGroupAsyncReplication and compute.regionDisks.stopGroupAsyncReplication. It is only used to process requests and is not persisted.
       properties:
         resourcePolicy:
           description: "The URL of the DiskConsistencyGroupPolicy for the group of disks to stop. This may be a full or partial URL, such as: - https://www.googleapis.com/compute/v1/projects/project/regions/region /resourcePolicies/resourcePolicy - projects/project/regions/region/resourcePolicies/resourcePolicy - regions/region/resourcePolicies/resourcePolicy "
@@ -57362,7 +57024,7 @@ components:
     InstanceGroupManagerInstanceLifecyclePolicy:
       properties:
         forceUpdateOnRepair:
-          description: "A bit indicating whether to forcefully apply the group's latest configuration when repairing a VM. Valid options are: - NO (default): If configuration updates are available, they are not forcefully applied during repair. However, if you've set up a proactive type of update policy, then configuration updates are applied as usual. - YES: If configuration updates are available, they are applied during repair. "
+          description: "A bit indicating whether to forcefully apply the group's latest configuration when repairing a VM. Valid options are: - NO (default): If configuration updates are available, they are not forcefully applied during repair. Instead, configuration updates are applied according to the group's update policy. - YES: If configuration updates are available, they are applied during repair. "
           enum:
             - NO
             - YES
@@ -58340,6 +58002,7 @@ components:
           enum:
             - ABANDONING
             - CREATING
+            - CREATING_ATOMICALLY
             - CREATING_WITHOUT_RETRIES
             - DELETING
             - NONE
@@ -61359,6 +61022,7 @@ components:
           enum:
             - ABANDONING
             - CREATING
+            - CREATING_ATOMICALLY
             - CREATING_WITHOUT_RETRIES
             - DELETING
             - NONE
@@ -61908,6 +61572,8 @@ components:
             - PRIVATE_SERVICE_CONNECT
             - SERVERLESS
           type: string
+        pscData:
+          $ref: "#/components/schemas/NetworkEndpointGroupPscData"
         pscTargetService:
           description: 'The target service url used to set up private service connection to a Google API or a PSC Producer Service Attachment. An example value is: "asia-northeast3-cloudkms.googleapis.com"'
           type: string
@@ -62139,6 +61805,27 @@ components:
               description: "[Output Only] A human-readable description of the warning code."
               type: string
           type: object
+      type: object
+    NetworkEndpointGroupPscData:
+      description: All data that is specifically relevant to only network endpoint groups of type PRIVATE_SERVICE_CONNECT.
+      properties:
+        consumerPscAddress:
+          description: "[Output Only] Address allocated from given subnetwork for PSC. This IP address acts as a VIP for a PSC NEG, allowing it to act as an endpoint in L7 PSC-XLB."
+          type: string
+        pscConnectionId:
+          description: "[Output Only] The PSC connection id of the PSC Network Endpoint Group Consumer."
+          format: uint64
+          type: string
+        pscConnectionStatus:
+          description: "[Output Only] The connection status of the PSC Forwarding Rule."
+          enum:
+            - ACCEPTED
+            - CLOSED
+            - NEEDS_ATTENTION
+            - PENDING
+            - REJECTED
+            - STATUS_UNSPECIFIED
+          type: string
       type: object
     NetworkEndpointGroupServerlessDeployment:
       description: "Configuration for a serverless network endpoint group (NEG). The platform must be provided. Note: The target backend service must be in the same project and located in the same region as the Serverless NEG."
@@ -63108,6 +62795,14 @@ components:
         nodeTemplate:
           description: Full or partial URL of the node template resource to be updated for this node group.
           type: string
+      type: object
+    NodeGroupsSimulateMaintenanceEventRequest:
+      properties:
+        nodes:
+          description: Names of the nodes to go under maintenance simulation.
+          items:
+            type: string
+          type: array
       type: object
     NodeTemplate:
       description: Represent a sole-tenant Node Template resource. You can use a template to define properties for nodes in a node group. For more information, read Creating node groups and instances.
@@ -66226,12 +65921,6 @@ components:
           description: "The secondary disk to stop asynchronous replication to. Supplied if and only if the target disk is a primary disk in an asynchronously replicated pair. You can provide this as a partial or full URL to the resource. For example, the following are valid values: - https://www.googleapis.com/compute/v1/projects/project/zones/zone /disks/disk - https://www.googleapis.com/compute/v1/projects/project/regions/region /disks/disk - projects/project/zones/zone/disks/disk - projects/project/regions/region/disks/disk - zones/zone/disks/disk - regions/region/disks/disk "
           type: string
       type: object
-    RegionDisksStopGroupAsyncReplicationRequest:
-      properties:
-        resourcePolicy:
-          description: "The URL of the DiskConsistencyGroupPolicy for the group of disks to stop. This may be a full or partial URL, such as: - https://www.googleapis.com/compute/v1/projects/project/regions/region /resourcePolicies/resourcePolicy - projects/project/regions/region/resourcePolicies/resourcePolicy - regions/region/resourcePolicies/resourcePolicy "
-          type: string
-      type: object
     RegionInstanceGroupList:
       description: Contains a list of InstanceGroup resources.
       properties:
@@ -68995,6 +68684,8 @@ components:
           description: Current amount of memory (in MB) available for VM. 0 or unset means default amount of memory of the current machine type.
           format: int64
           type: string
+        dynamicResizeProperties:
+          $ref: "#/components/schemas/SchedulingDynamicResizeProperties"
         hostErrorTimeoutSeconds:
           description: Specify the time in seconds for host error detection, the value must be within the range of [90, 330] with the increment of 30, if unset, the default behavior of host error recovery will be used.
           format: int32
@@ -69050,6 +68741,20 @@ components:
           type: string
         terminationTime:
           description: Specifies the timestamp, when the instance will be terminated, in RFC3339 text format. If specified, the instance termination action will be performed at the termination time.
+          type: string
+      type: object
+    SchedulingDynamicResizeProperties:
+      description: Configuration for properties related to dynamic assignment of computing resources to VM (CPU and RAM).
+      properties:
+        enableHotStandby:
+          description: Set to true if this VM is supporting HotStandby modes (b/235044648).
+          type: boolean
+        hotStandbyState:
+          description: Current Hot Standby state of VM.
+          enum:
+            - ACTIVE
+            - HOTSTANDBY_STATE_UNSPECIFIED
+            - STANDBY
           type: string
       type: object
     SchedulingNodeAffinity:
@@ -69526,6 +69231,9 @@ components:
         match:
           $ref: "#/components/schemas/SecurityPolicyRuleMatcher"
           description: A match condition that incoming traffic is evaluated against. If it evaluates to true, the corresponding 'action' is enforced.
+        preconfiguredWafConfig:
+          $ref: "#/components/schemas/SecurityPolicyRulePreconfiguredWafConfig"
+          description: Preconfigured WAF configuration to be applied for the rule. If the rule does not evaluate preconfigured WAF rules, i.e., if evaluatePreconfiguredWaf() is not used, this field will have no effect.
         preview:
           description: If set to true, the specified action is not enforced.
           type: boolean
@@ -69645,6 +69353,60 @@ components:
           items:
             type: string
           type: array
+      type: object
+    SecurityPolicyRulePreconfiguredWafConfig:
+      properties:
+        exclusions:
+          description: A list of exclusions to apply during preconfigured WAF evaluation.
+          items:
+            $ref: "#/components/schemas/SecurityPolicyRulePreconfiguredWafConfigExclusion"
+          type: array
+      type: object
+    SecurityPolicyRulePreconfiguredWafConfigExclusion:
+      properties:
+        requestCookiesToExclude:
+          description: A list of request cookie names whose value will be excluded from inspection during preconfigured WAF evaluation.
+          items:
+            $ref: "#/components/schemas/SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams"
+          type: array
+        requestHeadersToExclude:
+          description: A list of request header names whose value will be excluded from inspection during preconfigured WAF evaluation.
+          items:
+            $ref: "#/components/schemas/SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams"
+          type: array
+        requestQueryParamsToExclude:
+          description: A list of request query parameter names whose value will be excluded from inspection during preconfigured WAF evaluation. Note that the parameter can be in the query string or in the POST body.
+          items:
+            $ref: "#/components/schemas/SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams"
+          type: array
+        requestUrisToExclude:
+          description: A list of request URIs from the request line to be excluded from inspection during preconfigured WAF evaluation. When specifying this field, the query or fragment part should be excluded.
+          items:
+            $ref: "#/components/schemas/SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams"
+          type: array
+        targetRuleIds:
+          description: A list of target rule IDs under the WAF rule set to apply the preconfigured WAF exclusion. If omitted, it refers to all the rule IDs under the WAF rule set.
+          items:
+            type: string
+          type: array
+        targetRuleSet:
+          description: Target WAF rule set to apply the preconfigured WAF exclusion.
+          type: string
+      type: object
+    SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams:
+      properties:
+        op:
+          description: The match operator for the field.
+          enum:
+            - CONTAINS
+            - ENDS_WITH
+            - EQUALS
+            - EQUALS_ANY
+            - STARTS_WITH
+          type: string
+        val:
+          description: The value of the field.
+          type: string
       type: object
     SecurityPolicyRuleRateLimitOptions:
       properties:

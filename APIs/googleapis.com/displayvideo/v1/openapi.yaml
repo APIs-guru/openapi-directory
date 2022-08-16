@@ -1516,7 +1516,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The ID of the insertion order we need to delete.
+        - description: The ID of the insertion order to delete.
           in: path
           name: insertionOrderId
           required: true
@@ -2107,7 +2107,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The ID of the line item we need to fetch.
+        - description: The ID of the line item to delete.
           in: path
           name: lineItemId
           required: true
@@ -3704,7 +3704,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Required. Identifies the type of assigned targeting options to list. Supported targeting types: * `TARGETING_TYPE_CHANNEL` * `TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION` * `TARGETING_TYPE_OMID` * `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION`"
+        - description: "Required. Identifies the type of assigned targeting options to list. Supported targeting types: * `TARGETING_TYPE_CHANNEL` * `TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION` * `TARGETING_TYPE_OMID` * `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION` * `TARGETING_TYPE_YOUTUBE_VIDEO` * `TARGETING_TYPE_YOUTUBE_CHANNEL`"
           in: path
           name: targetingType
           required: true
@@ -3979,7 +3979,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Required. Identifies the type of this assigned targeting option. Supported targeting types: * `TARGETING_TYPE_CHANNEL` * `TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION` * `TARGETING_TYPE_OMID` * `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION`"
+        - description: "Required. Identifies the type of this assigned targeting option. Supported targeting types: * `TARGETING_TYPE_CHANNEL` * `TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION` * `TARGETING_TYPE_OMID` * `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION` * `TARGETING_TYPE_YOUTUBE_VIDEO` * `TARGETING_TYPE_YOUTUBE_CHANNEL`"
           in: path
           name: targetingType
           required: true
@@ -7713,6 +7713,16 @@ components:
             - AGE_RANGE_55_64
             - AGE_RANGE_65_PLUS
             - AGE_RANGE_UNKNOWN
+            - AGE_RANGE_18_20
+            - AGE_RANGE_21_24
+            - AGE_RANGE_25_29
+            - AGE_RANGE_30_34
+            - AGE_RANGE_35_39
+            - AGE_RANGE_40_44
+            - AGE_RANGE_45_49
+            - AGE_RANGE_50_54
+            - AGE_RANGE_55_59
+            - AGE_RANGE_60_64
           type: string
         targetingOptionId:
           description: Required. The targeting_option_id of a TargetingOption of type `TARGETING_TYPE_AGE_RANGE`.
@@ -7732,6 +7742,16 @@ components:
             - AGE_RANGE_55_64
             - AGE_RANGE_65_PLUS
             - AGE_RANGE_UNKNOWN
+            - AGE_RANGE_18_20
+            - AGE_RANGE_21_24
+            - AGE_RANGE_25_29
+            - AGE_RANGE_30_34
+            - AGE_RANGE_35_39
+            - AGE_RANGE_40_44
+            - AGE_RANGE_45_49
+            - AGE_RANGE_50_54
+            - AGE_RANGE_55_59
+            - AGE_RANGE_60_64
           readOnly: true
           type: string
       type: object
@@ -10273,9 +10293,12 @@ components:
             - EXCHANGE_WAZE
             - EXCHANGE_SOUNDCAST
             - EXCHANGE_SHARETHROUGH
+            - EXCHANGE_FYBER
             - EXCHANGE_RED_FOR_PUBLISHERS
             - EXCHANGE_MEDIANET
             - EXCHANGE_TAPJOY
+            - EXCHANGE_VISTAR
+            - EXCHANGE_DAX
           type: string
         googleAdManagerAgencyId:
           description: Output only. Agency ID of Google Ad Manager. The field is only relevant when Google Ad Manager is the enabled exchange.
@@ -10359,9 +10382,12 @@ components:
             - EXCHANGE_WAZE
             - EXCHANGE_SOUNDCAST
             - EXCHANGE_SHARETHROUGH
+            - EXCHANGE_FYBER
             - EXCHANGE_RED_FOR_PUBLISHERS
             - EXCHANGE_MEDIANET
             - EXCHANGE_TAPJOY
+            - EXCHANGE_VISTAR
+            - EXCHANGE_DAX
           type: string
         status:
           description: Status of the exchange review.
@@ -10441,9 +10467,12 @@ components:
             - EXCHANGE_WAZE
             - EXCHANGE_SOUNDCAST
             - EXCHANGE_SHARETHROUGH
+            - EXCHANGE_FYBER
             - EXCHANGE_RED_FOR_PUBLISHERS
             - EXCHANGE_MEDIANET
             - EXCHANGE_TAPJOY
+            - EXCHANGE_VISTAR
+            - EXCHANGE_DAX
           readOnly: true
           type: string
       type: object
@@ -10972,9 +11001,12 @@ components:
             - EXCHANGE_WAZE
             - EXCHANGE_SOUNDCAST
             - EXCHANGE_SHARETHROUGH
+            - EXCHANGE_FYBER
             - EXCHANGE_RED_FOR_PUBLISHERS
             - EXCHANGE_MEDIANET
             - EXCHANGE_TAPJOY
+            - EXCHANGE_VISTAR
+            - EXCHANGE_DAX
           type: string
         guaranteedOrderId:
           description: Output only. The unique identifier of the guaranteed order. The guaranteed order IDs have the format `{exchange}-{legacy_guaranteed_order_id}`.
@@ -11457,9 +11489,12 @@ components:
             - EXCHANGE_WAZE
             - EXCHANGE_SOUNDCAST
             - EXCHANGE_SHARETHROUGH
+            - EXCHANGE_FYBER
             - EXCHANGE_RED_FOR_PUBLISHERS
             - EXCHANGE_MEDIANET
             - EXCHANGE_TAPJOY
+            - EXCHANGE_VISTAR
+            - EXCHANGE_DAX
           type: string
         guaranteedOrderId:
           description: Immutable. The ID of the guaranteed order that this inventory source belongs to. Only applicable when commitment is `INVENTORY_SOURCE_COMMITMENT_GUARANTEED`.
