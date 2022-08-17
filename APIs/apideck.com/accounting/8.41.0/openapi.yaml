@@ -275,7 +275,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 8.40.1
+  version: 8.41.0
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -306,6 +306,11 @@ tags:
     x-apideck-model:
       $ref: "#/components/schemas/CompanyInfo"
     x-apideck-resource-id: company-info
+  - description: ""
+    name: Credit Notes
+    x-apideck-model:
+      $ref: "#/components/schemas/CreditNote"
+    x-apideck-resource-id: credit-notes
   - description: ""
     name: Customers
     x-apideck-model:
@@ -881,6 +886,394 @@ paths:
               console.error(error)
             }
       x-graphql-field-name: companyInfo
+  /accounting/credit-notes:
+    get:
+      description: List Credit Notes
+      operationId: creditNotesAll
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetCreditNotesResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: List Credit Notes
+      tags:
+        - Credit Notes
+      x-apideck-api: accounting
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.accounting.creditNotesAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: CreditNotes
+    post:
+      description: Create Credit Note
+      operationId: creditNotesAdd
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreditNote"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateCreditNoteResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Create Credit Note
+      tags:
+        - Credit Notes
+      x-apideck-api: accounting
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              creditNote: {
+                number: 'OIT00546',
+                customer: {
+                  id: '12345',
+                  display_name: 'Windsurf Shop'
+                },
+                currency: 'USD',
+                currency_rate: 0.69,
+                tax_inclusive: true,
+                sub_total: 27500,
+                total_amount: 49.99,
+                total_tax: 2500,
+                tax_code: '1234',
+                balance: 27500,
+                remaining_credit: 27500,
+                status: 'authorised',
+                reference: '123456',
+                date_issued: '2021-05-01T12:00:00.000Z',
+                date_paid: '2021-05-01T12:00:00.000Z',
+                type: 'accounts_receivable_credit',
+                line_items: [
+                  {
+                    row_id: '12345',
+                    code: '120-C',
+                    line_number: 1,
+                    description:
+                      'Model Y is a fully electric, mid-size SUV, with seating for up to seven, dual motor AWD and unparalleled protection.',
+                    type: 'sales_item',
+                    tax_amount: 27500,
+                    total_amount: 27500,
+                    quantity: 1,
+                    unit_price: 27500.5,
+                    unit_of_measure: 'pc.',
+                    discount_percentage: 0.01,
+                    item: {
+                      id: '12344'
+                    },
+                    tax_rate: {
+                      id: '123456'
+                    },
+                    ledger_account: {
+                      id: '123456',
+                      nominal_code: 'N091',
+                      code: '453'
+                    },
+                    row_version: '1-12345'
+                  }
+                ],
+                allocations: [
+                  {
+                    id: '123456',
+                    type: 'invoice',
+                    amount: 49.99
+                  }
+                ],
+                note: 'Some notes about this credit note',
+                row_version: '1-12345'
+              }
+            }
+
+            try {
+              const { data } = await apideck.accounting.creditNotesAdd(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/accounting/credit-notes/{id}":
+    delete:
+      description: Delete Credit Note
+      operationId: creditNotesDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeleteCreditNoteResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Delete Credit Note
+      tags:
+        - Credit Notes
+      x-apideck-api: accounting
+      x-apideck-gotchas:
+        - connector: xero
+          description: Xero will only allow deleting a Credit Note if it is in draft status.
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.accounting.creditNotesDelete({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    get:
+      description: Get Credit Note
+      operationId: creditNotesOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetCreditNoteResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get Credit Note
+      tags:
+        - Credit Notes
+      x-apideck-api: accounting
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.accounting.creditNotesOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    patch:
+      description: Update Credit Note
+      operationId: creditNotesUpdate
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreditNote"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdateCreditNoteResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Update Credit Note
+      tags:
+        - Credit Notes
+      x-apideck-api: accounting
+      x-apideck-gotchas:
+        - connector: xero
+          description: Xero will only allow updating a Credit Note when it has not yet been allocated.
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              id: 'id_example',
+              creditNote: {
+                number: 'OIT00546',
+                customer: {
+                  id: '12345',
+                  display_name: 'Windsurf Shop'
+                },
+                currency: 'USD',
+                currency_rate: 0.69,
+                tax_inclusive: true,
+                sub_total: 27500,
+                total_amount: 49.99,
+                total_tax: 2500,
+                tax_code: '1234',
+                balance: 27500,
+                remaining_credit: 27500,
+                status: 'authorised',
+                reference: '123456',
+                date_issued: '2021-05-01T12:00:00.000Z',
+                date_paid: '2021-05-01T12:00:00.000Z',
+                type: 'accounts_receivable_credit',
+                line_items: [
+                  {
+                    row_id: '12345',
+                    code: '120-C',
+                    line_number: 1,
+                    description:
+                      'Model Y is a fully electric, mid-size SUV, with seating for up to seven, dual motor AWD and unparalleled protection.',
+                    type: 'sales_item',
+                    tax_amount: 27500,
+                    total_amount: 27500,
+                    quantity: 1,
+                    unit_price: 27500.5,
+                    unit_of_measure: 'pc.',
+                    discount_percentage: 0.01,
+                    item: {
+                      id: '12344'
+                    },
+                    tax_rate: {
+                      id: '123456'
+                    },
+                    ledger_account: {
+                      id: '123456',
+                      nominal_code: 'N091',
+                      code: '453'
+                    },
+                    row_version: '1-12345'
+                  }
+                ],
+                allocations: [
+                  {
+                    id: '123456',
+                    type: 'invoice',
+                    amount: 49.99
+                  }
+                ],
+                note: 'Some notes about this credit note',
+                row_version: '1-12345'
+              }
+            }
+
+            try {
+              const { data } = await apideck.accounting.creditNotesUpdate(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
   /accounting/customers:
     get:
       description: List Customers
@@ -3751,6 +4144,12 @@ components:
           schema:
             $ref: "#/components/schemas/CreateBillResponse"
       description: Bill created
+    CreateCreditNoteResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateCreditNoteResponse"
+      description: Credit Note created
     CreateCustomerResponse:
       content:
         application/json:
@@ -3799,6 +4198,12 @@ components:
           schema:
             $ref: "#/components/schemas/DeleteBillResponse"
       description: Bill deleted
+    DeleteCreditNoteResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DeleteCreditNoteResponse"
+      description: Credit Note deleted
     DeleteCustomerResponse:
       content:
         application/json:
@@ -3865,6 +4270,18 @@ components:
           schema:
             $ref: "#/components/schemas/GetCompanyInfoResponse"
       description: CompanyInfo
+    GetCreditNoteResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetCreditNoteResponse"
+      description: Credit Note
+    GetCreditNotesResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetCreditNotesResponse"
+      description: Credit Notes
     GetCustomerResponse:
       content:
         application/json:
@@ -4003,6 +4420,12 @@ components:
           schema:
             $ref: "#/components/schemas/UpdateBillResponse"
       description: Bill Updated
+    UpdateCreditNoteResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateCreditNoteResponse"
+      description: Credit Note updated
     UpdateCustomerResponse:
       content:
         application/json:
@@ -5558,6 +5981,38 @@ components:
         - operation
         - data
       type: object
+    CreateCreditNoteResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: credit-notes
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: xero
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     CreateCustomerResponse:
       properties:
         data:
@@ -5794,6 +6249,185 @@ components:
       readOnly: true
       title: Created by
       type: string
+    CreditNote:
+      properties:
+        allocations:
+          items:
+            properties:
+              amount:
+                description: Amount of payment that should be attributed to this allocation. If null, the total_amount will be used.
+                example: 49.99
+                nullable: true
+                title: Amount
+                type: number
+              code:
+                example: N091
+                readOnly: true
+                type: string
+              id:
+                description: Unique identifier of entity this payment should be attributed to.
+                example: "123456"
+                title: Linked entity ID
+                type: string
+              type:
+                description: Type of entity this payment should be attributed to.
+                enum:
+                  - invoice
+                  - order
+                  - expense
+                  - credit_memo
+                  - over_payment
+                  - pre_payment
+                title: Allocation type
+                type: string
+                x-apideck-enum-id: allocations.type
+                x-graphql-type-name: AllocationType
+            x-apideck-weights:
+              amount: medium
+              code: medium
+              id: medium
+              type: medium
+          type: array
+        balance:
+          description: The balance reflecting any payments made against the transaction.
+          example: 27500
+          nullable: true
+          title: Balance
+          type: number
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        currency:
+          $ref: "#/components/schemas/Currency"
+        currency_rate:
+          $ref: "#/components/schemas/CurrencyRate"
+        customer:
+          $ref: "#/components/schemas/LinkedCustomer"
+        date_issued:
+          description: Date credit note issued - YYYY:MM::DDThh:mm:ss.sTZD
+          example: 2021-05-01T12:00:00.000Z
+          format: date-time
+          title: Datetime
+          type: string
+        date_paid:
+          description: Date credit note paid - YYYY:MM::DDThh:mm:ss.sTZD
+          example: 2021-05-01T12:00:00.000Z
+          format: date-time
+          nullable: true
+          title: Datetime
+          type: string
+        id:
+          description: Unique identifier representing the entity
+          example: "123456"
+          readOnly: true
+          title: Credit Note identifier
+          type: string
+        line_items:
+          items:
+            $ref: "#/components/schemas/InvoiceLineItem"
+          type: array
+        note:
+          description: Optional note to be associated with the credit note.
+          example: Some notes about this credit note
+          nullable: true
+          title: Note
+          type: string
+        number:
+          description: Credit note number.
+          example: OIT00546
+          nullable: true
+          title: Credit note number
+          type: string
+        reference:
+          description: "Optional reference message ie: Debit remittance detail."
+          example: "123456"
+          nullable: true
+          title: Credit Note reference
+          type: string
+        remaining_credit:
+          description: Indicates the total credit amount still available to apply towards the payment.
+          example: 27500
+          nullable: true
+          title: Remaining Credit
+          type: number
+        row_version:
+          $ref: "#/components/schemas/RowVersion"
+        status:
+          description: Status of payment
+          enum:
+            - draft
+            - authorised
+            - paid
+            - voided
+            - deleted
+          example: authorised
+          title: Credit Note status
+          type: string
+          x-apideck-enum-id: payments.status
+          x-graphql-type-name: CreditNoteStatus
+        sub_total:
+          description: Sub-total amount, normally before tax.
+          example: 27500
+          nullable: true
+          title: Sub-total amount
+          type: number
+        tax_code:
+          description: Applicable tax id/code override if tax is not supplied on a line item basis.
+          example: "1234"
+          nullable: true
+          title: Tax Code
+          type: string
+        tax_inclusive:
+          $ref: "#/components/schemas/TaxInclusive"
+        total_amount:
+          description: Amount of transaction
+          example: 49.99
+          title: Total amount
+          type: number
+        total_tax:
+          description: Total tax amount applied to this invoice.
+          example: 2500
+          nullable: true
+          title: Total tax amount
+          type: number
+        type:
+          description: Type of payment
+          enum:
+            - accounts_receivable_credit
+            - accounts_payable_credit
+          example: accounts_receivable_credit
+          title: Credit Note Type
+          type: string
+          x-apideck-enum-id: credit-notes.type
+          x-graphql-type-name: CreditNoteType
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+      required:
+        - total_amount
+      type: object
+      x-apideck-weights:
+        account: critical
+        allocations: medium
+        balance: critical
+        created_at: edge-case
+        currency: critical
+        currency_rate: medium
+        customer: high
+        date_issued: edge-case
+        date_paid: critical
+        id: critical
+        line_items: medium
+        note: low
+        number: low
+        reference: low
+        row_version: edge-case
+        status: high
+        sub_total: critical
+        tax_code: edge-case
+        tax_inclusive: low
+        total_amount: critical
+        total_tax: edge-case
+        type: edge-case
+        updated_at: medium
     Currency:
       description: Indicates the associated currency for an amount of money. Values correspond to [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
       enum:
@@ -6459,6 +7093,38 @@ components:
         - operation
         - data
       type: object
+    DeleteCreditNoteResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: credit-notes
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: xero
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     DeleteCustomerResponse:
       properties:
         data:
@@ -6832,6 +7498,76 @@ components:
         - data
       type: object
       x-graphql-type-name: CompanyInfo
+    GetCreditNoteResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/CreditNote"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: credit-notes
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: xero
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    GetCreditNotesResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/CreditNote"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: credit-notes
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: xero
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     GetCustomerResponse:
       properties:
         data:
@@ -9357,6 +10093,38 @@ components:
         resource:
           description: Unified API resource name
           example: bills
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: xero
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    UpdateCreditNoteResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: credit-notes
           type: string
         service:
           description: Apideck ID of service provider

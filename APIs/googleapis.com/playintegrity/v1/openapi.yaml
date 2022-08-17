@@ -150,6 +150,9 @@ components:
     AccountDetails:
       description: Contains the account information such as the licensing status for the user in the scope.
       properties:
+        accountRiskVerdict:
+          $ref: "#/components/schemas/AccountRiskVerdict"
+          description: Details about the account risk for the user in the scope. This feature is available only to selected developers.
         appLicensingVerdict:
           description: Required. Details about the licensing status of the user for the app in the scope.
           enum:
@@ -157,6 +160,20 @@ components:
             - LICENSED
             - UNLICENSED
             - UNEVALUATED
+          type: string
+      type: object
+    AccountRiskVerdict:
+      description: Contains information about account risk that indicates if the current user session seems low risk, unknown, or risky before you allow important actions to proceed.
+      properties:
+        riskLevel:
+          description: Required. Indicates the account risk level of the current user session.
+          enum:
+            - RISK_LEVEL_UNSPECIFIED
+            - RISK_LEVEL_UNEVALUATED
+            - RISK_LEVEL_RISK
+            - RISK_LEVEL_UNKNOWN
+            - RISK_LEVEL_LOW_RISK
+            - RISK_LEVEL_LOWEST_RISK
           type: string
       type: object
     AppIntegrity:

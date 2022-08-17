@@ -553,7 +553,7 @@ paths:
         - properties
   "/v1alpha/{parent}/audiences":
     get:
-      description: Lists Audiences on a property. Audiences created before 2020 may not be supported.
+      description: Lists Audiences on a property. Audiences created before 2020 may not be supported. Default audiences will not show filter definitions.
       operationId: analyticsadmin.properties.audiences.list
       parameters:
         - description: "Required. Example format: properties/1234"
@@ -2218,9 +2218,7 @@ components:
             - OPERATION_UNSPECIFIED
             - EQUAL
             - LESS_THAN
-            - LESS_THAN_OR_EQUAL
             - GREATER_THAN
-            - GREATER_THAN_OR_EQUAL
           type: string
         value:
           $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericValue"
@@ -2253,7 +2251,6 @@ components:
             - ENDS_WITH
             - CONTAINS
             - FULL_REGEXP
-            - PARTIAL_REGEXP
           type: string
         value:
           description: Required. The string value to be matched against.

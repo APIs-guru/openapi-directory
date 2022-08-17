@@ -164,7 +164,7 @@ paths:
       description: Moves or inserts multiple Chrome OS devices to an organizational unit. You can move up to 50 devices at once.
       operationId: directory.chromeosdevices.moveDevicesToOu
       parameters:
-        - description: Immutable ID of the Google Workspace account
+        - description: Immutable. ID of the Google Workspace account
           in: path
           name: customerId
           required: true
@@ -337,19 +337,19 @@ paths:
       description: Gets command data a specific command issued to the device.
       operationId: admin.customer.devices.chromeos.commands.get
       parameters:
-        - description: Immutable. Immutable ID of the Google Workspace account.
+        - description: Immutable. ID of the Google Workspace account.
           in: path
           name: customerId
           required: true
           schema:
             type: string
-        - description: Immutable. Immutable ID of Chrome OS Device.
+        - description: Immutable. ID of Chrome OS Device.
           in: path
           name: deviceId
           required: true
           schema:
             type: string
-        - description: Immutable. Immutable ID of Chrome OS Device Command.
+        - description: Immutable. ID of Chrome OS Device Command.
           in: path
           name: commandId
           required: true
@@ -402,13 +402,13 @@ paths:
       description: Issues a command for the device to execute.
       operationId: admin.customer.devices.chromeos.issueCommand
       parameters:
-        - description: Immutable. Immutable ID of the Google Workspace account.
+        - description: Immutable. ID of the Google Workspace account.
           in: path
           name: customerId
           required: true
           schema:
             type: string
-        - description: Immutable. Immutable ID of Chrome OS Device.
+        - description: Immutable. ID of Chrome OS Device.
           in: path
           name: deviceId
           required: true
@@ -3051,7 +3051,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/admin/directory/v1/groups/{groupKey}/hasMember/{memberKey}":
     get:
-      description: Checks whether the given user is a member of the group. Membership can be direct or nested.
+      description: Checks whether the given user is a member of the group. Membership can be direct or nested, but if nested, the `memberKey` and `groupKey` must be entities in the same domain or an `Invalid input` error is returned. To check for nested memberships that include entities outside of the group's domain, use the [`checkTransitiveMembership()`](https://cloud.google.com/identity/docs/reference/rest/v1/groups.memberships/checkTransitiveMembership) method in the Cloud Identity Groups API.
       operationId: directory.members.hasMember
       parameters:
         - description: Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
@@ -5665,6 +5665,7 @@ components:
           type: boolean
       type: object
     ChromeOsDeviceAction:
+      description: The data regarding an action to update the status of a Chrome OS device.
       properties:
         action:
           description: Action to be taken on the Chrome OS device.
