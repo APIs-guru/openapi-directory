@@ -1846,8 +1846,10 @@ components:
           properties: {}
           type: object
         settings_required_for_authorization:
+          description: List of settings that are required to be configured on integration before authorization can occur
           example:
-            - instance_url
+            - client_id
+            - client_secret
           items:
             type: string
           readOnly: true
