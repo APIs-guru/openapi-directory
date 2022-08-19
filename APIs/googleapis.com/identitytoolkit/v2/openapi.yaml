@@ -28,7 +28,7 @@ info:
   x-providerName: googleapis.com
   x-serviceName: identitytoolkit
 externalDocs:
-  url: https://firebase.google.com/docs/auth/
+  url: https://cloud.google.com/identity-platform
 tags:
   - name: accounts
   - name: defaultSupportedIdps
@@ -971,6 +971,23 @@ components:
           $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2Permissions"
           description: Configuration related to restricting a user's ability to affect their account.
       type: object
+    GoogleCloudIdentitytoolkitAdminV2ClientPermissionConfig:
+      description: Options related to how clients making requests on behalf of a tenant should be configured.
+      properties:
+        permissions:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2ClientPermissions"
+          description: Configuration related to restricting a user's ability to affect their account.
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2ClientPermissions:
+      description: Configuration related to restricting a user's ability to affect their account.
+      properties:
+        disabledUserDeletion:
+          description: When true, end users cannot delete their account on the associated project through any of our API methods
+          type: boolean
+        disabledUserSignup:
+          description: When true, end users cannot sign up for a new account on the associated project through any of our API methods
+          type: boolean
+      type: object
     GoogleCloudIdentitytoolkitAdminV2CodeFlowConfig:
       description: Additional config for Apple for code flow.
       properties:
@@ -1573,6 +1590,9 @@ components:
         autodeleteAnonymousUsers:
           description: Whether anonymous users will be auto-deleted after a period of 30 days.
           type: boolean
+        client:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2ClientPermissionConfig"
+          description: Options related to how clients making requests on behalf of a project should be configured.
         disableAuth:
           description: Whether authentication is disabled for the tenant. If true, the users under the disabled tenant are not allowed to sign-in. Admins of the disabled tenant are not able to manage its users.
           type: boolean
