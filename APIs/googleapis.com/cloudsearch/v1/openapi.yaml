@@ -4516,11 +4516,6 @@ components:
             $ref: "#/components/schemas/StreamingSessionInfo"
           readOnly: true
           type: array
-        supportedCaptionLanguages:
-          description: Supported caption languages in BCP 47 language code format, e.g.'en-US'.
-          items:
-            type: string
-          type: array
         transcriptionSessionInfo:
           $ref: "#/components/schemas/TranscriptionSessionInfo"
           description: Information about active transcription session in the ongoing conference.
@@ -10854,9 +10849,6 @@ components:
           type: string
         uri:
           description: The uri for whiteboard document.
-          type: string
-        whiteboardUri:
-          description: This field is deprecated and will be removed. Please use "uri" instead.
           type: string
       type: object
     WidgetMarkup:

@@ -480,6 +480,19 @@ components:
           format: int32
           type: integer
       type: object
+    BwdifConfig:
+      description: Bob Weaver Deinterlacing Filter Configuration.
+      properties:
+        deinterlaceAllFrames:
+          description: Deinterlace all frames rather than just the frames identified as interlaced. The default is `false`.
+          type: boolean
+        mode:
+          description: "Specifies the deinterlacing mode to adopt. The default is `send_frame`. Supported values: - `send_frame`: Output one frame for each frame - `send_field`: Output one frame for each field"
+          type: string
+        parity:
+          description: "The picture field parity assumed for the input interlaced video. The default is `auto`. Supported values: - `tff`: Assume the top field is first - `bff`: Assume the bottom field is first - `auto`: Enable automatic detection of field parity"
+          type: string
+      type: object
     Color:
       description: Color preprocessing configuration. **Note:** This configuration is not supported.
       properties:
@@ -526,6 +539,16 @@ components:
           description: Set strength of the deblocker. Enter a value between 0 and 1. The higher the value, the stronger the block removal. 0 is no deblocking. The default is 0.
           format: double
           type: number
+      type: object
+    Deinterlace:
+      description: Deinterlace configuration for input video.
+      properties:
+        bwdif:
+          $ref: "#/components/schemas/BwdifConfig"
+          description: Specifies the Bob Weaver Deinterlacing Filter Configuration.
+        yadif:
+          $ref: "#/components/schemas/YadifConfig"
+          description: Specifies the Yet Another Deinterlacing Filter Configuration.
       type: object
     Denoise:
       description: Denoise preprocessing configuration. **Note:** This configuration is not supported.
@@ -1014,6 +1037,9 @@ components:
         deblock:
           $ref: "#/components/schemas/Deblock"
           description: Deblock preprocessing configuration.
+        deinterlace:
+          $ref: "#/components/schemas/Deinterlace"
+          description: Specify the video deinterlace configuration.
         denoise:
           $ref: "#/components/schemas/Denoise"
           description: Denoise preprocessing configuration.
@@ -1182,6 +1208,22 @@ components:
           description: The width of the video in pixels. Must be an even integer. When not specified, the width is adjusted to match the specified height and input aspect ratio. If both are omitted, the input width is used.
           format: int32
           type: integer
+      type: object
+    YadifConfig:
+      description: Yet Another Deinterlacing Filter Configuration.
+      properties:
+        deinterlaceAllFrames:
+          description: Deinterlace all frames rather than just the frames identified as interlaced. The default is `false`.
+          type: boolean
+        disableSpatialInterlacing:
+          description: Disable spacial interlacing. The default is `false`.
+          type: boolean
+        mode:
+          description: "Specifies the deinterlacing mode to adopt. The default is `send_frame`. Supported values: - `send_frame`: Output one frame for each frame - `send_field`: Output one frame for each field"
+          type: string
+        parity:
+          description: "The picture field parity assumed for the input interlaced video. The default is `auto`. Supported values: - `tff`: Assume the top field is first - `bff`: Assume the bottom field is first - `auto`: Enable automatic detection of field parity"
+          type: string
       type: object
   securitySchemes:
     Oauth2:

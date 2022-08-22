@@ -104,6 +104,11 @@ paths:
           name: pageToken
           schema:
             type: string
+        - description: Optional. Controls whether Projects in the DELETING state should be returned. Defaults to false.
+          in: query
+          name: showDeleted
+          schema:
+            type: boolean
       responses:
         "200":
           content:
@@ -285,6 +290,48 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/RemoveWebAppRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{name}:undelete":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Restores the specified WebApp to the project.
+      operationId: firebase.projects.webApps.undelete
+      parameters:
+        - description: "Required. The resource name of the WebApp, in the format: projects/ PROJECT_IDENTIFIER/webApps/APP_ID Since an APP_ID is a unique identifier, the Unique Resource from Sub-Collection access pattern may be used here, in the format: projects/-/webApps/APP_ID Refer to the WebApp [name](../projects.webApps#WebApp.FIELDS.name) field for details about PROJECT_IDENTIFIER and APP_ID values."
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UndeleteWebAppRequest"
       responses:
         "200":
           content:
@@ -1574,6 +1621,33 @@ components:
           description: The unique Google-assigned identifier of the Google Analytics data stream associated with the Firebase App. Learn more about Google Analytics data streams in the [Analytics documentation](https://support.google.com/analytics/answer/9303323).
           format: int64
           type: string
+      type: object
+    UndeleteAndroidAppRequest:
+      properties:
+        etag:
+          description: Checksum provided in the AndroidApp entity, which if provided ensures the client has an up-to-date value before proceeding.
+          type: string
+        validateOnly:
+          description: If set to true, only validate the request and do not undelete the app.
+          type: boolean
+      type: object
+    UndeleteIosAppRequest:
+      properties:
+        etag:
+          description: Checksum provided in the IosApp entity, which if provided ensures the client has an up-to-date value before proceeding.
+          type: string
+        validateOnly:
+          description: If set to true, only validate the request and do not undelete the app.
+          type: boolean
+      type: object
+    UndeleteWebAppRequest:
+      properties:
+        etag:
+          description: Checksum provided in the WebApp entity, which if provided ensures the client has an up-to-date value before proceeding.
+          type: string
+        validateOnly:
+          description: If set to true, only validate the request and do not undelete the app.
+          type: boolean
       type: object
     WebApp:
       description: Details of a Firebase App for the web.
