@@ -13,17 +13,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Tag Manager API
   version: v2
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://tagmanager.googleapis.com/$discovery/rest?version=v2
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: tagmanager
 externalDocs:
@@ -723,7 +721,7 @@ paths:
       description: Lists all GTM Triggers of a Container.
       operationId: tagmanager.accounts.containers.workspaces.triggers.list
       parameters:
-        - description: "GTM Workspaces's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}"
+        - description: "GTM Workspace's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}"
           in: path
           name: parent
           required: true
@@ -768,7 +766,7 @@ paths:
       description: Creates a GTM Trigger.
       operationId: tagmanager.accounts.containers.workspaces.triggers.create
       parameters:
-        - description: "GTM Workspaces's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}"
+        - description: "GTM Workspace's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}"
           in: path
           name: parent
           required: true
@@ -2231,7 +2229,7 @@ components:
           type: string
       type: object
     BuiltInVariable:
-      description: Built-in variables are a special category of variables that are pre-created and non-customizable. They provide common functionality like accessing propeties of the gtm data layer, monitoring clicks, or accessing elements of a page URL.
+      description: Built-in variables are a special category of variables that are pre-created and non-customizable. They provide common functionality like accessing properties of the gtm data layer, monitoring clicks, or accessing elements of a page URL.
       properties:
         accountId:
           description: GTM Account ID.
@@ -2617,7 +2615,7 @@ components:
           description: Number of zones in the container version.
           type: string
         path:
-          description: GTM Container Versions's API relative path.
+          description: GTM Container Version's API relative path.
           type: string
       type: object
     CreateBuiltInVariableResponse:
@@ -3693,5 +3691,3 @@ components:
             https://www.googleapis.com/auth/tagmanager.readonly: View your Google Tag Manager container and its subcomponents
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}
