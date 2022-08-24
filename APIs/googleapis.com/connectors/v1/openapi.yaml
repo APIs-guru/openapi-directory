@@ -881,6 +881,7 @@ components:
             - OAUTH2_JWT_BEARER
             - OAUTH2_CLIENT_CREDENTIALS
             - SSH_PUBLIC_KEY
+            - OAUTH2_AUTH_CODE_FLOW
           type: string
         oauth2ClientCredentials:
           $ref: "#/components/schemas/Oauth2ClientCredentials"
@@ -906,6 +907,7 @@ components:
             - OAUTH2_JWT_BEARER
             - OAUTH2_CLIENT_CREDENTIALS
             - SSH_PUBLIC_KEY
+            - OAUTH2_AUTH_CODE_FLOW
           type: string
         configVariableTemplates:
           description: Config variables to describe an `AuthConfig` for a `Connection`.
