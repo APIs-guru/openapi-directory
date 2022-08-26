@@ -35,7 +35,7 @@ Check the `info.contact` section of the API definition or the `x-origin` to see 
 
 If you do this, your changes would be overwritten the next time the API update scripts are run. Such PRs will be closed.
 
-#### If you want to run API registry (add/update/validate/repair functions)
+#### If you want to run our API registry (add/update/validate/repair functions) locally
 
 Please contact us for details.
 
