@@ -147,30 +147,6 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
   "/v2/{name}":
-    delete:
-      description: Delete an NFS share. The underlying volume is automatically deleted.
-      operationId: baremetalsolution.projects.locations.nfsShares.delete
-      parameters:
-        - description: Required. The name of the NFS share to delete.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
     get:
       description: Get details of a single storage logical unit number(LUN).
       operationId: baremetalsolution.projects.locations.volumes.luns.get
@@ -651,35 +627,6 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Create an NFS share.
-      operationId: baremetalsolution.projects.locations.nfsShares.create
-      parameters:
-        - description: Required. The parent project and location.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/NfsShare"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
   "/v2/{parent}/provisioningConfigs":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1016,8 +963,7 @@ components:
           description: Disable root squashing, which is a feature of NFS. Root squash is a special mapping of the remote superuser (root) identity when using identity authentication.
           type: boolean
         shareIp:
-          description: Output only. The IP address of the share on this network. Assigned automatically during provisioning based on the network's services_cidr.
-          readOnly: true
+          description: The IP address of the share on this network.
           type: string
       type: object
     DetachLunRequest:
@@ -1466,9 +1412,6 @@ components:
         ipAddress:
           description: IP address configured.
           type: string
-        jumboFramesEnabled:
-          description: Whether network uses standard frames or jumbo ones.
-          type: boolean
         labels:
           additionalProperties:
             type: string
@@ -1479,17 +1422,8 @@ components:
           items:
             type: string
           type: array
-        mountPoints:
-          description: Input only. List of mount points to attach the network to.
-          items:
-            $ref: "#/components/schemas/NetworkMountPoint"
-          type: array
         name:
           description: "Output only. The resource name of this `Network`. Resource names are schemeless URIs that follow the conventions in https://cloud.google.com/apis/design/resource_names. Format: `projects/{project}/locations/{location}/networks/{network}`"
-          readOnly: true
-          type: string
-        pod:
-          description: Output only. Pod name.
           readOnly: true
           type: string
         reservations:
@@ -1604,22 +1538,6 @@ components:
           description: Whether the VLAN attachment pair is located in the same project.
           type: boolean
       type: object
-    NetworkMountPoint:
-      description: Mount point for a network.
-      properties:
-        defaultGateway:
-          description: Network should be a default gateway.
-          type: boolean
-        instance:
-          description: Instance to attach network to.
-          type: string
-        ipAddress:
-          description: Ip address of the server.
-          type: string
-        logicalInterface:
-          description: Logical interface to detach from.
-          type: string
-      type: object
     NetworkUsage:
       description: Network with all used IP addresses.
       properties:
@@ -1679,7 +1597,8 @@ components:
           description: Labels as key value pairs.
           type: object
         name:
-          description: Immutable. The name of the NFS share.
+          description: Output only. The name of the NFS share.
+          readOnly: true
           type: string
         nfsShareId:
           description: Output only. An identifier for the NFS share, generated by the backend. This field will be deprecated in the future, use `id` instead.
@@ -1690,25 +1609,16 @@ components:
           format: int64
           type: string
         state:
-          description: Output only. The state of the NFS share.
+          description: The state of the NFS share.
           enum:
             - STATE_UNSPECIFIED
             - PROVISIONED
             - CREATING
             - UPDATING
             - DELETING
-          readOnly: true
-          type: string
-        storageType:
-          description: Immutable. The storage type of the underlying volume.
-          enum:
-            - STORAGE_TYPE_UNSPECIFIED
-            - SSD
-            - HDD
           type: string
         volume:
-          description: Output only. The underlying volume of the share. Created automatically during provisioning.
-          readOnly: true
+          description: The volume containing the share.
           type: string
       type: object
     OSImage:
@@ -2005,7 +1915,7 @@ components:
           type: string
         qosPolicy:
           $ref: "#/components/schemas/QosPolicy"
-          description: The QOS policy applied to this VRF. The value is only meaningful when all the vlan attachments have the same QoS. This field should not be used for new integrations, use vlan attachment level qos instead. The field is left for backward-compatibility.
+          description: The QOS policy applied to this VRF.
         state:
           description: The possible state of VRF.
           enum:
@@ -2022,9 +1932,6 @@ components:
     VlanAttachment:
       description: VLAN attachment details.
       properties:
-        pairingKey:
-          description: Input only. Pairing key.
-          type: string
         peerIp:
           description: The peer IP of the attachment.
           type: string
@@ -2032,9 +1939,6 @@ components:
           description: The peer vlan ID of the attachment.
           format: int64
           type: string
-        qosPolicy:
-          $ref: "#/components/schemas/QosPolicy"
-          description: The QOS policy applied to this VLAN attachment. This value should be preferred to using qos at vrf level.
         routerIp:
           description: The router IP of the attachment.
           type: string

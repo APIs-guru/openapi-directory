@@ -1588,6 +1588,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: If provided, this field specifies the criteria that must be met by uptime checks to be included in the response.For more details, see Filtering syntax (https://cloud.google.com/monitoring/api/v3/sorting-and-filtering#filter_syntax).
+          in: query
+          name: filter
+          schema:
+            type: string
         - description: The maximum number of results to return in a single response. The server may further constrain the maximum number of results returned in a single page. If the page_size is <=0, the server will decide the number of results to be returned.
           in: query
           name: pageSize
@@ -2456,6 +2461,9 @@ components:
         path:
           description: Optional (defaults to "/"). The path to the page against which to run the check. Will be combined with the host (specified within the monitored_resource) and port to construct the full URL. If the provided path does not begin with "/", a "/" will be prepended automatically.
           type: string
+        pingConfig:
+          $ref: "#/components/schemas/PingConfig"
+          description: Contains information needed to add pings to an HTTP check.
         port:
           description: Optional (defaults to 80 when use_ssl is false, and 443 when use_ssl is true). The TCP port on the HTTP server against which to run the check. Will be combined with host (specified within the monitored_resource) and path to construct the full URL.
           format: int32
@@ -3186,6 +3194,14 @@ components:
           format: double
           type: number
       type: object
+    PingConfig:
+      description: Information involved in sending ICMP pings alongside public HTTP/TCP checks. For HTTP, the pings are performed for each part of the redirect chain.
+      properties:
+        pingsCount:
+          description: Number of ICMP pings. A maximum of 3 ICMP pings is currently supported.
+          format: int32
+          type: integer
+      type: object
     Point:
       description: A single data point in a time series.
       properties:
@@ -3435,6 +3451,9 @@ components:
     TcpCheck:
       description: Information required for a TCP Uptime check request.
       properties:
+        pingConfig:
+          $ref: "#/components/schemas/PingConfig"
+          description: Contains information needed to add pings to a TCP check.
         port:
           description: The TCP port on the server against which to run the check. Will be combined with host (specified within the monitored_resource) to construct the full URL. Required.
           format: int32

@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://documentai.googleapis.com/$discovery/rest?version=v1beta2
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: documentai
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/document-ai/docs/
 tags:
@@ -231,6 +232,10 @@ components:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
           description: The basic metadata of the long running operation.
+        errorDocumentCount:
+          description: Total number of documents that failed to be deleted in storage.
+          format: int32
+          type: integer
         individualBatchDeleteStatuses:
           description: The list of response details of each document.
           items:
@@ -461,7 +466,7 @@ components:
           type: integer
       type: object
     GoogleCloudDocumentaiUiv1beta3ImportDocumentsMetadataImportConfigValidationResult:
-      description: The validation status of each import config. Status is ok if the configuration is valid and the specified documents are valid for importing. Otherwise status will be set as errors.
+      description: The validation status of each import config. Status is set to errors if there is no documents to import in the import_config, or OK if the operation will try to proceed at least one document.
       properties:
         inputGcsSource:
           description: The source Cloud Storage URI specified in the import config.
@@ -503,11 +508,6 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3ResyncDatasetMetadataIndividualDocumentResyncStatus"
           type: array
-        newlyAddedDocuments:
-          description: Returns the newly added document Cloud Storage prefix if the documents are founded in Cloud Storage while not in Document Service storage.
-          items:
-            $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3ResyncDatasetMetadataUpdatedDocument"
-          type: array
       type: object
     GoogleCloudDocumentaiUiv1beta3ResyncDatasetMetadataDatasetResyncStatus:
       description: Resync status against inconsistency types on the dataset level.
@@ -539,19 +539,6 @@ components:
         status:
           $ref: "#/components/schemas/GoogleRpcStatus"
           description: The status of resyncing the document with regards to the detected inconsistency. Empty if `validate_only` is true in the request.
-      type: object
-    GoogleCloudDocumentaiUiv1beta3ResyncDatasetMetadataUpdatedDocument:
-      description: The proto for updated document in resync pipeline.
-      properties:
-        destinationPrefix:
-          description: The prefix of cloud storage, identifies the destination document which should be updated by resync pipeline.
-          type: string
-        sourcePrefix:
-          description: The prefix of cloud storage, identifies the original document which should be updated by resync pipeline.
-          type: string
-        status:
-          $ref: "#/components/schemas/GoogleRpcStatus"
-          description: The final status of the documents which should be updated by resync pipeline.
       type: object
     GoogleCloudDocumentaiUiv1beta3ResyncDatasetResponse:
       description: The response proto of ResyncDataset method.

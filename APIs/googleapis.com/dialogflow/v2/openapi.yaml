@@ -6156,7 +6156,10 @@ components:
       type: object
     GoogleCloudDialogflowV2CreateConversationDatasetOperationMetadata:
       description: Metadata for ConversationDatasets.
-      properties: {}
+      properties:
+        conversationDataset:
+          description: "The resource name of the conversation dataset that will be created. Format: `projects//locations//conversationDatasets/`"
+          type: string
       type: object
     GoogleCloudDialogflowV2CreateConversationModelEvaluationOperationMetadata:
       description: Metadata for a ConversationModels.CreateConversationModelEvaluation operation.

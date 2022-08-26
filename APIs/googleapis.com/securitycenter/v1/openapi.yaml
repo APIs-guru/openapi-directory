@@ -1598,7 +1598,7 @@ components:
         contacts:
           additionalProperties:
             $ref: "#/components/schemas/ContactDetails"
-          description: 'Output only. Map containing the point of contacts for the given finding. The key represents the type of contact, while the value contains a list of all the contacts that pertain. Please refer to: https://cloud.google.com/resource-manager/docs/managing-notification-contacts#notification-categories { "security": { "contacts": [ { "email": "person1@company.com" }, { "email": "person2@company.com" } ] }'
+          description: 'Output only. Map containing the point of contacts for the given finding. The key represents the type of contact, while the value contains a list of all the contacts that pertain. Please refer to: https://cloud.google.com/resource-manager/docs/managing-notification-contacts#notification-categories { "security": { "contacts": [ { "email": "person1@company.com" }, { "email": "person2@company.com" } ] } }'
           readOnly: true
           type: object
         containers:
@@ -2211,7 +2211,7 @@ components:
             $ref: "#/components/schemas/ProcessSignature"
           type: array
         uris:
-          description: The list of URIs associated to the Findings
+          description: The list of URIs associated to the Findings.
           items:
             type: string
           type: array
