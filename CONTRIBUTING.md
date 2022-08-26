@@ -4,7 +4,7 @@ First of all, thank you for considering making a contribution to the project.
 
 ## Adding an API
 
-To add an API to the collection, there must be a machine-readable API description in a format which is or can be converted to OpenAPI (Swagger). These include RAML, API Blueprint, IO Docs, WADL and Google Discovery Format.
+To add an API to the collection, there must be a machine-readable API description in a format which is or can be converted to OpenAPI (formerly known as Swagger). These include RAML, API Blueprint, Postman Collections, Google Discovery Format, WADL and IO Docs.
 
 First please check that the API you wish to add isn't already in the collection. You can
 browse the APIs in [GitHub](https://github.com/APIs-guru/openapi-directory/tree/main/APIs) or on the [APIs.guru](https://apis.guru/) website.
@@ -17,7 +17,7 @@ The API should meet the following criteria:
 * Persistent - API is made with long-lived goal, and not for a particular event (conference, hackathon, etc.).
 * Useful - API should provide useful functionality not only for its owner.
 
-The easiest way to request an API to be added is to use the [web form](https://apis.guru/add-api/).
+The process to request an API to be added is to use the [web form](https://apis.guru/add-api/).
 
 ## Amending an API definition
 
@@ -33,9 +33,9 @@ Check the `info.contact` section of the API definition or the `x-origin` to see 
 
 #### Do not raise PRs to amend the openapi/swagger.yaml files directly
 
-If you do this, your changes will be overwritten the next time the API update scripts are run.
+If you do this, your changes would be overwritten the next time the API update scripts are run. Such PRs will be closed.
 
-#### If you want to run our add/update/validate/repair scripts locally
+#### If you want to run API registry (add/update/validate/repair functions)
 
 Please contact us for details.
 
