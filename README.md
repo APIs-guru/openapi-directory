@@ -68,10 +68,11 @@ Existing integrations
 [![Become a partner](https://opencollective.com/openapi-directory/tiers/partner.svg?avatarHeight=36&width=600)](https://opencollective.com/openapi-directory)
 
  - [Apideck](https://apideck.com) - **Faster data integration through Unified APIs**
- - [API Tracker](https://apitracker.io/) - **Aggregates 14,000+ APIs, SDKs, API specifications, integrations and DX profiles. It aims to help developers access the information they need to integrate APIs faster.**
- - https://any-api.com - **Documentation and Test Consoles for Public APIs**
- - https://datafire.io - **allows you to process and transfer data between APIs, databases, and more**
- - https://pipedream.com/ - **The integration platform built for developers**
+ - [API Tracker](https://apitracker.io/) - Aggregates 14,000+ APIs, SDKs, API specifications, integrations and DX profiles. It aims to help developers access the information they need to integrate APIs faster.
+ - [API Watch](https://www.apiwatch.io)
+ - https://any-api.com - Documentation and Test Consoles for Public APIs**
+ - https://datafire.io - Allows you to process and transfer data between APIs, databases, and more
+ - https://pipedream.com/ - The integration platform built for developers
  - [https://sdks.io](https://sdks.io/Search/FindSDKs?Bridge=APIs.guru) - Explore Automatically Generated SDKs
  - [https://cenit.io](https://cenit.io/directory?spec=swagger) - Data integration platform
  - [commandcar](https://github.com/tikalk/commandcar#installing-from-api-models) - Curl on steroids
@@ -133,7 +134,7 @@ This project exists thanks to all the people who [contribute](CONTRIBUTING.md).
 
 ## Asynchronous APIs
 
-See also [AsyncAPI-Directory](https://github.com/APIs-guru/asyncapi-directory)
+See also [AsyncAPI-Directory](https://apis.guru/asyncapi-directory/APIs/)
 
 ## Backers
 
