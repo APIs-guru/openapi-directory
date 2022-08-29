@@ -777,8 +777,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItem"
           type: array
         name:
-          description: Output only. Response only. Resource name of the subscription. It will have the format of "partners/{partner_id}/subscriptions/{subscription_id}"
-          readOnly: true
+          description: Optional. Resource name of the subscription. It will have the format of "partners/{partner_id}/subscriptions/{subscription_id}". This is available for authorizeAddon, but otherwise is response only.
           type: string
         partnerUserToken:
           description: Required. Identifier of the end-user in partner’s system. The value is restricted to 63 ASCII characters at the maximum.

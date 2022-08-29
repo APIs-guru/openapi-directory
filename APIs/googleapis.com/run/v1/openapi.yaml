@@ -655,7 +655,7 @@ paths:
           name: includeUninitialized
           schema:
             type: boolean
-        - description: 'Optional. Allows to filter resources based on a label. Supported operations are =, !=, exists, in, and notIn. For example, to list all tasks of execution "foo" in succeeded state: `run.googleapis.com/execution=foo,run.googleapis.com/runningState=Succeeded`. Supported states are: * `Pending`: Initial state of all tasks. The task has not yet started but eventually will. * `Running`: Container instances for this task are running or will be running shortly. * `Succeeded`: No more container instances to run for the task, and the last attempt succeeded. * `Failed`: No more container instances to run for the task, and the last attempt failed. This task has run out of retry attempts. * `Cancelled`: Task was running but got stopped because its parent execution has been aborted. * `Abandoned`: The task has not yet started and never will because its parent execution has been aborted.'
+        - description: Optional. Allows to filter resources based on a label. Supported operations are =, !=, exists, in, and notIn.
           in: query
           name: labelSelector
           schema:
@@ -2060,19 +2060,19 @@ components:
           type: boolean
       type: object
     ConfigMapKeySelector:
-      description: Not supported by Cloud Run.
+      description: Not supported by Cloud Run. Selects a key from a ConfigMap.
       properties:
         key:
-          description: Required. Not supported by Cloud Run.
+          description: Required. The key to select.
           type: string
         localObjectReference:
           $ref: "#/components/schemas/LocalObjectReference"
-          description: Not supported by Cloud Run.
+          description: This field should not be used directly as it is meant to be inlined directly into the message. Use the "name" field instead.
         name:
-          description: Required. Not supported by Cloud Run.
+          description: Required. The ConfigMap to select from.
           type: string
         optional:
-          description: Not supported by Cloud Run.
+          description: Specify whether the ConfigMap or its key must be defined
           type: boolean
       type: object
     ConfigMapVolumeSource:
@@ -2143,12 +2143,12 @@ components:
       description: A single application container. This specifies both the container to run, the command to run in the container and the arguments to supply to it. Note that additional arguments may be supplied by the system to the container at runtime.
       properties:
         args:
-          description: Arguments to the entrypoint. The docker image's CMD is used if this is not provided. Variable references are not supported in Cloud Run.
+          description: "Arguments to the entrypoint. The docker image's CMD is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container's environment. If a variable cannot be resolved, the reference in the input string will be unchanged. The $(VAR_NAME) syntax can be escaped with a double $$, ie: $$(VAR_NAME). Escaped references will never be expanded, regardless of whether the variable exists or not. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell"
           items:
             type: string
           type: array
         command:
-          description: Entrypoint array. Not executed within a shell. The docker image's ENTRYPOINT is used if this is not provided. Variable references are not supported in Cloud Run.
+          description: "Entrypoint array. Not executed within a shell. The docker image's ENTRYPOINT is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container's environment. If a variable cannot be resolved, the reference in the input string will be unchanged. The $(VAR_NAME) syntax can be escaped with a double $$, ie: $$(VAR_NAME). Escaped references will never be expanded, regardless of whether the variable exists or not. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell"
           items:
             type: string
           type: array
@@ -2300,7 +2300,7 @@ components:
           description: Required. Name of the environment variable. Must be a C_IDENTIFIER.
           type: string
         value:
-          description: Value of the environment variable. Defaults to "". Variable references are not supported in Cloud Run.
+          description: 'Variable references $(VAR_NAME) are expanded using the previous defined environment variables in the container and any route environment variables. If a variable cannot be resolved, the reference in the input string will be unchanged. The $(VAR_NAME) syntax can be escaped with a double $$, ie: $$(VAR_NAME). Escaped references will never be expanded, regardless of whether the variable exists or not. Defaults to "".'
           type: string
         valueFrom:
           $ref: "#/components/schemas/EnvVarSource"
@@ -2311,7 +2311,7 @@ components:
       properties:
         configMapKeyRef:
           $ref: "#/components/schemas/ConfigMapKeySelector"
-          description: Not supported by Cloud Run. Not supported in Cloud Run.
+          description: Not supported by Cloud Run. Selects a key of a ConfigMap.
         secretKeyRef:
           $ref: "#/components/schemas/SecretKeySelector"
           description: Selects a key (version) of a secret in Secret Manager.
@@ -2387,7 +2387,7 @@ components:
           format: google-datetime
           type: string
         conditions:
-          description: 'Optional. Conditions communicate information about ongoing/complete reconciliation processes that bring the "spec" inline with the observed state of the world. Execution-specific conditions include: * `ResourcesAvailable`: `True` when underlying resources have been provisioned. * `Started`: `True` when the execution has started to execute. * `Completed`: `True` when the execution has succeeded. `False` when the execution has failed.'
+          description: Optional. The latest available observations of an execution's current state.
           items:
             $ref: "#/components/schemas/GoogleCloudRunV1Condition"
           type: array
@@ -2556,7 +2556,7 @@ components:
       description: JobStatus represents the current state of a Job.
       properties:
         conditions:
-          description: 'Conditions communicate information about ongoing/complete reconciliation processes that bring the "spec" inline with the observed state of the world. Job-specific conditions include: * `Ready`: `True` when the job is ready to be executed.'
+          description: "The latest available observations of a job's current state. More info: https://kubernetes.io/docs/concepts/workloads/controllers/job/"
           items:
             $ref: "#/components/schemas/GoogleCloudRunV1Condition"
           type: array
@@ -3033,7 +3033,7 @@ components:
       description: RevisionSpec holds the desired state of the Revision (from the client).
       properties:
         containerConcurrency:
-          description: ContainerConcurrency specifies the maximum allowed in-flight (concurrent) requests per container instance of the Revision. If not specified, defaults to 80.
+          description: "ContainerConcurrency specifies the maximum allowed in-flight (concurrent) requests per container instance of the Revision. Cloud Run: supported, defaults to 80"
           format: int32
           type: integer
         containers:
@@ -3065,7 +3065,7 @@ components:
       description: RevisionStatus communicates the observed state of the Revision (from the controller).
       properties:
         conditions:
-          description: 'Conditions communicate information about ongoing/complete reconciliation processes that bring the "spec" inline with the observed state of the world. As a Revision is being prepared, it will incrementally update conditions. Revision-specific conditions include: * `ResourcesAvailable`: `True` when underlying resources have been provisioned. * `ContainerHealthy`: `True` when the Revision readiness check completes. * `Active`: `True` when the Revision may receive traffic.'
+          description: 'Conditions communicates information about ongoing/complete reconciliation processes that bring the "spec" inline with the observed state of the world. As a Revision is being prepared, it will incrementally update conditions. Revision-specific conditions include: * "ResourcesAvailable": True when underlying resources have been provisioned. * "ContainerHealthy": True when the Revision readiness check completes. * "Active": True when the Revision may receive traffic.'
           items:
             $ref: "#/components/schemas/GoogleCloudRunV1Condition"
           type: array
@@ -3243,7 +3243,7 @@ components:
           $ref: "#/components/schemas/Addressable"
           description: Similar to url, information on where the service is available on HTTP.
         conditions:
-          description: "Conditions communicate information about ongoing/complete reconciliation processes that bring the `spec` inline with the observed state of the world. Service-specific conditions include: * `ConfigurationsReady`: `True` when the underlying Configuration is ready. * `RoutesReady`: `True` when the underlying Route is ready. * `Ready`: `True` when all underlying resources are ready."
+          description: "Communicates information about ongoing/complete reconciliation processes that bring the `spec` inline with the observed state of the world. Service-specific conditions include: * `ConfigurationsReady`: `True` when the underlying Configuration is ready. * `RoutesReady`: `True` when the underlying Route is ready. * `Ready`: `True` when all underlying resources are ready."
           items:
             $ref: "#/components/schemas/GoogleCloudRunV1Condition"
           type: array
@@ -3413,7 +3413,7 @@ components:
           format: google-datetime
           type: string
         conditions:
-          description: 'Optional. Conditions communicate information about ongoing/complete reconciliation processes that bring the "spec" inline with the observed state of the world. Task-specific conditions include: * `Started`: `True` when the task has started to execute. * `Completed`: `True` when the task has succeeded. `False` when the task has failed.'
+          description: "Optional. The latest available observations of a task's current state. More info: https://kubernetes.io/docs/concepts/workloads/controllers/job/"
           items:
             $ref: "#/components/schemas/GoogleCloudRunV1Condition"
           type: array
@@ -3493,7 +3493,7 @@ components:
       properties:
         configMap:
           $ref: "#/components/schemas/ConfigMapVolumeSource"
-          description: Not supported in Cloud Run.
+          description: Adapts a ConfigMap into a volume. The contents of the target ConfigMap's Data field will be presented in a volume as files using the keys in the Data field as the file names, unless the items element is populated with specific mappings of keys to paths.
         name:
           description: Volume's name. In Cloud Run Fully Managed, the name 'cloudsql' is reserved.
           type: string

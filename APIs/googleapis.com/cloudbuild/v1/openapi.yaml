@@ -31,11 +31,48 @@ info:
 externalDocs:
   url: https://cloud.google.com/cloud-build/docs/
 tags:
+  - name: githubDotComWebhook
   - name: locations
   - name: operations
   - name: projects
   - name: v1
 paths:
+  /v1/githubDotComWebhook:receive:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: ReceiveGitHubDotComWebhook is called when the API receives a github.com webhook.
+      operationId: cloudbuild.githubDotComWebhook.receive
+      parameters:
+        - description: For GitHub Enterprise webhooks, this key is used to associate the webhook request with the GitHubEnterpriseConfig to use for validation.
+          in: query
+          name: webhookKey
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HttpBody"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      tags:
+        - githubDotComWebhook
   "/v1/projects/{projectId}/builds":
     get:
       description: Lists previously requested builds. Previously requested builds may still be in-progress, or may have finished successfully or unsuccessfully.
