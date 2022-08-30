@@ -165,6 +165,16 @@ components:
     AccountRiskVerdict:
       description: Contains information about account risk that indicates if the current user session seems low risk, unknown, or risky before you allow important actions to proceed.
       properties:
+        risk:
+          description: Required. Indicates the account risk level of the current user session.
+          enum:
+            - RISK_UNSPECIFIED
+            - UNEVALUATED
+            - HIGHER
+            - UNKNOWN
+            - LOWER
+            - LOWEST
+          type: string
         riskLevel:
           description: Required. Indicates the account risk level of the current user session.
           enum:

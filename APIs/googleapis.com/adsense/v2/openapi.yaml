@@ -120,6 +120,7 @@ paths:
                 - MONTH
                 - ACCOUNT_NAME
                 - AD_CLIENT_ID
+                - HOSTED_AD_CLIENT_ID
                 - PRODUCT_NAME
                 - PRODUCT_CODE
                 - AD_UNIT_NAME
@@ -346,6 +347,7 @@ paths:
                 - MONTH
                 - ACCOUNT_NAME
                 - AD_CLIENT_ID
+                - HOSTED_AD_CLIENT_ID
                 - PRODUCT_NAME
                 - PRODUCT_CODE
                 - AD_UNIT_NAME
@@ -593,6 +595,10 @@ paths:
             - https://www.googleapis.com/auth/adsense
           Oauth2c:
             - https://www.googleapis.com/auth/adsense
+        - Oauth2:
+            - https://www.googleapis.com/auth/adsense.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/adsense.readonly
       tags:
         - accounts
     parameters:

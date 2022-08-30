@@ -166,7 +166,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Required. The field paths to update. Separate multiple values with commas. Currently supported field paths: - text - cards (Requires [service account authentication](/chat/api/guides/auth/service-accounts).) "
+        - description: "Required. The field paths to update. Separate multiple values with commas. Currently supported field paths: - text - cards (Requires [service account authentication](/chat/api/guides/auth/service-accounts).) - cards_v2 "
           in: query
           name: updateMask
           schema:
@@ -640,6 +640,7 @@ components:
             - DRIVE
             - DEMO
             - DOCS
+            - MEET
             - SHEETS
             - SLIDES
             - DRAWINGS
@@ -1675,8 +1676,7 @@ components:
           description: "Resource name of the space. Format: spaces/{space}"
           type: string
         singleUserBotDm:
-          description: Output only. Whether the space is a DM between a Chat app and a single human.
-          readOnly: true
+          description: Optional. Whether the space is a DM between a Chat app and a single human.
           type: boolean
         spaceDetails:
           $ref: "#/components/schemas/SpaceDetails"
