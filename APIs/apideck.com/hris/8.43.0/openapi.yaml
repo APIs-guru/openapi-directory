@@ -1265,6 +1265,7 @@ paths:
                 tax_id: '234-32-0000',
                 dietary_preference: 'Veggie',
                 food_allergies: ['No allergies'],
+                tags: ['New'],
                 row_version: '1-12345',
                 deleted: true
               }
@@ -1600,6 +1601,7 @@ paths:
                 tax_id: '234-32-0000',
                 dietary_preference: 'Veggie',
                 food_allergies: ['No allergies'],
+                tags: ['New'],
                 row_version: '1-12345',
                 deleted: true
               }
@@ -3785,6 +3787,12 @@ components:
           nullable: true
           title: Source ID
           type: string
+        tags:
+          example:
+            - New
+          items:
+            type: string
+          type: array
         tax_code:
           example: "1111"
           nullable: true
@@ -3875,6 +3883,7 @@ components:
         social_security_number: edge-case
         source: edge-case
         source_id: edge-case
+        tags: low
         tax_code: edge-case
         tax_id: edge-case
         team: medium
@@ -4641,7 +4650,7 @@ components:
       properties:
         detail:
           anyOf:
-            - example: Failed to retrieve Widget tokenUrl from 'components.securitySchemes.oauth2.flows'
+            - example: Failed to retrieve Widget tokenUrl from 'components.securitySchemes.OAuth2.flows'
               type: string
             - type: object
           description: Contains parameter or domain specific information related to the error and why it occurred.
