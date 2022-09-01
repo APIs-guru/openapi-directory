@@ -1298,6 +1298,9 @@ components:
         channel:
           description: Channel specifies the release channel of the pool.
           type: string
+        hostOs:
+          description: HostOS specifies the OS version of the image for the worker VMs.
+          type: string
         name:
           description: "WorkerPool resource name formatted as: `projects/[PROJECT_ID]/instances/[INSTANCE_ID]/workerpools/[POOL_ID]`. name should not be populated when creating a worker pool since it is provided in the `poolId` field."
           type: string

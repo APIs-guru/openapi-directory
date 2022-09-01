@@ -1111,7 +1111,7 @@ components:
           description: Enable email notification for project owners and editors on job's completion/failure.
         pubSub:
           $ref: "#/components/schemas/GooglePrivacyDlpV2PublishToPubSub"
-          description: Publish a notification to a pubsub topic.
+          description: Publish a notification to a Pub/Sub topic.
         publishFindingsToCloudDataCatalog:
           $ref: "#/components/schemas/GooglePrivacyDlpV2PublishFindingsToCloudDataCatalog"
           description: Publish findings to Cloud Datahub.
@@ -1810,14 +1810,14 @@ components:
           type: string
       type: object
     GooglePrivacyDlpV2DataProfilePubSubCondition:
-      description: A condition for determining whether a PubSub should be triggered.
+      description: A condition for determining whether a Pub/Sub should be triggered.
       properties:
         expressions:
           $ref: "#/components/schemas/GooglePrivacyDlpV2PubSubExpressions"
           description: An expression.
       type: object
     GooglePrivacyDlpV2DataProfilePubSubMessage:
-      description: Pub/Sub topic message for a DataProfileAction.PubSubNotification event. To receive a message of protocol buffer schema type, convert the message data to an object of this proto class. https://cloud.google.com/pubsub/docs/samples/pubsub-subscribe-proto-messages
+      description: Pub/Sub topic message for a DataProfileAction.PubSubNotification event. To receive a message of protocol buffer schema type, convert the message data to an object of this proto class.
       properties:
         event:
           description: The event that caused the Pub/Sub message to be sent.

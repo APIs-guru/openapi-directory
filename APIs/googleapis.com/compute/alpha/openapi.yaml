@@ -32070,6 +32070,261 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionSecurityPolicies
+  "/projects/{project}/regions/{region}/securityPolicies/{securityPolicy}/addRule":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Inserts a rule into a security policy.
+      operationId: compute.regionSecurityPolicies.addRule
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the region scoping this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name of the security policy to update.
+          in: path
+          name: securityPolicy
+          required: true
+          schema:
+            type: string
+        - description: If true, the request will not be committed.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SecurityPolicyRule"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - regionSecurityPolicies
+  "/projects/{project}/regions/{region}/securityPolicies/{securityPolicy}/getRule":
+    get:
+      description: Gets a rule at the specified priority.
+      operationId: compute.regionSecurityPolicies.getRule
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the region scoping this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name of the security policy to which the queried rule belongs.
+          in: path
+          name: securityPolicy
+          required: true
+          schema:
+            type: string
+        - description: The priority of the rule to get from the security policy.
+          in: query
+          name: priority
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SecurityPolicyRule"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - regionSecurityPolicies
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+  "/projects/{project}/regions/{region}/securityPolicies/{securityPolicy}/patchRule":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Patches a rule at the specified priority.
+      operationId: compute.regionSecurityPolicies.patchRule
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the region scoping this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name of the security policy to update.
+          in: path
+          name: securityPolicy
+          required: true
+          schema:
+            type: string
+        - description: The priority of the rule to patch.
+          in: query
+          name: priority
+          schema:
+            type: integer
+        - description: If true, the request will not be committed.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SecurityPolicyRule"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - regionSecurityPolicies
+  "/projects/{project}/regions/{region}/securityPolicies/{securityPolicy}/removeRule":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Deletes a rule at the specified priority.
+      operationId: compute.regionSecurityPolicies.removeRule
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the region scoping this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name of the security policy to update.
+          in: path
+          name: securityPolicy
+          required: true
+          schema:
+            type: string
+        - description: The priority of the rule to remove from the security policy.
+          in: query
+          name: priority
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - regionSecurityPolicies
   "/projects/{project}/regions/{region}/serviceAttachments":
     get:
       description: Lists the ServiceAttachments for a project in the given scope.
@@ -49786,7 +50041,7 @@ components:
           $ref: "#/components/schemas/AttachedDiskInitializeParams"
           description: "[Input Only] Specifies the parameters for a new disk that will be created alongside the new instance. Use initialization parameters to create boot disks or local SSDs attached to the new instance. This property is mutually exclusive with the source property; you can only define one or the other, but not both."
         interface:
-          description: Specifies the disk interface to use for attaching this disk, which is either SCSI or NVME. The default is SCSI. Persistent disks must always use SCSI and the request will fail if you attempt to attach a persistent disk in any other format than SCSI. Local SSDs can use either NVME or SCSI. For performance characteristics of SCSI over NVMe, see Local SSD performance.
+          description: Specifies the disk interface to use for attaching this disk, which is either SCSI or NVME. For most machine types, the default is SCSI. Local SSDs can use either NVME or SCSI. In certain configurations, persistent disks can use NVMe. For more information, see About persistent disks.
           enum:
             - NVDIMM
             - NVME
@@ -53333,7 +53588,7 @@ components:
             type: string
           type: array
         direction:
-          description: Direction of traffic to which this firewall applies, either `INGRESS` or `EGRESS`. The default is `INGRESS`. For `INGRESS` traffic, you cannot specify the destinationRanges field, and for `EGRESS` traffic, you cannot specify the sourceRanges or sourceTags fields.
+          description: Direction of traffic to which this firewall applies, either `INGRESS` or `EGRESS`. The default is `INGRESS`. For `EGRESS` traffic, you cannot specify the sourceTags fields.
           enum:
             - EGRESS
             - INGRESS
@@ -56906,6 +57161,10 @@ components:
           description: "[Output Only] The number of instances in the managed instance group that are running and have no scheduled actions."
           format: int32
           type: integer
+        queuing:
+          description: "[Output Only] The number of instances that the managed instance group is currently queuing."
+          format: int32
+          type: integer
         recreating:
           description: "[Output Only] The number of instances in the managed instance group that are scheduled to be recreated or are currently being being recreated. Recreating an instance deletes the existing root persistent disk and creates a new disk from the image that is defined in the instance template."
           format: int32
@@ -58032,6 +58291,7 @@ components:
             - CREATING_WITHOUT_RETRIES
             - DELETING
             - NONE
+            - QUEUING
             - RECREATING
             - REFRESHING
             - RESTARTING
@@ -61052,6 +61312,7 @@ components:
             - CREATING_WITHOUT_RETRIES
             - DELETING
             - NONE
+            - QUEUING
             - RECREATING
             - REFRESHING
             - RESTARTING
@@ -61093,6 +61354,9 @@ components:
         lastAttempt:
           $ref: "#/components/schemas/ManagedInstanceLastAttempt"
           description: "[Output Only] Information about the last attempt to create or delete the instance."
+        name:
+          description: "[Output Only] The name of the instance. The name will always exist even if the instance has not yet been created."
+          type: string
         preservedStateFromConfig:
           $ref: "#/components/schemas/PreservedState"
           description: "[Output Only] Preserved state applied from per-instance config for this instance."
@@ -61309,7 +61573,7 @@ components:
           description: "[Output Only] Type of the resource. Always compute#network for networks."
           type: string
         mtu:
-          description: Maximum Transmission Unit in bytes. The minimum value for this field is 1460 and the maximum value is 1500 bytes. If unspecified, defaults to 1460.
+          description: Maximum Transmission Unit in bytes. The minimum value for this field is 1300 and the maximum value is 8896. The suggested value is 1500, which is the default MTU used on the Internet, or 8896 if you want to use Jumbo frames. If unspecified, the value defaults to 1460.
           format: int32
           type: integer
         name:

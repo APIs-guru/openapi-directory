@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://documentai.googleapis.com/$discovery/rest?version=v1beta2
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: documentai
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/document-ai/docs/
 tags:
@@ -428,6 +429,56 @@ components:
         evaluation:
           description: The resource name of the created evaluation.
           type: string
+      type: object
+    GoogleCloudDocumentaiUiv1beta3ExportDocumentsMetadata:
+      description: Metadata of the batch export documents operation.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+        individualExportStatuses:
+          description: The list of response details of each document.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3ExportDocumentsMetadataIndividualExportStatus"
+          type: array
+        splitExportStats:
+          description: The list of statistics for each dataset split type.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3ExportDocumentsMetadataSplitExportStat"
+          type: array
+      type: object
+    GoogleCloudDocumentaiUiv1beta3ExportDocumentsMetadataIndividualExportStatus:
+      description: The status of each individual document in the export process.
+      properties:
+        documentId:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3DocumentId"
+          description: The path to source docproto of the document.
+        outputGcsDestination:
+          description: The output_gcs_destination of the exported document if it was successful, otherwise empty.
+          type: string
+        status:
+          $ref: "#/components/schemas/GoogleRpcStatus"
+          description: The status of the exporting of the document.
+      type: object
+    GoogleCloudDocumentaiUiv1beta3ExportDocumentsMetadataSplitExportStat:
+      description: The statistic representing a dataset split type for this export.
+      properties:
+        splitType:
+          description: The dataset split type.
+          enum:
+            - DATASET_SPLIT_TYPE_UNSPECIFIED
+            - DATASET_SPLIT_TRAIN
+            - DATASET_SPLIT_TEST
+            - DATASET_SPLIT_UNASSIGNED
+          type: string
+        totalDocumentCount:
+          description: Total number of documents with the given dataset split type to be exported.
+          format: int32
+          type: integer
+      type: object
+    GoogleCloudDocumentaiUiv1beta3ExportDocumentsResponse:
+      description: The response proto of ExportDocuments method.
+      properties: {}
       type: object
     GoogleCloudDocumentaiUiv1beta3ExportProcessorVersionMetadata:
       description: Metadata message associated with the ExportProcessorVersion operation.
