@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://dialogflow.googleapis.com/$discovery/rest?version=v3beta1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: dialogflow
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/dialogflow/
 tags:
@@ -5895,7 +5896,7 @@ components:
           description: Enable audio redaction if it is true.
           type: boolean
         gcsBucket:
-          description: Cloud Storage bucket to export audio record to. You need to grant `service-@gcp-sa-dialogflow.iam.gserviceaccount.com` the `Storage Object Admin` role in this bucket.
+          description: Cloud Storage bucket to export audio record to. Settings this field would grant the Storage Object Creator role to the Dialogflow Service Agent. API caller that tries to modify this field should have the permission of storage.buckets.setIamPolicy.
           type: string
       type: object
     GoogleCloudDialogflowCxV3beta1SecuritySettingsInsightsExportSettings:
@@ -8038,6 +8039,7 @@ components:
             - ARTICLE_SUGGESTION
             - FAQ
             - SMART_REPLY
+            - CONVERSATION_SUMMARIZATION
           type: string
       type: object
     GoogleCloudDialogflowV2beta1Context:
@@ -9253,6 +9255,7 @@ components:
             - ARTICLE_SUGGESTION
             - FAQ
             - SMART_REPLY
+            - CONVERSATION_SUMMARIZATION
           type: string
       type: object
     GoogleCloudDialogflowV2beta1SmartReplyAnswer:

@@ -104,7 +104,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Optional. Controls whether Projects in the DELETING state should be returned. Defaults to false.
+        - description: Optional. Controls whether Projects in the DELETED state should be returned in the response. If not specified, only `ACTIVE` Projects will be returned.
           in: query
           name: showDeleted
           schema:
@@ -234,7 +234,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Specifies which fields to update. Note that the fields `name`, `appId`, `projectId` and `state` are all immutable
+        - description: "Specifies which fields of the WebApp to update. Note that the following fields are immutable: `name`, `app_id`, and `project_id`. To update `state`, use any of the following endpoints: RemoveWebApp or UndeleteWebApp."
           in: query
           name: updateMask
           schema:
@@ -276,7 +276,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Removes the specified WebApp from the project.
+      description: Removes the specified WebApp from the FirebaseProject.
       operationId: firebase.projects.webApps.remove
       parameters:
         - description: "Required. The resource name of the WebApp, in the format: projects/ PROJECT_IDENTIFIER/webApps/APP_ID Since an APP_ID is a unique identifier, the Unique Resource from Sub-Collection access pattern may be used here, in the format: projects/-/webApps/APP_ID Refer to the WebApp [name](../projects.webApps#WebApp.FIELDS.name) field for details about PROJECT_IDENTIFIER and APP_ID values."
@@ -322,7 +322,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Restores the specified WebApp to the project.
+      description: Restores the specified WebApp to the FirebaseProject.
       operationId: firebase.projects.webApps.undelete
       parameters:
         - description: "Required. The resource name of the WebApp, in the format: projects/ PROJECT_IDENTIFIER/webApps/APP_ID Since an APP_ID is a unique identifier, the Unique Resource from Sub-Collection access pattern may be used here, in the format: projects/-/webApps/APP_ID Refer to the WebApp [name](../projects.webApps#WebApp.FIELDS.name) field for details about PROJECT_IDENTIFIER and APP_ID values."
@@ -375,7 +375,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Controls whether Apps in the DELETED state should be returned. Defaults to false.
+        - description: Controls whether Apps in the DELETED state should be returned in the response. If not specified, only `ACTIVE` Apps will be returned.
           in: query
           name: showDeleted
           schema:
@@ -577,7 +577,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Controls whether Apps in the DELETED state should be returned. Defaults to false.
+        - description: Controls whether Apps in the DELETED state should be returned in the response. If not specified, only `ACTIVE` Apps will be returned.
           in: query
           name: showDeleted
           schema:
@@ -756,7 +756,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Controls whether Apps in the DELETED state should be returned. Defaults to false.
+        - description: Controls whether Apps in the DELETED state should be returned in the response. If not specified, only `ACTIVE` Apps will be returned.
           in: query
           name: showDeleted
           schema:
@@ -950,7 +950,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Controls whether Apps in the DELETED state should be returned. Defaults to false.
+        - description: Controls whether Apps in the DELETED state should be returned. If not specified, only `ACTIVE` Apps will be returned.
           in: query
           name: showDeleted
           schema:
@@ -1312,7 +1312,7 @@ components:
           description: Output only. The default Firebase resources associated with the Project.
           readOnly: true
         state:
-          description: Output only. The lifecycle state of the Project. Updates to the state must be performed via com.google.cloudresourcemanager.v1.Projects.DeleteProject and com.google.cloudresourcemanager.v1.Projects.UndeleteProject
+          description: Output only. The lifecycle state of the Project.
           enum:
             - STATE_UNSPECIFIED
             - ACTIVE
@@ -1522,7 +1522,7 @@ components:
           description: Checksum provided in the AndroidApp entity, which if provided ensures the client has an up-to-date value before proceeding.
           type: string
         validateOnly:
-          description: If set to true, only validate the request and do not delete the app.
+          description: If set to true, the request is only validated. The App will _not_ be removed.
           type: boolean
       type: object
     RemoveIosAppRequest:
@@ -1534,7 +1534,7 @@ components:
           description: Checksum provided in the IosApp entity, which if provided ensures the client has an up-to-date value before proceeding.
           type: string
         validateOnly:
-          description: If set to true, only validate the request and do not delete the app.
+          description: If set to true, the request is only validated. The App will _not_ be removed.
           type: boolean
       type: object
     RemoveWebAppRequest:
@@ -1546,7 +1546,7 @@ components:
           description: Checksum provided in the WebApp entity, which if provided ensures the client has an up-to-date value before proceeding.
           type: string
         validateOnly:
-          description: If set to true, only validate the request and do not delete the app.
+          description: If set to true, the request is only validated. The App will _not_ be removed.
           type: boolean
       type: object
     SearchFirebaseAppsResponse:
@@ -1636,7 +1636,7 @@ components:
           description: Checksum provided in the AndroidApp entity, which if provided ensures the client has an up-to-date value before proceeding.
           type: string
         validateOnly:
-          description: If set to true, only validate the request and do not undelete the app.
+          description: If set to true, the request is only validated. The App will _not_ be undeleted.
           type: boolean
       type: object
     UndeleteIosAppRequest:
@@ -1645,7 +1645,7 @@ components:
           description: Checksum provided in the IosApp entity, which if provided ensures the client has an up-to-date value before proceeding.
           type: string
         validateOnly:
-          description: If set to true, only validate the request and do not undelete the app.
+          description: If set to true, the request is only validated. The App will _not_ be undeleted.
           type: boolean
       type: object
     UndeleteWebAppRequest:
@@ -1654,7 +1654,7 @@ components:
           description: Checksum provided in the WebApp entity, which if provided ensures the client has an up-to-date value before proceeding.
           type: string
         validateOnly:
-          description: If set to true, only validate the request and do not undelete the app.
+          description: If set to true, the request is only validated. The App will _not_ be undeleted.
           type: boolean
       type: object
     WebApp:

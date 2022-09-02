@@ -122,6 +122,52 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
+  "/v2beta1/{conversation}/suggestions:suggestConversationSummary":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Suggest summary for a conversation based on specific historical messages. The range of the messages to be used for summary can be specified in the request.
+      operationId: dialogflow.projects.locations.conversations.suggestions.suggestConversationSummary
+      parameters:
+        - description: "Required. The conversation to fetch suggestion for. Format: `projects//locations//conversations/`."
+          in: path
+          name: conversation
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1SuggestConversationSummaryRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1SuggestConversationSummaryResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
   "/v2beta1/{name}":
     delete:
       description: "Deletes the specified document. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: KnowledgeOperationMetadata - `response`: An [Empty message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty) Note: The `projects.agent.knowledgeBases.documents` resource is deprecated; only use `projects.knowledgeBases.documents`."
@@ -7061,6 +7107,7 @@ components:
             - ARTICLE_SUGGESTION
             - FAQ
             - SMART_REPLY
+            - CONVERSATION_SUMMARIZATION
           type: string
       type: object
     GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigRequest:
@@ -7081,6 +7128,7 @@ components:
             - ARTICLE_SUGGESTION
             - FAQ
             - SMART_REPLY
+            - CONVERSATION_SUMMARIZATION
           type: string
       type: object
     GoogleCloudDialogflowV2beta1CompileSuggestionRequest:
@@ -9433,6 +9481,7 @@ components:
             - ARTICLE_SUGGESTION
             - FAQ
             - SMART_REPLY
+            - CONVERSATION_SUMMARIZATION
           type: string
       type: object
     GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigRequest:
@@ -9528,6 +9577,46 @@ components:
         latestMessage:
           description: "The name of the latest conversation message used to compile suggestion for. Format: `projects//locations//conversations//messages/`."
           type: string
+      type: object
+    GoogleCloudDialogflowV2beta1SuggestConversationSummaryRequest:
+      description: The request message for Conversations.SuggestConversationSummary.
+      properties:
+        contextSize:
+          description: Max number of messages prior to and including [latest_message] to use as context when compiling the suggestion. By default 500 and at most 1000.
+          format: int32
+          type: integer
+        latestMessage:
+          description: "The name of the latest conversation message used as context for compiling suggestion. If empty, the latest message of the conversation will be used. Format: `projects//locations//conversations//messages/`."
+          type: string
+      type: object
+    GoogleCloudDialogflowV2beta1SuggestConversationSummaryResponse:
+      description: The response message for Conversations.SuggestConversationSummary.
+      properties:
+        contextSize:
+          description: Number of messages prior to and including last_conversation_message used to compile the suggestion. It may be smaller than the SuggestSummaryRequest.context_size field in the request if there weren't that many messages in the conversation.
+          format: int32
+          type: integer
+        latestMessage:
+          description: "The name of the latest conversation message used as context for compiling suggestion. Format: `projects//locations//conversations//messages/`."
+          type: string
+        summary:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1SuggestConversationSummaryResponseSummary"
+          description: Generated summary.
+      type: object
+    GoogleCloudDialogflowV2beta1SuggestConversationSummaryResponseSummary:
+      description: Generated summary for a conversation.
+      properties:
+        answerRecord:
+          description: 'The name of the answer record. Format: "projects//answerRecords/"'
+          type: string
+        text:
+          description: The summary content that is concatenated into one string.
+          type: string
+        textSections:
+          additionalProperties:
+            type: string
+          description: The summary content that is divided into sections. The key is the section's name and the value is the section's content. There is no specific format for the key or value.
+          type: object
       type: object
     GoogleCloudDialogflowV2beta1SuggestFaqAnswersRequest:
       description: The request message for Participants.SuggestFaqAnswers.
@@ -9671,6 +9760,7 @@ components:
             - ARTICLE_SUGGESTION
             - FAQ
             - SMART_REPLY
+            - CONVERSATION_SUMMARIZATION
           type: string
       type: object
     GoogleCloudDialogflowV2beta1SuggestionResult:
