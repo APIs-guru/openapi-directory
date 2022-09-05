@@ -275,7 +275,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Connector API
-  version: 8.46.0
+  version: 8.49.0
   x-apideck-api: connector
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1219,6 +1219,14 @@ components:
                 $ref: "#/components/schemas/ResourceStatus"
             type: object
           type: array
+        tls_support:
+          properties:
+            description:
+              description: Description of the TLS support
+              type: string
+            type:
+              type: string
+          type: object
         unified_apis:
           description: List of Unified APIs that feature this connector.
           items:

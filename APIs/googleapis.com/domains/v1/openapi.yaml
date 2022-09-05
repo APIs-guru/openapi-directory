@@ -32,7 +32,7 @@ tags:
 paths:
   "/v1/{location}/registrations:retrieveImportableDomains":
     get:
-      description: Lists domain names from [Google Domains](https://domains.google/) that can be imported to Cloud Domains using the `ImportDomain` method. Since individual users can own domains in Google Domains, the list of domains returned depends on the individual user making the call. Domains supported by Google Domains, but not supported by Cloud Domains, are not returned.
+      description: Lists domain names from [Google Domains](https://domains.google/) that can be imported to Cloud Domains using the `ImportDomain` method. Since individual users can own domains in Google Domains, the list of domains returned depends on the individual user making the call. Domains already managed by Cloud Domains are not returned.
       operationId: domains.projects.locations.registrations.retrieveImportableDomains
       parameters:
         - description: Required. The location. Must be in the format `projects/*/locations/*`.
@@ -1813,7 +1813,7 @@ components:
           description: The registrar that currently manages the domain.
           type: string
         currentRegistrarUri:
-          description: The URL of registrar that currently manages the domain.
+          description: The URL of the registrar that currently manages the domain.
           type: string
         domainName:
           description: The domain name. Unicode domain names are expressed in Punycode format.

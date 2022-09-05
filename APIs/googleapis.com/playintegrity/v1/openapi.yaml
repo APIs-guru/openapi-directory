@@ -198,7 +198,7 @@ components:
             - UNEVALUATED
           type: string
         certificateSha256Digest:
-          description: Hex fingerprint of the application signing certificate. e.g. “ABCE1F....” Set iff app_recognition_verdict != UNEVALUATED.
+          description: The SHA256 hash of the requesting app's signing certificates (base64 web-safe encoded). Set iff app_recognition_verdict != UNEVALUATED.
           items:
             type: string
           type: array

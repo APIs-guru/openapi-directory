@@ -19,7 +19,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://www.nexmo.com/terms-of-use
   title: Reports API
-  version: 2.2.1
+  version: 2.2.2
   x-label: Beta
   x-origin:
     - format: openapi
@@ -2213,16 +2213,10 @@ components:
     voice_status:
       description: Search only for voice call with the corresponding status.
       enum:
-        - started
-        - ringing
         - answered
         - machine
-        - completed
-        - timeout
+        - error
         - failed
-        - rejected
-        - cancelled
-        - busy
       example: started
       type: string
     voice_status_description:

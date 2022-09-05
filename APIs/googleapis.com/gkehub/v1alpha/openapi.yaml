@@ -881,16 +881,16 @@ components:
       properties:
         defaultMembershipSpec:
           $ref: "#/components/schemas/AnthosObservabilityMembershipSpec"
-          description: default membership spec for unconfigured memberships
+          description: Default membership spec for unconfigured memberships
       type: object
     AnthosObservabilityMembershipSpec:
       description: "**Anthosobservability**: Per-Membership Feature spec."
       properties:
         doNotOptimizeMetrics:
-          description: use full of metrics rather than optimized metrics. See https://cloud.google.com/anthos/clusters/docs/on-prem/1.8/concepts/logging-and-monitoring#optimized_metrics_default_metrics
+          description: Use full of metrics rather than optimized metrics. See https://cloud.google.com/anthos/clusters/docs/on-prem/1.8/concepts/logging-and-monitoring#optimized_metrics_default_metrics
           type: boolean
         enableStackdriverOnApplications:
-          description: enable collecting and reporting metrics and logs from user apps See go/onyx-application-metrics-logs-user-guide
+          description: Enable collecting and reporting metrics and logs from user apps.
           type: boolean
         version:
           description: the version of stackdriver operator used by this feature
@@ -1024,7 +1024,7 @@ components:
           $ref: "#/components/schemas/Expr"
           description: The condition that is associated with this binding. If the condition evaluates to `true`, then this binding applies to the current request. If the condition evaluates to `false`, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
         members:
-          description: "Specifies the principals requesting access for a Google Cloud resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a Google service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `serviceAccount:{projectid}.svc.id.goog[{namespace}/{kubernetes-sa}]`: An identifier for a [Kubernetes service account](https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts). For example, `my-project.svc.id.goog[my-namespace/my-kubernetes-sa]`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. "
+          description: "Specifies the principals requesting access for a Google Cloud resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a Google service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `serviceAccount:{projectid}.svc.id.goog[{namespace}/{kubernetes-sa}]`: An identifier for a [Kubernetes service account](https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts). For example, `my-project.svc.id.goog[my-namespace/my-kubernetes-sa]`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. "
           items:
             type: string
           type: array
@@ -1137,7 +1137,7 @@ components:
           description: Set to true to enable the Config Sync admission webhook to prevent drifts. If set to `false`, disables the Config Sync admission webhook and does not prevent drifts.
           type: boolean
         sourceFormat:
-          description: Specifies whether the Config Sync Repo is in “hierarchical” or “unstructured” mode.
+          description: Specifies whether the Config Sync Repo is in "hierarchical" or "unstructured" mode.
           type: string
       type: object
     ConfigManagementConfigSyncDeploymentState:
@@ -1804,6 +1804,9 @@ components:
     IdentityServiceAuthMethod:
       description: Configuration of an auth method for a member/cluster. Only one authentication method (e.g., OIDC and LDAP) can be set per AuthMethod.
       properties:
+        googleConfig:
+          $ref: "#/components/schemas/IdentityServiceGoogleConfig"
+          description: GoogleConfig specific configuration
         name:
           description: Identifier for auth config.
           type: string
@@ -1813,6 +1816,13 @@ components:
         proxy:
           description: Proxy server address to use for auth method.
           type: string
+      type: object
+    IdentityServiceGoogleConfig:
+      description: Configuration for the Google Plugin Auth flow.
+      properties:
+        disable:
+          description: Disable automatic configuration of Google Plugin on supported platforms.
+          type: boolean
       type: object
     IdentityServiceMembershipSpec:
       description: "**Anthos Identity Service**: Configuration for a single Membership."
@@ -2442,6 +2452,7 @@ components:
             - DECOMISSIONING
             - CLUSTER_ERROR
             - HUB_ERROR
+            - SUSPENDED
           type: string
       type: object
     PolicyControllerMonitoringConfig:
@@ -2474,6 +2485,7 @@ components:
             - DECOMISSIONING
             - CLUSTER_ERROR
             - HUB_ERROR
+            - SUSPENDED
           type: string
       type: object
     PolicyControllerTemplateLibraryConfig:

@@ -96,7 +96,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: UpdateApiSpec can be used to modify a specified spec.
+      description: Used to modify a specified spec.
       operationId: apigeeregistry.projects.locations.apis.versions.specs.patch
       parameters:
         - description: Resource name.
@@ -110,7 +110,7 @@ paths:
           name: allowMissing
           schema:
             type: boolean
-        - description: The list of fields to be updated. If omitted, all fields are updated that are set in the request message (fields set to default values are ignored). If a "*" is specified, all fields are updated, including fields that are unspecified/default in the request.
+        - description: The list of fields to be updated. If omitted, all fields are updated that are set in the request message (fields set to default values are ignored). If an asterisk "*" is specified, all fields are updated, including fields that are unspecified/default in the request.
           in: query
           name: updateMask
           schema:
@@ -135,7 +135,7 @@ paths:
       tags:
         - projects
     put:
-      description: ReplaceArtifact can be used to replace a specified artifact.
+      description: Used to replace a specified artifact.
       operationId: apigeeregistry.projects.locations.artifacts.replaceArtifact
       parameters:
         - description: Resource name.
@@ -311,10 +311,10 @@ paths:
         - projects
   "/v1/{name}:deleteRevision":
     delete:
-      description: DeleteApiSpecRevision deletes a revision of a spec.
+      description: Deletes a revision of a spec.
       operationId: apigeeregistry.projects.locations.apis.versions.specs.deleteRevision
       parameters:
-        - description: "Required. The name of the spec revision to be deleted, with a revision ID explicitly included. Example: projects/sample/locations/global/apis/petstore/versions/1.0.0/specs/openapi.yaml@c7cfa2a8"
+        - description: "Required. The name of the spec revision to be deleted, with a revision ID explicitly included. Example: `projects/sample/locations/global/apis/petstore/versions/1.0.0/specs/openapi.yaml@c7cfa2a8`"
           in: path
           name: name
           required: true
@@ -348,10 +348,10 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1/{name}:getContents":
     get:
-      description: GetArtifactContents returns the contents of a specified artifact. If artifacts are stored with GZip compression, the default behavior is to return the artifact uncompressed (the mime_type response field indicates the exact format returned).
+      description: Returns the contents of a specified artifact. If artifacts are stored with GZip compression, the default behavior is to return the artifact uncompressed (the mime_type response field indicates the exact format returned).
       operationId: apigeeregistry.projects.locations.artifacts.getContents
       parameters:
-        - description: "Required. The name of the artifact whose contents should be retrieved. Format: {parent}/artifacts/*"
+        - description: "Required. The name of the artifact whose contents should be retrieved. Format: `{parent}/artifacts/*`"
           in: path
           name: name
           required: true
@@ -385,7 +385,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1/{name}:listRevisions":
     get:
-      description: ListApiSpecRevisions lists all revisions of a spec. Revisions are returned in descending order of revision creation time.
+      description: Lists all revisions of a spec. Revisions are returned in descending order of revision creation time.
       operationId: apigeeregistry.projects.locations.apis.versions.specs.listRevisions
       parameters:
         - description: Required. The name of the spec to list revisions for.
@@ -444,7 +444,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: RollbackApiSpec sets the current revision to a specified prior revision. Note that this creates a new revision with a new revision ID.
+      description: Sets the current revision to a specified prior revision. Note that this creates a new revision with a new revision ID.
       operationId: apigeeregistry.projects.locations.apis.versions.specs.rollback
       parameters:
         - description: Required. The spec being rolled back.
@@ -486,7 +486,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: TagApiSpecRevision adds a tag to a specified revision of a spec.
+      description: Adds a tag to a specified revision of a spec.
       operationId: apigeeregistry.projects.locations.apis.versions.specs.tagRevision
       parameters:
         - description: Required. The name of the spec to be tagged, including the revision ID.
@@ -516,10 +516,10 @@ paths:
         - projects
   "/v1/{parent}/apis":
     get:
-      description: ListApis returns matching APIs.
+      description: Returns matching APIs.
       operationId: apigeeregistry.projects.locations.apis.list
       parameters:
-        - description: "Required. The parent, which owns this collection of APIs. Format: projects/*/locations/*"
+        - description: "Required. The parent, which owns this collection of APIs. Format: `projects/*/locations/*`"
           in: path
           name: parent
           required: true
@@ -528,6 +528,11 @@ paths:
         - description: An expression that can be used to filter the list. Filters use the Common Expression Language and can refer to all message fields.
           in: query
           name: filter
+          schema:
+            type: string
+        - description: A comma-separated list of fields, e.g. "foo,bar" Fields can be sorted in descending order using the "desc" identifier, e.g. "foo desc,bar"
+          in: query
+          name: orderBy
           schema:
             type: string
         - description: The maximum number of APIs to return. The service may return fewer than this value. If unspecified, at most 50 values will be returned. The maximum is 1000; values above 1000 will be coerced to 1000.
@@ -567,16 +572,16 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: CreateApi creates a specified API.
+      description: Creates a specified API.
       operationId: apigeeregistry.projects.locations.apis.create
       parameters:
-        - description: "Required. The parent, which owns this collection of APIs. Format: projects/*/locations/*"
+        - description: "Required. The parent, which owns this collection of APIs. Format: `projects/*/locations/*`"
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: Required. The ID to use for the api, which will become the final component of the api's resource name. This value should be 4-63 characters, and valid characters are /a-z-/. Following AIP-162, IDs must not have the form of a UUID.
+        - description: Required. The ID to use for the API, which will become the final component of the API's resource name. This value should be 4-63 characters, and valid characters are /a-z-/. Following AIP-162, IDs must not have the form of a UUID.
           in: query
           name: apiId
           schema:
@@ -602,10 +607,10 @@ paths:
         - projects
   "/v1/{parent}/artifacts":
     get:
-      description: ListArtifacts returns matching artifacts.
+      description: Returns matching artifacts.
       operationId: apigeeregistry.projects.locations.artifacts.list
       parameters:
-        - description: "Required. The parent, which owns this collection of artifacts. Format: {parent}"
+        - description: "Required. The parent, which owns this collection of artifacts. Format: `{parent}`"
           in: path
           name: parent
           required: true
@@ -614,6 +619,11 @@ paths:
         - description: An expression that can be used to filter the list. Filters use the Common Expression Language and can refer to all message fields except contents.
           in: query
           name: filter
+          schema:
+            type: string
+        - description: A comma-separated list of fields, e.g. "foo,bar" Fields can be sorted in descending order using the "desc" identifier, e.g. "foo desc,bar"
+          in: query
+          name: orderBy
           schema:
             type: string
         - description: The maximum number of artifacts to return. The service may return fewer than this value. If unspecified, at most 50 values will be returned. The maximum is 1000; values above 1000 will be coerced to 1000.
@@ -653,10 +663,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: CreateArtifact creates a specified artifact.
+      description: Creates a specified artifact.
       operationId: apigeeregistry.projects.locations.artifacts.create
       parameters:
-        - description: "Required. The parent, which owns this collection of artifacts. Format: {parent}"
+        - description: "Required. The parent, which owns this collection of artifacts. Format: `{parent}`"
           in: path
           name: parent
           required: true
@@ -688,10 +698,10 @@ paths:
         - projects
   "/v1/{parent}/deployments":
     get:
-      description: ListApiDeployments returns matching deployments.
+      description: Returns matching deployments.
       operationId: apigeeregistry.projects.locations.apis.deployments.list
       parameters:
-        - description: "Required. The parent, which owns this collection of deployments. Format: projects/*/locations/*/apis/*"
+        - description: "Required. The parent, which owns this collection of deployments. Format: `projects/*/locations/*/apis/*`"
           in: path
           name: parent
           required: true
@@ -700,6 +710,11 @@ paths:
         - description: An expression that can be used to filter the list. Filters use the Common Expression Language and can refer to all message fields.
           in: query
           name: filter
+          schema:
+            type: string
+        - description: A comma-separated list of fields, e.g. "foo,bar" Fields can be sorted in descending order using the "desc" identifier, e.g. "foo desc,bar"
+          in: query
+          name: orderBy
           schema:
             type: string
         - description: The maximum number of deployments to return. The service may return fewer than this value. If unspecified, at most 50 values will be returned. The maximum is 1000; values above 1000 will be coerced to 1000.
@@ -739,10 +754,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: CreateApiDeployment creates a specified deployment.
+      description: Creates a specified deployment.
       operationId: apigeeregistry.projects.locations.apis.deployments.create
       parameters:
-        - description: "Required. The parent, which owns this collection of deployments. Format: projects/*/locations/*/apis/*"
+        - description: "Required. The parent, which owns this collection of deployments. Format: `projects/*/locations/*/apis/*`"
           in: path
           name: parent
           required: true
@@ -821,10 +836,10 @@ paths:
         - projects
   "/v1/{parent}/specs":
     get:
-      description: ListApiSpecs returns matching specs.
+      description: Returns matching specs.
       operationId: apigeeregistry.projects.locations.apis.versions.specs.list
       parameters:
-        - description: "Required. The parent, which owns this collection of specs. Format: projects/*/locations/*/apis/*/versions/*"
+        - description: "Required. The parent, which owns this collection of specs. Format: `projects/*/locations/*/apis/*/versions/*`"
           in: path
           name: parent
           required: true
@@ -833,6 +848,11 @@ paths:
         - description: An expression that can be used to filter the list. Filters use the Common Expression Language and can refer to all message fields except contents.
           in: query
           name: filter
+          schema:
+            type: string
+        - description: A comma-separated list of fields, e.g. "foo,bar" Fields can be sorted in descending order using the "desc" identifier, e.g. "foo desc,bar"
+          in: query
+          name: orderBy
           schema:
             type: string
         - description: The maximum number of specs to return. The service may return fewer than this value. If unspecified, at most 50 values will be returned. The maximum is 1000; values above 1000 will be coerced to 1000.
@@ -872,10 +892,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: CreateApiSpec creates a specified spec.
+      description: Creates a specified spec.
       operationId: apigeeregistry.projects.locations.apis.versions.specs.create
       parameters:
-        - description: "Required. The parent, which owns this collection of specs. Format: projects/*/locations/*/apis/*/versions/*"
+        - description: "Required. The parent, which owns this collection of specs. Format: `projects/*/locations/*/apis/*/versions/*`"
           in: path
           name: parent
           required: true
@@ -907,10 +927,10 @@ paths:
         - projects
   "/v1/{parent}/versions":
     get:
-      description: ListApiVersions returns matching versions.
+      description: Returns matching versions.
       operationId: apigeeregistry.projects.locations.apis.versions.list
       parameters:
-        - description: "Required. The parent, which owns this collection of versions. Format: projects/*/locations/*/apis/*"
+        - description: "Required. The parent, which owns this collection of versions. Format: `projects/*/locations/*/apis/*`"
           in: path
           name: parent
           required: true
@@ -919,6 +939,11 @@ paths:
         - description: An expression that can be used to filter the list. Filters use the Common Expression Language and can refer to all message fields.
           in: query
           name: filter
+          schema:
+            type: string
+        - description: A comma-separated list of fields, e.g. "foo,bar" Fields can be sorted in descending order using the "desc" identifier, e.g. "foo desc,bar"
+          in: query
+          name: orderBy
           schema:
             type: string
         - description: The maximum number of versions to return. The service may return fewer than this value. If unspecified, at most 50 values will be returned. The maximum is 1000; values above 1000 will be coerced to 1000.
@@ -958,10 +983,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: CreateApiVersion creates a specified version.
+      description: Creates a specified version.
       operationId: apigeeregistry.projects.locations.apis.versions.create
       parameters:
-        - description: "Required. The parent, which owns this collection of versions. Format: projects/*/locations/*/apis/*"
+        - description: "Required. The parent, which owns this collection of versions. Format: `projects/*/locations/*/apis/*`"
           in: path
           name: parent
           required: true
@@ -1194,7 +1219,7 @@ components:
         type: string
   schemas:
     Api:
-      description: An Api is a top-level description of an API. Apis are produced by producers and are commitments to provide services.
+      description: A top-level description of an API. Produced by producers and are commitments to provide services.
       properties:
         annotations:
           additionalProperties:
@@ -1202,7 +1227,7 @@ components:
           description: Annotations attach non-identifying metadata to resources. Annotation keys and values are less restricted than those of labels, but should be generally used for small values of broad interest. Larger, topic- specific metadata should be stored in Artifacts.
           type: object
         availability:
-          description: 'A user-definable description of the availability of this service. Format: free-form, but we expect single words that describe availability, e.g. "NONE", "TESTING", "PREVIEW", "GENERAL", "DEPRECATED", "SHUTDOWN".'
+          description: 'A user-definable description of the availability of this service. Format: free-form, but we expect single words that describe availability, e.g., "NONE", "TESTING", "PREVIEW", "GENERAL", "DEPRECATED", "SHUTDOWN".'
           type: string
         createTime:
           description: Output only. Creation timestamp.
@@ -1218,16 +1243,16 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: Labels attach identifying metadata to resources. Identifying metadata can be used to filter list operations. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. No more than 64 user labels can be associated with one resource (System labels are excluded). See https://goo.gl/xmQnxf for more information and examples of labels. System reserved label keys are prefixed with "apigeeregistry.googleapis.com/" and cannot be changed.
+          description: Labels attach identifying metadata to resources. Identifying metadata can be used to filter list operations. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores, and dashes. International characters are allowed. No more than 64 user labels can be associated with one resource (System labels are excluded). See https://goo.gl/xmQnxf for more information and examples of labels. System reserved label keys are prefixed with `apigeeregistry.googleapis.com/` and cannot be changed.
           type: object
         name:
           description: Resource name.
           type: string
         recommendedDeployment:
-          description: "The recommended deployment of the API. Format: apis/{api}/deployments/{deployment}"
+          description: "The recommended deployment of the API. Format: `apis/{api}/deployments/{deployment}`"
           type: string
         recommendedVersion:
-          description: "The recommended version of the API. Format: apis/{api}/versions/{version}"
+          description: "The recommended version of the API. Format: `apis/{api}/versions/{version}`"
           type: string
         updateTime:
           description: Output only. Last update timestamp.
@@ -1236,7 +1261,7 @@ components:
           type: string
       type: object
     ApiDeployment:
-      description: An ApiDeployment describes a service running at particular address that provides a particular version of an API. ApiDeployments have revisions which correspond to different configurations of a single deployment in time. Revision identifiers should be updated whenever the served API spec or endpoint address changes.
+      description: Describes a service running at particular address that provides a particular version of an API. ApiDeployments have revisions which correspond to different configurations of a single deployment in time. Revision identifiers should be updated whenever the served API spec or endpoint address changes.
       properties:
         accessGuidance:
           description: Text briefly describing how to access the endpoint. Changes to this value will not affect the revision.
@@ -1247,7 +1272,7 @@ components:
           description: Annotations attach non-identifying metadata to resources. Annotation keys and values are less restricted than those of labels, but should be generally used for small values of broad interest. Larger, topic- specific metadata should be stored in Artifacts.
           type: object
         apiSpecRevision:
-          description: "The full resource name (including revision id) of the spec of the API being served by the deployment. Changes to this value will update the revision. Format: apis/{api}/deployments/{deployment}"
+          description: "The full resource name (including revision ID) of the spec of the API being served by the deployment. Changes to this value will update the revision. Format: `apis/{api}/deployments/{deployment}`"
           type: string
         createTime:
           description: Output only. Creation timestamp; when the deployment resource was created.
@@ -1264,7 +1289,7 @@ components:
           description: The address where the deployment is serving. Changes to this value will update the revision.
           type: string
         externalChannelUri:
-          description: The address of the external channel of the API (e.g. the Developer Portal). Changes to this value will not affect the revision.
+          description: The address of the external channel of the API (e.g., the Developer Portal). Changes to this value will not affect the revision.
           type: string
         intendedAudience:
           description: Text briefly identifying the intended audience of the API. Changes to this value will not affect the revision.
@@ -1272,7 +1297,7 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: Labels attach identifying metadata to resources. Identifying metadata can be used to filter list operations. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. No more than 64 user labels can be associated with one resource (System labels are excluded). See https://goo.gl/xmQnxf for more information and examples of labels. System reserved label keys are prefixed with "apigeeregistry.googleapis.com/" and cannot be changed.
+          description: Labels attach identifying metadata to resources. Identifying metadata can be used to filter list operations. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. No more than 64 user labels can be associated with one resource (System labels are excluded). See https://goo.gl/xmQnxf for more information and examples of labels. System reserved label keys are prefixed with `apigeeregistry.googleapis.com/` and cannot be changed.
           type: object
         name:
           description: Resource name.
@@ -1293,7 +1318,7 @@ components:
           type: string
       type: object
     ApiSpec:
-      description: An ApiSpec describes a version of an API in a structured way. ApiSpecs provide formal descriptions that consumers can use to use a version. ApiSpec resources are intended to be fully-resolved descriptions of an ApiVersion. When specs consist of multiple files, these should be bundled together (e.g. in a zip archive) and stored as a unit. Multiple specs can exist to provide representations in different API description formats. Synchronization of these representations would be provided by tooling and background services.
+      description: Describes a version of an API in a structured way. ApiSpecs provide formal descriptions that consumers can use to use a version. ApiSpec resources are intended to be fully-resolved descriptions of an ApiVersion. When specs consist of multiple files, these should be bundled together (e.g., in a zip archive) and stored as a unit. Multiple specs can exist to provide representations in different API description formats. Synchronization of these representations would be provided by tooling and background services.
       properties:
         annotations:
           additionalProperties:
@@ -1322,10 +1347,10 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: Labels attach identifying metadata to resources. Identifying metadata can be used to filter list operations. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. No more than 64 user labels can be associated with one resource (System labels are excluded). See https://goo.gl/xmQnxf for more information and examples of labels. System reserved label keys are prefixed with "apigeeregistry.googleapis.com/" and cannot be changed.
+          description: Labels attach identifying metadata to resources. Identifying metadata can be used to filter list operations. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. No more than 64 user labels can be associated with one resource (System labels are excluded). See https://goo.gl/xmQnxf for more information and examples of labels. System reserved label keys are prefixed with `apigeeregistry.googleapis.com/` and cannot be changed.
           type: object
         mimeType:
-          description: A style (format) descriptor for this spec that is specified as a Media Type (https://en.wikipedia.org/wiki/Media_type). Possible values include "application/vnd.apigee.proto", "application/vnd.apigee.openapi", and "application/vnd.apigee.graphql", with possible suffixes representing compression types. These hypothetical names are defined in the vendor tree defined in RFC6838 (https://tools.ietf.org/html/rfc6838) and are not final. Content types can specify compression. Currently only GZip compression is supported (indicated with "+gzip").
+          description: A style (format) descriptor for this spec that is specified as a Media Type (https://en.wikipedia.org/wiki/Media_type). Possible values include `application/vnd.apigee.proto`, `application/vnd.apigee.openapi`, and `application/vnd.apigee.graphql`, with possible suffixes representing compression types. These hypothetical names are defined in the vendor tree defined in RFC6838 (https://tools.ietf.org/html/rfc6838) and are not final. Content types can specify compression. Currently only GZip compression is supported (indicated with "+gzip").
           type: string
         name:
           description: Resource name.
@@ -1354,7 +1379,7 @@ components:
           type: string
       type: object
     ApiVersion:
-      description: An ApiVersion describes a particular version of an API. ApiVersions are what consumers actually use.
+      description: Describes a particular version of an API. ApiVersions are what consumers actually use.
       properties:
         annotations:
           additionalProperties:
@@ -1375,13 +1400,13 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: Labels attach identifying metadata to resources. Identifying metadata can be used to filter list operations. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. No more than 64 user labels can be associated with one resource (System labels are excluded). See https://goo.gl/xmQnxf for more information and examples of labels. System reserved label keys are prefixed with "apigeeregistry.googleapis.com/" and cannot be changed.
+          description: Labels attach identifying metadata to resources. Identifying metadata can be used to filter list operations. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. No more than 64 user labels can be associated with one resource (System labels are excluded). See https://goo.gl/xmQnxf for more information and examples of labels. System reserved label keys are prefixed with `apigeeregistry.googleapis.com/` and cannot be changed.
           type: object
         name:
           description: Resource name.
           type: string
         state:
-          description: 'A user-definable description of the lifecycle phase of this API version. Format: free-form, but we expect single words that describe API maturity, e.g. "CONCEPT", "DESIGN", "DEVELOPMENT", "STAGING", "PRODUCTION", "DEPRECATED", "RETIRED".'
+          description: 'A user-definable description of the lifecycle phase of this API version. Format: free-form, but we expect single words that describe API maturity, e.g., "CONCEPT", "DESIGN", "DEVELOPMENT", "STAGING", "PRODUCTION", "DEPRECATED", "RETIRED".'
           type: string
         updateTime:
           description: Output only. Last update timestamp.
@@ -1390,7 +1415,7 @@ components:
           type: string
       type: object
     Artifact:
-      description: Artifacts of resources. Artifacts are unique (single-value) per resource and are used to store metadata that is too large or numerous to be stored directly on the resource. Since artifacts are stored separately from parent resources, they should generally be used for metadata that is needed infrequently, i.e. not for display in primary views of the resource but perhaps displayed or downloaded upon request. The ListArtifacts method allows artifacts to be quickly enumerated and checked for presence without downloading their (potentially-large) contents.
+      description: Artifacts of resources. Artifacts are unique (single-value) per resource and are used to store metadata that is too large or numerous to be stored directly on the resource. Since artifacts are stored separately from parent resources, they should generally be used for metadata that is needed infrequently, i.e., not for display in primary views of the resource but perhaps displayed or downloaded upon request. The `ListArtifacts` method allows artifacts to be quickly enumerated and checked for presence without downloading their (potentially-large) contents.
       properties:
         contents:
           description: Input only. The contents of the artifact. Provided by API callers when artifacts are created or replaced. To access the contents of an artifact, use GetArtifactContents.
@@ -1429,7 +1454,7 @@ components:
           $ref: "#/components/schemas/Expr"
           description: The condition that is associated with this binding. If the condition evaluates to `true`, then this binding applies to the current request. If the condition evaluates to `false`, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
         members:
-          description: "Specifies the principals requesting access for a Google Cloud resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. "
+          description: "Specifies the principals requesting access for a Google Cloud resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a Google service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `serviceAccount:{projectid}.svc.id.goog[{namespace}/{kubernetes-sa}]`: An identifier for a [Kubernetes service account](https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts). For example, `my-project.svc.id.goog[my-namespace/my-kubernetes-sa]`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. "
           items:
             type: string
           type: array
@@ -1502,7 +1527,7 @@ components:
           readOnly: true
           type: string
         name:
-          description: "Format: `projects/*/locations/*/instance`. Currently only locations/global is supported."
+          description: "Format: `projects/*/locations/*/instance`. Currently only `locations/global` is supported."
           type: string
         state:
           description: Output only. The current state of the Instance.
@@ -1728,14 +1753,14 @@ components:
       description: Request message for RollbackApiDeployment.
       properties:
         revisionId:
-          description: "Required. The revision ID to roll back to. It must be a revision of the same deployment. Example: c7cfa2a8"
+          description: "Required. The revision ID to roll back to. It must be a revision of the same deployment. Example: `c7cfa2a8`"
           type: string
       type: object
     RollbackApiSpecRequest:
       description: Request message for RollbackApiSpec.
       properties:
         revisionId:
-          description: "Required. The revision ID to roll back to. It must be a revision of the same spec. Example: c7cfa2a8"
+          description: "Required. The revision ID to roll back to. It must be a revision of the same spec. Example: `c7cfa2a8`"
           type: string
       type: object
     SetIamPolicyRequest:

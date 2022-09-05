@@ -275,7 +275,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: POS API
-  version: 8.46.0
+  version: 8.49.0
   x-apideck-api: pos
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -8227,6 +8227,60 @@ components:
         id: edge-case
         number: critical
         type: critical
+    PosBankAccount:
+      description: Card details for this payment. This field is currently not available. Reach out to our team for more info.
+      properties:
+        account_ownership_type:
+          description: |-
+            The ownership type of the bank account performing the transfer.
+            The type can be `INDIVIDUAL`, `COMPANY`, or `UNKNOWN`.
+          maxLength: 50
+          type: string
+        ach_details:
+          description: ACH-specific details about `BANK_ACCOUNT` type payments with the `transfer_type` of `ACH`.
+          properties:
+            account_number_suffix:
+              description: The last few digits of the bank account number.
+              maxLength: 4
+              type: string
+            account_type:
+              description: |-
+                The type of the bank account performing the transfer. The account type can be `CHECKING`,
+                `SAVINGS`, or `UNKNOWN`.
+              maxLength: 50
+              type: string
+            routing_number:
+              description: The routing number for the bank account.
+              maxLength: 50
+              type: string
+          type: object
+        bank_name:
+          description: The name of the bank associated with the bank account.
+          maxLength: 100
+          type: string
+        country:
+          description: country code according to ISO 3166-1 alpha-2.
+          example: US
+          maxLength: 2
+          minLength: 2
+          nullable: true
+          type: string
+        fingerprint:
+          description: |-
+            Uniquely identifies the bank account for this seller and can be used
+            to determine if payments are from the same bank account.
+          maxLength: 255
+          type: string
+        statement_description:
+          description: The statement description as sent to the bank.
+          maxLength: 1000
+          type: string
+        transfer_type:
+          description: The type of the bank transfer. The type can be `ACH` or `UNKNOWN`.
+          maxLength: 50
+          type: string
+      title: Bank Account
+      type: object
     PosPayment:
       additionalProperties: false
       properties:
@@ -8245,59 +8299,7 @@ components:
           title: Approved amount (in cents)
           type: number
         bank_account:
-          description: Card details for this payment. This field is currently not available. Reach out to our team for more info.
-          properties:
-            account_ownership_type:
-              description: |-
-                The ownership type of the bank account performing the transfer.
-                The type can be `INDIVIDUAL`, `COMPANY`, or `UNKNOWN`.
-              maxLength: 50
-              type: string
-            ach_details:
-              description: ACH-specific details about `BANK_ACCOUNT` type payments with the `transfer_type` of `ACH`.
-              properties:
-                account_number_suffix:
-                  description: The last few digits of the bank account number.
-                  maxLength: 4
-                  type: string
-                account_type:
-                  description: |-
-                    The type of the bank account performing the transfer. The account type can be `CHECKING`,
-                    `SAVINGS`, or `UNKNOWN`.
-                  maxLength: 50
-                  type: string
-                routing_number:
-                  description: The routing number for the bank account.
-                  maxLength: 50
-                  type: string
-              type: object
-            bank_name:
-              description: The name of the bank associated with the bank account.
-              maxLength: 100
-              type: string
-            country:
-              description: country code according to ISO 3166-1 alpha-2.
-              example: US
-              maxLength: 2
-              minLength: 2
-              nullable: true
-              type: string
-            fingerprint:
-              description: |-
-                Uniquely identifies the bank account for this seller and can be used
-                to determine if payments are from the same bank account.
-              maxLength: 255
-              type: string
-            statement_description:
-              description: The statement description as sent to the bank.
-              maxLength: 1000
-              type: string
-            transfer_type:
-              description: The type of the bank transfer. The type can be `ACH` or `UNKNOWN`.
-              maxLength: 50
-              type: string
-          title: Bank account
-          type: object
+          $ref: "#/components/schemas/PosBankAccount"
         card_details:
           properties:
             card:
