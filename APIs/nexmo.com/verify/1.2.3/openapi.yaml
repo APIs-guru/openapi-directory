@@ -18,7 +18,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://www.nexmo.com/terms-of-use
   title: Verify API
-  version: 1.2.1
+  version: 1.2.3
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/verify.yml
@@ -747,8 +747,11 @@ components:
           example: 32526
           type: string
         unblock_duration:
-          description: Duration the unblock will be applied in seconds
+          default: 3600
+          description: An optional duration the unblock will be applied for in seconds
           example: "3600"
+          maximum: 86400
+          minimum: 0
           required:
             - "false"
           type: integer
@@ -788,10 +791,17 @@ components:
           type: string
         invalid_parameters:
           description: Detailed payload of errors.
-          example:
-            name: unblock_duration
-            reason: Must be an integer in minutes
-          items: {}
+          items:
+            properties:
+              name:
+                description: The name of the parameter.
+                example: network
+                type: string
+              reason:
+                description: The reason for the parameter error.
+                example: Network not found
+                type: string
+            type: object
           type: array
         title:
           description: Full string text of the HTTP error code.
@@ -853,10 +863,17 @@ components:
           type: string
         invalid_parameters:
           description: Detailed payload of errors.
-          example:
-            name: network
-            reason: Network not found
-          items: {}
+          items:
+            properties:
+              name:
+                description: The name of the parameter.
+                example: network
+                type: string
+              reason:
+                description: The reason for the parameter error.
+                example: Network not found
+                type: string
+            type: object
           type: array
         title:
           description: Full string text of the HTTP error code.

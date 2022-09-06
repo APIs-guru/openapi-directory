@@ -803,6 +803,11 @@ paths:
           name: ackBundleInstallationWarning
           schema:
             type: boolean
+        - description: Device tier config (DTC) to be used for generating deliverables (APKs). Contains id of the DTC or "LATEST" for last uploaded DTC.
+          in: query
+          name: deviceTierConfigId
+          schema:
+            type: string
       responses:
         "200":
           content:
