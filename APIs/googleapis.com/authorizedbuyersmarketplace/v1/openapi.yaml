@@ -957,7 +957,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/publisherProfiles":
     get:
-      description: Lists publisher profiles
+      description: Lists publisher profiles. The returned publisher profiles aren't in any defined order. The order of the results might change. A new publisher profile can appear in any place in the list of returned results.
       operationId: authorizedbuyersmarketplace.buyers.publisherProfiles.list
       parameters:
         - description: "Required. Parent that owns the collection of publisher profiles Format: `buyers/{buyerId}`"
