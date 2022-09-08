@@ -3477,6 +3477,9 @@ components:
         desiredNodePoolId:
           description: The node pool to be upgraded. This field is mandatory if "desired_node_version", "desired_image_family" or "desired_node_pool_autoscaling" is specified and there is more than one node pool on the cluster.
           type: string
+        desiredNodePoolLoggingConfig:
+          $ref: "#/components/schemas/NodePoolLoggingConfig"
+          description: The desired node pool logging configuration defaults for the cluster.
         desiredNodeVersion:
           description: 'The Kubernetes version to change the nodes to (typically an upgrade). Users may specify either explicit versions offered by Kubernetes Engine or version aliases, which have the following behavior: - "latest": picks the highest valid Kubernetes version - "1.X": picks the highest valid patch+gke.N patch in the 1.X version - "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version - "1.X.Y-gke.N": picks an explicit Kubernetes version - "-": picks the Kubernetes master version'
           type: string
@@ -3965,6 +3968,17 @@ components:
           $ref: "#/components/schemas/LoggingComponentConfig"
           description: Logging components configuration
       type: object
+    LoggingVariantConfig:
+      description: LoggingVariantConfig specifies the behaviour of the logging component.
+      properties:
+        variant:
+          description: Logging variant deployed on nodes.
+          enum:
+            - VARIANT_UNSPECIFIED
+            - DEFAULT
+            - MAX_THROUGHPUT
+          type: string
+      type: object
     MaintenanceExclusionOptions:
       description: Represents the Maintenance exclusion option.
       properties:
@@ -4227,6 +4241,9 @@ components:
           description: "The number of local SSD disks to be attached to the node. The limit for this value is dependent upon the maximum number of disks available on a machine per zone. See: https://cloud.google.com/compute/docs/disks/local-ssd for more information."
           format: int32
           type: integer
+        loggingConfig:
+          $ref: "#/components/schemas/NodePoolLoggingConfig"
+          description: Logging configuration.
         machineType:
           description: The name of a Google Compute Engine [machine type](https://cloud.google.com/compute/docs/machine-types) If unspecified, the default machine type is `e2-medium`.
           type: string
@@ -4284,6 +4301,9 @@ components:
         gcfsConfig:
           $ref: "#/components/schemas/GcfsConfig"
           description: GCFS (Google Container File System, also known as Riptide) options.
+        loggingConfig:
+          $ref: "#/components/schemas/NodePoolLoggingConfig"
+          description: Logging configuration for node pools.
       type: object
     NodeKubeletConfig:
       description: Node kubelet configs.
@@ -4458,6 +4478,13 @@ components:
         nodeConfigDefaults:
           $ref: "#/components/schemas/NodeConfigDefaults"
           description: Subset of NodeConfig message that has defaults.
+      type: object
+    NodePoolLoggingConfig:
+      description: NodePoolLoggingConfig specifies logging configuration for nodepools.
+      properties:
+        variantConfig:
+          $ref: "#/components/schemas/LoggingVariantConfig"
+          description: Logging variant configuration.
       type: object
     NodeTaint:
       description: "Kubernetes taint is comprised of three fields: key, value, and effect. Effect can only be one of three types: NoSchedule, PreferNoSchedule or NoExecute. See [here](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration) for more information, including usage and the valid values."
@@ -5296,6 +5323,9 @@ components:
           items:
             type: string
           type: array
+        loggingConfig:
+          $ref: "#/components/schemas/NodePoolLoggingConfig"
+          description: Logging configuration.
         name:
           description: The name (project, location, cluster, node pool) of the node pool to update. Specified in the format `projects/*/locations/*/clusters/*/nodePools/*`.
           type: string

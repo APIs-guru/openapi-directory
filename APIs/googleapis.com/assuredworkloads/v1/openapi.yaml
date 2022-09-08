@@ -625,8 +625,7 @@ components:
       description: An Workload object for managing highly regulated workloads of cloud customers.
       properties:
         billingAccount:
-          description: Output only. The billing account used for the resources which are direct children of workload. This billing account is initially associated with the resources created as part of Workload creation. After the initial creation of these resources, the customer can change the assigned billing account. The resource name has the form `billingAccounts/{billing_account_id}`. For example, `billingAccounts/012345-567890-ABCDEF`.
-          readOnly: true
+          description: Optional. The billing account used for the resources which are direct children of workload. This billing account is initially associated with the resources created as part of Workload creation. After the initial creation of these resources, the customer can change the assigned billing account. The resource name has the form `billingAccounts/{billing_account_id}`. For example, `billingAccounts/012345-567890-ABCDEF`.
           type: string
         cjisSettings:
           $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1WorkloadCJISSettings"
@@ -647,6 +646,12 @@ components:
             - ITAR
             - AU_REGIONS_AND_US_SUPPORT
           type: string
+        compliantButDisallowedServices:
+          description: Output only. Urls for services which are compliant for this Assured Workload, but which are currently disallowed by the ResourceUsageRestriction org policy. Invoke RestrictAllowedResources endpoint to allow your project developers to use these services in their environment."
+          items:
+            type: string
+          readOnly: true
+          type: array
         createTime:
           description: Output only. Immutable. The Workload creation timestamp.
           format: google-datetime
@@ -845,7 +850,7 @@ components:
       description: An Workload object for managing highly regulated workloads of cloud customers.
       properties:
         billingAccount:
-          description: Input only. The billing account used for the resources which are direct children of workload. This billing account is initially associated with the resources created as part of Workload creation. After the initial creation of these resources, the customer can change the assigned billing account. The resource name has the form `billingAccounts/{billing_account_id}`. For example, `billingAccounts/012345-567890-ABCDEF`.
+          description: Optional. The billing account used for the resources which are direct children of workload. This billing account is initially associated with the resources created as part of Workload creation. After the initial creation of these resources, the customer can change the assigned billing account. The resource name has the form `billingAccounts/{billing_account_id}`. For example, `billingAccounts/012345-567890-ABCDEF`.
           type: string
         cjisSettings:
           $ref: "#/components/schemas/GoogleCloudAssuredworkloadsVersioningV1mainWorkloadCJISSettings"
@@ -870,6 +875,12 @@ components:
           $ref: "#/components/schemas/GoogleCloudAssuredworkloadsVersioningV1mainWorkloadComplianceStatus"
           description: Output only. Count of active Violations in the Workload.
           readOnly: true
+        compliantButDisallowedServices:
+          description: Output only. Urls for services which are compliant for this Assured Workload, but which are currently disallowed by the ResourceUsageRestriction org policy. Invoke RestrictAllowedResources endpoint to allow your project developers to use these services in their environment."
+          items:
+            type: string
+          readOnly: true
+          type: array
         createTime:
           description: Output only. Immutable. The Workload creation timestamp.
           format: google-datetime

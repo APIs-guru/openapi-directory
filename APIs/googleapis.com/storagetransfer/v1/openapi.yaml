@@ -231,6 +231,36 @@ paths:
       tags:
         - transferJobs
   "/v1/{jobName}":
+    delete:
+      description: Deletes a transfer job. Deleting a transfer job sets its status to DELETED.
+      operationId: storagetransfer.transferJobs.delete
+      parameters:
+        - description: Required. The job to delete.
+          in: path
+          name: jobName
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID of the Google Cloud project that owns the job.
+          in: query
+          name: projectId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - transferJobs
     get:
       description: Gets a transfer job.
       operationId: storagetransfer.transferJobs.get
@@ -1444,7 +1474,7 @@ components:
           type: string
         transferJob:
           $ref: "#/components/schemas/TransferJob"
-          description: "Required. The job to update. `transferJob` is expected to specify one or more of five fields: description, transfer_spec, notification_config, logging_config, and status. An `UpdateTransferJobRequest` that specifies other fields are rejected with the error INVALID_ARGUMENT. Updating a job status to DELETED requires `storagetransfer.jobs.delete` permissions."
+          description: "Required. The job to update. `transferJob` is expected to specify one or more of five fields: description, transfer_spec, notification_config, logging_config, and status. An `UpdateTransferJobRequest` that specifies other fields are rejected with the error INVALID_ARGUMENT. Updating a job status to DELETED requires `storagetransfer.jobs.delete` permission."
         updateTransferJobFieldMask:
           description: "The field mask of the fields in `transferJob` that are to be updated in this request. Fields in `transferJob` that can be updated are: description, transfer_spec, notification_config, logging_config, and status. To update the `transfer_spec` of the job, a complete transfer specification must be provided. An incomplete specification missing any required fields is rejected with the error INVALID_ARGUMENT."
           format: google-fieldmask

@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://metastore.googleapis.com/$discovery/rest?version=v1alpha
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: metastore
 externalDocs:
@@ -1720,7 +1720,7 @@ components:
           description: Output only. The metadata management activities of the metastore service.
           readOnly: true
         name:
-          description: Immutable. The relative resource name of the metastore service, of the form:projects/{project_number}/locations/{location_id}/services/{service_id}.
+          description: Immutable. The relative resource name of the metastore service, in the following format:projects/{project_number}/locations/{location_id}/services/{service_id}.
           type: string
         network:
           description: Immutable. The relative resource name of the VPC network on which the instance can be accessed. It is specified in the following form:projects/{project_number}/global/networks/{network_id}.
