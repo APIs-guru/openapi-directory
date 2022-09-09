@@ -164,7 +164,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 8.52.0
+  version: 8.52.1
   x-apideck-api: vault
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -3090,7 +3090,7 @@ components:
       properties:
         detail:
           description: Contains parameter or domain specific information related to the error and why it occurred.
-          example: State did not include unified_api
+          example: Unprocessable request, please verify your request headers and body.
           type: string
         error:
           description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)

@@ -275,7 +275,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: HRIS API
-  version: 8.52.0
+  version: 8.52.1
   x-apideck-api: hris
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -2503,7 +2503,7 @@ components:
           $ref: "#/components/schemas/UnifiedId"
         operation:
           description: Operation performed
-          example: one
+          example: add
           type: string
         resource:
           description: Unified API resource name
@@ -2535,7 +2535,7 @@ components:
           $ref: "#/components/schemas/UnifiedId"
         operation:
           description: Operation performed
-          example: one
+          example: add
           type: string
         resource:
           description: Unified API resource name
@@ -2567,7 +2567,7 @@ components:
           $ref: "#/components/schemas/UnifiedId"
         operation:
           description: Operation performed
-          example: one
+          example: add
           type: string
         resource:
           description: Unified API resource name
@@ -3218,7 +3218,7 @@ components:
           $ref: "#/components/schemas/UnifiedId"
         operation:
           description: Operation performed
-          example: one
+          example: delete
           type: string
         resource:
           description: Unified API resource name
@@ -3250,7 +3250,7 @@ components:
           $ref: "#/components/schemas/UnifiedId"
         operation:
           description: Operation performed
-          example: one
+          example: delete
           type: string
         resource:
           description: Unified API resource name
@@ -3282,7 +3282,7 @@ components:
           $ref: "#/components/schemas/UnifiedId"
         operation:
           description: Operation performed
-          example: one
+          example: delete
           type: string
         resource:
           description: Unified API resource name
@@ -3935,10 +3935,46 @@ components:
       additionalProperties: false
       example:
         company_id: "1234"
+        email: elon@tesla.com
+        employment_status: active
+        first_name: Elon
+        last_name: Musk
+        manager_id: "1234"
+        title: Manager
       properties:
         company_id:
           description: Company ID to filter on
           example: "1234"
+          type: string
+        email:
+          description: Email to filter on
+          example: elon@tesla.com
+          type: string
+        employment_status:
+          description: Employment status to filter on
+          enum:
+            - active
+            - inactive
+            - terminated
+            - other
+          example: active
+          type: string
+          x-graphql-type-name: EmploymentStatusFilter
+        first_name:
+          description: First Name to filter on
+          example: Elon
+          type: string
+        last_name:
+          description: Last Name to filter on
+          example: Musk
+          type: string
+        manager_id:
+          description: Manager id to filter on
+          example: "1234"
+          type: string
+        title:
+          description: Job title to filter on
+          example: Manager
           type: string
       type: object
       x-graphql-type-name: EmployeesFilter
@@ -4003,7 +4039,7 @@ components:
           $ref: "#/components/schemas/Meta"
         operation:
           description: Operation performed
-          example: one
+          example: all
           type: string
         resource:
           description: Unified API resource name
@@ -4069,7 +4105,7 @@ components:
           $ref: "#/components/schemas/EmployeePayrolls"
         operation:
           description: Operation performed
-          example: one
+          example: all
           type: string
         resource:
           description: Unified API resource name
@@ -4135,7 +4171,7 @@ components:
           $ref: "#/components/schemas/EmployeeSchedules"
         operation:
           description: Operation performed
-          example: one
+          example: all
           type: string
         resource:
           description: Unified API resource name
@@ -4174,7 +4210,7 @@ components:
           $ref: "#/components/schemas/Meta"
         operation:
           description: Operation performed
-          example: one
+          example: all
           type: string
         resource:
           description: Unified API resource name
@@ -4213,7 +4249,7 @@ components:
           $ref: "#/components/schemas/Meta"
         operation:
           description: Operation performed
-          example: one
+          example: all
           type: string
         resource:
           description: Unified API resource name
@@ -4312,7 +4348,7 @@ components:
           $ref: "#/components/schemas/HrisJobs"
         operation:
           description: Operation performed
-          example: one
+          example: all
           type: string
         resource:
           description: Unified API resource name
@@ -4380,7 +4416,7 @@ components:
           type: array
         operation:
           description: Operation performed
-          example: one
+          example: all
           type: string
         resource:
           description: Unified API resource name
@@ -5177,7 +5213,7 @@ components:
       properties:
         detail:
           description: Contains parameter or domain specific information related to the error and why it occurred.
-          example: State did not include unified_api
+          example: Unprocessable request, please verify your request headers and body.
           type: string
         error:
           description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
@@ -5205,7 +5241,7 @@ components:
           $ref: "#/components/schemas/UnifiedId"
         operation:
           description: Operation performed
-          example: one
+          example: update
           type: string
         resource:
           description: Unified API resource name
@@ -5237,7 +5273,7 @@ components:
           $ref: "#/components/schemas/UnifiedId"
         operation:
           description: Operation performed
-          example: one
+          example: update
           type: string
         resource:
           description: Unified API resource name
@@ -5269,7 +5305,7 @@ components:
           $ref: "#/components/schemas/UnifiedId"
         operation:
           description: Operation performed
-          example: one
+          example: update
           type: string
         resource:
           description: Unified API resource name

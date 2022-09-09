@@ -275,7 +275,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: File storage API
-  version: 8.52.0
+  version: 8.52.1
   x-apideck-api: file-storage
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -2442,7 +2442,7 @@ components:
           $ref: "#/components/schemas/UnifiedId"
         operation:
           description: Operation performed
-          example: one
+          example: add
           type: string
         resource:
           description: Unified API resource name
@@ -2474,7 +2474,7 @@ components:
           $ref: "#/components/schemas/UnifiedId"
         operation:
           description: Operation performed
-          example: one
+          example: add
           type: string
         resource:
           description: Unified API resource name
@@ -2527,7 +2527,7 @@ components:
           $ref: "#/components/schemas/UnifiedId"
         operation:
           description: Operation performed
-          example: one
+          example: add
           type: string
         resource:
           description: Unified API resource name
@@ -2582,7 +2582,7 @@ components:
           $ref: "#/components/schemas/UnifiedId"
         operation:
           description: Operation performed
-          example: one
+          example: add
           type: string
         resource:
           description: Unified API resource name
@@ -2614,7 +2614,7 @@ components:
           $ref: "#/components/schemas/UnifiedId"
         operation:
           description: Operation performed
-          example: one
+          example: add
           type: string
         resource:
           description: Unified API resource name
@@ -2710,7 +2710,7 @@ components:
           $ref: "#/components/schemas/UnifiedId"
         operation:
           description: Operation performed
-          example: one
+          example: delete
           type: string
         resource:
           description: Unified API resource name
@@ -2742,7 +2742,7 @@ components:
           $ref: "#/components/schemas/UnifiedId"
         operation:
           description: Operation performed
-          example: one
+          example: delete
           type: string
         resource:
           description: Unified API resource name
@@ -2774,7 +2774,7 @@ components:
           $ref: "#/components/schemas/UnifiedId"
         operation:
           description: Operation performed
-          example: one
+          example: delete
           type: string
         resource:
           description: Unified API resource name
@@ -2806,7 +2806,7 @@ components:
           $ref: "#/components/schemas/UnifiedId"
         operation:
           description: Operation performed
-          example: one
+          example: delete
           type: string
         resource:
           description: Unified API resource name
@@ -2838,7 +2838,7 @@ components:
           $ref: "#/components/schemas/UnifiedId"
         operation:
           description: Operation performed
-          example: one
+          example: delete
           type: string
         resource:
           description: Unified API resource name
@@ -3160,7 +3160,7 @@ components:
           $ref: "#/components/schemas/Meta"
         operation:
           description: Operation performed
-          example: one
+          example: all
           type: string
         resource:
           description: Unified API resource name
@@ -3232,7 +3232,7 @@ components:
           $ref: "#/components/schemas/Meta"
         operation:
           description: Operation performed
-          example: one
+          example: all
           type: string
         resource:
           description: Unified API resource name
@@ -3304,7 +3304,7 @@ components:
           $ref: "#/components/schemas/Meta"
         operation:
           description: Operation performed
-          example: one
+          example: all
           type: string
         resource:
           description: Unified API resource name
@@ -3376,7 +3376,7 @@ components:
           $ref: "#/components/schemas/Meta"
         operation:
           description: Operation performed
-          example: one
+          example: all
           type: string
         resource:
           description: Unified API resource name
@@ -3448,7 +3448,7 @@ components:
           $ref: "#/components/schemas/Meta"
         operation:
           description: Operation performed
-          example: one
+          example: all
           type: string
         resource:
           description: Unified API resource name
@@ -3927,7 +3927,7 @@ components:
       properties:
         detail:
           description: Contains parameter or domain specific information related to the error and why it occurred.
-          example: State did not include unified_api
+          example: Unprocessable request, please verify your request headers and body.
           type: string
         error:
           description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
@@ -3955,7 +3955,7 @@ components:
           $ref: "#/components/schemas/UnifiedId"
         operation:
           description: Operation performed
-          example: one
+          example: update
           type: string
         resource:
           description: Unified API resource name
@@ -3987,7 +3987,7 @@ components:
           $ref: "#/components/schemas/UnifiedId"
         operation:
           description: Operation performed
-          example: one
+          example: update
           type: string
         resource:
           description: Unified API resource name
@@ -4019,7 +4019,7 @@ components:
           $ref: "#/components/schemas/UnifiedId"
         operation:
           description: Operation performed
-          example: one
+          example: update
           type: string
         resource:
           description: Unified API resource name
@@ -4067,7 +4067,7 @@ components:
           $ref: "#/components/schemas/UnifiedId"
         operation:
           description: Operation performed
-          example: one
+          example: update
           type: string
         resource:
           description: Unified API resource name
@@ -4099,7 +4099,7 @@ components:
           $ref: "#/components/schemas/UnifiedId"
         operation:
           description: Operation performed
-          example: one
+          example: update
           type: string
         resource:
           description: Unified API resource name

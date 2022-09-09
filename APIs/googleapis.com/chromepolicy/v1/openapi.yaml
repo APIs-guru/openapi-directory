@@ -780,8 +780,7 @@ components:
       description: Provides detailed information for a particular field that is part of a PolicySchema.
       properties:
         description:
-          description: Output only. The description for the field.
-          readOnly: true
+          description: Deprecated. Use name and field_description instead. The description for the field.
           type: string
         field:
           description: Output only. The name of the field for associated with this description.
@@ -793,6 +792,10 @@ components:
             $ref: "#/components/schemas/GoogleChromePolicyV1PolicySchemaFieldDependencies"
           readOnly: true
           type: array
+        fieldDescription:
+          description: Output only. The description of the field.
+          readOnly: true
+          type: string
         inputConstraint:
           description: Output only. Any input constraints associated on the values for the field.
           readOnly: true
@@ -803,6 +806,10 @@ components:
             $ref: "#/components/schemas/GoogleChromePolicyV1PolicySchemaFieldKnownValueDescription"
           readOnly: true
           type: array
+        name:
+          description: Output only. The name of the field.
+          readOnly: true
+          type: string
         nestedFieldDescriptions:
           description: Output only. Provides the description of the fields nested in this field, if the field is a message type that defines multiple fields.
           items:
