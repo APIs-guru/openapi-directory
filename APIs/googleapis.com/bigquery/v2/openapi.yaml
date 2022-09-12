@@ -3532,11 +3532,6 @@ components:
         clustering:
           $ref: "#/components/schemas/Clustering"
           description: "[Beta] Clustering specification for the destination table. Must be specified with time-based partitioning, data in the table will be first partitioned and subsequently clustered."
-        connectionProperties:
-          description: Connection properties.
-          items:
-            $ref: "#/components/schemas/ConnectionProperty"
-          type: array
         createDisposition:
           description: "[Optional] Specifies whether the job is allowed to create new tables. The following values are supported: CREATE_IF_NEEDED: If the table does not exist, BigQuery creates the table. CREATE_NEVER: The table must already exist. If it does not, a 'notFound' error is returned in the job result. The default value is CREATE_IF_NEEDED. Creation, truncation and append actions occur as one atomic update upon job completion."
           type: string
@@ -4733,7 +4728,6 @@ components:
             - LANGUAGE_UNSPECIFIED
             - SQL
             - JAVASCRIPT
-            - PYTHON
           type: string
         lastModifiedTime:
           description: Output only. The time when this routine was last modified, in milliseconds since the epoch.
@@ -4978,7 +4972,7 @@ components:
           type: string
       type: object
     StandardSqlDataType:
-      description: 'The data type of a variable such as a function argument. Examples include: * INT64: `{"typeKind": "INT64"}` * ARRAY: { "typeKind": "ARRAY", "arrayElementType": {"typeKind": "STRING"} } * STRUCT>: { "typeKind": "STRUCT", "structType": { "fields": [ { "name": "x", "type": {"typeKind": "STRING"} }, { "name": "y", "type": { "typeKind": "ARRAY", "arrayElementType": {"typeKind": "DATE"} } } ] } }'
+      description: 'The data type of a variable such as a function argument. Examples include: * INT64: `{"typeKind": "INT64"}` * ARRAY: { "typeKind": "ARRAY", "arrayElementType": {"typeKind": "STRING"} } * STRUCT>: { "typeKind": "STRUCT", "structType": { "fields": [ { "name": "x", "type": {"typeKind: "STRING"} }, { "name": "y", "type": { "typeKind": "ARRAY", "arrayElementType": {"typekind": "DATE"} } } ] } }'
       properties:
         arrayElementType:
           $ref: "#/components/schemas/StandardSqlDataType"

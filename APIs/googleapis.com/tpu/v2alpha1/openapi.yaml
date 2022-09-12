@@ -1068,6 +1068,9 @@ components:
         serviceAccount:
           $ref: "#/components/schemas/ServiceAccount"
           description: The Google Cloud Platform Service Account to be used by the TPU node VMs. If None is specified, the default compute service account will be used.
+        shieldedInstanceConfig:
+          $ref: "#/components/schemas/ShieldedInstanceConfig"
+          description: Shielded Instance options.
         state:
           description: Output only. The current state for the TPU Node.
           enum:
@@ -1188,6 +1191,13 @@ components:
         email:
           description: The email address of the service identity.
           type: string
+      type: object
+    ShieldedInstanceConfig:
+      description: A set of Shielded Instance options.
+      properties:
+        enableSecureBoot:
+          description: Defines whether the instance has Secure Boot enabled.
+          type: boolean
       type: object
     SimulateMaintenanceEventRequest:
       description: Request for SimulateMaintenanceEvent.

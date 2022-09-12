@@ -1022,7 +1022,7 @@ components:
           description: If set, there are more responses. To get the next page of responses, provide this as `page_token` in a future request.
           type: string
         responses:
-          description: The returned responses.
+          description: "The returned form responses. Note: The `formId` field is not returned in the `FormResponse` object for list requests."
           items:
             $ref: "#/components/schemas/FormResponse"
           type: array

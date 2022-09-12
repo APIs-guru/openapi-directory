@@ -13,20 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Tasks API
   version: v2beta2
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://cloudtasks.googleapis.com/$discovery/rest?version=v2beta2
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: cloudtasks
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/tasks/
 tags:
@@ -653,7 +650,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2beta2/{parent}/tasks:buffer":
+  "/v2beta2/{parent}/tasks/{taskId}:buffer":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -667,12 +664,18 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Creates and buffers a new task without the need to explicitly define a Task message. The queue must have HTTP target. Note: This feature is in its experimental stage. You must request access to the API through the [Cloud Tasks BufferTasks Experiment Signup form](https://forms.gle/X8Zr5hiXH5tTGFqh8)."
+      description: "Creates and buffers a new task without the need to explicitly define a Task message. The queue must have HTTP target. To create the task with a custom ID, use the following format and set TASK_ID to your desired ID: projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID:buffer To create the task with an automatically generated ID, use the following format: projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks:buffer. Note: This feature is in its experimental stage. You must request access to the API through the [Cloud Tasks BufferTask Experiment Signup form](https://forms.gle/X8Zr5hiXH5tTGFqh8)."
       operationId: cloudtasks.projects.locations.queues.tasks.buffer
       parameters:
         - description: "Required. The parent queue name. For example: projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID` The queue must already exist."
           in: path
           name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Task ID for the task being created. If not provided, a random task ID is assigned to the task.
+          in: path
+          name: taskId
           required: true
           schema:
             type: string
@@ -1040,7 +1043,7 @@ components:
       properties:
         body:
           $ref: "#/components/schemas/HttpBody"
-          description: Optional. Body of the HTTP request. The body can take any generic value. The value will be written to the HttpRequest of the [Task].
+          description: Optional. Body of the HTTP request. The body can take any generic value. The value is written to the HttpRequest of the [Task].
       type: object
     BufferTaskResponse:
       description: Response message for BufferTask.
@@ -1651,5 +1654,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

@@ -1681,6 +1681,10 @@ components:
         parent:
           description: 'The relative resource name of the source the finding belongs to. See: https://cloud.google.com/apis/design/resource_names#relative_resource_name This field is immutable after creation time. For example: "organizations/{organization_id}/sources/{source_id}"'
           type: string
+        parentDisplayName:
+          description: Output only. The human readable display name of the finding source such as "Event Threat Detection" or "Security Health Analytics"
+          readOnly: true
+          type: string
         processes:
           description: Represents operating system processes associated with the Finding.
           items:
@@ -1900,6 +1904,27 @@ components:
         type:
           description: The full resource type of the resource.
           type: string
+      type: object
+    GoogleCloudSecuritycenterV1ResourceValueConfig:
+      description: A resource value config is a mapping configuration of user's tag values to resource values. Used by the attack path simulation.
+      properties:
+        name:
+          description: Name for the resource value config
+          type: string
+        resourceValue:
+          description: Required. Resource value level this expression represents
+          enum:
+            - RESOURCE_VALUE_UNSPECIFIED
+            - HIGH
+            - MEDIUM
+            - LOW
+            - NONE
+          type: string
+        tagValues:
+          description: Required. Tag values combined with AND to check against. Values in the form "tagValues/123" E.g. [ "tagValues/123", "tagValues/456", "tagValues/789" ] https://cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing
+          items:
+            type: string
+          type: array
       type: object
     GoogleCloudSecuritycenterV1RunAssetDiscoveryResponse:
       description: Response of asset discovery run
