@@ -939,7 +939,7 @@ paths:
           name: requestOptions.debugOptions.enableDebugging
           schema:
             type: boolean
-        - description: The BCP-47 language code, such as "en-US" or "sr-Latn". For more information, see http://www.unicode.org/reports/tr35/#Unicode_locale_identifier. For translations. Set this field using the language set in browser or for the page. In the event that the user's language preference is known, set this field to the known user language. When specified, the documents in search results are biased towards the specified language. From Suggest API perspective, for 3p suggest this is used as a hint while making predictions to add language boosting.
+        - description: The BCP-47 language code, such as "en-US" or "sr-Latn". For more information, see http://www.unicode.org/reports/tr35/#Unicode_locale_identifier. For translations. Set this field using the language set in browser or for the page. In the event that the user's language preference is known, set this field to the known user language. When specified, the documents in search results are biased towards the specified language. The suggest API does not use this parameter. Instead, suggest autocompletes only based on characters in the query.
           in: query
           name: requestOptions.languageCode
           schema:
@@ -2640,7 +2640,6 @@ components:
             - CONTACTS_APP
             - ACTIVITY_FEED_APP
             - DRIVE_APP
-            - CHAT_IN_MEET_APP
           type: string
         id:
           description: Numeric identifier of the App. Set to Project number for 1/3P Apps. For Webhook, this is WebhookId. Determined & set by the 1P API from App credentials on the side channel.
@@ -3821,35 +3820,6 @@ components:
             - PERMANENT
             - EPHEMERAL_ONE_DAY
           type: string
-      type: object
-    AppsDynamiteSharedSegmentedMembershipCount:
-      description: "Contains info on membership count for member types: HUMAN_USER, BOT_USER & ROSTER_MEMBER different states: INVITED, JOINED"
-      properties:
-        memberType:
-          enum:
-            - MEMBER_TYPE_UNSPECIFIED
-            - HUMAN_USER
-            - ROSTER_MEMBER
-          type: string
-        membershipCount:
-          description: count of members with given type and state
-          format: int32
-          type: integer
-        membershipState:
-          enum:
-            - MEMBER_UNKNOWN
-            - MEMBER_INVITED
-            - MEMBER_JOINED
-            - MEMBER_NOT_A_MEMBER
-            - MEMBER_FAILED
-          type: string
-      type: object
-    AppsDynamiteSharedSegmentedMembershipCounts:
-      properties:
-        value:
-          items:
-            $ref: "#/components/schemas/AppsDynamiteSharedSegmentedMembershipCount"
-          type: array
       type: object
     AppsDynamiteSharedSelectionInput:
       description: A widget that creates a UI item (for example, a drop-down list) with options for users to select.
@@ -6718,7 +6688,7 @@ components:
           type: string
       type: object
     GoogleDocsMetadata:
-      description: "The corpus specific metadata for office-type documents, from Google Docs and other sources. This message is passed to the scorer and beyond. Next tag: 9"
+      description: "The corpus specific metadata for office-type documents, from Google Docs and other sources. This message is passed to the scorer and beyond. Next tag: 7"
       properties:
         aclInfo:
           $ref: "#/components/schemas/AclInfo"
@@ -6751,14 +6721,6 @@ components:
           description: The last time this document was modified, in seconds since epoch. Only counts content modifications.
           format: int64
           type: string
-        numSubscribers:
-          description: Contains number of subscribers for the document.
-          format: int32
-          type: integer
-        numViewers:
-          description: Size of untruncated viewers list.
-          format: int32
-          type: integer
         resultInfo:
           $ref: "#/components/schemas/GoogleDocsResultInfo"
           description: "Additional per-result information, akin to Gmail's SingleThreadResponse. Note: GWS no longer seems to use this field, but there's still one reference to it for Scribe, so we can't remove it."
@@ -9238,7 +9200,7 @@ components:
           $ref: "#/components/schemas/DebugOptions"
           description: Debug options of the request
         languageCode:
-          description: The BCP-47 language code, such as "en-US" or "sr-Latn". For more information, see http://www.unicode.org/reports/tr35/#Unicode_locale_identifier. For translations. Set this field using the language set in browser or for the page. In the event that the user's language preference is known, set this field to the known user language. When specified, the documents in search results are biased towards the specified language. From Suggest API perspective, for 3p suggest this is used as a hint while making predictions to add language boosting.
+          description: The BCP-47 language code, such as "en-US" or "sr-Latn". For more information, see http://www.unicode.org/reports/tr35/#Unicode_locale_identifier. For translations. Set this field using the language set in browser or for the page. In the event that the user's language preference is known, set this field to the known user language. When specified, the documents in search results are biased towards the specified language. The suggest API does not use this parameter. Instead, suggest autocompletes only based on characters in the query.
           type: string
         searchApplicationId:
           description: The ID generated when you create a search application using the [admin console](https://support.google.com/a/answer/9043922).
@@ -9422,9 +9384,6 @@ components:
             - ROSTER_ACTIVE
             - ROSTER_DELETED
           type: string
-        segmentedMembershipCounts:
-          $ref: "#/components/schemas/AppsDynamiteSharedSegmentedMembershipCounts"
-          description: Roster membership count. May contain counts based on member type and membership state.
       type: object
     RosterId:
       description: Primary key for Roster resource.

@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://realtimebidding.googleapis.com/$discovery/rest?version=v1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: realtimebidding
 externalDocs:
@@ -455,7 +455,7 @@ paths:
       description: Lists creatives as they are at the time of the initial request. This call may take multiple hours to complete. For large, paginated requests, this method returns a snapshot of creatives at the time of request for the first page. `lastStatusUpdate` and `creativeServingDecision` may be outdated for creatives on sequential pages. We recommend [Google Cloud Pub/Sub](//cloud.google.com/pubsub/docs/overview) to view the latest status.
       operationId: realtimebidding.buyers.creatives.list
       parameters:
-        - description: "Required. Name of the parent buyer that owns the creatives. The pattern for this resource is either `buyers/{buyerAccountId}` or `bidders/{bidderAccountId}`. For `buyers/{buyerAccountId}`, the `buyerAccountId` can be one of the following: 1. The ID of the buyer that is accessing their own creatives. 2. The ID of the child seat buyer under a bidder account. So for listing creatives pertaining to the child seat buyer (`456`) under bidder account (`123`), you would use the pattern: `buyers/456`. 3. The ID of the bidder itself. So for listing creatives pertaining to bidder (`123`), you would use `buyers/123`. If you want to access all creatives pertaining to both the bidder and all of its child seat accounts, you would use `bidders/{bidderAccountId}`, e.g., for all creatives pertaining to bidder (`123`), use `bidders/123`."
+        - description: "Required. Name of the parent buyer that owns the creatives. The pattern for this resource is either `buyers/{buyerAccountId}` or `bidders/{bidderAccountId}`. For `buyers/{buyerAccountId}`, the `buyerAccountId` can be one of the following: 1. The ID of the buyer that is accessing their own creatives. 2. The ID of the child seat buyer under a bidder account. So for listing creatives pertaining to the child seat buyer (`456`) under bidder account (`123`), you would use the pattern: `buyers/456`. 3. The ID of the bidder itself. So for listing creatives pertaining to bidder (`123`), you would use `buyers/123`. If you want to access all creatives pertaining to both the bidder and all of its child seat accounts, you would use `bidders/{bidderAccountId}`, for example, for all creatives pertaining to bidder (`123`), use `bidders/123`."
           in: path
           name: parent
           required: true
@@ -466,7 +466,7 @@ paths:
           name: filter
           schema:
             type: string
-        - description: Requested page size. The server may return fewer creatives than requested (due to timeout constraint) even if more are available via another call. If unspecified, server will pick an appropriate default. Acceptable values are 1 to 1000, inclusive.
+        - description: Requested page size. The server may return fewer creatives than requested (due to timeout constraint) even if more are available through another call. If unspecified, server will pick an appropriate default. Acceptable values are 1 to 1000, inclusive.
           in: query
           name: pageSize
           schema:
@@ -726,7 +726,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. The server may return fewer results than requested (due to timeout constraint) even if more are available via another call. If unspecified, the server will pick an appropriate default. Acceptable values are 1 to 5000, inclusive.
+        - description: Requested page size. The server may return fewer results than requested (due to timeout constraint) even if more are available through another call. If unspecified, the server will pick an appropriate default. Acceptable values are 1 to 5000, inclusive.
           in: query
           name: pageSize
           schema:
@@ -1391,7 +1391,7 @@ components:
       description: Bidder settings.
       properties:
         bypassNonguaranteedDealsPretargeting:
-          description: Output only. A flag to bypass pretargeting for private auctions and preferred deals. When true, bid requests from these nonguaranteed deals will always be sent. When false, bid requests will be subject to regular pretargeting configurations. Programmatic Guaranteed deals will always be sent to the bidder, regardless of the value for this flag. Auction packages are not impacted by this value and are subject to the regular pretargeting configurations.
+          description: Output only. An option to bypass pretargeting for private auctions and preferred deals. When true, bid requests from these nonguaranteed deals will always be sent. When false, bid requests will be subject to regular pretargeting configurations. Programmatic Guaranteed deals will always be sent to the bidder, regardless of the value for this flag. Auction packages are not impacted by this value and are subject to the regular pretargeting configurations.
           readOnly: true
           type: boolean
         cookieMatchingNetworkId:
@@ -1415,7 +1415,7 @@ components:
       description: RTB Buyer account information.
       properties:
         activeCreativeCount:
-          description: Output only. The number of creatives that this buyer submitted via the API or bid with in the last 30 days. This is counted against the maximum number of active creatives.
+          description: Output only. The number of creatives that this buyer submitted through the API or bid with in the last 30 days. This is counted against the maximum number of active creatives.
           format: int64
           readOnly: true
           type: string
@@ -1466,7 +1466,7 @@ components:
           format: int64
           type: string
         apiUpdateTime:
-          description: Output only. The last update timestamp of the creative via API.
+          description: Output only. The last update timestamp of the creative through the API.
           format: google-datetime
           readOnly: true
           type: string
@@ -1757,7 +1757,7 @@ components:
           description: The full non-working URL.
           type: string
         httpError:
-          description: HTTP error code (e.g. 404 or 5xx)
+          description: HTTP error code (for example, 404 or 5xx)
           format: int32
           type: integer
         invalidPage:
@@ -1807,7 +1807,7 @@ components:
       description: Number of HTTP calls made by a creative, broken down by domain.
       properties:
         topHttpCallDomains:
-          description: Breakdown of the most frequent domains called via HTTP by the creative.
+          description: Breakdown of the most frequent domains called through HTTP by the creative.
           items:
             $ref: "#/components/schemas/DomainCalls"
           type: array
@@ -2123,7 +2123,7 @@ components:
       description: Policy compliance of the creative for a transaction type or a region.
       properties:
         status:
-          description: Serving status for the given transaction type (e.g., open auction, deals) or region (e.g., China, Russia). Can be used to filter the response of the creatives.list method.
+          description: Serving status for the given transaction type (for example, open auction, deals) or region (for example, China, Russia). Can be used to filter the response of the creatives.list method.
           enum:
             - STATUS_UNSPECIFIED
             - PENDING_REVIEW
@@ -2132,7 +2132,7 @@ components:
             - CERTIFICATE_REQUIRED
           type: string
         topics:
-          description: Topics related to the policy compliance for this transaction type (e.g., open auction, deals) or region (e.g., China, Russia). Topics may be present only if status is DISAPPROVED.
+          description: Topics related to the policy compliance for this transaction type (for example, open auction, deals) or region (for example, China, Russia). Topics may be present only if status is DISAPPROVED.
           items:
             $ref: "#/components/schemas/PolicyTopicEntry"
           type: array
@@ -2512,7 +2512,7 @@ components:
       description: A response for the request to receive push notification when a bidder's creatives change status.
       properties:
         subscription:
-          description: The Pub/Sub subscription that can be used to pull creative status notifications. This would be of the format `projects/{project_id}/subscriptions/{subscription_id}`. Subscription is created with pull delivery. All service accounts belonging to the bidder will have read access to this subscription. Subscriptions that are inactive for more than 90 days will be disabled. Please use watchCreatives to re-enable the subscription.
+          description: The Pub/Sub subscription that can be used to pull creative status notifications. This would be of the format `projects/{project_id}/subscriptions/{subscription_id}`. Subscription is created with pull delivery. All service accounts belonging to the bidder will have read access to this subscription. Subscriptions that are inactive for more than 90 days will be disabled. Use watchCreatives to re-enable the subscription.
           type: string
         topic:
           description: The Pub/Sub topic that will be used to publish creative serving status notifications. This would be of the format `projects/{project_id}/topics/{topic_id}`.

@@ -396,7 +396,7 @@ paths:
         - enterprises
   "/androidenterprise/v1/enterprises/{enterpriseId}/groupLicenses":
     get:
-      description: Retrieves IDs of all products for which the enterprise has a group license.
+      description: Retrieves IDs of all products for which the enterprise has a group license. **Note:** This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
       operationId: androidenterprise.grouplicenses.list
       parameters:
         - description: The ID of the enterprise.
@@ -433,7 +433,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/androidenterprise/v1/enterprises/{enterpriseId}/groupLicenses/{groupLicenseId}":
     get:
-      description: Retrieves details of an enterprise's group license for a product.
+      description: Retrieves details of an enterprise's group license for a product. **Note:** This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
       operationId: androidenterprise.grouplicenses.get
       parameters:
         - description: The ID of the enterprise.
@@ -476,7 +476,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/androidenterprise/v1/enterprises/{enterpriseId}/groupLicenses/{groupLicenseId}/users":
     get:
-      description: Retrieves the IDs of the users who have been granted entitlements under the license.
+      description: Retrieves the IDs of the users who have been granted entitlements under the license. **Note:** This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
       operationId: androidenterprise.grouplicenseusers.list
       parameters:
         - description: The ID of the enterprise.
@@ -519,7 +519,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/androidenterprise/v1/enterprises/{enterpriseId}/products":
     get:
-      description: Finds approved products that match a query, or all approved products if there is no query.
+      description: "Finds approved products that match a query, or all approved products if there is no query. **Note:** This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations. "
       operationId: androidenterprise.products.list
       parameters:
         - description: The ID of the enterprise.
@@ -689,7 +689,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: " Approves the specified product and the relevant app permissions, if any. The maximum number of products that you can approve per enterprise customer is 1,000. To learn how to use managed Google Play to design and create a store layout to display approved products to your users, see Store Layout Design. "
+      description: " Approves the specified product and the relevant app permissions, if any. The maximum number of products that you can approve per enterprise customer is 1,000. To learn how to use managed Google Play to design and create a store layout to display approved products to your users, see Store Layout Design. **Note:** This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations. "
       operationId: androidenterprise.products.approve
       parameters:
         - description: The ID of the enterprise.
@@ -733,7 +733,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Generates a URL that can be rendered in an iframe to display the permissions (if any) of a product. An enterprise admin must view these permissions and accept them on behalf of their organization in order to approve that product. Admins should accept the displayed permissions by interacting with a separate UI element in the EMM console, which in turn should trigger the use of this URL as the approvalUrlInfo.approvalUrl property in a Products.approve call to approve the product. This URL can only be used to display permissions for up to 1 day.
+      description: "Generates a URL that can be rendered in an iframe to display the permissions (if any) of a product. An enterprise admin must view these permissions and accept them on behalf of their organization in order to approve that product. Admins should accept the displayed permissions by interacting with a separate UI element in the EMM console, which in turn should trigger the use of this URL as the approvalUrlInfo.approvalUrl property in a Products.approve call to approve the product. This URL can only be used to display permissions for up to 1 day. **Note:** This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations. "
       operationId: androidenterprise.products.generateApprovalUrl
       parameters:
         - description: The ID of the enterprise.
@@ -867,7 +867,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Unapproves the specified product (and the relevant app permissions, if any)
+      description: Unapproves the specified product (and the relevant app permissions, if any) **Note:** This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
       operationId: androidenterprise.products.unapprove
       parameters:
         - description: The ID of the enterprise.
@@ -1769,7 +1769,7 @@ paths:
         - users
   "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/availableProductSet":
     get:
-      description: Retrieves the set of products a user is entitled to access.
+      description: Retrieves the set of products a user is entitled to access. **Note:** This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
       operationId: androidenterprise.users.getAvailableProductSet
       parameters:
         - description: The ID of the enterprise.
@@ -1811,7 +1811,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     put:
-      description: Modifies the set of products that a user is entitled to access (referred to as *whitelisted* products). Only products that are approved or products that were previously approved (products with revoked approval) can be whitelisted.
+      description: Modifies the set of products that a user is entitled to access (referred to as *whitelisted* products). Only products that are approved or products that were previously approved (products with revoked approval) can be whitelisted. **Note:** This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
       operationId: androidenterprise.users.setAvailableProductSet
       parameters:
         - description: The ID of the enterprise.
@@ -2537,7 +2537,7 @@ paths:
         - devices
   "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/entitlements":
     get:
-      description: Lists all entitlements for the specified user. Only the ID is set.
+      description: Lists all entitlements for the specified user. Only the ID is set. **Note:** This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
       operationId: androidenterprise.entitlements.list
       parameters:
         - description: The ID of the enterprise.
@@ -2580,7 +2580,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/entitlements/{entitlementId}":
     delete:
-      description: Removes an entitlement to an app for a user.
+      description: Removes an entitlement to an app for a user. **Note:** This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
       operationId: androidenterprise.entitlements.delete
       parameters:
         - description: The ID of the enterprise.
@@ -2612,7 +2612,7 @@ paths:
       tags:
         - entitlements
     get:
-      description: Retrieves details of an entitlement.
+      description: Retrieves details of an entitlement. **Note:** This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
       operationId: androidenterprise.entitlements.get
       parameters:
         - description: The ID of the enterprise.
@@ -2660,7 +2660,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     put:
-      description: Adds or updates an entitlement to an app for a user.
+      description: Adds or updates an entitlement to an app for a user. **Note:** This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
       operationId: androidenterprise.entitlements.update
       parameters:
         - description: The ID of the enterprise.

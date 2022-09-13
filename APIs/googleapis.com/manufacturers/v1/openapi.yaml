@@ -343,7 +343,7 @@ components:
           type: string
         grocery:
           $ref: "#/components/schemas/Grocery"
-          description: Grocery Attributes. For more information, see go/mfc-nutrition-attributes.
+          description: Grocery Attributes. See more at https://support.google.com/manufacturers/answer/12098458#grocery.
         gtin:
           description: The Global Trade Item Number (GTIN) of the product. For more information, see https://support.google.com/manufacturers/answer/6124116#gtin.
           items:
@@ -368,7 +368,7 @@ components:
           type: string
         nutrition:
           $ref: "#/components/schemas/Nutrition"
-          description: Nutrition Attributes. For more information, see go/mfc-nutrition-attributes.
+          description: Nutrition Attributes. See more at https://support.google.com/manufacturers/answer/12098458#food-servings.
         pattern:
           description: The pattern of the product. For more information, see https://support.google.com/manufacturers/answer/6124116#pattern.
           type: string
@@ -491,7 +491,7 @@ components:
           type: string
       type: object
     FloatUnit:
-      description: Combination of float amout and unit.
+      description: Combination of float amount and unit.
       properties:
         amount:
           description: amount.

@@ -674,6 +674,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1alpha/{parent}/memberships:validateCreate":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "ValidateCreateMembership is a preflight check for CreateMembership. It checks the following: 1. Caller has the required `gkehub.memberships.create` permission. 2. The membership_id is still available."
+      operationId: gkehub.projects.locations.memberships.validateCreate
+      parameters:
+        - description: Required. The parent (project and location) where the Memberships will be created. Specified in the format `projects/*/locations/*`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ValidateCreateMembershipRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidateCreateMembershipResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1alpha/{resource}:getIamPolicy":
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
@@ -1124,6 +1166,9 @@ components:
     ConfigManagementConfigSync:
       description: Configuration for Config Sync
       properties:
+        allowVerticalScale:
+          description: Set to true to allow the vertical scaling. Defaults to false which disallows vertical scaling.
+          type: boolean
         enabled:
           description: Enables the installation of ConfigSync. If set to true, ConfigSync resources will be created and the other ConfigSync fields will be applied if exist. If set to false, all other ConfigSync fields will be ignored, ConfigSync resources will be deleted. If omitted, ConfigSync resources will be managed depends on the presence of git field.
           type: boolean
@@ -2626,6 +2671,13 @@ components:
             - REGULAR
             - STABLE
           type: string
+        management:
+          description: Enables automatic Service Mesh management.
+          enum:
+            - MANAGEMENT_UNSPECIFIED
+            - MANAGEMENT_AUTOMATIC
+            - MANAGEMENT_MANUAL
+          type: string
       type: object
     ServiceMeshMembershipState:
       description: "**Service Mesh**: State for a single Membership, as analyzed by the Service Mesh Hub Controller."
@@ -2728,6 +2780,42 @@ components:
           type: string
         kind:
           description: Kind of the resource (e.g. Deployment).
+          type: string
+      type: object
+    ValidateCreateMembershipRequest:
+      description: Request message for the `GkeHub.ValidateCreateMembership` method.
+      properties:
+        membership:
+          $ref: "#/components/schemas/Membership"
+          description: Required. Membership resource to be created.
+        membershipId:
+          description: Required. Client chosen membership id.
+          type: string
+      type: object
+    ValidateCreateMembershipResponse:
+      description: Response message for the `GkeHub.ValidateCreateMembership` method.
+      properties:
+        validationResults:
+          description: Wraps all the validator results.
+          items:
+            $ref: "#/components/schemas/ValidationResult"
+          type: array
+      type: object
+    ValidationResult:
+      description: ValidationResults are results set by each validator running during ValidateCreateMembership.
+      properties:
+        result:
+          description: Additional information for the validation.
+          type: string
+        success:
+          description: Whether the validation is passed or not.
+          type: boolean
+        validator:
+          description: Validator type to validate membership with.
+          enum:
+            - VALIDATOR_TYPE_UNSPECIFIED
+            - MEMBERSHIP_ID
+            - CROSS_PROJECT_PERMISSION
           type: string
       type: object
   securitySchemes:

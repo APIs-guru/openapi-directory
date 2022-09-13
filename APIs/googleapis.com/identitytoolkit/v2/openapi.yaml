@@ -1665,6 +1665,9 @@ components:
         mfaConfig:
           $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfig"
           description: The tenant-level configuration of MFA options.
+        monitoring:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2MonitoringConfig"
+          description: Configuration related to monitoring project activity.
         name:
           description: 'Output only. Resource name of a tenant. For example: "projects/{project-id}/tenants/{tenant-id}"'
           readOnly: true
