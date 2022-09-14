@@ -402,7 +402,6 @@ components:
             - EU_REGIONS_AND_SUPPORT
             - CA_REGIONS_AND_SUPPORT
             - ITAR
-            - AU_REGIONS_AND_US_SUPPORT
           type: string
         createTime:
           description: Optional. Time when the operation was created.
@@ -462,8 +461,13 @@ components:
             - EU_REGIONS_AND_SUPPORT
             - CA_REGIONS_AND_SUPPORT
             - ITAR
-            - AU_REGIONS_AND_US_SUPPORT
           type: string
+        compliantButDisallowedServices:
+          description: Output only. Urls for services which are compliant for this Assured Workload, but which are currently disallowed by the ResourceUsageRestriction org policy. Invoke RestrictAllowedResources endpoint to allow your project developers to use these services in their environment."
+          items:
+            type: string
+          readOnly: true
+          type: array
         createTime:
           description: Output only. Immutable. The Workload creation timestamp.
           format: google-datetime
@@ -603,7 +607,6 @@ components:
             - EU_REGIONS_AND_SUPPORT
             - CA_REGIONS_AND_SUPPORT
             - ITAR
-            - AU_REGIONS_AND_US_SUPPORT
           type: string
         createTime:
           description: Optional. Time when the operation was created.
@@ -644,7 +647,6 @@ components:
             - EU_REGIONS_AND_SUPPORT
             - CA_REGIONS_AND_SUPPORT
             - ITAR
-            - AU_REGIONS_AND_US_SUPPORT
           type: string
         compliantButDisallowedServices:
           description: Output only. Urls for services which are compliant for this Assured Workload, but which are currently disallowed by the ResourceUsageRestriction org policy. Invoke RestrictAllowedResources endpoint to allow your project developers to use these services in their environment."
@@ -828,7 +830,6 @@ components:
             - EU_REGIONS_AND_SUPPORT
             - CA_REGIONS_AND_SUPPORT
             - ITAR
-            - AU_REGIONS_AND_US_SUPPORT
           type: string
         createTime:
           description: Optional. Time when the operation was created.
@@ -869,7 +870,6 @@ components:
             - EU_REGIONS_AND_SUPPORT
             - CA_REGIONS_AND_SUPPORT
             - ITAR
-            - AU_REGIONS_AND_US_SUPPORT
           type: string
         complianceStatus:
           $ref: "#/components/schemas/GoogleCloudAssuredworkloadsVersioningV1mainWorkloadComplianceStatus"

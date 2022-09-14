@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://documentai.googleapis.com/$discovery/rest?version=v1beta3
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: documentai
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/document-ai/docs/
 tags:
@@ -2189,6 +2190,9 @@ components:
         color:
           $ref: "#/components/schemas/GoogleTypeColor"
           description: Text color.
+        fontFamily:
+          description: Font family such as "Arial", "Times New Roman". https://www.w3schools.com/cssref/pr_font_font-family.asp
+          type: string
         fontSize:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentStyleFontSize"
           description: Font size.
@@ -3046,6 +3050,9 @@ components:
         color:
           $ref: "#/components/schemas/GoogleTypeColor"
           description: Text color.
+        fontFamily:
+          description: Font family such as "Arial", "Times New Roman". https://www.w3schools.com/cssref/pr_font_font-family.asp
+          type: string
         fontSize:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentStyleFontSize"
           description: Font size.
@@ -4158,6 +4165,9 @@ components:
         color:
           $ref: "#/components/schemas/GoogleTypeColor"
           description: Text color.
+        fontFamily:
+          description: Font family such as "Arial", "Times New Roman". https://www.w3schools.com/cssref/pr_font_font-family.asp
+          type: string
         fontSize:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DocumentStyleFontSize"
           description: Font size.

@@ -2576,7 +2576,7 @@ paths:
         - organizations
   "/v1/{parent}/entries":
     get:
-      description: Lists key value entries for key values maps scoped to an organization, environment, or API proxy.
+      description: "Lists key value entries for key values maps scoped to an organization, environment, or API proxy. **Note**: Supported for Apigee hybrid 1.8.x and higher."
       operationId: apigee.organizations.keyvaluemaps.entries.list
       parameters:
         - description: "Required. Scope as indicated by the URI in which to list key value maps. Use **one** of the following structures in your request: * `organizations/{organization}/apis/{api}/keyvaluemaps/{keyvaluemap}`. * `organizations/{organization}/environments/{environment}/keyvaluemaps/{keyvaluemap}` * `organizations/{organization}/keyvaluemaps/{keyvaluemap}`."
@@ -2622,7 +2622,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates key value entries in a key value map scoped to an organization, environment, or API proxy.
+      description: "Creates key value entries in a key value map scoped to an organization, environment, or API proxy. **Note**: Supported for Apigee hybrid 1.8.x and higher."
       operationId: apigee.organizations.keyvaluemaps.entries.create
       parameters:
         - description: "Required. Scope as indicated by the URI in which to create the key value map entry. Use **one** of the following structures in your request: * `organizations/{organization}/apis/{api}/keyvaluemaps/{keyvaluemap}`. * `organizations/{organization}/environments/{environment}/keyvaluemaps/{keyvaluemap}` * `organizations/{organization}/keyvaluemaps/{keyvaluemap}`."
@@ -6776,7 +6776,7 @@ components:
           type: string
       type: object
     GoogleCloudApigeeV1KeyValueEntry:
-      description: Key value map pair where the value represents the data associated with the corresponding key.
+      description: "Key value map pair where the value represents the data associated with the corresponding key. **Note**: Supported for Apigee hybrid 1.8.x and higher."
       properties:
         name:
           description: Resource URI that can be used to identify the scope of the key value map entries.
@@ -7039,7 +7039,7 @@ components:
           type: string
       type: object
     GoogleCloudApigeeV1ListKeyValueEntriesResponse:
-      description: The request structure for listing Key value map keys and its corrresponding values.
+      description: The request structure for listing key value map keys and its corresponding values.
       properties:
         keyValueEntries:
           description: One or more key value map keys and values.

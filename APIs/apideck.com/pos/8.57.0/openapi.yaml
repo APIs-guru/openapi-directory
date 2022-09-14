@@ -8308,7 +8308,8 @@ components:
         cash:
           description: Cash details for this payment
           properties:
-            amount: {}
+            amount:
+              description: The amount of cash given by the customer.
             charge_back_amount:
               description: "The amount of change due back to the buyer. For Square: this read-only field is calculated from the amount_money and buyer_supplied_money fields."
           title: Cash details

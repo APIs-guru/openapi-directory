@@ -2625,10 +2625,6 @@ components:
     GooglePrivacyDlpV2InfoTypeSummary:
       description: The infoType details for this column.
       properties:
-        estimatedPrevalence:
-          description: Approximate percentage of non-null rows that contained data detected by this infotype.
-          format: int32
-          type: integer
         infoType:
           $ref: "#/components/schemas/GooglePrivacyDlpV2InfoType"
           description: The infoType.
@@ -4030,7 +4026,7 @@ components:
             - RESOURCE_VISIBILITY_RESTRICTED
           type: string
         rowCount:
-          description: Number of rows in the table when the profile was generated.
+          description: Number of rows in the table when the profile was generated. This will not be populated for BigLake tables.
           format: int64
           type: string
         scannedColumnCount:
