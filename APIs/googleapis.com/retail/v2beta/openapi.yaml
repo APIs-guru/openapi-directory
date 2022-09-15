@@ -2845,6 +2845,13 @@ components:
             type: string
           type: array
       type: object
+    GoogleCloudRetailV2betaCreateModelMetadata:
+      description: Metadata associated with a create operation.
+      properties:
+        model:
+          description: "The resource name of the model that this create applies to. Format: `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/models/{model_id}`"
+          type: string
+      type: object
     GoogleCloudRetailV2betaCustomAttribute:
       description: A custom attribute that is not explicitly modeled in Product.
       properties:
@@ -3184,6 +3191,17 @@ components:
           $ref: "#/components/schemas/GoogleCloudRetailV2betaPriceInfo"
           description: Product price and cost information. Google Merchant Center property [price](https://support.google.com/merchants/answer/6324371).
       type: object
+    GoogleCloudRetailV2betaMerchantCenterFeedFilter:
+      description: Merchant Center Feed filter criterrion.
+      properties:
+        primaryFeedId:
+          description: Merchant Center primary feed id.
+          format: int64
+          type: string
+        primaryFeedName:
+          description: Merchant Center primary feed name. The name is used for the display purposes only.
+          type: string
+      type: object
     GoogleCloudRetailV2betaMerchantCenterLink:
       description: Represents a link between a Merchant Center account and a branch. Once a link is established, products from the linked merchant center account will be streamed to the linked branch.
       properties:
@@ -3194,6 +3212,11 @@ components:
           description: 'String representing the destination to import for, all if left empty. List of possible values is given in [Included destination](https://support.google.com/merchants/answer/7501026). List of allowed string values: "Shopping_ads", "Buy_on_google_listings", "Display_ads", "Local_inventory _ads", "Free_listings", "Free_local_listings" NOTE: The string values are case sensitive.'
           items:
             type: string
+          type: array
+        feeds:
+          description: Criteria for the Merchant Center feeds to be ingested via the link. All offers will be ingested if the list is empty. Otherwise the offers will be ingested from selected feeds.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRetailV2betaMerchantCenterFeedFilter"
           type: array
         languageCode:
           description: "Language of the title/description and other string attributes. Use language tags defined by [BCP 47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt). ISO 639-1. This specifies the language of offers in Merchant Center that will be accepted. If empty no language filtering will be performed. Example value: `en`."
@@ -4367,8 +4390,19 @@ components:
       description: Response of the SetInventoryRequest. Currently empty because there is no meaningful response populated from the ProductService.SetInventory method.
       properties: {}
       type: object
+    GoogleCloudRetailV2betaTuneModelMetadata:
+      description: Metadata associated with a tune operation.
+      properties:
+        model:
+          description: "The resource name of the model that this tune applies to. Format: `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/models/{model_id}`"
+          type: string
+      type: object
     GoogleCloudRetailV2betaTuneModelRequest:
       description: Request to manually start a tuning process now (instead of waiting for the periodically scheduled tuning to happen).
+      properties: {}
+      type: object
+    GoogleCloudRetailV2betaTuneModelResponse:
+      description: Response associated with a tune operation.
       properties: {}
       type: object
     GoogleCloudRetailV2betaUserEvent:

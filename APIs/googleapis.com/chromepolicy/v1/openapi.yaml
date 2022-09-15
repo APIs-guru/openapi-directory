@@ -57,13 +57,13 @@ paths:
         content:
           application/octet-stream:
             schema:
-              $ref: "#/components/schemas/GoogleChromePolicyV1UploadPolicyFileRequest"
+              $ref: "#/components/schemas/GoogleChromePolicyVersionsV1UploadPolicyFileRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleChromePolicyV1UploadPolicyFileResponse"
+                $ref: "#/components/schemas/GoogleChromePolicyVersionsV1UploadPolicyFileResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -957,14 +957,14 @@ components:
           $ref: "#/components/schemas/GoogleChromePolicyV1PolicyTargetKey"
           description: Required. The key of the target for which we want to update the group priority ordering. The target resource must point to an app.
       type: object
-    GoogleChromePolicyV1UploadPolicyFileRequest:
+    GoogleChromePolicyVersionsV1UploadPolicyFileRequest:
       description: "Request message for uploading a file for a policy. Next ID: 5"
       properties:
         policyField:
           description: Required. The fully qualified policy schema and field name this file is uploaded for. This information will be used to validate the content type of the file.
           type: string
       type: object
-    GoogleChromePolicyV1UploadPolicyFileResponse:
+    GoogleChromePolicyVersionsV1UploadPolicyFileResponse:
       description: "Response message for downloading an uploaded file. Next ID: 2"
       properties:
         downloadUri:
