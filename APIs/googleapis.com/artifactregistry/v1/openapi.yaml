@@ -402,6 +402,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1/{parent}/kfpArtifacts:create":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Directly uploads a KFP artifact. The returned Operation will complete once the resource is uploaded. Package, Version, and File resources will be created based on the uploaded artifact. Uploaded artifacts that conflict with existing resources will be overwritten.
+      operationId: artifactregistry.projects.locations.repositories.kfpArtifacts.upload
+      parameters:
+        - description: The resource name of the repository where the KFP artifact will be uploaded.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              $ref: "#/components/schemas/UploadKfpArtifactRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UploadKfpArtifactMediaResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{parent}/mavenArtifacts":
     get:
       description: Lists maven artifacts.
@@ -1388,6 +1430,17 @@ components:
             $ref: "#/components/schemas/YumArtifact"
           type: array
       type: object
+    KfpArtifact:
+      description: A detailed representation of a GooGet artifact.
+      properties:
+        name:
+          description: Output only. Resource name of the KFP artifact. Since users don't directly interact with this resource, the name will be derived from the associated version. For example, when version = ".../versions/sha256:abcdef...", the name will be ".../kfpArtifacts/sha256:abcdef...".
+          readOnly: true
+          type: string
+        version:
+          description: The version associated with the KFP artifact. Must follow the Semantic Versioning standard.
+          type: string
+      type: object
     ListDockerImagesResponse:
       description: The response from listing docker images.
       properties:
@@ -1826,6 +1879,29 @@ components:
           description: The Apt artifacts updated.
           items:
             $ref: "#/components/schemas/AptArtifact"
+          type: array
+      type: object
+    UploadKfpArtifactMediaResponse:
+      description: The response to upload an artifact.
+      properties:
+        operation:
+          $ref: "#/components/schemas/Operation"
+          description: Operation that will be returned to the user.
+      type: object
+    UploadKfpArtifactMetadata:
+      description: The operation metadata for uploading KFP artifacts.
+      properties: {}
+      type: object
+    UploadKfpArtifactRequest:
+      description: The request to upload an artifact.
+      properties:
+        description:
+          description: Description of the package version.
+          type: string
+        tags:
+          description: Tags to be created with the version.
+          items:
+            type: string
           type: array
       type: object
     UploadYumArtifactMediaResponse:

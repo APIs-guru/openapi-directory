@@ -13,17 +13,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Network Management API
   version: v1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://networkmanagement.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: networkmanagement
 externalDocs:
@@ -675,7 +673,7 @@ components:
           $ref: "#/components/schemas/Expr"
           description: The condition that is associated with this binding. If the condition evaluates to `true`, then this binding applies to the current request. If the condition evaluates to `false`, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
         members:
-          description: "Specifies the principals requesting access for a Google Cloud resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a Google service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `serviceAccount:{projectid}.svc.id.goog[{namespace}/{kubernetes-sa}]`: An identifier for a [Kubernetes service account](https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts). For example, `my-project.svc.id.goog[my-namespace/my-kubernetes-sa]`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. "
+          description: "Specifies the principals requesting access for a Google Cloud resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a Google service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `serviceAccount:{projectid}.svc.id.goog[{namespace}/{kubernetes-sa}]`: An identifier for a [Kubernetes service account](https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts). For example, `my-project.svc.id.goog[my-namespace/my-kubernetes-sa]`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. "
           items:
             type: string
           type: array
@@ -688,26 +686,26 @@ components:
       properties: {}
       type: object
     CloudFunctionEndpoint:
-      description: Wrapper for cloud function attributes.
+      description: Wrapper for Cloud Function attributes.
       properties:
         uri:
-          description: A [Cloud function](https://cloud.google.com/functions) name.
+          description: A [Cloud Function](https://cloud.google.com/functions) name.
           type: string
       type: object
     CloudFunctionInfo:
-      description: For display only. Metadata associated with a Cloud function.
+      description: For display only. Metadata associated with a Cloud Function.
       properties:
         displayName:
-          description: Name of a Cloud function.
+          description: Name of a Cloud Function.
           type: string
         location:
-          description: Location in which the Cloud function is deployed.
+          description: Location in which the Cloud Function is deployed.
           type: string
         uri:
-          description: URI of a Cloud function.
+          description: URI of a Cloud Function.
           type: string
         versionId:
-          description: Latest successfully deployed version id of the Cloud function.
+          description: Latest successfully deployed version id of the Cloud Function.
           format: int64
           type: string
       type: object
@@ -795,6 +793,9 @@ components:
             - GOOGLE_API
             - GKE_MASTER
             - CLOUD_SQL_INSTANCE
+            - PSC_PUBLISHED_SERVICE
+            - PSC_GOOGLE_API
+            - PSC_VPC_SC
           type: string
       type: object
     DropInfo:
@@ -828,6 +829,7 @@ components:
             - CLOUD_FUNCTION_NOT_ACTIVE
             - VPC_CONNECTOR_NOT_SET
             - VPC_CONNECTOR_NOT_RUNNING
+            - PSC_CONNECTION_NOT_ACCEPTED
           type: string
         resourceUri:
           description: URI of the resource that caused the drop.
@@ -842,7 +844,7 @@ components:
       properties:
         cloudFunction:
           $ref: "#/components/schemas/CloudFunctionEndpoint"
-          description: A [Cloud function](https://cloud.google.com/functions).
+          description: A [Cloud Function](https://cloud.google.com/functions).
         cloudSqlInstance:
           description: A [Cloud SQL](https://cloud.google.com/sql) instance URI.
           type: string
@@ -936,6 +938,7 @@ components:
             - VPC_FIREWALL_RULE
             - IMPLIED_VPC_FIREWALL_RULE
             - SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE
+            - NETWORK_FIREWALL_POLICY_RULE
           type: string
         networkUri:
           description: The URI of the VPC network that the firewall rule is associated with. This field is not applicable to hierarchical firewall policy rules.
@@ -1127,6 +1130,7 @@ components:
             - BACKEND_TYPE_UNSPECIFIED
             - BACKEND_SERVICE
             - TARGET_POOL
+            - TARGET_INSTANCE
           type: string
         backendUri:
           description: Backend configuration URI.
@@ -1382,7 +1386,7 @@ components:
           type: boolean
         cloudFunction:
           $ref: "#/components/schemas/CloudFunctionInfo"
-          description: Display information of a Cloud function.
+          description: Display information of a Cloud Function.
         cloudSqlInstance:
           $ref: "#/components/schemas/CloudSQLInstanceInfo"
           description: Display information of a Cloud SQL instance.
@@ -1583,5 +1587,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

@@ -2170,7 +2170,7 @@ components:
           type: string
         livenessProbe:
           $ref: "#/components/schemas/Probe"
-          description: "Periodic probe of container liveness. Container will be restarted if the probe fails. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes"
+          description: Not supported by Cloud Run.
         name:
           description: "Name of the container specified as a DNS_LABEL. Currently unused in Cloud Run. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#dns-label-names"
           type: string

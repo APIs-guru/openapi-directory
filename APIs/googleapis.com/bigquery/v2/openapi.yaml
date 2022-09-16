@@ -2553,6 +2553,13 @@ components:
           format: int64
           type: string
       type: object
+    DataMaskingStatistics:
+      properties:
+        dataMaskingApplied:
+          default: false
+          description: "[Output-only] [Preview] Whether any accessed data was protected by data masking. The actual evaluation is done by accessStats.masked_field_count > 0. Since this is only used for the discovery_doc generation purpose, as long as the type (boolean) matches, client library can leverage this. The actual evaluation of the variable is done else-where."
+          type: boolean
+      type: object
     DataSplitResult:
       description: Data split result. This contains references to the training and evaluation data tables that were used to train the model.
       properties:
@@ -3826,6 +3833,9 @@ components:
           description: "[Output-only] Creation time of this job, in milliseconds since the epoch. This field will be present on all jobs."
           format: int64
           type: string
+        dataMaskingStatistics:
+          $ref: "#/components/schemas/DataMaskingStatistics"
+          description: "[Output-only] Statistics for data masking. Present only for query and extract jobs."
         endTime:
           description: "[Output-only] End time of this job, in milliseconds since the epoch. This field will be present whenever a job is in the DONE state."
           format: int64
