@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://realtimebidding.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: realtimebidding
 externalDocs:
@@ -1570,6 +1570,9 @@ components:
         native:
           $ref: "#/components/schemas/NativeContent"
           description: A native creative.
+        renderUrl:
+          description: Experimental field that can be used during the [FLEDGE Origin Trial](/authorized-buyers/rtb/fledge-origin-trial). The URL to fetch an interest group ad used in [TURTLEDOVE on-device auction](https://github.com/WICG/turtledove/blob/main/FLEDGE.md#1-browsers-record-interest-groups") This should be unique among all creatives for a given creative.account_id
+          type: string
         restrictedCategories:
           description: All restricted categories for the ads that may be shown from this creative.
           items:

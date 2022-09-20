@@ -517,9 +517,22 @@ components:
           description: The name of the category representing the document, from the [predefined taxonomy](https://cloud.google.com/natural-language/docs/categories).
           type: string
       type: object
+    ClassificationModelOptions:
+      description: Model options available for classification requests.
+      properties:
+        v1Model:
+          $ref: "#/components/schemas/V1Model"
+          description: Setting this field will use the V1 model and V1 content categories version. The V1 model is a legacy model; support for this will be discontinued in the future.
+        v2Model:
+          $ref: "#/components/schemas/V2Model"
+          description: Setting this field will use the V2 model with the appropriate content categories version. The V2 model is a better performing model.
+      type: object
     ClassifyTextRequest:
       description: The document classification request message.
       properties:
+        classificationModelOptions:
+          $ref: "#/components/schemas/ClassificationModelOptions"
+          description: Model options to use for classification. Defaults to v1 options if not specified.
         document:
           $ref: "#/components/schemas/Document"
           description: Required. Input document.
@@ -709,6 +722,9 @@ components:
     Features:
       description: All available features for sentiment, syntax, and semantic analysis. Setting each one to true will enable that specific analysis for the input.
       properties:
+        classificationModelOptions:
+          $ref: "#/components/schemas/ClassificationModelOptions"
+          description: The model options to use for classification. Defaults to v1 options if not specified. Only used if `classify_text` is set to true.
         classifyText:
           description: Classify the full document into categories.
           type: boolean
@@ -925,6 +941,21 @@ components:
         text:
           $ref: "#/components/schemas/TextSpan"
           description: The token text.
+      type: object
+    V1Model:
+      description: Options for the V1 model.
+      properties: {}
+      type: object
+    V2Model:
+      description: Options for the V2 model.
+      properties:
+        contentCategoriesVersion:
+          description: The content categories used for classification.
+          enum:
+            - CONTENT_CATEGORIES_VERSION_UNSPECIFIED
+            - V1
+            - V2
+          type: string
       type: object
   securitySchemes:
     Oauth2:
