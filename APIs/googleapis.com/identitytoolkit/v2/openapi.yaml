@@ -968,6 +968,24 @@ components:
       schema:
         type: string
   schemas:
+    GoogleCloudIdentitytoolkitAdminV2AllowByDefault:
+      description: Defines a policy of allowing every region by default and adding disallowed regions to a disallow list.
+      properties:
+        disallowedRegions:
+          description: "Two letter unicode region codes to disallow as defined by https://cldr.unicode.org/ The full list of these region codes is here: https://github.com/unicode-cldr/cldr-localenames-full/blob/master/main/en/territories.json"
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2AllowlistOnly:
+      description: Defines a policy of only allowing regions by explicitly adding them to an allowlist.
+      properties:
+        allowedRegions:
+          description: "Two letter unicode region codes to allow as defined by https://cldr.unicode.org/ The full list of these region codes is here: https://github.com/unicode-cldr/cldr-localenames-full/blob/master/main/en/territories.json"
+          items:
+            type: string
+          type: array
+      type: object
     GoogleCloudIdentitytoolkitAdminV2Anonymous:
       description: Configuration options related to authenticating an anonymous user.
       properties:
@@ -1082,6 +1100,9 @@ components:
         signIn:
           $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2SignInConfig"
           description: Configuration related to local sign in methods.
+        smsRegionConfig:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2SmsRegionConfig"
+          description: Configures which regions are enabled for SMS verification code sending.
         subtype:
           description: Output only. The subtype of this config.
           enum:
@@ -1553,6 +1574,16 @@ components:
           $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2PhoneNumber"
           description: Configuration options related to authenticated a user by their phone number.
       type: object
+    GoogleCloudIdentitytoolkitAdminV2SmsRegionConfig:
+      description: Configures the regions where users are allowed to send verification SMS for the project or tenant. This is based on the calling code of the destination phone number.
+      properties:
+        allowByDefault:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2AllowByDefault"
+          description: A policy of allowing SMS to every region by default and adding disallowed regions to a disallow list.
+        allowlistOnly:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2AllowlistOnly"
+          description: A policy of only allowing regions by explicitly adding them to an allowlist.
+      type: object
     GoogleCloudIdentitytoolkitAdminV2SmsTemplate:
       description: The template to use when sending an SMS.
       properties:
@@ -1672,6 +1703,9 @@ components:
           description: 'Output only. Resource name of a tenant. For example: "projects/{project-id}/tenants/{tenant-id}"'
           readOnly: true
           type: string
+        smsRegionConfig:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2SmsRegionConfig"
+          description: Configures which regions are enabled for SMS verification code sending.
         testPhoneNumbers:
           additionalProperties:
             type: string

@@ -4552,10 +4552,10 @@ paths:
         - verificationCodes
   "/admin/directory/v1/{name}":
     delete:
-      description: Deletes a `Printer`.
-      operationId: admin.customers.chrome.printers.delete
+      description: Deletes a print server.
+      operationId: admin.customers.chrome.printServers.delete
       parameters:
-        - description: "Required. The name of the printer to be updated. Format: customers/{customer_id}/chrome/printers/{printer_id}"
+        - description: "Required. The name of the print server to be deleted. Format: `customers/{customer.id}/chrome/printServers/{print_server.id}`"
           in: path
           name: name
           required: true
@@ -4576,10 +4576,10 @@ paths:
       tags:
         - customers
     get:
-      description: Returns a `Printer` resource (printer's config).
-      operationId: admin.customers.chrome.printers.get
+      description: Returns a print server's configuration.
+      operationId: admin.customers.chrome.printServers.get
       parameters:
-        - description: "Required. The name of the printer to retrieve. Format: customers/{customer_id}/chrome/printers/{printer_id}"
+        - description: "Required. The [unique ID](https://developers.google.com/admin-sdk/directory/reference/rest/v1/customers) of the customer's Google Workspace account. Format: `customers/{id}`"
           in: path
           name: name
           required: true
@@ -4590,7 +4590,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Printer"
+                $ref: "#/components/schemas/PrintServer"
           description: Successful response
       security:
         - Oauth2:
@@ -4616,21 +4616,16 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates a `Printer` resource.
-      operationId: admin.customers.chrome.printers.patch
+      description: Updates a print server's configuration.
+      operationId: admin.customers.chrome.printServers.patch
       parameters:
-        - description: The resource name of the Printer object, in the format customers/{customer-id}/printers/{printer-id} (During printer creation leave empty)
+        - description: "Immutable. Resource name of the print server. Leave empty when creating. Format: `customers/{customer.id}/printServers/{print_server.id}`"
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: The list of fields to be cleared. Note, some of the fields are read only and cannot be updated. Values for not specified fields will be patched.
-          in: query
-          name: clearMask
-          schema:
-            type: string
-        - description: The list of fields to be updated. Note, some of the fields are read only and cannot be updated. Values for not specified fields will be patched.
+        - description: The list of fields to update. Some fields are read-only and cannot be updated. Values for unspecified fields are patched.
           in: query
           name: updateMask
           schema:
@@ -4639,13 +4634,192 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Printer"
+              $ref: "#/components/schemas/PrintServer"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Printer"
+                $ref: "#/components/schemas/PrintServer"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/admin.chrome.printers
+          Oauth2c:
+            - https://www.googleapis.com/auth/admin.chrome.printers
+      tags:
+        - customers
+  "/admin/directory/v1/{parent}/chrome/printServers":
+    get:
+      description: Lists print server configurations.
+      operationId: admin.customers.chrome.printServers.list
+      parameters:
+        - description: "Required. The [unique ID](https://developers.google.com/admin-sdk/directory/reference/rest/v1/customers) of the customer's Google Workspace account. Format: `customers/{id}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Search query in [Common Expression Language syntax](https://github.com/google/cel-spec). Supported filters are `display_name`, `description`, and `uri`. Example: `printServer.displayName=='marketing-queue'`."
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Sort order for results. Supported values are `display_name`, `description`, or `create_time`. Default order is ascending, but descending order can be returned by appending "desc" to the `order_by` field. For instance, `orderBy=='description desc'` returns the print servers sorted by description in descending order.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: If `org_unit_id` is present in the request, only print servers owned or inherited by the organizational unit (OU) are returned. If the `PrintServer` resource's `org_unit_id` matches the one in the request, the OU owns the server. If `org_unit_id` is not specified in the request, all print servers are returned or filtered against.
+          in: query
+          name: orgUnitId
+          schema:
+            type: string
+        - description: The maximum number of objects to return (default `100`, max `100`). The service might return fewer than this value.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A generated token to paginate results (the `next_page_token` from a previous call).
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListPrintServersResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/admin.chrome.printers
+          Oauth2c:
+            - https://www.googleapis.com/auth/admin.chrome.printers
+        - Oauth2:
+            - https://www.googleapis.com/auth/admin.chrome.printers.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/admin.chrome.printers.readonly
+      tags:
+        - customers
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a print server.
+      operationId: admin.customers.chrome.printServers.create
+      parameters:
+        - description: "Required. The [unique ID](https://developers.google.com/admin-sdk/directory/reference/rest/v1/customers) of the customer's Google Workspace account. Format: `customers/{id}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PrintServer"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PrintServer"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/admin.chrome.printers
+          Oauth2c:
+            - https://www.googleapis.com/auth/admin.chrome.printers
+      tags:
+        - customers
+  "/admin/directory/v1/{parent}/chrome/printServers:batchCreatePrintServers":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates multiple print servers.
+      operationId: admin.customers.chrome.printServers.batchCreatePrintServers
+      parameters:
+        - description: "Required. The [unique ID](https://developers.google.com/admin-sdk/directory/reference/rest/v1/customers) of the customer's Google Workspace account. Format: `customers/{id}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchCreatePrintServersRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchCreatePrintServersResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/admin.chrome.printers
+          Oauth2c:
+            - https://www.googleapis.com/auth/admin.chrome.printers
+      tags:
+        - customers
+  "/admin/directory/v1/{parent}/chrome/printServers:batchDeletePrintServers":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Deletes multiple print servers.
+      operationId: admin.customers.chrome.printServers.batchDeletePrintServers
+      parameters:
+        - description: "Required. The [unique ID](https://developers.google.com/admin-sdk/directory/reference/rest/v1/customers) of the customer's Google Workspace account. Format: `customers/{customer.id}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchDeletePrintServersRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchDeletePrintServersResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -5102,6 +5276,28 @@ components:
             - SEVERITY_ERROR
           type: string
       type: object
+    BatchCreatePrintServersRequest:
+      description: Request to add multiple new print servers in a batch.
+      properties:
+        requests:
+          description: Required. A list of `PrintServer` resources to be created (max `50` per batch).
+          items:
+            $ref: "#/components/schemas/CreatePrintServerRequest"
+          type: array
+      type: object
+    BatchCreatePrintServersResponse:
+      properties:
+        failures:
+          description: A list of create failures. `PrintServer` IDs are not populated, as print servers were not created.
+          items:
+            $ref: "#/components/schemas/PrintServerFailureInfo"
+          type: array
+        printServers:
+          description: A list of successfully created print servers with their IDs populated.
+          items:
+            $ref: "#/components/schemas/PrintServer"
+          type: array
+      type: object
     BatchCreatePrintersRequest:
       description: Request for adding new printers in batch.
       properties:
@@ -5123,6 +5319,28 @@ components:
           description: A list of successfully created printers with their IDs populated.
           items:
             $ref: "#/components/schemas/Printer"
+          type: array
+      type: object
+    BatchDeletePrintServersRequest:
+      description: Request to delete multiple existing print servers in a batch.
+      properties:
+        printServerIds:
+          description: A list of print server IDs that should be deleted (max `100` per batch).
+          items:
+            type: string
+          type: array
+      type: object
+    BatchDeletePrintServersResponse:
+      properties:
+        failedPrintServers:
+          description: A list of update failures.
+          items:
+            $ref: "#/components/schemas/PrintServerFailureInfo"
+          type: array
+        printServerIds:
+          description: A list of print server IDs that were successfully deleted.
+          items:
+            type: string
           type: array
       type: object
     BatchDeletePrintersRequest:
@@ -5699,6 +5917,16 @@ components:
             type: string
           type: array
       type: object
+    CreatePrintServerRequest:
+      description: Request for adding a new print server.
+      properties:
+        parent:
+          description: "Required. The [unique ID](https://developers.google.com/admin-sdk/directory/reference/rest/v1/customers) of the customer's Google Workspace account. Format: `customers/{id}`"
+          type: string
+        printServer:
+          $ref: "#/components/schemas/PrintServer"
+          description: Required. A print server to create. If you want to place the print server under a specific organizational unit (OU), then populate the `org_unit_id`. Otherwise the print server is created under the root OU. The `org_unit_id` can be retrieved using the [Directory API](https://developers.google.com/admin-sdk/directory/v1/guides/manage-org-units).
+      type: object
     CreatePrinterRequest:
       description: Request for adding a new printer.
       properties:
@@ -6100,6 +6328,17 @@ components:
           description: Token used to access next page of this result.
           type: string
       type: object
+    ListPrintServersResponse:
+      properties:
+        nextPageToken:
+          description: A token that can be sent as `page_token` in a request to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        printServers:
+          description: List of print servers.
+          items:
+            $ref: "#/components/schemas/PrintServer"
+          type: array
+      type: object
     ListPrinterModelsResponse:
       description: Response for listing allowed printer models.
       properties:
@@ -6430,6 +6669,67 @@ components:
           type: string
         updateTime:
           description: Date and time of the last successful OS update.
+          type: string
+      type: object
+    PrintServer:
+      description: Configuration for a print server.
+      properties:
+        createTime:
+          description: Output only. Time when the print server was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: Editable. Description of the print server (as shown in the Admin console).
+          type: string
+        displayName:
+          description: Editable. Display name of the print server (as shown in the Admin console).
+          type: string
+        id:
+          description: Immutable. ID of the print server. Leave empty when creating.
+          type: string
+        name:
+          description: "Immutable. Resource name of the print server. Leave empty when creating. Format: `customers/{customer.id}/printServers/{print_server.id}`"
+          type: string
+        orgUnitId:
+          description: ID of the organization unit (OU) that owns this print server. This value can only be set when the print server is initially created. If it's not populated, the print server is placed under the root OU. The `org_unit_id` can be retrieved using the [Directory API](/admin-sdk/directory/reference/rest/v1/orgunits).
+          type: string
+        uri:
+          description: Editable. Print server URI.
+          type: string
+      type: object
+    PrintServerFailureInfo:
+      description: Info about failures
+      properties:
+        errorCode:
+          description: Canonical code for why the update failed to apply.
+          enum:
+            - OK
+            - CANCELLED
+            - UNKNOWN
+            - INVALID_ARGUMENT
+            - DEADLINE_EXCEEDED
+            - NOT_FOUND
+            - ALREADY_EXISTS
+            - PERMISSION_DENIED
+            - UNAUTHENTICATED
+            - RESOURCE_EXHAUSTED
+            - FAILED_PRECONDITION
+            - ABORTED
+            - OUT_OF_RANGE
+            - UNIMPLEMENTED
+            - INTERNAL
+            - UNAVAILABLE
+            - DATA_LOSS
+          type: string
+        errorMessage:
+          description: Failure reason message.
+          type: string
+        printServer:
+          $ref: "#/components/schemas/PrintServer"
+          description: Failed print server.
+        printServerId:
+          description: ID of a failed print server.
           type: string
       type: object
     Printer:

@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://ondemandscanning.googleapis.com/$discovery/rest?version=v1beta1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: ondemandscanning
 externalDocs:
@@ -1673,6 +1673,13 @@ components:
           description: Output only. The CVSS score of this vulnerability. CVSS score is on a scale of 0 - 10 where 0 indicates low severity and 10 indicates high severity.
           format: float
           type: number
+        cvssVersion:
+          description: Output only. CVSS version used to populate cvss_score and severity.
+          enum:
+            - CVSS_VERSION_UNSPECIFIED
+            - CVSS_VERSION_2
+            - CVSS_VERSION_3
+          type: string
         cvssv3:
           $ref: "#/components/schemas/CVSS"
           description: The cvss v3 score for the vulnerability.

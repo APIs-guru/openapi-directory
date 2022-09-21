@@ -19,12 +19,11 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://documentai.googleapis.com/$discovery/rest?version=v1beta3
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: documentai
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/document-ai/docs/
 tags:
@@ -1614,7 +1613,7 @@ components:
           description: Optional. Deprecated. Use `id` field instead.
           type: string
         mentionText:
-          description: Optional. Text value in the document e.g. `1600 Amphitheatre Pkwy`. If the entity is not present in the document, this field will be empty.
+          description: Optional. Text value of the entity e.g. `1600 Amphitheatre Pkwy`.
           type: string
         normalizedValue:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentEntityNormalizedValue"
@@ -2460,7 +2459,7 @@ components:
           description: Optional. Deprecated. Use `id` field instead.
           type: string
         mentionText:
-          description: Optional. Text value in the document e.g. `1600 Amphitheatre Pkwy`. If the entity is not present in the document, this field will be empty.
+          description: Optional. Text value of the entity e.g. `1600 Amphitheatre Pkwy`.
           type: string
         normalizedValue:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentEntityNormalizedValue"
@@ -3484,7 +3483,7 @@ components:
           description: Optional. Deprecated. Use `id` field instead.
           type: string
         mentionText:
-          description: Optional. Text value in the document e.g. `1600 Amphitheatre Pkwy`. If the entity is not present in the document, this field will be empty.
+          description: Optional. Text value of the entity e.g. `1600 Amphitheatre Pkwy`.
           type: string
         normalizedValue:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DocumentEntityNormalizedValue"
@@ -3563,6 +3562,10 @@ components:
     GoogleCloudDocumentaiV1beta3DocumentOutputConfigGcsOutputConfig:
       description: The configuration used when outputting documents.
       properties:
+        fieldMask:
+          description: Specifies which fields to include in the output documents.
+          format: google-fieldmask
+          type: string
         gcsUri:
           description: The Cloud Storage uri (a directory) of the output.
           type: string
@@ -4260,9 +4263,6 @@ components:
           description: Human review config on the entity type.
         inactive:
           description: Whether the entity type should be considered as "inactive".
-          type: boolean
-        prefixedNamingOnProperties:
-          description: If set, the properties of this entity type must be prefixed with the parents.
           type: boolean
       type: object
     GoogleCloudDocumentaiV1beta3FetchProcessorTypesResponse:

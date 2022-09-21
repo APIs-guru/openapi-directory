@@ -8804,7 +8804,7 @@ paths:
       description: Updates an existing report. This method supports patch semantics.
       operationId: dfareporting.reports.patch
       parameters:
-        - description: The DFA user profile ID.
+        - description: The Campaign Manager 360 user profile ID.
           in: path
           name: profileId
           required: true
@@ -13652,7 +13652,7 @@ components:
           description: The kind of resource this is, in this case dfareporting#dimension.
           type: string
         name:
-          description: The dimension name, e.g. dfa:advertiser
+          description: The dimension name, e.g. advertiser
           type: string
       type: object
     DimensionFilter:
@@ -13891,6 +13891,9 @@ components:
         kind:
           description: The kind of resource this is, in this case dfareporting#eventFilter.
           type: string
+        uvarFilter:
+          $ref: "#/components/schemas/UvarFilter"
+          description: Filter on a custom variable.
       type: object
     EventTag:
       description: Contains properties of an event tag.
@@ -17918,6 +17921,32 @@ components:
           description: User role collection.
           items:
             $ref: "#/components/schemas/UserRole"
+          type: array
+      type: object
+    UvarFilter:
+      description: Defines the filtering on a single uvar.
+      properties:
+        complement:
+          description: Return rows which don't match this filter.
+          type: boolean
+        index:
+          description: Custom variable index the filter is applied to.
+          format: int64
+          type: string
+        kind:
+          description: The kind of resource this is, in this case dfareporting#uvarFilter.
+          type: string
+        match:
+          description: Indicates how the filter should be matched to the values.
+          enum:
+            - UNSPECIFIED
+            - EXACT
+            - CONTAINS
+          type: string
+        values:
+          description: Values to filter on.
+          items:
+            type: string
           type: array
       type: object
     VideoFormat:

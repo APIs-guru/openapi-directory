@@ -22,9 +22,9 @@ info:
     - format: openapi
       url: https://assuredworkloads.googleapis.com/$discovery/rest?version=v1
       version: "3.0"
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: assuredworkloads
-  x-preferred: false
 externalDocs:
   url: https://cloud.google.com
 tags:
@@ -61,10 +61,10 @@ paths:
       tags:
         - organizations
     get:
-      description: Gets Assured Workload associated with a CRM Node
-      operationId: assuredworkloads.organizations.locations.workloads.get
+      description: Retrieves Assured Workload Violation based on ID.
+      operationId: assuredworkloads.organizations.locations.workloads.violations.get
       parameters:
-        - description: Required. The resource name of the Workload to fetch. This is the workloads's relative path in the API, formatted as "organizations/{organization_id}/locations/{location_id}/workloads/{workload_id}". For example, "organizations/123/locations/us-east1/workloads/assured-workload-1".
+        - description: "Required. The resource name of the Violation to fetch (ie. Violation.name). Format: organizations/{organization}/locations/{location}/workloads/{workload}/violations/{violation}"
           in: path
           name: name
           required: true
@@ -75,7 +75,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1Workload"
+                $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1Violation"
           description: Successful response
       security:
         - Oauth2:
@@ -182,6 +182,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1/{name}:acknowledge":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Acknowledges an existing violation. By acknowledging a violation, users acknowledge the existence of a compliance violation in their workload and decide to ignore it due to a valid business justification. Acknowledgement is a permanent operation and it cannot be reverted.
+      operationId: assuredworkloads.organizations.locations.workloads.violations.acknowledge
+      parameters:
+        - description: "Required. The resource name of the Violation to acknowledge. Format: organizations/{organization}/locations/{location}/workloads/{workload}/violations/{violation}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1AcknowledgeViolationRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1AcknowledgeViolationResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
   "/v1/{name}:restrictAllowedResources":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -224,6 +266,68 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
+  "/v1/{parent}/violations":
+    get:
+      description: Lists the Violations in the AssuredWorkload Environment. Callers may also choose to read across multiple Workloads as per [AIP-159](https://google.aip.dev/159) by using '-' (the hyphen or dash character) as a wildcard character instead of workload-id in the parent. Format `organizations/{org_id}/locations/{location}/workloads/-`
+      operationId: assuredworkloads.organizations.locations.workloads.violations.list
+      parameters:
+        - description: Required. The Workload name. Format `organizations/{org_id}/locations/{location}/workloads/{workload}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. A custom filter for filtering by the Violations properties.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The end of the time window.
+          in: query
+          name: interval.endTime
+          schema:
+            type: string
+        - description: The start of the time window.
+          in: query
+          name: interval.startTime
+          schema:
+            type: string
+        - description: Optional. Page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. Page token returned from previous request.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1ListViolationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/workloads":
     get:
       description: Lists Assured Workloads under a CRM Node.
@@ -386,6 +490,20 @@ components:
       schema:
         type: string
   schemas:
+    GoogleCloudAssuredworkloadsV1AcknowledgeViolationRequest:
+      description: "Request for acknowledging the violation Next Id: 4"
+      properties:
+        comment:
+          description: Required. Business justification explaining the need for violation acknowledgement
+          type: string
+        nonCompliantOrgPolicy:
+          description: "Optional. Name of the OrgPolicy which was modified with non-compliant change and resulted in this violation. Format: projects/{project_number}/policies/{constraint_name} folders/{folder_id}/policies/{constraint_name} organizations/{organization_id}/policies/{constraint_name}"
+          type: string
+      type: object
+    GoogleCloudAssuredworkloadsV1AcknowledgeViolationResponse:
+      description: Response for violation acknowledgement
+      properties: {}
+      type: object
     GoogleCloudAssuredworkloadsV1CreateWorkloadOperationMetadata:
       description: Operation metadata to give request details of CreateWorkload.
       properties:
@@ -415,6 +533,18 @@ components:
           description: Optional. The parent of the workload.
           type: string
       type: object
+    GoogleCloudAssuredworkloadsV1ListViolationsResponse:
+      description: Response of ListViolations endpoint.
+      properties:
+        nextPageToken:
+          description: The next page token. Returns empty if reached the last page.
+          type: string
+        violations:
+          description: List of Violations under a Workload.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1Violation"
+          type: array
+      type: object
     GoogleCloudAssuredworkloadsV1ListWorkloadsResponse:
       description: Response of ListWorkloads endpoint.
       properties:
@@ -441,6 +571,140 @@ components:
     GoogleCloudAssuredworkloadsV1RestrictAllowedResourcesResponse:
       description: Response for restricting the list of allowed resources.
       properties: {}
+      type: object
+    GoogleCloudAssuredworkloadsV1Violation:
+      description: Workload monitoring Violation.
+      properties:
+        acknowledged:
+          description: A boolean that indicates if the violation is acknowledged
+          type: boolean
+        acknowledgementTime:
+          description: Optional. Timestamp when this violation was acknowledged last. This will be absent when acknowledged field is marked as false.
+          format: google-datetime
+          type: string
+        auditLogLink:
+          description: "Output only. Immutable. Audit Log Link for violated resource Format: https://console.cloud.google.com/logs/query;query={logName}{protoPayload.resourceName}{timeRange}{folder}"
+          readOnly: true
+          type: string
+        beginTime:
+          description: Output only. Time of the event which triggered the Violation.
+          format: google-datetime
+          readOnly: true
+          type: string
+        category:
+          description: Output only. Category under which this violation is mapped. e.g. Location, Service Usage, Access, Encryption, etc.
+          readOnly: true
+          type: string
+        description:
+          description: Output only. Description for the Violation. e.g. OrgPolicy gcp.resourceLocations has non compliant value.
+          readOnly: true
+          type: string
+        name:
+          description: "Output only. Immutable. Name of the Violation. Format: organizations/{organization}/locations/{location}/workloads/{workload_id}/violations/{violations_id}"
+          readOnly: true
+          type: string
+        nonCompliantOrgPolicy:
+          description: "Output only. Immutable. Name of the OrgPolicy which was modified with non-compliant change and resulted this violation. Format: projects/{project_number}/policies/{constraint_name} folders/{folder_id}/policies/{constraint_name} organizations/{organization_id}/policies/{constraint_name}"
+          readOnly: true
+          type: string
+        orgPolicyConstraint:
+          description: Output only. Immutable. The org-policy-constraint that was incorrectly changed, which resulted in this violation.
+          readOnly: true
+          type: string
+        remediation:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1ViolationRemediation"
+          description: Output only. Compliance violation remediation
+          readOnly: true
+        resolveTime:
+          description: Output only. Time of the event which fixed the Violation. If the violation is ACTIVE this will be empty.
+          format: google-datetime
+          readOnly: true
+          type: string
+        state:
+          description: Output only. State of the violation
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - RESOLVED
+            - UNRESOLVED
+            - EXCEPTION
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. The last time when the Violation record was updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudAssuredworkloadsV1ViolationRemediation:
+      description: Represents remediation guidance to resolve compliance violation for AssuredWorkload
+      properties:
+        compliantValues:
+          description: "Values that can resolve the violation For example: for list org policy violations, this will either be the list of allowed or denied values"
+          items:
+            type: string
+          type: array
+        instructions:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1ViolationRemediationInstructions"
+          description: Required. Remediation instructions to resolve violations
+        remediationType:
+          description: Output only. Reemediation type based on the type of org policy values violated
+          enum:
+            - REMEDIATION_TYPE_UNSPECIFIED
+            - REMEDIATION_BOOLEAN_ORG_POLICY_VIOLATION
+            - REMEDIATION_LIST_ALLOWED_VALUES_ORG_POLICY_VIOLATION
+            - REMEDIATION_LIST_DENIED_VALUES_ORG_POLICY_VIOLATION
+            - REMEDIATION_RESTRICT_CMEK_CRYPTO_KEY_PROJECTS_ORG_POLICY_VIOLATION
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudAssuredworkloadsV1ViolationRemediationInstructions:
+      description: Instructions to remediate violation
+      properties:
+        consoleInstructions:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1ViolationRemediationInstructionsConsole"
+          description: Remediation instructions to resolve violation via cloud console
+        gcloudInstructions:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1ViolationRemediationInstructionsGcloud"
+          description: Remediation instructions to resolve violation via gcloud cli
+      type: object
+    GoogleCloudAssuredworkloadsV1ViolationRemediationInstructionsConsole:
+      description: Remediation instructions to resolve violation via cloud console
+      properties:
+        additionalLinks:
+          description: Additional urls for more information about steps
+          items:
+            type: string
+          type: array
+        consoleUris:
+          description: Link to console page where violations can be resolved
+          items:
+            type: string
+          type: array
+        steps:
+          description: Steps to resolve violation via cloud console
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudAssuredworkloadsV1ViolationRemediationInstructionsGcloud:
+      description: Remediation instructions to resolve violation via gcloud cli
+      properties:
+        additionalLinks:
+          description: Additional urls for more information about steps
+          items:
+            type: string
+          type: array
+        gcloudCommands:
+          description: Gcloud command to resolve violation
+          items:
+            type: string
+          type: array
+        steps:
+          description: Steps to resolve violation via gcloud cli
+          items:
+            type: string
+          type: array
       type: object
     GoogleCloudAssuredworkloadsV1Workload:
       description: An Workload object for managing highly regulated workloads of cloud customers.
@@ -570,468 +834,6 @@ components:
           type: string
       type: object
     GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponse:
-      description: Signed Access Approvals (SAA) enrollment response.
-      properties:
-        setupErrors:
-          description: Indicates SAA enrollment setup error if any.
-          items:
-            enum:
-              - SETUP_ERROR_UNSPECIFIED
-              - ERROR_INVALID_BASE_SETUP
-              - ERROR_MISSING_EXTERNAL_SIGNING_KEY
-              - ERROR_NOT_ALL_SERVICES_ENROLLED
-              - ERROR_SETUP_CHECK_FAILED
-            type: string
-          type: array
-        setupStatus:
-          description: Indicates SAA enrollment status of a given workload.
-          enum:
-            - SETUP_STATE_UNSPECIFIED
-            - STATUS_PENDING
-            - STATUS_COMPLETE
-          type: string
-      type: object
-    GoogleCloudAssuredworkloadsV1beta1CreateWorkloadOperationMetadata:
-      description: Operation metadata to give request details of CreateWorkload.
-      properties:
-        complianceRegime:
-          description: Optional. Compliance controls that should be applied to the resources managed by the workload.
-          enum:
-            - COMPLIANCE_REGIME_UNSPECIFIED
-            - IL4
-            - CJIS
-            - FEDRAMP_HIGH
-            - FEDRAMP_MODERATE
-            - US_REGIONAL_ACCESS
-            - HIPAA
-            - HITRUST
-            - EU_REGIONS_AND_SUPPORT
-            - CA_REGIONS_AND_SUPPORT
-            - ITAR
-          type: string
-        createTime:
-          description: Optional. Time when the operation was created.
-          format: google-datetime
-          type: string
-        displayName:
-          description: Optional. The display name of the workload.
-          type: string
-        parent:
-          description: Optional. The parent of the workload.
-          type: string
-        resourceSettings:
-          description: Optional. Resource properties in the input that are used for creating/customizing workload resources.
-          items:
-            $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1WorkloadResourceSettings"
-          type: array
-      type: object
-    GoogleCloudAssuredworkloadsV1beta1Workload:
-      description: An Workload object for managing highly regulated workloads of cloud customers.
-      properties:
-        billingAccount:
-          description: Optional. The billing account used for the resources which are direct children of workload. This billing account is initially associated with the resources created as part of Workload creation. After the initial creation of these resources, the customer can change the assigned billing account. The resource name has the form `billingAccounts/{billing_account_id}`. For example, `billingAccounts/012345-567890-ABCDEF`.
-          type: string
-        cjisSettings:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1WorkloadCJISSettings"
-          description: Input only. Immutable. Settings specific to resources needed for CJIS.
-        complianceRegime:
-          description: Required. Immutable. Compliance Regime associated with this workload.
-          enum:
-            - COMPLIANCE_REGIME_UNSPECIFIED
-            - IL4
-            - CJIS
-            - FEDRAMP_HIGH
-            - FEDRAMP_MODERATE
-            - US_REGIONAL_ACCESS
-            - HIPAA
-            - HITRUST
-            - EU_REGIONS_AND_SUPPORT
-            - CA_REGIONS_AND_SUPPORT
-            - ITAR
-          type: string
-        compliantButDisallowedServices:
-          description: Output only. Urls for services which are compliant for this Assured Workload, but which are currently disallowed by the ResourceUsageRestriction org policy. Invoke RestrictAllowedResources endpoint to allow your project developers to use these services in their environment."
-          items:
-            type: string
-          readOnly: true
-          type: array
-        createTime:
-          description: Output only. Immutable. The Workload creation timestamp.
-          format: google-datetime
-          readOnly: true
-          type: string
-        displayName:
-          description: "Required. The user-assigned display name of the Workload. When present it must be between 4 to 30 characters. Allowed characters are: lowercase and uppercase letters, numbers, hyphen, and spaces. Example: My Workload"
-          type: string
-        enableSovereignControls:
-          description: Optional. Indicates the sovereignty status of the given workload. Currently meant to be used by Europe/Canada customers.
-          type: boolean
-        etag:
-          description: Optional. ETag of the workload, it is calculated on the basis of the Workload contents. It will be used in Update & Delete operations.
-          type: string
-        fedrampHighSettings:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1WorkloadFedrampHighSettings"
-          description: Input only. Immutable. Settings specific to resources needed for FedRAMP High.
-        fedrampModerateSettings:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1WorkloadFedrampModerateSettings"
-          description: Input only. Immutable. Settings specific to resources needed for FedRAMP Moderate.
-        il4Settings:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1WorkloadIL4Settings"
-          description: Input only. Immutable. Settings specific to resources needed for IL4.
-        kajEnrollmentState:
-          description: Output only. Represents the KAJ enrollment state of the given workload.
-          enum:
-            - KAJ_ENROLLMENT_STATE_UNSPECIFIED
-            - KAJ_ENROLLMENT_STATE_PENDING
-            - KAJ_ENROLLMENT_STATE_COMPLETE
-          readOnly: true
-          type: string
-        kmsSettings:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1WorkloadKMSSettings"
-          description: Input only. Settings used to create a CMEK crypto key. When set, a project with a KMS CMEK key is provisioned. This field is deprecated as of Feb 28, 2022. In order to create a Keyring, callers should specify, ENCRYPTION_KEYS_PROJECT or KEYRING in ResourceSettings.resource_type field.
-        labels:
-          additionalProperties:
-            type: string
-          description: Optional. Labels applied to the workload.
-          type: object
-        name:
-          description: "Optional. The resource name of the workload. Format: organizations/{organization}/locations/{location}/workloads/{workload} Read-only."
-          type: string
-        provisionedResourcesParent:
-          description: "Input only. The parent resource for the resources managed by this Assured Workload. May be either empty or a folder resource which is a child of the Workload parent. If not specified all resources are created under the parent organization. Format: folders/{folder_id}"
-          type: string
-        resourceSettings:
-          description: Input only. Resource properties that are used to customize workload resources. These properties (such as custom project id) will be used to create workload resources if possible. This field is optional.
-          items:
-            $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1WorkloadResourceSettings"
-          type: array
-        resources:
-          description: Output only. The resources associated with this workload. These resources will be created when creating the workload. If any of the projects already exist, the workload creation will fail. Always read only.
-          items:
-            $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1WorkloadResourceInfo"
-          readOnly: true
-          type: array
-        saaEnrollmentResponse:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1WorkloadSaaEnrollmentResponse"
-          description: Output only. Represents the SAA enrollment response of the given workload. SAA enrollment response is queried during GetWorkload call. In failure cases, user friendly error message is shown in SAA details page.
-          readOnly: true
-      type: object
-    GoogleCloudAssuredworkloadsV1beta1WorkloadCJISSettings:
-      description: Settings specific to resources needed for CJIS.
-      properties:
-        kmsSettings:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1WorkloadKMSSettings"
-          description: Input only. Immutable. Settings used to create a CMEK crypto key.
-      type: object
-    GoogleCloudAssuredworkloadsV1beta1WorkloadFedrampHighSettings:
-      description: Settings specific to resources needed for FedRAMP High.
-      properties:
-        kmsSettings:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1WorkloadKMSSettings"
-          description: Input only. Immutable. Settings used to create a CMEK crypto key.
-      type: object
-    GoogleCloudAssuredworkloadsV1beta1WorkloadFedrampModerateSettings:
-      description: Settings specific to resources needed for FedRAMP Moderate.
-      properties:
-        kmsSettings:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1WorkloadKMSSettings"
-          description: Input only. Immutable. Settings used to create a CMEK crypto key.
-      type: object
-    GoogleCloudAssuredworkloadsV1beta1WorkloadIL4Settings:
-      description: Settings specific to resources needed for IL4.
-      properties:
-        kmsSettings:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1WorkloadKMSSettings"
-          description: Input only. Immutable. Settings used to create a CMEK crypto key.
-      type: object
-    GoogleCloudAssuredworkloadsV1beta1WorkloadKMSSettings:
-      description: Settings specific to the Key Management Service.
-      properties:
-        nextRotationTime:
-          description: Required. Input only. Immutable. The time at which the Key Management Service will automatically create a new version of the crypto key and mark it as the primary.
-          format: google-datetime
-          type: string
-        rotationPeriod:
-          description: Required. Input only. Immutable. [next_rotation_time] will be advanced by this period when the Key Management Service automatically rotates a key. Must be at least 24 hours and at most 876,000 hours.
-          format: google-duration
-          type: string
-      type: object
-    GoogleCloudAssuredworkloadsV1beta1WorkloadResourceInfo:
-      description: Represent the resources that are children of this Workload.
-      properties:
-        resourceId:
-          description: Resource identifier. For a project this represents project_number.
-          format: int64
-          type: string
-        resourceType:
-          description: Indicates the type of resource.
-          enum:
-            - RESOURCE_TYPE_UNSPECIFIED
-            - CONSUMER_PROJECT
-            - CONSUMER_FOLDER
-            - ENCRYPTION_KEYS_PROJECT
-            - KEYRING
-          type: string
-      type: object
-    GoogleCloudAssuredworkloadsV1beta1WorkloadResourceSettings:
-      description: Represent the custom settings for the resources to be created.
-      properties:
-        displayName:
-          description: User-assigned resource display name. If not empty it will be used to create a resource with the specified name.
-          type: string
-        resourceId:
-          description: Resource identifier. For a project this represents project_id. If the project is already taken, the workload creation will fail. For KeyRing, this represents the keyring_id. For a folder, don't set this value as folder_id is assigned by Google.
-          type: string
-        resourceType:
-          description: Indicates the type of resource. This field should be specified to correspond the id to the right project type (CONSUMER_PROJECT or ENCRYPTION_KEYS_PROJECT)
-          enum:
-            - RESOURCE_TYPE_UNSPECIFIED
-            - CONSUMER_PROJECT
-            - CONSUMER_FOLDER
-            - ENCRYPTION_KEYS_PROJECT
-            - KEYRING
-          type: string
-      type: object
-    GoogleCloudAssuredworkloadsV1beta1WorkloadSaaEnrollmentResponse:
-      description: Signed Access Approvals (SAA) enrollment response.
-      properties:
-        setupErrors:
-          description: Indicates SAA enrollment setup error if any.
-          items:
-            enum:
-              - SETUP_ERROR_UNSPECIFIED
-              - ERROR_INVALID_BASE_SETUP
-              - ERROR_MISSING_EXTERNAL_SIGNING_KEY
-              - ERROR_NOT_ALL_SERVICES_ENROLLED
-              - ERROR_SETUP_CHECK_FAILED
-            type: string
-          type: array
-        setupStatus:
-          description: Indicates SAA enrollment status of a given workload.
-          enum:
-            - SETUP_STATE_UNSPECIFIED
-            - STATUS_PENDING
-            - STATUS_COMPLETE
-          type: string
-      type: object
-    GoogleCloudAssuredworkloadsVersioningV1mainCreateWorkloadOperationMetadata:
-      description: Operation metadata to give request details of CreateWorkload.
-      properties:
-        complianceRegime:
-          description: Optional. Compliance controls that should be applied to the resources managed by the workload.
-          enum:
-            - COMPLIANCE_REGIME_UNSPECIFIED
-            - IL4
-            - CJIS
-            - FEDRAMP_HIGH
-            - FEDRAMP_MODERATE
-            - US_REGIONAL_ACCESS
-            - HIPAA
-            - HITRUST
-            - EU_REGIONS_AND_SUPPORT
-            - CA_REGIONS_AND_SUPPORT
-            - ITAR
-          type: string
-        createTime:
-          description: Optional. Time when the operation was created.
-          format: google-datetime
-          type: string
-        displayName:
-          description: Optional. The display name of the workload.
-          type: string
-        parent:
-          description: Optional. The parent of the workload.
-          type: string
-        resourceSettings:
-          description: Optional. Resource properties in the input that are used for creating/customizing workload resources.
-          items:
-            $ref: "#/components/schemas/GoogleCloudAssuredworkloadsVersioningV1mainWorkloadResourceSettings"
-          type: array
-      type: object
-    GoogleCloudAssuredworkloadsVersioningV1mainWorkload:
-      description: An Workload object for managing highly regulated workloads of cloud customers.
-      properties:
-        billingAccount:
-          description: Optional. The billing account used for the resources which are direct children of workload. This billing account is initially associated with the resources created as part of Workload creation. After the initial creation of these resources, the customer can change the assigned billing account. The resource name has the form `billingAccounts/{billing_account_id}`. For example, `billingAccounts/012345-567890-ABCDEF`.
-          type: string
-        cjisSettings:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsVersioningV1mainWorkloadCJISSettings"
-          description: Required. Input only. Immutable. Settings specific to resources needed for CJIS.
-        complianceRegime:
-          description: Required. Immutable. Compliance Regime associated with this workload.
-          enum:
-            - COMPLIANCE_REGIME_UNSPECIFIED
-            - IL4
-            - CJIS
-            - FEDRAMP_HIGH
-            - FEDRAMP_MODERATE
-            - US_REGIONAL_ACCESS
-            - HIPAA
-            - HITRUST
-            - EU_REGIONS_AND_SUPPORT
-            - CA_REGIONS_AND_SUPPORT
-            - ITAR
-          type: string
-        complianceStatus:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsVersioningV1mainWorkloadComplianceStatus"
-          description: Output only. Count of active Violations in the Workload.
-          readOnly: true
-        compliantButDisallowedServices:
-          description: Output only. Urls for services which are compliant for this Assured Workload, but which are currently disallowed by the ResourceUsageRestriction org policy. Invoke RestrictAllowedResources endpoint to allow your project developers to use these services in their environment."
-          items:
-            type: string
-          readOnly: true
-          type: array
-        createTime:
-          description: Output only. Immutable. The Workload creation timestamp.
-          format: google-datetime
-          readOnly: true
-          type: string
-        displayName:
-          description: "Required. The user-assigned display name of the Workload. When present it must be between 4 to 30 characters. Allowed characters are: lowercase and uppercase letters, numbers, hyphen, and spaces. Example: My Workload"
-          type: string
-        enableSovereignControls:
-          description: Optional. Indicates the sovereignty status of the given workload. Currently meant to be used by Europe/Canada customers.
-          type: boolean
-        etag:
-          description: Optional. ETag of the workload, it is calculated on the basis of the Workload contents. It will be used in Update & Delete operations.
-          type: string
-        fedrampHighSettings:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsVersioningV1mainWorkloadFedrampHighSettings"
-          description: Required. Input only. Immutable. Settings specific to resources needed for FedRAMP High.
-        fedrampModerateSettings:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsVersioningV1mainWorkloadFedrampModerateSettings"
-          description: Required. Input only. Immutable. Settings specific to resources needed for FedRAMP Moderate.
-        il4Settings:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsVersioningV1mainWorkloadIL4Settings"
-          description: Required. Input only. Immutable. Settings specific to resources needed for IL4.
-        kajEnrollmentState:
-          description: Output only. Represents the KAJ enrollment state of the given workload.
-          enum:
-            - KAJ_ENROLLMENT_STATE_UNSPECIFIED
-            - KAJ_ENROLLMENT_STATE_PENDING
-            - KAJ_ENROLLMENT_STATE_COMPLETE
-          readOnly: true
-          type: string
-        kmsSettings:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsVersioningV1mainWorkloadKMSSettings"
-          description: Input only. Settings used to create a CMEK crypto key. When set, a project with a KMS CMEK key is provisioned. This field is deprecated as of Feb 28, 2022. In order to create a Keyring, callers should specify, ENCRYPTION_KEYS_PROJECT or KEYRING in ResourceSettings.resource_type field.
-        labels:
-          additionalProperties:
-            type: string
-          description: Optional. Labels applied to the workload.
-          type: object
-        name:
-          description: "Optional. The resource name of the workload. Format: organizations/{organization}/locations/{location}/workloads/{workload} Read-only."
-          type: string
-        provisionedResourcesParent:
-          description: "Input only. The parent resource for the resources managed by this Assured Workload. May be either empty or a folder resource which is a child of the Workload parent. If not specified all resources are created under the parent organization. Format: folders/{folder_id}"
-          type: string
-        resourceSettings:
-          description: Input only. Resource properties that are used to customize workload resources. These properties (such as custom project id) will be used to create workload resources if possible. This field is optional.
-          items:
-            $ref: "#/components/schemas/GoogleCloudAssuredworkloadsVersioningV1mainWorkloadResourceSettings"
-          type: array
-        resources:
-          description: Output only. The resources associated with this workload. These resources will be created when creating the workload. If any of the projects already exist, the workload creation will fail. Always read only.
-          items:
-            $ref: "#/components/schemas/GoogleCloudAssuredworkloadsVersioningV1mainWorkloadResourceInfo"
-          readOnly: true
-          type: array
-        saaEnrollmentResponse:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsVersioningV1mainWorkloadSaaEnrollmentResponse"
-          description: Output only. Represents the SAA enrollment response of the given workload. SAA enrollment response is queried during GetWorkload call. In failure cases, user friendly error message is shown in SAA details page.
-          readOnly: true
-      type: object
-    GoogleCloudAssuredworkloadsVersioningV1mainWorkloadCJISSettings:
-      description: Settings specific to resources needed for CJIS.
-      properties:
-        kmsSettings:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsVersioningV1mainWorkloadKMSSettings"
-          description: Input only. Immutable. Settings used to create a CMEK crypto key.
-      type: object
-    GoogleCloudAssuredworkloadsVersioningV1mainWorkloadComplianceStatus:
-      description: Represents the Compliance Status of this workload
-      properties:
-        acknowledgedViolationCount:
-          description: Count of active Violations which are acknowledged in the Workload.
-          format: int32
-          type: integer
-        activeViolationCount:
-          description: Count of active Violations which haven't been acknowledged.
-          format: int32
-          type: integer
-      type: object
-    GoogleCloudAssuredworkloadsVersioningV1mainWorkloadFedrampHighSettings:
-      description: Settings specific to resources needed for FedRAMP High.
-      properties:
-        kmsSettings:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsVersioningV1mainWorkloadKMSSettings"
-          description: Input only. Immutable. Settings used to create a CMEK crypto key.
-      type: object
-    GoogleCloudAssuredworkloadsVersioningV1mainWorkloadFedrampModerateSettings:
-      description: Settings specific to resources needed for FedRAMP Moderate.
-      properties:
-        kmsSettings:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsVersioningV1mainWorkloadKMSSettings"
-          description: Input only. Immutable. Settings used to create a CMEK crypto key.
-      type: object
-    GoogleCloudAssuredworkloadsVersioningV1mainWorkloadIL4Settings:
-      description: Settings specific to resources needed for IL4.
-      properties:
-        kmsSettings:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsVersioningV1mainWorkloadKMSSettings"
-          description: Input only. Immutable. Settings used to create a CMEK crypto key.
-      type: object
-    GoogleCloudAssuredworkloadsVersioningV1mainWorkloadKMSSettings:
-      description: Settings specific to the Key Management Service.
-      properties:
-        nextRotationTime:
-          description: Required. Input only. Immutable. The time at which the Key Management Service will automatically create a new version of the crypto key and mark it as the primary.
-          format: google-datetime
-          type: string
-        rotationPeriod:
-          description: Required. Input only. Immutable. [next_rotation_time] will be advanced by this period when the Key Management Service automatically rotates a key. Must be at least 24 hours and at most 876,000 hours.
-          format: google-duration
-          type: string
-      type: object
-    GoogleCloudAssuredworkloadsVersioningV1mainWorkloadResourceInfo:
-      description: Represent the resources that are children of this Workload.
-      properties:
-        resourceId:
-          description: Resource identifier. For a project this represents project_number.
-          format: int64
-          type: string
-        resourceType:
-          description: Indicates the type of resource.
-          enum:
-            - RESOURCE_TYPE_UNSPECIFIED
-            - CONSUMER_PROJECT
-            - CONSUMER_FOLDER
-            - ENCRYPTION_KEYS_PROJECT
-            - KEYRING
-          type: string
-      type: object
-    GoogleCloudAssuredworkloadsVersioningV1mainWorkloadResourceSettings:
-      description: Represent the custom settings for the resources to be created.
-      properties:
-        displayName:
-          description: User-assigned resource display name. If not empty it will be used to create a resource with the specified name.
-          type: string
-        resourceId:
-          description: Resource identifier. For a project this represents project_id. If the project is already taken, the workload creation will fail. For KeyRing, this represents the keyring_id. For a folder, don't set this value as folder_id is assigned by Google.
-          type: string
-        resourceType:
-          description: Indicates the type of resource. This field should be specified to correspond the id to the right project type (CONSUMER_PROJECT or ENCRYPTION_KEYS_PROJECT)
-          enum:
-            - RESOURCE_TYPE_UNSPECIFIED
-            - CONSUMER_PROJECT
-            - CONSUMER_FOLDER
-            - ENCRYPTION_KEYS_PROJECT
-            - KEYRING
-          type: string
-      type: object
-    GoogleCloudAssuredworkloadsVersioningV1mainWorkloadSaaEnrollmentResponse:
       description: Signed Access Approvals (SAA) enrollment response.
       properties:
         setupErrors:
