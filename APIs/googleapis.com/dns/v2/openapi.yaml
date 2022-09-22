@@ -3487,6 +3487,11 @@ components:
         kind:
           default: dns#responsePolicy
           type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: User labels.
+          type: object
         networks:
           description: List of network names specifying networks to which this policy is applied.
           items:
