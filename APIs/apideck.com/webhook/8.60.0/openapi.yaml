@@ -275,7 +275,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Webhook API
-  version: 8.59.0
+  version: 8.60.0
   x-apideck-api: webhook
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -912,6 +912,8 @@ components:
           description: The type of error returned
           example: RequestValidationError
           type: string
+      type: object
+      x-apideck-schema-id: BadRequest
     ConsumerId:
       description: Consumer identifier
       example: test_consumer_id
@@ -942,6 +944,7 @@ components:
         - events
         - unified_api
       type: object
+      x-apideck-schema-id: CreateWebhookRequest
     CreateWebhookResponse:
       properties:
         data:
@@ -959,6 +962,7 @@ components:
         - status
         - data
       type: object
+      x-apideck-schema-id: CreateWebhookResponse
     CreatedAt:
       example: 2020-09-30T07:43:32.000Z
       format: date-time
@@ -982,6 +986,7 @@ components:
         - status
         - data
       type: object
+      x-apideck-schema-id: DeleteWebhookResponse
     DeliveryUrl:
       description: The delivery url of the webhook endpoint.
       example: https://example.com/my/webhook/endpoint
@@ -1003,11 +1008,13 @@ components:
     ExecuteWebhookEventRequest:
       additionalProperties: true
       type: object
+      x-apideck-schema-id: ExecuteWebhookEventRequest
     ExecuteWebhookEventsRequest:
       items:
         additionalProperties: true
         type: object
       type: array
+      x-apideck-schema-id: ExecuteWebhookEventsRequest
     ExecuteWebhookResponse:
       properties:
         request_id:
@@ -1031,6 +1038,7 @@ components:
         - status
         - data
       type: object
+      x-apideck-schema-id: ExecuteWebhookResponse
     GetWebhookEventLogsResponse:
       properties:
         data:
@@ -1054,6 +1062,7 @@ components:
         - status
         - data
       type: object
+      x-apideck-schema-id: GetWebhookEventLogsResponse
       x-graphql-type-name: EventLogList
     GetWebhookResponse:
       properties:
@@ -1072,6 +1081,7 @@ components:
         - status
         - data
       type: object
+      x-apideck-schema-id: GetWebhookResponse
       x-graphql-type-name: Webhook
     GetWebhooksResponse:
       properties:
@@ -1096,6 +1106,7 @@ components:
         - status
         - data
       type: object
+      x-apideck-schema-id: GetWebhooksResponse
       x-graphql-type-name: WebhookList
     Links:
       description: Links to navigate to previous or next pages through the API
@@ -1115,6 +1126,7 @@ components:
           nullable: true
           type: string
       type: object
+      x-apideck-schema-id: Links
     Meta:
       description: Response metadata
       properties:
@@ -1142,6 +1154,7 @@ components:
           example: 50
           type: integer
       type: object
+      x-apideck-schema-id: Meta
     NotFoundResponse:
       properties:
         detail:
@@ -1174,6 +1187,8 @@ components:
           description: The type of error returned
           example: EntityNotFoundError
           type: string
+      type: object
+      x-apideck-schema-id: NotFound
     NotImplementedResponse:
       properties:
         detail:
@@ -1202,6 +1217,8 @@ components:
           description: The type of error returned
           example: MappingError
           type: string
+      type: object
+      x-apideck-schema-id: NotImplemented
     PaymentRequiredResponse:
       properties:
         detail:
@@ -1228,6 +1245,8 @@ components:
           description: The type of error returned
           example: RequestLimitError
           type: string
+      type: object
+      x-apideck-schema-id: PaymentRequired
     ServiceId:
       description: Service provider identifier
       example: close
@@ -1267,6 +1286,8 @@ components:
           description: The type of error returned
           example: UnauthorizedError
           type: string
+      type: object
+      x-apideck-schema-id: Unauthorized
     UnexpectedErrorResponse:
       properties:
         detail:
@@ -1298,6 +1319,8 @@ components:
           description: The type of error returned
           example: RequestHeadersValidationError
           type: string
+      type: object
+      x-apideck-schema-id: Error
     UnifiedApiId:
       description: Name of Apideck Unified API
       enum:
@@ -1352,6 +1375,8 @@ components:
           description: The type of error returned
           example: InvalidStateError
           type: string
+      type: object
+      x-apideck-schema-id: Unprocessable
     UpdateWebhookRequest:
       additionalProperties: false
       properties:
@@ -1371,6 +1396,7 @@ components:
         status:
           $ref: "#/components/schemas/Status"
       type: object
+      x-apideck-schema-id: UpdateWebhookRequest
     UpdateWebhookResponse:
       properties:
         data:
@@ -1388,6 +1414,7 @@ components:
         - status
         - data
       type: object
+      x-apideck-schema-id: UpdateWebhookResponse
     UpdatedAt:
       example: 2020-09-30T07:43:32.000Z
       format: date-time
@@ -1431,6 +1458,7 @@ components:
         - unified_api
         - execute_base_url
       type: object
+      x-apideck-schema-id: Webhook
     WebhookEvent:
       properties:
         entity_id:
@@ -1561,6 +1589,7 @@ components:
         unified_api:
           $ref: "#/components/schemas/UnifiedApiId"
       type: object
+      x-apideck-schema-id: WebhookEventLog
     WebhookEventLogsFilter:
       properties:
         consumer_id:
@@ -1586,6 +1615,7 @@ components:
               type: string
           type: object
       type: object
+      x-apideck-schema-id: WebhookEventLogsFilter
       x-graphql-type-name: WebhookEventLogsFilter
     WebhookEventType:
       enum:

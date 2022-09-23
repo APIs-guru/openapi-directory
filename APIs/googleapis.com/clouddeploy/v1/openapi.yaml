@@ -1252,7 +1252,7 @@ components:
         annotations:
           additionalProperties:
             type: string
-          description: User annotations. These attributes can only be set and used by the user, and not by Google Cloud Deploy. See https://google.aip.dev/128#annotations for more details such as format and size limitations.
+          description: User annotations. These attributes can only be set and used by the user, and not by Google Cloud Deploy.
           type: object
         condition:
           $ref: "#/components/schemas/PipelineCondition"
@@ -1334,6 +1334,18 @@ components:
           description: Output only. Additional information about the deploy failure, if available.
           readOnly: true
           type: string
+        metadata:
+          $ref: "#/components/schemas/DeployJobRunMetadata"
+          description: Output only. Metadata containing information about the deploy job run.
+          readOnly: true
+      type: object
+    DeployJobRunMetadata:
+      description: DeployJobRunMetadata surfaces information associated with a `DeployJobRun` to the user.
+      properties:
+        cloudRun:
+          $ref: "#/components/schemas/CloudRunMetadata"
+          description: Output only. The name of the Cloud Run Service that is associated with a `DeployJobRun`.
+          readOnly: true
       type: object
     DeploymentJobs:
       description: Deployment job composition.
@@ -1496,6 +1508,35 @@ components:
           $ref: "#/components/schemas/VerifyJobRun"
           description: Output only. Information specific to a verify `JobRun`.
           readOnly: true
+      type: object
+    JobRunNotificationEvent:
+      description: Payload proto for "clouddeploy.googleapis.com/jobrun_notification" Platform Log event that describes the failure to send JobRun resource update Pub/Sub notification.
+      properties:
+        jobRun:
+          description: The name of the `JobRun`.
+          type: string
+        message:
+          description: Debug message for when a notification fails to send.
+          type: string
+        pipelineUid:
+          description: Unique identifier of the `DeliveryPipeline`.
+          type: string
+        releaseUid:
+          description: Unique identifier of the `Release`.
+          type: string
+        rolloutUid:
+          description: Unique identifier of the `Rollout`.
+          type: string
+        targetId:
+          description: ID of the `Target`.
+          type: string
+        type:
+          description: Type of this notification, e.g. for a Pub/Sub failure.
+          enum:
+            - TYPE_UNSPECIFIED
+            - TYPE_PUBSUB_NOTIFICATION_FAILURE
+            - TYPE_RENDER_STATUES_CHANGE
+          type: string
       type: object
     ListDeliveryPipelinesResponse:
       description: The response object from `ListDeliveryPipelines`.

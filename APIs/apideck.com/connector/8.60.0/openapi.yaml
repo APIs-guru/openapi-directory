@@ -275,7 +275,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Connector API
-  version: 8.59.0
+  version: 8.60.0
   x-apideck-api: connector
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -902,6 +902,7 @@ components:
             - unified
           type: string
       type: object
+      x-apideck-schema-id: Api
     ApiResource:
       properties:
         id:
@@ -956,6 +957,7 @@ components:
         status:
           $ref: "#/components/schemas/ResourceStatus"
       type: object
+      x-apideck-schema-id: ApiResource
     ApiResourceCoverage:
       properties:
         coverage:
@@ -1029,6 +1031,7 @@ components:
         status:
           $ref: "#/components/schemas/ResourceStatus"
       type: object
+      x-apideck-schema-id: ApiResourceCoverage
     ApiStatus:
       description: Status of the API. APIs with status live or beta are callable.
       enum:
@@ -1045,6 +1048,7 @@ components:
         status:
           $ref: "#/components/schemas/ApiStatus"
       type: object
+      x-apideck-schema-id: ApisFilter
       x-graphql-type-name: ApisFilter
     BadRequestResponse:
       properties:
@@ -1077,6 +1081,8 @@ components:
           description: The type of error returned
           example: RequestValidationError
           type: string
+      type: object
+      x-apideck-schema-id: BadRequest
     Connector:
       properties:
         auth_only:
@@ -1263,6 +1269,7 @@ components:
           format: uri
           type: string
       type: object
+      x-apideck-schema-id: Connector
     ConnectorDoc:
       properties:
         audience:
@@ -1288,6 +1295,7 @@ components:
           format: uri
           type: string
       type: object
+      x-apideck-schema-id: ConnectorDoc
     ConnectorResource:
       properties:
         downstream_id:
@@ -1354,6 +1362,7 @@ components:
             type: string
           type: array
       type: object
+      x-apideck-schema-id: ConnectorResource
     ConnectorSetting:
       properties:
         id:
@@ -1380,6 +1389,7 @@ components:
             - password
           example: select
       type: object
+      x-apideck-schema-id: ConnectorSetting
     ConnectorStatus:
       description: Status of the connector. Connectors with status live or beta are callable.
       enum:
@@ -1398,6 +1408,7 @@ components:
         unified_api:
           $ref: "#/components/schemas/UnifiedApiId"
       type: object
+      x-apideck-schema-id: ConnectorsFilter
       x-graphql-type-name: ConnectorsFilter
     GetApiResourceCoverageResponse:
       properties:
@@ -1420,6 +1431,7 @@ components:
         - status
         - data
       type: object
+      x-apideck-schema-id: GetApiResourceCoverageResponse
     GetApiResourceResponse:
       properties:
         data:
@@ -1441,6 +1453,7 @@ components:
         - status
         - data
       type: object
+      x-apideck-schema-id: GetApiResourceResponse
     GetApiResponse:
       properties:
         data:
@@ -1462,6 +1475,7 @@ components:
         - status
         - data
       type: object
+      x-apideck-schema-id: GetApiResponse
     GetApisResponse:
       properties:
         data:
@@ -1485,6 +1499,7 @@ components:
         - status
         - data
       type: object
+      x-apideck-schema-id: GetApisResponse
       x-graphql-type-name: ApiList
     GetConnectorResourceResponse:
       properties:
@@ -1507,6 +1522,7 @@ components:
         - status
         - data
       type: object
+      x-apideck-schema-id: GetConnectorResourceResponse
     GetConnectorResponse:
       properties:
         data:
@@ -1528,6 +1544,7 @@ components:
         - status
         - data
       type: object
+      x-apideck-schema-id: GetConnectorResponse
     GetConnectorsResponse:
       properties:
         data:
@@ -1551,6 +1568,7 @@ components:
         - status
         - data
       type: object
+      x-apideck-schema-id: GetConnectorsResponse
       x-graphql-type-name: ConnectorList
     Id:
       example: "12345"
@@ -1574,6 +1592,7 @@ components:
           nullable: true
           type: string
       type: object
+      x-apideck-schema-id: Links
     Meta:
       description: Response metadata
       properties:
@@ -1601,6 +1620,7 @@ components:
           example: 50
           type: integer
       type: object
+      x-apideck-schema-id: Meta
     NotFoundResponse:
       properties:
         detail:
@@ -1633,6 +1653,8 @@ components:
           description: The type of error returned
           example: EntityNotFoundError
           type: string
+      type: object
+      x-apideck-schema-id: NotFound
     PaymentRequiredResponse:
       properties:
         detail:
@@ -1659,6 +1681,8 @@ components:
           description: The type of error returned
           example: RequestLimitError
           type: string
+      type: object
+      x-apideck-schema-id: PaymentRequired
     ResourceId:
       description: ID of the resource, typically a lowercased version of name.
       example: companies
@@ -1702,6 +1726,8 @@ components:
           description: The type of error returned
           example: ConnectorRateLimitError
           type: string
+      type: object
+      x-apideck-schema-id: TooManyRequests
     UnauthorizedResponse:
       properties:
         detail:
@@ -1728,6 +1754,8 @@ components:
           description: The type of error returned
           example: UnauthorizedError
           type: string
+      type: object
+      x-apideck-schema-id: Unauthorized
     UnexpectedErrorResponse:
       properties:
         detail:
@@ -1759,6 +1787,8 @@ components:
           description: The type of error returned
           example: RequestHeadersValidationError
           type: string
+      type: object
+      x-apideck-schema-id: Error
     UnifiedApiId:
       description: Name of Apideck Unified API
       enum:

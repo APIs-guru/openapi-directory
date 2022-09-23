@@ -148,10 +148,10 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v2/{name}":
     delete:
-      description: Delete an NFS share. The underlying volume is automatically deleted.
-      operationId: baremetalsolution.projects.locations.nfsShares.delete
+      description: Deletes a public SSH key registered in the specified project.
+      operationId: baremetalsolution.projects.locations.sshKeys.delete
       parameters:
-        - description: Required. The name of the NFS share to delete.
+        - description: Required. The name of the SSH key to delete. Currently, the only valid value for the location is "global".
           in: path
           name: name
           required: true
@@ -162,7 +162,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
@@ -293,6 +293,90 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v2/{name}:disableInteractiveSerialConsole":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Disable the interactive serial console feature on an instance.
+      operationId: baremetalsolution.projects.locations.instances.disableInteractiveSerialConsole
+      parameters:
+        - description: Required. Name of the resource.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DisableInteractiveSerialConsoleRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2/{name}:enableInteractiveSerialConsole":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Enable the interactive serial console feature on an instance.
+      operationId: baremetalsolution.projects.locations.instances.enableInteractiveSerialConsole
+      parameters:
+        - description: Required. Name of the resource.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EnableInteractiveSerialConsoleRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v2/{name}:reset":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -816,6 +900,87 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v2/{parent}/sshKeys":
+    get:
+      description: Lists the public SSH keys registered for the specified project. These SSH keys are used only for the interactive serial console feature.
+      operationId: baremetalsolution.projects.locations.sshKeys.list
+      parameters:
+        - description: Required. The parent containing the SSH keys. Currently, the only valid value for the location is "global".
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of items to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from a previous List request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListSSHKeysResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Register a public SSH key in the specified project for use with the interactive serial console feature.
+      operationId: baremetalsolution.projects.locations.sshKeys.create
+      parameters:
+        - description: Required. The parent containing the SSH keys.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Required. The ID to use for the key, which will become the final component of the key's resource name. This value must match the regex: [a-zA-Z0-9@.\\-_]{1,64}"
+          in: query
+          name: sshKeyId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SSHKey"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SSHKey"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v2/{parent}/volumes":
     get:
       description: List storage volumes in a given project and location.
@@ -1030,6 +1195,18 @@ components:
           description: If true, performs lun unmapping without instance reboot.
           type: boolean
       type: object
+    DisableInteractiveSerialConsoleRequest:
+      description: Message for disabling the interactive serial console on an instance.
+      properties: {}
+      type: object
+    Empty:
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
+      properties: {}
+      type: object
+    EnableInteractiveSerialConsoleRequest:
+      description: Message for enabling the interactive serial console on an instance.
+      properties: {}
+      type: object
     FetchInstanceProvisioningSettingsResponse:
       description: Response with all provisioning settings.
       properties:
@@ -1138,6 +1315,10 @@ components:
             - PROVISIONING
             - RUNNING
             - DELETED
+            - UPDATING
+            - STARTING
+            - STOPPING
+            - SHUTDOWN
           readOnly: true
           type: string
         updateTime:
@@ -1330,6 +1511,18 @@ components:
             $ref: "#/components/schemas/ProvisioningQuota"
           type: array
       type: object
+    ListSSHKeysResponse:
+      description: Message for response of ListSSHKeys.
+      properties:
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+        sshKeys:
+          description: The SSH keys registered in the project.
+          items:
+            $ref: "#/components/schemas/SSHKey"
+          type: array
+      type: object
     ListVolumesResponse:
       description: Response message containing the list of storage volumes.
       properties:
@@ -1460,6 +1653,10 @@ components:
         cidr:
           description: The cidr of the Network.
           type: string
+        gatewayIp:
+          description: Output only. Gateway ip address.
+          readOnly: true
+          type: string
         id:
           description: An identifier for the `Network`, generated by the backend.
           type: string
@@ -1507,6 +1704,7 @@ components:
             - PROVISIONING
             - PROVISIONED
             - DEPROVISIONING
+            - UPDATING
           type: string
         type:
           description: The type of this network.
@@ -1799,6 +1997,9 @@ components:
           description: Output only. URI to Cloud Console UI view of this provisioning config.
           readOnly: true
           type: string
+        customId:
+          description: Optional. The user-defined identifier of the provisioning config.
+          type: string
         email:
           description: Email provided to send a confirmation with provisioning config to. Deprecated in favour of email field in request messages.
           type: string
@@ -1814,7 +2015,7 @@ components:
           description: Optional. Location name of this ProvisioningConfig. It is optional only for Intake UI transition period.
           type: string
         name:
-          description: Output only. The name of the provisioning config.
+          description: Output only. The system-generated name of the provisioning config. This follows the UUID format.
           readOnly: true
           type: string
         networks:
@@ -1914,6 +2115,17 @@ components:
         sizeGib:
           description: New Volume size, in GiB.
           format: int64
+          type: string
+      type: object
+    SSHKey:
+      description: An SSH key, used for authorizing with the interactive serial console feature.
+      properties:
+        name:
+          description: Output only. The name of this SSH key. Currently, the only valid value for the location is "global".
+          readOnly: true
+          type: string
+        publicKey:
+          description: The public SSH key. This must be in OpenSSH .authorized_keys format.
           type: string
       type: object
     ServerNetworkTemplate:
@@ -2089,7 +2301,8 @@ components:
           enum:
             - VOLUME_PERFORMANCE_TIER_UNSPECIFIED
             - VOLUME_PERFORMANCE_TIER_SHARED
-            - VOLUME_PERFORMANCE_TIER_DEDICATED
+            - VOLUME_PERFORMANCE_TIER_ASSIGNED
+            - VOLUME_PERFORMANCE_TIER_HT
           type: string
         pod:
           description: Immutable. Pod name.
@@ -2134,6 +2347,7 @@ components:
             - CREATING
             - READY
             - DELETING
+            - UPDATING
           type: string
         storageType:
           description: The storage type for this volume.
@@ -2176,7 +2390,8 @@ components:
           enum:
             - VOLUME_PERFORMANCE_TIER_UNSPECIFIED
             - VOLUME_PERFORMANCE_TIER_SHARED
-            - VOLUME_PERFORMANCE_TIER_DEDICATED
+            - VOLUME_PERFORMANCE_TIER_ASSIGNED
+            - VOLUME_PERFORMANCE_TIER_HT
           type: string
         protocol:
           description: Volume protocol.

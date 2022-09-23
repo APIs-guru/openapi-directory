@@ -114,6 +114,11 @@ paths:
           name: location
           schema:
             type: string
+        - description: Optional. The job name. Optional.
+          in: query
+          name: name
+          schema:
+            type: string
         - description: If there are many jobs, limit response to at most this many. The actual number of jobs returned will be the lesser of max_responses and an unspecified server-defined limit.
           in: query
           name: pageSize
@@ -838,6 +843,11 @@ paths:
           name: location
           schema:
             type: string
+        - description: Optional. The job name. Optional.
+          in: query
+          name: name
+          schema:
+            type: string
         - description: If there are many jobs, limit response to at most this many. The actual number of jobs returned will be the lesser of max_responses and an unspecified server-defined limit.
           in: query
           name: pageSize
@@ -1042,6 +1052,11 @@ paths:
               - ALL
               - TERMINATED
               - ACTIVE
+            type: string
+        - description: Optional. The job name. Optional.
+          in: query
+          name: name
+          schema:
             type: string
         - description: If there are many jobs, limit response to at most this many. The actual number of jobs returned will be the lesser of max_responses and an unspecified server-defined limit.
           in: query
@@ -4578,6 +4593,9 @@ components:
           items:
             $ref: "#/components/schemas/TransformSummary"
           type: array
+        stepNamesHash:
+          description: A hash value of the submitted pipeline portable graph step names if exists.
+          type: string
       type: object
     Point:
       description: A point in the timeseries.

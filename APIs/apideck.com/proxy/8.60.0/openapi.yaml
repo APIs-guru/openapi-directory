@@ -233,7 +233,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Proxy API
-  version: 8.59.0
+  version: 8.60.0
   x-apideck-api: proxy
   x-apisguru-categories:
     - developer_tools
@@ -609,6 +609,8 @@ components:
                 description: The type of error returned
                 example: UnauthorizedError
                 type: string
+            type: object
+            x-apideck-schema-id: Unauthorized
       description: Unauthorized
   securitySchemes:
     apiKey:

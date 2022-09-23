@@ -164,7 +164,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 8.59.0
+  version: 8.60.0
   x-apideck-api: vault
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1677,6 +1677,8 @@ components:
           description: The type of error returned
           example: RequestValidationError
           type: string
+      type: object
+      x-apideck-schema-id: BadRequest
     Connection:
       properties:
         auth_type:
@@ -1882,6 +1884,7 @@ components:
           readOnly: true
           type: string
       type: object
+      x-apideck-schema-id: Connection
     ConnectionEvent:
       properties:
         entity:
@@ -1962,6 +1965,7 @@ components:
           nullable: true
           type: object
       type: object
+      x-apideck-schema-id: ConnectionImportData
     ConnectionMetadata:
       properties:
         id:
@@ -1969,6 +1973,7 @@ components:
         name:
           type: string
       type: object
+      x-apideck-schema-id: ConnectionMetadata
     ConnectionState:
       description: "[Connection state flow](#section/Connection-state)"
       enum:
@@ -1980,6 +1985,7 @@ components:
       readOnly: true
       type: string
       x-apideck-enum-id: connections.state
+      x-apideck-schema-id: ConnectionState
     Consumer:
       properties:
         aggregated_request_count:
@@ -2017,6 +2023,7 @@ components:
             type: string
           type: array
       type: object
+      x-apideck-schema-id: Consumer
     ConsumerConnection:
       properties:
         auth_type:
@@ -2089,6 +2096,7 @@ components:
           readOnly: true
           type: string
       type: object
+      x-apideck-schema-id: ConsumerConnection
     ConsumerMetadata:
       properties:
         account_name:
@@ -2104,6 +2112,7 @@ components:
           example: Elon Musk
           type: string
       type: object
+      x-apideck-schema-id: ConsumerMetadata
     ConsumerRequestCountsInDateRangeResponse:
       properties:
         data:
@@ -2126,6 +2135,7 @@ components:
               example: 2021-05-01T12:00:00.000Z
               type: string
           type: object
+          x-apideck-schema-id: ConsumerRequestCountsInDateRange
         status:
           description: HTTP Response Status
           example: OK
@@ -2139,6 +2149,7 @@ components:
         - status
         - data
       type: object
+      x-apideck-schema-id: ConsumerRequestCountsInDateRangeResponse
     ConsumerWebhook:
       additionalProperties: false
       properties:
@@ -2293,6 +2304,7 @@ components:
         - unified_api
         - execute_base_url
       type: object
+      x-apideck-schema-id: Webhook
     CreateConnectionResponse:
       properties:
         data:
@@ -2310,6 +2322,7 @@ components:
         - status
         - data
       type: object
+      x-apideck-schema-id: CreateConnectionResponse
     CreateSessionResponse:
       additionalProperties: false
       properties:
@@ -2341,6 +2354,7 @@ components:
         - status
         - data
       type: object
+      x-apideck-schema-id: CreateSessionResponse
     FormField:
       properties:
         allow_custom_values:
@@ -2401,6 +2415,7 @@ components:
             - number
           example: select
       type: object
+      x-apideck-schema-id: FormField
       x-graphql-type-name: FormField
     FormFieldOption:
       anyOf:
@@ -2419,6 +2434,7 @@ components:
             $ref: "#/components/schemas/SimpleFormFieldOption"
           type: array
       type: object
+      x-apideck-schema-id: FormFieldOptionGroup
     GetConnectionResponse:
       properties:
         data:
@@ -2436,6 +2452,7 @@ components:
         - status
         - data
       type: object
+      x-apideck-schema-id: GetConnectionResponse
     GetConnectionsResponse:
       properties:
         data:
@@ -2455,6 +2472,7 @@ components:
         - status
         - data
       type: object
+      x-apideck-schema-id: GetConnectionsResponse
     GetConsumerResponse:
       properties:
         data:
@@ -2472,6 +2490,7 @@ components:
         - status
         - data
       type: object
+      x-apideck-schema-id: GetConsumerResponse
     GetConsumersResponse:
       properties:
         data:
@@ -2526,6 +2545,7 @@ components:
         - status
         - data
       type: object
+      x-apideck-schema-id: GetConsumersResponse
     GetLogsResponse:
       properties:
         data:
@@ -2549,6 +2569,7 @@ components:
         - status
         - data
       type: object
+      x-apideck-schema-id: GetLogsResponse
       x-graphql-type-name: LogList
     Links:
       description: Links to navigate to previous or next pages through the API
@@ -2568,6 +2589,7 @@ components:
           nullable: true
           type: string
       type: object
+      x-apideck-schema-id: Links
     Log:
       additionalProperties: false
       properties:
@@ -2715,6 +2737,7 @@ components:
         - timestamp
         - unified_api
       type: object
+      x-apideck-schema-id: Log
     LogsFilter:
       properties:
         connector_id:
@@ -2730,6 +2753,7 @@ components:
           nullable: true
           type: number
       type: object
+      x-apideck-schema-id: LogsFilter
       x-graphql-type-name: LogsFilter
     Meta:
       description: Response metadata
@@ -2758,6 +2782,7 @@ components:
           example: 50
           type: integer
       type: object
+      x-apideck-schema-id: Meta
     NotFoundResponse:
       properties:
         detail:
@@ -2790,6 +2815,8 @@ components:
           description: The type of error returned
           example: EntityNotFoundError
           type: string
+      type: object
+      x-apideck-schema-id: NotFound
     NotImplementedResponse:
       properties:
         detail:
@@ -2818,6 +2845,8 @@ components:
           description: The type of error returned
           example: MappingError
           type: string
+      type: object
+      x-apideck-schema-id: NotImplemented
     OAuthGrantType:
       description: "OAuth grant type used by the connector. More info: https://oauth.net/2/grant-types"
       enum:
@@ -2853,6 +2882,8 @@ components:
           description: The type of error returned
           example: RequestLimitError
           type: string
+      type: object
+      x-apideck-schema-id: PaymentRequired
     ProxyRequest:
       example:
         account_sid: ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -2874,6 +2905,7 @@ components:
         uri: /2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.json
       properties: {}
       type: object
+      x-apideck-schema-id: ProxyRequest
     RequestCountAllocation:
       properties:
         proxy:
@@ -2886,6 +2918,7 @@ components:
           example: 21
           type: number
       type: object
+      x-apideck-schema-id: RequestCountAllocation
     Session:
       additionalProperties: false
       properties:
@@ -2976,6 +3009,7 @@ components:
               type: string
           type: object
       type: object
+      x-apideck-schema-id: Session
     SimpleFormFieldOption:
       properties:
         label:
@@ -3001,6 +3035,7 @@ components:
                   - type: number
               type: array
       type: object
+      x-apideck-schema-id: SimpleFormFieldOption
     UnauthorizedResponse:
       properties:
         detail:
@@ -3027,6 +3062,8 @@ components:
           description: The type of error returned
           example: UnauthorizedError
           type: string
+      type: object
+      x-apideck-schema-id: Unauthorized
     UnexpectedErrorResponse:
       properties:
         detail:
@@ -3058,6 +3095,8 @@ components:
           description: The type of error returned
           example: RequestHeadersValidationError
           type: string
+      type: object
+      x-apideck-schema-id: Error
     UnifiedApiId:
       description: Name of Apideck Unified API
       enum:
@@ -3112,6 +3151,8 @@ components:
           description: The type of error returned
           example: InvalidStateError
           type: string
+      type: object
+      x-apideck-schema-id: Unprocessable
     UpdateConnectionResponse:
       properties:
         data:
@@ -3129,6 +3170,7 @@ components:
         - status
         - data
       type: object
+      x-apideck-schema-id: UpdateConnectionResponse
     VaultEventType:
       enum:
         - "*"

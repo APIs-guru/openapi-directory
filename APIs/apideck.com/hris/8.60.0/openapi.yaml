@@ -275,7 +275,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: HRIS API
-  version: 8.59.0
+  version: 8.60.0
   x-apideck-api: hris
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -331,6 +331,11 @@ tags:
     x-apideck-model:
       $ref: "#/components/schemas/HrisJobs"
     x-apideck-resource-id: jobs
+  - description: ""
+    name: Time Off Requests
+    x-apideck-model:
+      $ref: "#/components/schemas/TimeOffRequest"
+    x-apideck-resource-id: TimeOffRequests
 paths:
   /hris/companies:
     get:
@@ -1983,6 +1988,307 @@ paths:
               console.error(error)
             }
       x-graphql-field-name: employeeSchedules
+  /hris/time-off-requests:
+    get:
+      description: List Time Off Requests
+      operationId: timeOffRequestsAll
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/timeOffRequestsFilter"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetTimeOffRequestsResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: List Time Off Requests
+      tags:
+        - Time Off Requests
+      x-apideck-api: hris
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.hris.timeOffRequestsAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: timeOffRequests
+    post:
+      description: Create Time Off Request
+      operationId: timeOffRequestsAdd
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TimeOffRequest"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateTimeOffRequestResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Create Time Off Request
+      tags:
+        - Time Off Requests
+      x-apideck-api: hris
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              timeOffRequest: {
+                employee_id: '12345',
+                policy_id: '12345',
+                status: 'approved',
+                description: 'Enjoying some sun.',
+                start_date: '2022-04-01',
+                end_date: '2022-04-01',
+                request_date: '2022-03-21',
+                request_type: 'vacaction',
+                approval_date: '2022-03-21',
+                units: 'hours',
+                amount: 3.5,
+                notes: {
+                  employee: 'Relaxing on the beach for a few hours.',
+                  manager: 'Enjoy!'
+                }
+              }
+            }
+
+            try {
+              const { data } = await apideck.hris.timeOffRequestsAdd(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/hris/time-off-requests/{id}":
+    delete:
+      description: Delete Time Off Request
+      operationId: timeOffRequestsDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeleteTimeOffRequestResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Delete Time Off Request
+      tags:
+        - Time Off Requests
+      x-apideck-api: hris
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.hris.timeOffRequestsDelete({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    get:
+      description: Get Time Off Request
+      operationId: timeOffRequestsOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetTimeOffRequestResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get Time Off Request
+      tags:
+        - Time Off Requests
+      x-apideck-api: hris
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.hris.timeOffRequestsOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    patch:
+      description: Update Time Off Request
+      operationId: timeOffRequestsUpdate
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TimeOffRequest"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdateTimeOffRequestResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Update Time Off Request
+      tags:
+        - Time Off Requests
+      x-apideck-api: hris
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              id: 'id_example',
+              timeOffRequest: {
+                employee_id: '12345',
+                policy_id: '12345',
+                status: 'approved',
+                description: 'Enjoying some sun.',
+                start_date: '2022-04-01',
+                end_date: '2022-04-01',
+                request_date: '2022-03-21',
+                request_type: 'vacaction',
+                approval_date: '2022-03-21',
+                units: 'hours',
+                amount: 3.5,
+                notes: {
+                  employee: 'Relaxing on the beach for a few hours.',
+                  manager: 'Enjoy!'
+                }
+              }
+            }
+
+            try {
+              const { data } = await apideck.hris.timeOffRequestsUpdate(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
 components:
   parameters:
     applicationId:
@@ -2079,6 +2385,14 @@ components:
       name: x-apideck-service-id
       schema:
         type: string
+    timeOffRequestsFilter:
+      description: Apply filters
+      explode: true
+      in: query
+      name: filter
+      schema:
+        $ref: "#/components/schemas/TimeOffRequestsFilter"
+      style: deepObject
   responses:
     BadRequestResponse:
       content:
@@ -2104,6 +2418,12 @@ components:
           schema:
             $ref: "#/components/schemas/CreateHrisCompanyResponse"
       description: Companies
+    CreateTimeOffRequestResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateTimeOffRequestResponse"
+      description: TimeOffRequests
     DeleteDepartmentResponse:
       content:
         application/json:
@@ -2122,6 +2442,12 @@ components:
           schema:
             $ref: "#/components/schemas/DeleteHrisCompanyResponse"
       description: Companies
+    DeleteTimeOffRequestResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DeleteTimeOffRequestResponse"
+      description: TimeOffRequests
     GetDepartmentResponse:
       content:
         application/json:
@@ -2200,6 +2526,18 @@ components:
           schema:
             $ref: "#/components/schemas/GetPayrollsResponse"
       description: Payrolls
+    GetTimeOffRequestResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetTimeOffRequestResponse"
+      description: TimeOffRequests
+    GetTimeOffRequestsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetTimeOffRequestsResponse"
+      description: TimeOffRequests
     NotFoundResponse:
       content:
         application/json:
@@ -2218,6 +2556,12 @@ components:
           schema:
             $ref: "#/components/schemas/PaymentRequiredResponse"
       description: Payment Required
+    TimeOffRequest:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/TimeOffRequest"
+      description: TimeOffRequests
     TooManyRequestsResponse:
       content:
         application/json:
@@ -2260,6 +2604,12 @@ components:
           schema:
             $ref: "#/components/schemas/UpdateHrisCompanyResponse"
       description: Companies
+    UpdateTimeOffRequestResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateTimeOffRequestResponse"
+      description: TimeOffRequests
   schemas:
     Address:
       additionalProperties: false
@@ -2375,6 +2725,7 @@ components:
           nullable: true
           type: string
       type: object
+      x-apideck-schema-id: Address
       x-apideck-weights:
         city: high
         contact_name: edge-case
@@ -2430,6 +2781,8 @@ components:
           description: The type of error returned
           example: RequestValidationError
           type: string
+      type: object
+      x-apideck-schema-id: BadRequest
     Benefit:
       properties:
         employee_deduction:
@@ -2445,6 +2798,7 @@ components:
           example: Health Insurance
           type: string
       type: object
+      x-apideck-schema-id: Benefit
       x-apideck-weights:
         employee_deduction: high
         employer_contribution: high
@@ -2490,6 +2844,7 @@ components:
       required:
         - employee_id
       type: object
+      x-apideck-schema-id: Compensation
       x-apideck-weights:
         benefits: high
         deductions: high
@@ -2529,6 +2884,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateDepartmentResponse
     CreateEmployeeResponse:
       properties:
         data:
@@ -2561,6 +2917,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateEmployeeResponse
     CreateHrisCompanyResponse:
       properties:
         data:
@@ -2576,6 +2933,39 @@ components:
         service:
           description: Apideck ID of service provider
           example: undefined
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: CreateHrisCompanyResponse
+    CreateTimeOffRequestResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: add
+          type: string
+        resource:
+          description: Unified API resource name
+          example: TimeOffRequests
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: bamboohr
           type: string
         status:
           description: HTTP Response Status
@@ -3193,6 +3583,7 @@ components:
       required:
         - id
       type: object
+      x-apideck-schema-id: CustomField
       x-apideck-weights:
         description: edge-case
         id: critical
@@ -3209,6 +3600,7 @@ components:
           example: Company Car
           type: string
       type: object
+      x-apideck-schema-id: Deduction
       x-apideck-weights:
         amount: critical
         name: critical
@@ -3244,6 +3636,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteDepartmentResponse
     DeleteEmployeeResponse:
       properties:
         data:
@@ -3276,6 +3669,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteEmployeeResponse
     DeleteHrisCompanyResponse:
       properties:
         data:
@@ -3291,6 +3685,39 @@ components:
         service:
           description: Apideck ID of service provider
           example: undefined
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: DeleteHrisCompanyResponse
+    DeleteTimeOffRequestResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: delete
+          type: string
+        resource:
+          description: Unified API resource name
+          example: TimeOffRequests
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: bamboohr
           type: string
         status:
           description: HTTP Response Status
@@ -3338,6 +3765,7 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+      x-apideck-schema-id: Department
       x-apideck-weights:
         code: medium
         created_at: medium
@@ -3384,6 +3812,7 @@ components:
       required:
         - email
       type: object
+      x-apideck-schema-id: Email
       x-apideck-weights:
         email: critical
         id: edge-case
@@ -3717,6 +4146,7 @@ components:
             middle_name:
               $ref: "#/components/schemas/MiddleName"
           type: object
+          x-apideck-schema-id: Person
           x-apideck-weights:
             birthday: low
             deceased_on: low
@@ -3767,6 +4197,7 @@ components:
             required:
               - url
             type: object
+            x-apideck-schema-id: SocialLink
             x-apideck-weights:
               id: edge-case
               type: critical
@@ -3793,6 +4224,7 @@ components:
           items:
             type: string
           type: array
+          x-apideck-schema-id: Tags
         tax_code:
           example: "1111"
           nullable: true
@@ -3817,6 +4249,7 @@ components:
               nullable: true
               type: string
           type: object
+          x-apideck-schema-id: Team
         timezone:
           example: Europe/London
           nullable: true
@@ -3837,6 +4270,7 @@ components:
       required:
         - id
       type: object
+      x-apideck-schema-id: Employee
       x-apideck-weights:
         addresses: high
         birthday: high
@@ -3907,6 +4341,7 @@ components:
         payroll:
           $ref: "#/components/schemas/Payroll"
       type: object
+      x-apideck-schema-id: EmployeePayroll
       x-apideck-weights:
         employee: critical
         payroll: critical
@@ -3919,6 +4354,7 @@ components:
             $ref: "#/components/schemas/Payroll"
           type: array
       type: object
+      x-apideck-schema-id: EmployeePayrolls
       x-apideck-weights:
         employee: critical
         payrolls: critical
@@ -3931,6 +4367,7 @@ components:
             $ref: "#/components/schemas/Schedule"
           type: array
       type: object
+      x-apideck-schema-id: EmployeeSchedules
     EmployeesFilter:
       additionalProperties: false
       example:
@@ -3977,6 +4414,7 @@ components:
           example: Manager
           type: string
       type: object
+      x-apideck-schema-id: EmployeesFilter
       x-graphql-type-name: EmployeesFilter
     FirstName:
       example: Elon
@@ -4026,6 +4464,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetDepartmentResponse
       x-graphql-type-name: Department
     GetDepartmentsResponse:
       properties:
@@ -4065,6 +4504,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetDepartmentsResponse
       x-graphql-type-name: DepartmentList
     GetEmployeePayrollResponse:
       properties:
@@ -4098,6 +4538,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetEmployeePayrollResponse
       x-graphql-type-name: EmployeePayroll
     GetEmployeePayrollsResponse:
       properties:
@@ -4131,6 +4572,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetEmployeePayrollsResponse
       x-graphql-type-name: EmployeePayrollList
     GetEmployeeResponse:
       properties:
@@ -4164,6 +4606,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetEmployeeResponse
       x-graphql-type-name: Employee
     GetEmployeeSchedulesResponse:
       properties:
@@ -4197,6 +4640,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetEmployeeSchedulesResponse
       x-graphql-type-name: EmployeeSchedulesList
     GetEmployeesResponse:
       properties:
@@ -4236,6 +4680,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetEmployeesResponse
       x-graphql-type-name: EmployeeList
     GetHrisCompaniesResponse:
       properties:
@@ -4275,6 +4720,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetHrisCompaniesResponse
       x-graphql-type-name: HrisCompanyList
     GetHrisCompanyResponse:
       properties:
@@ -4308,6 +4754,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetHrisCompanyResponse
       x-graphql-type-name: HrisCompany
     GetHrisJobResponse:
       properties:
@@ -4341,6 +4788,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetHrisJobResponse
       x-graphql-type-name: Job
     GetHrisJobsResponse:
       properties:
@@ -4374,6 +4822,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetHrisJobsResponse
       x-graphql-type-name: JobsList
     GetPayrollResponse:
       properties:
@@ -4407,6 +4856,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetPayrollResponse
       x-graphql-type-name: Payroll
     GetPayrollsResponse:
       properties:
@@ -4442,7 +4892,80 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetPayrollsResponse
       x-graphql-type-name: PayrollList
+    GetTimeOffRequestResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/TimeOffRequest"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: TimeOffRequests
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: bamboohr
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: TimeOffRequest
+    GetTimeOffRequestsResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/TimeOffRequest"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: all
+          type: string
+        resource:
+          description: Unified API resource name
+          example: TimeOffRequests
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: bamboohr
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: TimeOffRequestList
     HrisCompany:
       additionalProperties: false
       properties:
@@ -4510,6 +5033,7 @@ components:
       required:
         - legal_name
       type: object
+      x-apideck-schema-id: HrisCompany
       x-apideck-weights:
         company_number: high
         debtor_id: edge-case
@@ -4571,6 +5095,7 @@ components:
         title:
           $ref: "#/components/schemas/Title"
       type: object
+      x-apideck-schema-id: HrisJob
       x-apideck-weights:
         department: medium
         employee_id: critical
@@ -4589,6 +5114,7 @@ components:
             $ref: "#/components/schemas/HrisJob"
           type: array
       type: object
+      x-apideck-schema-id: HrisJobs
     Id:
       example: "12345"
       readOnly: true
@@ -4621,6 +5147,7 @@ components:
           nullable: true
           type: string
       type: object
+      x-apideck-schema-id: Links
     Meta:
       description: Response metadata
       properties:
@@ -4648,6 +5175,7 @@ components:
           example: 50
           type: integer
       type: object
+      x-apideck-schema-id: Meta
     MiddleName:
       example: D.
       nullable: true
@@ -4685,6 +5213,8 @@ components:
           description: The type of error returned
           example: EntityNotFoundError
           type: string
+      type: object
+      x-apideck-schema-id: NotFound
     NotImplementedResponse:
       properties:
         detail:
@@ -4713,6 +5243,8 @@ components:
           description: The type of error returned
           example: MappingError
           type: string
+      type: object
+      x-apideck-schema-id: NotImplemented
     PaymentRequiredResponse:
       properties:
         detail:
@@ -4739,6 +5271,8 @@ components:
           description: The type of error returned
           example: RequestLimitError
           type: string
+      type: object
+      x-apideck-schema-id: PaymentRequired
     PaymentUnit:
       enum:
         - hour
@@ -4797,6 +5331,7 @@ components:
         - start_date
         - end_date
       type: object
+      x-apideck-schema-id: Payroll
       x-apideck-weights:
         check_date: critical
         company_id: high
@@ -4846,6 +5381,7 @@ components:
           example: 8655.32
           type: number
       type: object
+      x-apideck-schema-id: PayrollTotals
     PayrollsFilter:
       additionalProperties: false
       example:
@@ -4863,6 +5399,7 @@ components:
           pattern: ^\d{4}-\d{2}-\d{2}$
           type: string
       type: object
+      x-apideck-schema-id: PayrollsFilter
       x-graphql-type-name: PayrollsFilter
     PhoneNumber:
       additionalProperties: false
@@ -4911,6 +5448,7 @@ components:
       required:
         - number
       type: object
+      x-apideck-schema-id: PhoneNumber
       x-apideck-weights:
         area_code: edge-case
         country_code: edge-case
@@ -5084,6 +5622,7 @@ components:
         - end_date
         - work_pattern
       type: object
+      x-apideck-schema-id: Schedule
       x-apideck-weights:
         end_date: critical
         id: critical
@@ -5104,10 +5643,137 @@ components:
           example: CA State Income Tax
           type: string
       type: object
+      x-apideck-schema-id: Tax
       x-apideck-weights:
         amount: high
         employer: high
         name: high
+    TimeOffRequest:
+      additionalProperties: false
+      properties:
+        amount:
+          description: The amount of time off requested.
+          example: 3.5
+          type: number
+        approval_date:
+          description: The date the request was approved
+          example: 2022-03-21
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          type: string
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        created_by:
+          $ref: "#/components/schemas/CreatedBy"
+        description:
+          description: Description of the time off request.
+          example: Enjoying some sun.
+          title: Description
+          type: string
+        employee_id:
+          description: ID of the employee
+          example: "12345"
+          title: Employee ID
+          type: string
+        end_date:
+          description: The end date of the time off request.
+          example: 2022-04-01
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          type: string
+        id:
+          $ref: "#/components/schemas/Id"
+        notes:
+          properties:
+            employee:
+              example: Relaxing on the beach for a few hours.
+              title: Employee note
+              type: string
+            manager:
+              example: Enjoy!
+              title: Manager note
+              type: string
+          type: object
+        policy_id:
+          description: ID of the policy
+          example: "12345"
+          title: Policy ID
+          type: string
+        request_date:
+          description: The date the request was made.
+          example: 2022-03-21
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          type: string
+        request_type:
+          description: The type of request
+          enum:
+            - vacaction
+            - sick
+            - personal
+            - jury_duty
+            - volunteer
+            - bereavement
+            - other
+          example: vacaction
+          type: string
+          x-apideck-enum-id: time-off-requests.type
+          x-graphql-type-name: TimeOffRequestType
+        start_date:
+          description: The start date of the time off request.
+          example: 2022-04-01
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          type: string
+        status:
+          description: The status of the time off request.
+          enum:
+            - requested
+            - approved
+            - declined
+            - canceled
+            - deleted
+            - other
+          example: approved
+          title: Status
+          type: string
+          x-apideck-enum-id: time-off-requests.status
+          x-graphql-type-name: TimeOffRequestStatus
+        units:
+          description: "The unit of time off requested. Possible values include: `hours`, `days`, or `other`."
+          enum:
+            - days
+            - hours
+            - other
+          example: hours
+          type: string
+          x-apideck-enum-id: time-off-requests.units
+          x-graphql-type-name: TimeOffRequestUnits
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+        updated_by:
+          $ref: "#/components/schemas/UpdatedBy"
+      type: object
+      x-apideck-weights:
+        created_at: medium
+        created_by: edge-case
+        id: high
+        updated_at: medium
+        updated_by: edge-case
+    TimeOffRequestsFilter:
+      additionalProperties: false
+      example:
+        end_date: 2022-04-21
+        start_date: 2022-04-08
+      properties:
+        end_date:
+          description: End date
+          example: 2022-04-21
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          type: string
+        start_date:
+          description: Start date
+          example: 2022-04-08
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          type: string
+      type: object
+      x-graphql-type-name: TimeOffRequestsFilter
     Title:
       example: CEO
       nullable: true
@@ -5143,6 +5809,8 @@ components:
           description: The type of error returned
           example: ConnectorRateLimitError
           type: string
+      type: object
+      x-apideck-schema-id: TooManyRequests
     UnauthorizedResponse:
       properties:
         detail:
@@ -5169,6 +5837,8 @@ components:
           description: The type of error returned
           example: UnauthorizedError
           type: string
+      type: object
+      x-apideck-schema-id: Unauthorized
     UnexpectedErrorResponse:
       properties:
         detail:
@@ -5200,6 +5870,8 @@ components:
           description: The type of error returned
           example: RequestHeadersValidationError
           type: string
+      type: object
+      x-apideck-schema-id: Error
     UnifiedId:
       properties:
         id:
@@ -5209,6 +5881,8 @@ components:
       required:
         - id
       title: UnifiedId
+      type: object
+      x-apideck-schema-id: Id
     UnprocessableResponse:
       properties:
         detail:
@@ -5235,6 +5909,8 @@ components:
           description: The type of error returned
           example: InvalidStateError
           type: string
+      type: object
+      x-apideck-schema-id: Unprocessable
     UpdateDepartmentResponse:
       properties:
         data:
@@ -5267,6 +5943,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateDepartmentResponse
     UpdateEmployeeResponse:
       properties:
         data:
@@ -5299,6 +5976,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateEmployeeResponse
     UpdateHrisCompanyResponse:
       properties:
         data:
@@ -5314,6 +5992,39 @@ components:
         service:
           description: Apideck ID of service provider
           example: undefined
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: UpdateHrisCompanyResponse
+    UpdateTimeOffRequestResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: update
+          type: string
+        resource:
+          description: Unified API resource name
+          example: TimeOffRequests
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: bamboohr
           type: string
         status:
           description: HTTP Response Status
@@ -5374,6 +6085,7 @@ components:
               example: close
               type: string
           type: object
+          x-apideck-schema-id: WebhookEvent
         - properties:
             event_type:
               $ref: "#/components/schemas/HrisEventType"
@@ -5404,6 +6116,7 @@ components:
       required:
         - url
       type: object
+      x-apideck-schema-id: Website
       x-apideck-weights:
         id: edge-case
         type: critical

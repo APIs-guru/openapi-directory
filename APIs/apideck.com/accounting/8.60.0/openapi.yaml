@@ -275,7 +275,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 8.59.0
+  version: 8.60.0
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -4569,6 +4569,7 @@ components:
             $ref: "#/components/schemas/Website"
           type: array
       type: object
+      x-apideck-schema-id: Customer
       x-apideck-weights:
         addresses: high
         bank_accounts: high
@@ -4658,6 +4659,7 @@ components:
               example: close
               type: string
           type: object
+          x-apideck-schema-id: WebhookEvent
         - properties:
             event_type:
               $ref: "#/components/schemas/AccountingEventType"
@@ -4782,6 +4784,7 @@ components:
           nullable: true
           type: string
       type: object
+      x-apideck-schema-id: Address
       x-apideck-weights:
         city: high
         contact_name: edge-case
@@ -4837,6 +4840,8 @@ components:
           description: The type of error returned
           example: RequestValidationError
           type: string
+      type: object
+      x-apideck-schema-id: BadRequest
     BalanceSheet:
       additionalProperties: false
       properties:
@@ -5062,6 +5067,7 @@ components:
         - liabilities
         - equity
       type: object
+      x-apideck-schema-id: BalanceSheet
       x-apideck-weights:
         assets: critical
         created_at: edge-case
@@ -5090,6 +5096,7 @@ components:
           title: Start date
           type: string
       type: object
+      x-apideck-schema-id: BalanceSheetFilter
       x-graphql-type-name: BalanceSheetFilter
     BankAccount:
       additionalProperties: false
@@ -5146,6 +5153,7 @@ components:
           nullable: true
           type: string
       type: object
+      x-apideck-schema-id: BankAccount
       x-apideck-weights:
         account_number: critical
         bsb_number: edge-case
@@ -5276,6 +5284,7 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+      x-apideck-schema-id: Bill
       x-apideck-weights:
         balance: high
         bill_date: critical
@@ -5373,6 +5382,7 @@ components:
         unit_price:
           $ref: "#/components/schemas/UnitPrice"
       type: object
+      x-apideck-schema-id: BillLineItem
       x-apideck-weights:
         code: high
         created_at: edge-case
@@ -5582,6 +5592,7 @@ components:
       required:
         - name
       type: object
+      x-apideck-schema-id: Company
       x-apideck-weights:
         abn_branch: edge-case
         abn_or_tfn: edge-case
@@ -5713,6 +5724,7 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+      x-apideck-schema-id: CompanyInfo
       x-apideck-weights:
         addresses: medium
         automated_sales_tax: edge-case
@@ -5914,6 +5926,8 @@ components:
           type: array
       required:
         - name
+      type: object
+      x-apideck-schema-id: Contact
       x-apideck-weights:
         active: edge-case
         addresses: high
@@ -5990,6 +6004,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateBillResponse
     CreateCreditNoteResponse:
       properties:
         data:
@@ -6022,6 +6037,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateCreditNoteResponse
     CreateCustomerResponse:
       properties:
         data:
@@ -6054,6 +6070,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateCustomerResponse
     CreateInvoiceItemResponse:
       properties:
         data:
@@ -6086,6 +6103,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateInvoiceItemResponse
     CreateInvoiceResponse:
       properties:
         data:
@@ -6118,6 +6136,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateInvoiceResponse
     CreateLedgerAccountResponse:
       properties:
         data:
@@ -6150,6 +6169,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateLedgerAccountResponse
     CreatePaymentResponse:
       properties:
         data:
@@ -6182,6 +6202,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreatePaymentResponse
     CreateSupplierResponse:
       properties:
         data:
@@ -6214,6 +6235,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateSupplierResponse
     CreateTaxRateResponse:
       properties:
         data:
@@ -6246,6 +6268,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateTaxRateResponse
     CreatedAt:
       example: 2020-09-30T07:43:32.000Z
       format: date-time
@@ -6413,6 +6436,7 @@ components:
       required:
         - total_amount
       type: object
+      x-apideck-schema-id: CreditNote
       x-apideck-weights:
         account: critical
         allocations: medium
@@ -7031,6 +7055,7 @@ components:
       required:
         - id
       type: object
+      x-apideck-schema-id: CustomField
       x-apideck-weights:
         description: edge-case
         id: critical
@@ -7071,6 +7096,7 @@ components:
           title: Last Name
           type: string
       type: object
+      x-apideck-schema-id: CustomersFilter
       x-graphql-type-name: CustomersFilter
     DeleteBillResponse:
       properties:
@@ -7104,6 +7130,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteBillResponse
     DeleteCreditNoteResponse:
       properties:
         data:
@@ -7136,6 +7163,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteCreditNoteResponse
     DeleteCustomerResponse:
       properties:
         data:
@@ -7168,6 +7196,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteCustomerResponse
     DeleteInvoiceItemResponse:
       $ref: "#/components/schemas/DeleteTaxRateResponse"
     DeleteInvoiceResponse:
@@ -7202,6 +7231,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteInvoiceResponse
     DeleteLedgerAccountResponse:
       properties:
         data:
@@ -7234,6 +7264,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteLedgerAccountResponse
     DeletePaymentResponse:
       properties:
         data:
@@ -7266,6 +7297,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeletePaymentResponse
     DeleteSupplierResponse:
       properties:
         data:
@@ -7298,6 +7330,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteSupplierResponse
     DeleteTaxRateResponse:
       properties:
         data:
@@ -7330,6 +7363,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteTaxRateResponse
     DownstreamId:
       description: The third-party API ID of original entity
       example: "12345"
@@ -7362,6 +7396,7 @@ components:
       required:
         - email
       type: object
+      x-apideck-schema-id: Email
       x-apideck-weights:
         email: critical
         id: edge-case
@@ -7403,6 +7438,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetBalanceSheetResponse
       x-graphql-type-name: BalanceSheet
     GetBillResponse:
       properties:
@@ -7436,6 +7472,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetBillResponse
       x-graphql-type-name: Bill
     GetBillsResponse:
       properties:
@@ -7475,6 +7512,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetBillsResponse
       x-graphql-type-name: BillList
     GetCompanyInfoResponse:
       properties:
@@ -7508,6 +7546,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetCompanyInfoResponse
       x-graphql-type-name: CompanyInfo
     GetCreditNoteResponse:
       properties:
@@ -7541,6 +7580,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetCreditNoteResponse
     GetCreditNotesResponse:
       properties:
         data:
@@ -7579,6 +7619,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetCreditNotesResponse
     GetCustomerResponse:
       properties:
         data:
@@ -7611,6 +7652,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetCustomerResponse
     GetCustomersResponse:
       properties:
         data:
@@ -7649,6 +7691,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetCustomersResponse
       x-graphql-type-name: CustomerList
     GetInvoiceItemResponse:
       properties:
@@ -7682,6 +7725,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetInvoiceItemResponse
       x-graphql-type-name: InvoiceItem
     GetInvoiceItemsResponse:
       properties:
@@ -7721,6 +7765,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetInvoiceItemsResponse
       x-graphql-type-name: InvoiceItemList
     GetInvoiceResponse:
       properties:
@@ -7754,6 +7799,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetInvoiceResponse
       x-graphql-type-name: Invoice
     GetInvoicesResponse:
       properties:
@@ -7793,6 +7839,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetInvoicesResponse
       x-graphql-type-name: InvoiceList
     GetLedgerAccountResponse:
       properties:
@@ -7826,6 +7873,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetLedgerAccountResponse
       x-graphql-type-name: LedgerAccount
     GetLedgerAccountsResponse:
       properties:
@@ -7865,6 +7913,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetLedgerAccountsResponse
       x-graphql-type-name: LedgerAccountList
     GetPaymentResponse:
       properties:
@@ -7898,6 +7947,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetPaymentResponse
       x-graphql-type-name: Payment
     GetPaymentsResponse:
       properties:
@@ -7937,6 +7987,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetPaymentsResponse
       x-graphql-type-name: PaymentList
     GetProfitAndLossResponse:
       properties:
@@ -7970,6 +8021,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetProfitAndLossResponse
       x-graphql-type-name: ProfitAndLoss
     GetSupplierResponse:
       properties:
@@ -8003,6 +8055,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetSupplierResponse
       x-graphql-type-name: Supplier
     GetSuppliersResponse:
       properties:
@@ -8042,6 +8095,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetSuppliersResponse
       x-graphql-type-name: SupplierList
     GetTaxRateResponse:
       properties:
@@ -8075,6 +8129,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetTaxRateResponse
       x-graphql-type-name: TaxRateOne
     GetTaxRatesResponse:
       properties:
@@ -8114,6 +8169,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetTaxRatesResponse
       x-graphql-type-name: TaxRateList
     Id:
       example: "12345"
@@ -8281,6 +8337,7 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+      x-apideck-schema-id: Invoice
       x-apideck-weights:
         balance: high
         billing_address: high
@@ -8433,6 +8490,7 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+      x-apideck-schema-id: InvoiceItem
       x-apideck-weights:
         active: medium
         asset_account: medium
@@ -8473,6 +8531,7 @@ components:
           title: Name
           type: string
       type: object
+      x-apideck-schema-id: InvoiceItemsFilter
       x-graphql-type-name: InvoiceItemsFilter
     InvoiceLineItem:
       additionalProperties: false
@@ -8548,6 +8607,7 @@ components:
         unit_price:
           $ref: "#/components/schemas/UnitPrice"
       type: object
+      x-apideck-schema-id: InvoiceLineItem
       x-apideck-weights:
         code: medium
         description: high
@@ -8572,6 +8632,7 @@ components:
         id:
           $ref: "#/components/schemas/Id"
       type: object
+      x-apideck-schema-id: InvoiceResponse
     InvoicesSort:
       additionalProperties: false
       example:
@@ -8589,6 +8650,7 @@ components:
         direction:
           $ref: "#/components/schemas/SortDirection"
       type: object
+      x-apideck-schema-id: InvoicesSort
       x-graphql-type-name: InvoicesSort
     Language:
       description: language code according to ISO 639-1. For the United States - EN
@@ -8625,6 +8687,7 @@ components:
                 readOnly: true
                 title: Category name
                 type: string
+            type: object
           readOnly: true
           title: Categories
           type: array
@@ -8821,6 +8884,7 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+      x-apideck-schema-id: LedgerAccount
       x-apideck-weights:
         active: edge-case
         bank_account: high
@@ -8889,6 +8953,7 @@ components:
         - id
       title: LinkedCustomer
       type: object
+      x-apideck-schema-id: LinkedCustomer
       x-apideck-weights:
         company_name: medium
         display_id: medium
@@ -8918,6 +8983,7 @@ components:
           title: Item name
           type: string
       type: object
+      x-apideck-schema-id: LinkedInvoiceItem
       x-apideck-weights:
         code: medium
         id: medium
@@ -8951,6 +9017,7 @@ components:
           title: Nominal Code
           type: string
       type: object
+      x-apideck-schema-id: LinkedLedgerAccount
       x-apideck-weights:
         code: medium
         id: medium
@@ -8985,6 +9052,7 @@ components:
         - id
       title: LinkedSupplier
       type: object
+      x-apideck-schema-id: LinkedSupplier
       x-apideck-weights:
         address: low
         company_name: edge-case
@@ -9014,6 +9082,7 @@ components:
           title: Name
           type: string
       type: object
+      x-apideck-schema-id: LinkedTaxRate
       x-apideck-weights:
         code: medium
         id: medium
@@ -9037,6 +9106,7 @@ components:
           nullable: true
           type: string
       type: object
+      x-apideck-schema-id: Links
     Meta:
       description: Response metadata
       properties:
@@ -9064,6 +9134,7 @@ components:
           example: 50
           type: integer
       type: object
+      x-apideck-schema-id: Meta
     MiddleName:
       example: D.
       nullable: true
@@ -9101,6 +9172,8 @@ components:
           description: The type of error returned
           example: EntityNotFoundError
           type: string
+      type: object
+      x-apideck-schema-id: NotFound
     NotImplementedResponse:
       properties:
         detail:
@@ -9129,6 +9202,8 @@ components:
           description: The type of error returned
           example: MappingError
           type: string
+      type: object
+      x-apideck-schema-id: NotImplemented
     Passthrough:
       additionalProperties: true
       properties:
@@ -9185,11 +9260,13 @@ components:
                 type: string
                 x-apideck-enum-id: allocations.type
                 x-graphql-type-name: AllocationType
+            type: object
             x-apideck-weights:
               amount: medium
               code: medium
               id: medium
               type: medium
+            x-graphql-type-name: PaymentAllocation
           type: array
         created_at:
           $ref: "#/components/schemas/CreatedAt"
@@ -9281,6 +9358,7 @@ components:
         - total_amount
         - transaction_date
       type: object
+      x-apideck-schema-id: Payment
       x-apideck-weights:
         account: critical
         accounts_receivable_account_id: edge-case
@@ -9328,6 +9406,8 @@ components:
           description: The type of error returned
           example: RequestLimitError
           type: string
+      type: object
+      x-apideck-schema-id: PaymentRequired
     PhoneNumber:
       additionalProperties: false
       properties:
@@ -9375,6 +9455,7 @@ components:
       required:
         - number
       type: object
+      x-apideck-schema-id: PhoneNumber
       x-apideck-weights:
         area_code: edge-case
         country_code: edge-case
@@ -9531,6 +9612,8 @@ components:
         - income
         - expenses
       type: object
+      x-apideck-circular-ref: true
+      x-apideck-schema-id: ProfitAndLoss
       x-apideck-weights:
         currency: critical
         customer: low
@@ -9566,6 +9649,7 @@ components:
           title: Start date
           type: string
       type: object
+      x-apideck-schema-id: ProfitAndLossFilter
       x-graphql-type-name: ProfitAndLossFilter
     ProfitAndLossRecord:
       example:
@@ -9589,6 +9673,7 @@ components:
       required:
         - type
       type: object
+      x-apideck-schema-id: ProfitAndLossRecord
       x-apideck-weights:
         type: critical
       x-graphql-type-name: ProfitAndLossRecord
@@ -9599,6 +9684,7 @@ components:
           - $ref: "#/components/schemas/ProfitAndLossRecord"
       nullable: true
       type: array
+      x-apideck-schema-id: ProfitAndLossRecords
       x-graphql-type-name: ProfitAndLossRecords
     ProfitAndLossSection:
       example:
@@ -9624,6 +9710,7 @@ components:
       required:
         - type
       type: object
+      x-apideck-schema-id: ProfitAndLossSection
       x-apideck-weights:
         id: medium
         records: medium
@@ -9664,6 +9751,7 @@ components:
       required:
         - url
       type: object
+      x-apideck-schema-id: SocialLink
       x-apideck-weights:
         id: edge-case
         type: critical
@@ -9676,6 +9764,7 @@ components:
         - desc
       type: string
       x-apideck-enum-id: sort_direction
+      x-apideck-schema-id: SortDirection
       x-graphql-type-name: SortDirection
     Suffix:
       example: Jr.
@@ -9764,6 +9853,7 @@ components:
             $ref: "#/components/schemas/Website"
           type: array
       type: object
+      x-apideck-schema-id: Supplier
       x-apideck-weights:
         account: edge-case
         addresses: high
@@ -9797,6 +9887,7 @@ components:
       items:
         type: string
       type: array
+      x-apideck-schema-id: Tags
     TaxInclusive:
       description: Amounts are including tax
       example: true
@@ -9929,6 +10020,7 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+      x-apideck-schema-id: TaxRate
       x-apideck-weights:
         code: edge-case
         components: medium
@@ -9983,6 +10075,7 @@ components:
           title: Revenue
           type: boolean
       type: object
+      x-apideck-schema-id: TaxRatesFilter
       x-graphql-type-name: TaxRatesFilter
     Title:
       example: CEO
@@ -10019,6 +10112,8 @@ components:
           description: The type of error returned
           example: ConnectorRateLimitError
           type: string
+      type: object
+      x-apideck-schema-id: TooManyRequests
     UnauthorizedResponse:
       properties:
         detail:
@@ -10045,6 +10140,8 @@ components:
           description: The type of error returned
           example: UnauthorizedError
           type: string
+      type: object
+      x-apideck-schema-id: Unauthorized
     UnexpectedErrorResponse:
       properties:
         detail:
@@ -10076,6 +10173,8 @@ components:
           description: The type of error returned
           example: RequestHeadersValidationError
           type: string
+      type: object
+      x-apideck-schema-id: Error
     UnifiedId:
       properties:
         id:
@@ -10085,6 +10184,8 @@ components:
       required:
         - id
       title: UnifiedId
+      type: object
+      x-apideck-schema-id: Id
     UnitOfMeasure:
       description: "Description of the unit type the item is sold as, ie: kg, hour."
       example: pc.
@@ -10122,6 +10223,8 @@ components:
           description: The type of error returned
           example: InvalidStateError
           type: string
+      type: object
+      x-apideck-schema-id: Unprocessable
     UpdateBillResponse:
       properties:
         data:
@@ -10154,6 +10257,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateBillResponse
     UpdateCreditNoteResponse:
       properties:
         data:
@@ -10186,6 +10290,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateCreditNoteResponse
     UpdateCustomerResponse:
       properties:
         data:
@@ -10218,6 +10323,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateCustomerResponse
     UpdateInvoiceItemsResponse:
       properties:
         data:
@@ -10250,6 +10356,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateInvoiceItemsResponse
     UpdateInvoiceResponse:
       properties:
         data:
@@ -10282,6 +10389,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateInvoiceResponse
     UpdateLedgerAccountResponse:
       properties:
         data:
@@ -10314,6 +10422,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateLedgerAccountResponse
     UpdatePaymentResponse:
       properties:
         data:
@@ -10346,6 +10455,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdatePaymentResponse
     UpdateSupplierResponse:
       properties:
         data:
@@ -10378,6 +10488,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateSupplierResponse
     UpdateTaxRateResponse:
       properties:
         data:
@@ -10410,6 +10521,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateTaxRateResponse
     UpdatedAt:
       example: 2020-09-30T07:43:32.000Z
       format: date-time
@@ -10446,6 +10558,7 @@ components:
       required:
         - url
       type: object
+      x-apideck-schema-id: Website
       x-apideck-weights:
         id: edge-case
         type: critical

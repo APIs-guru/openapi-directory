@@ -276,7 +276,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: CRM API
-  version: 8.59.0
+  version: 8.60.0
   x-apideck-api: crm
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -4201,6 +4201,7 @@ components:
       required:
         - type
       type: object
+      x-apideck-schema-id: Activity
       x-apideck-weights:
         account_id: edge-case
         activity_date: medium
@@ -4313,6 +4314,8 @@ components:
           example: "12345"
           readOnly: true
           type: string
+      type: object
+      x-apideck-schema-id: ActivityAttendee
       x-apideck-weights:
         email_address: medium
         first_name: high
@@ -4445,6 +4448,7 @@ components:
           nullable: true
           type: string
       type: object
+      x-apideck-schema-id: Address
       x-apideck-weights:
         city: high
         contact_name: edge-case
@@ -4500,6 +4504,8 @@ components:
           description: The type of error returned
           example: RequestValidationError
           type: string
+      type: object
+      x-apideck-schema-id: BadRequest
     BankAccount:
       additionalProperties: false
       properties:
@@ -4555,6 +4561,7 @@ components:
           nullable: true
           type: string
       type: object
+      x-apideck-schema-id: BankAccount
       x-apideck-weights:
         account_number: critical
         bsb_number: edge-case
@@ -4569,6 +4576,7 @@ components:
           example: SpaceX
           type: string
       type: object
+      x-apideck-schema-id: CompaniesFilter
       x-graphql-type-name: CompaniesFilter
     CompaniesSort:
       additionalProperties: false
@@ -4589,6 +4597,7 @@ components:
         direction:
           $ref: "#/components/schemas/SortDirection"
       type: object
+      x-apideck-schema-id: CompaniesSort
       x-graphql-type-name: CompaniesSort
     Company:
       additionalProperties: false
@@ -4780,6 +4789,7 @@ components:
       required:
         - name
       type: object
+      x-apideck-schema-id: Company
       x-apideck-weights:
         abn_branch: edge-case
         abn_or_tfn: edge-case
@@ -4996,6 +5006,8 @@ components:
           type: array
       required:
         - name
+      type: object
+      x-apideck-schema-id: Contact
       x-apideck-weights:
         active: edge-case
         addresses: high
@@ -5064,6 +5076,7 @@ components:
           example: Elon Musk
           type: string
       type: object
+      x-apideck-schema-id: ContactsFilter
       x-graphql-type-name: ContactsFilter
     ContactsSort:
       additionalProperties: false
@@ -5087,6 +5100,7 @@ components:
         direction:
           $ref: "#/components/schemas/SortDirection"
       type: object
+      x-apideck-schema-id: ContactsSort
       x-graphql-type-name: ContactsSort
     CreateActivityResponse:
       properties:
@@ -5120,6 +5134,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateActivityResponse
     CreateCompanyResponse:
       properties:
         data:
@@ -5152,6 +5167,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateCompanyResponse
     CreateContactResponse:
       properties:
         data:
@@ -5184,6 +5200,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateContactResponse
     CreateLeadResponse:
       properties:
         data:
@@ -5216,6 +5233,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateLeadResponse
     CreateNoteResponse:
       properties:
         data:
@@ -5248,6 +5266,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateNoteResponse
     CreateOpportunityResponse:
       properties:
         data:
@@ -5280,6 +5299,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateOpportunityResponse
     CreatePipelineResponse:
       properties:
         data:
@@ -5312,6 +5332,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreatePipelineResponse
     CreateUserResponse:
       properties:
         data:
@@ -5344,6 +5365,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateUserResponse
     CrmEventType:
       enum:
         - "*"
@@ -5400,6 +5422,7 @@ components:
               example: close
               type: string
           type: object
+          x-apideck-schema-id: WebhookEvent
         - properties:
             event_type:
               $ref: "#/components/schemas/CrmEventType"
@@ -5993,6 +6016,7 @@ components:
       required:
         - id
       type: object
+      x-apideck-schema-id: CustomField
       x-apideck-weights:
         description: edge-case
         id: critical
@@ -6030,6 +6054,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteActivityResponse
     DeleteCompanyResponse:
       properties:
         data:
@@ -6062,6 +6087,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteCompanyResponse
     DeleteContactResponse:
       properties:
         data:
@@ -6094,6 +6120,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteContactResponse
     DeleteLeadResponse:
       properties:
         data:
@@ -6126,6 +6153,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteLeadResponse
     DeleteNoteResponse:
       properties:
         data:
@@ -6158,6 +6186,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteNoteResponse
     DeleteOpportunityResponse:
       properties:
         data:
@@ -6190,6 +6219,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteOpportunityResponse
     DeletePipelineResponse:
       properties:
         data:
@@ -6222,6 +6252,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeletePipelineResponse
     DeleteUserResponse:
       properties:
         data:
@@ -6254,6 +6285,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteUserResponse
     Email:
       additionalProperties: false
       properties:
@@ -6280,6 +6312,7 @@ components:
       required:
         - email
       type: object
+      x-apideck-schema-id: Email
       x-apideck-weights:
         email: critical
         id: edge-case
@@ -6327,6 +6360,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetActivitiesResponse
       x-graphql-type-name: ActivityList
     GetActivityResponse:
       properties:
@@ -6360,6 +6394,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetActivityResponse
       x-graphql-type-name: activity
     GetCompaniesResponse:
       properties:
@@ -6399,6 +6434,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetCompaniesResponse
       x-graphql-type-name: CompanyList
     GetCompanyResponse:
       properties:
@@ -6432,6 +6468,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetCompanyResponse
       x-graphql-type-name: company
     GetContactResponse:
       properties:
@@ -6465,6 +6502,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetContactResponse
     GetContactsResponse:
       properties:
         data:
@@ -6503,6 +6541,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetContactsResponse
       x-graphql-type-name: ContactList
     GetLeadResponse:
       properties:
@@ -6536,6 +6575,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetLeadResponse
     GetLeadsResponse:
       properties:
         data:
@@ -6574,6 +6614,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetLeadsResponse
       x-graphql-type-name: LeadList
     GetNoteResponse:
       properties:
@@ -6607,6 +6648,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetNoteResponse
       x-graphql-type-name: note
     GetNotesResponse:
       properties:
@@ -6646,6 +6688,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetNotesResponse
       x-graphql-type-name: NoteList
     GetOpportunitiesResponse:
       properties:
@@ -6685,6 +6728,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetOpportunitiesResponse
       x-graphql-type-name: OpportunityList
     GetOpportunityResponse:
       properties:
@@ -6718,6 +6762,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetOpportunityResponse
     GetPipelineResponse:
       properties:
         data:
@@ -6750,6 +6795,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetPipelineResponse
     GetPipelinesResponse:
       properties:
         data:
@@ -6788,6 +6834,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetPipelinesResponse
       x-graphql-type-name: PipelinesList
     GetUserResponse:
       properties:
@@ -6821,6 +6868,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetUserResponse
     GetUsersResponse:
       properties:
         data:
@@ -6859,6 +6907,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetUsersResponse
       x-graphql-type-name: UserList
     LastName:
       example: Musk
@@ -6972,6 +7021,7 @@ components:
         - name
         - company_name
       type: object
+      x-apideck-schema-id: Lead
       x-apideck-weights:
         addresses: high
         company_id: high
@@ -7028,6 +7078,7 @@ components:
           example: Elon Musk
           type: string
       type: object
+      x-apideck-schema-id: LeadsFilter
       x-graphql-type-name: LeadsFilter
     LeadsSort:
       additionalProperties: false
@@ -7051,6 +7102,7 @@ components:
         direction:
           $ref: "#/components/schemas/SortDirection"
       type: object
+      x-apideck-schema-id: LeadsSort
       x-graphql-type-name: LeadsSort
     Links:
       description: Links to navigate to previous or next pages through the API
@@ -7070,6 +7122,7 @@ components:
           nullable: true
           type: string
       type: object
+      x-apideck-schema-id: Links
     Meta:
       description: Response metadata
       properties:
@@ -7097,6 +7150,7 @@ components:
           example: 50
           type: integer
       type: object
+      x-apideck-schema-id: Meta
     NotFoundResponse:
       properties:
         detail:
@@ -7129,6 +7183,8 @@ components:
           description: The type of error returned
           example: EntityNotFoundError
           type: string
+      type: object
+      x-apideck-schema-id: NotFound
     NotImplementedResponse:
       properties:
         detail:
@@ -7157,6 +7213,8 @@ components:
           description: The type of error returned
           example: MappingError
           type: string
+      type: object
+      x-apideck-schema-id: NotImplemented
     Note:
       additionalProperties: false
       properties:
@@ -7212,6 +7270,7 @@ components:
           readOnly: true
           type: string
       type: object
+      x-apideck-schema-id: Note
       x-apideck-weights:
         active: low
         company_id: medium
@@ -7249,6 +7308,7 @@ components:
           example: 50
           type: number
       type: object
+      x-apideck-schema-id: OpportunitiesFilter
       x-graphql-type-name: OpportunitiesFilter
     OpportunitiesSort:
       additionalProperties: false
@@ -7272,6 +7332,7 @@ components:
         direction:
           $ref: "#/components/schemas/SortDirection"
       type: object
+      x-apideck-schema-id: OpportunitiesSort
       x-graphql-type-name: OpportunitiesSort
     Opportunity:
       additionalProperties: false
@@ -7449,6 +7510,7 @@ components:
         - title
         - primary_contact_id
       type: object
+      x-apideck-schema-id: Opportunity
       x-apideck-weights:
         close_date: medium
         company_id: high
@@ -7515,6 +7577,8 @@ components:
           description: The type of error returned
           example: RequestLimitError
           type: string
+      type: object
+      x-apideck-schema-id: PaymentRequired
     PhoneNumber:
       additionalProperties: false
       properties:
@@ -7562,6 +7626,7 @@ components:
       required:
         - number
       type: object
+      x-apideck-schema-id: PhoneNumber
       x-apideck-weights:
         area_code: edge-case
         country_code: edge-case
@@ -7630,6 +7695,8 @@ components:
           type: string
       required:
         - name
+      type: object
+      x-apideck-schema-id: Pipeline
       x-apideck-weights:
         archived: low
         created_at: medium
@@ -7663,6 +7730,7 @@ components:
       required:
         - url
       type: object
+      x-apideck-schema-id: SocialLink
       x-apideck-weights:
         id: edge-case
         type: critical
@@ -7675,6 +7743,7 @@ components:
         - desc
       type: string
       x-apideck-enum-id: sort_direction
+      x-apideck-schema-id: SortDirection
       x-graphql-type-name: SortDirection
     Tags:
       example:
@@ -7682,6 +7751,7 @@ components:
       items:
         type: string
       type: array
+      x-apideck-schema-id: Tags
     TooManyRequestsResponse:
       properties:
         detail:
@@ -7712,6 +7782,8 @@ components:
           description: The type of error returned
           example: ConnectorRateLimitError
           type: string
+      type: object
+      x-apideck-schema-id: TooManyRequests
     UnauthorizedResponse:
       properties:
         detail:
@@ -7738,6 +7810,8 @@ components:
           description: The type of error returned
           example: UnauthorizedError
           type: string
+      type: object
+      x-apideck-schema-id: Unauthorized
     UnexpectedErrorResponse:
       properties:
         detail:
@@ -7769,6 +7843,8 @@ components:
           description: The type of error returned
           example: RequestHeadersValidationError
           type: string
+      type: object
+      x-apideck-schema-id: Error
     UnifiedId:
       properties:
         id:
@@ -7778,6 +7854,8 @@ components:
       required:
         - id
       title: UnifiedId
+      type: object
+      x-apideck-schema-id: Id
     UnprocessableResponse:
       properties:
         detail:
@@ -7804,6 +7882,8 @@ components:
           description: The type of error returned
           example: InvalidStateError
           type: string
+      type: object
+      x-apideck-schema-id: Unprocessable
     UpdateActivityResponse:
       properties:
         data:
@@ -7836,6 +7916,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateActivityResponse
     UpdateCompanyResponse:
       properties:
         data:
@@ -7868,6 +7949,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateCompanyResponse
     UpdateContactResponse:
       properties:
         data:
@@ -7900,6 +7982,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateContactResponse
     UpdateLeadResponse:
       properties:
         data:
@@ -7932,6 +8015,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateLeadResponse
     UpdateNoteResponse:
       properties:
         data:
@@ -7964,6 +8048,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateNoteResponse
     UpdateOpportunityResponse:
       properties:
         data:
@@ -7996,6 +8081,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateOpportunityResponse
     UpdatePipelineResponse:
       properties:
         data:
@@ -8028,6 +8114,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdatePipelineResponse
     UpdateUserResponse:
       properties:
         data:
@@ -8060,6 +8147,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateUserResponse
     User:
       properties:
         addresses:
@@ -8150,6 +8238,8 @@ components:
           type: string
       required:
         - emails
+      type: object
+      x-apideck-schema-id: User
       x-apideck-weights:
         addresses: high
         company_name: medium
@@ -8201,6 +8291,7 @@ components:
       required:
         - url
       type: object
+      x-apideck-schema-id: Website
       x-apideck-weights:
         id: edge-case
         type: critical

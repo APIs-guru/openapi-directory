@@ -13,17 +13,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Network Management API
   version: v1beta1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://networkmanagement.googleapis.com/$discovery/rest?version=v1beta1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: networkmanagement
 externalDocs:
@@ -1389,6 +1387,11 @@ components:
         destIpRange:
           description: Destination IP range of the route.
           type: string
+        destPortRanges:
+          description: Destination port ranges of the route. Policy based routes only.
+          items:
+            type: string
+          type: array
         displayName:
           description: Name of a Compute Engine route.
           type: string
@@ -1423,6 +1426,11 @@ components:
           description: Priority of the route.
           format: int32
           type: integer
+        protocols:
+          description: Protocols of the route. Policy based routes only.
+          items:
+            type: string
+          type: array
         routeType:
           description: Type of route.
           enum:
@@ -1433,7 +1441,16 @@ components:
             - PEERING_SUBNET
             - PEERING_STATIC
             - PEERING_DYNAMIC
+            - POLICY_BASED_ROUTE
           type: string
+        srcIpRange:
+          description: Source IP address range of the route. Policy based routes only.
+          type: string
+        srcPortRanges:
+          description: Source port ranges of the route. Policy based routes only.
+          items:
+            type: string
+          type: array
         uri:
           description: URI of a Compute Engine route. Dynamic route from cloud router does not have a URI. Advertised route from Google Cloud VPC to on-premises network also does not have a URI.
           type: string
@@ -1679,5 +1696,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

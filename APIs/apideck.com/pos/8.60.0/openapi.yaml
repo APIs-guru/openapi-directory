@@ -275,7 +275,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: POS API
-  version: 8.59.0
+  version: 8.60.0
   x-apideck-api: pos
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -4617,6 +4617,7 @@ components:
           nullable: true
           type: string
       type: object
+      x-apideck-schema-id: Address
       x-apideck-weights:
         city: high
         contact_name: edge-case
@@ -4677,6 +4678,8 @@ components:
           description: The type of error returned
           example: RequestValidationError
           type: string
+      type: object
+      x-apideck-schema-id: BadRequest
     CreateItemResponse:
       properties:
         data:
@@ -4709,6 +4712,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateItemResponse
     CreateLocationResponse:
       properties:
         data:
@@ -4741,6 +4745,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateLocationResponse
     CreateMerchantResponse:
       properties:
         data:
@@ -4773,6 +4778,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateMerchantResponse
     CreateModifierGroupResponse:
       properties:
         data:
@@ -4805,6 +4811,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateModifierGroupResponse
     CreateModifierResponse:
       properties:
         data:
@@ -4837,6 +4844,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateModifierResponse
     CreateOrderResponse:
       properties:
         data:
@@ -4869,6 +4877,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateOrderResponse
     CreateOrderTypeResponse:
       properties:
         data:
@@ -4901,6 +4910,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateOrderTypeResponse
     CreatePosPaymentResponse:
       properties:
         data:
@@ -4933,6 +4943,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreatePosPaymentResponse
     CreateTenderResponse:
       properties:
         data:
@@ -4965,6 +4976,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateTenderResponse
     CreatedAt:
       example: 2020-09-30T07:43:32.000Z
       format: date-time
@@ -5565,6 +5577,7 @@ components:
       required:
         - id
       type: object
+      x-apideck-schema-id: CustomField
       x-apideck-weights:
         description: edge-case
         id: critical
@@ -5602,6 +5615,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteItemResponse
     DeleteLocationResponse:
       properties:
         data:
@@ -5634,6 +5648,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteLocationResponse
     DeleteMerchantResponse:
       properties:
         data:
@@ -5666,6 +5681,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteMerchantResponse
     DeleteModifierGroupResponse:
       properties:
         data:
@@ -5698,6 +5714,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteModifierGroupResponse
     DeleteModifierResponse:
       properties:
         data:
@@ -5730,6 +5747,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteModifierResponse
     DeleteOrderResponse:
       properties:
         data:
@@ -5762,6 +5780,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteOrderResponse
     DeleteOrderTypeResponse:
       properties:
         data:
@@ -5794,6 +5813,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteOrderTypeResponse
     DeletePosPaymentResponse:
       properties:
         data:
@@ -5826,6 +5846,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeletePosPaymentResponse
     DeleteTenderResponse:
       properties:
         data:
@@ -5858,6 +5879,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteTenderResponse
     Deleted:
       example: true
       nullable: true
@@ -5889,6 +5911,7 @@ components:
       required:
         - email
       type: object
+      x-apideck-schema-id: Email
       x-apideck-weights:
         email: critical
         id: edge-case
@@ -5925,6 +5948,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetItemResponse
       x-graphql-type-name: Item
     GetItemsResponse:
       properties:
@@ -5964,6 +5988,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetItemsResponse
       x-graphql-type-name: ItemList
     GetLocationResponse:
       properties:
@@ -5997,6 +6022,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetLocationResponse
       x-graphql-type-name: Location
     GetLocationsResponse:
       properties:
@@ -6036,6 +6062,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetLocationsResponse
       x-graphql-type-name: LocationList
     GetMerchantResponse:
       properties:
@@ -6069,6 +6096,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetMerchantResponse
       x-graphql-type-name: Merchant
     GetMerchantsResponse:
       properties:
@@ -6108,6 +6136,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetMerchantsResponse
       x-graphql-type-name: MerchantList
     GetModifierGroupResponse:
       properties:
@@ -6141,6 +6170,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetModifierGroupResponse
       x-graphql-type-name: ModifierGroup
     GetModifierGroupsResponse:
       properties:
@@ -6180,6 +6210,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetModifierGroupsResponse
       x-graphql-type-name: ModifierGroupList
     GetModifierResponse:
       properties:
@@ -6213,6 +6244,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetModifierResponse
       x-graphql-type-name: Modifier
     GetModifiersResponse:
       properties:
@@ -6252,6 +6284,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetModifiersResponse
       x-graphql-type-name: ModifierList
     GetOrderResponse:
       properties:
@@ -6285,6 +6318,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetOrderResponse
       x-graphql-type-name: Order
     GetOrderTypeResponse:
       properties:
@@ -6318,6 +6352,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetOrderTypeResponse
       x-graphql-type-name: OrderType
     GetOrderTypesResponse:
       properties:
@@ -6357,6 +6392,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetOrderTypesResponse
       x-graphql-type-name: OrderTypeList
     GetOrdersResponse:
       properties:
@@ -6396,6 +6432,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetOrdersResponse
       x-graphql-type-name: OrderList
     GetPosPaymentResponse:
       properties:
@@ -6429,6 +6466,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetPosPaymentResponse
       x-graphql-type-name: PosPayment
     GetPosPaymentsResponse:
       properties:
@@ -6468,6 +6506,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetPosPaymentsResponse
       x-graphql-type-name: PosPaymentList
     GetTenderResponse:
       properties:
@@ -6501,6 +6540,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetTenderResponse
       x-graphql-type-name: Tender
     GetTendersResponse:
       properties:
@@ -6540,6 +6580,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetTendersResponse
       x-graphql-type-name: TenderList
     Hidden:
       example: true
@@ -6789,6 +6830,7 @@ components:
       required:
         - name
       type: object
+      x-apideck-schema-id: Item
       x-apideck-weights:
         abbreviation: low
         absent_at_location_ids: edge-case
@@ -6837,6 +6879,7 @@ components:
           nullable: true
           type: string
       type: object
+      x-apideck-schema-id: Links
     Location:
       additionalProperties: false
       properties:
@@ -6881,6 +6924,7 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+      x-apideck-schema-id: Location
       x-apideck-weights:
         address: high
         business_name: high
@@ -6947,6 +6991,7 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+      x-apideck-schema-id: Merchant
       x-apideck-weights:
         address: medium
         created_at: medium
@@ -6987,6 +7032,7 @@ components:
           example: 50
           type: integer
       type: object
+      x-apideck-schema-id: Meta
     Modifier:
       additionalProperties: false
       properties:
@@ -7026,6 +7072,7 @@ components:
         - name
         - modifier_group_id
       type: object
+      x-apideck-schema-id: Modifier
       x-apideck-weights:
         alternate_name: edge-case
         available: high
@@ -7115,6 +7162,7 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+      x-apideck-schema-id: ModifierGroup
       x-apideck-weights:
         alternate_name: low
         created_at: medium
@@ -7140,6 +7188,7 @@ components:
           example: "1234"
           type: string
       type: object
+      x-apideck-schema-id: ModifierGroupFilter
       x-graphql-type-name: ModifierGroupFilter
     NotFoundResponse:
       properties:
@@ -7173,6 +7222,8 @@ components:
           description: The type of error returned
           example: EntityNotFoundError
           type: string
+      type: object
+      x-apideck-schema-id: NotFound
     NotImplementedResponse:
       properties:
         detail:
@@ -7201,6 +7252,8 @@ components:
           description: The type of error returned
           example: MappingError
           type: string
+      type: object
+      x-apideck-schema-id: NotImplemented
     Order:
       additionalProperties: false
       properties:
@@ -7971,6 +8024,7 @@ components:
         - location_id
         - merchant_id
       type: object
+      x-apideck-schema-id: Order
       x-apideck-weights:
         closed_date: high
         created_at: medium
@@ -8037,6 +8091,7 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+      x-apideck-schema-id: OrderType
       x-apideck-weights:
         created_at: medium
         created_by: edge-case
@@ -8143,6 +8198,7 @@ components:
         version:
           $ref: "#/components/schemas/Version"
       type: object
+      x-apideck-schema-id: PaymentCard
     PaymentRequiredResponse:
       properties:
         detail:
@@ -8169,6 +8225,8 @@ components:
           description: The type of error returned
           example: RequestLimitError
           type: string
+      type: object
+      x-apideck-schema-id: PaymentRequired
     Percentage:
       example: 15
       title: Percentage
@@ -8220,6 +8278,7 @@ components:
       required:
         - number
       type: object
+      x-apideck-schema-id: PhoneNumber
       x-apideck-weights:
         area_code: edge-case
         country_code: edge-case
@@ -8281,6 +8340,7 @@ components:
           type: string
       title: Bank Account
       type: object
+      x-apideck-schema-id: PosBankAccount
     PosPayment:
       additionalProperties: false
       properties:
@@ -8507,6 +8567,7 @@ components:
         - order_id
         - tender_id
       type: object
+      x-apideck-schema-id: PosPayment
     PosWebhookEvent:
       allOf:
         - properties:
@@ -8539,6 +8600,7 @@ components:
               example: close
               type: string
           type: object
+          x-apideck-schema-id: WebhookEvent
         - properties:
             event_type:
               enum:
@@ -8610,11 +8672,13 @@ components:
           type: string
           x-apideck-enum-id: service-charges.type
       type: object
+      x-apideck-schema-id: ServiceCharge
     ServiceCharges:
       description: Optional service charges or gratuity tip applied to the order.
       items:
         $ref: "#/components/schemas/ServiceCharge"
       type: array
+      x-apideck-schema-id: ServiceCharges
       x-apideck-weights:
         amount: critical
         currency: high
@@ -8639,6 +8703,7 @@ components:
       required:
         - url
       type: object
+      x-apideck-schema-id: SocialLink
       x-apideck-weights:
         id: edge-case
         type: critical
@@ -8649,6 +8714,7 @@ components:
       items:
         type: string
       type: array
+      x-apideck-schema-id: Tags
     Tender:
       additionalProperties: false
       properties:
@@ -8685,6 +8751,7 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
+      x-apideck-schema-id: Tender
       x-apideck-weights:
         active: medium
         allows_tipping: medium
@@ -8728,6 +8795,8 @@ components:
           description: The type of error returned
           example: ConnectorRateLimitError
           type: string
+      type: object
+      x-apideck-schema-id: TooManyRequests
     UnauthorizedResponse:
       properties:
         detail:
@@ -8754,6 +8823,8 @@ components:
           description: The type of error returned
           example: UnauthorizedError
           type: string
+      type: object
+      x-apideck-schema-id: Unauthorized
     UnexpectedErrorResponse:
       properties:
         detail:
@@ -8785,6 +8856,8 @@ components:
           description: The type of error returned
           example: RequestHeadersValidationError
           type: string
+      type: object
+      x-apideck-schema-id: Error
     UnifiedId:
       properties:
         id:
@@ -8794,6 +8867,8 @@ components:
       required:
         - id
       title: UnifiedId
+      type: object
+      x-apideck-schema-id: Id
     UnitPrice:
       example: 27500.5
       nullable: true
@@ -8825,6 +8900,8 @@ components:
           description: The type of error returned
           example: InvalidStateError
           type: string
+      type: object
+      x-apideck-schema-id: Unprocessable
     UpdateItemResponse:
       properties:
         data:
@@ -8857,6 +8934,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateItemResponse
     UpdateLocationResponse:
       properties:
         data:
@@ -8889,6 +8967,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateLocationResponse
     UpdateMerchantResponse:
       properties:
         data:
@@ -8921,6 +9000,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateMerchantResponse
     UpdateModifierGroupResponse:
       properties:
         data:
@@ -8953,6 +9033,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateModifierGroupResponse
     UpdateModifierResponse:
       properties:
         data:
@@ -8985,6 +9066,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateModifierResponse
     UpdateOrderResponse:
       properties:
         data:
@@ -9017,6 +9099,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateOrderResponse
     UpdateOrderTypeResponse:
       properties:
         data:
@@ -9049,6 +9132,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateOrderTypeResponse
     UpdatePosPaymentResponse:
       properties:
         data:
@@ -9081,6 +9165,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdatePosPaymentResponse
     UpdateTenderResponse:
       properties:
         data:
@@ -9113,6 +9198,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateTenderResponse
     UpdatedAt:
       example: 2020-09-30T07:43:32.000Z
       format: date-time
@@ -9154,6 +9240,7 @@ components:
       required:
         - url
       type: object
+      x-apideck-schema-id: Website
       x-apideck-weights:
         id: edge-case
         type: critical

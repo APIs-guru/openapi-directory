@@ -275,7 +275,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: File storage API
-  version: 8.59.0
+  version: 8.60.0
   x-apideck-api: file-storage
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -2422,6 +2422,8 @@ components:
           description: The type of error returned
           example: RequestValidationError
           type: string
+      type: object
+      x-apideck-schema-id: BadRequest
     CopyFolderRequest:
       additionalProperties: false
       properties:
@@ -2436,6 +2438,7 @@ components:
       required:
         - parent_folder_id
       type: object
+      x-apideck-schema-id: CopyFolderRequest
     CreateDriveGroupResponse:
       properties:
         data:
@@ -2468,6 +2471,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateDriveGroupResponse
     CreateDriveResponse:
       properties:
         data:
@@ -2500,6 +2504,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateDriveResponse
     CreateFileRequest:
       additionalProperties: false
       properties:
@@ -2521,6 +2526,7 @@ components:
         - name
         - parent_folder_id
       type: object
+      x-apideck-schema-id: CreateFileRequest
     CreateFileResponse:
       properties:
         data:
@@ -2553,6 +2559,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateFileResponse
     CreateFolderRequest:
       additionalProperties: false
       properties:
@@ -2576,6 +2583,7 @@ components:
         - name
         - parent_folder_id
       type: object
+      x-apideck-schema-id: CreateFolderRequest
     CreateFolderResponse:
       properties:
         data:
@@ -2608,6 +2616,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateFolderResponse
     CreateSharedLinkResponse:
       properties:
         data:
@@ -2640,6 +2649,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateSharedLinkResponse
     CreateUploadSessionRequest:
       additionalProperties: false
       properties:
@@ -2660,6 +2670,7 @@ components:
         - parent_folder_id
         - size
       type: object
+      x-apideck-schema-id: CreateUploadSessionRequest
     CreateUploadSessionResponse:
       properties:
         data:
@@ -2692,6 +2703,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: CreateUploadSessionResponse
     CreatedAt:
       example: 2020-09-30T07:43:32.000Z
       format: date-time
@@ -2736,6 +2748,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteDriveGroupResponse
     DeleteDriveResponse:
       properties:
         data:
@@ -2768,6 +2781,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteDriveResponse
     DeleteFileResponse:
       properties:
         data:
@@ -2800,6 +2814,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteFileResponse
     DeleteFolderResponse:
       properties:
         data:
@@ -2832,6 +2847,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteFolderResponse
     DeleteSharedLinkResponse:
       properties:
         data:
@@ -2864,6 +2880,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteSharedLinkResponse
     DeleteUploadSessionResponse:
       properties:
         data:
@@ -2896,6 +2913,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: DeleteUploadSessionResponse
     Description:
       example: A description
       nullable: true
@@ -2930,6 +2948,7 @@ components:
         - id
         - name
       type: object
+      x-apideck-schema-id: Drive
       x-apideck-weights:
         created_at: critical
         created_by: edge-case
@@ -2964,6 +2983,7 @@ components:
         - id
         - name
       type: object
+      x-apideck-schema-id: DriveGroup
       x-apideck-weights:
         created_at: critical
         created_by: edge-case
@@ -2979,6 +2999,7 @@ components:
           example: "1234"
           type: string
       type: object
+      x-apideck-schema-id: DriveGroupsFilter
       x-graphql-type-name: DriveGroupsFilter
     DrivesFilter:
       additionalProperties: false
@@ -2988,6 +3009,7 @@ components:
           example: "1234"
           type: string
       type: object
+      x-apideck-schema-id: DrivesFilter
       x-graphql-type-name: DrivesFilter
     ExpiresAt:
       example: 2022-09-30T07:43:32.000Z
@@ -2998,6 +3020,7 @@ components:
       description: The size of the file in bytes
       example: 1810673
       type: integer
+      x-apideck-schema-id: FileSize
       x-graphql-type-name: FileSize
     FileType:
       description: The type of resource. Could be file, folder or url
@@ -3009,6 +3032,7 @@ components:
       readOnly: true
       type: string
       x-apideck-enum-id: files.type
+      x-apideck-schema-id: FileType
       x-graphql-type-name: FileType
     FilesFilter:
       additionalProperties: false
@@ -3025,6 +3049,7 @@ components:
           description: Only return files and folders that are shared
           type: boolean
       type: object
+      x-apideck-schema-id: FilesFilter
       x-graphql-type-name: FilesFilter
     FilesSearch:
       additionalProperties: false
@@ -3042,6 +3067,7 @@ components:
       required:
         - query
       type: object
+      x-apideck-schema-id: FilesSearch
     FilesSort:
       additionalProperties: false
       example:
@@ -3060,6 +3086,7 @@ components:
         direction:
           $ref: "#/components/schemas/SortDirection"
       type: object
+      x-apideck-schema-id: FilesSort
       x-graphql-type-name: FilesSort
     Folder:
       additionalProperties: false
@@ -3107,6 +3134,7 @@ components:
         - name
         - parent_folders
       type: object
+      x-apideck-schema-id: Folder
       x-apideck-weights:
         created_at: high
         id: critical
@@ -3147,6 +3175,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetDriveGroupResponse
       x-graphql-type-name: DriveGroup
     GetDriveGroupsResponse:
       properties:
@@ -3186,6 +3215,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetDriveGroupsResponse
       x-graphql-type-name: DriveGroupList
     GetDriveResponse:
       properties:
@@ -3219,6 +3249,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetDriveResponse
       x-graphql-type-name: Drive
     GetDrivesResponse:
       properties:
@@ -3258,6 +3289,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetDrivesResponse
       x-graphql-type-name: DriveList
     GetFileResponse:
       properties:
@@ -3291,6 +3323,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetFileResponse
       x-graphql-type-name: File
     GetFilesResponse:
       properties:
@@ -3330,6 +3363,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetFilesResponse
       x-graphql-type-name: FileList
     GetFolderResponse:
       properties:
@@ -3363,6 +3397,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetFolderResponse
       x-graphql-type-name: Folder
     GetFoldersResponse:
       properties:
@@ -3402,6 +3437,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetFoldersResponse
       x-graphql-type-name: FolderList
     GetSharedLinkResponse:
       properties:
@@ -3435,6 +3471,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetSharedLinkResponse
       x-graphql-type-name: SharedLink
     GetSharedLinksResponse:
       properties:
@@ -3474,6 +3511,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetSharedLinksResponse
       x-graphql-type-name: SharedLinkList
     GetUploadSessionResponse:
       properties:
@@ -3507,6 +3545,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: GetUploadSessionResponse
       x-graphql-type-name: UploadSession
     Id:
       example: "12345"
@@ -3523,6 +3562,7 @@ components:
       required:
         - id
       type: object
+      x-apideck-schema-id: LinkedFolder
       x-apideck-weights:
         id: critical
     Links:
@@ -3543,6 +3583,7 @@ components:
           nullable: true
           type: string
       type: object
+      x-apideck-schema-id: Links
     Meta:
       description: Response metadata
       properties:
@@ -3570,6 +3611,7 @@ components:
           example: 50
           type: integer
       type: object
+      x-apideck-schema-id: Meta
     NotFoundResponse:
       properties:
         detail:
@@ -3602,6 +3644,8 @@ components:
           description: The type of error returned
           example: EntityNotFoundError
           type: string
+      type: object
+      x-apideck-schema-id: NotFound
     NotImplementedResponse:
       properties:
         detail:
@@ -3630,6 +3674,8 @@ components:
           description: The type of error returned
           example: MappingError
           type: string
+      type: object
+      x-apideck-schema-id: NotImplemented
     Owner:
       properties:
         email:
@@ -3649,12 +3695,14 @@ components:
           type: string
       readOnly: true
       type: object
+      x-apideck-schema-id: Owner
       x-apideck-weights:
         id: critical
     ParentFolderId:
       description: The parent folder to create the new file within.
       example: "1234"
       type: string
+      x-apideck-schema-id: ParentFolderId
     PaymentRequiredResponse:
       properties:
         detail:
@@ -3681,6 +3729,8 @@ components:
           description: The type of error returned
           example: RequestLimitError
           type: string
+      type: object
+      x-apideck-schema-id: PaymentRequired
     SharedLink:
       additionalProperties: false
       properties:
@@ -3725,6 +3775,7 @@ components:
       required:
         - target_id
       type: object
+      x-apideck-schema-id: SharedLink
       x-apideck-weights:
         created_at: medium
         download_url: high
@@ -3751,6 +3802,7 @@ components:
       required:
         - id
       type: object
+      x-apideck-schema-id: SharedLinkTarget
       x-apideck-weights:
         id: critical
     SortDirection:
@@ -3761,6 +3813,7 @@ components:
         - desc
       type: string
       x-apideck-enum-id: sort_direction
+      x-apideck-schema-id: SortDirection
       x-graphql-type-name: SortDirection
     TooManyRequestsResponse:
       properties:
@@ -3792,6 +3845,8 @@ components:
           description: The type of error returned
           example: ConnectorRateLimitError
           type: string
+      type: object
+      x-apideck-schema-id: TooManyRequests
     UnauthorizedResponse:
       properties:
         detail:
@@ -3818,6 +3873,8 @@ components:
           description: The type of error returned
           example: UnauthorizedError
           type: string
+      type: object
+      x-apideck-schema-id: Unauthorized
     UnexpectedErrorResponse:
       properties:
         detail:
@@ -3849,6 +3906,8 @@ components:
           description: The type of error returned
           example: RequestHeadersValidationError
           type: string
+      type: object
+      x-apideck-schema-id: Error
     UnifiedFile:
       additionalProperties: false
       properties:
@@ -3902,6 +3961,7 @@ components:
         - name
         - type
       type: object
+      x-apideck-schema-id: UnifiedFile
       x-apideck-weights:
         created_at: high
         downloadable: high
@@ -3923,6 +3983,8 @@ components:
       required:
         - id
       title: UnifiedId
+      type: object
+      x-apideck-schema-id: Id
     UnprocessableResponse:
       properties:
         detail:
@@ -3949,6 +4011,8 @@ components:
           description: The type of error returned
           example: InvalidStateError
           type: string
+      type: object
+      x-apideck-schema-id: Unprocessable
     UpdateDriveGroupResponse:
       properties:
         data:
@@ -3981,6 +4045,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateDriveGroupResponse
     UpdateDriveResponse:
       properties:
         data:
@@ -4013,6 +4078,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateDriveResponse
     UpdateFileResponse:
       properties:
         data:
@@ -4045,6 +4111,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateFileResponse
     UpdateFolderRequest:
       additionalProperties: false
       properties:
@@ -4061,6 +4128,7 @@ components:
         parent_folder_id:
           $ref: "#/components/schemas/ParentFolderId"
       type: object
+      x-apideck-schema-id: UpdateFolderRequest
     UpdateFolderResponse:
       properties:
         data:
@@ -4093,6 +4161,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateFolderResponse
     UpdateSharedLinkResponse:
       properties:
         data:
@@ -4125,6 +4194,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateSharedLinkResponse
     UpdateUploadSessionResponse:
       properties:
         data:
@@ -4157,6 +4227,7 @@ components:
         - operation
         - data
       type: object
+      x-apideck-schema-id: UpdateUploadSessionResponse
     UpdatedAt:
       example: 2020-09-30T07:43:32.000Z
       format: date-time
@@ -4196,6 +4267,7 @@ components:
           readOnly: true
           type: string
       type: object
+      x-apideck-schema-id: UploadSession
       x-apideck-weights:
         expires_at: medium
         id: critical
