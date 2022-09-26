@@ -696,6 +696,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{config}:removeGitLabConnectedRepository":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Remove a GitLab repository from a given GitLabConfig's connected repositories. This API is experimental.
+      operationId: cloudbuild.projects.locations.gitLabConfigs.removeGitLabConnectedRepository
+      parameters:
+        - description: "Required. The name of the `GitLabConfig` to remove a connected repository. Format: `projects/{project}/locations/{location}/gitLabConfigs/{config}`"
+          in: path
+          name: config
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RemoveGitLabConnectedRepositoryRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{location}/regionalWebhook":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1269,10 +1311,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Batch connecting Bitbucket Server repositories to Cloud Build.
-      operationId: cloudbuild.projects.locations.bitbucketServerConfigs.connectedRepositories.batchCreate
+      description: Batch connecting GitLab repositories to Cloud Build. This API is experimental.
+      operationId: cloudbuild.projects.locations.gitLabConfigs.connectedRepositories.batchCreate
       parameters:
-        - description: "The name of the `BitbucketServerConfig` that added connected repository. Format: `projects/{project}/locations/{location}/bitbucketServerConfigs/{config}`"
+        - description: "The name of the `GitLabConfig` that adds connected repositories. Format: `projects/{project}/locations/{location}/gitLabConfigs/{config}`"
           in: path
           name: parent
           required: true
@@ -1282,7 +1324,88 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/BatchCreateBitbucketServerConnectedRepositoriesRequest"
+              $ref: "#/components/schemas/BatchCreateGitLabConnectedRepositoriesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/gitLabConfigs":
+    get:
+      description: List all `GitLabConfigs` for a given project. This API is experimental
+      operationId: cloudbuild.projects.locations.gitLabConfigs.list
+      parameters:
+        - description: Required. Name of the parent resource
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of configs to return. The service may return fewer than this value. If unspecified, at most 50 configs will be returned. The maximum value is 1000;, values above 1000 will be coerced to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous ‘ListGitlabConfigsRequest’ call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to ‘ListGitlabConfigsRequest’ must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListGitLabConfigsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new `GitLabConfig`. This API is experimental
+      operationId: cloudbuild.projects.locations.gitLabConfigs.create
+      parameters:
+        - description: Required. Name of the parent resource.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Optional. The ID to use for the GitLabConfig, which will become the final component of the GitLabConfig’s resource name. gitlab_config_id must meet the following requirements: + They must contain only alphanumeric characters and dashes. + They can be 1-64 characters long. + They must begin and end with an alphanumeric character"
+          in: query
+          name: gitlabConfigId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GitLabConfig"
       responses:
         "200":
           content:
@@ -1380,8 +1503,8 @@ paths:
         - projects
   "/v1/{parent}/repos":
     get:
-      description: List all repositories for a given `BitbucketServerConfig`. This API is experimental.
-      operationId: cloudbuild.projects.locations.bitbucketServerConfigs.repos.list
+      description: List all repositories for a given `GitLabConfig`. This API is experimental
+      operationId: cloudbuild.projects.locations.gitLabConfigs.repos.list
       parameters:
         - description: Required. Name of the parent resource.
           in: path
@@ -1389,12 +1512,12 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of configs to return. The service may return fewer than this value. The maximum value is 1000; values above 1000 will be coerced to 1000.
+        - description: The maximum number of repositories to return. The service may return fewer than this value.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: A page token, received from a previous `ListBitbucketServerRepositoriesRequest` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListBitbucketServerConfigsRequest` must match the call that provided the page token.
+        - description: A page token, received from a previous ListGitLabRepositoriesRequest` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListGitLabRepositoriesRequest` must match the call that provided the page token.
           in: query
           name: pageToken
           schema:
@@ -1404,7 +1527,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ListBitbucketServerRepositoriesResponse"
+                $ref: "#/components/schemas/ListGitLabRepositoriesResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -1832,6 +1955,39 @@ components:
           type: string
         config:
           description: "The name of the `BitbucketServerConfig` that added connected repositories. Format: `projects/{project}/locations/{location}/bitbucketServerConfigs/{config}`"
+          type: string
+        createTime:
+          description: Time the operation was created.
+          format: google-datetime
+          type: string
+      type: object
+    BatchCreateGitLabConnectedRepositoriesRequest:
+      description: RPC request object accepted by BatchCreateGitLabConnectedRepositories RPC method.
+      properties:
+        requests:
+          description: Required. Requests to connect GitLab repositories.
+          items:
+            $ref: "#/components/schemas/CreateGitLabConnectedRepositoryRequest"
+          type: array
+      type: object
+    BatchCreateGitLabConnectedRepositoriesResponse:
+      description: Response of BatchCreateGitLabConnectedRepositories RPC method.
+      properties:
+        gitlabConnectedRepositories:
+          description: The GitLab connected repository requests' responses.
+          items:
+            $ref: "#/components/schemas/GitLabConnectedRepository"
+          type: array
+      type: object
+    BatchCreateGitLabConnectedRepositoriesResponseMetadata:
+      description: Metadata for `BatchCreateGitLabConnectedRepositories` operation.
+      properties:
+        completeTime:
+          description: Time the operation was completed.
+          format: google-datetime
+          type: string
+        config:
+          description: "The name of the `GitLabConfig` that added connected repositories. Format: `projects/{project}/locations/{location}/gitLabConfigs/{config}`"
           type: string
         createTime:
           description: Time the operation was created.
@@ -2338,6 +2494,9 @@ components:
         github:
           $ref: "#/components/schemas/GitHubEventsConfig"
           description: GitHubEventsConfig describes the configuration of a trigger that creates a build whenever a GitHub event is received. Mutually exclusive with `trigger_template`.
+        gitlabEnterpriseEventsConfig:
+          $ref: "#/components/schemas/GitLabEventsConfig"
+          description: GitLabEnterpriseEventsConfig describes the configuration of a trigger that creates a build whenever a GitLab Enterprise event is received.
         id:
           description: Output only. Unique identifier of the trigger.
           readOnly: true
@@ -2461,6 +2620,31 @@ components:
           description: "The resource name of the GitHubEnterprise to be created. Format: `projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}`."
           type: string
       type: object
+    CreateGitLabConfigOperationMetadata:
+      description: Metadata for `CreateGitLabConfig` operation.
+      properties:
+        completeTime:
+          description: Time the operation was completed.
+          format: google-datetime
+          type: string
+        createTime:
+          description: Time the operation was created.
+          format: google-datetime
+          type: string
+        gitlabConfig:
+          description: "The resource name of the GitLabConfig to be created. Format: `projects/{project}/locations/{location}/gitlabConfigs/{id}`."
+          type: string
+      type: object
+    CreateGitLabConnectedRepositoryRequest:
+      description: Request to connect a repository from a connected GitLab host.
+      properties:
+        gitlabConnectedRepository:
+          $ref: "#/components/schemas/GitLabConnectedRepository"
+          description: Required. The GitLab repository to connect.
+        parent:
+          description: "Required. The name of the `GitLabConfig` that adds connected repository. Format: `projects/{project}/locations/{location}/gitLabConfigs/{config}`"
+          type: string
+      type: object
     CreateWorkerPoolOperationMetadata:
       description: Metadata for the `CreateWorkerPool` operation.
       properties:
@@ -2504,6 +2688,21 @@ components:
           type: string
         githubEnterpriseConfig:
           description: "The resource name of the GitHubEnterprise to be deleted. Format: `projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}`."
+          type: string
+      type: object
+    DeleteGitLabConfigOperationMetadata:
+      description: Metadata for `DeleteGitLabConfig` operation.
+      properties:
+        completeTime:
+          description: Time the operation was completed.
+          format: google-datetime
+          type: string
+        createTime:
+          description: Time the operation was created.
+          format: google-datetime
+          type: string
+        gitlabConfig:
+          description: "The resource name of the GitLabConfig to be created. Format: `projects/{project}/locations/{location}/gitlabConfigs/{id}`."
           type: string
       type: object
     DeleteWorkerPoolOperationMetadata:
@@ -2664,6 +2863,130 @@ components:
           $ref: "#/components/schemas/PushFilter"
           description: filter to match changes in refs like branches, tags.
       type: object
+    GitLabConfig:
+      description: GitLabConfig represents the configuration for a GitLab integration.
+      properties:
+        connectedRepositories:
+          description: Connected GitLab.com or GitLabEnterprise repositories for this config.
+          items:
+            $ref: "#/components/schemas/GitLabRepositoryId"
+          type: array
+        createTime:
+          description: Output only. Time when the config was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        enterpriseConfig:
+          $ref: "#/components/schemas/GitLabEnterpriseConfig"
+          description: Optional. GitLabEnterprise config.
+        name:
+          description: The resource name for the config.
+          type: string
+        secrets:
+          $ref: "#/components/schemas/GitLabSecrets"
+          description: Required. Secret Manager secrets needed by the config.
+        username:
+          description: Username of the GitLab.com or GitLab Enterprise account Cloud Build will use.
+          type: string
+        webhookKey:
+          description: Output only. UUID included in webhook requests. The UUID is used to look up the corresponding config.
+          readOnly: true
+          type: string
+      type: object
+    GitLabConnectedRepository:
+      description: GitLabConnectedRepository represents a GitLab connected repository request response.
+      properties:
+        parent:
+          description: "The name of the `GitLabConfig` that added connected repository. Format: `projects/{project}/locations/{location}/gitLabConfigs/{config}`"
+          type: string
+        repo:
+          $ref: "#/components/schemas/GitLabRepositoryId"
+          description: The GitLab repositories to connect.
+        status:
+          $ref: "#/components/schemas/Status"
+          description: Output only. The status of the repo connection request.
+          readOnly: true
+      type: object
+    GitLabEnterpriseConfig:
+      description: GitLabEnterpriseConfig represents the configuration for a GitLabEnterprise integration.
+      properties:
+        hostUri:
+          description: Immutable. The URI of the GitlabEnterprise host.
+          type: string
+        serviceDirectoryConfig:
+          $ref: "#/components/schemas/ServiceDirectoryConfig"
+          description: The Service Directory configuration to be used when reaching out to the GitLab Enterprise instance.
+        sslCa:
+          description: The SSL certificate to use in requests to GitLab Enterprise instances.
+          type: string
+      type: object
+    GitLabEventsConfig:
+      description: GitLabEventsConfig describes the configuration of a trigger that creates a build whenever a GitLab event is received.
+      properties:
+        gitlabConfig:
+          $ref: "#/components/schemas/GitLabConfig"
+          description: Output only. The GitLabConfig specified in the gitlab_config_resource field.
+          readOnly: true
+        gitlabConfigResource:
+          description: The GitLab config resource that this trigger config maps to.
+          type: string
+        projectNamespace:
+          description: Namespace of the GitLab project.
+          type: string
+        pullRequest:
+          $ref: "#/components/schemas/PullRequestFilter"
+          description: Filter to match changes in pull requests.
+        push:
+          $ref: "#/components/schemas/PushFilter"
+          description: Filter to match changes in refs like branches, tags.
+      type: object
+    GitLabRepository:
+      description: Proto Representing a GitLabRepository
+      properties:
+        browseUri:
+          description: Link to the browse repo page on the GitLab instance
+          type: string
+        description:
+          description: Description of the repository
+          type: string
+        displayName:
+          description: Display name of the repository
+          type: string
+        name:
+          description: The resource name of the repository
+          type: string
+        repositoryId:
+          $ref: "#/components/schemas/GitLabRepositoryId"
+          description: Identifier for a repository
+      type: object
+    GitLabRepositoryId:
+      description: GitLabRepositoryId identifies a specific repository hosted on GitLab.com or GitLabEnterprise
+      properties:
+        id:
+          description: 'Required. Identifier for the repository. example: "namespace/project-slug", namespace is usually the username or group ID'
+          type: string
+        webhookId:
+          description: Output only. The ID of the webhook that was created for receiving events from this repo. We only create and manage a single webhook for each repo.
+          format: int32
+          readOnly: true
+          type: integer
+      type: object
+    GitLabSecrets:
+      description: GitLabSecrets represents the secrets in Secret Manager for a GitLab integration.
+      properties:
+        apiAccessTokenVersion:
+          description: Required. The resource name for the api access token’s secret version
+          type: string
+        apiKeyVersion:
+          description: Required. Immutable. API Key that will be attached to webhook requests from GitLab to Cloud Build.
+          type: string
+        readAccessTokenVersion:
+          description: Required. The resource name for the read access token’s secret version
+          type: string
+        webhookSecretVersion:
+          description: Required. Immutable. The resource name for the webhook secret’s secret version. Once this field has been set, it cannot be changed. If you need to change it, please create another GitLabConfig.
+          type: string
+      type: object
     GitRepoSource:
       description: GitRepoSource describes a repo and ref of a code repository.
       properties:
@@ -2821,6 +3144,30 @@ components:
           type: array
         nextPageToken:
           description: Token to receive the next page of results. This will be absent if the end of the response list has been reached.
+          type: string
+      type: object
+    ListGitLabConfigsResponse:
+      description: RPC response object returned by ListGitLabConfigs RPC method.
+      properties:
+        gitlabConfigs:
+          description: A list of GitLabConfigs
+          items:
+            $ref: "#/components/schemas/GitLabConfig"
+          type: array
+        nextPageToken:
+          description: A token that can be sent as `page_token` to retrieve the next page If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
+    ListGitLabRepositoriesResponse:
+      description: RPC response object returned by the ListGitLabRepositories RPC method.
+      properties:
+        gitlabRepositories:
+          description: List of GitLab repositories
+          items:
+            $ref: "#/components/schemas/GitLabRepository"
+          type: array
+        nextPageToken:
+          description: A token that can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
       type: object
     ListGithubEnterpriseConfigsResponse:
@@ -3087,6 +3434,13 @@ components:
           $ref: "#/components/schemas/BitbucketServerRepositoryId"
           description: The connected repository to remove.
       type: object
+    RemoveGitLabConnectedRepositoryRequest:
+      description: RPC request object accepted by RemoveGitLabConnectedRepository RPC method.
+      properties:
+        connectedRepository:
+          $ref: "#/components/schemas/GitLabRepositoryId"
+          description: The connected repository to remove.
+      type: object
     RepoSource:
       description: Location of the source in a Google Cloud Source Repository.
       properties:
@@ -3268,6 +3622,13 @@ components:
             $ref: "#/components/schemas/SecretManagerSecret"
           type: array
       type: object
+    ServiceDirectoryConfig:
+      description: ServiceDirectoryConfig represents Service Directory configuration for a SCM host connection.
+      properties:
+        service:
+          description: "The Service Directory service name. Format: projects/{project}/locations/{location}/namespaces/{namespace}/services/{service}."
+          type: string
+      type: object
     SlackDelivery:
       description: "SlackDelivery is the delivery configuration for delivering Slack messages via webhooks. See Slack webhook documentation at: https://api.slack.com/messaging/webhooks."
       properties:
@@ -3393,6 +3754,21 @@ components:
           type: string
         githubEnterpriseConfig:
           description: "The resource name of the GitHubEnterprise to be updated. Format: `projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}`."
+          type: string
+      type: object
+    UpdateGitLabConfigOperationMetadata:
+      description: Metadata for `UpdateGitLabConfig` operation.
+      properties:
+        completeTime:
+          description: Time the operation was completed.
+          format: google-datetime
+          type: string
+        createTime:
+          description: Time the operation was created.
+          format: google-datetime
+          type: string
+        gitlabConfig:
+          description: "The resource name of the GitLabConfig to be created. Format: `projects/{project}/locations/{location}/gitlabConfigs/{id}`."
           type: string
       type: object
     UpdateWorkerPoolOperationMetadata:

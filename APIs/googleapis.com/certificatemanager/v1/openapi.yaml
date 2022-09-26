@@ -807,7 +807,7 @@ components:
           description: One or more paragraphs of text description of a certificate map.
           type: string
         gclbTargets:
-          description: Output only. A list of GCLB targets which use this Certificate Map.
+          description: Output only. A list of GCLB targets which use this Certificate Map. A Target Proxy is only present on this list if it's attached to a Forwarding Rule.
           items:
             $ref: "#/components/schemas/GclbTarget"
           readOnly: true

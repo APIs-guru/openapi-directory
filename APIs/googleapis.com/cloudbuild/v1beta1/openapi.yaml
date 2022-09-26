@@ -418,6 +418,30 @@ components:
           format: google-datetime
           type: string
       type: object
+    BatchCreateGitLabConnectedRepositoriesResponse:
+      description: Response of BatchCreateGitLabConnectedRepositories RPC method.
+      properties:
+        gitlabConnectedRepositories:
+          description: The GitLab connected repository requests' responses.
+          items:
+            $ref: "#/components/schemas/GitLabConnectedRepository"
+          type: array
+      type: object
+    BatchCreateGitLabConnectedRepositoriesResponseMetadata:
+      description: Metadata for `BatchCreateGitLabConnectedRepositories` operation.
+      properties:
+        completeTime:
+          description: Time the operation was completed.
+          format: google-datetime
+          type: string
+        config:
+          description: "The name of the `GitLabConfig` that added connected repositories. Format: `projects/{project}/locations/{location}/gitLabConfigs/{config}`"
+          type: string
+        createTime:
+          description: Time the operation was created.
+          format: google-datetime
+          type: string
+      type: object
     BitbucketServerConnectedRepository:
       description: / BitbucketServerConnectedRepository represents a connected Bitbucket Server / repository.
       properties:
@@ -825,6 +849,21 @@ components:
           description: "The resource name of the GitHubEnterprise to be created. Format: `projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}`."
           type: string
       type: object
+    CreateGitLabConfigOperationMetadata:
+      description: Metadata for `CreateGitLabConfig` operation.
+      properties:
+        completeTime:
+          description: Time the operation was completed.
+          format: google-datetime
+          type: string
+        createTime:
+          description: Time the operation was created.
+          format: google-datetime
+          type: string
+        gitlabConfig:
+          description: "The resource name of the GitLabConfig to be created. Format: `projects/{project}/locations/{location}/gitlabConfigs/{id}`."
+          type: string
+      type: object
     CreateWorkerPoolOperationMetadata:
       description: Metadata for the `CreateWorkerPool` operation.
       properties:
@@ -868,6 +907,21 @@ components:
           type: string
         githubEnterpriseConfig:
           description: "The resource name of the GitHubEnterprise to be deleted. Format: `projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}`."
+          type: string
+      type: object
+    DeleteGitLabConfigOperationMetadata:
+      description: Metadata for `DeleteGitLabConfig` operation.
+      properties:
+        completeTime:
+          description: Time the operation was completed.
+          format: google-datetime
+          type: string
+        createTime:
+          description: Time the operation was created.
+          format: google-datetime
+          type: string
+        gitlabConfig:
+          description: "The resource name of the GitLabConfig to be created. Format: `projects/{project}/locations/{location}/gitlabConfigs/{id}`."
           type: string
       type: object
     DeleteWorkerPoolOperationMetadata:
@@ -915,6 +969,32 @@ components:
           items:
             $ref: "#/components/schemas/Hash"
           type: array
+      type: object
+    GitLabConnectedRepository:
+      description: GitLabConnectedRepository represents a GitLab connected repository request response.
+      properties:
+        parent:
+          description: "The name of the `GitLabConfig` that added connected repository. Format: `projects/{project}/locations/{location}/gitLabConfigs/{config}`"
+          type: string
+        repo:
+          $ref: "#/components/schemas/GitLabRepositoryId"
+          description: The GitLab repositories to connect.
+        status:
+          $ref: "#/components/schemas/Status"
+          description: Output only. The status of the repo connection request.
+          readOnly: true
+      type: object
+    GitLabRepositoryId:
+      description: GitLabRepositoryId identifies a specific repository hosted on GitLab.com or GitLabEnterprise
+      properties:
+        id:
+          description: 'Required. Identifier for the repository. example: "namespace/project-slug", namespace is usually the username or group ID'
+          type: string
+        webhookId:
+          description: Output only. The ID of the webhook that was created for receiving events from this repo. We only create and manage a single webhook for each repo.
+          format: int32
+          readOnly: true
+          type: integer
       type: object
     GoogleDevtoolsCloudbuildV2OperationMetadata:
       description: Represents the metadata of the long-running operation.
@@ -1436,6 +1516,21 @@ components:
           type: string
         githubEnterpriseConfig:
           description: "The resource name of the GitHubEnterprise to be updated. Format: `projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}`."
+          type: string
+      type: object
+    UpdateGitLabConfigOperationMetadata:
+      description: Metadata for `UpdateGitLabConfig` operation.
+      properties:
+        completeTime:
+          description: Time the operation was completed.
+          format: google-datetime
+          type: string
+        createTime:
+          description: Time the operation was created.
+          format: google-datetime
+          type: string
+        gitlabConfig:
+          description: "The resource name of the GitLabConfig to be created. Format: `projects/{project}/locations/{location}/gitlabConfigs/{id}`."
           type: string
       type: object
     UpdateWorkerPoolOperationMetadata:

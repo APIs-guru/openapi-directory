@@ -172,6 +172,9 @@ components:
     ActionDetail:
       description: Data describing the type and additional information of an action.
       properties:
+        appliedLabelChange:
+          $ref: "#/components/schemas/AppliedLabelChange"
+          description: Label was changed.
         comment:
           $ref: "#/components/schemas/Comment"
           description: A change about comments was made.
@@ -247,6 +250,41 @@ components:
             - LINK
             - DISCUSS
           type: string
+      type: object
+    AppliedLabelChange:
+      description: Label changes that were made on the Target.
+      properties:
+        changes:
+          description: Changes that were made to the Label on the Target.
+          items:
+            $ref: "#/components/schemas/AppliedLabelChangeDetail"
+          type: array
+      type: object
+    AppliedLabelChangeDetail:
+      description: A change made to a Label on the Target.
+      properties:
+        fieldChanges:
+          description: Field Changes. Only present if `types` contains `LABEL_FIELD_VALUE_CHANGED`.
+          items:
+            $ref: "#/components/schemas/FieldValueChange"
+          type: array
+        label:
+          description: The Label name representing the Label that changed. This name always contains the revision of the Label that was used when this Action occurred. The format is `labels/id@revision`.
+          type: string
+        title:
+          description: The human-readable title of the label that changed.
+          type: string
+        types:
+          description: The types of changes made to the Label on the Target.
+          items:
+            enum:
+              - TYPE_UNSPECIFIED
+              - LABEL_ADDED
+              - LABEL_REMOVED
+              - LABEL_FIELD_VALUE_CHANGED
+              - LABEL_APPLIED_BY_ITEM_CREATE
+            type: string
+          type: array
       type: object
     Assignment:
       description: A comment with an assignment.
@@ -324,6 +362,14 @@ components:
             - TYPE_UNSPECIFIED
             - FLAGGED
             - CLEARED
+          type: string
+      type: object
+    Date:
+      description: Wrapper for Date Field value.
+      properties:
+        value:
+          description: Date value.
+          format: google-datetime
           type: string
       type: object
     Delete:
@@ -473,6 +519,50 @@ components:
       description: An empty message indicating an object was edited.
       properties: {}
       type: object
+    FieldValue:
+      description: Contains a value of a Field.
+      properties:
+        date:
+          $ref: "#/components/schemas/Date"
+          description: Date Field value.
+        integer:
+          $ref: "#/components/schemas/Integer"
+          description: Integer Field value.
+        selection:
+          $ref: "#/components/schemas/Selection"
+          description: Selection Field value.
+        selectionList:
+          $ref: "#/components/schemas/SelectionList"
+          description: Selection List Field value.
+        text:
+          $ref: "#/components/schemas/Text"
+          description: Text Field value.
+        textList:
+          $ref: "#/components/schemas/TextList"
+          description: Text List Field value.
+        user:
+          $ref: "#/components/schemas/SingleUser"
+          description: User Field value.
+        userList:
+          $ref: "#/components/schemas/UserList"
+          description: User List Field value.
+      type: object
+    FieldValueChange:
+      description: Change to a Field value.
+      properties:
+        displayName:
+          description: The human-readable display name for this field.
+          type: string
+        fieldId:
+          description: The ID of this field. Field IDs are unique within a Label.
+          type: string
+        newValue:
+          $ref: "#/components/schemas/FieldValue"
+          description: The value that is now set on the field. If not present, the field was cleared. At least one of {old_value|new_value} is always set.
+        oldValue:
+          $ref: "#/components/schemas/FieldValue"
+          description: The value that was previously set on the field. If not present, the field was newly set. At least one of {old_value|new_value} is always set.
+      type: object
     File:
       description: This item is deprecated; please see `DriveFile` instead.
       properties: {}
@@ -521,6 +611,14 @@ components:
         impersonatedUser:
           $ref: "#/components/schemas/User"
           description: The impersonated user.
+      type: object
+    Integer:
+      description: Wrapper for Integer Field value.
+      properties:
+        value:
+          description: Integer value.
+          format: int64
+          type: string
       type: object
     KnownUser:
       description: A known user.
@@ -709,6 +807,25 @@ components:
             - FULLY_RESTRICTED
           type: string
       type: object
+    Selection:
+      description: Wrapper for Selection Field value as combined value/display_name pair for selected choice.
+      properties:
+        displayName:
+          description: Selection value as human-readable display string.
+          type: string
+        value:
+          description: Selection value as Field Choice ID.
+          type: string
+      type: object
+    SelectionList:
+      description: Wrapper for SelectionList Field value.
+      properties:
+        values:
+          description: Selection values.
+          items:
+            $ref: "#/components/schemas/Selection"
+          type: array
+      type: object
     SettingsChange:
       description: Information about settings changes.
       properties:
@@ -717,6 +834,13 @@ components:
           items:
             $ref: "#/components/schemas/RestrictionChange"
           type: array
+      type: object
+    SingleUser:
+      description: Wrapper for User Field value.
+      properties:
+        value:
+          description: User value as email.
+          type: string
       type: object
     Suggestion:
       description: A suggestion.
@@ -798,6 +922,22 @@ components:
           description: This field is deprecated; please see `DriveReference.title` instead.
           type: string
       type: object
+    Text:
+      description: Wrapper for Text Field value.
+      properties:
+        value:
+          description: Value of Text Field.
+          type: string
+      type: object
+    TextList:
+      description: Wrapper for Text List Field value.
+      properties:
+        values:
+          description: Text values.
+          items:
+            $ref: "#/components/schemas/Text"
+          type: array
+      type: object
     TimeRange:
       description: Information about time ranges.
       properties:
@@ -830,6 +970,15 @@ components:
         unknownUser:
           $ref: "#/components/schemas/UnknownUser"
           description: A user about whom nothing is currently known.
+      type: object
+    UserList:
+      description: Wrapper for UserList Field value.
+      properties:
+        values:
+          description: User values.
+          items:
+            $ref: "#/components/schemas/SingleUser"
+          type: array
       type: object
   securitySchemes:
     Oauth2:
