@@ -3269,6 +3269,9 @@ components:
             - SPAM
             - CONFIDENTIAL_INFORMATION
             - SENSITIVE_INFORMATION
+            - FRAUD
+            - MALWARE
+            - ILLEGAL_ACTIVITIES
             - OTHER
           type: string
       type: object
@@ -4070,6 +4073,8 @@ components:
             - SUCCESS
             - ERROR
             - NOT_APPLICABLE
+            - THUMBNAIL_SUCCESS
+            - GO_LIVE_SUCCESS
           type: string
       type: object
     AppsDynamiteSharedWidget:
@@ -4365,6 +4370,13 @@ components:
     BotInfo:
       description: Bot-specific profile information.
       properties:
+        appAllowlistStatus:
+          enum:
+            - UNSPECIFIED_STATUS
+            - ALLOWED
+            - ALL_APPS_DISABLED_BY_ADMIN
+            - APP_NOT_ALLOWLISTED_BY_ADMIN
+          type: string
         appId:
           $ref: "#/components/schemas/AppId"
           description: Identifier of the application associated with the bot.
@@ -4390,6 +4402,9 @@ components:
             - ENABLED
             - DISABLED_BY_DEVELOPER
           type: string
+        supportHomeScreen:
+          description: If the app supports a home screen.
+          type: boolean
         supportUrls:
           $ref: "#/components/schemas/SupportUrls"
           description: Urls with additional information related to the bot. This field should always be set even if all the fields within it are empty, so that it is convenient for clients to work with this field in javascript.
@@ -4403,13 +4418,6 @@ components:
               - CAN_ADD_TO_HUMAN_DM
             type: string
           type: array
-        whitelistStatus:
-          enum:
-            - UNSPECIFIED_STATUS
-            - ALLOWED
-            - ALL_BOTS_DISABLED_BY_ADMIN
-            - BOT_NOT_WHITELISTED_BY_ADMIN
-          type: string
       type: object
     BotResponse:
       description: Information about a bot response, branched from shared/bot_response.proto without frontend User proto as we never store it.
@@ -8825,7 +8833,7 @@ components:
           description: Indicates that the property can be used for generating query suggestions.
           type: boolean
         isWildcardSearchable:
-          description: Indicates that users can perform wildcard search for this property. Only supported for Text properties. IsReturnable must be true to set this option. In a given datasource maximum of 5 properties can be marked as is_wildcard_searchable.
+          description: Indicates that users can perform wildcard search for this property. Only supported for Text properties. IsReturnable must be true to set this option. In a given datasource maximum of 5 properties can be marked as is_wildcard_searchable. For more details, see [Define object properties](https://developers.google.com/cloud-search/docs/guides/schema-guide#properties)
           type: boolean
         name:
           description: The name of the property. Item indexing requests sent to the Indexing API should set the property name equal to this value. For example, if name is *subject_line*, then indexing requests for document items with subject fields should set the name for that field equal to *subject_line*. Use the name as the identifier for the object property. Once registered as a property for an object, you cannot re-use this name for another property within that object. The name must start with a letter and can only contain letters (A-Z, a-z) or numbers (0-9). The maximum length is 256 characters.
@@ -9850,7 +9858,7 @@ components:
           description: The chat lock of the meeting space that lets owner control whether the participants can send chat messages. True if the chat lock feature is enabled for the meeting space.
           type: boolean
         cohostArtifactSharingEnabled:
-          description: Whether meeting artifacts will be shared with co-hosts.
+          description: Whether meeting artifacts will be shared with cohosts.
           type: boolean
         cseEnabled:
           description: Whether Client-side Encryption is enabled for the meeting space.
@@ -10622,7 +10630,7 @@ components:
           format: int32
           type: integer
         mimeType:
-          description: "Mime type of the content (Currently mapped from Page Render Service ItemType) Note that this is not necessarily the mime type of the http resource. For example a text/html from youtube or vimeo may actually be classified as a video type. Then we shall mark it as video/* since we don't know exactly what type of video it is. NEXT TAG : 16"
+          description: Mime type of the content (Currently mapped from Page Render Service ItemType) Note that this is not necessarily the mime type of the http resource. For example a text/html from youtube or vimeo may actually be classified as a video type. Then we shall mark it as video/* since we don't know exactly what type of video it is.
           type: string
         redirectUrl:
           $ref: "#/components/schemas/SafeUrlProto"
@@ -10639,6 +10647,13 @@ components:
         url:
           $ref: "#/components/schemas/SafeUrlProto"
           description: The original URL.
+        urlSource:
+          description: "NEXT TAG : 17"
+          enum:
+            - URL_SOURCE_UNKNOWN
+            - USER_SUPPLIED_URL
+            - SERVER_SUPPLIED_POLICY_VIOLATION
+          type: string
       type: object
     User:
       description: User profile information. This user is not necessarily member of a space.
@@ -10735,8 +10750,11 @@ components:
           type: string
       type: object
     UserInfo:
-      description: "Contains info regarding the updater of an Activity Feed item. Next Id: 7"
+      description: "Contains info regarding the updater of an Activity Feed item. Next Id: 8"
       properties:
+        driveNotificationAvatarUrl:
+          description: Avatar url of the user who triggered the Drive Notification email. This field will be populated if we can extract such information from the Drive Notification email. This should only be used to fetch user avatars when updater_to_show_email is not populated. This field is not set for non-Drive Notification items. This is not the actual sender of the email, as the sender is always comments-noreply@docs.google.com.
+          type: string
         updaterCountDisplayType:
           description: Describes how updater_count_to_show should be used.
           enum:
@@ -10750,14 +10768,14 @@ components:
           format: int32
           type: integer
         updaterToShowEmail:
-          description: The email of the updater for clients to show used for Gmail items.
+          description: The email of the updater for clients to show used for Gmail items. For Drive Notifications, this is the email of the user who triggered the Drive Notification email. This field will be populated if we can extract such information from the Drive Notification email. This is not the actual sender of the email, as the sender is always comments-noreply@docs.google.com.
           type: string
         updaterToShowGaiaId:
           description: The gaia id of the updater for clients to show used for Gmail items. If the updater is an external user, the email field below should be populated.
           format: int64
           type: string
         updaterToShowName:
-          description: The display name of the updater for clients to show used for Gmail items. This (along with the updater fields above) will be populated in the thread pipeline (http://shortn/_rPS0GCp94Y) when converting Activity Feed message attributes into client-renderable Activity Feed items.
+          description: The display name of the updater for clients to show used for Gmail items. For non-Drive Notification items, this field will always be populated. If the display name cannot be found for the user, the fallback string will be the email address. For Drive Notification items, this is the email of the user who triggered the Drive notification email. This field will be populated if we can extract such information from the Drive Notification email. This is not the actual sender of the email, as the sender is always comments-noreply@docs.google.com.
           type: string
         updaterToShowUserId:
           $ref: "#/components/schemas/UserId"

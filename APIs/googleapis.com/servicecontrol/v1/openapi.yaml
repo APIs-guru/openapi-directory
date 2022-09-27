@@ -485,6 +485,7 @@ components:
             - CLOUD_RESOURCE_MANAGER_BACKEND_UNAVAILABLE
             - SECURITY_POLICY_BACKEND_UNAVAILABLE
             - LOCATION_POLICY_BACKEND_UNAVAILABLE
+            - INJECTED_ERROR
           type: string
         detail:
           description: Free-form text providing details on the error cause of the error.
@@ -990,7 +991,7 @@ components:
           format: int64
           type: string
         principal:
-          description: The identity of this peer. Similar to `Request.auth.principal`, but relative to the peer instead of the request. For example, the idenity associated with a load balancer that forwared the request.
+          description: The identity of this peer. Similar to `Request.auth.principal`, but relative to the peer instead of the request. For example, the identity associated with a load balancer that forwarded the request.
           type: string
         regionCode:
           description: The CLDR country/region code associated with the above IP address. If the IP address is private, the `region_code` should reflect the physical location where this peer is running.
