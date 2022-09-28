@@ -13,17 +13,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Recommender API
   version: v1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://recommender.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: recommender
 externalDocs:
@@ -480,21 +478,13 @@ components:
             - SECURITY
             - PERFORMANCE
             - MANAGEABILITY
-            - SUSTAINABILITY
-            - RELIABILITY
           type: string
         costProjection:
           $ref: "#/components/schemas/GoogleCloudRecommenderV1CostProjection"
           description: Use with CategoryType.COST
-        reliabilityProjection:
-          $ref: "#/components/schemas/GoogleCloudRecommenderV1ReliabilityProjection"
-          description: Use with CategoryType.RELAIBILITY
         securityProjection:
           $ref: "#/components/schemas/GoogleCloudRecommenderV1SecurityProjection"
           description: Use with CategoryType.SECURITY
-        sustainabilityProjection:
-          $ref: "#/components/schemas/GoogleCloudRecommenderV1SustainabilityProjection"
-          description: Use with CategoryType.SUSTAINABILITY
       type: object
     GoogleCloudRecommenderV1Insight:
       description: An insight along with the information used to derive the insight. The insight may have associated recommendations as well.
@@ -512,8 +502,6 @@ components:
             - SECURITY
             - PERFORMANCE
             - MANAGEABILITY
-            - SUSTAINABILITY
-            - RELIABILITY
           type: string
         content:
           additionalProperties:
@@ -866,25 +854,6 @@ components:
           description: Parameters for this RecommenderGenerationConfig. These configs can be used by or are applied to all subtypes.
           type: object
       type: object
-    GoogleCloudRecommenderV1ReliabilityProjection:
-      description: Contains information on the impact of a reliability recommendation.
-      properties:
-        details:
-          additionalProperties:
-            description: Properties of the object.
-          description: Per-recommender projection.
-          type: object
-        risks:
-          description: Reliability risks mitigated by this recommendation.
-          items:
-            enum:
-              - RISK_TYPE_UNSPECIFIED
-              - SERVICE_DISRUPTION
-              - DATA_LOSS
-              - ACCESS_DENY
-            type: string
-          type: array
-      type: object
     GoogleCloudRecommenderV1SecurityProjection:
       description: Contains various ways of describing the impact on Security.
       properties:
@@ -893,18 +862,6 @@ components:
             description: Properties of the object.
           description: Additional security impact details that is provided by the recommender.
           type: object
-      type: object
-    GoogleCloudRecommenderV1SustainabilityProjection:
-      description: Contains metadata about how much sustainability a recommendation can save or incur.
-      properties:
-        duration:
-          description: Duration for which this sustainability applies.
-          format: google-duration
-          type: string
-        kgCO2e:
-          description: Carbon Footprint generated in kg of CO2 equivalent. Chose kg_c_o2e so that the name renders correctly in camelCase (kgCO2e).
-          format: double
-          type: number
       type: object
     GoogleCloudRecommenderV1ValueMatcher:
       description: Contains various matching options for values for a GCP resource field.
@@ -946,5 +903,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

@@ -521,7 +521,6 @@ components:
             - EU_REGIONS_AND_SUPPORT
             - CA_REGIONS_AND_SUPPORT
             - ITAR
-            - ASSURED_WORKLOADS_FOR_PARTNERS
           type: string
         createTime:
           description: Optional. Time when the operation was created.
@@ -625,6 +624,7 @@ components:
           description: Output only. State of the violation
           enum:
             - STATE_UNSPECIFIED
+            - ACTIVE
             - RESOLVED
             - UNRESOLVED
             - EXCEPTION
@@ -726,7 +726,6 @@ components:
             - EU_REGIONS_AND_SUPPORT
             - CA_REGIONS_AND_SUPPORT
             - ITAR
-            - ASSURED_WORKLOADS_FOR_PARTNERS
           type: string
         compliantButDisallowedServices:
           description: Output only. Urls for services which are compliant for this Assured Workload, but which are currently disallowed by the ResourceUsageRestriction org policy. Invoke RestrictAllowedResources endpoint to allow your project developers to use these services in their environment."
@@ -766,12 +765,6 @@ components:
           type: object
         name:
           description: "Optional. The resource name of the workload. Format: organizations/{organization}/locations/{location}/workloads/{workload} Read-only."
-          type: string
-        partner:
-          description: Optional. Compliance Regime associated with this workload.
-          enum:
-            - PARTNER_UNSPECIFIED
-            - LOCAL_CONTROLS_BY_S3NS
           type: string
         provisionedResourcesParent:
           description: "Input only. The parent resource for the resources managed by this Assured Workload. May be either empty or a folder resource which is a child of the Workload parent. If not specified all resources are created under the parent organization. Format: folders/{folder_id}"

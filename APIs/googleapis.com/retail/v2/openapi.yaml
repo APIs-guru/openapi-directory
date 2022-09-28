@@ -1590,11 +1590,29 @@ components:
         gcsPath:
           description: Cloud Storage file path of the import source. Can be set for batch operation error.
           type: string
+        inventoryActivity:
+          description: The detailed content which caused the error on importing an inventory activity. http://cs/google3/google/cloud/retail/v2main/inventory_activity.proto
+          type: string
         lineNumber:
           description: Line number of the content in file. Should be empty for permission or batch operation error.
           type: string
         operationName:
           description: The operation resource name of the LRO.
+          type: string
+        order:
+          description: The detailed content which caused the error on importing an order. http://cs/google3/google/cloud/retail/v2main/order.proto
+          type: string
+        place:
+          description: The detailed content which caused the error on importing a place. http://cs/google3/google/cloud/retail/v2main/place.proto
+          type: string
+        placeAsset:
+          description: The detailed content which caused the error on importing a place asset. http://cs/google3/google/cloud/retail/v2main/place_asset.proto
+          type: string
+        placeProductPrice:
+          description: The detailed content which caused the error on importing a place product price. http://cs/google3/google/cloud/retail/v2main/place_product_price.proto
+          type: string
+        placeProductSettings:
+          description: The detailed content which caused the error on importing a place product settings. http://cs/google3/google/cloud/retail/v2main/place_product_settings.proto
           type: string
         product:
           description: The detailed content which caused the error on importing a product.
@@ -1759,7 +1777,7 @@ components:
       description: Catalog level attribute config for an attribute. For example, if customers want to enable/disable facet for a specific attribute.
       properties:
         dynamicFacetableOption:
-          description: If DYNAMIC_FACETABLE_ENABLED, attribute values are available for dynamic facet. Could only be DYNAMIC_FACETABLE_DISABLED if CatalogAttribute.indexable_option is INDEXABLE_DISABLED. Otherwise, an INVALID_ARGUMENT error is returned.
+          description: If DYNAMIC_FACETABLE_ENABLED, attribute values are available for dynamic facet. Could only be DYNAMIC_FACETABLE_DISABLED if CatalogAttribute.indexable_option is INDEXABLE_DISABLED. Otherwise, an INVALID_ARGUMENT error is returned. Must be specified, otherwise throws INVALID_FORMAT error.
           enum:
             - DYNAMIC_FACETABLE_OPTION_UNSPECIFIED
             - DYNAMIC_FACETABLE_ENABLED
@@ -1770,7 +1788,7 @@ components:
           readOnly: true
           type: boolean
         indexableOption:
-          description: When AttributesConfig.attribute_config_level is CATALOG_LEVEL_ATTRIBUTE_CONFIG, if INDEXABLE_ENABLED attribute values are indexed so that it can be filtered, faceted, or boosted in SearchService.Search.
+          description: When AttributesConfig.attribute_config_level is CATALOG_LEVEL_ATTRIBUTE_CONFIG, if INDEXABLE_ENABLED attribute values are indexed so that it can be filtered, faceted, or boosted in SearchService.Search. Must be specified, otherwise throws INVALID_FORMAT error.
           enum:
             - INDEXABLE_OPTION_UNSPECIFIED
             - INDEXABLE_ENABLED
@@ -1780,7 +1798,7 @@ components:
           description: "Required. Attribute name. For example: `color`, `brands`, `attributes.custom_attribute`, such as `attributes.xyz`. To be indexable, the attribute name can contain only alpha-numeric characters and underscores. For example, an attribute named `attributes.abc_xyz` can be indexed, but an attribute named `attributes.abc-xyz` cannot be indexed."
           type: string
         searchableOption:
-          description: When AttributesConfig.attribute_config_level is CATALOG_LEVEL_ATTRIBUTE_CONFIG, if SEARCHABLE_ENABLED, attribute values are searchable by text queries in SearchService.Search. If SEARCHABLE_ENABLED but attribute type is numerical, attribute values will not be searchable by text queries in SearchService.Search, as there are no text values associated to numerical attributes.
+          description: When AttributesConfig.attribute_config_level is CATALOG_LEVEL_ATTRIBUTE_CONFIG, if SEARCHABLE_ENABLED, attribute values are searchable by text queries in SearchService.Search. If SEARCHABLE_ENABLED but attribute type is numerical, attribute values will not be searchable by text queries in SearchService.Search, as there are no text values associated to numerical attributes. Must be specified, otherwise throws INVALID_FORMAT error.
           enum:
             - SEARCHABLE_OPTION_UNSPECIFIED
             - SEARCHABLE_ENABLED

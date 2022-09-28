@@ -13,15 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Recommender API
   version: v1beta1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://recommender.googleapis.com/$discovery/rest?version=v1beta1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: recommender
 externalDocs:
@@ -479,14 +481,10 @@ components:
             - PERFORMANCE
             - MANAGEABILITY
             - SUSTAINABILITY
-            - RELIABILITY
           type: string
         costProjection:
           $ref: "#/components/schemas/GoogleCloudRecommenderV1beta1CostProjection"
           description: Use with CategoryType.COST
-        reliabilityProjection:
-          $ref: "#/components/schemas/GoogleCloudRecommenderV1beta1ReliabilityProjection"
-          description: Use with CategoryType.RELIABILITY
         securityProjection:
           $ref: "#/components/schemas/GoogleCloudRecommenderV1beta1SecurityProjection"
           description: Use with CategoryType.SECURITY
@@ -511,7 +509,6 @@ components:
             - PERFORMANCE
             - MANAGEABILITY
             - SUSTAINABILITY
-            - RELIABILITY
           type: string
         content:
           additionalProperties:
@@ -864,25 +861,6 @@ components:
           description: Parameters for this RecommenderGenerationConfig. These configs can be used by or are applied to all subtypes.
           type: object
       type: object
-    GoogleCloudRecommenderV1beta1ReliabilityProjection:
-      description: Contains information on the impact of a reliability recommendation.
-      properties:
-        details:
-          additionalProperties:
-            description: Properties of the object.
-          description: Per-recommender projection.
-          type: object
-        risks:
-          description: Reliability risks mitigated by this recommendation.
-          items:
-            enum:
-              - RISK_TYPE_UNSPECIFIED
-              - SERVICE_DISRUPTION
-              - DATA_LOSS
-              - ACCESS_DENY
-            type: string
-          type: array
-      type: object
     GoogleCloudRecommenderV1beta1SecurityProjection:
       description: Contains various ways of describing the impact on Security.
       properties:
@@ -944,3 +922,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}
