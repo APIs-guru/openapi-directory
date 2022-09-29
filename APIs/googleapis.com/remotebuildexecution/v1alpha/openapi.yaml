@@ -1127,6 +1127,13 @@ components:
             - GVISOR
             - OFF
           type: string
+        vmVerification:
+          description: Whether to verify CreateBotSession and UpdateBotSession from the bot.
+          enum:
+            - VM_VERIFICATION_UNSPECIFIED
+            - VM_VERIFICATION_GCP_TOKEN
+            - VM_VERIFICATION_OFF
+          type: string
       type: object
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature:
       description: Defines whether a feature can be used or what values are accepted.

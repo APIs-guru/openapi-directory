@@ -892,7 +892,7 @@ components:
           type: string
         livenessProbe:
           $ref: "#/components/schemas/GoogleCloudRunV2Probe"
-          description: "Not Supported By Cloud Run. Periodic probe of container liveness. Container will be restarted if the probe fails. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes"
+          description: "Periodic probe of container liveness. Container will be restarted if the probe fails. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes"
         name:
           description: Name of the container specified as a DNS_LABEL.
           type: string

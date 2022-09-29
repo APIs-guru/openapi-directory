@@ -275,7 +275,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: HRIS API
-  version: 8.65.0
+  version: 8.66.0
   x-apideck-api: hris
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1118,6 +1118,7 @@ paths:
                 },
                 division: 'Europe',
                 department: 'R&D',
+                department_id: '12345',
                 team: {
                   id: '1234',
                   name: 'Full Stack Engineers'
@@ -1154,10 +1155,9 @@ paths:
                 nationalities: ['US'],
                 photo_url: 'https://unavatar.io/elon-musk',
                 timezone: 'Europe/London',
-                source:
-                  'When the employee is imported as a new hire, this field indicates what system (e.g. the name of the ATS) this employee was imported from.',
-                source_id:
-                  'Unique identifier of the employee in the system this employee was imported from (e.g. the ID in the ATS).',
+                source: 'lever',
+                source_id: '12345',
+                record_url: 'https://app.intercom.io/contacts/12345',
                 jobs: [
                   {
                     title: 'CEO',
@@ -1454,6 +1454,7 @@ paths:
                 },
                 division: 'Europe',
                 department: 'R&D',
+                department_id: '12345',
                 team: {
                   id: '1234',
                   name: 'Full Stack Engineers'
@@ -1490,10 +1491,9 @@ paths:
                 nationalities: ['US'],
                 photo_url: 'https://unavatar.io/elon-musk',
                 timezone: 'Europe/London',
-                source:
-                  'When the employee is imported as a new hire, this field indicates what system (e.g. the name of the ATS) this employee was imported from.',
-                source_id:
-                  'Unique identifier of the employee in the system this employee was imported from (e.g. the ID in the ATS).',
+                source: 'lever',
+                source_id: '12345',
+                record_url: 'https://app.intercom.io/contacts/12345',
                 jobs: [
                   {
                     title: 'CEO',
@@ -3915,6 +3915,12 @@ components:
           nullable: true
           title: Department
           type: string
+        department_id:
+          description: Unique identifier of the department ID this employee belongs to.
+          example: "12345"
+          nullable: true
+          title: Department ID
+          type: string
         description:
           $ref: "#/components/schemas/Description"
         dietary_preference:
@@ -4172,6 +4178,11 @@ components:
           nullable: true
           title: Pronouns
           type: string
+        record_url:
+          example: https://app.intercom.io/contacts/12345
+          nullable: true
+          title: Record URL
+          type: string
         row_version:
           $ref: "#/components/schemas/RowVersion"
         salutation:
@@ -4209,12 +4220,14 @@ components:
           title: Social Security Number
           type: string
         source:
-          example: When the employee is imported as a new hire, this field indicates what system (e.g. the name of the ATS) this employee was imported from.
+          description: When the employee is imported as a new hire, this field indicates what system (e.g. the name of the ATS) this employee was imported from.
+          example: lever
           nullable: true
           title: Source
           type: string
         source_id:
-          example: Unique identifier of the employee in the system this employee was imported from (e.g. the ID in the ATS).
+          description: Unique identifier of the employee in the system this employee was imported from (e.g. the ID in the ATS).
+          example: "12345"
           nullable: true
           title: Source ID
           type: string
@@ -4373,6 +4386,7 @@ components:
       example:
         company_id: "1234"
         email: elon@tesla.com
+        employee_number: 123456-AB
         employment_status: active
         first_name: Elon
         last_name: Musk
@@ -4386,6 +4400,10 @@ components:
         email:
           description: Email to filter on
           example: elon@tesla.com
+          type: string
+        employee_number:
+          description: Employee number to filter on
+          example: 123456-AB
           type: string
         employment_status:
           description: Employment status to filter on

@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://documentai.googleapis.com/$discovery/rest?version=v1beta2
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: documentai
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/document-ai/docs/
 tags:
@@ -1124,6 +1125,9 @@ components:
         image:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageImage"
           description: Rendered image for this page. This image is preprocessed to remove any skew, rotation, and distortions such that the annotation bounding boxes can be upright and axis-aligned.
+        imageQualityScores:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageImageQualityScores"
+          description: Image Quality Scores.
         layout:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageLayout"
           description: Layout for the page.
@@ -1310,6 +1314,30 @@ components:
           description: Width of the image in pixels.
           format: int32
           type: integer
+      type: object
+    GoogleCloudDocumentaiV1beta1DocumentPageImageQualityScores:
+      description: Image Quality Scores for the page image
+      properties:
+        detectedDefects:
+          description: A list of detected defects.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageImageQualityScoresDetectedDefect"
+          type: array
+        qualityScore:
+          description: The overall quality score. Range [0, 1] where 1 is perfect quality.
+          format: float
+          type: number
+      type: object
+    GoogleCloudDocumentaiV1beta1DocumentPageImageQualityScoresDetectedDefect:
+      description: Image Quality Defects
+      properties:
+        confidence:
+          description: Confidence of detected defect. Range [0, 1] where 1 indicates strong confidence of that the defect exists.
+          format: float
+          type: number
+        type:
+          description: Name of the defect type. Supported values are "quality/defect_blurry", "quality/defect_noisy", "quality/defect_dark", "quality/defect_faint", "quality/defect_text_too_small", "quality/defect_document_cutoff", "quality/defect_text_cutoff", "quality/defect_glare"
+          type: string
       type: object
     GoogleCloudDocumentaiV1beta1DocumentPageLayout:
       description: Visual element describing a layout unit on a page.
@@ -2000,6 +2028,9 @@ components:
         image:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageImage"
           description: Rendered image for this page. This image is preprocessed to remove any skew, rotation, and distortions such that the annotation bounding boxes can be upright and axis-aligned.
+        imageQualityScores:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageImageQualityScores"
+          description: Image Quality Scores.
         layout:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageLayout"
           description: Layout for the page.
@@ -2186,6 +2217,30 @@ components:
           description: Width of the image in pixels.
           format: int32
           type: integer
+      type: object
+    GoogleCloudDocumentaiV1beta2DocumentPageImageQualityScores:
+      description: Image Quality Scores for the page image
+      properties:
+        detectedDefects:
+          description: A list of detected defects.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageImageQualityScoresDetectedDefect"
+          type: array
+        qualityScore:
+          description: The overall quality score. Range [0, 1] where 1 is perfect quality.
+          format: float
+          type: number
+      type: object
+    GoogleCloudDocumentaiV1beta2DocumentPageImageQualityScoresDetectedDefect:
+      description: Image Quality Defects
+      properties:
+        confidence:
+          description: Confidence of detected defect. Range [0, 1] where 1 indicates strong confidence of that the defect exists.
+          format: float
+          type: number
+        type:
+          description: Name of the defect type. Supported values are "quality/defect_blurry", "quality/defect_noisy", "quality/defect_dark", "quality/defect_faint", "quality/defect_text_too_small", "quality/defect_document_cutoff", "quality/defect_text_cutoff", "quality/defect_glare"
+          type: string
       type: object
     GoogleCloudDocumentaiV1beta2DocumentPageLayout:
       description: Visual element describing a layout unit on a page.

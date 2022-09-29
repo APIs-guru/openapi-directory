@@ -401,7 +401,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Required. The list of fields to be updated. Field names must be in snake case (e.g., "field_to_update"). Omitted fields will not be updated. To replace the entire entity, use one path with the string "*" to match all fields.
+        - description: Required. The list of fields to be updated. Omitted fields will not be updated. To replace the entire entity, use one path with the string "*" to match all fields.
           in: query
           name: updateMask
           schema:
@@ -1343,6 +1343,86 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaMeasurementProtocolSecret"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
+      tags:
+        - properties
+  "/v1alpha/{parent}/searchAds360Links":
+    get:
+      description: Lists all SearchAds360Links on a property.
+      operationId: analyticsadmin.properties.searchAds360Links.list
+      parameters:
+        - description: "Required. Example format: properties/1234"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of resources to return. If unspecified, at most 50 resources will be returned. The maximum value is 200 (higher values will be coerced to the maximum).
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListSearchAds360Links` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListSearchAds360Links` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaListSearchAds360LinksResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.readonly
+      tags:
+        - properties
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a SearchAds360Link.
+      operationId: analyticsadmin.properties.searchAds360Links.create
+      parameters:
+        - description: "Required. Example format: properties/1234"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaSearchAds360Link"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaSearchAds360Link"
           description: Successful response
       security:
         - Oauth2:
@@ -2556,6 +2636,9 @@ components:
         property:
           $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaProperty"
           description: A snapshot of a Property resource in change history.
+        searchAds360Link:
+          $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaSearchAds360Link"
+          description: A snapshot of a SearchAds360Link resource in change history.
       type: object
     GoogleAnalyticsAdminV1alphaChangeHistoryEvent:
       description: A set of changes within a Google Analytics account or its child properties that resulted from the same cause. Common causes would be updates made in the Google Analytics UI, changes from customer support, or automatic Google Analytics system changes.
@@ -3145,6 +3228,18 @@ components:
             $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaProperty"
           type: array
       type: object
+    GoogleAnalyticsAdminV1alphaListSearchAds360LinksResponse:
+      description: Response message for ListSearchAds360Links RPC.
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        searchAds360Links:
+          description: List of SearchAds360Links.
+          items:
+            $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaSearchAds360Link"
+          type: array
+      type: object
     GoogleAnalyticsAdminV1alphaListUserLinksResponse:
       description: Response message for ListUserLinks RPC.
       properties:
@@ -3381,6 +3476,33 @@ components:
           items:
             $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAccessRow"
           type: array
+      type: object
+    GoogleAnalyticsAdminV1alphaSearchAds360Link:
+      description: A link between a GA4 property and a Search Ads 360 entity.
+      properties:
+        adsPersonalizationEnabled:
+          description: Enables personalized advertising features with this integration. If this field is not set on create, it will be defaulted to true.
+          type: boolean
+        advertiserDisplayName:
+          description: Output only. The display name of the Search Ads 360 Advertiser. Allows users to easily identify the linked resource.
+          readOnly: true
+          type: string
+        advertiserId:
+          description: Immutable. This field represents the Advertiser ID of the Search Ads 360 Advertiser. that has been linked.
+          type: string
+        campaignDataSharingEnabled:
+          description: Immutable. Enables the import of campaign data from Search Ads 360 into the GA4 property. After link creation, this can only be updated from the Search Ads 360 product. If this field is not set on create, it will be defaulted to true.
+          type: boolean
+        costDataSharingEnabled:
+          description: Immutable. Enables the import of cost data from Search Ads 360 to the GA4 property. This can only be enabled if campaign_data_sharing_enabled is enabled. After link creation, this can only be updated from the Search Ads 360 product. If this field is not set on create, it will be defaulted to true.
+          type: boolean
+        name:
+          description: "Output only. The resource name for this SearchAds360Link resource. Format: properties/{propertyId}/searchAds360Links/{linkId} Note: linkId is not the Search Ads 360 advertiser ID"
+          readOnly: true
+          type: string
+        siteStatsSharingEnabled:
+          description: Enables export of site stats with this integration. If this field is not set on create, it will be defaulted to true.
+          type: boolean
       type: object
     GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsRequest:
       description: Request message for SearchChangeHistoryEvents RPC.

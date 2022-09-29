@@ -7,7 +7,7 @@ info:
     url: https://developer.nexmo.com
   description: "Enables users to manage their Vonage API Account by programmable means. More information is available here: <https://developer.nexmo.com/account/overview>."
   title: Account API
-  version: 1.0.3
+  version: 1.0.4
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/account.yml
@@ -418,7 +418,7 @@ components:
             properties:
               detail:
                 description: More detail regarding this error, including the expected value
-                example: 'Invalid credentials format. Expected: "Authorization: (Base64(UTF-8(apiKey:secret)))"'
+                example: You did not provide correct credentials.
                 type: string
               instance:
                 description: Internal Trace ID
@@ -430,7 +430,7 @@ components:
                 type: string
               type:
                 description: URL for further information
-                example: https://developer.nexmo.com/
+                example: https://developer.nexmo.com/api-errors#unauthorized
                 type: string
       description: Credentials are missing or invalid
   schemas:
