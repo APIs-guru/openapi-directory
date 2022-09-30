@@ -244,6 +244,174 @@ paths:
             - https://www.googleapis.com/auth/chrome.management.policy
       tags:
         - customers
+  "/v1/{customer}/policies/networks:defineCertificate":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a certificate at a specified OU for a customer.
+      operationId: chromepolicy.customers.policies.networks.defineCertificate
+      parameters:
+        - description: Required. The customer for which the certificate will apply.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleChromePolicyV1DefineCertificateRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleChromePolicyV1DefineCertificateResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chrome.management.policy
+          Oauth2c:
+            - https://www.googleapis.com/auth/chrome.management.policy
+      tags:
+        - customers
+  "/v1/{customer}/policies/networks:defineNetwork":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Define a new network.
+      operationId: chromepolicy.customers.policies.networks.defineNetwork
+      parameters:
+        - description: Required. The customer who will own this new network.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleChromePolicyV1DefineNetworkRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleChromePolicyV1DefineNetworkResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chrome.management.policy
+          Oauth2c:
+            - https://www.googleapis.com/auth/chrome.management.policy
+      tags:
+        - customers
+  "/v1/{customer}/policies/networks:removeCertificate":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Remove an existing certificate by guid.
+      operationId: chromepolicy.customers.policies.networks.removeCertificate
+      parameters:
+        - description: Required. The customer whose certificate will be removed.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleChromePolicyV1RemoveCertificateRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleChromePolicyV1RemoveCertificateResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chrome.management.policy
+          Oauth2c:
+            - https://www.googleapis.com/auth/chrome.management.policy
+      tags:
+        - customers
+  "/v1/{customer}/policies/networks:removeNetwork":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Remove an existing network by guid.
+      operationId: chromepolicy.customers.policies.networks.removeNetwork
+      parameters:
+        - description: Required. The customer whose network will be removed.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleChromePolicyV1RemoveNetworkRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleChromePolicyV1RemoveNetworkResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chrome.management.policy
+          Oauth2c:
+            - https://www.googleapis.com/auth/chrome.management.policy
+      tags:
+        - customers
   "/v1/{customer}/policies/orgunits:batchInherit":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -390,7 +558,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleChromePolicyV1PolicySchema"
+                $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicySchema"
           description: Successful response
       security:
         - Oauth2:
@@ -431,7 +599,7 @@ paths:
           name: filter
           schema:
             type: string
-        - description: The maximum number of policy schemas to return.
+        - description: The maximum number of policy schemas to return, defaults to 100 and has a maximum of 1000.
           in: query
           name: pageSize
           schema:
@@ -446,7 +614,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleChromePolicyV1ListPolicySchemasResponse"
+                $ref: "#/components/schemas/GoogleChromePolicyVersionsV1ListPolicySchemasResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -565,16 +733,6 @@ components:
             - API_DEPRECATED
           type: string
       type: object
-    GoogleChromePolicyV1AdditionalTargetKeyName:
-      description: Additional key names that will be used to identify the target of the policy value.
-      properties:
-        key:
-          description: Key name.
-          type: string
-        keyDescription:
-          description: Key description.
-          type: string
-      type: object
     GoogleChromePolicyV1BatchDeleteGroupPoliciesRequest:
       description: Request message for specifying that multiple policy values will be deleted.
       properties:
@@ -610,6 +768,69 @@ components:
           items:
             $ref: "#/components/schemas/GoogleChromePolicyV1ModifyOrgUnitPolicyRequest"
           type: array
+      type: object
+    GoogleChromePolicyV1DefineCertificateRequest:
+      description: Request object for creating a certificate.
+      properties:
+        ceritificateName:
+          description: Optional. The optional name of the certificate. If not specified, the certificate issuer will be used as the name.
+          type: string
+        certificate:
+          description: Required. The raw contents of the .PEM, .CRT, or .CER file.
+          type: string
+        settings:
+          description: Optional. Certificate settings within the chrome.networks.certificates namespace.
+          items:
+            $ref: "#/components/schemas/GoogleChromePolicyV1NetworkSetting"
+          type: array
+        targetResource:
+          description: 'Required. The target resource on which this certificate is applied. The following resources are supported: * Organizational Unit ("orgunits/{orgunit_id}")'
+          type: string
+      type: object
+    GoogleChromePolicyV1DefineCertificateResponse:
+      description: Response object for creating a certificate.
+      properties:
+        networkId:
+          description: The guid of the certificate created by the action.
+          type: string
+        settings:
+          description: the affiliated settings of the certificate (NOT IMPLEMENTED)
+          items:
+            $ref: "#/components/schemas/GoogleChromePolicyV1NetworkSetting"
+          type: array
+        targetResource:
+          description: the resource at which the certificate is defined.
+          type: string
+      type: object
+    GoogleChromePolicyV1DefineNetworkRequest:
+      description: Request object for creating a new network.
+      properties:
+        name:
+          description: Required. Name of the new created network.
+          type: string
+        settings:
+          description: Required. Detailed network settings.
+          items:
+            $ref: "#/components/schemas/GoogleChromePolicyV1NetworkSetting"
+          type: array
+        targetResource:
+          description: 'Required. The target resource on which this new network will be defined. The following resources are supported: * Organizational Unit ("orgunits/{orgunit_id}")'
+          type: string
+      type: object
+    GoogleChromePolicyV1DefineNetworkResponse:
+      description: Response object for creating a network.
+      properties:
+        networkId:
+          description: Network ID of the new created network.
+          type: string
+        settings:
+          description: Detailed network settings of the new created network
+          items:
+            $ref: "#/components/schemas/GoogleChromePolicyV1NetworkSetting"
+          type: array
+        targetResource:
+          description: 'The target resource on which this new network will be defined. The following resources are supported: * Organizational Unit ("orgunits/{orgunit_id}")'
+          type: string
       type: object
     GoogleChromePolicyV1DeleteGroupPolicyRequest:
       description: Request parameters for deleting the policy value of a specific group target.
@@ -659,18 +880,6 @@ components:
           description: Output only. The target resource for which the group priority ordering has been retrieved.
           readOnly: true
       type: object
-    GoogleChromePolicyV1ListPolicySchemasResponse:
-      description: Response message for listing policy schemas that match a filter.
-      properties:
-        nextPageToken:
-          description: The page token used to get the next page of policy schemas.
-          type: string
-        policySchemas:
-          description: The list of policy schemas that match the query.
-          items:
-            $ref: "#/components/schemas/GoogleChromePolicyV1PolicySchema"
-          type: array
-      type: object
     GoogleChromePolicyV1ModifyGroupPolicyRequest:
       description: Request parameters for modifying a policy value for a specific group target.
       properties:
@@ -699,175 +908,29 @@ components:
           format: google-fieldmask
           type: string
       type: object
-    GoogleChromePolicyV1PolicySchema:
-      description: "Resource representing a policy schema. Next ID: 14"
+    GoogleChromePolicyV1NetworkSetting:
+      description: A network setting contains network configurations.
       properties:
-        accessRestrictions:
-          description: Output only. Specific access restrictions related to this policy.
-          items:
-            type: string
-          readOnly: true
-          type: array
-        additionalTargetKeyNames:
-          description: Output only. Additional key names that will be used to identify the target of the policy value. When specifying a `policyTargetKey`, each of the additional keys specified here will have to be included in the `additionalTargetKeys` map.
-          items:
-            $ref: "#/components/schemas/GoogleChromePolicyV1AdditionalTargetKeyName"
-          readOnly: true
-          type: array
-        categoryTitle:
-          description: Output only. Title of the category in which a setting belongs.
-          readOnly: true
-          type: string
-        definition:
-          $ref: "#/components/schemas/Proto2FileDescriptorProto"
-          description: Schema definition using proto descriptor.
-        fieldDescriptions:
-          description: Output only. Detailed description of each field that is part of the schema.
-          items:
-            $ref: "#/components/schemas/GoogleChromePolicyV1PolicySchemaFieldDescription"
-          readOnly: true
-          type: array
-        name:
-          description: "Format: name=customers/{customer}/policySchemas/{schema_namespace}"
-          type: string
-        notices:
-          description: Output only. Special notice messages related to setting certain values in certain fields in the schema.
-          items:
-            $ref: "#/components/schemas/GoogleChromePolicyV1PolicySchemaNoticeDescription"
-          readOnly: true
-          type: array
-        policyApiLifecycle:
-          $ref: "#/components/schemas/ChromeCrosDpanelAutosettingsProtoPolicyApiLifecycle"
-          description: Output only. Current lifecycle information.
-          readOnly: true
-        policyApiLifeycle:
-          $ref: "#/components/schemas/ChromeCrosDpanelAutosettingsProtoPolicyApiLifecycle"
-          description: Deprecated field because of typo.
-        policyDescription:
-          description: Output only. Description about the policy schema for user consumption.
-          readOnly: true
-          type: string
-        schemaName:
-          description: Output only. The fully qualified name of the policy schema. This value is used to fill the field `policy_schema` in PolicyValue when calling BatchInheritOrgUnitPolicies BatchModifyOrgUnitPolicies BatchModifyGroupPolicies or BatchDeleteGroupPolicies.
-          readOnly: true
-          type: string
-        supportUri:
-          description: Output only. URI to related support article for this schema.
-          readOnly: true
-          type: string
-        validTargetResources:
-          description: Output only. Information about applicable target resources for the policy.
-          items:
-            enum:
-              - TARGET_RESOURCE_UNSPECIFIED
-              - ORG_UNIT
-              - GROUP
-            type: string
-          readOnly: true
-          type: array
-      type: object
-    GoogleChromePolicyV1PolicySchemaFieldDependencies:
-      description: The field and the value it must have for another field to be allowed to be set.
-      properties:
-        sourceField:
-          description: The source field which this field depends on.
-          type: string
-        sourceFieldValue:
-          description: The value which the source field must have for this field to be allowed to be set.
-          type: string
-      type: object
-    GoogleChromePolicyV1PolicySchemaFieldDescription:
-      description: Provides detailed information for a particular field that is part of a PolicySchema.
-      properties:
-        description:
-          description: Deprecated. Use name and field_description instead. The description for the field.
-          type: string
-        field:
-          description: Output only. The name of the field for associated with this description.
-          readOnly: true
-          type: string
-        fieldDependencies:
-          description: Output only. Provides a list of fields and values. At least one of the fields must have the corresponding value in order for this field to be allowed to be set.
-          items:
-            $ref: "#/components/schemas/GoogleChromePolicyV1PolicySchemaFieldDependencies"
-          readOnly: true
-          type: array
-        fieldDescription:
-          description: Output only. The description of the field.
-          readOnly: true
-          type: string
-        inputConstraint:
-          description: Output only. Any input constraints associated on the values for the field.
-          readOnly: true
-          type: string
-        knownValueDescriptions:
-          description: Output only. If the field has a set of known values, this field will provide a description for these values.
-          items:
-            $ref: "#/components/schemas/GoogleChromePolicyV1PolicySchemaFieldKnownValueDescription"
-          readOnly: true
-          type: array
-        name:
-          description: Output only. The name of the field.
-          readOnly: true
-          type: string
-        nestedFieldDescriptions:
-          description: Output only. Provides the description of the fields nested in this field, if the field is a message type that defines multiple fields.
-          items:
-            $ref: "#/components/schemas/GoogleChromePolicyV1PolicySchemaFieldDescription"
-          readOnly: true
-          type: array
-        requiredItems:
-          description: Output only. Provides a list of fields that are required to be set if this field has a certain value.
-          items:
-            $ref: "#/components/schemas/GoogleChromePolicyV1PolicySchemaRequiredItems"
-          readOnly: true
-          type: array
-      type: object
-    GoogleChromePolicyV1PolicySchemaFieldKnownValueDescription:
-      description: Provides detailed information about a known value that is allowed for a particular field in a PolicySchema.
-      properties:
-        description:
-          description: Output only. Additional description for this value.
-          readOnly: true
+        policySchema:
+          description: The fully qualified name of the network setting.
           type: string
         value:
-          description: Output only. The string represenstation of the value that can be set for the field.
+          additionalProperties:
+            description: Properties of the object.
+          description: The value of the network setting.
+          type: object
+      type: object
+    GoogleChromePolicyV1PolicyModificationFieldError:
+      description: Error information for a modification request of a specific field on a specific policy.
+      properties:
+        error:
+          description: Output only. The error message related to the field.
           readOnly: true
           type: string
-      type: object
-    GoogleChromePolicyV1PolicySchemaNoticeDescription:
-      description: Provides special notice messages related to a particular value in a field that is part of a PolicySchema.
-      properties:
-        acknowledgementRequired:
-          description: Output only. Whether the user needs to acknowledge the notice message before the value can be set.
-          readOnly: true
-          type: boolean
         field:
-          description: Output only. The field name associated with the notice.
+          description: Output only. The name of the field with the error.
           readOnly: true
           type: string
-        noticeMessage:
-          description: Output only. The notice message associate with the value of the field.
-          readOnly: true
-          type: string
-        noticeValue:
-          description: Output only. The value of the field that has a notice. When setting the field to this value, the user may be required to acknowledge the notice message in order for the value to be set.
-          readOnly: true
-          type: string
-      type: object
-    GoogleChromePolicyV1PolicySchemaRequiredItems:
-      description: The fields that will become required based on the value of this field.
-      properties:
-        fieldConditions:
-          description: The value(s) of the field that provoke required field enforcement. An empty field_conditions implies that any value assigned to this field will provoke required field enforcement.
-          items:
-            type: string
-          type: array
-        requiredFields:
-          description: The fields that are required as a consequence of the field conditions.
-          items:
-            type: string
-          type: array
       type: object
     GoogleChromePolicyV1PolicyTargetKey:
       description: The key used to identify the target on which the policy will be applied.
@@ -893,6 +956,34 @@ components:
           description: The value of the policy that is compatible with the schema that it is associated with.
           type: object
       type: object
+    GoogleChromePolicyV1RemoveCertificateRequest:
+      description: Request object for removing a certificate.
+      properties:
+        networkId:
+          description: Required. The GUID of the certificate to remove.
+          type: string
+        targetResource:
+          description: 'Required. The target resource on which this certificate will be removed. The following resources are supported: * Organizational Unit ("orgunits/{orgunit_id}")'
+          type: string
+      type: object
+    GoogleChromePolicyV1RemoveCertificateResponse:
+      description: Response object for removing a certificate.
+      properties: {}
+      type: object
+    GoogleChromePolicyV1RemoveNetworkRequest:
+      description: Request object for removing a network
+      properties:
+        networkId:
+          description: Required. The GUID of the network to remove.
+          type: string
+        targetResource:
+          description: 'Required. The target resource on which this network will be removed. The following resources are supported: * Organizational Unit ("orgunits/{orgunit_id}")'
+          type: string
+      type: object
+    GoogleChromePolicyV1RemoveNetworkResponse:
+      description: Response object for removing a network.
+      properties: {}
+      type: object
     GoogleChromePolicyV1ResolveRequest:
       description: Request message for getting the resolved policy value for a specific target.
       properties:
@@ -904,7 +995,7 @@ components:
           description: The page token used to retrieve a specific page of the request.
           type: string
         policySchemaFilter:
-          description: 'The schema filter to apply to the resolve request. Specify a schema name to view a particular schema, for example: chrome.users.ShowLogoutButton Wildcards are supported, but only in the leaf portion of the schema name. Wildcards cannot be used in namespace directly. Please read https://developers.google.com/chrome/policy/guides/policy-schemas for details on schema namepsaces. For example: Valid: "chrome.users.*", "chrome.users.apps.*", "chrome.printers.*" Invalid: "*", "*.users", "chrome.*", "chrome.*.apps.*"'
+          description: 'The schema filter to apply to the resolve request. Specify a schema name to view a particular schema, for example: chrome.users.ShowLogoutButton Wildcards are supported, but only in the leaf portion of the schema name. Wildcards cannot be used in namespace directly. Please read https://developers.google.com/chrome/policy/guides/policy-schemas for details on schema namespaces. For example: Valid: "chrome.users.*", "chrome.users.apps.*", "chrome.printers.*" Invalid: "*", "*.users", "chrome.*", "chrome.*.apps.*"'
           type: string
         policyTargetKey:
           $ref: "#/components/schemas/GoogleChromePolicyV1PolicyTargetKey"
@@ -957,15 +1048,209 @@ components:
           $ref: "#/components/schemas/GoogleChromePolicyV1PolicyTargetKey"
           description: Required. The key of the target for which we want to update the group priority ordering. The target resource must point to an app.
       type: object
+    GoogleChromePolicyVersionsV1AdditionalTargetKeyName:
+      description: Additional key names that will be used to identify the target of the policy value.
+      properties:
+        key:
+          description: Key name.
+          type: string
+        keyDescription:
+          description: Key description.
+          type: string
+      type: object
+    GoogleChromePolicyVersionsV1ListPolicySchemasResponse:
+      description: Response message for listing policy schemas that match a filter.
+      properties:
+        nextPageToken:
+          description: The page token used to get the next page of policy schemas.
+          type: string
+        policySchemas:
+          description: The list of policy schemas that match the query.
+          items:
+            $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicySchema"
+          type: array
+      type: object
+    GoogleChromePolicyVersionsV1PolicySchema:
+      description: Resource representing a policy schema.
+      properties:
+        accessRestrictions:
+          description: Output only. Specific access restrictions related to this policy.
+          items:
+            type: string
+          readOnly: true
+          type: array
+        additionalTargetKeyNames:
+          description: Output only. Additional key names that will be used to identify the target of the policy value. When specifying a `policyTargetKey`, each of the additional keys specified here will have to be included in the `additionalTargetKeys` map.
+          items:
+            $ref: "#/components/schemas/GoogleChromePolicyVersionsV1AdditionalTargetKeyName"
+          readOnly: true
+          type: array
+        categoryTitle:
+          description: Title of the category in which a setting belongs.
+          type: string
+        definition:
+          $ref: "#/components/schemas/Proto2FileDescriptorProto"
+          description: Schema definition using proto descriptor.
+        fieldDescriptions:
+          description: Output only. Detailed description of each field that is part of the schema.
+          items:
+            $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicySchemaFieldDescription"
+          readOnly: true
+          type: array
+        name:
+          description: "Format: name=customers/{customer}/policySchemas/{schema_namespace}"
+          type: string
+        notices:
+          description: Output only. Special notice messages related to setting certain values in certain fields in the schema.
+          items:
+            $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicySchemaNoticeDescription"
+          readOnly: true
+          type: array
+        policyApiLifecycle:
+          $ref: "#/components/schemas/ChromeCrosDpanelAutosettingsProtoPolicyApiLifecycle"
+          description: Output only. Current lifecycle information.
+          readOnly: true
+        policyApiLifeycle:
+          $ref: "#/components/schemas/ChromeCrosDpanelAutosettingsProtoPolicyApiLifecycle"
+          description: Deprecated field because of typo.
+        policyDescription:
+          description: Output only. Description about the policy schema for user consumption.
+          readOnly: true
+          type: string
+        schemaName:
+          description: Output only. The fully qualified name of the policy schema. This value is used to fill the field `policy_schema` in PolicyValue when calling BatchInheritOrgUnitPolicies BatchModifyOrgUnitPolicies BatchModifyGroupPolicies or BatchDeleteGroupPolicies.
+          readOnly: true
+          type: string
+        supportUri:
+          description: Output only. URI to related support article for this schema.
+          readOnly: true
+          type: string
+        validTargetResources:
+          description: Output only. Information about applicable target resources for the policy.
+          items:
+            enum:
+              - TARGET_RESOURCE_UNSPECIFIED
+              - ORG_UNIT
+              - GROUP
+            type: string
+          readOnly: true
+          type: array
+      type: object
+    GoogleChromePolicyVersionsV1PolicySchemaFieldDependencies:
+      description: The field and the value it must have for another field to be allowed to be set.
+      properties:
+        sourceField:
+          description: The source field which this field depends on.
+          type: string
+        sourceFieldValue:
+          description: The value which the source field must have for this field to be allowed to be set.
+          type: string
+      type: object
+    GoogleChromePolicyVersionsV1PolicySchemaFieldDescription:
+      description: Provides detailed information for a particular field that is part of a PolicySchema.
+      properties:
+        defaultValue:
+          description: Output only. Client default if the policy is unset.
+          readOnly: true
+        description:
+          description: Deprecated. Use name and field_description instead. The description for the field.
+          type: string
+        field:
+          description: Output only. The name of the field for associated with this description.
+          readOnly: true
+          type: string
+        fieldDependencies:
+          description: Output only. Provides a list of fields and values. At least one of the fields must have the corresponding value in order for this field to be allowed to be set.
+          items:
+            $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicySchemaFieldDependencies"
+          readOnly: true
+          type: array
+        fieldDescription:
+          description: Output only. The description of the field.
+          readOnly: true
+          type: string
+        inputConstraint:
+          description: Output only. Any input constraints associated on the values for the field.
+          readOnly: true
+          type: string
+        knownValueDescriptions:
+          description: Output only. If the field has a set of known values, this field will provide a description for these values.
+          items:
+            $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicySchemaFieldKnownValueDescription"
+          readOnly: true
+          type: array
+        name:
+          description: Output only. The name of the field.
+          readOnly: true
+          type: string
+        nestedFieldDescriptions:
+          description: Output only. Provides the description of the fields nested in this field, if the field is a message type that defines multiple fields.
+          items:
+            $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicySchemaFieldDescription"
+          readOnly: true
+          type: array
+        requiredItems:
+          description: Output only. Provides a list of fields that are required to be set if this field has a certain value.
+          items:
+            $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicySchemaRequiredItems"
+          readOnly: true
+          type: array
+      type: object
+    GoogleChromePolicyVersionsV1PolicySchemaFieldKnownValueDescription:
+      description: Provides detailed information about a known value that is allowed for a particular field in a PolicySchema.
+      properties:
+        description:
+          description: Output only. Additional description for this value.
+          readOnly: true
+          type: string
+        value:
+          description: Output only. The string represenstation of the value that can be set for the field.
+          readOnly: true
+          type: string
+      type: object
+    GoogleChromePolicyVersionsV1PolicySchemaNoticeDescription:
+      description: Provides special notice messages related to a particular value in a field that is part of a PolicySchema.
+      properties:
+        acknowledgementRequired:
+          description: Output only. Whether the user needs to acknowledge the notice message before the value can be set.
+          readOnly: true
+          type: boolean
+        field:
+          description: Output only. The field name associated with the notice.
+          readOnly: true
+          type: string
+        noticeMessage:
+          description: Output only. The notice message associate with the value of the field.
+          readOnly: true
+          type: string
+        noticeValue:
+          description: Output only. The value of the field that has a notice. When setting the field to this value, the user may be required to acknowledge the notice message in order for the value to be set.
+          readOnly: true
+          type: string
+      type: object
+    GoogleChromePolicyVersionsV1PolicySchemaRequiredItems:
+      description: The fields that will become required based on the value of this field.
+      properties:
+        fieldConditions:
+          description: The value(s) of the field that provoke required field enforcement. An empty field_conditions implies that any value assigned to this field will provoke required field enforcement.
+          items:
+            type: string
+          type: array
+        requiredFields:
+          description: The fields that are required as a consequence of the field conditions.
+          items:
+            type: string
+          type: array
+      type: object
     GoogleChromePolicyVersionsV1UploadPolicyFileRequest:
-      description: "Request message for uploading a file for a policy. Next ID: 5"
+      description: Request message for uploading a file for a policy.
       properties:
         policyField:
           description: Required. The fully qualified policy schema and field name this file is uploaded for. This information will be used to validate the content type of the file.
           type: string
       type: object
     GoogleChromePolicyVersionsV1UploadPolicyFileResponse:
-      description: "Response message for downloading an uploaded file. Next ID: 2"
+      description: Response message for downloading an uploaded file.
       properties:
         downloadUri:
           description: The uri for end user to download the file.

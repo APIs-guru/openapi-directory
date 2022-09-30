@@ -3022,7 +3022,8 @@ paths:
                   }
                 ],
                 note: 'Some notes about this payment',
-                row_version: '1-12345'
+                row_version: '1-12345',
+                display_id: '123456'
               }
             }
 
@@ -3213,7 +3214,8 @@ paths:
                   }
                 ],
                 note: 'Some notes about this payment',
-                row_version: '1-12345'
+                row_version: '1-12345',
+                display_id: '123456'
               }
             }
 
@@ -9270,12 +9272,20 @@ components:
           type: array
         created_at:
           $ref: "#/components/schemas/CreatedAt"
+        created_by:
+          $ref: "#/components/schemas/CreatedBy"
         currency:
           $ref: "#/components/schemas/Currency"
         currency_rate:
           $ref: "#/components/schemas/CurrencyRate"
         customer:
           $ref: "#/components/schemas/LinkedCustomer"
+        display_id:
+          description: Payment id to be displayed.
+          example: "123456"
+          nullable: true
+          title: Display id
+          type: string
         id:
           description: Unique identifier representing the entity
           example: "123456"
@@ -9354,6 +9364,8 @@ components:
           x-graphql-type-name: PaymentType
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
+        updated_by:
+          $ref: "#/components/schemas/UpdatedBy"
       required:
         - total_amount
         - transaction_date
@@ -9365,9 +9377,11 @@ components:
         accounts_receivable_account_type: edge-case
         allocations: critical
         created_at: medium
+        created_by: edge-case
         currency: critical
         currency_rate: medium
         customer: high
+        display_id: low
         id: critical
         note: low
         payment_method: medium
@@ -9380,6 +9394,7 @@ components:
         transaction_date: critical
         type: high
         updated_at: medium
+        updated_by: edge-case
     PaymentRequiredResponse:
       properties:
         detail:
