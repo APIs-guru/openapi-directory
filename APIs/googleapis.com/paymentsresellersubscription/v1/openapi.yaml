@@ -770,6 +770,10 @@ components:
           format: int32
           readOnly: true
           type: integer
+        regionCode:
+          description: Output only. 2-letter ISO region code where the product is available in. Ex. "US".
+          readOnly: true
+          type: string
       type: object
     GoogleCloudPaymentsResellerSubscriptionV1ServicePeriod:
       description: A description of what time period or moment in time the product or service is being delivered over.

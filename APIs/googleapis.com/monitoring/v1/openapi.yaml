@@ -1612,6 +1612,9 @@ components:
     TimeSeriesQuery:
       description: TimeSeriesQuery collects the set of supported methods for querying time series data from the Stackdriver metrics API.
       properties:
+        prometheusQuery:
+          description: A query used to fetch time series with PromQL.
+          type: string
         timeSeriesFilter:
           $ref: "#/components/schemas/TimeSeriesFilter"
           description: Filter parameters to fetch time series.

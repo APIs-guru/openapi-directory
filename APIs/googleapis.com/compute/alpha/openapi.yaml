@@ -50172,8 +50172,9 @@ components:
             - UNSPECIFIED_VERSION
           type: string
         ipv6EndpointType:
-          description: The endpoint type of this address, which should be VM. This is used for deciding which endpoint this address will be assigned to during the IPv6 external IP address reservation.
+          description: The endpoint type of this address, which should be VM or NETLB. This is used for deciding which type of endpoint this address can be used after the external IPv6 address reservation.
           enum:
+            - NETLB
             - VM
           type: string
         kind:
@@ -54559,7 +54560,7 @@ components:
             type: string
           type: array
         destFqdns:
-          description: Fully Qualified Domain Name (FQDN) which should be matched against traffic destination. Maximum number of destination fqdn allowed is 1000.
+          description: Fully Qualified Domain Name (FQDN) which should be matched against traffic destination. Maximum number of destination fqdn allowed is 100.
           items:
             type: string
           type: array
@@ -54589,7 +54590,7 @@ components:
             type: string
           type: array
         srcFqdns:
-          description: Fully Qualified Domain Name (FQDN) which should be matched against traffic source. Maximum number of source fqdn allowed is 1000.
+          description: Fully Qualified Domain Name (FQDN) which should be matched against traffic source. Maximum number of source fqdn allowed is 100.
           items:
             type: string
           type: array
@@ -54806,6 +54807,7 @@ components:
           description: This field identifies the subnetwork that the load balanced IP should belong to for this Forwarding Rule, used in internal load balancing and network load balancing with IPv6. If the network specified is in auto subnet mode, this field is optional. However, a subnetwork must be specified if the network is in custom subnet mode or when creating external forwarding rule with IPv6.
           type: string
         target:
+          description: 'The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must be in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object. For more information, see the "Target" column in [Port specifications](https://cloud.google.com/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications). For Private Service Connect forwarding rules that forward traffic to Google APIs, provide the name of a supported Google API bundle: - vpc-sc - APIs that support VPC Service Controls. - all-apis - All supported Google APIs. '
           type: string
       type: object
     ForwardingRuleAggregatedList:
@@ -69293,6 +69295,15 @@ components:
     RouterNat:
       description: Represents a Nat resource. It enables the VMs within the specified subnetworks to access Internet without external IP addresses. It specifies a list of subnetworks (and the ranges within) that want to use NAT. Customers can also provide the external IPs that would be used for NAT. GCP would auto-allocate ephemeral IPs if no external IPs are provided.
       properties:
+        autoNetworkTier:
+          description: "The network tier to use when automatically reserving IP addresses. Must be one of: PREMIUM, STANDARD. If not specified, PREMIUM tier will be used."
+          enum:
+            - FIXED_STANDARD
+            - PREMIUM
+            - SELECT
+            - STANDARD
+            - STANDARD_OVERRIDES_FIXED_STANDARD
+          type: string
         drainNatIps:
           description: A list of URLs of the IP resources to be drained. These IPs must be valid static external IPs that have been assigned to the NAT. These IPs should be used for updating/patching a NAT only.
           items:

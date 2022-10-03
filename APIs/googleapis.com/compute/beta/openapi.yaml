@@ -44529,6 +44529,12 @@ components:
             - IPV6
             - UNSPECIFIED_VERSION
           type: string
+        ipv6EndpointType:
+          description: The endpoint type of this address, which should be VM or NETLB. This is used for deciding which type of endpoint this address can be used after the external IPv6 address reservation.
+          enum:
+            - NETLB
+            - VM
+          type: string
         kind:
           default: compute#address
           description: "[Output Only] Type of the resource. Always compute#address for addresses."
@@ -48564,6 +48570,11 @@ components:
           items:
             type: string
           type: array
+        destFqdns:
+          description: Fully Qualified Domain Name (FQDN) which should be matched against traffic destination. Maximum number of destination fqdn allowed is 100.
+          items:
+            type: string
+          type: array
         destIpRanges:
           description: CIDR IP address range. Maximum number of destination CIDR IP ranges allowed is 5000.
           items:
@@ -48586,6 +48597,11 @@ components:
           type: array
         srcAddressGroups:
           description: Address groups which should be matched against the traffic source. Maximum number of source address groups is 10.
+          items:
+            type: string
+          type: array
+        srcFqdns:
+          description: Fully Qualified Domain Name (FQDN) which should be matched against traffic source. Maximum number of source fqdn allowed is 100.
           items:
             type: string
           type: array
@@ -48794,6 +48810,7 @@ components:
           description: This field identifies the subnetwork that the load balanced IP should belong to for this Forwarding Rule, used in internal load balancing and network load balancing with IPv6. If the network specified is in auto subnet mode, this field is optional. However, a subnetwork must be specified if the network is in custom subnet mode or when creating external forwarding rule with IPv6.
           type: string
         target:
+          description: 'The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must be in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object. For more information, see the "Target" column in [Port specifications](https://cloud.google.com/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications). For Private Service Connect forwarding rules that forward traffic to Google APIs, provide the name of a supported Google API bundle: - vpc-sc - APIs that support VPC Service Controls. - all-apis - All supported Google APIs. '
           type: string
       type: object
     ForwardingRuleAggregatedList:
@@ -60565,8 +60582,14 @@ components:
           type: array
         bfdStatus:
           $ref: "#/components/schemas/BfdStatus"
+        enableIpv6:
+          description: Enable IPv6 traffic over BGP Peer. If not specified, it is disabled by default.
+          type: boolean
         ipAddress:
           description: IP address of the local BGP interface.
+          type: string
+        ipv6NexthopAddress:
+          description: IPv6 address of the local BGP interface.
           type: string
         linkedVpnTunnel:
           description: URL of the VPN tunnel that this BGP peer controls.
@@ -60583,6 +60606,9 @@ components:
           type: integer
         peerIpAddress:
           description: IP address of the remote BGP interface.
+          type: string
+        peerIpv6NexthopAddress:
+          description: IPv6 address of the remote BGP interface.
           type: string
         routerApplianceInstance:
           description: "[Output only] URI of the VM instance that is used as third-party router appliances such as Next Gen Firewalls, Virtual Routers, or Router Appliances. The VM instance is the peer side of the BGP session."

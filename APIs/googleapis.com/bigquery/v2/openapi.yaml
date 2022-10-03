@@ -4028,6 +4028,10 @@ components:
           description: "[Output only] Slot-milliseconds for the job."
           format: int64
           type: string
+        transferredBytes:
+          description: "[Output-only] Total bytes transferred for cross-cloud queries such as Cross Cloud Transfer and CREATE TABLE AS SELECT (CTAS)."
+          format: int64
+          type: string
         undeclaredQueryParameters:
           description: "Standard SQL only: list of undeclared query parameters detected during a dry run validation."
           items:
@@ -5913,10 +5917,10 @@ components:
           readOnly: true
           type: string
         vertexAiModelId:
-          description: The model id in Vertex AI Model Registry for this training run
+          description: The model id in the [Vertex AI Model Registry](https://cloud.google.com/vertex-ai/docs/model-registry/introduction) for this training run.
           type: string
         vertexAiModelVersion:
-          description: Output only. The model version in Vertex AI Model Registry for this training run
+          description: Output only. The model version in the [Vertex AI Model Registry](https://cloud.google.com/vertex-ai/docs/model-registry/introduction) for this training run.
           readOnly: true
           type: string
       type: object
