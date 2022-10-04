@@ -18,27 +18,123 @@ info:
   x-providerName: hubapi.com
   x-serviceName: marketing
 tags:
-  - description: Operations to interact with URL settings for an external application.
-    name: Settings
-  - description: Endpoints that allow you to create or modify the state of an individual Marketing Event in HubSpot.
-    name: Basic
-  - description: Endpoints that allow you to create or modify the state of multiple Marketing Events in HubSpot.
-    name: Batch
-  - description: Endpoints that allow you to search for Marketing Events in HubSpot.
-    name: Search
   - description: Operations to mark HubSpot contacts as registered, attended or cancelled a registration to a Marketing Event.
-    name: Subscriber State Changes
+    name: Attendance Subscriber State Changes
+  - name: Marketing_Events_External
+  - name: Settings_External
 paths:
+  "/marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/create":
+    post:
+      description: Record a subscription state between multiple HubSpot contacts and a marketing event, using HubSpot contact ids.
+      operationId: post-/marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/create
+      parameters:
+        - description: The id of the marketing event
+          explode: false
+          in: path
+          name: externalEventId
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: The new subscriber state for the HubSpot contacts and the specified marketing event
+          explode: false
+          in: path
+          name: subscriberState
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: The account id associated with the marketing event
+          explode: true
+          in: query
+          name: externalAccountId
+          required: false
+          schema:
+            type: string
+          style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchInputMarketingEventSubscriber"
+        description: The details of the contacts to subscribe to the event. Parameters of join and left time if state is Attended.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchResponseSubscriberVidResponse"
+          description: successful operation
+        default:
+          $ref: "#/components/responses/Error"
+      security:
+        - hapikey: []
+        - oauth2_legacy:
+            - crm.objects.marketing_events.write
+      summary: Record
+      tags:
+        - Attendance Subscriber State Changes
+  "/marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/email-create":
+    post:
+      description: "Record a subscription state between multiple HubSpot contacts and a marketing event, using contact email addresses. If contact is not present it will be automatically created. If you set params "
+      operationId: post-/marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/email-create
+      parameters:
+        - description: The id of the marketing event
+          explode: false
+          in: path
+          name: externalEventId
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: The new subscriber state for the HubSpot contacts and the specified marketing event
+          explode: false
+          in: path
+          name: subscriberState
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: The account id associated with the marketing event
+          explode: true
+          in: query
+          name: externalAccountId
+          required: false
+          schema:
+            type: string
+          style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchInputMarketingEventEmailSubscriber"
+        description: The details of the contacts to subscribe to the event. Parameters of join and left time if state is Attended.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchResponseSubscriberEmailResponse"
+          description: successful operation
+        default:
+          $ref: "#/components/responses/Error"
+      security:
+        - hapikey: []
+        - oauth2_legacy:
+            - crm.objects.marketing_events.write
+      summary: Record
+      tags:
+        - Attendance Subscriber State Changes
   /marketing/v3/marketing-events/events:
     post:
-      description: Creates a new marketing event in HubSpot
       operationId: post-/marketing/v3/marketing-events/events_create
       requestBody:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/MarketingEventCreateRequestParams"
-        description: The details of the marketing event to create
         required: true
       responses:
         "200":
@@ -53,19 +149,16 @@ paths:
         - hapikey: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
-      summary: Create a marketing event
       tags:
-        - Basic
+        - Marketing_Events_External
   /marketing/v3/marketing-events/events/delete:
     post:
-      description: Bulk delete a number of marketing events in HubSpot
       operationId: post-/marketing/v3/marketing-events/events/delete_archive
       requestBody:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/BatchInputMarketingEventExternalUniqueIdentifier"
-        description: The details of the marketing events to delete
         required: true
       responses:
         default:
@@ -74,16 +167,13 @@ paths:
         - hapikey: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
-      summary: Delete multiple marketing events
       tags:
-        - Batch
+        - Marketing_Events_External
   /marketing/v3/marketing-events/events/search:
     get:
-      description: Search for marketing events that have an event id that starts with the query string
       operationId: get-/marketing/v3/marketing-events/events/search_doSearch
       parameters:
-        - description: The partial event id to search for
-          explode: true
+        - explode: true
           in: query
           name: q
           required: true
@@ -103,19 +193,16 @@ paths:
         - hapikey: []
         - oauth2_legacy:
             - crm.objects.marketing_events.read
-      summary: Search for marketing events
       tags:
-        - Search
+        - Marketing_Events_External
   /marketing/v3/marketing-events/events/upsert:
     post:
-      description: Upset multiple Marketing Event. If there is an existing Marketing event with the specified id, it will be updated; otherwise a new event will be created.
       operationId: post-/marketing/v3/marketing-events/events/upsert_doUpsert
       requestBody:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/BatchInputMarketingEventCreateRequestParams"
-        description: The details of the marketing events to upsert
         required: true
       responses:
         "200":
@@ -130,24 +217,20 @@ paths:
         - hapikey: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
-      summary: Create or update multiple marketing events
       tags:
-        - Batch
+        - Marketing_Events_External
   "/marketing/v3/marketing-events/events/{externalEventId}":
     delete:
-      description: Deletes an existing Marketing Event with the specified id, if one exists.
       operationId: delete-/marketing/v3/marketing-events/events/{externalEventId}_archive
       parameters:
-        - description: The id of the marketing event to delete
-          explode: false
+        - explode: false
           in: path
           name: externalEventId
           required: true
           schema:
             type: string
           style: simple
-        - description: The account id associated with the marketing event
-          explode: true
+        - explode: true
           in: query
           name: externalAccountId
           required: true
@@ -164,23 +247,19 @@ paths:
         - hapikey: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
-      summary: Delete a marketing event
       tags:
-        - Basic
+        - Marketing_Events_External
     get:
-      description: Returns the details of the Marketing Event with the specified id, if one exists.
       operationId: get-/marketing/v3/marketing-events/events/{externalEventId}_getById
       parameters:
-        - description: The id of the marketing event to return
-          explode: false
+        - explode: false
           in: path
           name: externalEventId
           required: true
           schema:
             type: string
           style: simple
-        - description: The account id associated with the marketing event
-          explode: true
+        - explode: true
           in: query
           name: externalAccountId
           required: true
@@ -200,23 +279,19 @@ paths:
         - hapikey: []
         - oauth2_legacy:
             - crm.objects.marketing_events.read
-      summary: Get a marketing event
       tags:
-        - Basic
+        - Marketing_Events_External
     patch:
-      description: Updates an existing Marketing Event with the specified id, if one exists.
       operationId: patch-/marketing/v3/marketing-events/events/{externalEventId}_update
       parameters:
-        - description: The id of the marketing event to update
-          explode: false
+        - explode: false
           in: path
           name: externalEventId
           required: true
           schema:
             type: string
           style: simple
-        - description: The account id associated with the marketing event
-          explode: true
+        - explode: true
           in: query
           name: externalAccountId
           required: true
@@ -228,7 +303,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/MarketingEventUpdateRequestParams"
-        description: The details of the marketing event to update
         required: true
       responses:
         "200":
@@ -243,15 +317,12 @@ paths:
         - hapikey: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
-      summary: Update a marketing event
       tags:
-        - Basic
+        - Marketing_Events_External
     put:
-      description: Upsets a Marketing Event. If there is an existing Marketing event with the specified id, it will be updated; otherwise a new event will be created.
       operationId: put-/marketing/v3/marketing-events/events/{externalEventId}_replace
       parameters:
-        - description: The id of the marketing event to upsert
-          explode: false
+        - explode: false
           in: path
           name: externalEventId
           required: true
@@ -263,7 +334,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/MarketingEventCreateRequestParams"
-        description: The details of the marketing event to upsert
         required: true
       responses:
         "200":
@@ -278,24 +348,20 @@ paths:
         - hapikey: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
-      summary: Create or update a marketing event
       tags:
-        - Basic
+        - Marketing_Events_External
   "/marketing/v3/marketing-events/events/{externalEventId}/cancel":
     post:
-      description: Mark a marketing event as cancelled.
       operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/cancel_doCancel
       parameters:
-        - description: The id of the marketing event to mark as cancelled
-          explode: false
+        - explode: false
           in: path
           name: externalEventId
           required: true
           schema:
             type: string
           style: simple
-        - description: The account id associated with the marketing event
-          explode: true
+        - explode: true
           in: query
           name: externalAccountId
           required: true
@@ -315,32 +381,66 @@ paths:
         - hapikey: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
-      summary: Mark a marketing event as cancelled
       tags:
-        - Basic
-  "/marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/email-upsert":
+        - Marketing_Events_External
+  "/marketing/v3/marketing-events/events/{externalEventId}/complete":
     post:
-      description: Record a subscription state between multiple HubSpot contacts and a marketing event, using contact email addresses.
-      operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/email-upsert_doEmailUpsertById
+      operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/complete
       parameters:
-        - description: The id of the marketing event
-          explode: false
+        - explode: false
           in: path
           name: externalEventId
           required: true
           schema:
             type: string
           style: simple
-        - description: The new subscriber state for the HubSpot contacts and the specified marketing event
-          explode: false
+        - explode: true
+          in: query
+          name: externalAccountId
+          required: true
+          schema:
+            type: string
+          style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MarketingEventCompleteRequestParams"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MarketingEventDefaultResponse"
+          description: successful operation
+        default:
+          $ref: "#/components/responses/Error"
+      security:
+        - hapikey: []
+        - oauth2_legacy:
+            - crm.objects.marketing_events.write
+      tags:
+        - Marketing_Events_External
+  "/marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/email-upsert":
+    post:
+      operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/email-upsert_doEmailUpsertById
+      parameters:
+        - explode: false
+          in: path
+          name: externalEventId
+          required: true
+          schema:
+            type: string
+          style: simple
+        - explode: false
           in: path
           name: subscriberState
           required: true
           schema:
             type: string
           style: simple
-        - description: The account id associated with the marketing event
-          explode: true
+        - explode: true
           in: query
           name: externalAccountId
           required: true
@@ -352,7 +452,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/BatchInputMarketingEventEmailSubscriber"
-        description: The details of the contacts to subscribe to the event
         required: true
       responses:
         default:
@@ -361,32 +460,27 @@ paths:
         - hapikey: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
-      summary: Record
       tags:
-        - Subscriber State Changes
+        - Marketing_Events_External
   "/marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/upsert":
     post:
-      description: Record a subscription state between multiple HubSpot contacts and a marketing event, using HubSpot contact ids.
       operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/upsert_doUpsertById
       parameters:
-        - description: The id of the marketing event
-          explode: false
+        - explode: false
           in: path
           name: externalEventId
           required: true
           schema:
             type: string
           style: simple
-        - description: The new subscriber state for the HubSpot contacts and the specified marketing event
-          explode: false
+        - explode: false
           in: path
           name: subscriberState
           required: true
           schema:
             type: string
           style: simple
-        - description: The account id associated with the marketing event
-          explode: true
+        - explode: true
           in: query
           name: externalAccountId
           required: true
@@ -398,7 +492,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/BatchInputMarketingEventSubscriber"
-        description: The details of the contacts to subscribe to the event
         required: true
       responses:
         default:
@@ -407,16 +500,13 @@ paths:
         - hapikey: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
-      summary: Record
       tags:
-        - Subscriber State Changes
+        - Marketing_Events_External
   "/marketing/v3/marketing-events/{appId}/settings":
     get:
-      description: Retrieve the current settings for the application.
       operationId: get-/marketing/v3/marketing-events/{appId}/settings_getAll
       parameters:
-        - description: The id of the application to retrieve the settings for.
-          explode: false
+        - explode: false
           in: path
           name: appId
           required: true
@@ -436,15 +526,12 @@ paths:
       security:
         - hapikey: []
         - developer_hapikey: []
-      summary: Retrieve the application settings
       tags:
-        - Settings
+        - Settings_External
     post:
-      description: Create or update the current settings for the application.
       operationId: post-/marketing/v3/marketing-events/{appId}/settings_create
       parameters:
-        - description: The id of the application to update the settings for.
-          explode: false
+        - explode: false
           in: path
           name: appId
           required: true
@@ -457,7 +544,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/EventDetailSettingsUrl"
-        description: The new application settings
         required: true
       responses:
         "200":
@@ -471,9 +557,8 @@ paths:
       security:
         - hapikey: []
         - developer_hapikey: []
-      summary: Update the application settings
       tags:
-        - Settings
+        - Settings_External
 components:
   responses:
     Error:
@@ -545,6 +630,84 @@ components:
         results:
           items:
             $ref: "#/components/schemas/MarketingEventPublicDefaultResponse"
+          type: array
+        startedAt:
+          format: date-time
+          type: string
+        status:
+          enum:
+            - PENDING
+            - PROCESSING
+            - CANCELED
+            - COMPLETE
+          type: string
+      required:
+        - completedAt
+        - results
+        - startedAt
+        - status
+      type: object
+    BatchResponseSubscriberEmailResponse:
+      properties:
+        completedAt:
+          format: date-time
+          type: string
+        errors:
+          items:
+            $ref: "#/components/schemas/StandardError"
+          type: array
+        links:
+          additionalProperties:
+            type: string
+          type: object
+        numErrors:
+          format: int32
+          type: integer
+        requestedAt:
+          format: date-time
+          type: string
+        results:
+          items:
+            $ref: "#/components/schemas/SubscriberEmailResponse"
+          type: array
+        startedAt:
+          format: date-time
+          type: string
+        status:
+          enum:
+            - PENDING
+            - PROCESSING
+            - CANCELED
+            - COMPLETE
+          type: string
+      required:
+        - completedAt
+        - results
+        - startedAt
+        - status
+      type: object
+    BatchResponseSubscriberVidResponse:
+      properties:
+        completedAt:
+          format: date-time
+          type: string
+        errors:
+          items:
+            $ref: "#/components/schemas/StandardError"
+          type: array
+        links:
+          additionalProperties:
+            type: string
+          type: object
+        numErrors:
+          format: int32
+          type: integer
+        requestedAt:
+          format: date-time
+          type: string
+        results:
+          items:
+            $ref: "#/components/schemas/SubscriberVidResponse"
           type: array
         startedAt:
           format: date-time
@@ -676,6 +839,7 @@ components:
             - REQUEST_HEADERS_FIELDS_TOO_LARGE
             - INTERNAL_STALE_SERVICE_DISCOVERY
             - UNAVAILABLE_FOR_LEGAL_REASONS
+            - MIGRATION_IN_PROGRESS
             - INTERNAL_SERVER_ERROR
             - NOT_IMPLEMENTED
             - BAD_GATEWAY
@@ -742,6 +906,18 @@ components:
           type: string
       required:
         - eventDetailsUrl
+      type: object
+    MarketingEventCompleteRequestParams:
+      properties:
+        endDateTime:
+          format: date-time
+          type: string
+        startDateTime:
+          format: date-time
+          type: string
+      required:
+        - endDateTime
+        - startDateTime
       type: object
     MarketingEventCreateRequestParams:
       properties:
@@ -831,6 +1007,10 @@ components:
       type: object
     MarketingEventEmailSubscriber:
       properties:
+        contactProperties:
+          additionalProperties:
+            type: string
+          type: object
         email:
           description: The email address of the contact in HubSpot to associate with the event. Note that the contact must already exist in HubSpot; a contact will not be created.
           type: string
@@ -838,6 +1018,10 @@ components:
           description: The date and time at which the contact subscribed to the event.
           format: int64
           type: integer
+        properties:
+          additionalProperties:
+            type: string
+          type: object
       required:
         - email
         - interactionDateTime
@@ -989,6 +1173,10 @@ components:
           description: The date and time at which the contact subscribed to the event.
           format: int64
           type: integer
+        properties:
+          additionalProperties:
+            type: string
+          type: object
         vid:
           format: int32
           type: integer
@@ -1116,6 +1304,13 @@ components:
             - GOALS
             - PORTAL_OBJECT_SYNC
             - APPROVALS
+            - FILE_MANAGER
+            - MARKETPLACE
+            - INTERNAL_PROCESSING
+            - FORECASTING
+            - SLACK_INTEGRATION
+            - CRM_UI_BULK_ACTION
+            - WORKFLOW_CONTACT_DELETE_ACTION
           type: string
         sourceId:
           type: string
@@ -1184,6 +1379,25 @@ components:
         - links
         - message
         - status
+      type: object
+    SubscriberEmailResponse:
+      properties:
+        email:
+          type: string
+        vid:
+          format: int32
+          type: integer
+      required:
+        - email
+        - vid
+      type: object
+    SubscriberVidResponse:
+      properties:
+        vid:
+          format: int32
+          type: integer
+      required:
+        - vid
       type: object
   securitySchemes:
     developer_hapikey:
