@@ -2625,6 +2625,10 @@ components:
     GooglePrivacyDlpV2InfoTypeSummary:
       description: The infoType details for this column.
       properties:
+        estimatedPrevalence:
+          description: Not populated for predicted infotypes.
+          format: int32
+          type: integer
         infoType:
           $ref: "#/components/schemas/GooglePrivacyDlpV2InfoType"
           description: The infoType.

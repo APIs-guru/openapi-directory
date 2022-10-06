@@ -14,17 +14,20 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Container Analysis API
   version: v1beta1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://containeranalysis.googleapis.com/$discovery/rest?version=v1beta1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: containeranalysis
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/container-analysis/api/reference/rest/
 tags:
@@ -1252,9 +1255,19 @@ components:
           items:
             type: string
           type: array
+        mavenArtifacts:
+          description: A list of Maven artifacts to be uploaded to Artifact Registry upon successful completion of all build steps. Artifacts in the workspace matching specified paths globs will be uploaded to the specified Artifact Registry repository using the builder service account's credentials. If any artifacts fail to be pushed, the build is marked FAILURE.
+          items:
+            $ref: "#/components/schemas/ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact"
+          type: array
         objects:
           $ref: "#/components/schemas/ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsArtifactObjects"
           description: A list of objects to be uploaded to Cloud Storage upon successful completion of all build steps. Files in the workspace matching specified paths globs will be uploaded to the specified Cloud Storage location using the builder service account's credentials. The location and generation of the uploaded objects will be stored in the Build resource's results field. If any objects fail to be pushed, the build is marked FAILURE.
+        pythonPackages:
+          description: A list of Python packages to be uploaded to Artifact Registry upon successful completion of all build steps. The build service account credentials will be used to perform the upload. If any objects fail to be pushed, the build is marked FAILURE.
+          items:
+            $ref: "#/components/schemas/ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage"
+          type: array
       type: object
     ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsArtifactObjects:
       description: Files in the workspace to upload to Cloud Storage upon successful completion of all build steps.
@@ -1271,6 +1284,37 @@ components:
           $ref: "#/components/schemas/ContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan"
           description: Output only. Stores timing information for pushing all artifact objects.
           readOnly: true
+      type: object
+    ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact:
+      description: A Maven artifact to upload to Artifact Registry upon successful completion of all build steps.
+      properties:
+        artifactId:
+          description: Maven `artifactId` value used when uploading the artifact to Artifact Registry.
+          type: string
+        groupId:
+          description: Maven `groupId` value used when uploading the artifact to Artifact Registry.
+          type: string
+        path:
+          description: Path to an artifact in the build's workspace to be uploaded to Artifact Registry. This can be either an absolute path, e.g. /workspace/my-app/target/my-app-1.0.SNAPSHOT.jar or a relative path from /workspace, e.g. my-app/target/my-app-1.0.SNAPSHOT.jar.
+          type: string
+        repository:
+          description: Artifact Registry repository, in the form "https://$REGION-maven.pkg.dev/$PROJECT/$REPOSITORY" Artifact in the workspace specified by path will be uploaded to Artifact Registry with this location as a prefix.
+          type: string
+        version:
+          description: Maven `version` value used when uploading the artifact to Artifact Registry.
+          type: string
+      type: object
+    ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage:
+      description: Python package to upload to Artifact Registry upon successful completion of all build steps. A package can encapsulate multiple objects to be uploaded to a single repository.
+      properties:
+        paths:
+          description: Path globs used to match files in the build's workspace. For Python/ Twine, this is usually `dist/*`, and sometimes additionally an `.asc` file.
+          items:
+            type: string
+          type: array
+        repository:
+          description: Artifact Registry repository, in the form "https://$REGION-python.pkg.dev/$PROJECT/$REPOSITORY" Files in the workspace matching any path pattern will be uploaded to Artifact Registry with this location as a prefix.
+          type: string
       type: object
     ContaineranalysisGoogleDevtoolsCloudbuildV1Build:
       description: "A build resource in the Cloud Build API. At a high level, a `Build` describes where to find source code, how to build it (for example, the builder image to run on the source), and where to store the built artifacts. Fields can include the following variables, which will be expanded when the build is created: - $PROJECT_ID: the project ID of the build. - $PROJECT_NUMBER: the project number of the build. - $LOCATION: the location/region of the build. - $BUILD_ID: the autogenerated ID of the build. - $REPO_NAME: the source repository name specified by RepoSource. - $BRANCH_NAME: the branch name specified by RepoSource. - $TAG_NAME: the tag name specified by RepoSource. - $REVISION_ID or $COMMIT_SHA: the commit SHA specified by RepoSource or resolved from the specified branch or tag. - $SHORT_SHA: first 7 characters of $REVISION_ID or $COMMIT_SHA."
@@ -1399,7 +1443,7 @@ components:
         timing:
           additionalProperties:
             $ref: "#/components/schemas/ContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan"
-          description: "Output only. Stores timing information for phases of the build. Valid keys are: * BUILD: time to execute all build steps. * PUSH: time to push all specified images. * FETCHSOURCE: time to fetch source. * SETUPBUILD: time to set up build. If the build does not specify source or images, these keys will not be included."
+          description: "Output only. Stores timing information for phases of the build. Valid keys are: * BUILD: time to execute all build steps. * PUSH: time to push all artifacts including docker images and non docker artifacts. * FETCHSOURCE: time to fetch source. * SETUPBUILD: time to set up build. If the build does not specify source or images, these keys will not be included."
           readOnly: true
           type: object
         warnings:
@@ -1720,11 +1764,11 @@ components:
       description: Artifacts created by the build pipeline.
       properties:
         artifactManifest:
-          description: Path to the artifact manifest. Only populated when artifacts are uploaded.
+          description: Path to the artifact manifest for non-container artifacts uploaded to Cloud Storage. Only populated when artifacts are uploaded to Cloud Storage.
           type: string
         artifactTiming:
           $ref: "#/components/schemas/ContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan"
-          description: Time to push all non-container artifacts.
+          description: Time to push all non-container artifacts to Cloud Storage.
         buildStepImages:
           description: List of build step digests, in the order corresponding to build step indices.
           items:
@@ -1741,10 +1785,20 @@ components:
           items:
             $ref: "#/components/schemas/ContaineranalysisGoogleDevtoolsCloudbuildV1BuiltImage"
           type: array
+        mavenArtifacts:
+          description: Maven artifacts uploaded to Artifact Registry at the end of the build.
+          items:
+            $ref: "#/components/schemas/ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact"
+          type: array
         numArtifacts:
-          description: Number of artifacts uploaded. Only populated when artifacts are uploaded.
+          description: Number of non-container artifacts uploaded to Cloud Storage. Only populated when artifacts are uploaded to Cloud Storage.
           format: int64
           type: string
+        pythonPackages:
+          description: Python artifacts uploaded to Artifact Registry at the end of the build.
+          items:
+            $ref: "#/components/schemas/ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedPythonPackage"
+          type: array
       type: object
     ContaineranalysisGoogleDevtoolsCloudbuildV1Secret:
       description: "Pairs a set of secret environment variables containing encrypted values with the Cloud KMS key to use to decrypt the value. Note: Use `kmsKeyName` with `available_secrets` instead of using `kmsKeyName` with `secret`. For instructions see: https://cloud.google.com/cloud-build/docs/securing-builds/use-encrypted-credentials."
@@ -1853,6 +1907,34 @@ components:
         startTime:
           description: Start of time span.
           format: google-datetime
+          type: string
+      type: object
+    ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact:
+      description: A Maven artifact uploaded using the MavenArtifact directive.
+      properties:
+        fileHashes:
+          $ref: "#/components/schemas/ContaineranalysisGoogleDevtoolsCloudbuildV1FileHashes"
+          description: Hash types and values of the Maven Artifact.
+        pushTiming:
+          $ref: "#/components/schemas/ContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan"
+          description: Output only. Stores timing information for pushing the specified artifact.
+          readOnly: true
+        uri:
+          description: URI of the uploaded artifact.
+          type: string
+      type: object
+    ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedPythonPackage:
+      description: Artifact uploaded using the PythonPackage directive.
+      properties:
+        fileHashes:
+          $ref: "#/components/schemas/ContaineranalysisGoogleDevtoolsCloudbuildV1FileHashes"
+          description: Hash types and values of the Python Artifact.
+        pushTiming:
+          $ref: "#/components/schemas/ContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan"
+          description: Output only. Stores timing information for pushing the specified artifact.
+          readOnly: true
+        uri:
+          description: URI of the uploaded artifact.
           type: string
       type: object
     ContaineranalysisGoogleDevtoolsCloudbuildV1Volume:
@@ -3496,3 +3578,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

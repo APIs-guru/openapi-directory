@@ -1249,10 +1249,10 @@ components:
           description: Resource name.
           type: string
         recommendedDeployment:
-          description: "The recommended deployment of the API. Format: `projects/{project}/locations/{location}/apis/{api}/deployments/{deployment}`"
+          description: "The recommended deployment of the API. Format: `apis/{api}/deployments/{deployment}`"
           type: string
         recommendedVersion:
-          description: "The recommended version of the API. Format: `projects/{project}/locations/{location}/apis/{api}/versions/{version}`"
+          description: "The recommended version of the API. Format: `apis/{api}/versions/{version}`"
           type: string
         updateTime:
           description: Output only. Last update timestamp.
