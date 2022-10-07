@@ -2964,6 +2964,9 @@ components:
         gcpFilestoreCsiDriverConfig:
           $ref: "#/components/schemas/GcpFilestoreCsiDriverConfig"
           description: Configuration for the GCP Filestore CSI driver.
+        gkeBackupAgentConfig:
+          $ref: "#/components/schemas/GkeBackupAgentConfig"
+          description: Configuration for the Backup for GKE agent addon.
         horizontalPodAutoscaling:
           $ref: "#/components/schemas/HorizontalPodAutoscaling"
           description: Configuration for the horizontal pod autoscaling feature, which increases or decreases the number of replica pods a replication controller has based on the resource usage of the existing pods.
@@ -3189,6 +3192,9 @@ components:
         confidentialNodes:
           $ref: "#/components/schemas/ConfidentialNodes"
           description: Configuration of Confidential Nodes. All the nodes in the cluster will be Confidential VM once enabled.
+        costManagementConfig:
+          $ref: "#/components/schemas/CostManagementConfig"
+          description: Configuration for the fine-grained cost management feature.
         createTime:
           description: "[Output only] The time the cluster was created, in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format."
           type: string
@@ -3411,6 +3417,9 @@ components:
         desiredClusterAutoscaling:
           $ref: "#/components/schemas/ClusterAutoscaling"
           description: Cluster-level autoscaling configuration.
+        desiredCostManagementConfig:
+          $ref: "#/components/schemas/CostManagementConfig"
+          description: The desired configuration for the fine-grained cost management feature.
         desiredDatabaseEncryption:
           $ref: "#/components/schemas/DatabaseEncryption"
           description: Configuration of etcd encryption.
@@ -3555,6 +3564,13 @@ components:
       properties:
         enabled:
           description: Whether to enable consumption metering for this cluster. If enabled, a second BigQuery table will be created to hold resource consumption records.
+          type: boolean
+      type: object
+    CostManagementConfig:
+      description: Configuration for fine-grained cost management feature.
+      properties:
+        enabled:
+          description: Whether the feature is enabled or not.
           type: boolean
       type: object
     CreateClusterRequest:
@@ -3753,6 +3769,13 @@ components:
             type: string
           type: array
       type: object
+    GkeBackupAgentConfig:
+      description: Configuration for the Backup for GKE Agent.
+      properties:
+        enabled:
+          description: Whether the Backup for GKE agent is enabled for this cluster.
+          type: boolean
+      type: object
     HorizontalPodAutoscaling:
       description: Configuration options for the horizontal pod autoscaling feature, which increases or decreases the number of replica pods a replication controller has based on the resource usage of the existing pods.
       properties:
@@ -3803,6 +3826,13 @@ components:
         createSubnetwork:
           description: Whether a new subnetwork will be created automatically for the cluster. This field is only applicable when `use_ip_aliases` is true.
           type: boolean
+        ipv6AccessType:
+          description: The ipv6 access type (internal or external) when create_subnetwork is true
+          enum:
+            - IPV6_ACCESS_TYPE_UNSPECIFIED
+            - INTERNAL
+            - EXTERNAL
+          type: string
         nodeIpv4Cidr:
           description: This field is deprecated, use node_ipv4_cidr_block.
           type: string
@@ -3817,6 +3847,13 @@ components:
           type: string
         servicesSecondaryRangeName:
           description: The name of the secondary range to be used as for the services CIDR block. The secondary range will be used for service ClusterIPs. This must be an existing secondary range associated with the cluster subnetwork. This field is only applicable with use_ip_aliases is true and create_subnetwork is false.
+          type: string
+        stackType:
+          description: The IP stack type of the cluster
+          enum:
+            - STACK_TYPE_UNSPECIFIED
+            - IPV4
+            - IPV4_IPV6
           type: string
         subnetworkName:
           description: A custom subnetwork name to be used if `create_subnetwork` is true. If this field is empty, then an automatic name will be chosen for the new subnetwork.

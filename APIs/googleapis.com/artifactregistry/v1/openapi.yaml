@@ -1941,7 +1941,7 @@ components:
         metadata:
           additionalProperties:
             description: Properties of the object.
-          description: "Output only. Repository-specific Metadata stored against this version. The fields returned are defined by the underlying repository-specific resource. Currently, the resources could be: DockerImage MavenArtifact"
+          description: Output only. Repository-specific Metadata stored against this version. The fields returned are defined by the underlying repository-specific resource. Currently, the only resource in use is DockerImage
           readOnly: true
           type: object
         name:
