@@ -267,7 +267,7 @@ components:
         type: string
   schemas:
     AutoText:
-      description: A ParagraphElement representing a spot in the text that is dynamically replaced with content that can change over time, like a page number.
+      description: A ParagraphElement representing a spot in the text that's dynamically replaced with content that can change over time, like a page number.
       properties:
         suggestedDeletionIds:
           description: The suggested deletion IDs. If empty, then there are no suggested deletions of this content.
@@ -275,7 +275,7 @@ components:
             type: string
           type: array
         suggestedInsertionIds:
-          description: The suggested insertion IDs. An AutoText may have multiple insertion IDs if it is a nested suggested change. If empty, then this is not a suggested insertion.
+          description: The suggested insertion IDs. An AutoText may have multiple insertion IDs if it's a nested suggested change. If empty, then this is not a suggested insertion.
           items:
             type: string
           type: array
@@ -337,7 +337,7 @@ components:
           description: The updated write control after applying the request.
       type: object
     Body:
-      description: The document body. The body typically contains the full document contents except for headers, footers and footnotes.
+      description: The document body. The body typically contains the full document contents except for headers, footers, and footnotes.
       properties:
         content:
           description: The contents of the body. The indexes for the body's content begin at zero.
@@ -357,10 +357,10 @@ components:
           type: integer
         textStyle:
           $ref: "#/components/schemas/TextStyle"
-          description: The paragraph specific text style applied to this bullet.
+          description: The paragraph-specific text style applied to this bullet.
       type: object
     BulletSuggestionState:
-      description: A mask that indicates which of the fields on the base Bullet have been changed in this suggestion. For any field set to true, there is a new suggested value.
+      description: A mask that indicates which of the fields on the base Bullet have been changed in this suggestion. For any field set to true, there's a new suggested value.
       properties:
         listIdSuggested:
           description: Indicates if there was a suggested change to the list_id.
@@ -388,7 +388,7 @@ components:
             type: string
           type: array
         suggestedInsertionIds:
-          description: The suggested insertion IDs. A ColumnBreak may have multiple insertion IDs if it is a nested suggested change. If empty, then this is not a suggested insertion.
+          description: The suggested insertion IDs. A ColumnBreak may have multiple insertion IDs if it's a nested suggested change. If empty, then this is not a suggested insertion.
           items:
             type: string
           type: array
@@ -399,7 +399,7 @@ components:
           type: object
         textStyle:
           $ref: "#/components/schemas/TextStyle"
-          description: The text style of this ColumnBreak. Similar to text content, like text runs and footnote references, the text style of a column break can affect content layout as well as the styling of text inserted adjacent to it.
+          description: The text style of this ColumnBreak. Similar to text content, like text runs and footnote references, the text style of a column break can affect content layout as well as the styling of text inserted next to it.
       type: object
     CreateFooterRequest:
       description: Creates a Footer. The new footer is applied to the SectionStyle at the location of the SectionBreak if specified, otherwise it is applied to the DocumentStyle. If a footer of the specified type already exists, a 400 bad request error is returned.
@@ -503,7 +503,7 @@ components:
           description: The range to apply the bullet preset to.
       type: object
     CropProperties:
-      description: The crop properties of an image. The crop rectangle is represented using fractional offsets from the original content's four edges. - If the offset is in the interval (0, 1), the corresponding edge of crop rectangle is positioned inside of the image's original bounding rectangle. - If the offset is negative or greater than 1, the corresponding edge of crop rectangle is positioned outside of the image's original bounding rectangle. - If all offsets and rotation angle are 0, the image is not cropped.
+      description: The crop properties of an image. The crop rectangle is represented using fractional offsets from the original content's 4 edges. - If the offset is in the interval (0, 1), the corresponding edge of crop rectangle is positioned inside of the image's original bounding rectangle. - If the offset is negative or greater than 1, the corresponding edge of crop rectangle is positioned outside of the image's original bounding rectangle. - If all offsets and rotation angle are 0, the image is not cropped.
       properties:
         angle:
           description: The clockwise rotation angle of the crop rectangle around its center, in radians. Rotation is applied after the offsets.
@@ -527,7 +527,7 @@ components:
           type: number
       type: object
     CropPropertiesSuggestionState:
-      description: A mask that indicates which of the fields on the base CropProperties have been changed in this suggestion. For any field set to true, there is a new suggested value.
+      description: A mask that indicates which of the fields on the base CropProperties have been changed in this suggestion. For any field set to true, there's a new suggested value.
       properties:
         angleSuggested:
           description: Indicates if there was a suggested change to angle.
@@ -700,22 +700,22 @@ components:
           $ref: "#/components/schemas/Background"
           description: The background of the document. Documents cannot have a transparent background color.
         defaultFooterId:
-          description: The ID of the default footer. If not set, there is no default footer. This property is read-only.
+          description: The ID of the default footer. If not set, there's no default footer. This property is read-only.
           type: string
         defaultHeaderId:
-          description: The ID of the default header. If not set, there is no default header. This property is read-only.
+          description: The ID of the default header. If not set, there's no default header. This property is read-only.
           type: string
         evenPageFooterId:
-          description: The ID of the footer used only for even pages. The value of use_even_page_header_footer determines whether to use the default_footer_id or this value for the footer on even pages. If not set, there is no even page footer. This property is read-only.
+          description: The ID of the footer used only for even pages. The value of use_even_page_header_footer determines whether to use the default_footer_id or this value for the footer on even pages. If not set, there's no even page footer. This property is read-only.
           type: string
         evenPageHeaderId:
-          description: The ID of the header used only for even pages. The value of use_even_page_header_footer determines whether to use the default_header_id or this value for the header on even pages. If not set, there is no even page header. This property is read-only.
+          description: The ID of the header used only for even pages. The value of use_even_page_header_footer determines whether to use the default_header_id or this value for the header on even pages. If not set, there's no even page header. This property is read-only.
           type: string
         firstPageFooterId:
-          description: The ID of the footer used only for the first page. If not set then a unique footer for the first page does not exist. The value of use_first_page_header_footer determines whether to use the default_footer_id or this value for the footer on the first page. If not set, there is no first page footer. This property is read-only.
+          description: The ID of the footer used only for the first page. If not set then a unique footer for the first page does not exist. The value of use_first_page_header_footer determines whether to use the default_footer_id or this value for the footer on the first page. If not set, there's no first page footer. This property is read-only.
           type: string
         firstPageHeaderId:
-          description: The ID of the header used only for the first page. If not set then a unique header for the first page does not exist. The value of use_first_page_header_footer determines whether to use the default_header_id or this value for the header on the first page. If not set, there is no first page header. This property is read-only.
+          description: The ID of the header used only for the first page. If not set then a unique header for the first page does not exist. The value of use_first_page_header_footer determines whether to use the default_header_id or this value for the header on the first page. If not set, there's no first page header. This property is read-only.
           type: string
         marginBottom:
           $ref: "#/components/schemas/Dimension"
@@ -753,7 +753,7 @@ components:
           type: boolean
       type: object
     DocumentStyleSuggestionState:
-      description: A mask that indicates which of the fields on the base DocumentStyle have been changed in this suggestion. For any field set to true, there is a new suggested value.
+      description: A mask that indicates which of the fields on the base DocumentStyle have been changed in this suggestion. For any field set to true, there's a new suggested value.
       properties:
         backgroundSuggestionState:
           $ref: "#/components/schemas/BackgroundSuggestionState"
@@ -811,11 +811,11 @@ components:
           type: boolean
       type: object
     EmbeddedDrawingProperties:
-      description: The properties of an embedded drawing.
+      description: The properties of an embedded drawing and used to differentiate the object type. An embedded drawing is one that's created and edited within a document. Note that extensive details are not supported.
       properties: {}
       type: object
     EmbeddedDrawingPropertiesSuggestionState:
-      description: A mask that indicates which of the fields on the base EmbeddedDrawingProperties have been changed in this suggestion. For any field set to true, there is a new suggested value.
+      description: A mask that indicates which of the fields on the base EmbeddedDrawingProperties have been changed in this suggestion. For any field set to true, there's a new suggested value.
       properties: {}
       type: object
     EmbeddedObject:
@@ -835,7 +835,7 @@ components:
           description: The properties of an image.
         linkedContentReference:
           $ref: "#/components/schemas/LinkedContentReference"
-          description: A reference to the external linked source content. For example, it contains a reference to the source Sheets chart when the embedded object is a linked chart. If unset, then the embedded object is not linked.
+          description: A reference to the external linked source content. For example, it contains a reference to the source Google Sheets chart when the embedded object is a linked chart. If unset, then the embedded object is not linked.
         marginBottom:
           $ref: "#/components/schemas/Dimension"
           description: The bottom margin of the embedded object.
@@ -880,7 +880,7 @@ components:
           description: The width of the border.
       type: object
     EmbeddedObjectBorderSuggestionState:
-      description: A mask that indicates which of the fields on the base EmbeddedObjectBorder have been changed in this suggestion. For any field set to true, there is a new suggested value.
+      description: A mask that indicates which of the fields on the base EmbeddedObjectBorder have been changed in this suggestion. For any field set to true, there's a new suggested value.
       properties:
         colorSuggested:
           description: Indicates if there was a suggested change to color.
@@ -896,7 +896,7 @@ components:
           type: boolean
       type: object
     EmbeddedObjectSuggestionState:
-      description: A mask that indicates which of the fields on the base EmbeddedObject have been changed in this suggestion. For any field set to true, there is a new suggested value.
+      description: A mask that indicates which of the fields on the base EmbeddedObject have been changed in this suggestion. For any field set to true, there's a new suggested value.
       properties:
         descriptionSuggested:
           description: Indicates if there was a suggested change to description.
@@ -948,7 +948,7 @@ components:
             type: string
           type: array
         suggestedInsertionIds:
-          description: The suggested insertion IDs. A Equation may have multiple insertion IDs if it is a nested suggested change. If empty, then this is not a suggested insertion.
+          description: The suggested insertion IDs. An Equation may have multiple insertion IDs if it's a nested suggested change. If empty, then this is not a suggested insertion.
           items:
             type: string
           type: array
@@ -992,7 +992,7 @@ components:
             type: string
           type: array
         suggestedInsertionIds:
-          description: The suggested insertion IDs. A FootnoteReference may have multiple insertion IDs if it is a nested suggested change. If empty, then this is not a suggested insertion.
+          description: The suggested insertion IDs. A FootnoteReference may have multiple insertion IDs if it's a nested suggested change. If empty, then this is not a suggested insertion.
           items:
             type: string
           type: array
@@ -1037,7 +1037,7 @@ components:
           type: object
         textStyle:
           $ref: "#/components/schemas/TextStyle"
-          description: The text style of this HorizontalRule. Similar to text content, like text runs and footnote references, the text style of a horizontal rule can affect content layout as well as the styling of text inserted adjacent to it.
+          description: The text style of this HorizontalRule. Similar to text content, like text runs and footnote references, the text style of a horizontal rule can affect content layout as well as the styling of text inserted next to it.
       type: object
     ImageProperties:
       description: The properties of an image.
@@ -1064,12 +1064,12 @@ components:
           description: The source URI is the URI used to insert the image. The source URI can be empty.
           type: string
         transparency:
-          description: The transparency effect of the image. The value should be in the interval [0.0, 1.0], where 0 means no effect and 1 means completely transparent.
+          description: The transparency effect of the image. The value should be in the interval [0.0, 1.0], where 0 means no effect and 1 means transparent.
           format: float
           type: number
       type: object
     ImagePropertiesSuggestionState:
-      description: A mask that indicates which of the fields on the base ImageProperties have been changed in this suggestion. For any field set to true, there is a new suggested value.
+      description: A mask that indicates which of the fields on the base ImageProperties have been changed in this suggestion. For any field set to true, there's a new suggested value.
       properties:
         angleSuggested:
           description: Indicates if there was a suggested change to angle.
@@ -1128,7 +1128,7 @@ components:
             type: string
           type: array
         suggestedInsertionIds:
-          description: The suggested insertion IDs. An InlineObjectElement may have multiple insertion IDs if it is a nested suggested change. If empty, then this is not a suggested insertion.
+          description: The suggested insertion IDs. An InlineObjectElement may have multiple insertion IDs if it's a nested suggested change. If empty, then this is not a suggested insertion.
           items:
             type: string
           type: array
@@ -1139,7 +1139,7 @@ components:
           type: object
         textStyle:
           $ref: "#/components/schemas/TextStyle"
-          description: The text style of this InlineObjectElement. Similar to text content, like text runs and footnote references, the text style of an inline object element can affect content layout as well as the styling of text inserted adjacent to it.
+          description: The text style of this InlineObjectElement. Similar to text content, like text runs and footnote references, the text style of an inline object element can affect content layout as well as the styling of text inserted next to it.
       type: object
     InlineObjectProperties:
       description: Properties of an InlineObject.
@@ -1149,7 +1149,7 @@ components:
           description: The embedded object of this inline object.
       type: object
     InlineObjectPropertiesSuggestionState:
-      description: A mask that indicates which of the fields on the base InlineObjectProperties have been changed in this suggestion. For any field set to true, there is a new suggested value.
+      description: A mask that indicates which of the fields on the base InlineObjectProperties have been changed in this suggestion. For any field set to true, there's a new suggested value.
       properties:
         embeddedObjectSuggestionState:
           $ref: "#/components/schemas/EmbeddedObjectSuggestionState"
@@ -1284,14 +1284,14 @@ components:
           description: A reference to the linked chart.
       type: object
     LinkedContentReferenceSuggestionState:
-      description: A mask that indicates which of the fields on the base LinkedContentReference have been changed in this suggestion. For any field set to true, there is a new suggested value.
+      description: A mask that indicates which of the fields on the base LinkedContentReference have been changed in this suggestion. For any field set to true, there's a new suggested value.
       properties:
         sheetsChartReferenceSuggestionState:
           $ref: "#/components/schemas/SheetsChartReferenceSuggestionState"
           description: A mask that indicates which of the fields in sheets_chart_reference have been changed in this suggestion.
       type: object
     List:
-      description: A List represents the list attributes for a group of paragraphs that all belong to the same list. A paragraph that is part of a list has a reference to the list's ID in its bullet.
+      description: A List represents the list attributes for a group of paragraphs that all belong to the same list. A paragraph that's part of a list has a reference to the list's ID in its bullet.
       properties:
         listProperties:
           $ref: "#/components/schemas/ListProperties"
@@ -1311,16 +1311,16 @@ components:
           type: object
       type: object
     ListProperties:
-      description: The properties of a list which describe the look and feel of bullets belonging to paragraphs associated with a list.
+      description: The properties of a list that describe the look and feel of bullets belonging to paragraphs associated with a list.
       properties:
         nestingLevels:
-          description: Describes the properties of the bullets at the associated level. A list has at most nine levels of nesting with nesting level 0 corresponding to the top-most level and nesting level 8 corresponding to the most nested level. The nesting levels are returned in ascending order with the least nested returned first.
+          description: Describes the properties of the bullets at the associated level. A list has at most 9 levels of nesting with nesting level 0 corresponding to the top-most level and nesting level 8 corresponding to the most nested level. The nesting levels are returned in ascending order with the least nested returned first.
           items:
             $ref: "#/components/schemas/NestingLevel"
           type: array
       type: object
     ListPropertiesSuggestionState:
-      description: A mask that indicates which of the fields on the base ListProperties have been changed in this suggestion. For any field set to true, there is a new suggested value.
+      description: A mask that indicates which of the fields on the base ListProperties have been changed in this suggestion. For any field set to true, there's a new suggested value.
       properties:
         nestingLevelsSuggestionStates:
           description: A mask that indicates which of the fields on the corresponding NestingLevel in nesting_levels have been changed in this suggestion. The nesting level suggestion states are returned in ascending order of the nesting level with the least nested returned first.
@@ -1347,7 +1347,7 @@ components:
           description: The table range specifying which cells of the table to merge. Any text in the cells being merged will be concatenated and stored in the "head" cell of the range. This is the upper-left cell of the range when the content direction is left to right, and the upper-right cell of the range otherwise. If the range is non-rectangular (which can occur in some cases where the range covers cells that are already merged or where the table is non-rectangular), a 400 bad request error is returned.
       type: object
     NamedRange:
-      description: A collection of Ranges with the same named range ID. Named ranges allow developers to associate parts of a document with an arbitrary user-defined label so their contents can be programmatically read or edited at a later time. A document can contain multiple named ranges with the same name, but every named range has a unique ID. A named range is created with a single Range, and content inserted inside a named range generally expands that range. However, certain document changes can cause the range to be split into multiple ranges. Named ranges are not private. All applications and collaborators that have access to the document can see its named ranges.
+      description: A collection of Ranges with the same named range ID. Named ranges allow developers to associate parts of a document with an arbitrary user-defined label so their contents can be programmatically read or edited later. A document can contain multiple named ranges with the same name, but every named range has a unique ID. A named range is created with a single Range, and content inserted inside a named range generally expands that range. However, certain document changes can cause the range to be split into multiple ranges. Named ranges are not private. All applications and collaborators that have access to the document can see its named ranges.
       properties:
         name:
           description: The name of the named range.
@@ -1425,7 +1425,7 @@ components:
       description: The named styles. Paragraphs in the document can inherit their TextStyle and ParagraphStyle from these named styles.
       properties:
         styles:
-          description: The named styles. There is an entry for each of the possible named style types.
+          description: The named styles. There's an entry for each of the possible named style types.
           items:
             $ref: "#/components/schemas/NamedStyle"
           type: array
@@ -1434,7 +1434,7 @@ components:
       description: The suggestion state of a NamedStyles message.
       properties:
         stylesSuggestionStates:
-          description: A mask that indicates which of the fields on the corresponding NamedStyle in styles have been changed in this suggestion. The order of these named style suggestion states match the order of the corresponding named style within the named styles suggestion.
+          description: A mask that indicates which of the fields on the corresponding NamedStyle in styles have been changed in this suggestion. The order of these named style suggestion states matches the order of the corresponding named style within the named styles suggestion.
           items:
             $ref: "#/components/schemas/NamedStyleSuggestionState"
           type: array
@@ -1451,7 +1451,7 @@ components:
             - END
           type: string
         glyphFormat:
-          description: The format string used by bullets at this level of nesting. The glyph format contains one or more placeholders, and these placeholder are replaced with the appropriate values depending on the glyph_type or glyph_symbol. The placeholders follow the pattern `%[nesting_level]`. Furthermore, placeholders can have prefixes and suffixes. Thus, the glyph format follows the pattern `%[nesting_level]`. Note that the prefix and suffix are optional and can be arbitrary strings. For example, the glyph format `%0.` indicates that the rendered glyph will replace the placeholder with the corresponding glyph for nesting level 0 followed by a period as the suffix. So a list with a glyph type of UPPER_ALPHA and glyph format `%0.` at nesting level 0 will result in a list with rendered glyphs `A.` `B.` `C.` The glyph format can contain placeholders for the current nesting level as well as placeholders for parent nesting levels. For example, a list can have a glyph format of `%0.` at nesting level 0 and a glyph format of `%0.%1.` at nesting level 1. Assuming both nesting levels have DECIMAL glyph types, this would result in a list with rendered glyphs `1.` `2.` ` 2.1.` ` 2.2.` `3.` For nesting levels that are ordered, the string that replaces a placeholder in the glyph format for a particular paragraph depends on the paragraph's order within the list.
+          description: The format string used by bullets at this level of nesting. The glyph format contains one or more placeholders, and these placeholders are replaced with the appropriate values depending on the glyph_type or glyph_symbol. The placeholders follow the pattern `%[nesting_level]`. Furthermore, placeholders can have prefixes and suffixes. Thus, the glyph format follows the pattern `%[nesting_level]`. Note that the prefix and suffix are optional and can be arbitrary strings. For example, the glyph format `%0.` indicates that the rendered glyph will replace the placeholder with the corresponding glyph for nesting level 0 followed by a period as the suffix. So a list with a glyph type of UPPER_ALPHA and glyph format `%0.` at nesting level 0 will result in a list with rendered glyphs `A.` `B.` `C.` The glyph format can contain placeholders for the current nesting level as well as placeholders for parent nesting levels. For example, a list can have a glyph format of `%0.` at nesting level 0 and a glyph format of `%0.%1.` at nesting level 1. Assuming both nesting levels have DECIMAL glyph types, this would result in a list with rendered glyphs `1.` `2.` ` 2.1.` ` 2.2.` `3.` For nesting levels that are ordered, the string that replaces a placeholder in the glyph format for a particular paragraph depends on the paragraph's order within the list.
           type: string
         glyphSymbol:
           description: A custom glyph symbol used by bullets when paragraphs at this level of nesting are unordered. The glyph symbol replaces placeholders within the glyph_format. For example, if the glyph_symbol is the solid circle corresponding to Unicode U+25cf code point and the glyph_format is `%0`, the rendered glyph would be the solid circle.
@@ -1475,7 +1475,7 @@ components:
           $ref: "#/components/schemas/Dimension"
           description: The amount of indentation for paragraphs at this level of nesting. Applied to the side that corresponds to the start of the text, based on the paragraph's content direction.
         startNumber:
-          description: The number of the first list item at this nesting level. A value of 0 is treated as a value of 1 for lettered lists and roman numeraled lists, i.e. for values of both 0 and 1, lettered and roman numeraled lists will begin at `a` and `i` respectively. This value is ignored for nesting levels with unordered glyphs.
+          description: The number of the first list item at this nesting level. A value of 0 is treated as a value of 1 for lettered lists and Roman numeral lists. For values of both 0 and 1, lettered and Roman numeral lists will begin at `a` and `i` respectively. This value is ignored for nesting levels with unordered glyphs.
           format: int32
           type: integer
         textStyle:
@@ -1483,7 +1483,7 @@ components:
           description: The text style of bullets at this level of nesting.
       type: object
     NestingLevelSuggestionState:
-      description: A mask that indicates which of the fields on the base NestingLevel have been changed in this suggestion. For any field set to true, there is a new suggested value.
+      description: A mask that indicates which of the fields on the base NestingLevel have been changed in this suggestion. For any field set to true, there's a new suggested value.
       properties:
         bulletAlignmentSuggested:
           description: Indicates if there was a suggested change to bullet_alignment.
@@ -1535,7 +1535,7 @@ components:
             type: string
           type: array
         suggestedInsertionIds:
-          description: The suggested insertion IDs. A PageBreak may have multiple insertion IDs if it is a nested suggested change. If empty, then this is not a suggested insertion.
+          description: The suggested insertion IDs. A PageBreak may have multiple insertion IDs if it's a nested suggested change. If empty, then this is not a suggested insertion.
           items:
             type: string
           type: array
@@ -1546,16 +1546,16 @@ components:
           type: object
         textStyle:
           $ref: "#/components/schemas/TextStyle"
-          description: The text style of this PageBreak. Similar to text content, like text runs and footnote references, the text style of a page break can affect content layout as well as the styling of text inserted adjacent to it.
+          description: The text style of this PageBreak. Similar to text content, like text runs and footnote references, the text style of a page break can affect content layout as well as the styling of text inserted next to it.
       type: object
     Paragraph:
-      description: A StructuralElement representing a paragraph. A paragraph is a range of content that is terminated with a newline character.
+      description: A StructuralElement representing a paragraph. A paragraph is a range of content that's terminated with a newline character.
       properties:
         bullet:
           $ref: "#/components/schemas/Bullet"
           description: The bullet for this paragraph. If not present, the paragraph does not belong to a list.
         elements:
-          description: The content of the paragraph broken down into its component parts.
+          description: The content of the paragraph, broken down into its component parts.
           items:
             $ref: "#/components/schemas/ParagraphElement"
           type: array
@@ -1580,7 +1580,7 @@ components:
         suggestedPositionedObjectIds:
           additionalProperties:
             $ref: "#/components/schemas/ObjectReferences"
-          description: The IDs of the positioned objects that are suggested to be attached to this paragraph, keyed by suggestion ID.
+          description: The IDs of the positioned objects suggested to be attached to this paragraph, keyed by suggestion ID.
           type: object
       type: object
     ParagraphBorder:
@@ -1637,7 +1637,7 @@ components:
           description: A paragraph element that links to a person or email address.
         richLink:
           $ref: "#/components/schemas/RichLink"
-          description: A paragraph element that links to a Google resource (such as a file in Drive, a Youtube video, a Calendar event, etc.)
+          description: A paragraph element that links to a Google resource (such as a file in Google Drive, a YouTube video, or a Calendar event.)
         startIndex:
           description: The zero-based start index of this paragraph element, in UTF-16 code units.
           format: int32
@@ -1647,7 +1647,7 @@ components:
           description: A text run paragraph element.
       type: object
     ParagraphStyle:
-      description: "Styles that apply to a whole paragraph. Inherited paragraph styles are represented as unset fields in this message. A paragraph style's parent depends on where the paragraph style is defined: * The ParagraphStyle on a Paragraph inherits from the paragraph's corresponding named style type. * The ParagraphStyle on a named style inherits from the normal text named style. * The ParagraphStyle of the normal text named style inherits from the default paragraph style in the Docs editor. * The ParagraphStyle on a Paragraph element that is contained in a table may inherit its paragraph style from the table style. If the paragraph style does not inherit from a parent, unsetting fields will revert the style to a value matching the defaults in the Docs editor."
+      description: "Styles that apply to a whole paragraph. Inherited paragraph styles are represented as unset fields in this message. A paragraph style's parent depends on where the paragraph style is defined: * The ParagraphStyle on a Paragraph inherits from the paragraph's corresponding named style type. * The ParagraphStyle on a named style inherits from the normal text named style. * The ParagraphStyle of the normal text named style inherits from the default paragraph style in the Docs editor. * The ParagraphStyle on a Paragraph element that's contained in a table may inherit its paragraph style from the table style. If the paragraph style does not inherit from a parent, unsetting fields will revert the style to a value matching the defaults in the Docs editor."
       properties:
         alignment:
           description: The text alignment for this paragraph.
@@ -1663,19 +1663,19 @@ components:
           type: boolean
         borderBetween:
           $ref: "#/components/schemas/ParagraphBorder"
-          description: The border between this paragraph and the next and previous paragraphs. If unset, the value is inherited from the parent. The between border is rendered when the adjacent paragraph has the same border and indent properties. Paragraph borders cannot be partially updated. When making changes to a paragraph border the new border must be specified in its entirety.
+          description: The border between this paragraph and the next and previous paragraphs. If unset, the value is inherited from the parent. The between border is rendered when the adjacent paragraph has the same border and indent properties. Paragraph borders cannot be partially updated. When changing a paragraph border, the new border must be specified in its entirety.
         borderBottom:
           $ref: "#/components/schemas/ParagraphBorder"
-          description: The border at the bottom of this paragraph. If unset, the value is inherited from the parent. The bottom border is rendered when the paragraph below has different border and indent properties. Paragraph borders cannot be partially updated. When making changes to a paragraph border the new border must be specified in its entirety.
+          description: The border at the bottom of this paragraph. If unset, the value is inherited from the parent. The bottom border is rendered when the paragraph below has different border and indent properties. Paragraph borders cannot be partially updated. When changing a paragraph border, the new border must be specified in its entirety.
         borderLeft:
           $ref: "#/components/schemas/ParagraphBorder"
-          description: The border to the left of this paragraph. If unset, the value is inherited from the parent. Paragraph borders cannot be partially updated. When making changes to a paragraph border the new border must be specified in its entirety.
+          description: The border to the left of this paragraph. If unset, the value is inherited from the parent. Paragraph borders cannot be partially updated. When changing a paragraph border, the new border must be specified in its entirety.
         borderRight:
           $ref: "#/components/schemas/ParagraphBorder"
-          description: The border to the right of this paragraph. If unset, the value is inherited from the parent. Paragraph borders cannot be partially updated. When making changes to a paragraph border the new border must be specified in its entirety.
+          description: The border to the right of this paragraph. If unset, the value is inherited from the parent. Paragraph borders cannot be partially updated. When changing a paragraph border, the new border must be specified in its entirety.
         borderTop:
           $ref: "#/components/schemas/ParagraphBorder"
-          description: The border at the top of this paragraph. If unset, the value is inherited from the parent. The top border is rendered when the paragraph above has different border and indent properties. Paragraph borders cannot be partially updated. When making changes to a paragraph border the new border must be specified in its entirety.
+          description: The border at the top of this paragraph. If unset, the value is inherited from the parent. The top border is rendered when the paragraph above has different border and indent properties. Paragraph borders cannot be partially updated. When changing a paragraph border, the new border must be specified in its entirety.
         direction:
           description: The text direction of this paragraph. If unset, the value defaults to LEFT_TO_RIGHT since paragraph direction is not inherited.
           enum:
@@ -1720,7 +1720,7 @@ components:
             - HEADING_6
           type: string
         pageBreakBefore:
-          description: Whether the current paragraph should always start at the beginning of a page. If unset, the value is inherited from the parent. Attempting to update page_break_before for paragraphs in unsupported regions, including Table, Header, Footer and Footnote, can result in an invalid document state which returns a 400 bad request error.
+          description: Whether the current paragraph should always start at the beginning of a page. If unset, the value is inherited from the parent. Attempting to update page_break_before for paragraphs in unsupported regions, including Table, Header, Footer and Footnote, can result in an invalid document state that returns a 400 bad request error.
           type: boolean
         shading:
           $ref: "#/components/schemas/Shading"
@@ -1745,7 +1745,7 @@ components:
           type: array
       type: object
     ParagraphStyleSuggestionState:
-      description: A mask that indicates which of the fields on the base ParagraphStyle have been changed in this suggestion. For any field set to true, there is a new suggested value.
+      description: A mask that indicates which of the fields on the base ParagraphStyle have been changed in this suggestion. For any field set to true, there's a new suggested value.
       properties:
         alignmentSuggested:
           description: Indicates if there was a suggested change to alignment.
@@ -1823,12 +1823,12 @@ components:
           description: Output only. The properties of this Person. This field is always present.
           readOnly: true
         suggestedDeletionIds:
-          description: IDs for suggestions that remove this person link from the document. A Person might have multiple deletion IDs if, for example, multiple users suggest to delete it. If empty, then this person link isn't suggested for deletion.
+          description: IDs for suggestions that remove this person link from the document. A Person might have multiple deletion IDs if, for example, multiple users suggest deleting it. If empty, then this person link isn't suggested for deletion.
           items:
             type: string
           type: array
         suggestedInsertionIds:
-          description: IDs for suggestions that insert this person link into the document. A Person might have multiple insertion IDs if it is a nested suggested change (a suggestion within a suggestion made by a different user, for example). If empty, then this person link isn't a suggested insertion.
+          description: IDs for suggestions that insert this person link into the document. A Person might have multiple insertion IDs if it's a nested suggested change (a suggestion within a suggestion made by a different user, for example). If empty, then this person link isn't a suggested insertion.
           items:
             type: string
           type: array
@@ -1849,7 +1849,7 @@ components:
           readOnly: true
           type: string
         name:
-          description: Output only. The name of the person if it is displayed in the link text instead of the person's email address.
+          description: Output only. The name of the person if it's displayed in the link text instead of the person's email address.
           readOnly: true
           type: string
       type: object
@@ -1865,7 +1865,7 @@ components:
           description: The location where the table starts in the document.
       type: object
     PositionedObject:
-      description: An object that is tethered to a Paragraph and positioned relative to the beginning of the paragraph. A PositionedObject contains an EmbeddedObject such as an image.
+      description: An object that's tethered to a Paragraph and positioned relative to the beginning of the paragraph. A PositionedObject contains an EmbeddedObject such as an image.
       properties:
         objectId:
           description: The ID of this positioned object.
@@ -1888,7 +1888,7 @@ components:
           type: object
       type: object
     PositionedObjectPositioning:
-      description: The positioning of a PositionedObject. The positioned object is positioned relative to the beginning of the Paragraph it is tethered to.
+      description: The positioning of a PositionedObject. The positioned object is positioned relative to the beginning of the Paragraph it's tethered to.
       properties:
         layout:
           description: The layout of this positioned object.
@@ -1903,13 +1903,13 @@ components:
           type: string
         leftOffset:
           $ref: "#/components/schemas/Dimension"
-          description: The offset of the left edge of the positioned object relative to the beginning of the Paragraph it is tethered to. The exact positioning of the object can depend on other content in the document and the document's styling.
+          description: The offset of the left edge of the positioned object relative to the beginning of the Paragraph it's tethered to. The exact positioning of the object can depend on other content in the document and the document's styling.
         topOffset:
           $ref: "#/components/schemas/Dimension"
-          description: The offset of the top edge of the positioned object relative to the beginning of the Paragraph it is tethered to. The exact positioning of the object can depend on other content in the document and the document's styling.
+          description: The offset of the top edge of the positioned object relative to the beginning of the Paragraph it's tethered to. The exact positioning of the object can depend on other content in the document and the document's styling.
       type: object
     PositionedObjectPositioningSuggestionState:
-      description: A mask that indicates which of the fields on the base PositionedObjectPositioning have been changed in this suggestion. For any field set to true, there is a new suggested value.
+      description: A mask that indicates which of the fields on the base PositionedObjectPositioning have been changed in this suggestion. For any field set to true, there's a new suggested value.
       properties:
         layoutSuggested:
           description: Indicates if there was a suggested change to layout.
@@ -1932,7 +1932,7 @@ components:
           description: The positioning of this positioned object relative to the newline of the Paragraph that references this positioned object.
       type: object
     PositionedObjectPropertiesSuggestionState:
-      description: A mask that indicates which of the fields on the base PositionedObjectProperties have been changed in this suggestion. For any field set to true, there is a new suggested value.
+      description: A mask that indicates which of the fields on the base PositionedObjectProperties have been changed in this suggestion. For any field set to true, there's a new suggested value.
       properties:
         embeddedObjectSuggestionState:
           $ref: "#/components/schemas/EmbeddedObjectSuggestionState"
@@ -1949,7 +1949,7 @@ components:
           format: int32
           type: integer
         segmentId:
-          description: The ID of the header, footer or footnote that this range is contained in. An empty segment ID signifies the document's body.
+          description: The ID of the header, footer, or footnote that this range is contained in. An empty segment ID signifies the document's body.
           type: string
         startIndex:
           description: The zero-based start index of this range, in UTF-16 code units. In all current uses, a start index must be provided. This field is an Int32Value in order to accommodate future use cases with open-ended ranges.
@@ -2148,7 +2148,7 @@ components:
           type: number
       type: object
     RichLink:
-      description: A link to a Google resource (e.g., a file in Drive, a YouTube video, a Calendar event, etc.).
+      description: A link to a Google resource (such as a file in Drive, a YouTube video, or a Calendar event).
       properties:
         richLinkId:
           description: Output only. The ID of this link.
@@ -2159,12 +2159,12 @@ components:
           description: Output only. The properties of this RichLink. This field is always present.
           readOnly: true
         suggestedDeletionIds:
-          description: IDs for suggestions that remove this link from the document. A RichLink might have multiple deletion IDs if, for example, multiple users suggest to delete it. If empty, then this person link isn't suggested for deletion.
+          description: IDs for suggestions that remove this link from the document. A RichLink might have multiple deletion IDs if, for example, multiple users suggest deleting it. If empty, then this person link isn't suggested for deletion.
           items:
             type: string
           type: array
         suggestedInsertionIds:
-          description: IDs for suggestions that insert this link into the document. A RichLink might have multiple insertion IDs if it is a nested suggested change (a suggestion within a suggestion made by a different user, for example). If empty, then this person link isn't a suggested insertion.
+          description: IDs for suggestions that insert this link into the document. A RichLink might have multiple insertion IDs if it's a nested suggested change (a suggestion within a suggestion made by a different user, for example). If empty, then this person link isn't a suggested insertion.
           items:
             type: string
           type: array
@@ -2181,7 +2181,7 @@ components:
       description: Properties specific to a RichLink.
       properties:
         mimeType:
-          description: Output only. The [MIME type](https://developers.google.com/drive/api/v3/mime-types) of the RichLink, if there is one (i.e., when it is a file in Drive).
+          description: Output only. The [MIME type](https://developers.google.com/drive/api/v3/mime-types) of the RichLink, if there's one (for example, when it's a file in Drive).
           readOnly: true
           type: string
         title:
@@ -2194,7 +2194,7 @@ components:
           type: string
       type: object
     SectionBreak:
-      description: A StructuralElement representing a section break. A section is a range of content which has the same SectionStyle. A section break represents the start of a new section, and the section style applies to the section after the section break. The document body always begins with a section break.
+      description: A StructuralElement representing a section break. A section is a range of content that has the same SectionStyle. A section break represents the start of a new section, and the section style applies to the section after the section break. The document body always begins with a section break.
       properties:
         sectionStyle:
           $ref: "#/components/schemas/SectionStyle"
@@ -2205,7 +2205,7 @@ components:
             type: string
           type: array
         suggestedInsertionIds:
-          description: The suggested insertion IDs. A SectionBreak may have multiple insertion IDs if it is a nested suggested change. If empty, then this is not a suggested insertion.
+          description: The suggested insertion IDs. A SectionBreak may have multiple insertion IDs if it's a nested suggested change. If empty, then this is not a suggested insertion.
           items:
             type: string
           type: array
@@ -2224,12 +2224,12 @@ components:
       description: The styling that applies to a section.
       properties:
         columnProperties:
-          description: The section's columns properties. If empty, the section contains one column with the default properties in the Docs editor. A section can be updated to have no more than three columns. When updating this property, setting a concrete value is required. Unsetting this property will result in a 400 bad request error.
+          description: The section's columns properties. If empty, the section contains one column with the default properties in the Docs editor. A section can be updated to have no more than 3 columns. When updating this property, setting a concrete value is required. Unsetting this property will result in a 400 bad request error.
           items:
             $ref: "#/components/schemas/SectionColumnProperties"
           type: array
         columnSeparatorStyle:
-          description: The style of column separators. This style can be set even when there is one column in the section. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
+          description: The style of column separators. This style can be set even when there's one column in the section. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
           enum:
             - COLUMN_SEPARATOR_STYLE_UNSPECIFIED
             - NONE
@@ -2249,35 +2249,35 @@ components:
           description: The ID of the default header. If unset, the value inherits from the previous SectionBreak's SectionStyle. If the value is unset in the first SectionBreak, it inherits from DocumentStyle's default_header_id. This property is read-only.
           type: string
         evenPageFooterId:
-          description: The ID of the footer used only for even pages. If the value of DocumentStyle's use_even_page_header_footer is true, this value is used for the footers on even pages in the section. If it is false, the footers on even pages uses the default_footer_id. If unset, the value inherits from the previous SectionBreak's SectionStyle. If the value is unset in the first SectionBreak, it inherits from DocumentStyle's even_page_footer_id. This property is read-only.
+          description: The ID of the footer used only for even pages. If the value of DocumentStyle's use_even_page_header_footer is true, this value is used for the footers on even pages in the section. If it is false, the footers on even pages use the default_footer_id. If unset, the value inherits from the previous SectionBreak's SectionStyle. If the value is unset in the first SectionBreak, it inherits from DocumentStyle's even_page_footer_id. This property is read-only.
           type: string
         evenPageHeaderId:
-          description: The ID of the header used only for even pages. If the value of DocumentStyle's use_even_page_header_footer is true, this value is used for the headers on even pages in the section. If it is false, the headers on even pages uses the default_header_id. If unset, the value inherits from the previous SectionBreak's SectionStyle. If the value is unset in the first SectionBreak, it inherits from DocumentStyle's even_page_header_id. This property is read-only.
+          description: The ID of the header used only for even pages. If the value of DocumentStyle's use_even_page_header_footer is true, this value is used for the headers on even pages in the section. If it is false, the headers on even pages use the default_header_id. If unset, the value inherits from the previous SectionBreak's SectionStyle. If the value is unset in the first SectionBreak, it inherits from DocumentStyle's even_page_header_id. This property is read-only.
           type: string
         firstPageFooterId:
-          description: The ID of the footer used only for the first page of the section. If use_first_page_header_footer is true, this value is used for the footer on the first page of the section. If it is false, the footer on the first page of the section uses the default_footer_id. If unset, the value inherits from the previous SectionBreak's SectionStyle. If the value is unset in the first SectionBreak, it inherits from DocumentStyle's first_page_footer_id. This property is read-only.
+          description: The ID of the footer used only for the first page of the section. If use_first_page_header_footer is true, this value is used for the footer on the first page of the section. If it's false, the footer on the first page of the section uses the default_footer_id. If unset, the value inherits from the previous SectionBreak's SectionStyle. If the value is unset in the first SectionBreak, it inherits from DocumentStyle's first_page_footer_id. This property is read-only.
           type: string
         firstPageHeaderId:
-          description: The ID of the header used only for the first page of the section. If use_first_page_header_footer is true, this value is used for the header on the first page of the section. If it is false, the header on the first page of the section uses the default_header_id. If unset, the value inherits from the previous SectionBreak's SectionStyle. If the value is unset in the first SectionBreak, it inherits from DocumentStyle's first_page_header_id. This property is read-only.
+          description: The ID of the header used only for the first page of the section. If use_first_page_header_footer is true, this value is used for the header on the first page of the section. If it's false, the header on the first page of the section uses the default_header_id. If unset, the value inherits from the previous SectionBreak's SectionStyle. If the value is unset in the first SectionBreak, it inherits from DocumentStyle's first_page_header_id. This property is read-only.
           type: string
         marginBottom:
           $ref: "#/components/schemas/Dimension"
-          description: The bottom page margin of the section. If unset, uses margin_bottom from DocumentStyle. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
+          description: The bottom page margin of the section. If unset, the value defaults to margin_bottom from DocumentStyle. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
         marginFooter:
           $ref: "#/components/schemas/Dimension"
-          description: The footer margin of the section. If unset, uses margin_footer from DocumentStyle. If updated, use_custom_header_footer_margins is set to true on DocumentStyle. The value of use_custom_header_footer_margins on DocumentStyle indicates if a footer margin is being respected for this section When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
+          description: The footer margin of the section. If unset, the value defaults to margin_footer from DocumentStyle. If updated, use_custom_header_footer_margins is set to true on DocumentStyle. The value of use_custom_header_footer_margins on DocumentStyle indicates if a footer margin is being respected for this section When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
         marginHeader:
           $ref: "#/components/schemas/Dimension"
-          description: The header margin of the section. If unset, uses margin_header from DocumentStyle. If updated, use_custom_header_footer_margins is set to true on DocumentStyle. The value of use_custom_header_footer_margins on DocumentStyle indicates if a header margin is being respected for this section. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
+          description: The header margin of the section. If unset, the value defaults to margin_header from DocumentStyle. If updated, use_custom_header_footer_margins is set to true on DocumentStyle. The value of use_custom_header_footer_margins on DocumentStyle indicates if a header margin is being respected for this section. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
         marginLeft:
           $ref: "#/components/schemas/Dimension"
-          description: The left page margin of the section. If unset, uses margin_left from DocumentStyle. Updating left margin causes columns in this section to resize. Since the margin affects column width, it is applied before column properties. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
+          description: The left page margin of the section. If unset, the value defaults to margin_left from DocumentStyle. Updating the left margin causes columns in this section to resize. Since the margin affects column width, it's applied before column properties. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
         marginRight:
           $ref: "#/components/schemas/Dimension"
-          description: The right page margin of the section. If unset, uses margin_right from DocumentStyle. Updating right margin causes columns in this section to resize. Since the margin affects column width, it is applied before column properties. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
+          description: The right page margin of the section. If unset, the value defaults to margin_right from DocumentStyle. Updating the right margin causes columns in this section to resize. Since the margin affects column width, it's applied before column properties. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
         marginTop:
           $ref: "#/components/schemas/Dimension"
-          description: The top page margin of the section. If unset, uses margin_top from DocumentStyle. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
+          description: The top page margin of the section. If unset, the value defaults to margin_top from DocumentStyle. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
         pageNumberStart:
           description: The page number from which to start counting the number of pages for this section. If unset, page numbering continues from the previous section. If the value is unset in the first SectionBreak, refer to DocumentStyle's page_number_start. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
           format: int32
@@ -2301,7 +2301,7 @@ components:
           description: The background color of this paragraph shading.
       type: object
     ShadingSuggestionState:
-      description: A mask that indicates which of the fields on the base Shading have been changed in this suggested change. For any field set to true, there is a new suggested value.
+      description: A mask that indicates which of the fields on the base Shading have been changed in this suggested change. For any field set to true, there's a new suggested value.
       properties:
         backgroundColorSuggested:
           description: Indicates if there was a suggested change to the Shading.
@@ -2311,7 +2311,7 @@ components:
       description: A reference to a linked chart embedded from Google Sheets.
       properties:
         chartId:
-          description: The ID of the specific chart in the Google Sheets spreadsheet that is embedded.
+          description: The ID of the specific chart in the Google Sheets spreadsheet that's embedded.
           format: int32
           type: integer
         spreadsheetId:
@@ -2319,7 +2319,7 @@ components:
           type: string
       type: object
     SheetsChartReferenceSuggestionState:
-      description: A mask that indicates which of the fields on the base SheetsChartReference have been changed in this suggestion. For any field set to true, there is a new suggested value.
+      description: A mask that indicates which of the fields on the base SheetsChartReference have been changed in this suggestion. For any field set to true, there's a new suggested value.
       properties:
         chartIdSuggested:
           description: Indicates if there was a suggested change to chart_id.
@@ -2501,7 +2501,7 @@ components:
       description: A StructuralElement representing a table.
       properties:
         columns:
-          description: Number of columns in the table. It is possible for a table to be non-rectangular, so some rows may have a different number of cells.
+          description: Number of columns in the table. It's possible for a table to be non-rectangular, so some rows may have a different number of cells.
           format: int32
           type: integer
         rows:
@@ -2514,7 +2514,7 @@ components:
             type: string
           type: array
         suggestedInsertionIds:
-          description: The suggested insertion IDs. A Table may have multiple insertion IDs if it is a nested suggested change. If empty, then this is not a suggested insertion.
+          description: The suggested insertion IDs. A Table may have multiple insertion IDs if it's a nested suggested change. If empty, then this is not a suggested insertion.
           items:
             type: string
           type: array
@@ -2549,7 +2549,7 @@ components:
             type: string
           type: array
         suggestedInsertionIds:
-          description: The suggested insertion IDs. A TableCell may have multiple insertion IDs if it is a nested suggested change. If empty, then this is not a suggested insertion.
+          description: The suggested insertion IDs. A TableCell may have multiple insertion IDs if it's a nested suggested change. If empty, then this is not a suggested insertion.
           items:
             type: string
           type: array
@@ -2644,7 +2644,7 @@ components:
           type: integer
       type: object
     TableCellStyleSuggestionState:
-      description: A mask that indicates which of the fields on the base TableCellStyle have been changed in this suggestion. For any field set to true, there is a new suggested value.
+      description: A mask that indicates which of the fields on the base TableCellStyle have been changed in this suggestion. For any field set to true, there's a new suggested value.
       properties:
         backgroundColorSuggested:
           description: Indicates if there was a suggested change to background_color.
@@ -2748,7 +2748,7 @@ components:
             type: string
           type: array
         suggestedInsertionIds:
-          description: The suggested insertion IDs. A TableRow may have multiple insertion IDs if it is a nested suggested change. If empty, then this is not a suggested insertion.
+          description: The suggested insertion IDs. A TableRow may have multiple insertion IDs if it's a nested suggested change. If empty, then this is not a suggested insertion.
           items:
             type: string
           type: array
@@ -2758,7 +2758,7 @@ components:
           description: The suggested style changes to this row, keyed by suggestion ID.
           type: object
         tableCells:
-          description: The contents and style of each cell in this row. It is possible for a table to be non-rectangular, so some rows may have a different number of cells than other rows in the same table.
+          description: The contents and style of each cell in this row. It's possible for a table to be non-rectangular, so some rows may have a different number of cells than other rows in the same table.
           items:
             $ref: "#/components/schemas/TableCell"
           type: array
@@ -2780,7 +2780,7 @@ components:
           type: boolean
       type: object
     TableRowStyleSuggestionState:
-      description: A mask that indicates which of the fields on the base TableRowStyle have been changed in this suggestion. For any field set to true, there is a new suggested value.
+      description: A mask that indicates which of the fields on the base TableRowStyle have been changed in this suggestion. For any field set to true, there's a new suggested value.
       properties:
         minRowHeightSuggested:
           description: Indicates if there was a suggested change to min_row_height.
@@ -2807,7 +2807,7 @@ components:
             type: string
           type: array
         suggestedInsertionIds:
-          description: The suggested insertion IDs. A TextRun may have multiple insertion IDs if it is a nested suggested change. If empty, then this is not a suggested insertion.
+          description: The suggested insertion IDs. A TextRun may have multiple insertion IDs if it's a nested suggested change. If empty, then this is not a suggested insertion.
           items:
             type: string
           type: array
@@ -2821,13 +2821,13 @@ components:
           description: The text style of this run.
       type: object
     TextStyle:
-      description: "Represents the styling that can be applied to text. Inherited text styles are represented as unset fields in this message. A text style's parent depends on where the text style is defined: * The TextStyle of text in a Paragraph inherits from the paragraph's corresponding named style type. * The TextStyle on a named style inherits from the normal text named style. * The TextStyle of the normal text named style inherits from the default text style in the Docs editor. * The TextStyle on a Paragraph element that is contained in a table may inherit its text style from the table style. If the text style does not inherit from a parent, unsetting fields will revert the style to a value matching the defaults in the Docs editor."
+      description: "Represents the styling that can be applied to text. Inherited text styles are represented as unset fields in this message. A text style's parent depends on where the text style is defined: * The TextStyle of text in a Paragraph inherits from the paragraph's corresponding named style type. * The TextStyle on a named style inherits from the normal text named style. * The TextStyle of the normal text named style inherits from the default text style in the Docs editor. * The TextStyle on a Paragraph element that's contained in a table may inherit its text style from the table style. If the text style does not inherit from a parent, unsetting fields will revert the style to a value matching the defaults in the Docs editor."
       properties:
         backgroundColor:
           $ref: "#/components/schemas/OptionalColor"
           description: The background color of the text. If set, the color is either an RGB color or transparent, depending on the `color` field.
         baselineOffset:
-          description: The text's vertical offset from its normal position. Text with `SUPERSCRIPT` or `SUBSCRIPT` baseline offsets is automatically rendered in a smaller font size, computed based on the `font_size` field. The `font_size` itself is not affected by changes in this field.
+          description: The text's vertical offset from its normal position. Text with `SUPERSCRIPT` or `SUBSCRIPT` baseline offsets is automatically rendered in a smaller font size, computed based on the `font_size` field. Changes in this field don't affect the `font_size`.
           enum:
             - BASELINE_OFFSET_UNSPECIFIED
             - NONE
@@ -2848,7 +2848,7 @@ components:
           type: boolean
         link:
           $ref: "#/components/schemas/Link"
-          description: 'The hyperlink destination of the text. If unset, there is no link. Links are not inherited from parent text. Changing the link in an update request causes some other changes to the text style of the range: * When setting a link, the text foreground color will be updated to the default link color and the text will be underlined. If these fields are modified in the same request, those values will be used instead of the link defaults. * Setting a link on a text range that overlaps with an existing link will also update the existing link to point to the new URL. * Links are not settable on newline characters. As a result, setting a link on a text range that crosses a paragraph boundary, such as `"ABC\n123"`, will separate the newline character(s) into their own text runs. The link will be applied separately to the runs before and after the newline. * Removing a link will update the text style of the range to match the style of the preceding text (or the default text styles if the preceding text is another link) unless different styles are being set in the same request.'
+          description: "The hyperlink destination of the text. If unset, there's no link. Links are not inherited from parent text. Changing the link in an update request causes some other changes to the text style of the range: * When setting a link, the text foreground color will be updated to the default link color and the text will be underlined. If these fields are modified in the same request, those values will be used instead of the link defaults. * Setting a link on a text range that overlaps with an existing link will also update the existing link to point to the new URL. * Links are not settable on newline characters. As a result, setting a link on a text range that crosses a paragraph boundary, such as `\"ABC\\n123\"`, will separate the newline character(s) into their own text runs. The link will be applied separately to the runs before and after the newline. * Removing a link will update the text style of the range to match the style of the preceding text (or the default text styles if the preceding text is another link) unless different styles are being set in the same request."
         smallCaps:
           description: Whether or not the text is in small capital letters.
           type: boolean
@@ -2863,7 +2863,7 @@ components:
           description: The font family and rendered weight of the text. If an update request specifies values for both `weighted_font_family` and `bold`, the `weighted_font_family` is applied first, then `bold`. If `weighted_font_family#weight` is not set, it defaults to `400`. If `weighted_font_family` is set, then `weighted_font_family#font_family` must also be set with a non-empty value. Otherwise, a 400 bad request error is returned.
       type: object
     TextStyleSuggestionState:
-      description: A mask that indicates which of the fields on the base TextStyle have been changed in this suggestion. For any field set to true, there is a new suggested value.
+      description: A mask that indicates which of the fields on the base TextStyle have been changed in this suggestion. For any field set to true, there's a new suggested value.
       properties:
         backgroundColorSuggested:
           description: Indicates if there was a suggested change to background_color.
@@ -3023,7 +3023,7 @@ components:
           description: The font family of the text. The font family can be any font from the Font menu in Docs or from [Google Fonts] (https://fonts.google.com/). If the font name is unrecognized, the text is rendered in `Arial`.
           type: string
         weight:
-          description: "The weight of the font. This field can have any value that is a multiple of `100` between `100` and `900`, inclusive. This range corresponds to the numerical values described in the CSS 2.1 Specification, [section 15.6](https://www.w3.org/TR/CSS21/fonts.html#font-boldness), with non-numerical values disallowed. The default value is `400` (\"normal\"). The font weight makes up just one component of the rendered font weight. The rendered weight is determined by a combination of the `weight` and the text style's resolved `bold` value, after accounting for inheritance: * If the text is bold and the weight is less than `400`, the rendered weight is 400. * If the text is bold and the weight is greater than or equal to `400` but is less than `700`, the rendered weight is `700`. * If the weight is greater than or equal to `700`, the rendered weight is equal to the weight. * If the text is not bold, the rendered weight is equal to the weight."
+          description: "The weight of the font. This field can have any value that's a multiple of `100` between `100` and `900`, inclusive. This range corresponds to the numerical values described in the CSS 2.1 Specification, [section 15.6](https://www.w3.org/TR/CSS21/fonts.html#font-boldness), with non-numerical values disallowed. The default value is `400` (\"normal\"). The font weight makes up just one component of the rendered font weight. A combination of the `weight` and the text style's resolved `bold` value determine the rendered weight, after accounting for inheritance: * If the text is bold and the weight is less than `400`, the rendered weight is 400. * If the text is bold and the weight is greater than or equal to `400` but is less than `700`, the rendered weight is `700`. * If the weight is greater than or equal to `700`, the rendered weight is equal to the weight. * If the text is not bold, the rendered weight is equal to the weight."
           format: int32
           type: integer
       type: object

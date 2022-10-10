@@ -280,6 +280,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{name}:diagnose":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a Diagnostic File and runs Diagnostic Tool given a Runtime.
+      operationId: notebooks.projects.locations.runtimes.diagnose
+      parameters:
+        - description: "Required. Format: `projects/{project_id}/locations/{location}/runtimes/{runtimes_id}`"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DiagnoseRuntimeRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{name}:getInstanceHealth":
     get:
       description: Check if a notebook instance is healthy.
@@ -961,10 +1003,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Upgrades a notebook instance to the latest version.
-      operationId: notebooks.projects.locations.instances.upgrade
+      description: Upgrades a Managed Notebook Runtime to the latest version.
+      operationId: notebooks.projects.locations.runtimes.upgrade
       parameters:
-        - description: "Required. Format: `projects/{project_id}/locations/{location}/instances/{instance_id}`"
+        - description: "Required. Format: `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`"
           in: path
           name: name
           required: true
@@ -974,7 +1016,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpgradeInstanceRequest"
+              $ref: "#/components/schemas/UpgradeRuntimeRequest"
       responses:
         "200":
           content:
@@ -1816,6 +1858,39 @@ components:
         cluster:
           description: "URI for cluster used to run Dataproc execution. Format: `projects/{PROJECT_ID}/regions/{REGION}/clusters/{CLUSTER_NAME}`"
           type: string
+      type: object
+    DiagnoseInstanceRequest:
+      description: Request for creating a notebook instance diagnostic file.
+      properties:
+        diagnosticConfig:
+          $ref: "#/components/schemas/DiagnosticConfig"
+          description: Required. Defines flags that are used to run the diagnostic tool
+      type: object
+    DiagnoseRuntimeRequest:
+      description: Request for creating a notebook instance diagnostic file.
+      properties:
+        diagnosticConfig:
+          $ref: "#/components/schemas/DiagnosticConfig"
+          description: Required. Defines flags that are used to run the diagnostic tool
+      type: object
+    DiagnosticConfig:
+      description: Defines flags that are used to run the diagnostic tool
+      properties:
+        copyHomeFilesFlagEnabled:
+          description: Optional. Enables flag to copy all `/home/jupyter` folder contents
+          type: boolean
+        gcsBucket:
+          description: "Required. User Cloud Storage bucket location (REQUIRED) ## Must be formatted with path prefix (gs://$GCS_BUCKET) Permissions: User Managed Notebooks: - storage.buckets.writer: Must be given to the project's service account attached to VM. Google Managed Notebooks: - storage.buckets.writer: Must be given to the project's service account or ## user credentials attached to VM depending on authentication mode. Cloud Storage bucket Log file will be written to gs://$GCS_BUCKET/$RELATIVE_PATH/$VM_DATE_$TIME.tar.gz"
+          type: string
+        packetCaptureFlagEnabled:
+          description: Optional. Enables flag to capture packets from the instance for 30 seconds
+          type: boolean
+        relativePath:
+          description: "Optional. Defines the relative storage path in the Cloud Storage bucket where the diagnostic logs will be written: Default path will be the root directory of the Cloud Storage bucket (gs://$GCS_BUCKET/$DATE_$TIME.tar.gz) Example of full path where Log file will be written: gs://$GCS_BUCKET/$RELATIVE_PATH/"
+          type: string
+        repairFlagEnabled:
+          description: Optional. Enables flag to repair service for instance
+          type: boolean
       type: object
     Disk:
       description: An instance-attached disk resource.
@@ -3125,6 +3200,13 @@ components:
             - UPGRADE_OS
             - UPGRADE_CUDA
             - UPGRADE_ALL
+          type: string
+      type: object
+    UpgradeRuntimeRequest:
+      description: Request for upgrading a Managed Notebook Runtime to the latest version. option (google.api.message_visibility).restriction = "TRUSTED_TESTER,SPECIAL_TESTER";
+      properties:
+        requestId:
+          description: Idempotent request UUID.
           type: string
       type: object
     VertexAIParameters:
