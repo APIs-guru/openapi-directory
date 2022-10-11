@@ -52,10 +52,6 @@ paths:
             - https://www.googleapis.com/auth/sdm.service
           Oauth2c:
             - https://www.googleapis.com/auth/sdm.service
-        - Oauth2:
-            - https://www.googleapis.com/auth/sdm.thermostat.service
-          Oauth2c:
-            - https://www.googleapis.com/auth/sdm.thermostat.service
       tags:
         - enterprises
     parameters:
@@ -110,10 +106,6 @@ paths:
             - https://www.googleapis.com/auth/sdm.service
           Oauth2c:
             - https://www.googleapis.com/auth/sdm.service
-        - Oauth2:
-            - https://www.googleapis.com/auth/sdm.thermostat.service
-          Oauth2c:
-            - https://www.googleapis.com/auth/sdm.thermostat.service
       tags:
         - enterprises
   "/v1/{parent}/devices":
@@ -154,10 +146,6 @@ paths:
             - https://www.googleapis.com/auth/sdm.service
           Oauth2c:
             - https://www.googleapis.com/auth/sdm.service
-        - Oauth2:
-            - https://www.googleapis.com/auth/sdm.thermostat.service
-          Oauth2c:
-            - https://www.googleapis.com/auth/sdm.thermostat.service
       tags:
         - enterprises
     parameters:
@@ -205,10 +193,6 @@ paths:
             - https://www.googleapis.com/auth/sdm.service
           Oauth2c:
             - https://www.googleapis.com/auth/sdm.service
-        - Oauth2:
-            - https://www.googleapis.com/auth/sdm.thermostat.service
-          Oauth2c:
-            - https://www.googleapis.com/auth/sdm.thermostat.service
       tags:
         - enterprises
     parameters:
@@ -261,10 +245,6 @@ paths:
             - https://www.googleapis.com/auth/sdm.service
           Oauth2c:
             - https://www.googleapis.com/auth/sdm.service
-        - Oauth2:
-            - https://www.googleapis.com/auth/sdm.thermostat.service
-          Oauth2c:
-            - https://www.googleapis.com/auth/sdm.thermostat.service
       tags:
         - enterprises
     parameters:
@@ -480,7 +460,6 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/sdm.service: See and/or control the devices that you selected
-            https://www.googleapis.com/auth/sdm.thermostat.service: See and control the Nest thermostats that you select
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -489,6 +468,5 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/sdm.service: See and/or control the devices that you selected
-            https://www.googleapis.com/auth/sdm.thermostat.service: See and control the Nest thermostats that you select
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

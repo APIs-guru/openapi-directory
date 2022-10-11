@@ -1531,6 +1531,9 @@ components:
         etag:
           description: Checksum provided in the AndroidApp entity, which if provided ensures the client has an up-to-date value before proceeding.
           type: string
+        immediate:
+          description: Determines whether to _immediately_ delete the App. If set to true, the App is immediately deleted from the Project and cannot be restored to the Project. If not set, defaults to false, which means that the App may be restored to the Project within 30 days using UndeleteAndroidApp.
+          type: boolean
         validateOnly:
           description: If set to true, the request is only validated. The App will _not_ be removed.
           type: boolean
@@ -1543,6 +1546,9 @@ components:
         etag:
           description: Checksum provided in the IosApp entity, which if provided ensures the client has an up-to-date value before proceeding.
           type: string
+        immediate:
+          description: Determines whether to _immediately_ delete the App. If set to true, the App is immediately deleted from the Project and cannot be restored to the Project. If not set, defaults to false, which means that the App may be restored to the Project within 30 days using UndeleteIosApp
+          type: boolean
         validateOnly:
           description: If set to true, the request is only validated. The App will _not_ be removed.
           type: boolean
@@ -1555,6 +1561,9 @@ components:
         etag:
           description: Checksum provided in the WebApp entity, which if provided ensures the client has an up-to-date value before proceeding.
           type: string
+        immediate:
+          description: Determines whether to _immediately_ delete the App. If set to true, the App is immediately deleted from the Project and cannot be restored to the Project. If not set, defaults to false, which means that the App may be restored to the Project within 30 days using UndeleteWebApp
+          type: boolean
         validateOnly:
           description: If set to true, the request is only validated. The App will _not_ be removed.
           type: boolean
