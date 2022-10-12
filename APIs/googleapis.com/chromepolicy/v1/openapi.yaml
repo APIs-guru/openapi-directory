@@ -99,7 +99,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleChromePolicyV1BatchDeleteGroupPoliciesRequest"
+              $ref: "#/components/schemas/GoogleChromePolicyVersionsV1BatchDeleteGroupPoliciesRequest"
       responses:
         "200":
           content:
@@ -141,7 +141,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleChromePolicyV1BatchModifyGroupPoliciesRequest"
+              $ref: "#/components/schemas/GoogleChromePolicyVersionsV1BatchModifyGroupPoliciesRequest"
       responses:
         "200":
           content:
@@ -183,13 +183,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleChromePolicyV1ListGroupPriorityOrderingRequest"
+              $ref: "#/components/schemas/GoogleChromePolicyVersionsV1ListGroupPriorityOrderingRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleChromePolicyV1ListGroupPriorityOrderingResponse"
+                $ref: "#/components/schemas/GoogleChromePolicyVersionsV1ListGroupPriorityOrderingResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -229,7 +229,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleChromePolicyV1UpdateGroupPriorityOrderingRequest"
+              $ref: "#/components/schemas/GoogleChromePolicyVersionsV1UpdateGroupPriorityOrderingRequest"
       responses:
         "200":
           content:
@@ -439,7 +439,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleChromePolicyV1BatchInheritOrgUnitPoliciesRequest"
+              $ref: "#/components/schemas/GoogleChromePolicyVersionsV1BatchInheritOrgUnitPoliciesRequest"
       responses:
         "200":
           content:
@@ -481,7 +481,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleChromePolicyV1BatchModifyOrgUnitPoliciesRequest"
+              $ref: "#/components/schemas/GoogleChromePolicyVersionsV1BatchModifyOrgUnitPoliciesRequest"
       responses:
         "200":
           content:
@@ -523,13 +523,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleChromePolicyV1ResolveRequest"
+              $ref: "#/components/schemas/GoogleChromePolicyVersionsV1ResolveRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleChromePolicyV1ResolveResponse"
+                $ref: "#/components/schemas/GoogleChromePolicyVersionsV1ResolveResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -733,42 +733,6 @@ components:
             - API_DEPRECATED
           type: string
       type: object
-    GoogleChromePolicyV1BatchDeleteGroupPoliciesRequest:
-      description: Request message for specifying that multiple policy values will be deleted.
-      properties:
-        requests:
-          description: "List of policies that will be deleted as defined by the `requests`. All requests in the list must follow these restrictions: 1. All schemas in the list must have the same root namespace. 2. All `policyTargetKey.targetResource` values must point to a group resource. 3. All `policyTargetKey` values must have the same `app_id` key name in the `additionalTargetKeys`. 4. No two modification requests can reference the same `policySchema` + ` policyTargetKey` pair. "
-          items:
-            $ref: "#/components/schemas/GoogleChromePolicyV1DeleteGroupPolicyRequest"
-          type: array
-      type: object
-    GoogleChromePolicyV1BatchInheritOrgUnitPoliciesRequest:
-      description: Request message for specifying that multiple policy values inherit their value from their parents.
-      properties:
-        requests:
-          description: "List of policies that have to inherit their values as defined by the `requests`. All requests in the list must follow these restrictions: 1. All schemas in the list must have the same root namespace. 2. All `policyTargetKey.targetResource` values must point to an org unit resource. 3. All `policyTargetKey` values must have the same key names in the ` additionalTargetKeys`. This also means if one of the targets has an empty `additionalTargetKeys` map, all of the targets must have an empty `additionalTargetKeys` map. 4. No two modification requests can reference the same `policySchema` + ` policyTargetKey` pair. "
-          items:
-            $ref: "#/components/schemas/GoogleChromePolicyV1InheritOrgUnitPolicyRequest"
-          type: array
-      type: object
-    GoogleChromePolicyV1BatchModifyGroupPoliciesRequest:
-      description: Request message for modifying multiple policy values for a specific group-based target.
-      properties:
-        requests:
-          description: "List of policies to modify as defined by the `requests`. All requests in the list must follow these restrictions: 1. All schemas in the list must have the same root namespace. 2. All `policyTargetKey.targetResource` values must point to a group resource. 3. All `policyTargetKey` values must have the same `app_id` key name in the `additionalTargetKeys`. 4. No two modification requests can reference the same `policySchema` + ` policyTargetKey` pair. "
-          items:
-            $ref: "#/components/schemas/GoogleChromePolicyV1ModifyGroupPolicyRequest"
-          type: array
-      type: object
-    GoogleChromePolicyV1BatchModifyOrgUnitPoliciesRequest:
-      description: Request message for modifying multiple policy values for a specific target.
-      properties:
-        requests:
-          description: "List of policies to modify as defined by the `requests`. All requests in the list must follow these restrictions: 1. All schemas in the list must have the same root namespace. 2. All `policyTargetKey.targetResource` values must point to an org unit resource. 3. All `policyTargetKey` values must have the same key names in the ` additionalTargetKeys`. This also means if one of the targets has an empty `additionalTargetKeys` map, all of the targets must have an empty `additionalTargetKeys` map. 4. No two modification requests can reference the same `policySchema` + ` policyTargetKey` pair. "
-          items:
-            $ref: "#/components/schemas/GoogleChromePolicyV1ModifyOrgUnitPolicyRequest"
-          type: array
-      type: object
     GoogleChromePolicyV1DefineCertificateRequest:
       description: Request object for creating a certificate.
       properties:
@@ -832,82 +796,6 @@ components:
           description: 'The target resource on which this new network will be defined. The following resources are supported: * Organizational Unit ("orgunits/{orgunit_id}")'
           type: string
       type: object
-    GoogleChromePolicyV1DeleteGroupPolicyRequest:
-      description: Request parameters for deleting the policy value of a specific group target.
-      properties:
-        policySchema:
-          description: The fully qualified name of the policy schema that is being inherited.
-          type: string
-        policyTargetKey:
-          $ref: "#/components/schemas/GoogleChromePolicyV1PolicyTargetKey"
-          description: Required. The key of the target for which we want to modify a policy. The target resource must point to a Group.
-      type: object
-    GoogleChromePolicyV1InheritOrgUnitPolicyRequest:
-      description: Request parameters for inheriting policy value of a specific org unit target from the policy value of its parent org unit.
-      properties:
-        policySchema:
-          description: The fully qualified name of the policy schema that is being inherited.
-          type: string
-        policyTargetKey:
-          $ref: "#/components/schemas/GoogleChromePolicyV1PolicyTargetKey"
-          description: Required. The key of the target for which we want to modify a policy. The target resource must point to an Org Unit.
-      type: object
-    GoogleChromePolicyV1ListGroupPriorityOrderingRequest:
-      description: Request message for listing the group priority ordering of an app.
-      properties:
-        policyNamespace:
-          description: Required. The namespace of the policy type for the request.
-          type: string
-        policyTargetKey:
-          $ref: "#/components/schemas/GoogleChromePolicyV1PolicyTargetKey"
-          description: Required. The key of the target for which we want to retrieve the group priority ordering. The target resource must point to an app.
-      type: object
-    GoogleChromePolicyV1ListGroupPriorityOrderingResponse:
-      description: Response message for listing the group priority ordering of an app.
-      properties:
-        groupIds:
-          description: Output only. The group IDs, in priority ordering.
-          items:
-            type: string
-          readOnly: true
-          type: array
-        policyNamespace:
-          description: Output only. The namespace of the policy type of the group IDs.
-          readOnly: true
-          type: string
-        policyTargetKey:
-          $ref: "#/components/schemas/GoogleChromePolicyV1PolicyTargetKey"
-          description: Output only. The target resource for which the group priority ordering has been retrieved.
-          readOnly: true
-      type: object
-    GoogleChromePolicyV1ModifyGroupPolicyRequest:
-      description: Request parameters for modifying a policy value for a specific group target.
-      properties:
-        policyTargetKey:
-          $ref: "#/components/schemas/GoogleChromePolicyV1PolicyTargetKey"
-          description: Required. The key of the target for which we want to modify a policy. The target resource must point to a Group.
-        policyValue:
-          $ref: "#/components/schemas/GoogleChromePolicyV1PolicyValue"
-          description: The new value for the policy.
-        updateMask:
-          description: Required. Policy fields to update. Only fields in this mask will be updated; other fields in `policy_value` will be ignored (even if they have values). If a field is in this list it must have a value in 'policy_value'.
-          format: google-fieldmask
-          type: string
-      type: object
-    GoogleChromePolicyV1ModifyOrgUnitPolicyRequest:
-      description: Request parameters for modifying a policy value for a specific org unit target.
-      properties:
-        policyTargetKey:
-          $ref: "#/components/schemas/GoogleChromePolicyV1PolicyTargetKey"
-          description: Required. The key of the target for which we want to modify a policy. The target resource must point to an Org Unit.
-        policyValue:
-          $ref: "#/components/schemas/GoogleChromePolicyV1PolicyValue"
-          description: The new value for the policy.
-        updateMask:
-          description: Required. Policy fields to update. Only fields in this mask will be updated; other fields in `policy_value` will be ignored (even if they have values). If a field is in this list it must have a value in 'policy_value'.
-          format: google-fieldmask
-          type: string
-      type: object
     GoogleChromePolicyV1NetworkSetting:
       description: A network setting contains network configurations.
       properties:
@@ -918,42 +806,6 @@ components:
           additionalProperties:
             description: Properties of the object.
           description: The value of the network setting.
-          type: object
-      type: object
-    GoogleChromePolicyV1PolicyModificationFieldError:
-      description: Error information for a modification request of a specific field on a specific policy.
-      properties:
-        error:
-          description: Output only. The error message related to the field.
-          readOnly: true
-          type: string
-        field:
-          description: Output only. The name of the field with the error.
-          readOnly: true
-          type: string
-      type: object
-    GoogleChromePolicyV1PolicyTargetKey:
-      description: The key used to identify the target on which the policy will be applied.
-      properties:
-        additionalTargetKeys:
-          additionalProperties:
-            type: string
-          description: Map containing the additional target key name and value pairs used to further identify the target of the policy.
-          type: object
-        targetResource:
-          description: 'The target resource on which this policy is applied. The following resources are supported: * Organizational Unit ("orgunits/{orgunit_id}") * Group ("groups/{group_id}")'
-          type: string
-      type: object
-    GoogleChromePolicyV1PolicyValue:
-      description: A particular value for a policy managed by the service.
-      properties:
-        policySchema:
-          description: The fully qualified name of the policy schema associated with this policy.
-          type: string
-        value:
-          additionalProperties:
-            description: Properties of the object.
-          description: The value of the policy that is compatible with the schema that it is associated with.
           type: object
       type: object
     GoogleChromePolicyV1RemoveCertificateRequest:
@@ -984,70 +836,6 @@ components:
       description: Response object for removing a network.
       properties: {}
       type: object
-    GoogleChromePolicyV1ResolveRequest:
-      description: Request message for getting the resolved policy value for a specific target.
-      properties:
-        pageSize:
-          description: The maximum number of policies to return, defaults to 100 and has a maximum of 1000.
-          format: int32
-          type: integer
-        pageToken:
-          description: The page token used to retrieve a specific page of the request.
-          type: string
-        policySchemaFilter:
-          description: 'The schema filter to apply to the resolve request. Specify a schema name to view a particular schema, for example: chrome.users.ShowLogoutButton Wildcards are supported, but only in the leaf portion of the schema name. Wildcards cannot be used in namespace directly. Please read https://developers.google.com/chrome/policy/guides/policy-schemas for details on schema namespaces. For example: Valid: "chrome.users.*", "chrome.users.apps.*", "chrome.printers.*" Invalid: "*", "*.users", "chrome.*", "chrome.*.apps.*"'
-          type: string
-        policyTargetKey:
-          $ref: "#/components/schemas/GoogleChromePolicyV1PolicyTargetKey"
-          description: Required. The key of the target resource on which the policies should be resolved. The target resource must point to an Org Unit.
-      type: object
-    GoogleChromePolicyV1ResolveResponse:
-      description: Response message for getting the resolved policy value for a specific target.
-      properties:
-        nextPageToken:
-          description: The page token used to get the next set of resolved policies found by the request.
-          type: string
-        resolvedPolicies:
-          description: The list of resolved policies found by the resolve request.
-          items:
-            $ref: "#/components/schemas/GoogleChromePolicyV1ResolvedPolicy"
-          type: array
-      type: object
-    GoogleChromePolicyV1ResolvedPolicy:
-      description: The resolved value of a policy for a given target.
-      properties:
-        addedSourceKey:
-          $ref: "#/components/schemas/GoogleChromePolicyV1PolicyTargetKey"
-          description: "Output only. The added source key establishes at which level an entity was explicitly added for management. This is useful for certain type of policies that are only applied if they are explicitly added for management. For example: apps and networks. An entity can only be deleted from management in an Organizational Unit that it was explicitly added to. If this is not present it means that the policy is managed without the need to explicitly add an entity, for example: standard user or device policies."
-          readOnly: true
-        sourceKey:
-          $ref: "#/components/schemas/GoogleChromePolicyV1PolicyTargetKey"
-          description: Output only. The source resource from which this policy value is obtained. May be the same as `targetKey` if the policy is directly modified on the target, otherwise it would be another resource from which the policy gets its value (if applicable). If not present, the source is the default value for the customer.
-          readOnly: true
-        targetKey:
-          $ref: "#/components/schemas/GoogleChromePolicyV1PolicyTargetKey"
-          description: Output only. The target resource for which the resolved policy value applies.
-          readOnly: true
-        value:
-          $ref: "#/components/schemas/GoogleChromePolicyV1PolicyValue"
-          description: Output only. The resolved value of the policy.
-          readOnly: true
-      type: object
-    GoogleChromePolicyV1UpdateGroupPriorityOrderingRequest:
-      description: Request message for updating the group priority ordering of an app.
-      properties:
-        groupIds:
-          description: Required. The group IDs, in desired priority ordering.
-          items:
-            type: string
-          type: array
-        policyNamespace:
-          description: Required. The namespace of the policy type for the request.
-          type: string
-        policyTargetKey:
-          $ref: "#/components/schemas/GoogleChromePolicyV1PolicyTargetKey"
-          description: Required. The key of the target for which we want to update the group priority ordering. The target resource must point to an app.
-      type: object
     GoogleChromePolicyVersionsV1AdditionalTargetKeyName:
       description: Additional key names that will be used to identify the target of the policy value.
       properties:
@@ -1057,6 +845,90 @@ components:
         keyDescription:
           description: Key description.
           type: string
+      type: object
+    GoogleChromePolicyVersionsV1BatchDeleteGroupPoliciesRequest:
+      description: Request message for specifying that multiple policy values will be deleted.
+      properties:
+        requests:
+          description: "List of policies that will be deleted as defined by the `requests`. All requests in the list must follow these restrictions: 1. All schemas in the list must have the same root namespace. 2. All `policyTargetKey.targetResource` values must point to a group resource. 3. All `policyTargetKey` values must have the same `app_id` key name in the `additionalTargetKeys`. 4. No two modification requests can reference the same `policySchema` + ` policyTargetKey` pair. "
+          items:
+            $ref: "#/components/schemas/GoogleChromePolicyVersionsV1DeleteGroupPolicyRequest"
+          type: array
+      type: object
+    GoogleChromePolicyVersionsV1BatchInheritOrgUnitPoliciesRequest:
+      description: Request message for specifying that multiple policy values inherit their value from their parents.
+      properties:
+        requests:
+          description: "List of policies that have to inherit their values as defined by the `requests`. All requests in the list must follow these restrictions: 1. All schemas in the list must have the same root namespace. 2. All `policyTargetKey.targetResource` values must point to an org unit resource. 3. All `policyTargetKey` values must have the same key names in the ` additionalTargetKeys`. This also means if one of the targets has an empty `additionalTargetKeys` map, all of the targets must have an empty `additionalTargetKeys` map. 4. No two modification requests can reference the same `policySchema` + ` policyTargetKey` pair. "
+          items:
+            $ref: "#/components/schemas/GoogleChromePolicyVersionsV1InheritOrgUnitPolicyRequest"
+          type: array
+      type: object
+    GoogleChromePolicyVersionsV1BatchModifyGroupPoliciesRequest:
+      description: Request message for modifying multiple policy values for a specific group-based target.
+      properties:
+        requests:
+          description: "List of policies to modify as defined by the `requests`. All requests in the list must follow these restrictions: 1. All schemas in the list must have the same root namespace. 2. All `policyTargetKey.targetResource` values must point to a group resource. 3. All `policyTargetKey` values must have the same `app_id` key name in the `additionalTargetKeys`. 4. No two modification requests can reference the same `policySchema` + ` policyTargetKey` pair. "
+          items:
+            $ref: "#/components/schemas/GoogleChromePolicyVersionsV1ModifyGroupPolicyRequest"
+          type: array
+      type: object
+    GoogleChromePolicyVersionsV1BatchModifyOrgUnitPoliciesRequest:
+      description: Request message for modifying multiple policy values for a specific target.
+      properties:
+        requests:
+          description: "List of policies to modify as defined by the `requests`. All requests in the list must follow these restrictions: 1. All schemas in the list must have the same root namespace. 2. All `policyTargetKey.targetResource` values must point to an org unit resource. 3. All `policyTargetKey` values must have the same key names in the ` additionalTargetKeys`. This also means if one of the targets has an empty `additionalTargetKeys` map, all of the targets must have an empty `additionalTargetKeys` map. 4. No two modification requests can reference the same `policySchema` + ` policyTargetKey` pair. "
+          items:
+            $ref: "#/components/schemas/GoogleChromePolicyVersionsV1ModifyOrgUnitPolicyRequest"
+          type: array
+      type: object
+    GoogleChromePolicyVersionsV1DeleteGroupPolicyRequest:
+      description: Request parameters for deleting the policy value of a specific group target.
+      properties:
+        policySchema:
+          description: The fully qualified name of the policy schema that is being inherited.
+          type: string
+        policyTargetKey:
+          $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicyTargetKey"
+          description: Required. The key of the target for which we want to modify a policy. The target resource must point to a Group.
+      type: object
+    GoogleChromePolicyVersionsV1InheritOrgUnitPolicyRequest:
+      description: Request parameters for inheriting policy value of a specific org unit target from the policy value of its parent org unit.
+      properties:
+        policySchema:
+          description: The fully qualified name of the policy schema that is being inherited.
+          type: string
+        policyTargetKey:
+          $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicyTargetKey"
+          description: Required. The key of the target for which we want to modify a policy. The target resource must point to an Org Unit.
+      type: object
+    GoogleChromePolicyVersionsV1ListGroupPriorityOrderingRequest:
+      description: Request message for listing the group priority ordering of an app.
+      properties:
+        policyNamespace:
+          description: Required. The namespace of the policy type for the request.
+          type: string
+        policyTargetKey:
+          $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicyTargetKey"
+          description: Required. The key of the target for which we want to retrieve the group priority ordering. The target resource must point to an app.
+      type: object
+    GoogleChromePolicyVersionsV1ListGroupPriorityOrderingResponse:
+      description: Response message for listing the group priority ordering of an app.
+      properties:
+        groupIds:
+          description: Output only. The group IDs, in priority ordering.
+          items:
+            type: string
+          readOnly: true
+          type: array
+        policyNamespace:
+          description: Output only. The namespace of the policy type of the group IDs.
+          readOnly: true
+          type: string
+        policyTargetKey:
+          $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicyTargetKey"
+          description: Output only. The target resource for which the group priority ordering has been retrieved.
+          readOnly: true
       type: object
     GoogleChromePolicyVersionsV1ListPolicySchemasResponse:
       description: Response message for listing policy schemas that match a filter.
@@ -1069,6 +941,46 @@ components:
           items:
             $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicySchema"
           type: array
+      type: object
+    GoogleChromePolicyVersionsV1ModifyGroupPolicyRequest:
+      description: Request parameters for modifying a policy value for a specific group target.
+      properties:
+        policyTargetKey:
+          $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicyTargetKey"
+          description: Required. The key of the target for which we want to modify a policy. The target resource must point to a Group.
+        policyValue:
+          $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicyValue"
+          description: The new value for the policy.
+        updateMask:
+          description: Required. Policy fields to update. Only fields in this mask will be updated; other fields in `policy_value` will be ignored (even if they have values). If a field is in this list it must have a value in 'policy_value'.
+          format: google-fieldmask
+          type: string
+      type: object
+    GoogleChromePolicyVersionsV1ModifyOrgUnitPolicyRequest:
+      description: Request parameters for modifying a policy value for a specific org unit target.
+      properties:
+        policyTargetKey:
+          $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicyTargetKey"
+          description: Required. The key of the target for which we want to modify a policy. The target resource must point to an Org Unit.
+        policyValue:
+          $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicyValue"
+          description: The new value for the policy.
+        updateMask:
+          description: Required. Policy fields to update. Only fields in this mask will be updated; other fields in `policy_value` will be ignored (even if they have values). If a field is in this list it must have a value in 'policy_value'.
+          format: google-fieldmask
+          type: string
+      type: object
+    GoogleChromePolicyVersionsV1PolicyModificationFieldError:
+      description: Error information for a modification request of a specific field on a specific policy.
+      properties:
+        error:
+          description: Output only. The error message related to the field.
+          readOnly: true
+          type: string
+        field:
+          description: Output only. The name of the field with the error.
+          readOnly: true
+          type: string
       type: object
     GoogleChromePolicyVersionsV1PolicySchema:
       description: Resource representing a policy schema.
@@ -1241,6 +1153,94 @@ components:
           items:
             type: string
           type: array
+      type: object
+    GoogleChromePolicyVersionsV1PolicyTargetKey:
+      description: The key used to identify the target on which the policy will be applied.
+      properties:
+        additionalTargetKeys:
+          additionalProperties:
+            type: string
+          description: Map containing the additional target key name and value pairs used to further identify the target of the policy.
+          type: object
+        targetResource:
+          description: 'The target resource on which this policy is applied. The following resources are supported: * Organizational Unit ("orgunits/{orgunit_id}") * Group ("groups/{group_id}")'
+          type: string
+      type: object
+    GoogleChromePolicyVersionsV1PolicyValue:
+      description: A particular value for a policy managed by the service.
+      properties:
+        policySchema:
+          description: The fully qualified name of the policy schema associated with this policy.
+          type: string
+        value:
+          additionalProperties:
+            description: Properties of the object.
+          description: The value of the policy that is compatible with the schema that it is associated with.
+          type: object
+      type: object
+    GoogleChromePolicyVersionsV1ResolveRequest:
+      description: Request message for getting the resolved policy value for a specific target.
+      properties:
+        pageSize:
+          description: The maximum number of policies to return, defaults to 100 and has a maximum of 1000.
+          format: int32
+          type: integer
+        pageToken:
+          description: The page token used to retrieve a specific page of the request.
+          type: string
+        policySchemaFilter:
+          description: 'The schema filter to apply to the resolve request. Specify a schema name to view a particular schema, for example: chrome.users.ShowLogoutButton Wildcards are supported, but only in the leaf portion of the schema name. Wildcards cannot be used in namespace directly. Please read https://developers.google.com/chrome/policy/guides/policy-schemas for details on schema namespaces. For example: Valid: "chrome.users.*", "chrome.users.apps.*", "chrome.printers.*" Invalid: "*", "*.users", "chrome.*", "chrome.*.apps.*"'
+          type: string
+        policyTargetKey:
+          $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicyTargetKey"
+          description: Required. The key of the target resource on which the policies should be resolved. The target resource must point to an Org Unit.
+      type: object
+    GoogleChromePolicyVersionsV1ResolveResponse:
+      description: Response message for getting the resolved policy value for a specific target.
+      properties:
+        nextPageToken:
+          description: The page token used to get the next set of resolved policies found by the request.
+          type: string
+        resolvedPolicies:
+          description: The list of resolved policies found by the resolve request.
+          items:
+            $ref: "#/components/schemas/GoogleChromePolicyVersionsV1ResolvedPolicy"
+          type: array
+      type: object
+    GoogleChromePolicyVersionsV1ResolvedPolicy:
+      description: The resolved value of a policy for a given target.
+      properties:
+        addedSourceKey:
+          $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicyTargetKey"
+          description: "Output only. The added source key establishes at which level an entity was explicitly added for management. This is useful for certain type of policies that are only applied if they are explicitly added for management. For example: apps and networks. An entity can only be deleted from management in an Organizational Unit that it was explicitly added to. If this is not present it means that the policy is managed without the need to explicitly add an entity, for example: standard user or device policies."
+          readOnly: true
+        sourceKey:
+          $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicyTargetKey"
+          description: Output only. The source resource from which this policy value is obtained. May be the same as `targetKey` if the policy is directly modified on the target, otherwise it would be another resource from which the policy gets its value (if applicable). If not present, the source is the default value for the customer.
+          readOnly: true
+        targetKey:
+          $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicyTargetKey"
+          description: Output only. The target resource for which the resolved policy value applies.
+          readOnly: true
+        value:
+          $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicyValue"
+          description: Output only. The resolved value of the policy.
+          readOnly: true
+      type: object
+    GoogleChromePolicyVersionsV1UpdateGroupPriorityOrderingRequest:
+      description: Request message for updating the group priority ordering of an app.
+      properties:
+        groupIds:
+          description: Required. The group IDs, in desired priority ordering.
+          items:
+            type: string
+          type: array
+        policyNamespace:
+          description: Required. The namespace of the policy type for the request.
+          type: string
+        policyTargetKey:
+          $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicyTargetKey"
+          description: Required. The key of the target for which we want to update the group priority ordering. The target resource must point to an app.
       type: object
     GoogleChromePolicyVersionsV1UploadPolicyFileRequest:
       description: Request message for uploading a file for a policy.
