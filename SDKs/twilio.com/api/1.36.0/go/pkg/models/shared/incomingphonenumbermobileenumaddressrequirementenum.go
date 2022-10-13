@@ -1,0 +1,10 @@
+package shared
+
+type IncomingPhoneNumberMobileEnumAddressRequirementEnum string
+
+const (
+	IncomingPhoneNumberMobileEnumAddressRequirementEnumNone    IncomingPhoneNumberMobileEnumAddressRequirementEnum = "none"
+	IncomingPhoneNumberMobileEnumAddressRequirementEnumAny     IncomingPhoneNumberMobileEnumAddressRequirementEnum = "any"
+	IncomingPhoneNumberMobileEnumAddressRequirementEnumLocal   IncomingPhoneNumberMobileEnumAddressRequirementEnum = "local"
+	IncomingPhoneNumberMobileEnumAddressRequirementEnumForeign IncomingPhoneNumberMobileEnumAddressRequirementEnum = "foreign"
+)

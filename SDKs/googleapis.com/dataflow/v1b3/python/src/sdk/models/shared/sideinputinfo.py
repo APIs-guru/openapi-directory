@@ -1,0 +1,13 @@
+from dataclasses import dataclass, field
+from typing import Any,List,Optional
+from dataclasses_json import dataclass_json
+from . import source
+
+
+@dataclass_json
+@dataclass
+class SideInputInfo:
+    kind: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
+    sources: Optional[List[source.Source]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sources' }})
+    tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tag' }})
+    

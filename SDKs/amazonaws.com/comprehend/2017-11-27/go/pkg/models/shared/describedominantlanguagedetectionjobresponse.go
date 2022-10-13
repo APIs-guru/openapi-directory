@@ -1,0 +1,5 @@
+package shared
+
+type DescribeDominantLanguageDetectionJobResponse struct {
+	DominantLanguageDetectionJobProperties *DominantLanguageDetectionJobProperties `json:"DominantLanguageDetectionJobProperties"`
+}

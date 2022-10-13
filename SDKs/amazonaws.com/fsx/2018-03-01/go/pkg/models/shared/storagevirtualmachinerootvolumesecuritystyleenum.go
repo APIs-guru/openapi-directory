@@ -1,0 +1,9 @@
+package shared
+
+type StorageVirtualMachineRootVolumeSecurityStyleEnum string
+
+const (
+	StorageVirtualMachineRootVolumeSecurityStyleEnumUnix  StorageVirtualMachineRootVolumeSecurityStyleEnum = "UNIX"
+	StorageVirtualMachineRootVolumeSecurityStyleEnumNtfs  StorageVirtualMachineRootVolumeSecurityStyleEnum = "NTFS"
+	StorageVirtualMachineRootVolumeSecurityStyleEnumMixed StorageVirtualMachineRootVolumeSecurityStyleEnum = "MIXED"
+)

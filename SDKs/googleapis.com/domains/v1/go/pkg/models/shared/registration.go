@@ -1,0 +1,74 @@
+package shared
+
+type RegistrationIssuesEnum string
+
+const (
+	RegistrationIssuesEnumIssueUnspecified RegistrationIssuesEnum = "ISSUE_UNSPECIFIED"
+	RegistrationIssuesEnumContactSupport   RegistrationIssuesEnum = "CONTACT_SUPPORT"
+	RegistrationIssuesEnumUnverifiedEmail  RegistrationIssuesEnum = "UNVERIFIED_EMAIL"
+)
+
+type RegistrationRegisterFailureReasonEnum string
+
+const (
+	RegistrationRegisterFailureReasonEnumRegisterFailureReasonUnspecified RegistrationRegisterFailureReasonEnum = "REGISTER_FAILURE_REASON_UNSPECIFIED"
+	RegistrationRegisterFailureReasonEnumRegisterFailureReasonUnknown     RegistrationRegisterFailureReasonEnum = "REGISTER_FAILURE_REASON_UNKNOWN"
+	RegistrationRegisterFailureReasonEnumDomainNotAvailable               RegistrationRegisterFailureReasonEnum = "DOMAIN_NOT_AVAILABLE"
+	RegistrationRegisterFailureReasonEnumInvalidContacts                  RegistrationRegisterFailureReasonEnum = "INVALID_CONTACTS"
+)
+
+type RegistrationStateEnum string
+
+const (
+	RegistrationStateEnumStateUnspecified    RegistrationStateEnum = "STATE_UNSPECIFIED"
+	RegistrationStateEnumRegistrationPending RegistrationStateEnum = "REGISTRATION_PENDING"
+	RegistrationStateEnumRegistrationFailed  RegistrationStateEnum = "REGISTRATION_FAILED"
+	RegistrationStateEnumTransferPending     RegistrationStateEnum = "TRANSFER_PENDING"
+	RegistrationStateEnumTransferFailed      RegistrationStateEnum = "TRANSFER_FAILED"
+	RegistrationStateEnumImportPending       RegistrationStateEnum = "IMPORT_PENDING"
+	RegistrationStateEnumActive              RegistrationStateEnum = "ACTIVE"
+	RegistrationStateEnumSuspended           RegistrationStateEnum = "SUSPENDED"
+	RegistrationStateEnumExported            RegistrationStateEnum = "EXPORTED"
+)
+
+type RegistrationSupportedPrivacyEnum string
+
+const (
+	RegistrationSupportedPrivacyEnumContactPrivacyUnspecified RegistrationSupportedPrivacyEnum = "CONTACT_PRIVACY_UNSPECIFIED"
+	RegistrationSupportedPrivacyEnumPublicContactData         RegistrationSupportedPrivacyEnum = "PUBLIC_CONTACT_DATA"
+	RegistrationSupportedPrivacyEnumPrivateContactData        RegistrationSupportedPrivacyEnum = "PRIVATE_CONTACT_DATA"
+	RegistrationSupportedPrivacyEnumRedactedContactData       RegistrationSupportedPrivacyEnum = "REDACTED_CONTACT_DATA"
+)
+
+type RegistrationTransferFailureReasonEnum string
+
+const (
+	RegistrationTransferFailureReasonEnumTransferFailureReasonUnspecified RegistrationTransferFailureReasonEnum = "TRANSFER_FAILURE_REASON_UNSPECIFIED"
+	RegistrationTransferFailureReasonEnumTransferFailureReasonUnknown     RegistrationTransferFailureReasonEnum = "TRANSFER_FAILURE_REASON_UNKNOWN"
+	RegistrationTransferFailureReasonEnumEmailConfirmationFailure         RegistrationTransferFailureReasonEnum = "EMAIL_CONFIRMATION_FAILURE"
+	RegistrationTransferFailureReasonEnumDomainNotRegistered              RegistrationTransferFailureReasonEnum = "DOMAIN_NOT_REGISTERED"
+	RegistrationTransferFailureReasonEnumDomainHasTransferLock            RegistrationTransferFailureReasonEnum = "DOMAIN_HAS_TRANSFER_LOCK"
+	RegistrationTransferFailureReasonEnumInvalidAuthorizationCode         RegistrationTransferFailureReasonEnum = "INVALID_AUTHORIZATION_CODE"
+	RegistrationTransferFailureReasonEnumTransferCancelled                RegistrationTransferFailureReasonEnum = "TRANSFER_CANCELLED"
+	RegistrationTransferFailureReasonEnumTransferRejected                 RegistrationTransferFailureReasonEnum = "TRANSFER_REJECTED"
+	RegistrationTransferFailureReasonEnumInvalidRegistrantEmailAddress    RegistrationTransferFailureReasonEnum = "INVALID_REGISTRANT_EMAIL_ADDRESS"
+	RegistrationTransferFailureReasonEnumDomainNotEligibleForTransfer     RegistrationTransferFailureReasonEnum = "DOMAIN_NOT_ELIGIBLE_FOR_TRANSFER"
+	RegistrationTransferFailureReasonEnumTransferAlreadyPending           RegistrationTransferFailureReasonEnum = "TRANSFER_ALREADY_PENDING"
+)
+
+type Registration struct {
+	ContactSettings        *ContactSettings                       `json:"contactSettings"`
+	CreateTime             *string                                `json:"createTime"`
+	DNSSettings            *DNSSettings                           `json:"dnsSettings"`
+	DomainName             *string                                `json:"domainName"`
+	ExpireTime             *string                                `json:"expireTime"`
+	Issues                 []RegistrationIssuesEnum               `json:"issues"`
+	Labels                 map[string]string                      `json:"labels"`
+	ManagementSettings     *ManagementSettings                    `json:"managementSettings"`
+	Name                   *string                                `json:"name"`
+	PendingContactSettings *ContactSettings                       `json:"pendingContactSettings"`
+	RegisterFailureReason  *RegistrationRegisterFailureReasonEnum `json:"registerFailureReason"`
+	State                  *RegistrationStateEnum                 `json:"state"`
+	SupportedPrivacy       []RegistrationSupportedPrivacyEnum     `json:"supportedPrivacy"`
+	TransferFailureReason  *RegistrationTransferFailureReasonEnum `json:"transferFailureReason"`
+}

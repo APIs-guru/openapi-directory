@@ -1,0 +1,40 @@
+package operations
+
+type PostGetInstanceProfileActionEnum string
+
+const (
+	PostGetInstanceProfileActionEnumGetInstanceProfile PostGetInstanceProfileActionEnum = "GetInstanceProfile"
+)
+
+type PostGetInstanceProfileVersionEnum string
+
+const (
+	PostGetInstanceProfileVersionEnumTwoThousandAndTen0508 PostGetInstanceProfileVersionEnum = "2010-05-08"
+)
+
+type PostGetInstanceProfileQueryParams struct {
+	Action  PostGetInstanceProfileActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostGetInstanceProfileVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+}
+
+type PostGetInstanceProfileHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type PostGetInstanceProfileRequest struct {
+	QueryParams PostGetInstanceProfileQueryParams
+	Headers     PostGetInstanceProfileHeaders
+	Request     []byte `request:"mediaType=text/xml"`
+}
+
+type PostGetInstanceProfileResponse struct {
+	Body        []byte
+	ContentType string
+	StatusCode  int64
+}

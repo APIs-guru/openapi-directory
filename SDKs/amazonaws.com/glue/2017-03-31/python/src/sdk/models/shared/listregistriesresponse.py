@@ -1,0 +1,12 @@
+from dataclasses import dataclass, field
+from typing import List,Optional
+from dataclasses_json import dataclass_json
+from . import registrylistitem
+
+
+@dataclass_json
+@dataclass
+class ListRegistriesResponse:
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    registries: Optional[List[registrylistitem.RegistryListItem]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Registries' }})
+    

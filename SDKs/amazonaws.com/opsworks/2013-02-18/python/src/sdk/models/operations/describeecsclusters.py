@@ -1,0 +1,41 @@
+from dataclasses import dataclass, field
+from typing import Any,Enum,Optional
+from sdk.models import shared
+
+
+@dataclass
+class DescribeEcsClustersQueryParams:
+    max_results: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
+    next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
+    
+class DescribeEcsClustersXAmzTargetEnum(str, Enum):
+    OPS_WORKS_20130218_DESCRIBE_ECS_CLUSTERS = "OpsWorks_20130218.DescribeEcsClusters"
+
+
+@dataclass
+class DescribeEcsClustersHeaders:
+    x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm' }})
+    x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256' }})
+    x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential' }})
+    x_amz_date: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Date' }})
+    x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token' }})
+    x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature' }})
+    x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders' }})
+    x_amz_target: DescribeEcsClustersXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target' }})
+    
+
+@dataclass
+class DescribeEcsClustersRequest:
+    query_params: DescribeEcsClustersQueryParams = field(default=None)
+    headers: DescribeEcsClustersHeaders = field(default=None)
+    request: shared.DescribeEcsClustersRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    
+
+@dataclass
+class DescribeEcsClustersResponse:
+    content_type: str = field(default=None)
+    describe_ecs_clusters_result: Optional[shared.DescribeEcsClustersResult] = field(default=None)
+    resource_not_found_exception: Optional[Any] = field(default=None)
+    status_code: int = field(default=None)
+    validation_exception: Optional[Any] = field(default=None)
+    

@@ -1,0 +1,10 @@
+from dataclasses import dataclass, field
+from typing import Enum
+
+class InspectorEventEnum(str, Enum):
+    ASSESSMENT_RUN_STARTED = "ASSESSMENT_RUN_STARTED"
+    ASSESSMENT_RUN_COMPLETED = "ASSESSMENT_RUN_COMPLETED"
+    ASSESSMENT_RUN_STATE_CHANGED = "ASSESSMENT_RUN_STATE_CHANGED"
+    FINDING_REPORTED = "FINDING_REPORTED"
+    OTHER = "OTHER"
+

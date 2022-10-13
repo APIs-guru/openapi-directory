@@ -1,0 +1,32 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+var PostV05LinksLinkInitServers = []string{
+	"https://your-hrp-server.com",
+}
+
+type PostV05LinksLinkInitHeaders struct {
+	Authorization string `header:"name=Authorization"`
+	XHipID        string `header:"name=X-HIP-ID"`
+}
+
+type PostV05LinksLinkInitRequests struct {
+	ApplicationXML              []byte                              `request:"mediaType=application/xml"`
+	PatientLinkReferenceRequest *shared.PatientLinkReferenceRequest `request:"mediaType=application/json"`
+}
+
+type PostV05LinksLinkInitRequest struct {
+	ServerURL *string
+	Headers   PostV05LinksLinkInitHeaders
+	Request   PostV05LinksLinkInitRequests
+}
+
+type PostV05LinksLinkInitResponse struct {
+	Body          []byte
+	ContentType   string
+	ErrorResponse *shared.ErrorResponse
+	StatusCode    int64
+}

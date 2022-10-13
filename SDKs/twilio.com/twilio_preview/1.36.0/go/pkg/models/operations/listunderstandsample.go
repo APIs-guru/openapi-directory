@@ -1,0 +1,51 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+var ListUnderstandSampleServers = []string{
+	"https://preview.twilio.com",
+}
+
+type ListUnderstandSamplePathParams struct {
+	AssistantSid string `pathParam:"style=simple,explode=false,name=AssistantSid"`
+	TaskSid      string `pathParam:"style=simple,explode=false,name=TaskSid"`
+}
+
+type ListUnderstandSampleQueryParams struct {
+	Language *string `queryParam:"style=form,explode=true,name=Language"`
+	PageSize *int64  `queryParam:"style=form,explode=true,name=PageSize"`
+}
+
+type ListUnderstandSampleSecurity struct {
+	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+}
+
+type ListUnderstandSampleRequest struct {
+	ServerURL   *string
+	PathParams  ListUnderstandSamplePathParams
+	QueryParams ListUnderstandSampleQueryParams
+	Security    ListUnderstandSampleSecurity
+}
+
+type ListUnderstandSample200ApplicationJSONMeta struct {
+	FirstPageURL    *string `json:"first_page_url"`
+	Key             *string `json:"key"`
+	NextPageURL     *string `json:"next_page_url"`
+	Page            *int64  `json:"page"`
+	PageSize        *int64  `json:"page_size"`
+	PreviousPageURL *string `json:"previous_page_url"`
+	URL             *string `json:"url"`
+}
+
+type ListUnderstandSample200ApplicationJSONListUnderstandSampleResponse struct {
+	Meta    *ListUnderstandSample200ApplicationJSONMeta   `json:"meta"`
+	Samples []shared.PreviewUnderstandAssistantTaskSample `json:"samples"`
+}
+
+type ListUnderstandSampleResponse struct {
+	ContentType                  string
+	ListUnderstandSampleResponse *ListUnderstandSample200ApplicationJSONListUnderstandSampleResponse
+	StatusCode                   int64
+}

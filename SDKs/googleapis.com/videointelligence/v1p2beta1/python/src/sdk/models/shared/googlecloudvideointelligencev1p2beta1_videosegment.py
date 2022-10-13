@@ -1,0 +1,11 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from dataclasses_json import dataclass_json
+
+
+@dataclass_json
+@dataclass
+class GoogleCloudVideointelligenceV1p2beta1VideoSegment:
+    end_time_offset: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endTimeOffset' }})
+    start_time_offset: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startTimeOffset' }})
+    

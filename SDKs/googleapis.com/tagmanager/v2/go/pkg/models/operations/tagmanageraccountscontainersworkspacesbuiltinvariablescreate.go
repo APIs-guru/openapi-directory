@@ -1,0 +1,159 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreatePathParams struct {
+	Parent string `pathParam:"style=simple,explode=false,name=parent"`
+}
+
+type TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum string
+
+const (
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumBuiltInVariableTypeUnspecified                      TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "builtInVariableTypeUnspecified"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumPageURL                                             TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "pageUrl"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumPageHostname                                        TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "pageHostname"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumPagePath                                            TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "pagePath"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumReferrer                                            TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "referrer"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumEvent                                               TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "event"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumClickElement                                        TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "clickElement"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumClickClasses                                        TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "clickClasses"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumClickID                                             TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "clickId"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumClickTarget                                         TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "clickTarget"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumClickURL                                            TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "clickUrl"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumClickText                                           TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "clickText"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFirstPartyServingURL                                TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "firstPartyServingUrl"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFormElement                                         TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "formElement"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFormClasses                                         TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "formClasses"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFormID                                              TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "formId"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFormTarget                                          TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "formTarget"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFormURL                                             TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "formUrl"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFormText                                            TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "formText"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumErrorMessage                                        TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "errorMessage"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumErrorURL                                            TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "errorUrl"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumErrorLine                                           TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "errorLine"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumNewHistoryURL                                       TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "newHistoryUrl"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumOldHistoryURL                                       TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "oldHistoryUrl"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumNewHistoryFragment                                  TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "newHistoryFragment"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumOldHistoryFragment                                  TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "oldHistoryFragment"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumNewHistoryState                                     TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "newHistoryState"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumOldHistoryState                                     TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "oldHistoryState"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumHistorySource                                       TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "historySource"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumContainerVersion                                    TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "containerVersion"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumDebugMode                                           TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "debugMode"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumRandomNumber                                        TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "randomNumber"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumContainerID                                         TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "containerId"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumAppID                                               TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "appId"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumAppName                                             TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "appName"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumAppVersionCode                                      TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "appVersionCode"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumAppVersionName                                      TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "appVersionName"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumLanguage                                            TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "language"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumOsVersion                                           TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "osVersion"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumPlatform                                            TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "platform"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumSdkVersion                                          TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "sdkVersion"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumDeviceName                                          TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "deviceName"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumResolution                                          TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "resolution"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumAdvertiserID                                        TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "advertiserId"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumAdvertisingTrackingEnabled                          TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "advertisingTrackingEnabled"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumHtmlid                                              TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "htmlId"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumEnvironmentName                                     TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "environmentName"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumAmpBrowserLanguage                                  TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "ampBrowserLanguage"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumAmpCanonicalPath                                    TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "ampCanonicalPath"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumAmpCanonicalURL                                     TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "ampCanonicalUrl"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumAmpCanonicalHost                                    TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "ampCanonicalHost"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumAmpReferrer                                         TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "ampReferrer"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumAmpTitle                                            TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "ampTitle"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumAmpClientID                                         TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "ampClientId"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumAmpClientTimezone                                   TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "ampClientTimezone"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumAmpClientTimestamp                                  TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "ampClientTimestamp"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumAmpClientScreenWidth                                TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "ampClientScreenWidth"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumAmpClientScreenHeight                               TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "ampClientScreenHeight"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumAmpClientScrollX                                    TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "ampClientScrollX"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumAmpClientScrollY                                    TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "ampClientScrollY"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumAmpClientMaxScrollX                                 TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "ampClientMaxScrollX"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumAmpClientMaxScrollY                                 TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "ampClientMaxScrollY"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumAmpTotalEngagedTime                                 TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "ampTotalEngagedTime"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumAmpPageViewID                                       TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "ampPageViewId"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumAmpPageLoadTime                                     TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "ampPageLoadTime"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumAmpPageDownloadTime                                 TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "ampPageDownloadTime"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumAmpGtmEvent                                         TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "ampGtmEvent"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumEventName                                           TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "eventName"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFirebaseEventParameterCampaign                      TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "firebaseEventParameterCampaign"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFirebaseEventParameterCampaignAclid                 TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "firebaseEventParameterCampaignAclid"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFirebaseEventParameterCampaignAnid                  TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "firebaseEventParameterCampaignAnid"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFirebaseEventParameterCampaignClickTimestamp        TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "firebaseEventParameterCampaignClickTimestamp"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFirebaseEventParameterCampaignContent               TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "firebaseEventParameterCampaignContent"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFirebaseEventParameterCampaignCp1                   TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "firebaseEventParameterCampaignCp1"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFirebaseEventParameterCampaignGclid                 TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "firebaseEventParameterCampaignGclid"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFirebaseEventParameterCampaignSource                TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "firebaseEventParameterCampaignSource"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFirebaseEventParameterCampaignTerm                  TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "firebaseEventParameterCampaignTerm"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFirebaseEventParameterCurrency                      TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "firebaseEventParameterCurrency"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFirebaseEventParameterDynamicLinkAcceptTime         TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "firebaseEventParameterDynamicLinkAcceptTime"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFirebaseEventParameterDynamicLinkLinkid             TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "firebaseEventParameterDynamicLinkLinkid"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFirebaseEventParameterNotificationMessageDeviceTime TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "firebaseEventParameterNotificationMessageDeviceTime"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFirebaseEventParameterNotificationMessageID         TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "firebaseEventParameterNotificationMessageId"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFirebaseEventParameterNotificationMessageName       TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "firebaseEventParameterNotificationMessageName"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFirebaseEventParameterNotificationMessageTime       TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "firebaseEventParameterNotificationMessageTime"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFirebaseEventParameterNotificationTopic             TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "firebaseEventParameterNotificationTopic"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFirebaseEventParameterPreviousAppVersion            TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "firebaseEventParameterPreviousAppVersion"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFirebaseEventParameterPreviousOsVersion             TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "firebaseEventParameterPreviousOsVersion"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFirebaseEventParameterPrice                         TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "firebaseEventParameterPrice"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFirebaseEventParameterProductID                     TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "firebaseEventParameterProductId"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFirebaseEventParameterQuantity                      TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "firebaseEventParameterQuantity"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumFirebaseEventParameterValue                         TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "firebaseEventParameterValue"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumVideoProvider                                       TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "videoProvider"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumVideoURL                                            TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "videoUrl"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumVideoTitle                                          TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "videoTitle"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumVideoDuration                                       TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "videoDuration"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumVideoPercent                                        TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "videoPercent"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumVideoVisible                                        TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "videoVisible"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumVideoStatus                                         TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "videoStatus"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumVideoCurrentTime                                    TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "videoCurrentTime"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumScrollDepthThreshold                                TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "scrollDepthThreshold"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumScrollDepthUnits                                    TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "scrollDepthUnits"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumScrollDepthDirection                                TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "scrollDepthDirection"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumElementVisibilityRatio                              TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "elementVisibilityRatio"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumElementVisibilityTime                               TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "elementVisibilityTime"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumElementVisibilityFirstTime                          TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "elementVisibilityFirstTime"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumElementVisibilityRecentTime                         TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "elementVisibilityRecentTime"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumRequestPath                                         TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "requestPath"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumRequestMethod                                       TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "requestMethod"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumClientName                                          TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "clientName"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumQueryString                                         TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "queryString"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumServerPageLocationURL                               TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "serverPageLocationUrl"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumServerPageLocationPath                              TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "serverPageLocationPath"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnumServerPageLocationHostname                          TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum = "serverPageLocationHostname"
+)
+
+type TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateQueryParams struct {
+	DollarXgafv    *shared.XgafvEnum                                                      `queryParam:"style=form,explode=true,name=$.xgafv"`
+	AccessToken    *string                                                                `queryParam:"style=form,explode=true,name=access_token"`
+	Alt            *shared.AltEnum                                                        `queryParam:"style=form,explode=true,name=alt"`
+	Callback       *string                                                                `queryParam:"style=form,explode=true,name=callback"`
+	Fields         *string                                                                `queryParam:"style=form,explode=true,name=fields"`
+	Key            *string                                                                `queryParam:"style=form,explode=true,name=key"`
+	OauthToken     *string                                                                `queryParam:"style=form,explode=true,name=oauth_token"`
+	PrettyPrint    *bool                                                                  `queryParam:"style=form,explode=true,name=prettyPrint"`
+	QuotaUser      *string                                                                `queryParam:"style=form,explode=true,name=quotaUser"`
+	Type           []TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateTypeEnum `queryParam:"style=form,explode=true,name=type"`
+	UploadType     *string                                                                `queryParam:"style=form,explode=true,name=uploadType"`
+	UploadProtocol *string                                                                `queryParam:"style=form,explode=true,name=upload_protocol"`
+}
+
+type TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateSecurity struct {
+	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
+	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+}
+
+type TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateRequest struct {
+	PathParams  TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreatePathParams
+	QueryParams TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateQueryParams
+	Security    TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateSecurity
+}
+
+type TagmanagerAccountsContainersWorkspacesBuiltInVariablesCreateResponse struct {
+	ContentType                   string
+	CreateBuiltInVariableResponse *shared.CreateBuiltInVariableResponse
+	StatusCode                    int64
+}

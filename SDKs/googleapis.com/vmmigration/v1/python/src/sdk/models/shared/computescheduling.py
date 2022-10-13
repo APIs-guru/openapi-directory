@@ -1,0 +1,24 @@
+from dataclasses import dataclass, field
+from typing import Enum,List,Optional
+from dataclasses_json import dataclass_json
+from . import schedulingnodeaffinity
+
+class ComputeSchedulingOnHostMaintenanceEnum(str, Enum):
+    ON_HOST_MAINTENANCE_UNSPECIFIED = "ON_HOST_MAINTENANCE_UNSPECIFIED"
+    TERMINATE = "TERMINATE"
+    MIGRATE = "MIGRATE"
+
+class ComputeSchedulingRestartTypeEnum(str, Enum):
+    RESTART_TYPE_UNSPECIFIED = "RESTART_TYPE_UNSPECIFIED"
+    AUTOMATIC_RESTART = "AUTOMATIC_RESTART"
+    NO_AUTOMATIC_RESTART = "NO_AUTOMATIC_RESTART"
+
+
+@dataclass_json
+@dataclass
+class ComputeScheduling:
+    min_node_cpus: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'minNodeCpus' }})
+    node_affinities: Optional[List[schedulingnodeaffinity.SchedulingNodeAffinity]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nodeAffinities' }})
+    on_host_maintenance: Optional[ComputeSchedulingOnHostMaintenanceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'onHostMaintenance' }})
+    restart_type: Optional[ComputeSchedulingRestartTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'restartType' }})
+    

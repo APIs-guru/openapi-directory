@@ -1,0 +1,14 @@
+package shared
+
+type EnvironmentTargetingOptionDetailsEnvironmentEnum string
+
+const (
+	EnvironmentTargetingOptionDetailsEnvironmentEnumEnvironmentUnspecified     EnvironmentTargetingOptionDetailsEnvironmentEnum = "ENVIRONMENT_UNSPECIFIED"
+	EnvironmentTargetingOptionDetailsEnvironmentEnumEnvironmentWebOptimized    EnvironmentTargetingOptionDetailsEnvironmentEnum = "ENVIRONMENT_WEB_OPTIMIZED"
+	EnvironmentTargetingOptionDetailsEnvironmentEnumEnvironmentWebNotOptimized EnvironmentTargetingOptionDetailsEnvironmentEnum = "ENVIRONMENT_WEB_NOT_OPTIMIZED"
+	EnvironmentTargetingOptionDetailsEnvironmentEnumEnvironmentApp             EnvironmentTargetingOptionDetailsEnvironmentEnum = "ENVIRONMENT_APP"
+)
+
+type EnvironmentTargetingOptionDetails struct {
+	Environment *EnvironmentTargetingOptionDetailsEnvironmentEnum `json:"environment"`
+}

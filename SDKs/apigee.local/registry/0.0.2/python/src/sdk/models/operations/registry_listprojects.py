@@ -1,0 +1,22 @@
+from dataclasses import dataclass, field
+from typing import Any,List,Optional
+
+
+@dataclass
+class RegistryListProjectsQueryParams:
+    filter: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'filter', 'style': 'form', 'explode': True }})
+    page_size: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'page_size', 'style': 'form', 'explode': True }})
+    page_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'page_token', 'style': 'form', 'explode': True }})
+    
+
+@dataclass
+class RegistryListProjectsRequest:
+    query_params: RegistryListProjectsQueryParams = field(default=None)
+    
+
+@dataclass
+class RegistryListProjectsResponse:
+    content_type: str = field(default=None)
+    list_projects_response: Optional[Any] = field(default=None)
+    status_code: int = field(default=None)
+    

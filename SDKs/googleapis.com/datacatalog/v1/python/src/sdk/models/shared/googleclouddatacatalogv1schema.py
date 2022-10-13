@@ -1,0 +1,11 @@
+from dataclasses import dataclass, field
+from typing import List,Optional
+from dataclasses_json import dataclass_json
+from . import googleclouddatacatalogv1columnschema
+
+
+@dataclass_json
+@dataclass
+class GoogleCloudDatacatalogV1Schema:
+    columns: Optional[List[googleclouddatacatalogv1columnschema.GoogleCloudDatacatalogV1ColumnSchema]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'columns' }})
+    

@@ -1,0 +1,10 @@
+package shared
+
+type DescribeScheduledAuditResponse struct {
+	DayOfMonth         *string             `json:"dayOfMonth"`
+	DayOfWeek          *DayOfWeekEnum      `json:"dayOfWeek"`
+	Frequency          *AuditFrequencyEnum `json:"frequency"`
+	ScheduledAuditArn  *string             `json:"scheduledAuditArn"`
+	ScheduledAuditName *string             `json:"scheduledAuditName"`
+	TargetCheckNames   []string            `json:"targetCheckNames"`
+}

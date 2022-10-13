@@ -1,0 +1,5 @@
+package shared
+
+type GetAssociationForServiceQuotaTemplateResponse struct {
+	ServiceQuotaTemplateAssociationStatus *ServiceQuotaTemplateAssociationStatusEnum `json:"ServiceQuotaTemplateAssociationStatus"`
+}

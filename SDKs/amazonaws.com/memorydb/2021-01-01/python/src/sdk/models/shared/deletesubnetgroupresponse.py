@@ -1,0 +1,11 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from dataclasses_json import dataclass_json
+from . import subnetgroup
+
+
+@dataclass_json
+@dataclass
+class DeleteSubnetGroupResponse:
+    subnet_group: Optional[subnetgroup.SubnetGroup] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SubnetGroup' }})
+    

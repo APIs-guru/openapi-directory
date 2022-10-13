@@ -1,0 +1,7 @@
+package shared
+
+type StreamingImageEncryptionConfigurationKeyTypeEnum string
+
+const (
+	StreamingImageEncryptionConfigurationKeyTypeEnumCustomerManagedKey StreamingImageEncryptionConfigurationKeyTypeEnum = "CUSTOMER_MANAGED_KEY"
+)

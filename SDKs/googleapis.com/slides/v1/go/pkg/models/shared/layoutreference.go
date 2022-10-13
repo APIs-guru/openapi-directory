@@ -1,0 +1,23 @@
+package shared
+
+type LayoutReferencePredefinedLayoutEnum string
+
+const (
+	LayoutReferencePredefinedLayoutEnumPredefinedLayoutUnspecified LayoutReferencePredefinedLayoutEnum = "PREDEFINED_LAYOUT_UNSPECIFIED"
+	LayoutReferencePredefinedLayoutEnumBlank                       LayoutReferencePredefinedLayoutEnum = "BLANK"
+	LayoutReferencePredefinedLayoutEnumCaptionOnly                 LayoutReferencePredefinedLayoutEnum = "CAPTION_ONLY"
+	LayoutReferencePredefinedLayoutEnumTitle                       LayoutReferencePredefinedLayoutEnum = "TITLE"
+	LayoutReferencePredefinedLayoutEnumTitleAndBody                LayoutReferencePredefinedLayoutEnum = "TITLE_AND_BODY"
+	LayoutReferencePredefinedLayoutEnumTitleAndTwoColumns          LayoutReferencePredefinedLayoutEnum = "TITLE_AND_TWO_COLUMNS"
+	LayoutReferencePredefinedLayoutEnumTitleOnly                   LayoutReferencePredefinedLayoutEnum = "TITLE_ONLY"
+	LayoutReferencePredefinedLayoutEnumSectionHeader               LayoutReferencePredefinedLayoutEnum = "SECTION_HEADER"
+	LayoutReferencePredefinedLayoutEnumSectionTitleAndDescription  LayoutReferencePredefinedLayoutEnum = "SECTION_TITLE_AND_DESCRIPTION"
+	LayoutReferencePredefinedLayoutEnumOneColumnText               LayoutReferencePredefinedLayoutEnum = "ONE_COLUMN_TEXT"
+	LayoutReferencePredefinedLayoutEnumMainPoint                   LayoutReferencePredefinedLayoutEnum = "MAIN_POINT"
+	LayoutReferencePredefinedLayoutEnumBigNumber                   LayoutReferencePredefinedLayoutEnum = "BIG_NUMBER"
+)
+
+type LayoutReference struct {
+	LayoutID         *string                              `json:"layoutId"`
+	PredefinedLayout *LayoutReferencePredefinedLayoutEnum `json:"predefinedLayout"`
+}

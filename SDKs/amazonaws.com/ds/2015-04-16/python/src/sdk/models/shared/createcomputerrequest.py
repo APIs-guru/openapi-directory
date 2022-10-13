@@ -1,0 +1,15 @@
+from dataclasses import dataclass, field
+from typing import List,Optional
+from dataclasses_json import dataclass_json
+from . import attribute
+
+
+@dataclass_json
+@dataclass
+class CreateComputerRequest:
+    computer_attributes: Optional[List[attribute.Attribute]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ComputerAttributes' }})
+    computer_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ComputerName' }})
+    directory_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DirectoryId' }})
+    organizational_unit_distinguished_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OrganizationalUnitDistinguishedName' }})
+    password: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Password' }})
+    

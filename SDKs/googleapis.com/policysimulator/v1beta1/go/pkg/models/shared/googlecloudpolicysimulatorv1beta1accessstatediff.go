@@ -1,0 +1,19 @@
+package shared
+
+type GoogleCloudPolicysimulatorV1beta1AccessStateDiffAccessChangeEnum string
+
+const (
+	GoogleCloudPolicysimulatorV1beta1AccessStateDiffAccessChangeEnumAccessChangeTypeUnspecified GoogleCloudPolicysimulatorV1beta1AccessStateDiffAccessChangeEnum = "ACCESS_CHANGE_TYPE_UNSPECIFIED"
+	GoogleCloudPolicysimulatorV1beta1AccessStateDiffAccessChangeEnumNoChange                    GoogleCloudPolicysimulatorV1beta1AccessStateDiffAccessChangeEnum = "NO_CHANGE"
+	GoogleCloudPolicysimulatorV1beta1AccessStateDiffAccessChangeEnumUnknownChange               GoogleCloudPolicysimulatorV1beta1AccessStateDiffAccessChangeEnum = "UNKNOWN_CHANGE"
+	GoogleCloudPolicysimulatorV1beta1AccessStateDiffAccessChangeEnumAccessRevoked               GoogleCloudPolicysimulatorV1beta1AccessStateDiffAccessChangeEnum = "ACCESS_REVOKED"
+	GoogleCloudPolicysimulatorV1beta1AccessStateDiffAccessChangeEnumAccessGained                GoogleCloudPolicysimulatorV1beta1AccessStateDiffAccessChangeEnum = "ACCESS_GAINED"
+	GoogleCloudPolicysimulatorV1beta1AccessStateDiffAccessChangeEnumAccessMaybeRevoked          GoogleCloudPolicysimulatorV1beta1AccessStateDiffAccessChangeEnum = "ACCESS_MAYBE_REVOKED"
+	GoogleCloudPolicysimulatorV1beta1AccessStateDiffAccessChangeEnumAccessMaybeGained           GoogleCloudPolicysimulatorV1beta1AccessStateDiffAccessChangeEnum = "ACCESS_MAYBE_GAINED"
+)
+
+type GoogleCloudPolicysimulatorV1beta1AccessStateDiff struct {
+	AccessChange *GoogleCloudPolicysimulatorV1beta1AccessStateDiffAccessChangeEnum `json:"accessChange"`
+	Baseline     *GoogleCloudPolicysimulatorV1beta1ExplainedAccess                 `json:"baseline"`
+	Simulated    *GoogleCloudPolicysimulatorV1beta1ExplainedAccess                 `json:"simulated"`
+}

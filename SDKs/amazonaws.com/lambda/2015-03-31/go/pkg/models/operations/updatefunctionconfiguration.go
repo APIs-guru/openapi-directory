@@ -1,0 +1,111 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type UpdateFunctionConfigurationPathParams struct {
+	FunctionName string `pathParam:"style=simple,explode=false,name=FunctionName"`
+}
+
+type UpdateFunctionConfigurationHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type UpdateFunctionConfigurationRequestBodyDeadLetterConfig struct {
+	TargetArn *string `json:"TargetArn"`
+}
+
+type UpdateFunctionConfigurationRequestBodyEnvironment struct {
+	Variables map[string]string `json:"Variables"`
+}
+
+type UpdateFunctionConfigurationRequestBodyImageConfig struct {
+	Command          []string `json:"Command"`
+	EntryPoint       []string `json:"EntryPoint"`
+	WorkingDirectory *string  `json:"WorkingDirectory"`
+}
+
+type UpdateFunctionConfigurationRequestBodyRuntimeEnum string
+
+const (
+	UpdateFunctionConfigurationRequestBodyRuntimeEnumNodejs       UpdateFunctionConfigurationRequestBodyRuntimeEnum = "nodejs"
+	UpdateFunctionConfigurationRequestBodyRuntimeEnumNodejs43     UpdateFunctionConfigurationRequestBodyRuntimeEnum = "nodejs4.3"
+	UpdateFunctionConfigurationRequestBodyRuntimeEnumNodejs610    UpdateFunctionConfigurationRequestBodyRuntimeEnum = "nodejs6.10"
+	UpdateFunctionConfigurationRequestBodyRuntimeEnumNodejs810    UpdateFunctionConfigurationRequestBodyRuntimeEnum = "nodejs8.10"
+	UpdateFunctionConfigurationRequestBodyRuntimeEnumNodejs10X    UpdateFunctionConfigurationRequestBodyRuntimeEnum = "nodejs10.x"
+	UpdateFunctionConfigurationRequestBodyRuntimeEnumNodejs12X    UpdateFunctionConfigurationRequestBodyRuntimeEnum = "nodejs12.x"
+	UpdateFunctionConfigurationRequestBodyRuntimeEnumNodejs14X    UpdateFunctionConfigurationRequestBodyRuntimeEnum = "nodejs14.x"
+	UpdateFunctionConfigurationRequestBodyRuntimeEnumJava8        UpdateFunctionConfigurationRequestBodyRuntimeEnum = "java8"
+	UpdateFunctionConfigurationRequestBodyRuntimeEnumJava8Al2     UpdateFunctionConfigurationRequestBodyRuntimeEnum = "java8.al2"
+	UpdateFunctionConfigurationRequestBodyRuntimeEnumJava11       UpdateFunctionConfigurationRequestBodyRuntimeEnum = "java11"
+	UpdateFunctionConfigurationRequestBodyRuntimeEnumPython27     UpdateFunctionConfigurationRequestBodyRuntimeEnum = "python2.7"
+	UpdateFunctionConfigurationRequestBodyRuntimeEnumPython36     UpdateFunctionConfigurationRequestBodyRuntimeEnum = "python3.6"
+	UpdateFunctionConfigurationRequestBodyRuntimeEnumPython37     UpdateFunctionConfigurationRequestBodyRuntimeEnum = "python3.7"
+	UpdateFunctionConfigurationRequestBodyRuntimeEnumPython38     UpdateFunctionConfigurationRequestBodyRuntimeEnum = "python3.8"
+	UpdateFunctionConfigurationRequestBodyRuntimeEnumPython39     UpdateFunctionConfigurationRequestBodyRuntimeEnum = "python3.9"
+	UpdateFunctionConfigurationRequestBodyRuntimeEnumDotnetcore10 UpdateFunctionConfigurationRequestBodyRuntimeEnum = "dotnetcore1.0"
+	UpdateFunctionConfigurationRequestBodyRuntimeEnumDotnetcore20 UpdateFunctionConfigurationRequestBodyRuntimeEnum = "dotnetcore2.0"
+	UpdateFunctionConfigurationRequestBodyRuntimeEnumDotnetcore21 UpdateFunctionConfigurationRequestBodyRuntimeEnum = "dotnetcore2.1"
+	UpdateFunctionConfigurationRequestBodyRuntimeEnumDotnetcore31 UpdateFunctionConfigurationRequestBodyRuntimeEnum = "dotnetcore3.1"
+	UpdateFunctionConfigurationRequestBodyRuntimeEnumNodejs43Edge UpdateFunctionConfigurationRequestBodyRuntimeEnum = "nodejs4.3-edge"
+	UpdateFunctionConfigurationRequestBodyRuntimeEnumGo1X         UpdateFunctionConfigurationRequestBodyRuntimeEnum = "go1.x"
+	UpdateFunctionConfigurationRequestBodyRuntimeEnumRuby25       UpdateFunctionConfigurationRequestBodyRuntimeEnum = "ruby2.5"
+	UpdateFunctionConfigurationRequestBodyRuntimeEnumRuby27       UpdateFunctionConfigurationRequestBodyRuntimeEnum = "ruby2.7"
+	UpdateFunctionConfigurationRequestBodyRuntimeEnumProvided     UpdateFunctionConfigurationRequestBodyRuntimeEnum = "provided"
+	UpdateFunctionConfigurationRequestBodyRuntimeEnumProvidedAl2  UpdateFunctionConfigurationRequestBodyRuntimeEnum = "provided.al2"
+)
+
+type UpdateFunctionConfigurationRequestBodyTracingConfig struct {
+	Mode *shared.TracingModeEnum `json:"Mode"`
+}
+
+type UpdateFunctionConfigurationRequestBodyVpcConfig struct {
+	SecurityGroupIds []string `json:"SecurityGroupIds"`
+	SubnetIds        []string `json:"SubnetIds"`
+}
+
+type UpdateFunctionConfigurationRequestBody struct {
+	DeadLetterConfig  *UpdateFunctionConfigurationRequestBodyDeadLetterConfig `json:"DeadLetterConfig"`
+	Description       *string                                                 `json:"Description"`
+	Environment       *UpdateFunctionConfigurationRequestBodyEnvironment      `json:"Environment"`
+	FileSystemConfigs []shared.FileSystemConfig                               `json:"FileSystemConfigs"`
+	Handler           *string                                                 `json:"Handler"`
+	ImageConfig       *UpdateFunctionConfigurationRequestBodyImageConfig      `json:"ImageConfig"`
+	KmsKeyArn         *string                                                 `json:"KMSKeyArn"`
+	Layers            []string                                                `json:"Layers"`
+	MemorySize        *int64                                                  `json:"MemorySize"`
+	RevisionID        *string                                                 `json:"RevisionId"`
+	Role              *string                                                 `json:"Role"`
+	Runtime           *UpdateFunctionConfigurationRequestBodyRuntimeEnum      `json:"Runtime"`
+	Timeout           *int64                                                  `json:"Timeout"`
+	TracingConfig     *UpdateFunctionConfigurationRequestBodyTracingConfig    `json:"TracingConfig"`
+	VpcConfig         *UpdateFunctionConfigurationRequestBodyVpcConfig        `json:"VpcConfig"`
+}
+
+type UpdateFunctionConfigurationRequest struct {
+	PathParams UpdateFunctionConfigurationPathParams
+	Headers    UpdateFunctionConfigurationHeaders
+	Request    UpdateFunctionConfigurationRequestBody `request:"mediaType=application/json"`
+}
+
+type UpdateFunctionConfigurationResponse struct {
+	CodeSigningConfigNotFoundException *interface{}
+	CodeVerificationFailedException    *interface{}
+	ContentType                        string
+	FunctionConfiguration              *shared.FunctionConfiguration
+	InvalidCodeSignatureException      *interface{}
+	InvalidParameterValueException     *interface{}
+	PreconditionFailedException        *interface{}
+	ResourceConflictException          *interface{}
+	ResourceNotFoundException          *interface{}
+	ServiceException                   *interface{}
+	StatusCode                         int64
+	TooManyRequestsException           *interface{}
+}

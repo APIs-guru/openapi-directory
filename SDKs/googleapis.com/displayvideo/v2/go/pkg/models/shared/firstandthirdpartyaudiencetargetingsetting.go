@@ -1,0 +1,41 @@
+package shared
+
+type FirstAndThirdPartyAudienceTargetingSettingRecencyEnum string
+
+const (
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecencyNoLimit   FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_NO_LIMIT"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency1Minute   FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_1_MINUTE"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency5Minutes  FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_5_MINUTES"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency10Minutes FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_10_MINUTES"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency15Minutes FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_15_MINUTES"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency30Minutes FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_30_MINUTES"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency1Hour     FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_1_HOUR"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency2Hours    FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_2_HOURS"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency3Hours    FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_3_HOURS"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency6Hours    FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_6_HOURS"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency12Hours   FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_12_HOURS"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency1Day      FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_1_DAY"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency2Days     FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_2_DAYS"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency3Days     FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_3_DAYS"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency5Days     FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_5_DAYS"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency7Days     FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_7_DAYS"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency10Days    FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_10_DAYS"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency14Days    FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_14_DAYS"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency15Days    FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_15_DAYS"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency21Days    FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_21_DAYS"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency28Days    FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_28_DAYS"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency30Days    FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_30_DAYS"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency40Days    FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_40_DAYS"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency45Days    FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_45_DAYS"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency60Days    FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_60_DAYS"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency90Days    FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_90_DAYS"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency120Days   FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_120_DAYS"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency180Days   FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_180_DAYS"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency270Days   FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_270_DAYS"
+	FirstAndThirdPartyAudienceTargetingSettingRecencyEnumRecency365Days   FirstAndThirdPartyAudienceTargetingSettingRecencyEnum = "RECENCY_365_DAYS"
+)
+
+type FirstAndThirdPartyAudienceTargetingSetting struct {
+	FirstAndThirdPartyAudienceID *string                                                `json:"firstAndThirdPartyAudienceId"`
+	Recency                      *FirstAndThirdPartyAudienceTargetingSettingRecencyEnum `json:"recency"`
+}

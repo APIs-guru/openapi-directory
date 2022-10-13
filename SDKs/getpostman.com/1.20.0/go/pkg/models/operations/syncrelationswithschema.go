@@ -1,0 +1,32 @@
+package operations
+
+type SyncRelationsWithSchemaPathParams struct {
+	APIID        string `pathParam:"style=simple,explode=false,name=apiId"`
+	APIVersionID string `pathParam:"style=simple,explode=false,name=apiVersionId"`
+	EntityID     string `pathParam:"style=simple,explode=false,name=entityId"`
+	EntityType   string `pathParam:"style=simple,explode=false,name=entityType"`
+}
+
+type SyncRelationsWithSchemaRequest struct {
+	PathParams SyncRelationsWithSchemaPathParams
+}
+
+type SyncRelationsWithSchema200ApplicationJSON struct {
+	Success *bool `json:"success"`
+}
+
+type SyncRelationsWithSchema400ApplicationJSONError struct {
+	Message *string `json:"message"`
+	Name    *string `json:"name"`
+}
+
+type SyncRelationsWithSchema400ApplicationJSON struct {
+	Error *SyncRelationsWithSchema400ApplicationJSONError `json:"error"`
+}
+
+type SyncRelationsWithSchemaResponse struct {
+	ContentType                                     string
+	StatusCode                                      int64
+	SyncRelationsWithSchema200ApplicationJSONObject *SyncRelationsWithSchema200ApplicationJSON
+	SyncRelationsWithSchema400ApplicationJSONObject *SyncRelationsWithSchema400ApplicationJSON
+}

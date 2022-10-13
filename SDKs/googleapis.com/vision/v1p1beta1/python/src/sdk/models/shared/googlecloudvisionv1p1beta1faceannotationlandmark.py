@@ -1,0 +1,51 @@
+from dataclasses import dataclass, field
+from typing import Enum,Optional
+from dataclasses_json import dataclass_json
+from . import googlecloudvisionv1p1beta1position
+
+class GoogleCloudVisionV1p1beta1FaceAnnotationLandmarkTypeEnum(str, Enum):
+    UNKNOWN_LANDMARK = "UNKNOWN_LANDMARK"
+    LEFT_EYE = "LEFT_EYE"
+    RIGHT_EYE = "RIGHT_EYE"
+    LEFT_OF_LEFT_EYEBROW = "LEFT_OF_LEFT_EYEBROW"
+    RIGHT_OF_LEFT_EYEBROW = "RIGHT_OF_LEFT_EYEBROW"
+    LEFT_OF_RIGHT_EYEBROW = "LEFT_OF_RIGHT_EYEBROW"
+    RIGHT_OF_RIGHT_EYEBROW = "RIGHT_OF_RIGHT_EYEBROW"
+    MIDPOINT_BETWEEN_EYES = "MIDPOINT_BETWEEN_EYES"
+    NOSE_TIP = "NOSE_TIP"
+    UPPER_LIP = "UPPER_LIP"
+    LOWER_LIP = "LOWER_LIP"
+    MOUTH_LEFT = "MOUTH_LEFT"
+    MOUTH_RIGHT = "MOUTH_RIGHT"
+    MOUTH_CENTER = "MOUTH_CENTER"
+    NOSE_BOTTOM_RIGHT = "NOSE_BOTTOM_RIGHT"
+    NOSE_BOTTOM_LEFT = "NOSE_BOTTOM_LEFT"
+    NOSE_BOTTOM_CENTER = "NOSE_BOTTOM_CENTER"
+    LEFT_EYE_TOP_BOUNDARY = "LEFT_EYE_TOP_BOUNDARY"
+    LEFT_EYE_RIGHT_CORNER = "LEFT_EYE_RIGHT_CORNER"
+    LEFT_EYE_BOTTOM_BOUNDARY = "LEFT_EYE_BOTTOM_BOUNDARY"
+    LEFT_EYE_LEFT_CORNER = "LEFT_EYE_LEFT_CORNER"
+    RIGHT_EYE_TOP_BOUNDARY = "RIGHT_EYE_TOP_BOUNDARY"
+    RIGHT_EYE_RIGHT_CORNER = "RIGHT_EYE_RIGHT_CORNER"
+    RIGHT_EYE_BOTTOM_BOUNDARY = "RIGHT_EYE_BOTTOM_BOUNDARY"
+    RIGHT_EYE_LEFT_CORNER = "RIGHT_EYE_LEFT_CORNER"
+    LEFT_EYEBROW_UPPER_MIDPOINT = "LEFT_EYEBROW_UPPER_MIDPOINT"
+    RIGHT_EYEBROW_UPPER_MIDPOINT = "RIGHT_EYEBROW_UPPER_MIDPOINT"
+    LEFT_EAR_TRAGION = "LEFT_EAR_TRAGION"
+    RIGHT_EAR_TRAGION = "RIGHT_EAR_TRAGION"
+    LEFT_EYE_PUPIL = "LEFT_EYE_PUPIL"
+    RIGHT_EYE_PUPIL = "RIGHT_EYE_PUPIL"
+    FOREHEAD_GLABELLA = "FOREHEAD_GLABELLA"
+    CHIN_GNATHION = "CHIN_GNATHION"
+    CHIN_LEFT_GONION = "CHIN_LEFT_GONION"
+    CHIN_RIGHT_GONION = "CHIN_RIGHT_GONION"
+    LEFT_CHEEK_CENTER = "LEFT_CHEEK_CENTER"
+    RIGHT_CHEEK_CENTER = "RIGHT_CHEEK_CENTER"
+
+
+@dataclass_json
+@dataclass
+class GoogleCloudVisionV1p1beta1FaceAnnotationLandmark:
+    position: Optional[googlecloudvisionv1p1beta1position.GoogleCloudVisionV1p1beta1Position] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'position' }})
+    type: Optional[GoogleCloudVisionV1p1beta1FaceAnnotationLandmarkTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    

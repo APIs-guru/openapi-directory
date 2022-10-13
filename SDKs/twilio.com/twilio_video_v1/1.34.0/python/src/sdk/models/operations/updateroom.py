@@ -1,0 +1,37 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from sdk.models import shared
+UPDATE_ROOM_SERVERS = [
+	"https://video.twilio.com",
+]
+
+
+@dataclass
+class UpdateRoomPathParams:
+    sid: str = field(default=None, metadata={'path_param': { 'field_name': 'Sid', 'style': 'simple', 'explode': False }})
+    
+
+@dataclass
+class UpdateRoomSecurity:
+    account_sid_auth_token: shared.SchemeAccountSidAuthToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    
+
+@dataclass
+class UpdateRoomRequest:
+    server_url: Optional[str] = field(default=None)
+    path_params: UpdateRoomPathParams = field(default=None)
+    request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    security: UpdateRoomSecurity = field(default=None)
+    
+
+@dataclass
+class UpdateRoomResponses:
+    video_v1_room: Optional[shared.VideoV1Room] = field(default=None)
+    
+
+@dataclass
+class UpdateRoomResponse:
+    content_type: str = field(default=None)
+    responses: dict[int, dict[str, UpdateRoomResponses]] = field(default=None)
+    status_code: int = field(default=None)
+    

@@ -1,0 +1,45 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+	"time"
+)
+
+type GetTimeSeriesServiceStatisticsQueryParams struct {
+	NextToken *string `queryParam:"style=form,explode=true,name=NextToken"`
+}
+
+type GetTimeSeriesServiceStatisticsHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type GetTimeSeriesServiceStatisticsRequestBody struct {
+	EndTime                  time.Time `json:"EndTime"`
+	EntitySelectorExpression *string   `json:"EntitySelectorExpression"`
+	ForecastStatistics       *bool     `json:"ForecastStatistics"`
+	GroupArn                 *string   `json:"GroupARN"`
+	GroupName                *string   `json:"GroupName"`
+	NextToken                *string   `json:"NextToken"`
+	Period                   *int64    `json:"Period"`
+	StartTime                time.Time `json:"StartTime"`
+}
+
+type GetTimeSeriesServiceStatisticsRequest struct {
+	QueryParams GetTimeSeriesServiceStatisticsQueryParams
+	Headers     GetTimeSeriesServiceStatisticsHeaders
+	Request     GetTimeSeriesServiceStatisticsRequestBody `request:"mediaType=application/json"`
+}
+
+type GetTimeSeriesServiceStatisticsResponse struct {
+	ContentType                          string
+	GetTimeSeriesServiceStatisticsResult *shared.GetTimeSeriesServiceStatisticsResult
+	InvalidRequestException              *interface{}
+	StatusCode                           int64
+	ThrottledException                   *interface{}
+}

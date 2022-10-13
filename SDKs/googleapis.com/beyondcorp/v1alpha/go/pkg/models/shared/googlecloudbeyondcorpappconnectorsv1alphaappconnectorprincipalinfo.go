@@ -1,0 +1,5 @@
+package shared
+
+type GoogleCloudBeyondcorpAppconnectorsV1alphaAppConnectorPrincipalInfo struct {
+	ServiceAccount *GoogleCloudBeyondcorpAppconnectorsV1alphaAppConnectorPrincipalInfoServiceAccount `json:"serviceAccount"`
+}

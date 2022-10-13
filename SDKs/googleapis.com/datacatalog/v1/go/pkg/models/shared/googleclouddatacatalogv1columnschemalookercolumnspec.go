@@ -1,0 +1,16 @@
+package shared
+
+type GoogleCloudDatacatalogV1ColumnSchemaLookerColumnSpecTypeEnum string
+
+const (
+	GoogleCloudDatacatalogV1ColumnSchemaLookerColumnSpecTypeEnumLookerColumnTypeUnspecified GoogleCloudDatacatalogV1ColumnSchemaLookerColumnSpecTypeEnum = "LOOKER_COLUMN_TYPE_UNSPECIFIED"
+	GoogleCloudDatacatalogV1ColumnSchemaLookerColumnSpecTypeEnumDimension                   GoogleCloudDatacatalogV1ColumnSchemaLookerColumnSpecTypeEnum = "DIMENSION"
+	GoogleCloudDatacatalogV1ColumnSchemaLookerColumnSpecTypeEnumDimensionGroup              GoogleCloudDatacatalogV1ColumnSchemaLookerColumnSpecTypeEnum = "DIMENSION_GROUP"
+	GoogleCloudDatacatalogV1ColumnSchemaLookerColumnSpecTypeEnumFilter                      GoogleCloudDatacatalogV1ColumnSchemaLookerColumnSpecTypeEnum = "FILTER"
+	GoogleCloudDatacatalogV1ColumnSchemaLookerColumnSpecTypeEnumMeasure                     GoogleCloudDatacatalogV1ColumnSchemaLookerColumnSpecTypeEnum = "MEASURE"
+	GoogleCloudDatacatalogV1ColumnSchemaLookerColumnSpecTypeEnumParemeter                   GoogleCloudDatacatalogV1ColumnSchemaLookerColumnSpecTypeEnum = "PAREMETER"
+)
+
+type GoogleCloudDatacatalogV1ColumnSchemaLookerColumnSpec struct {
+	Type *GoogleCloudDatacatalogV1ColumnSchemaLookerColumnSpecTypeEnum `json:"type"`
+}

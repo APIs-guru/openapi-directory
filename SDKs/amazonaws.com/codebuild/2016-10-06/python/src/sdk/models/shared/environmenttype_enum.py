@@ -1,0 +1,10 @@
+from dataclasses import dataclass, field
+from typing import Enum
+
+class EnvironmentTypeEnum(str, Enum):
+    WINDOWS_CONTAINER = "WINDOWS_CONTAINER"
+    LINUX_CONTAINER = "LINUX_CONTAINER"
+    LINUX_GPU_CONTAINER = "LINUX_GPU_CONTAINER"
+    ARM_CONTAINER = "ARM_CONTAINER"
+    WINDOWS_SERVER_2019_CONTAINER = "WINDOWS_SERVER_2019_CONTAINER"
+

@@ -1,0 +1,47 @@
+from dataclasses import dataclass, field
+from typing import Any,Enum,List,Optional
+from sdk.models import shared
+
+class ListActiveViolationsBehaviorCriteriaTypeEnum(str, Enum):
+    STATIC = "STATIC"
+    STATISTICAL = "STATISTICAL"
+    MACHINE_LEARNING = "MACHINE_LEARNING"
+
+
+@dataclass
+class ListActiveViolationsQueryParams:
+    behavior_criteria_type: Optional[ListActiveViolationsBehaviorCriteriaTypeEnum] = field(default=None, metadata={'query_param': { 'field_name': 'behaviorCriteriaType', 'style': 'form', 'explode': True }})
+    list_suppressed_alerts: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'listSuppressedAlerts', 'style': 'form', 'explode': True }})
+    max_results: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'maxResults', 'style': 'form', 'explode': True }})
+    next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'nextToken', 'style': 'form', 'explode': True }})
+    security_profile_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'securityProfileName', 'style': 'form', 'explode': True }})
+    thing_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'thingName', 'style': 'form', 'explode': True }})
+    
+
+@dataclass
+class ListActiveViolationsHeaders:
+    x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm' }})
+    x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256' }})
+    x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential' }})
+    x_amz_date: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Date' }})
+    x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token' }})
+    x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature' }})
+    x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders' }})
+    
+
+@dataclass
+class ListActiveViolationsRequest:
+    query_params: ListActiveViolationsQueryParams = field(default=None)
+    headers: ListActiveViolationsHeaders = field(default=None)
+    
+
+@dataclass
+class ListActiveViolationsResponse:
+    content_type: str = field(default=None)
+    internal_failure_exception: Optional[Any] = field(default=None)
+    invalid_request_exception: Optional[Any] = field(default=None)
+    list_active_violations_response: Optional[shared.ListActiveViolationsResponse] = field(default=None)
+    resource_not_found_exception: Optional[Any] = field(default=None)
+    status_code: int = field(default=None)
+    throttling_exception: Optional[Any] = field(default=None)
+    

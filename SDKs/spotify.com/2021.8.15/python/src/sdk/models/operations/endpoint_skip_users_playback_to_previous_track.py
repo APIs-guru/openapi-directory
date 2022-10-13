@@ -1,0 +1,33 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from sdk.models import shared
+
+
+@dataclass
+class EndpointSkipUsersPlaybackToPreviousTrackQueryParams:
+    device_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'device_id', 'style': 'form', 'explode': True }})
+    
+
+@dataclass
+class EndpointSkipUsersPlaybackToPreviousTrackHeaders:
+    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization' }})
+    
+
+@dataclass
+class EndpointSkipUsersPlaybackToPreviousTrackSecurity:
+    spotify_auth: shared.SchemeSpotifyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    
+
+@dataclass
+class EndpointSkipUsersPlaybackToPreviousTrackRequest:
+    query_params: EndpointSkipUsersPlaybackToPreviousTrackQueryParams = field(default=None)
+    headers: EndpointSkipUsersPlaybackToPreviousTrackHeaders = field(default=None)
+    security: EndpointSkipUsersPlaybackToPreviousTrackSecurity = field(default=None)
+    
+
+@dataclass
+class EndpointSkipUsersPlaybackToPreviousTrackResponse:
+    content_type: str = field(default=None)
+    error_response_object: Optional[shared.ErrorResponseObject] = field(default=None)
+    status_code: int = field(default=None)
+    

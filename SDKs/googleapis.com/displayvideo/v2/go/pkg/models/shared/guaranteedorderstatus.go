@@ -1,0 +1,26 @@
+package shared
+
+type GuaranteedOrderStatusConfigStatusEnum string
+
+const (
+	GuaranteedOrderStatusConfigStatusEnumGuaranteedOrderConfigStatusUnspecified GuaranteedOrderStatusConfigStatusEnum = "GUARANTEED_ORDER_CONFIG_STATUS_UNSPECIFIED"
+	GuaranteedOrderStatusConfigStatusEnumPending                                GuaranteedOrderStatusConfigStatusEnum = "PENDING"
+	GuaranteedOrderStatusConfigStatusEnumCompleted                              GuaranteedOrderStatusConfigStatusEnum = "COMPLETED"
+)
+
+type GuaranteedOrderStatusEntityStatusEnum string
+
+const (
+	GuaranteedOrderStatusEntityStatusEnumEntityStatusUnspecified          GuaranteedOrderStatusEntityStatusEnum = "ENTITY_STATUS_UNSPECIFIED"
+	GuaranteedOrderStatusEntityStatusEnumEntityStatusActive               GuaranteedOrderStatusEntityStatusEnum = "ENTITY_STATUS_ACTIVE"
+	GuaranteedOrderStatusEntityStatusEnumEntityStatusArchived             GuaranteedOrderStatusEntityStatusEnum = "ENTITY_STATUS_ARCHIVED"
+	GuaranteedOrderStatusEntityStatusEnumEntityStatusDraft                GuaranteedOrderStatusEntityStatusEnum = "ENTITY_STATUS_DRAFT"
+	GuaranteedOrderStatusEntityStatusEnumEntityStatusPaused               GuaranteedOrderStatusEntityStatusEnum = "ENTITY_STATUS_PAUSED"
+	GuaranteedOrderStatusEntityStatusEnumEntityStatusScheduledForDeletion GuaranteedOrderStatusEntityStatusEnum = "ENTITY_STATUS_SCHEDULED_FOR_DELETION"
+)
+
+type GuaranteedOrderStatus struct {
+	ConfigStatus      *GuaranteedOrderStatusConfigStatusEnum `json:"configStatus"`
+	EntityPauseReason *string                                `json:"entityPauseReason"`
+	EntityStatus      *GuaranteedOrderStatusEntityStatusEnum `json:"entityStatus"`
+}

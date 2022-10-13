@@ -1,0 +1,15 @@
+package shared
+
+type GoogleCloudDialogflowV2VoiceSelectionParamsSsmlGenderEnum string
+
+const (
+	GoogleCloudDialogflowV2VoiceSelectionParamsSsmlGenderEnumSsmlVoiceGenderUnspecified GoogleCloudDialogflowV2VoiceSelectionParamsSsmlGenderEnum = "SSML_VOICE_GENDER_UNSPECIFIED"
+	GoogleCloudDialogflowV2VoiceSelectionParamsSsmlGenderEnumSsmlVoiceGenderMale        GoogleCloudDialogflowV2VoiceSelectionParamsSsmlGenderEnum = "SSML_VOICE_GENDER_MALE"
+	GoogleCloudDialogflowV2VoiceSelectionParamsSsmlGenderEnumSsmlVoiceGenderFemale      GoogleCloudDialogflowV2VoiceSelectionParamsSsmlGenderEnum = "SSML_VOICE_GENDER_FEMALE"
+	GoogleCloudDialogflowV2VoiceSelectionParamsSsmlGenderEnumSsmlVoiceGenderNeutral     GoogleCloudDialogflowV2VoiceSelectionParamsSsmlGenderEnum = "SSML_VOICE_GENDER_NEUTRAL"
+)
+
+type GoogleCloudDialogflowV2VoiceSelectionParams struct {
+	Name       *string                                                    `json:"name"`
+	SsmlGender *GoogleCloudDialogflowV2VoiceSelectionParamsSsmlGenderEnum `json:"ssmlGender"`
+}

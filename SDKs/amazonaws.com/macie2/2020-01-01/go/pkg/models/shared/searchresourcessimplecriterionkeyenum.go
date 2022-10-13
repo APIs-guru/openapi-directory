@@ -1,0 +1,10 @@
+package shared
+
+type SearchResourcesSimpleCriterionKeyEnum string
+
+const (
+	SearchResourcesSimpleCriterionKeyEnumAccountID                   SearchResourcesSimpleCriterionKeyEnum = "ACCOUNT_ID"
+	SearchResourcesSimpleCriterionKeyEnumS3BucketName                SearchResourcesSimpleCriterionKeyEnum = "S3_BUCKET_NAME"
+	SearchResourcesSimpleCriterionKeyEnumS3BucketEffectivePermission SearchResourcesSimpleCriterionKeyEnum = "S3_BUCKET_EFFECTIVE_PERMISSION"
+	SearchResourcesSimpleCriterionKeyEnumS3BucketSharedAccess        SearchResourcesSimpleCriterionKeyEnum = "S3_BUCKET_SHARED_ACCESS"
+)

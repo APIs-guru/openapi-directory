@@ -1,0 +1,21 @@
+package shared
+
+type QueueActivityReportEventEnum string
+
+const (
+	QueueActivityReportEventEnumLocalPlayingElapsed                   QueueActivityReportEventEnum = "local.playing.elapsed"
+	QueueActivityReportEventEnumLocalPlayingPaused                    QueueActivityReportEventEnum = "local.playing.paused"
+	QueueActivityReportEventEnumLocalPlayingContinued                 QueueActivityReportEventEnum = "local.playing.continued"
+	QueueActivityReportEventEnumLocalPlayingScrub                     QueueActivityReportEventEnum = "local.playing.scrub"
+	QueueActivityReportEventEnumLocalPlayingFastForward               QueueActivityReportEventEnum = "local.playing.fastForward"
+	QueueActivityReportEventEnumLocalPlayingFastRewind                QueueActivityReportEventEnum = "local.playing.fastRewind"
+	QueueActivityReportEventEnumLocalPlayingTransitionedNaturally     QueueActivityReportEventEnum = "local.playing.transitioned.naturally"
+	QueueActivityReportEventEnumLocalPlayingTransitionedSkipNext      QueueActivityReportEventEnum = "local.playing.transitioned.skip_next"
+	QueueActivityReportEventEnumLocalPlayingTransitionedSkipPrevious  QueueActivityReportEventEnum = "local.playing.transitioned.skip_previous"
+	QueueActivityReportEventEnumLocalPlayingTransitionedQueueReplaced QueueActivityReportEventEnum = "local.playing.transitioned.queue_replaced"
+	QueueActivityReportEventEnumLocalStoppedNaturally                 QueueActivityReportEventEnum = "local.stopped.naturally"
+	QueueActivityReportEventEnumLocalStoppedSkipPastEnd               QueueActivityReportEventEnum = "local.stopped.skip_past_end"
+	QueueActivityReportEventEnumLocalCommandLike                      QueueActivityReportEventEnum = "local.command.like"
+	QueueActivityReportEventEnumLocalCommandDislike                   QueueActivityReportEventEnum = "local.command.dislike"
+	QueueActivityReportEventEnumLocalCommandBookmark                  QueueActivityReportEventEnum = "local.command.bookmark"
+)

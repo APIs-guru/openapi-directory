@@ -1,0 +1,22 @@
+from dataclasses import dataclass, field
+from typing import List,Optional
+from sdk.models import shared
+
+
+@dataclass
+class GetSiteIPAddressesQueryParams:
+    cursor: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'cursor', 'style': 'form', 'explode': True }})
+    per_page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'per_page', 'style': 'form', 'explode': True }})
+    
+
+@dataclass
+class GetSiteIPAddressesRequest:
+    query_params: GetSiteIPAddressesQueryParams = field(default=None)
+    
+
+@dataclass
+class GetSiteIPAddressesResponse:
+    content_type: str = field(default=None)
+    ip_address_entities: Optional[List[shared.IPAddressEntity]] = field(default=None)
+    status_code: int = field(default=None)
+    

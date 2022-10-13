@@ -1,0 +1,93 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum string
+
+const (
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeUnspecified                  DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_UNSPECIFIED"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeChannel                      DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_CHANNEL"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeAppCategory                  DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_APP_CATEGORY"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeApp                          DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_APP"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeURL                          DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_URL"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeDayAndTime                   DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_DAY_AND_TIME"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeAgeRange                     DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_AGE_RANGE"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeRegionalLocationList         DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_REGIONAL_LOCATION_LIST"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeProximityLocationList        DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_PROXIMITY_LOCATION_LIST"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeGender                       DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_GENDER"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeVideoPlayerSize              DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_VIDEO_PLAYER_SIZE"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeUserRewardedContent          DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_USER_REWARDED_CONTENT"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeParentalStatus               DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_PARENTAL_STATUS"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeContentInstreamPosition      DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_CONTENT_INSTREAM_POSITION"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeContentOutstreamPosition     DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_CONTENT_OUTSTREAM_POSITION"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeDeviceType                   DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_DEVICE_TYPE"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeAudienceGroup                DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_AUDIENCE_GROUP"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeBrowser                      DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_BROWSER"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeHouseholdIncome              DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_HOUSEHOLD_INCOME"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeOnScreenPosition             DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_ON_SCREEN_POSITION"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeThirdPartyVerifier           DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_THIRD_PARTY_VERIFIER"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeDigitalContentLabelExclusion DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeSensitiveCategoryExclusion   DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeEnvironment                  DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_ENVIRONMENT"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeCarrierAndIsp                DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_CARRIER_AND_ISP"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeOperatingSystem              DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_OPERATING_SYSTEM"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeDeviceMakeModel              DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_DEVICE_MAKE_MODEL"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeKeyword                      DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_KEYWORD"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeNegativeKeywordList          DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_NEGATIVE_KEYWORD_LIST"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeViewability                  DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_VIEWABILITY"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeCategory                     DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_CATEGORY"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeInventorySource              DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_INVENTORY_SOURCE"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeLanguage                     DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_LANGUAGE"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeAuthorizedSellerStatus       DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_AUTHORIZED_SELLER_STATUS"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeGeoRegion                    DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_GEO_REGION"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeInventorySourceGroup         DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_INVENTORY_SOURCE_GROUP"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeExchange                     DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_EXCHANGE"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeSubExchange                  DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_SUB_EXCHANGE"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypePoi                          DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_POI"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeBusinessChain                DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_BUSINESS_CHAIN"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeContentDuration              DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_CONTENT_DURATION"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeContentStreamType            DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_CONTENT_STREAM_TYPE"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeNativeContentPosition        DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_NATIVE_CONTENT_POSITION"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeOmid                         DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_OMID"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeAudioContentType             DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_AUDIO_CONTENT_TYPE"
+	DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnumTargetingTypeContentGenre                 DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = "TARGETING_TYPE_CONTENT_GENRE"
+)
+
+type DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeletePathParams struct {
+	AdvertiserID              string                                                                               `pathParam:"style=simple,explode=false,name=advertiserId"`
+	AssignedTargetingOptionID string                                                                               `pathParam:"style=simple,explode=false,name=assignedTargetingOptionId"`
+	TargetingType             DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum `pathParam:"style=simple,explode=false,name=targetingType"`
+}
+
+type DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteQueryParams struct {
+	DollarXgafv    *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
+	AccessToken    *string           `queryParam:"style=form,explode=true,name=access_token"`
+	Alt            *shared.AltEnum   `queryParam:"style=form,explode=true,name=alt"`
+	Callback       *string           `queryParam:"style=form,explode=true,name=callback"`
+	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`
+	Key            *string           `queryParam:"style=form,explode=true,name=key"`
+	OauthToken     *string           `queryParam:"style=form,explode=true,name=oauth_token"`
+	PrettyPrint    *bool             `queryParam:"style=form,explode=true,name=prettyPrint"`
+	QuotaUser      *string           `queryParam:"style=form,explode=true,name=quotaUser"`
+	UploadType     *string           `queryParam:"style=form,explode=true,name=uploadType"`
+	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
+}
+
+type DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteSecurity struct {
+	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
+	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+}
+
+type DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteRequest struct {
+	PathParams  DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeletePathParams
+	QueryParams DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteQueryParams
+	Security    DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteSecurity
+}
+
+type DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteResponse struct {
+	ContentType string
+	Empty       map[string]interface{}
+	StatusCode  int64
+}

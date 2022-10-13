@@ -1,0 +1,34 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type DeleteDomainXAmzTargetEnum string
+
+const (
+	DeleteDomainXAmzTargetEnumSageMakerDeleteDomain DeleteDomainXAmzTargetEnum = "SageMaker.DeleteDomain"
+)
+
+type DeleteDomainHeaders struct {
+	XAmzAlgorithm     *string                    `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                    `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                    `header:"name=X-Amz-Credential"`
+	XAmzDate          *string                    `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string                    `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string                    `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                    `header:"name=X-Amz-SignedHeaders"`
+	XAmzTarget        DeleteDomainXAmzTargetEnum `header:"name=X-Amz-Target"`
+}
+
+type DeleteDomainRequest struct {
+	Headers DeleteDomainHeaders
+	Request shared.DeleteDomainRequest `request:"mediaType=application/json"`
+}
+
+type DeleteDomainResponse struct {
+	ContentType      string
+	ResourceInUse    *interface{}
+	ResourceNotFound *interface{}
+	StatusCode       int64
+}

@@ -1,0 +1,14 @@
+package shared
+
+type ScalableDimensionEnum string
+
+const (
+	ScalableDimensionEnumAutoscalingAutoScalingGroupDesiredCapacity ScalableDimensionEnum = "autoscaling:autoScalingGroup:DesiredCapacity"
+	ScalableDimensionEnumEcsServiceDesiredCount                     ScalableDimensionEnum = "ecs:service:DesiredCount"
+	ScalableDimensionEnumEc2SpotFleetRequestTargetCapacity          ScalableDimensionEnum = "ec2:spot-fleet-request:TargetCapacity"
+	ScalableDimensionEnumRdsClusterReadReplicaCount                 ScalableDimensionEnum = "rds:cluster:ReadReplicaCount"
+	ScalableDimensionEnumDynamodbTableReadCapacityUnits             ScalableDimensionEnum = "dynamodb:table:ReadCapacityUnits"
+	ScalableDimensionEnumDynamodbTableWriteCapacityUnits            ScalableDimensionEnum = "dynamodb:table:WriteCapacityUnits"
+	ScalableDimensionEnumDynamodbIndexReadCapacityUnits             ScalableDimensionEnum = "dynamodb:index:ReadCapacityUnits"
+	ScalableDimensionEnumDynamodbIndexWriteCapacityUnits            ScalableDimensionEnum = "dynamodb:index:WriteCapacityUnits"
+)

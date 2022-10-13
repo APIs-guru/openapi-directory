@@ -1,0 +1,6 @@
+package shared
+
+type GoogleCloudAssuredworkloadsV1beta1ViolationRemediationInstructions struct {
+	ConsoleInstructions *GoogleCloudAssuredworkloadsV1beta1ViolationRemediationInstructionsConsole `json:"consoleInstructions"`
+	GcloudInstructions  *GoogleCloudAssuredworkloadsV1beta1ViolationRemediationInstructionsGcloud  `json:"gcloudInstructions"`
+}

@@ -1,0 +1,22 @@
+package shared
+
+type InstanceRecommendationFindingReasonCodeEnum string
+
+const (
+	InstanceRecommendationFindingReasonCodeEnumCPUOverprovisioned               InstanceRecommendationFindingReasonCodeEnum = "CPUOverprovisioned"
+	InstanceRecommendationFindingReasonCodeEnumCPUUnderprovisioned              InstanceRecommendationFindingReasonCodeEnum = "CPUUnderprovisioned"
+	InstanceRecommendationFindingReasonCodeEnumMemoryOverprovisioned            InstanceRecommendationFindingReasonCodeEnum = "MemoryOverprovisioned"
+	InstanceRecommendationFindingReasonCodeEnumMemoryUnderprovisioned           InstanceRecommendationFindingReasonCodeEnum = "MemoryUnderprovisioned"
+	InstanceRecommendationFindingReasonCodeEnumEbsThroughputOverprovisioned     InstanceRecommendationFindingReasonCodeEnum = "EBSThroughputOverprovisioned"
+	InstanceRecommendationFindingReasonCodeEnumEbsThroughputUnderprovisioned    InstanceRecommendationFindingReasonCodeEnum = "EBSThroughputUnderprovisioned"
+	InstanceRecommendationFindingReasonCodeEnumEbsiopsOverprovisioned           InstanceRecommendationFindingReasonCodeEnum = "EBSIOPSOverprovisioned"
+	InstanceRecommendationFindingReasonCodeEnumEbsiopsUnderprovisioned          InstanceRecommendationFindingReasonCodeEnum = "EBSIOPSUnderprovisioned"
+	InstanceRecommendationFindingReasonCodeEnumNetworkBandwidthOverprovisioned  InstanceRecommendationFindingReasonCodeEnum = "NetworkBandwidthOverprovisioned"
+	InstanceRecommendationFindingReasonCodeEnumNetworkBandwidthUnderprovisioned InstanceRecommendationFindingReasonCodeEnum = "NetworkBandwidthUnderprovisioned"
+	InstanceRecommendationFindingReasonCodeEnumNetworkPpsOverprovisioned        InstanceRecommendationFindingReasonCodeEnum = "NetworkPPSOverprovisioned"
+	InstanceRecommendationFindingReasonCodeEnumNetworkPpsUnderprovisioned       InstanceRecommendationFindingReasonCodeEnum = "NetworkPPSUnderprovisioned"
+	InstanceRecommendationFindingReasonCodeEnumDiskIopsOverprovisioned          InstanceRecommendationFindingReasonCodeEnum = "DiskIOPSOverprovisioned"
+	InstanceRecommendationFindingReasonCodeEnumDiskIopsUnderprovisioned         InstanceRecommendationFindingReasonCodeEnum = "DiskIOPSUnderprovisioned"
+	InstanceRecommendationFindingReasonCodeEnumDiskThroughputOverprovisioned    InstanceRecommendationFindingReasonCodeEnum = "DiskThroughputOverprovisioned"
+	InstanceRecommendationFindingReasonCodeEnumDiskThroughputUnderprovisioned   InstanceRecommendationFindingReasonCodeEnum = "DiskThroughputUnderprovisioned"
+)

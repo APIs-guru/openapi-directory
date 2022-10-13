@@ -1,0 +1,10 @@
+from dataclasses import dataclass, field
+from dataclasses_json import dataclass_json
+from . import applicationsettingsresource
+
+
+@dataclass_json
+@dataclass
+class GetApplicationSettingsResponse:
+    application_settings_resource: applicationsettingsresource.ApplicationSettingsResource = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ApplicationSettingsResource' }})
+    

@@ -1,0 +1,37 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type GetThirdPartyJobDetailsXAmzTargetEnum string
+
+const (
+	GetThirdPartyJobDetailsXAmzTargetEnumCodePipeline20150709GetThirdPartyJobDetails GetThirdPartyJobDetailsXAmzTargetEnum = "CodePipeline_20150709.GetThirdPartyJobDetails"
+)
+
+type GetThirdPartyJobDetailsHeaders struct {
+	XAmzAlgorithm     *string                               `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                               `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                               `header:"name=X-Amz-Credential"`
+	XAmzDate          *string                               `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string                               `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string                               `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                               `header:"name=X-Amz-SignedHeaders"`
+	XAmzTarget        GetThirdPartyJobDetailsXAmzTargetEnum `header:"name=X-Amz-Target"`
+}
+
+type GetThirdPartyJobDetailsRequest struct {
+	Headers GetThirdPartyJobDetailsHeaders
+	Request shared.GetThirdPartyJobDetailsInput `request:"mediaType=application/json"`
+}
+
+type GetThirdPartyJobDetailsResponse struct {
+	ContentType                   string
+	GetThirdPartyJobDetailsOutput *shared.GetThirdPartyJobDetailsOutput
+	InvalidClientTokenException   *interface{}
+	InvalidJobException           *interface{}
+	JobNotFoundException          *interface{}
+	StatusCode                    int64
+	ValidationException           *interface{}
+}

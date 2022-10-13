@@ -1,0 +1,35 @@
+from dataclasses import dataclass, field
+from typing import Any,Enum,Optional
+from sdk.models import shared
+
+class AssociateServiceActionWithProvisioningArtifactXAmzTargetEnum(str, Enum):
+    AWS242_SERVICE_CATALOG_SERVICE_ASSOCIATE_SERVICE_ACTION_WITH_PROVISIONING_ARTIFACT = "AWS242ServiceCatalogService.AssociateServiceActionWithProvisioningArtifact"
+
+
+@dataclass
+class AssociateServiceActionWithProvisioningArtifactHeaders:
+    x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm' }})
+    x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256' }})
+    x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential' }})
+    x_amz_date: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Date' }})
+    x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token' }})
+    x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature' }})
+    x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders' }})
+    x_amz_target: AssociateServiceActionWithProvisioningArtifactXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target' }})
+    
+
+@dataclass
+class AssociateServiceActionWithProvisioningArtifactRequest:
+    headers: AssociateServiceActionWithProvisioningArtifactHeaders = field(default=None)
+    request: shared.AssociateServiceActionWithProvisioningArtifactInput = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    
+
+@dataclass
+class AssociateServiceActionWithProvisioningArtifactResponse:
+    associate_service_action_with_provisioning_artifact_output: Optional[dict[str, Any]] = field(default=None)
+    content_type: str = field(default=None)
+    duplicate_resource_exception: Optional[Any] = field(default=None)
+    limit_exceeded_exception: Optional[Any] = field(default=None)
+    resource_not_found_exception: Optional[Any] = field(default=None)
+    status_code: int = field(default=None)
+    

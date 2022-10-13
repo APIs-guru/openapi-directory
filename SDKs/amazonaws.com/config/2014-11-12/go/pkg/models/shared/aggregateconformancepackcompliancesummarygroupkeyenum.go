@@ -1,0 +1,8 @@
+package shared
+
+type AggregateConformancePackComplianceSummaryGroupKeyEnum string
+
+const (
+	AggregateConformancePackComplianceSummaryGroupKeyEnumAccountID AggregateConformancePackComplianceSummaryGroupKeyEnum = "ACCOUNT_ID"
+	AggregateConformancePackComplianceSummaryGroupKeyEnumAwsRegion AggregateConformancePackComplianceSummaryGroupKeyEnum = "AWS_REGION"
+)

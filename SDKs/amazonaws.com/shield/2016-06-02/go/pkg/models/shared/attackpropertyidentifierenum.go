@@ -1,0 +1,14 @@
+package shared
+
+type AttackPropertyIdentifierEnum string
+
+const (
+	AttackPropertyIdentifierEnumDestinationURL             AttackPropertyIdentifierEnum = "DESTINATION_URL"
+	AttackPropertyIdentifierEnumReferrer                   AttackPropertyIdentifierEnum = "REFERRER"
+	AttackPropertyIdentifierEnumSourceAsn                  AttackPropertyIdentifierEnum = "SOURCE_ASN"
+	AttackPropertyIdentifierEnumSourceCountry              AttackPropertyIdentifierEnum = "SOURCE_COUNTRY"
+	AttackPropertyIdentifierEnumSourceIPAddress            AttackPropertyIdentifierEnum = "SOURCE_IP_ADDRESS"
+	AttackPropertyIdentifierEnumSourceUserAgent            AttackPropertyIdentifierEnum = "SOURCE_USER_AGENT"
+	AttackPropertyIdentifierEnumWordpressPingbackReflector AttackPropertyIdentifierEnum = "WORDPRESS_PINGBACK_REFLECTOR"
+	AttackPropertyIdentifierEnumWordpressPingbackSource    AttackPropertyIdentifierEnum = "WORDPRESS_PINGBACK_SOURCE"
+)

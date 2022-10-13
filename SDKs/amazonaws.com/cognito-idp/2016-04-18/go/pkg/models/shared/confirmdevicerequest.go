@@ -1,0 +1,8 @@
+package shared
+
+type ConfirmDeviceRequest struct {
+	AccessToken                string                          `json:"AccessToken"`
+	DeviceKey                  string                          `json:"DeviceKey"`
+	DeviceName                 *string                         `json:"DeviceName"`
+	DeviceSecretVerifierConfig *DeviceSecretVerifierConfigType `json:"DeviceSecretVerifierConfig"`
+}

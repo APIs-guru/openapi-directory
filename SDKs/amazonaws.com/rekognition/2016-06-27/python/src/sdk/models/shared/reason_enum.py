@@ -1,0 +1,12 @@
+from dataclasses import dataclass, field
+from typing import Enum
+
+class ReasonEnum(str, Enum):
+    EXCEEDS_MAX_FACES = "EXCEEDS_MAX_FACES"
+    EXTREME_POSE = "EXTREME_POSE"
+    LOW_BRIGHTNESS = "LOW_BRIGHTNESS"
+    LOW_SHARPNESS = "LOW_SHARPNESS"
+    LOW_CONFIDENCE = "LOW_CONFIDENCE"
+    SMALL_BOUNDING_BOX = "SMALL_BOUNDING_BOX"
+    LOW_FACE_QUALITY = "LOW_FACE_QUALITY"
+

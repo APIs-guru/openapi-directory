@@ -1,0 +1,64 @@
+package shared
+
+type GoogleCloudVisionV1p2beta1SafeSearchAnnotationAdultEnum string
+
+const (
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationAdultEnumUnknown      GoogleCloudVisionV1p2beta1SafeSearchAnnotationAdultEnum = "UNKNOWN"
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationAdultEnumVeryUnlikely GoogleCloudVisionV1p2beta1SafeSearchAnnotationAdultEnum = "VERY_UNLIKELY"
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationAdultEnumUnlikely     GoogleCloudVisionV1p2beta1SafeSearchAnnotationAdultEnum = "UNLIKELY"
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationAdultEnumPossible     GoogleCloudVisionV1p2beta1SafeSearchAnnotationAdultEnum = "POSSIBLE"
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationAdultEnumLikely       GoogleCloudVisionV1p2beta1SafeSearchAnnotationAdultEnum = "LIKELY"
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationAdultEnumVeryLikely   GoogleCloudVisionV1p2beta1SafeSearchAnnotationAdultEnum = "VERY_LIKELY"
+)
+
+type GoogleCloudVisionV1p2beta1SafeSearchAnnotationMedicalEnum string
+
+const (
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationMedicalEnumUnknown      GoogleCloudVisionV1p2beta1SafeSearchAnnotationMedicalEnum = "UNKNOWN"
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationMedicalEnumVeryUnlikely GoogleCloudVisionV1p2beta1SafeSearchAnnotationMedicalEnum = "VERY_UNLIKELY"
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationMedicalEnumUnlikely     GoogleCloudVisionV1p2beta1SafeSearchAnnotationMedicalEnum = "UNLIKELY"
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationMedicalEnumPossible     GoogleCloudVisionV1p2beta1SafeSearchAnnotationMedicalEnum = "POSSIBLE"
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationMedicalEnumLikely       GoogleCloudVisionV1p2beta1SafeSearchAnnotationMedicalEnum = "LIKELY"
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationMedicalEnumVeryLikely   GoogleCloudVisionV1p2beta1SafeSearchAnnotationMedicalEnum = "VERY_LIKELY"
+)
+
+type GoogleCloudVisionV1p2beta1SafeSearchAnnotationRacyEnum string
+
+const (
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationRacyEnumUnknown      GoogleCloudVisionV1p2beta1SafeSearchAnnotationRacyEnum = "UNKNOWN"
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationRacyEnumVeryUnlikely GoogleCloudVisionV1p2beta1SafeSearchAnnotationRacyEnum = "VERY_UNLIKELY"
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationRacyEnumUnlikely     GoogleCloudVisionV1p2beta1SafeSearchAnnotationRacyEnum = "UNLIKELY"
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationRacyEnumPossible     GoogleCloudVisionV1p2beta1SafeSearchAnnotationRacyEnum = "POSSIBLE"
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationRacyEnumLikely       GoogleCloudVisionV1p2beta1SafeSearchAnnotationRacyEnum = "LIKELY"
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationRacyEnumVeryLikely   GoogleCloudVisionV1p2beta1SafeSearchAnnotationRacyEnum = "VERY_LIKELY"
+)
+
+type GoogleCloudVisionV1p2beta1SafeSearchAnnotationSpoofEnum string
+
+const (
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationSpoofEnumUnknown      GoogleCloudVisionV1p2beta1SafeSearchAnnotationSpoofEnum = "UNKNOWN"
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationSpoofEnumVeryUnlikely GoogleCloudVisionV1p2beta1SafeSearchAnnotationSpoofEnum = "VERY_UNLIKELY"
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationSpoofEnumUnlikely     GoogleCloudVisionV1p2beta1SafeSearchAnnotationSpoofEnum = "UNLIKELY"
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationSpoofEnumPossible     GoogleCloudVisionV1p2beta1SafeSearchAnnotationSpoofEnum = "POSSIBLE"
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationSpoofEnumLikely       GoogleCloudVisionV1p2beta1SafeSearchAnnotationSpoofEnum = "LIKELY"
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationSpoofEnumVeryLikely   GoogleCloudVisionV1p2beta1SafeSearchAnnotationSpoofEnum = "VERY_LIKELY"
+)
+
+type GoogleCloudVisionV1p2beta1SafeSearchAnnotationViolenceEnum string
+
+const (
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationViolenceEnumUnknown      GoogleCloudVisionV1p2beta1SafeSearchAnnotationViolenceEnum = "UNKNOWN"
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationViolenceEnumVeryUnlikely GoogleCloudVisionV1p2beta1SafeSearchAnnotationViolenceEnum = "VERY_UNLIKELY"
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationViolenceEnumUnlikely     GoogleCloudVisionV1p2beta1SafeSearchAnnotationViolenceEnum = "UNLIKELY"
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationViolenceEnumPossible     GoogleCloudVisionV1p2beta1SafeSearchAnnotationViolenceEnum = "POSSIBLE"
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationViolenceEnumLikely       GoogleCloudVisionV1p2beta1SafeSearchAnnotationViolenceEnum = "LIKELY"
+	GoogleCloudVisionV1p2beta1SafeSearchAnnotationViolenceEnumVeryLikely   GoogleCloudVisionV1p2beta1SafeSearchAnnotationViolenceEnum = "VERY_LIKELY"
+)
+
+type GoogleCloudVisionV1p2beta1SafeSearchAnnotation struct {
+	Adult    *GoogleCloudVisionV1p2beta1SafeSearchAnnotationAdultEnum    `json:"adult"`
+	Medical  *GoogleCloudVisionV1p2beta1SafeSearchAnnotationMedicalEnum  `json:"medical"`
+	Racy     *GoogleCloudVisionV1p2beta1SafeSearchAnnotationRacyEnum     `json:"racy"`
+	Spoof    *GoogleCloudVisionV1p2beta1SafeSearchAnnotationSpoofEnum    `json:"spoof"`
+	Violence *GoogleCloudVisionV1p2beta1SafeSearchAnnotationViolenceEnum `json:"violence"`
+}

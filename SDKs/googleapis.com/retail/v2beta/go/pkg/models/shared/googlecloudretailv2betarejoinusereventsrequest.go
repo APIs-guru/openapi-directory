@@ -1,0 +1,13 @@
+package shared
+
+type GoogleCloudRetailV2betaRejoinUserEventsRequestUserEventRejoinScopeEnum string
+
+const (
+	GoogleCloudRetailV2betaRejoinUserEventsRequestUserEventRejoinScopeEnumUserEventRejoinScopeUnspecified GoogleCloudRetailV2betaRejoinUserEventsRequestUserEventRejoinScopeEnum = "USER_EVENT_REJOIN_SCOPE_UNSPECIFIED"
+	GoogleCloudRetailV2betaRejoinUserEventsRequestUserEventRejoinScopeEnumJoinedEvents                    GoogleCloudRetailV2betaRejoinUserEventsRequestUserEventRejoinScopeEnum = "JOINED_EVENTS"
+	GoogleCloudRetailV2betaRejoinUserEventsRequestUserEventRejoinScopeEnumUnjoinedEvents                  GoogleCloudRetailV2betaRejoinUserEventsRequestUserEventRejoinScopeEnum = "UNJOINED_EVENTS"
+)
+
+type GoogleCloudRetailV2betaRejoinUserEventsRequest struct {
+	UserEventRejoinScope *GoogleCloudRetailV2betaRejoinUserEventsRequestUserEventRejoinScopeEnum `json:"userEventRejoinScope"`
+}

@@ -1,0 +1,11 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from dataclasses_json import dataclass_json
+from . import googleiamv1__policy
+
+
+@dataclass_json
+@dataclass
+class GoogleIamV1SetIamPolicyRequest:
+    policy: Optional[googleiamv1__policy.GoogleIamV1Policy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policy' }})
+    

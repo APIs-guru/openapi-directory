@@ -1,0 +1,30 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from sdk.models import shared
+
+
+@dataclass
+class PostV05PatientsProfileOnShareHeaders:
+    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization' }})
+    x_cm_id: str = field(default=None, metadata={'header': { 'field_name': 'X-CM-ID' }})
+    
+
+@dataclass
+class PostV05PatientsProfileOnShareRequests:
+    application_xml: bytes = field(default=None, metadata={'request': { 'media_type': 'application/xml' }})
+    share_profile_result: Optional[shared.ShareProfileResult] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    
+
+@dataclass
+class PostV05PatientsProfileOnShareRequest:
+    headers: PostV05PatientsProfileOnShareHeaders = field(default=None)
+    request: PostV05PatientsProfileOnShareRequests = field(default=None)
+    
+
+@dataclass
+class PostV05PatientsProfileOnShareResponse:
+    body: bytes = field(default=None)
+    content_type: str = field(default=None)
+    error_response: Optional[shared.ErrorResponse] = field(default=None)
+    status_code: int = field(default=None)
+    

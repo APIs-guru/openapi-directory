@@ -1,0 +1,22 @@
+from dataclasses import dataclass, field
+from typing import List,Optional
+from dataclasses_json import dataclass_json
+from . import analyticsmetadatatype
+from . import attributetype
+from . import usercontextdatatype
+from . import attributetype
+
+
+@dataclass_json
+@dataclass
+class SignUpRequest:
+    analytics_metadata: Optional[analyticsmetadatatype.AnalyticsMetadataType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AnalyticsMetadata' }})
+    client_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClientId' }})
+    client_metadata: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClientMetadata' }})
+    password: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Password' }})
+    secret_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SecretHash' }})
+    user_attributes: Optional[List[attributetype.AttributeType]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UserAttributes' }})
+    user_context_data: Optional[usercontextdatatype.UserContextDataType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UserContextData' }})
+    username: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Username' }})
+    validation_data: Optional[List[attributetype.AttributeType]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ValidationData' }})
+    

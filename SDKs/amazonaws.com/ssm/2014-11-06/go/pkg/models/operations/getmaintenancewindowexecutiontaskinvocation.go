@@ -1,0 +1,35 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type GetMaintenanceWindowExecutionTaskInvocationXAmzTargetEnum string
+
+const (
+	GetMaintenanceWindowExecutionTaskInvocationXAmzTargetEnumAmazonSsmGetMaintenanceWindowExecutionTaskInvocation GetMaintenanceWindowExecutionTaskInvocationXAmzTargetEnum = "AmazonSSM.GetMaintenanceWindowExecutionTaskInvocation"
+)
+
+type GetMaintenanceWindowExecutionTaskInvocationHeaders struct {
+	XAmzAlgorithm     *string                                                   `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                                                   `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                                                   `header:"name=X-Amz-Credential"`
+	XAmzDate          *string                                                   `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string                                                   `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string                                                   `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                                                   `header:"name=X-Amz-SignedHeaders"`
+	XAmzTarget        GetMaintenanceWindowExecutionTaskInvocationXAmzTargetEnum `header:"name=X-Amz-Target"`
+}
+
+type GetMaintenanceWindowExecutionTaskInvocationRequest struct {
+	Headers GetMaintenanceWindowExecutionTaskInvocationHeaders
+	Request shared.GetMaintenanceWindowExecutionTaskInvocationRequest `request:"mediaType=application/json"`
+}
+
+type GetMaintenanceWindowExecutionTaskInvocationResponse struct {
+	ContentType                                       string
+	DoesNotExistException                             *interface{}
+	GetMaintenanceWindowExecutionTaskInvocationResult *shared.GetMaintenanceWindowExecutionTaskInvocationResult
+	InternalServerError                               *interface{}
+	StatusCode                                        int64
+}

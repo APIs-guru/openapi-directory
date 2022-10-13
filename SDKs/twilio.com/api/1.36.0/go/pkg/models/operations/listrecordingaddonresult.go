@@ -1,0 +1,47 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+var ListRecordingAddOnResultServers = []string{
+	"https://api.twilio.com",
+}
+
+type ListRecordingAddOnResultPathParams struct {
+	AccountSid   string `pathParam:"style=simple,explode=false,name=AccountSid"`
+	ReferenceSid string `pathParam:"style=simple,explode=false,name=ReferenceSid"`
+}
+
+type ListRecordingAddOnResultQueryParams struct {
+	PageSize *int64 `queryParam:"style=form,explode=true,name=PageSize"`
+}
+
+type ListRecordingAddOnResultSecurity struct {
+	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+}
+
+type ListRecordingAddOnResultRequest struct {
+	ServerURL   *string
+	PathParams  ListRecordingAddOnResultPathParams
+	QueryParams ListRecordingAddOnResultQueryParams
+	Security    ListRecordingAddOnResultSecurity
+}
+
+type ListRecordingAddOnResult200ApplicationJSONListRecordingAddOnResultResponse struct {
+	AddOnResults    []shared.APIV2010AccountRecordingRecordingAddOnResult `json:"add_on_results"`
+	End             *int64                                                `json:"end"`
+	FirstPageURI    *string                                               `json:"first_page_uri"`
+	NextPageURI     *string                                               `json:"next_page_uri"`
+	Page            *int64                                                `json:"page"`
+	PageSize        *int64                                                `json:"page_size"`
+	PreviousPageURI *string                                               `json:"previous_page_uri"`
+	Start           *int64                                                `json:"start"`
+	URI             *string                                               `json:"uri"`
+}
+
+type ListRecordingAddOnResultResponse struct {
+	ContentType                      string
+	ListRecordingAddOnResultResponse *ListRecordingAddOnResult200ApplicationJSONListRecordingAddOnResultResponse
+	StatusCode                       int64
+}

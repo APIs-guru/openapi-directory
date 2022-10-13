@@ -1,0 +1,34 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+var CreateAssetServers = []string{
+	"https://serverless.twilio.com",
+}
+
+type CreateAssetPathParams struct {
+	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
+}
+
+type CreateAssetRequestBodyCreateAssetRequest struct {
+	FriendlyName string `form:"name=FriendlyName"`
+}
+
+type CreateAssetSecurity struct {
+	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+}
+
+type CreateAssetRequest struct {
+	ServerURL  *string
+	PathParams CreateAssetPathParams
+	Request    *CreateAssetRequestBodyCreateAssetRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Security   CreateAssetSecurity
+}
+
+type CreateAssetResponse struct {
+	ContentType              string
+	StatusCode               int64
+	ServerlessV1ServiceAsset *shared.ServerlessV1ServiceAsset
+}

@@ -1,0 +1,23 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from sdk.models import shared
+
+
+@dataclass
+class LanguagesGetLanguagePathParams:
+    locale_id: int = field(default=None, metadata={'path_param': { 'field_name': 'LocaleID', 'style': 'simple', 'explode': False }})
+    
+
+@dataclass
+class LanguagesGetLanguageRequest:
+    path_params: LanguagesGetLanguagePathParams = field(default=None)
+    
+
+@dataclass
+class LanguagesGetLanguageResponse:
+    api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
+    body: bytes = field(default=None)
+    content_type: str = field(default=None)
+    global_resources_shared_models_language: Optional[shared.GlobalResourcesSharedModelsLanguage] = field(default=None)
+    status_code: int = field(default=None)
+    

@@ -1,0 +1,41 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type UpdateArchiveRulePathParams struct {
+	AnalyzerName string `pathParam:"style=simple,explode=false,name=analyzerName"`
+	RuleName     string `pathParam:"style=simple,explode=false,name=ruleName"`
+}
+
+type UpdateArchiveRuleHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type UpdateArchiveRuleRequestBody struct {
+	ClientToken *string                     `json:"clientToken"`
+	Filter      map[string]shared.Criterion `json:"filter"`
+}
+
+type UpdateArchiveRuleRequest struct {
+	PathParams UpdateArchiveRulePathParams
+	Headers    UpdateArchiveRuleHeaders
+	Request    UpdateArchiveRuleRequestBody `request:"mediaType=application/json"`
+}
+
+type UpdateArchiveRuleResponse struct {
+	AccessDeniedException     *interface{}
+	ContentType               string
+	InternalServerException   *interface{}
+	ResourceNotFoundException *interface{}
+	StatusCode                int64
+	ThrottlingException       *interface{}
+	ValidationException       *interface{}
+}

@@ -1,0 +1,20 @@
+from dataclasses import dataclass, field
+from typing import Enum,List,Optional
+from dataclasses_json import dataclass_json
+
+class GoogleCloudDialogflowV2beta1ImportDocumentTemplateKnowledgeTypesEnum(str, Enum):
+    KNOWLEDGE_TYPE_UNSPECIFIED = "KNOWLEDGE_TYPE_UNSPECIFIED"
+    FAQ = "FAQ"
+    EXTRACTIVE_QA = "EXTRACTIVE_QA"
+    ARTICLE_SUGGESTION = "ARTICLE_SUGGESTION"
+    AGENT_FACING_SMART_REPLY = "AGENT_FACING_SMART_REPLY"
+    SMART_REPLY = "SMART_REPLY"
+
+
+@dataclass_json
+@dataclass
+class GoogleCloudDialogflowV2beta1ImportDocumentTemplate:
+    knowledge_types: Optional[List[GoogleCloudDialogflowV2beta1ImportDocumentTemplateKnowledgeTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'knowledgeTypes' }})
+    metadata: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
+    mime_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mimeType' }})
+    

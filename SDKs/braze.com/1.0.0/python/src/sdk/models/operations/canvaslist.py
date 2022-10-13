@@ -1,0 +1,22 @@
+from dataclasses import dataclass, field
+from typing import List,Optional
+
+
+@dataclass
+class CanvasListQueryParams:
+    include_archived: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'include_archived', 'style': 'form', 'explode': True }})
+    last_edit_time_gt_: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'last_edit.time[gt]', 'style': 'form', 'explode': True }})
+    page: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
+    sort_direction: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'sort_direction', 'style': 'form', 'explode': True }})
+    
+
+@dataclass
+class CanvasListRequest:
+    query_params: CanvasListQueryParams = field(default=None)
+    
+
+@dataclass
+class CanvasListResponse:
+    content_type: str = field(default=None)
+    status_code: int = field(default=None)
+    

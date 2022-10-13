@@ -1,0 +1,35 @@
+from dataclasses import dataclass, field
+from typing import Enum,Optional
+from dataclasses_json import dataclass_json
+
+class PaymentMeansCodeCodeEnum(str, Enum):
+    CREDIT_TRANSFER = "credit_transfer"
+    DIRECT_DEBIT = "direct_debit"
+    BANK_CARD = "bank_card"
+    CREDIT_CARD = "credit_card"
+    ONLINE_PAYMENT_SERVICE = "online_payment_service"
+    STANDING_AGREEMENT = "standing_agreement"
+    AUNZ_NPP = "aunz_npp"
+    AUNZ_NPP_PAYID = "aunz_npp_payid"
+    AUNZ_NPP_PAYTO = "aunz_npp_payto"
+    AUNZ_BPAY = "aunz_bpay"
+    AUNZ_POSTBILLPAY = "aunz_postbillpay"
+    AUNZ_URI = "aunz_uri"
+    SE_BANKGIRO = "se_bankgiro"
+    SE_PLUSGIRO = "se_plusgiro"
+    SG_GIRO = "sg_giro"
+    SG_CARD = "sg_card"
+    SG_PAYNOW = "sg_paynow"
+
+
+@dataclass_json
+@dataclass
+class PaymentMeans:
+    account: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
+    branche_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'branche_code' }})
+    code: PaymentMeansCodeCodeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
+    holder: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'holder' }})
+    mandate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mandate' }})
+    network: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'network' }})
+    payment_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentId' }})
+    

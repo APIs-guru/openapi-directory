@@ -1,0 +1,29 @@
+package shared
+
+type ProfileConditionValueEnum string
+
+const (
+	ProfileConditionValueEnumAudioChannels    ProfileConditionValueEnum = "AudioChannels"
+	ProfileConditionValueEnumAudioBitrate     ProfileConditionValueEnum = "AudioBitrate"
+	ProfileConditionValueEnumAudioProfile     ProfileConditionValueEnum = "AudioProfile"
+	ProfileConditionValueEnumWidth            ProfileConditionValueEnum = "Width"
+	ProfileConditionValueEnumHeight           ProfileConditionValueEnum = "Height"
+	ProfileConditionValueEnumHas64BitOffsets  ProfileConditionValueEnum = "Has64BitOffsets"
+	ProfileConditionValueEnumPacketLength     ProfileConditionValueEnum = "PacketLength"
+	ProfileConditionValueEnumVideoBitDepth    ProfileConditionValueEnum = "VideoBitDepth"
+	ProfileConditionValueEnumVideoBitrate     ProfileConditionValueEnum = "VideoBitrate"
+	ProfileConditionValueEnumVideoFramerate   ProfileConditionValueEnum = "VideoFramerate"
+	ProfileConditionValueEnumVideoLevel       ProfileConditionValueEnum = "VideoLevel"
+	ProfileConditionValueEnumVideoProfile     ProfileConditionValueEnum = "VideoProfile"
+	ProfileConditionValueEnumVideoTimestamp   ProfileConditionValueEnum = "VideoTimestamp"
+	ProfileConditionValueEnumIsAnamorphic     ProfileConditionValueEnum = "IsAnamorphic"
+	ProfileConditionValueEnumRefFrames        ProfileConditionValueEnum = "RefFrames"
+	ProfileConditionValueEnumNumAudioStreams  ProfileConditionValueEnum = "NumAudioStreams"
+	ProfileConditionValueEnumNumVideoStreams  ProfileConditionValueEnum = "NumVideoStreams"
+	ProfileConditionValueEnumIsSecondaryAudio ProfileConditionValueEnum = "IsSecondaryAudio"
+	ProfileConditionValueEnumVideoCodecTag    ProfileConditionValueEnum = "VideoCodecTag"
+	ProfileConditionValueEnumIsAvc            ProfileConditionValueEnum = "IsAvc"
+	ProfileConditionValueEnumIsInterlaced     ProfileConditionValueEnum = "IsInterlaced"
+	ProfileConditionValueEnumAudioSampleRate  ProfileConditionValueEnum = "AudioSampleRate"
+	ProfileConditionValueEnumAudioBitDepth    ProfileConditionValueEnum = "AudioBitDepth"
+)

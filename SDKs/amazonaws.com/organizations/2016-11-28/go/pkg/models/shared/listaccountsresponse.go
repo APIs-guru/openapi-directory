@@ -1,0 +1,6 @@
+package shared
+
+type ListAccountsResponse struct {
+	Accounts  []Account `json:"Accounts"`
+	NextToken *string   `json:"NextToken"`
+}

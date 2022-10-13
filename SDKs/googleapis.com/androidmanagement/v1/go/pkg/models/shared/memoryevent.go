@@ -1,0 +1,18 @@
+package shared
+
+type MemoryEventEventTypeEnum string
+
+const (
+	MemoryEventEventTypeEnumMemoryEventTypeUnspecified MemoryEventEventTypeEnum = "MEMORY_EVENT_TYPE_UNSPECIFIED"
+	MemoryEventEventTypeEnumRAMMeasured                MemoryEventEventTypeEnum = "RAM_MEASURED"
+	MemoryEventEventTypeEnumInternalStorageMeasured    MemoryEventEventTypeEnum = "INTERNAL_STORAGE_MEASURED"
+	MemoryEventEventTypeEnumExternalStorageDetected    MemoryEventEventTypeEnum = "EXTERNAL_STORAGE_DETECTED"
+	MemoryEventEventTypeEnumExternalStorageRemoved     MemoryEventEventTypeEnum = "EXTERNAL_STORAGE_REMOVED"
+	MemoryEventEventTypeEnumExternalStorageMeasured    MemoryEventEventTypeEnum = "EXTERNAL_STORAGE_MEASURED"
+)
+
+type MemoryEvent struct {
+	ByteCount  *string                   `json:"byteCount"`
+	CreateTime *string                   `json:"createTime"`
+	EventType  *MemoryEventEventTypeEnum `json:"eventType"`
+}

@@ -1,0 +1,17 @@
+package shared
+
+type WebsiteTypeEnum string
+
+const (
+	WebsiteTypeEnumPrimary   WebsiteTypeEnum = "primary"
+	WebsiteTypeEnumSecondary WebsiteTypeEnum = "secondary"
+	WebsiteTypeEnumWork      WebsiteTypeEnum = "work"
+	WebsiteTypeEnumPersonal  WebsiteTypeEnum = "personal"
+	WebsiteTypeEnumOther     WebsiteTypeEnum = "other"
+)
+
+type Website struct {
+	ID   *string          `json:"id"`
+	Type *WebsiteTypeEnum `json:"type"`
+	URL  string           `json:"url"`
+}

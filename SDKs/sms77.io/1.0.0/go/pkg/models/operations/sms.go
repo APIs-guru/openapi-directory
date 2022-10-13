@@ -1,0 +1,61 @@
+package operations
+
+type SmsQueryParams struct {
+	Debug               *float64 `queryParam:"style=form,explode=true,name=debug"`
+	Delay               *string  `queryParam:"style=form,explode=true,name=delay"`
+	Details             *float64 `queryParam:"style=form,explode=true,name=details"`
+	Flash               *float64 `queryParam:"style=form,explode=true,name=flash"`
+	ForeignID           *string  `queryParam:"style=form,explode=true,name=foreign_id"`
+	From                *string  `queryParam:"style=form,explode=true,name=from"`
+	JSON                *float64 `queryParam:"style=form,explode=true,name=json"`
+	Label               *string  `queryParam:"style=form,explode=true,name=label"`
+	NoReload            *float64 `queryParam:"style=form,explode=true,name=no_reload"`
+	PerformanceTracking *float64 `queryParam:"style=form,explode=true,name=performance_tracking"`
+	ReturnMsgID         *float64 `queryParam:"style=form,explode=true,name=return_msg_id"`
+	Text                string   `queryParam:"style=form,explode=true,name=text"`
+	To                  string   `queryParam:"style=form,explode=true,name=to"`
+	Udh                 *string  `queryParam:"style=form,explode=true,name=udh"`
+	Unicode             *float64 `queryParam:"style=form,explode=true,name=unicode"`
+	UTF8                *float64 `queryParam:"style=form,explode=true,name=utf8"`
+}
+
+type SmsRequest struct {
+	QueryParams SmsQueryParams
+}
+
+type Sms200ApplicationJSONMessages struct {
+	Encoding  *string  `json:"encoding"`
+	Error     *string  `json:"error"`
+	ErrorText *string  `json:"error_text"`
+	ID        *string  `json:"id"`
+	Messages  []string `json:"messages"`
+	Parts     *int64   `json:"parts"`
+	Price     *int64   `json:"price"`
+	Recipient *string  `json:"recipient"`
+	Sender    *string  `json:"sender"`
+	Success   *bool    `json:"success"`
+	Text      *string  `json:"text"`
+}
+
+type Sms200ApplicationJSONSmsTypeEnum string
+
+const (
+	Sms200ApplicationJSONSmsTypeEnumEconomy Sms200ApplicationJSONSmsTypeEnum = "economy"
+	Sms200ApplicationJSONSmsTypeEnumDirect  Sms200ApplicationJSONSmsTypeEnum = "direct"
+)
+
+type Sms200ApplicationJSON struct {
+	Balance    *float32                          `json:"balance"`
+	Debug      *string                           `json:"debug"`
+	Messages   []Sms200ApplicationJSONMessages   `json:"messages"`
+	SmsType    *Sms200ApplicationJSONSmsTypeEnum `json:"sms_type"`
+	Success    *string                           `json:"success"`
+	TotalPrice *float32                          `json:"total_price"`
+}
+
+type SmsResponse struct {
+	Body                        []byte
+	ContentType                 string
+	Sms200ApplicationJSONObject *Sms200ApplicationJSON
+	StatusCode                  int64
+}

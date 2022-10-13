@@ -1,0 +1,10 @@
+package shared
+
+type ResolverQueryLogConfigAssociationErrorEnum string
+
+const (
+	ResolverQueryLogConfigAssociationErrorEnumNone                 ResolverQueryLogConfigAssociationErrorEnum = "NONE"
+	ResolverQueryLogConfigAssociationErrorEnumDestinationNotFound  ResolverQueryLogConfigAssociationErrorEnum = "DESTINATION_NOT_FOUND"
+	ResolverQueryLogConfigAssociationErrorEnumAccessDenied         ResolverQueryLogConfigAssociationErrorEnum = "ACCESS_DENIED"
+	ResolverQueryLogConfigAssociationErrorEnumInternalServiceError ResolverQueryLogConfigAssociationErrorEnum = "INTERNAL_SERVICE_ERROR"
+)

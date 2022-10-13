@@ -1,0 +1,33 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from sdk.models import shared
+
+
+@dataclass
+class PostAPIV1SubscriptionsSubscriptionIDResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourcePatchValidatePathParams:
+    provider_namespace: str = field(default=None, metadata={'path_param': { 'field_name': 'providerNamespace', 'style': 'simple', 'explode': False }})
+    resource_group: str = field(default=None, metadata={'path_param': { 'field_name': 'resourceGroup', 'style': 'simple', 'explode': False }})
+    resource_name: str = field(default=None, metadata={'path_param': { 'field_name': 'resourceName', 'style': 'simple', 'explode': False }})
+    resource_type: str = field(default=None, metadata={'path_param': { 'field_name': 'resourceType', 'style': 'simple', 'explode': False }})
+    subscription_id: str = field(default=None, metadata={'path_param': { 'field_name': 'subscriptionId', 'style': 'simple', 'explode': False }})
+    
+
+@dataclass
+class PostAPIV1SubscriptionsSubscriptionIDResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourcePatchValidateRequests:
+    plan_resource_update_body: Optional[shared.PlanResourceUpdateBody] = field(default=None, metadata={'request': { 'media_type': 'application/*+json' }})
+    plan_resource_update_body1: Optional[shared.PlanResourceUpdateBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    plan_resource_update_body2: Optional[shared.PlanResourceUpdateBody] = field(default=None, metadata={'request': { 'media_type': 'application/json-patch+json' }})
+    plan_resource_update_body3: Optional[shared.PlanResourceUpdateBody] = field(default=None, metadata={'request': { 'media_type': 'text/json' }})
+    
+
+@dataclass
+class PostAPIV1SubscriptionsSubscriptionIDResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourcePatchValidateRequest:
+    path_params: PostAPIV1SubscriptionsSubscriptionIDResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourcePatchValidatePathParams = field(default=None)
+    request: Optional[PostAPIV1SubscriptionsSubscriptionIDResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourcePatchValidateRequests] = field(default=None)
+    
+
+@dataclass
+class PostAPIV1SubscriptionsSubscriptionIDResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourcePatchValidateResponse:
+    content_type: str = field(default=None)
+    status_code: int = field(default=None)
+    

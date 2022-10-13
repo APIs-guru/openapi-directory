@@ -1,0 +1,13 @@
+package shared
+
+type ReportRecipientTypeEnum string
+
+const (
+	ReportRecipientTypeEnumEmail ReportRecipientTypeEnum = "Email"
+	ReportRecipientTypeEnumSlack ReportRecipientTypeEnum = "Slack"
+)
+
+type ReportRecipient struct {
+	RecipientConfigJSON *ReportRecipientConfigJSON `json:"recipient_config_json"`
+	Type                ReportRecipientTypeEnum    `json:"type"`
+}

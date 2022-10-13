@@ -1,0 +1,40 @@
+package operations
+
+type PostDeleteReceiptFilterActionEnum string
+
+const (
+	PostDeleteReceiptFilterActionEnumDeleteReceiptFilter PostDeleteReceiptFilterActionEnum = "DeleteReceiptFilter"
+)
+
+type PostDeleteReceiptFilterVersionEnum string
+
+const (
+	PostDeleteReceiptFilterVersionEnumTwoThousandAndTen1201 PostDeleteReceiptFilterVersionEnum = "2010-12-01"
+)
+
+type PostDeleteReceiptFilterQueryParams struct {
+	Action  PostDeleteReceiptFilterActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostDeleteReceiptFilterVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+}
+
+type PostDeleteReceiptFilterHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type PostDeleteReceiptFilterRequest struct {
+	QueryParams PostDeleteReceiptFilterQueryParams
+	Headers     PostDeleteReceiptFilterHeaders
+	Request     []byte `request:"mediaType=text/xml"`
+}
+
+type PostDeleteReceiptFilterResponse struct {
+	Body        []byte
+	ContentType string
+	StatusCode  int64
+}

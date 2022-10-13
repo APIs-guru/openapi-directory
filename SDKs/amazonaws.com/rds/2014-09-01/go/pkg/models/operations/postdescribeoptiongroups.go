@@ -1,0 +1,40 @@
+package operations
+
+type PostDescribeOptionGroupsActionEnum string
+
+const (
+	PostDescribeOptionGroupsActionEnumDescribeOptionGroups PostDescribeOptionGroupsActionEnum = "DescribeOptionGroups"
+)
+
+type PostDescribeOptionGroupsVersionEnum string
+
+const (
+	PostDescribeOptionGroupsVersionEnumTwoThousandAndFourteen0901 PostDescribeOptionGroupsVersionEnum = "2014-09-01"
+)
+
+type PostDescribeOptionGroupsQueryParams struct {
+	Action  PostDescribeOptionGroupsActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostDescribeOptionGroupsVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+}
+
+type PostDescribeOptionGroupsHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type PostDescribeOptionGroupsRequest struct {
+	QueryParams PostDescribeOptionGroupsQueryParams
+	Headers     PostDescribeOptionGroupsHeaders
+	Request     []byte `request:"mediaType=text/xml"`
+}
+
+type PostDescribeOptionGroupsResponse struct {
+	Body        []byte
+	ContentType string
+	StatusCode  int64
+}

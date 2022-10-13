@@ -1,0 +1,48 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type CreateDeliverabilityTestReportHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type CreateDeliverabilityTestReportRequestBodyContent struct {
+	Raw      *shared.RawMessage `json:"Raw"`
+	Simple   *shared.Message    `json:"Simple"`
+	Template *shared.Template   `json:"Template"`
+}
+
+type CreateDeliverabilityTestReportRequestBody struct {
+	Content          CreateDeliverabilityTestReportRequestBodyContent `json:"Content"`
+	FromEmailAddress string                                           `json:"FromEmailAddress"`
+	ReportName       *string                                          `json:"ReportName"`
+	Tags             []shared.Tag                                     `json:"Tags"`
+}
+
+type CreateDeliverabilityTestReportRequest struct {
+	Headers CreateDeliverabilityTestReportHeaders
+	Request CreateDeliverabilityTestReportRequestBody `request:"mediaType=application/json"`
+}
+
+type CreateDeliverabilityTestReportResponse struct {
+	AccountSuspendedException              *interface{}
+	BadRequestException                    *interface{}
+	ConcurrentModificationException        *interface{}
+	ContentType                            string
+	CreateDeliverabilityTestReportResponse *shared.CreateDeliverabilityTestReportResponse
+	LimitExceededException                 *interface{}
+	MailFromDomainNotVerifiedException     *interface{}
+	MessageRejected                        *interface{}
+	NotFoundException                      *interface{}
+	SendingPausedException                 *interface{}
+	StatusCode                             int64
+	TooManyRequestsException               *interface{}
+}

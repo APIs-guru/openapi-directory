@@ -1,0 +1,37 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type UpdateMobileDeviceAccessRuleXAmzTargetEnum string
+
+const (
+	UpdateMobileDeviceAccessRuleXAmzTargetEnumWorkMailServiceUpdateMobileDeviceAccessRule UpdateMobileDeviceAccessRuleXAmzTargetEnum = "WorkMailService.UpdateMobileDeviceAccessRule"
+)
+
+type UpdateMobileDeviceAccessRuleHeaders struct {
+	XAmzAlgorithm     *string                                    `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                                    `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                                    `header:"name=X-Amz-Credential"`
+	XAmzDate          *string                                    `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string                                    `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string                                    `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                                    `header:"name=X-Amz-SignedHeaders"`
+	XAmzTarget        UpdateMobileDeviceAccessRuleXAmzTargetEnum `header:"name=X-Amz-Target"`
+}
+
+type UpdateMobileDeviceAccessRuleRequest struct {
+	Headers UpdateMobileDeviceAccessRuleHeaders
+	Request shared.UpdateMobileDeviceAccessRuleRequest `request:"mediaType=application/json"`
+}
+
+type UpdateMobileDeviceAccessRuleResponse struct {
+	ContentType                          string
+	EntityNotFoundException              *interface{}
+	InvalidParameterException            *interface{}
+	OrganizationNotFoundException        *interface{}
+	OrganizationStateException           *interface{}
+	StatusCode                           int64
+	UpdateMobileDeviceAccessRuleResponse map[string]interface{}
+}

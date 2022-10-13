@@ -1,0 +1,21 @@
+from dataclasses import dataclass, field
+from typing import List,Optional
+from sdk.models import shared
+
+
+@dataclass
+class FindAllDataExportersSecurity:
+    otoroshi_auth: shared.SchemeOtoroshiAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    
+
+@dataclass
+class FindAllDataExportersRequest:
+    security: FindAllDataExportersSecurity = field(default=None)
+    
+
+@dataclass
+class FindAllDataExportersResponse:
+    content_type: str = field(default=None)
+    data_exporter_configs: Optional[List[shared.DataExporterConfig]] = field(default=None)
+    status_code: int = field(default=None)
+    

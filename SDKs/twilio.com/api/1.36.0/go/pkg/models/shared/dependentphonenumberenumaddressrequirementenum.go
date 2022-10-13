@@ -1,0 +1,10 @@
+package shared
+
+type DependentPhoneNumberEnumAddressRequirementEnum string
+
+const (
+	DependentPhoneNumberEnumAddressRequirementEnumNone    DependentPhoneNumberEnumAddressRequirementEnum = "none"
+	DependentPhoneNumberEnumAddressRequirementEnumAny     DependentPhoneNumberEnumAddressRequirementEnum = "any"
+	DependentPhoneNumberEnumAddressRequirementEnumLocal   DependentPhoneNumberEnumAddressRequirementEnum = "local"
+	DependentPhoneNumberEnumAddressRequirementEnumForeign DependentPhoneNumberEnumAddressRequirementEnum = "foreign"
+)

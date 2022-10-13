@@ -1,0 +1,22 @@
+package shared
+
+type GoogleCloudDocumentaiV1beta2DocumentPageAnchorPageRefLayoutTypeEnum string
+
+const (
+	GoogleCloudDocumentaiV1beta2DocumentPageAnchorPageRefLayoutTypeEnumLayoutTypeUnspecified GoogleCloudDocumentaiV1beta2DocumentPageAnchorPageRefLayoutTypeEnum = "LAYOUT_TYPE_UNSPECIFIED"
+	GoogleCloudDocumentaiV1beta2DocumentPageAnchorPageRefLayoutTypeEnumBlock                 GoogleCloudDocumentaiV1beta2DocumentPageAnchorPageRefLayoutTypeEnum = "BLOCK"
+	GoogleCloudDocumentaiV1beta2DocumentPageAnchorPageRefLayoutTypeEnumParagraph             GoogleCloudDocumentaiV1beta2DocumentPageAnchorPageRefLayoutTypeEnum = "PARAGRAPH"
+	GoogleCloudDocumentaiV1beta2DocumentPageAnchorPageRefLayoutTypeEnumLine                  GoogleCloudDocumentaiV1beta2DocumentPageAnchorPageRefLayoutTypeEnum = "LINE"
+	GoogleCloudDocumentaiV1beta2DocumentPageAnchorPageRefLayoutTypeEnumToken                 GoogleCloudDocumentaiV1beta2DocumentPageAnchorPageRefLayoutTypeEnum = "TOKEN"
+	GoogleCloudDocumentaiV1beta2DocumentPageAnchorPageRefLayoutTypeEnumVisualElement         GoogleCloudDocumentaiV1beta2DocumentPageAnchorPageRefLayoutTypeEnum = "VISUAL_ELEMENT"
+	GoogleCloudDocumentaiV1beta2DocumentPageAnchorPageRefLayoutTypeEnumTable                 GoogleCloudDocumentaiV1beta2DocumentPageAnchorPageRefLayoutTypeEnum = "TABLE"
+	GoogleCloudDocumentaiV1beta2DocumentPageAnchorPageRefLayoutTypeEnumFormField             GoogleCloudDocumentaiV1beta2DocumentPageAnchorPageRefLayoutTypeEnum = "FORM_FIELD"
+)
+
+type GoogleCloudDocumentaiV1beta2DocumentPageAnchorPageRef struct {
+	BoundingPoly *GoogleCloudDocumentaiV1beta2BoundingPoly                            `json:"boundingPoly"`
+	Confidence   *float32                                                             `json:"confidence"`
+	LayoutID     *string                                                              `json:"layoutId"`
+	LayoutType   *GoogleCloudDocumentaiV1beta2DocumentPageAnchorPageRefLayoutTypeEnum `json:"layoutType"`
+	Page         *string                                                              `json:"page"`
+}

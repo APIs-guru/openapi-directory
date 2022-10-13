@@ -1,0 +1,15 @@
+from dataclasses import dataclass, field
+from typing import Enum,List,Optional
+from dataclasses_json import dataclass_json
+from . import category_enum
+
+
+@dataclass_json
+@dataclass
+class CreateWebhookRequest:
+    authorization_header: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authorizationHeader' }})
+    categories: Optional[List[category_enum.CategoryEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'categories' }})
+    enabled: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enabled' }})
+    payor_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payorId' }})
+    webhook_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'webhookUrl' }})
+    

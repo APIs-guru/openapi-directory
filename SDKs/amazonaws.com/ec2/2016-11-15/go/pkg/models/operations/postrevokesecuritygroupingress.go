@@ -1,0 +1,40 @@
+package operations
+
+type PostRevokeSecurityGroupIngressActionEnum string
+
+const (
+	PostRevokeSecurityGroupIngressActionEnumRevokeSecurityGroupIngress PostRevokeSecurityGroupIngressActionEnum = "RevokeSecurityGroupIngress"
+)
+
+type PostRevokeSecurityGroupIngressVersionEnum string
+
+const (
+	PostRevokeSecurityGroupIngressVersionEnumTwoThousandAndSixteen1115 PostRevokeSecurityGroupIngressVersionEnum = "2016-11-15"
+)
+
+type PostRevokeSecurityGroupIngressQueryParams struct {
+	Action  PostRevokeSecurityGroupIngressActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostRevokeSecurityGroupIngressVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+}
+
+type PostRevokeSecurityGroupIngressHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type PostRevokeSecurityGroupIngressRequest struct {
+	QueryParams PostRevokeSecurityGroupIngressQueryParams
+	Headers     PostRevokeSecurityGroupIngressHeaders
+	Request     []byte `request:"mediaType=text/xml"`
+}
+
+type PostRevokeSecurityGroupIngressResponse struct {
+	Body        []byte
+	ContentType string
+	StatusCode  int64
+}

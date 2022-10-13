@@ -1,0 +1,12 @@
+package shared
+
+type ReplicationConfigurationReplicatedDiskStagingDiskTypeEnum string
+
+const (
+	ReplicationConfigurationReplicatedDiskStagingDiskTypeEnumAuto     ReplicationConfigurationReplicatedDiskStagingDiskTypeEnum = "AUTO"
+	ReplicationConfigurationReplicatedDiskStagingDiskTypeEnumGp2      ReplicationConfigurationReplicatedDiskStagingDiskTypeEnum = "GP2"
+	ReplicationConfigurationReplicatedDiskStagingDiskTypeEnumIo1      ReplicationConfigurationReplicatedDiskStagingDiskTypeEnum = "IO1"
+	ReplicationConfigurationReplicatedDiskStagingDiskTypeEnumSc1      ReplicationConfigurationReplicatedDiskStagingDiskTypeEnum = "SC1"
+	ReplicationConfigurationReplicatedDiskStagingDiskTypeEnumSt1      ReplicationConfigurationReplicatedDiskStagingDiskTypeEnum = "ST1"
+	ReplicationConfigurationReplicatedDiskStagingDiskTypeEnumStandard ReplicationConfigurationReplicatedDiskStagingDiskTypeEnum = "STANDARD"
+)

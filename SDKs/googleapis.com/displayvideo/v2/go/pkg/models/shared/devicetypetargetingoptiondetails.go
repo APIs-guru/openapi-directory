@@ -1,0 +1,15 @@
+package shared
+
+type DeviceTypeTargetingOptionDetailsDeviceTypeEnum string
+
+const (
+	DeviceTypeTargetingOptionDetailsDeviceTypeEnumDeviceTypeUnspecified DeviceTypeTargetingOptionDetailsDeviceTypeEnum = "DEVICE_TYPE_UNSPECIFIED"
+	DeviceTypeTargetingOptionDetailsDeviceTypeEnumDeviceTypeComputer    DeviceTypeTargetingOptionDetailsDeviceTypeEnum = "DEVICE_TYPE_COMPUTER"
+	DeviceTypeTargetingOptionDetailsDeviceTypeEnumDeviceTypeConnectedTv DeviceTypeTargetingOptionDetailsDeviceTypeEnum = "DEVICE_TYPE_CONNECTED_TV"
+	DeviceTypeTargetingOptionDetailsDeviceTypeEnumDeviceTypeSmartPhone  DeviceTypeTargetingOptionDetailsDeviceTypeEnum = "DEVICE_TYPE_SMART_PHONE"
+	DeviceTypeTargetingOptionDetailsDeviceTypeEnumDeviceTypeTablet      DeviceTypeTargetingOptionDetailsDeviceTypeEnum = "DEVICE_TYPE_TABLET"
+)
+
+type DeviceTypeTargetingOptionDetails struct {
+	DeviceType *DeviceTypeTargetingOptionDetailsDeviceTypeEnum `json:"deviceType"`
+}

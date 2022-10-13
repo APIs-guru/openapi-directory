@@ -1,0 +1,42 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type CustomersDeletePathParams struct {
+	ID string `pathParam:"style=simple,explode=false,name=id"`
+}
+
+type CustomersDeleteQueryParams struct {
+	Raw *bool `queryParam:"style=form,explode=true,name=raw"`
+}
+
+type CustomersDeleteHeaders struct {
+	XApideckAppID      string  `header:"name=x-apideck-app-id"`
+	XApideckConsumerID string  `header:"name=x-apideck-consumer-id"`
+	XApideckServiceID  *string `header:"name=x-apideck-service-id"`
+}
+
+type CustomersDeleteSecurity struct {
+	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
+}
+
+type CustomersDeleteRequest struct {
+	PathParams  CustomersDeletePathParams
+	QueryParams CustomersDeleteQueryParams
+	Headers     CustomersDeleteHeaders
+	Security    CustomersDeleteSecurity
+}
+
+type CustomersDeleteResponse struct {
+	BadRequestResponse      *interface{}
+	ContentType             string
+	DeleteCustomerResponse  *shared.DeleteCustomerResponse
+	NotFoundResponse        *interface{}
+	PaymentRequiredResponse *interface{}
+	StatusCode              int64
+	UnauthorizedResponse    *interface{}
+	UnexpectedErrorResponse *interface{}
+	UnprocessableResponse   *interface{}
+}

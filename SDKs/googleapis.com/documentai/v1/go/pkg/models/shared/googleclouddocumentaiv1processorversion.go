@@ -1,0 +1,25 @@
+package shared
+
+type GoogleCloudDocumentaiV1ProcessorVersionStateEnum string
+
+const (
+	GoogleCloudDocumentaiV1ProcessorVersionStateEnumStateUnspecified GoogleCloudDocumentaiV1ProcessorVersionStateEnum = "STATE_UNSPECIFIED"
+	GoogleCloudDocumentaiV1ProcessorVersionStateEnumDeployed         GoogleCloudDocumentaiV1ProcessorVersionStateEnum = "DEPLOYED"
+	GoogleCloudDocumentaiV1ProcessorVersionStateEnumDeploying        GoogleCloudDocumentaiV1ProcessorVersionStateEnum = "DEPLOYING"
+	GoogleCloudDocumentaiV1ProcessorVersionStateEnumUndeployed       GoogleCloudDocumentaiV1ProcessorVersionStateEnum = "UNDEPLOYED"
+	GoogleCloudDocumentaiV1ProcessorVersionStateEnumUndeploying      GoogleCloudDocumentaiV1ProcessorVersionStateEnum = "UNDEPLOYING"
+	GoogleCloudDocumentaiV1ProcessorVersionStateEnumCreating         GoogleCloudDocumentaiV1ProcessorVersionStateEnum = "CREATING"
+	GoogleCloudDocumentaiV1ProcessorVersionStateEnumDeleting         GoogleCloudDocumentaiV1ProcessorVersionStateEnum = "DELETING"
+	GoogleCloudDocumentaiV1ProcessorVersionStateEnumFailed           GoogleCloudDocumentaiV1ProcessorVersionStateEnum = "FAILED"
+)
+
+type GoogleCloudDocumentaiV1ProcessorVersion struct {
+	CreateTime        *string                                                 `json:"createTime"`
+	DeprecationInfo   *GoogleCloudDocumentaiV1ProcessorVersionDeprecationInfo `json:"deprecationInfo"`
+	DisplayName       *string                                                 `json:"displayName"`
+	GoogleManaged     *bool                                                   `json:"googleManaged"`
+	KmsKeyName        *string                                                 `json:"kmsKeyName"`
+	KmsKeyVersionName *string                                                 `json:"kmsKeyVersionName"`
+	Name              *string                                                 `json:"name"`
+	State             *GoogleCloudDocumentaiV1ProcessorVersionStateEnum       `json:"state"`
+}

@@ -1,0 +1,48 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type EndpointGetAnArtistsAlbumsPathParams struct {
+	ID string `pathParam:"style=simple,explode=false,name=id"`
+}
+
+type EndpointGetAnArtistsAlbumsQueryParams struct {
+	IncludeGroups *string `queryParam:"style=form,explode=true,name=include_groups"`
+	Limit         *int32  `queryParam:"style=form,explode=true,name=limit"`
+	Market        *string `queryParam:"style=form,explode=true,name=market"`
+	Offset        *int32  `queryParam:"style=form,explode=true,name=offset"`
+}
+
+type EndpointGetAnArtistsAlbumsHeaders struct {
+	Authorization string `header:"name=Authorization"`
+}
+
+type EndpointGetAnArtistsAlbumsSecurity struct {
+	SpotifyAuth shared.SchemeSpotifyAuth `security:"scheme,type=oauth2"`
+}
+
+type EndpointGetAnArtistsAlbumsRequest struct {
+	PathParams  EndpointGetAnArtistsAlbumsPathParams
+	QueryParams EndpointGetAnArtistsAlbumsQueryParams
+	Headers     EndpointGetAnArtistsAlbumsHeaders
+	Security    EndpointGetAnArtistsAlbumsSecurity
+}
+
+type EndpointGetAnArtistsAlbums200ApplicationJSON struct {
+	Href     *string                        `json:"href"`
+	Items    []shared.SimplifiedAlbumObject `json:"items"`
+	Limit    *int32                         `json:"limit"`
+	Next     *string                        `json:"next"`
+	Offset   *int32                         `json:"offset"`
+	Previous *string                        `json:"previous"`
+	Total    *int32                         `json:"total"`
+}
+
+type EndpointGetAnArtistsAlbumsResponse struct {
+	ContentType                                        string
+	ErrorResponseObject                                *shared.ErrorResponseObject
+	StatusCode                                         int64
+	EndpointGetAnArtistsAlbums200ApplicationJSONObject *EndpointGetAnArtistsAlbums200ApplicationJSON
+}

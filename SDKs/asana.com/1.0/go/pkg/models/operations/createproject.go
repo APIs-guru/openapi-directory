@@ -1,0 +1,30 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type CreateProjectQueryParams struct {
+	OptFields []string `queryParam:"style=form,explode=false,name=opt_fields"`
+	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
+}
+
+type CreateProjectRequestBody struct {
+	Data *shared.ProjectRequest `json:"data"`
+}
+
+type CreateProjectRequest struct {
+	QueryParams CreateProjectQueryParams
+	Request     CreateProjectRequestBody `request:"mediaType=application/json"`
+}
+
+type CreateProject201ApplicationJSON struct {
+	Data *shared.ProjectResponse `json:"data"`
+}
+
+type CreateProjectResponse struct {
+	ContentType                           string
+	ErrorResponse                         *shared.ErrorResponse
+	StatusCode                            int64
+	CreateProject201ApplicationJSONObject *CreateProject201ApplicationJSON
+}

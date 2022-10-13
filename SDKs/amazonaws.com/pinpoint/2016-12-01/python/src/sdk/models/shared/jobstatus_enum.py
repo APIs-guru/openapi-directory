@@ -1,0 +1,14 @@
+from dataclasses import dataclass, field
+from typing import Enum
+
+class JobStatusEnum(str, Enum):
+    CREATED = "CREATED"
+    PREPARING_FOR_INITIALIZATION = "PREPARING_FOR_INITIALIZATION"
+    INITIALIZING = "INITIALIZING"
+    PROCESSING = "PROCESSING"
+    PENDING_JOB = "PENDING_JOB"
+    COMPLETING = "COMPLETING"
+    COMPLETED = "COMPLETED"
+    FAILING = "FAILING"
+    FAILED = "FAILED"
+

@@ -1,0 +1,10 @@
+from dataclasses import dataclass, field
+from typing import Enum
+
+class InsightFeedbackOptionEnum(str, Enum):
+    VALID_COLLECTION = "VALID_COLLECTION"
+    RECOMMENDATION_USEFUL = "RECOMMENDATION_USEFUL"
+    ALERT_TOO_SENSITIVE = "ALERT_TOO_SENSITIVE"
+    DATA_NOISY_ANOMALY = "DATA_NOISY_ANOMALY"
+    DATA_INCORRECT = "DATA_INCORRECT"
+

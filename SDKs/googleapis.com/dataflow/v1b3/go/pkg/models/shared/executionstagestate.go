@@ -1,0 +1,25 @@
+package shared
+
+type ExecutionStageStateExecutionStageStateEnum string
+
+const (
+	ExecutionStageStateExecutionStageStateEnumJobStateUnknown            ExecutionStageStateExecutionStageStateEnum = "JOB_STATE_UNKNOWN"
+	ExecutionStageStateExecutionStageStateEnumJobStateStopped            ExecutionStageStateExecutionStageStateEnum = "JOB_STATE_STOPPED"
+	ExecutionStageStateExecutionStageStateEnumJobStateRunning            ExecutionStageStateExecutionStageStateEnum = "JOB_STATE_RUNNING"
+	ExecutionStageStateExecutionStageStateEnumJobStateDone               ExecutionStageStateExecutionStageStateEnum = "JOB_STATE_DONE"
+	ExecutionStageStateExecutionStageStateEnumJobStateFailed             ExecutionStageStateExecutionStageStateEnum = "JOB_STATE_FAILED"
+	ExecutionStageStateExecutionStageStateEnumJobStateCancelled          ExecutionStageStateExecutionStageStateEnum = "JOB_STATE_CANCELLED"
+	ExecutionStageStateExecutionStageStateEnumJobStateUpdated            ExecutionStageStateExecutionStageStateEnum = "JOB_STATE_UPDATED"
+	ExecutionStageStateExecutionStageStateEnumJobStateDraining           ExecutionStageStateExecutionStageStateEnum = "JOB_STATE_DRAINING"
+	ExecutionStageStateExecutionStageStateEnumJobStateDrained            ExecutionStageStateExecutionStageStateEnum = "JOB_STATE_DRAINED"
+	ExecutionStageStateExecutionStageStateEnumJobStatePending            ExecutionStageStateExecutionStageStateEnum = "JOB_STATE_PENDING"
+	ExecutionStageStateExecutionStageStateEnumJobStateCancelling         ExecutionStageStateExecutionStageStateEnum = "JOB_STATE_CANCELLING"
+	ExecutionStageStateExecutionStageStateEnumJobStateQueued             ExecutionStageStateExecutionStageStateEnum = "JOB_STATE_QUEUED"
+	ExecutionStageStateExecutionStageStateEnumJobStateResourceCleaningUp ExecutionStageStateExecutionStageStateEnum = "JOB_STATE_RESOURCE_CLEANING_UP"
+)
+
+type ExecutionStageState struct {
+	CurrentStateTime    *string                                     `json:"currentStateTime"`
+	ExecutionStageName  *string                                     `json:"executionStageName"`
+	ExecutionStageState *ExecutionStageStateExecutionStageStateEnum `json:"executionStageState"`
+}

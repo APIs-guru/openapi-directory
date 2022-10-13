@@ -1,0 +1,71 @@
+from dataclasses import dataclass, field
+from typing import Enum,Optional
+
+class GetCreateTrafficMirrorFilterRuleActionEnum(str, Enum):
+    CREATE_TRAFFIC_MIRROR_FILTER_RULE = "CreateTrafficMirrorFilterRule"
+
+
+@dataclass
+class GetCreateTrafficMirrorFilterRuleDestinationPortRange:
+    from_port: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'FromPort' }})
+    to_port: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'ToPort' }})
+    
+class GetCreateTrafficMirrorFilterRuleRuleActionEnum(str, Enum):
+    ACCEPT = "accept"
+    REJECT = "reject"
+
+
+@dataclass
+class GetCreateTrafficMirrorFilterRuleSourcePortRange:
+    from_port: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'FromPort' }})
+    to_port: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'ToPort' }})
+    
+class GetCreateTrafficMirrorFilterRuleTrafficDirectionEnum(str, Enum):
+    INGRESS = "ingress"
+    EGRESS = "egress"
+
+class GetCreateTrafficMirrorFilterRuleVersionEnum(str, Enum):
+    TWO_THOUSAND_AND_SIXTEEN_11_15 = "2016-11-15"
+
+
+@dataclass
+class GetCreateTrafficMirrorFilterRuleQueryParams:
+    action: GetCreateTrafficMirrorFilterRuleActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    client_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ClientToken', 'style': 'form', 'explode': True }})
+    description: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Description', 'style': 'form', 'explode': True }})
+    destination_cidr_block: str = field(default=None, metadata={'query_param': { 'field_name': 'DestinationCidrBlock', 'style': 'form', 'explode': True }})
+    destination_port_range: Optional[GetCreateTrafficMirrorFilterRuleDestinationPortRange] = field(default=None, metadata={'query_param': { 'field_name': 'DestinationPortRange', 'style': 'form', 'explode': True }})
+    dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
+    protocol: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'Protocol', 'style': 'form', 'explode': True }})
+    rule_action: GetCreateTrafficMirrorFilterRuleRuleActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'RuleAction', 'style': 'form', 'explode': True }})
+    rule_number: int = field(default=None, metadata={'query_param': { 'field_name': 'RuleNumber', 'style': 'form', 'explode': True }})
+    source_cidr_block: str = field(default=None, metadata={'query_param': { 'field_name': 'SourceCidrBlock', 'style': 'form', 'explode': True }})
+    source_port_range: Optional[GetCreateTrafficMirrorFilterRuleSourcePortRange] = field(default=None, metadata={'query_param': { 'field_name': 'SourcePortRange', 'style': 'form', 'explode': True }})
+    traffic_direction: GetCreateTrafficMirrorFilterRuleTrafficDirectionEnum = field(default=None, metadata={'query_param': { 'field_name': 'TrafficDirection', 'style': 'form', 'explode': True }})
+    traffic_mirror_filter_id: str = field(default=None, metadata={'query_param': { 'field_name': 'TrafficMirrorFilterId', 'style': 'form', 'explode': True }})
+    version: GetCreateTrafficMirrorFilterRuleVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    
+
+@dataclass
+class GetCreateTrafficMirrorFilterRuleHeaders:
+    x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm' }})
+    x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256' }})
+    x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential' }})
+    x_amz_date: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Date' }})
+    x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token' }})
+    x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature' }})
+    x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders' }})
+    
+
+@dataclass
+class GetCreateTrafficMirrorFilterRuleRequest:
+    query_params: GetCreateTrafficMirrorFilterRuleQueryParams = field(default=None)
+    headers: GetCreateTrafficMirrorFilterRuleHeaders = field(default=None)
+    
+
+@dataclass
+class GetCreateTrafficMirrorFilterRuleResponse:
+    body: bytes = field(default=None)
+    content_type: str = field(default=None)
+    status_code: int = field(default=None)
+    

@@ -1,0 +1,21 @@
+from dataclasses import dataclass, field
+from datetime import datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Enum,Optional
+from dataclasses_json import dataclass_json
+from . import provisioningartifactguidance_enum
+from . import provisioningartifacttype_enum
+
+
+@dataclass_json
+@dataclass
+class ProvisioningArtifactDetail:
+    active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Active' }})
+    created_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreatedTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
+    guidance: Optional[provisioningartifactguidance_enum.ProvisioningArtifactGuidanceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Guidance' }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Id' }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    type: Optional[provisioningartifacttype_enum.ProvisioningArtifactTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    

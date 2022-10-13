@@ -1,0 +1,47 @@
+from dataclasses import dataclass, field
+from typing import Enum,List,Optional
+from dataclasses_json import dataclass_json
+from sdk.models import shared
+
+
+@dataclass
+class ListAcceptedNodesQueryParams:
+    composition: Optional[shared.NodeCompositionEnum] = field(default=None, metadata={'query_param': { 'field_name': 'composition', 'style': 'form', 'explode': True }})
+    include: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'include', 'style': 'form', 'explode': True }})
+    query: Optional[shared.NodeQuery] = field(default=None, metadata={'query_param': { 'field_name': 'query', 'serialization': 'json' }})
+    select: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'select', 'style': 'form', 'explode': True }})
+    where: Optional[List[shared.NodeWhere]] = field(default=None, metadata={'query_param': { 'field_name': 'where', 'serialization': 'json' }})
+    
+
+@dataclass
+class ListAcceptedNodesRequest:
+    query_params: ListAcceptedNodesQueryParams = field(default=None)
+    
+class ListAcceptedNodes200ApplicationJSONActionEnum(str, Enum):
+    LIST_ACCEPTED_NODES = "listAcceptedNodes"
+
+
+@dataclass_json
+@dataclass
+class ListAcceptedNodes200ApplicationJSONData:
+    nodes: List[shared.NodeFull] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nodes' }})
+    
+class ListAcceptedNodes200ApplicationJSONResultEnum(str, Enum):
+    SUCCESS = "success"
+    ERROR = "error"
+
+
+@dataclass_json
+@dataclass
+class ListAcceptedNodes200ApplicationJSON:
+    action: ListAcceptedNodes200ApplicationJSONActionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+    data: ListAcceptedNodes200ApplicationJSONData = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
+    result: ListAcceptedNodes200ApplicationJSONResultEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'result' }})
+    
+
+@dataclass
+class ListAcceptedNodesResponse:
+    content_type: str = field(default=None)
+    status_code: int = field(default=None)
+    list_accepted_nodes_200_application_json_object: Optional[ListAcceptedNodes200ApplicationJSON] = field(default=None)
+    

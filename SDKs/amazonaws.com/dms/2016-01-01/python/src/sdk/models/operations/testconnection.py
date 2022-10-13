@@ -1,0 +1,37 @@
+from dataclasses import dataclass, field
+from typing import Any,Enum,Optional
+from sdk.models import shared
+
+class TestConnectionXAmzTargetEnum(str, Enum):
+    AMAZON_DM_SV20160101_TEST_CONNECTION = "AmazonDMSv20160101.TestConnection"
+
+
+@dataclass
+class TestConnectionHeaders:
+    x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm' }})
+    x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256' }})
+    x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential' }})
+    x_amz_date: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Date' }})
+    x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token' }})
+    x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature' }})
+    x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders' }})
+    x_amz_target: TestConnectionXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target' }})
+    
+
+@dataclass
+class TestConnectionRequest:
+    headers: TestConnectionHeaders = field(default=None)
+    request: shared.TestConnectionMessage = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    
+
+@dataclass
+class TestConnectionResponse:
+    access_denied_fault: Optional[Any] = field(default=None)
+    content_type: str = field(default=None)
+    invalid_resource_state_fault: Optional[Any] = field(default=None)
+    kms_key_not_accessible_fault: Optional[Any] = field(default=None)
+    resource_not_found_fault: Optional[Any] = field(default=None)
+    resource_quota_exceeded_fault: Optional[Any] = field(default=None)
+    status_code: int = field(default=None)
+    test_connection_response: Optional[shared.TestConnectionResponse] = field(default=None)
+    

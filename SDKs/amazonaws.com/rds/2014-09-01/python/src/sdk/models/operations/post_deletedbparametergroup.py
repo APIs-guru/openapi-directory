@@ -1,0 +1,40 @@
+from dataclasses import dataclass, field
+from typing import Enum,Optional
+
+class PostDeleteDbParameterGroupActionEnum(str, Enum):
+    DELETE_DB_PARAMETER_GROUP = "DeleteDBParameterGroup"
+
+class PostDeleteDbParameterGroupVersionEnum(str, Enum):
+    TWO_THOUSAND_AND_FOURTEEN_09_01 = "2014-09-01"
+
+
+@dataclass
+class PostDeleteDbParameterGroupQueryParams:
+    action: PostDeleteDbParameterGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteDbParameterGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    
+
+@dataclass
+class PostDeleteDbParameterGroupHeaders:
+    x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm' }})
+    x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256' }})
+    x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential' }})
+    x_amz_date: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Date' }})
+    x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token' }})
+    x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature' }})
+    x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders' }})
+    
+
+@dataclass
+class PostDeleteDbParameterGroupRequest:
+    query_params: PostDeleteDbParameterGroupQueryParams = field(default=None)
+    headers: PostDeleteDbParameterGroupHeaders = field(default=None)
+    request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
+    
+
+@dataclass
+class PostDeleteDbParameterGroupResponse:
+    body: bytes = field(default=None)
+    content_type: str = field(default=None)
+    status_code: int = field(default=None)
+    

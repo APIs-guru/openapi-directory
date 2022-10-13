@@ -1,0 +1,37 @@
+package shared
+
+type TargetDeviceEnum string
+
+const (
+	TargetDeviceEnumLambda        TargetDeviceEnum = "lambda"
+	TargetDeviceEnumMlM4          TargetDeviceEnum = "ml_m4"
+	TargetDeviceEnumMlM5          TargetDeviceEnum = "ml_m5"
+	TargetDeviceEnumMlC4          TargetDeviceEnum = "ml_c4"
+	TargetDeviceEnumMlC5          TargetDeviceEnum = "ml_c5"
+	TargetDeviceEnumMlP2          TargetDeviceEnum = "ml_p2"
+	TargetDeviceEnumMlP3          TargetDeviceEnum = "ml_p3"
+	TargetDeviceEnumMlG4dn        TargetDeviceEnum = "ml_g4dn"
+	TargetDeviceEnumMlInf1        TargetDeviceEnum = "ml_inf1"
+	TargetDeviceEnumMlEia2        TargetDeviceEnum = "ml_eia2"
+	TargetDeviceEnumJetsonTx1     TargetDeviceEnum = "jetson_tx1"
+	TargetDeviceEnumJetsonTx2     TargetDeviceEnum = "jetson_tx2"
+	TargetDeviceEnumJetsonNano    TargetDeviceEnum = "jetson_nano"
+	TargetDeviceEnumJetsonXavier  TargetDeviceEnum = "jetson_xavier"
+	TargetDeviceEnumRasp3b        TargetDeviceEnum = "rasp3b"
+	TargetDeviceEnumImx8qm        TargetDeviceEnum = "imx8qm"
+	TargetDeviceEnumDeeplens      TargetDeviceEnum = "deeplens"
+	TargetDeviceEnumRk3399        TargetDeviceEnum = "rk3399"
+	TargetDeviceEnumRk3288        TargetDeviceEnum = "rk3288"
+	TargetDeviceEnumAisage        TargetDeviceEnum = "aisage"
+	TargetDeviceEnumSbeC          TargetDeviceEnum = "sbe_c"
+	TargetDeviceEnumQcs605        TargetDeviceEnum = "qcs605"
+	TargetDeviceEnumQcs603        TargetDeviceEnum = "qcs603"
+	TargetDeviceEnumSitaraAm57x   TargetDeviceEnum = "sitara_am57x"
+	TargetDeviceEnumAmbaCv22      TargetDeviceEnum = "amba_cv22"
+	TargetDeviceEnumAmbaCv25      TargetDeviceEnum = "amba_cv25"
+	TargetDeviceEnumX86Win32      TargetDeviceEnum = "x86_win32"
+	TargetDeviceEnumX86Win64      TargetDeviceEnum = "x86_win64"
+	TargetDeviceEnumCoreml        TargetDeviceEnum = "coreml"
+	TargetDeviceEnumJacintoTda4vm TargetDeviceEnum = "jacinto_tda4vm"
+	TargetDeviceEnumImx8mplus     TargetDeviceEnum = "imx8mplus"
+)

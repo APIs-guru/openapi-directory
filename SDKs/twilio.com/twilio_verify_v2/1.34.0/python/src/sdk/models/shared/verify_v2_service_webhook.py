@@ -1,0 +1,25 @@
+from dataclasses import dataclass, field
+from datetime import datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Enum,List,Optional
+from dataclasses_json import dataclass_json
+from sdk.models import shared
+
+
+@dataclass_json
+@dataclass
+class VerifyV2ServiceWebhook:
+    account_sid: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account_sid' }})
+    date_created: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'date_created', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    date_updated: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'date_updated', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    event_types: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'event_types' }})
+    friendly_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'friendly_name' }})
+    service_sid: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'service_sid' }})
+    sid: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sid' }})
+    status: Optional[shared.WebhookEnumStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    version: Optional[shared.WebhookEnumVersionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'version' }})
+    webhook_method: Optional[shared.WebhookEnumMethodsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'webhook_method' }})
+    webhook_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'webhook_url' }})
+    

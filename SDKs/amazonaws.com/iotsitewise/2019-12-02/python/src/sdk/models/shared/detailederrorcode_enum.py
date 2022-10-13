@@ -1,0 +1,7 @@
+from dataclasses import dataclass, field
+from typing import Enum
+
+class DetailedErrorCodeEnum(str, Enum):
+    INCOMPATIBLE_COMPUTE_LOCATION = "INCOMPATIBLE_COMPUTE_LOCATION"
+    INCOMPATIBLE_FORWARDING_CONFIGURATION = "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+

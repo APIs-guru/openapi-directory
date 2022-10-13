@@ -1,0 +1,12 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from dataclasses_json import dataclass_json
+
+
+@dataclass_json
+@dataclass
+class AwsRdsDbInstanceAssociatedRole:
+    feature_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeatureName' }})
+    role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RoleArn' }})
+    status: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
+    

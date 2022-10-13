@@ -1,0 +1,12 @@
+from dataclasses import dataclass, field
+from typing import List,Optional
+from dataclasses_json import dataclass_json
+from . import item
+
+
+@dataclass_json
+@dataclass
+class ListItemsResponse:
+    items: Optional[List[item.Item]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Items' }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    

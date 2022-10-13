@@ -1,0 +1,62 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type ListObjectParentsQueryParams struct {
+	MaxResults *string `queryParam:"style=form,explode=true,name=MaxResults"`
+	NextToken  *string `queryParam:"style=form,explode=true,name=NextToken"`
+}
+
+type ListObjectParentsXAmzConsistencyLevelEnum string
+
+const (
+	ListObjectParentsXAmzConsistencyLevelEnumSerializable ListObjectParentsXAmzConsistencyLevelEnum = "SERIALIZABLE"
+	ListObjectParentsXAmzConsistencyLevelEnumEventual     ListObjectParentsXAmzConsistencyLevelEnum = "EVENTUAL"
+)
+
+type ListObjectParentsHeaders struct {
+	XAmzAlgorithm        *string                                    `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256    *string                                    `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential       *string                                    `header:"name=X-Amz-Credential"`
+	XAmzDate             *string                                    `header:"name=X-Amz-Date"`
+	XAmzSecurityToken    *string                                    `header:"name=X-Amz-Security-Token"`
+	XAmzSignature        *string                                    `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders    *string                                    `header:"name=X-Amz-SignedHeaders"`
+	XAmzConsistencyLevel *ListObjectParentsXAmzConsistencyLevelEnum `header:"name=x-amz-consistency-level"`
+	XAmzDataPartition    string                                     `header:"name=x-amz-data-partition"`
+}
+
+type ListObjectParentsRequestBodyObjectReference struct {
+	Selector *string `json:"Selector"`
+}
+
+type ListObjectParentsRequestBody struct {
+	IncludeAllLinksToEachParent *bool                                       `json:"IncludeAllLinksToEachParent"`
+	MaxResults                  *int64                                      `json:"MaxResults"`
+	NextToken                   *string                                     `json:"NextToken"`
+	ObjectReference             ListObjectParentsRequestBodyObjectReference `json:"ObjectReference"`
+}
+
+type ListObjectParentsRequest struct {
+	QueryParams ListObjectParentsQueryParams
+	Headers     ListObjectParentsHeaders
+	Request     ListObjectParentsRequestBody `request:"mediaType=application/json"`
+}
+
+type ListObjectParentsResponse struct {
+	AccessDeniedException           *interface{}
+	CannotListParentOfRootException *interface{}
+	ContentType                     string
+	DirectoryNotEnabledException    *interface{}
+	InternalServiceException        *interface{}
+	InvalidArnException             *interface{}
+	InvalidNextTokenException       *interface{}
+	LimitExceededException          *interface{}
+	ListObjectParentsResponse       *shared.ListObjectParentsResponse
+	ResourceNotFoundException       *interface{}
+	RetryableConflictException      *interface{}
+	StatusCode                      int64
+	ValidationException             *interface{}
+}

@@ -1,0 +1,61 @@
+from dataclasses import dataclass, field
+from typing import Any,Enum,Optional
+from dataclasses_json import dataclass_json
+from sdk.models import shared
+
+
+@dataclass
+class CreateEnvironmentHeaders:
+    x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm' }})
+    x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256' }})
+    x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential' }})
+    x_amz_date: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Date' }})
+    x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token' }})
+    x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature' }})
+    x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders' }})
+    
+class CreateEnvironmentRequestBodyFederationModeEnum(str, Enum):
+    FEDERATED = "FEDERATED"
+    LOCAL = "LOCAL"
+
+
+@dataclass_json
+@dataclass
+class CreateEnvironmentRequestBodyFederationParameters:
+    application_call_back_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applicationCallBackURL' }})
+    attribute_map: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributeMap' }})
+    federation_provider_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'federationProviderName' }})
+    federation_urn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'federationURN' }})
+    saml_metadata_document: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'samlMetadataDocument' }})
+    saml_metadata_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'samlMetadataURL' }})
+    
+
+@dataclass_json
+@dataclass
+class CreateEnvironmentRequestBody:
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
+    federation_mode: Optional[CreateEnvironmentRequestBodyFederationModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'federationMode' }})
+    federation_parameters: Optional[CreateEnvironmentRequestBodyFederationParameters] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'federationParameters' }})
+    kms_key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kmsKeyId' }})
+    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    
+
+@dataclass
+class CreateEnvironmentRequest:
+    headers: CreateEnvironmentHeaders = field(default=None)
+    request: CreateEnvironmentRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    
+
+@dataclass
+class CreateEnvironmentResponse:
+    access_denied_exception: Optional[Any] = field(default=None)
+    content_type: str = field(default=None)
+    create_environment_response: Optional[shared.CreateEnvironmentResponse] = field(default=None)
+    internal_server_exception: Optional[Any] = field(default=None)
+    limit_exceeded_exception: Optional[Any] = field(default=None)
+    service_quota_exceeded_exception: Optional[Any] = field(default=None)
+    status_code: int = field(default=None)
+    throttling_exception: Optional[Any] = field(default=None)
+    validation_exception: Optional[Any] = field(default=None)
+    

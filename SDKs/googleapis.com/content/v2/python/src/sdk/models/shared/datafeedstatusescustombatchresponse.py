@@ -1,0 +1,12 @@
+from dataclasses import dataclass, field
+from typing import List,Optional
+from dataclasses_json import dataclass_json
+from . import datafeedstatusescustombatchresponseentry
+
+
+@dataclass_json
+@dataclass
+class DatafeedstatusesCustomBatchResponse:
+    entries: Optional[List[datafeedstatusescustombatchresponseentry.DatafeedstatusesCustomBatchResponseEntry]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entries' }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
+    

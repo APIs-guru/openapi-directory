@@ -1,0 +1,42 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type CreateRecordingConfigurationHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type CreateRecordingConfigurationRequestBodyDestinationConfiguration struct {
+	S3 *shared.S3DestinationConfiguration `json:"s3"`
+}
+
+type CreateRecordingConfigurationRequestBody struct {
+	DestinationConfiguration CreateRecordingConfigurationRequestBodyDestinationConfiguration `json:"destinationConfiguration"`
+	Name                     *string                                                         `json:"name"`
+	Tags                     map[string]string                                               `json:"tags"`
+}
+
+type CreateRecordingConfigurationRequest struct {
+	Headers CreateRecordingConfigurationHeaders
+	Request CreateRecordingConfigurationRequestBody `request:"mediaType=application/json"`
+}
+
+type CreateRecordingConfigurationResponse struct {
+	AccessDeniedException                *interface{}
+	ConflictException                    *interface{}
+	ContentType                          string
+	CreateRecordingConfigurationResponse *shared.CreateRecordingConfigurationResponse
+	InternalServerException              *interface{}
+	PendingVerification                  *interface{}
+	ServiceQuotaExceededException        *interface{}
+	StatusCode                           int64
+	ValidationException                  *interface{}
+}

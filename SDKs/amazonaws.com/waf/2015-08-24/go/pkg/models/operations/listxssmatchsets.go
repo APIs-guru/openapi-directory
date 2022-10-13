@@ -1,0 +1,35 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type ListXSSMatchSetsXAmzTargetEnum string
+
+const (
+	ListXSSMatchSetsXAmzTargetEnumAwswaf20150824ListXSSMatchSets ListXSSMatchSetsXAmzTargetEnum = "AWSWAF_20150824.ListXssMatchSets"
+)
+
+type ListXSSMatchSetsHeaders struct {
+	XAmzAlgorithm     *string                        `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                        `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                        `header:"name=X-Amz-Credential"`
+	XAmzDate          *string                        `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string                        `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string                        `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                        `header:"name=X-Amz-SignedHeaders"`
+	XAmzTarget        ListXSSMatchSetsXAmzTargetEnum `header:"name=X-Amz-Target"`
+}
+
+type ListXSSMatchSetsRequest struct {
+	Headers ListXSSMatchSetsHeaders
+	Request shared.ListXSSMatchSetsRequest `request:"mediaType=application/json"`
+}
+
+type ListXSSMatchSetsResponse struct {
+	ContentType                string
+	ListXSSMatchSetsResponse   *shared.ListXSSMatchSetsResponse
+	StatusCode                 int64
+	WafInternalErrorException  *interface{}
+	WafInvalidAccountException *interface{}
+}

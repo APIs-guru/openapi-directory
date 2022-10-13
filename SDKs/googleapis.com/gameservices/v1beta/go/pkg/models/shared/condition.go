@@ -1,0 +1,43 @@
+package shared
+
+type ConditionIamEnum string
+
+const (
+	ConditionIamEnumNoAttr            ConditionIamEnum = "NO_ATTR"
+	ConditionIamEnumAuthority         ConditionIamEnum = "AUTHORITY"
+	ConditionIamEnumAttribution       ConditionIamEnum = "ATTRIBUTION"
+	ConditionIamEnumSecurityRealm     ConditionIamEnum = "SECURITY_REALM"
+	ConditionIamEnumApprover          ConditionIamEnum = "APPROVER"
+	ConditionIamEnumJustificationType ConditionIamEnum = "JUSTIFICATION_TYPE"
+	ConditionIamEnumCredentialsType   ConditionIamEnum = "CREDENTIALS_TYPE"
+	ConditionIamEnumCredsAssertion    ConditionIamEnum = "CREDS_ASSERTION"
+)
+
+type ConditionOpEnum string
+
+const (
+	ConditionOpEnumNoOp       ConditionOpEnum = "NO_OP"
+	ConditionOpEnumEquals     ConditionOpEnum = "EQUALS"
+	ConditionOpEnumNotEquals  ConditionOpEnum = "NOT_EQUALS"
+	ConditionOpEnumIn         ConditionOpEnum = "IN"
+	ConditionOpEnumNotIn      ConditionOpEnum = "NOT_IN"
+	ConditionOpEnumDischarged ConditionOpEnum = "DISCHARGED"
+)
+
+type ConditionSysEnum string
+
+const (
+	ConditionSysEnumNoAttr  ConditionSysEnum = "NO_ATTR"
+	ConditionSysEnumRegion  ConditionSysEnum = "REGION"
+	ConditionSysEnumService ConditionSysEnum = "SERVICE"
+	ConditionSysEnumName    ConditionSysEnum = "NAME"
+	ConditionSysEnumIP      ConditionSysEnum = "IP"
+)
+
+type Condition struct {
+	Iam    *ConditionIamEnum `json:"iam"`
+	Op     *ConditionOpEnum  `json:"op"`
+	Svc    *string           `json:"svc"`
+	Sys    *ConditionSysEnum `json:"sys"`
+	Values []string          `json:"values"`
+}

@@ -1,0 +1,12 @@
+from dataclasses import dataclass, field
+from typing import List,Optional
+from dataclasses_json import dataclass_json
+from . import publicidentifier
+
+
+@dataclass_json
+@dataclass
+class InvoiceRecipient:
+    emails: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'emails' }})
+    public_identifiers: Optional[List[publicidentifier.PublicIdentifier]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'publicIdentifiers' }})
+    

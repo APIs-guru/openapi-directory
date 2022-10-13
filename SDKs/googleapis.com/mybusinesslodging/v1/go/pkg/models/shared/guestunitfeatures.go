@@ -1,0 +1,113 @@
+package shared
+
+type GuestUnitFeaturesBungalowOrVillaExceptionEnum string
+
+const (
+	GuestUnitFeaturesBungalowOrVillaExceptionEnumExceptionUnspecified GuestUnitFeaturesBungalowOrVillaExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	GuestUnitFeaturesBungalowOrVillaExceptionEnumUnderConstruction    GuestUnitFeaturesBungalowOrVillaExceptionEnum = "UNDER_CONSTRUCTION"
+	GuestUnitFeaturesBungalowOrVillaExceptionEnumDependentOnSeason    GuestUnitFeaturesBungalowOrVillaExceptionEnum = "DEPENDENT_ON_SEASON"
+	GuestUnitFeaturesBungalowOrVillaExceptionEnumDependentOnDayOfWeek GuestUnitFeaturesBungalowOrVillaExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+)
+
+type GuestUnitFeaturesConnectingUnitAvailableExceptionEnum string
+
+const (
+	GuestUnitFeaturesConnectingUnitAvailableExceptionEnumExceptionUnspecified GuestUnitFeaturesConnectingUnitAvailableExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	GuestUnitFeaturesConnectingUnitAvailableExceptionEnumUnderConstruction    GuestUnitFeaturesConnectingUnitAvailableExceptionEnum = "UNDER_CONSTRUCTION"
+	GuestUnitFeaturesConnectingUnitAvailableExceptionEnumDependentOnSeason    GuestUnitFeaturesConnectingUnitAvailableExceptionEnum = "DEPENDENT_ON_SEASON"
+	GuestUnitFeaturesConnectingUnitAvailableExceptionEnumDependentOnDayOfWeek GuestUnitFeaturesConnectingUnitAvailableExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+)
+
+type GuestUnitFeaturesExecutiveFloorExceptionEnum string
+
+const (
+	GuestUnitFeaturesExecutiveFloorExceptionEnumExceptionUnspecified GuestUnitFeaturesExecutiveFloorExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	GuestUnitFeaturesExecutiveFloorExceptionEnumUnderConstruction    GuestUnitFeaturesExecutiveFloorExceptionEnum = "UNDER_CONSTRUCTION"
+	GuestUnitFeaturesExecutiveFloorExceptionEnumDependentOnSeason    GuestUnitFeaturesExecutiveFloorExceptionEnum = "DEPENDENT_ON_SEASON"
+	GuestUnitFeaturesExecutiveFloorExceptionEnumDependentOnDayOfWeek GuestUnitFeaturesExecutiveFloorExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+)
+
+type GuestUnitFeaturesMaxAdultOccupantsCountExceptionEnum string
+
+const (
+	GuestUnitFeaturesMaxAdultOccupantsCountExceptionEnumExceptionUnspecified GuestUnitFeaturesMaxAdultOccupantsCountExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	GuestUnitFeaturesMaxAdultOccupantsCountExceptionEnumUnderConstruction    GuestUnitFeaturesMaxAdultOccupantsCountExceptionEnum = "UNDER_CONSTRUCTION"
+	GuestUnitFeaturesMaxAdultOccupantsCountExceptionEnumDependentOnSeason    GuestUnitFeaturesMaxAdultOccupantsCountExceptionEnum = "DEPENDENT_ON_SEASON"
+	GuestUnitFeaturesMaxAdultOccupantsCountExceptionEnumDependentOnDayOfWeek GuestUnitFeaturesMaxAdultOccupantsCountExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+)
+
+type GuestUnitFeaturesMaxChildOccupantsCountExceptionEnum string
+
+const (
+	GuestUnitFeaturesMaxChildOccupantsCountExceptionEnumExceptionUnspecified GuestUnitFeaturesMaxChildOccupantsCountExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	GuestUnitFeaturesMaxChildOccupantsCountExceptionEnumUnderConstruction    GuestUnitFeaturesMaxChildOccupantsCountExceptionEnum = "UNDER_CONSTRUCTION"
+	GuestUnitFeaturesMaxChildOccupantsCountExceptionEnumDependentOnSeason    GuestUnitFeaturesMaxChildOccupantsCountExceptionEnum = "DEPENDENT_ON_SEASON"
+	GuestUnitFeaturesMaxChildOccupantsCountExceptionEnumDependentOnDayOfWeek GuestUnitFeaturesMaxChildOccupantsCountExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+)
+
+type GuestUnitFeaturesMaxOccupantsCountExceptionEnum string
+
+const (
+	GuestUnitFeaturesMaxOccupantsCountExceptionEnumExceptionUnspecified GuestUnitFeaturesMaxOccupantsCountExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	GuestUnitFeaturesMaxOccupantsCountExceptionEnumUnderConstruction    GuestUnitFeaturesMaxOccupantsCountExceptionEnum = "UNDER_CONSTRUCTION"
+	GuestUnitFeaturesMaxOccupantsCountExceptionEnumDependentOnSeason    GuestUnitFeaturesMaxOccupantsCountExceptionEnum = "DEPENDENT_ON_SEASON"
+	GuestUnitFeaturesMaxOccupantsCountExceptionEnumDependentOnDayOfWeek GuestUnitFeaturesMaxOccupantsCountExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+)
+
+type GuestUnitFeaturesPrivateHomeExceptionEnum string
+
+const (
+	GuestUnitFeaturesPrivateHomeExceptionEnumExceptionUnspecified GuestUnitFeaturesPrivateHomeExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	GuestUnitFeaturesPrivateHomeExceptionEnumUnderConstruction    GuestUnitFeaturesPrivateHomeExceptionEnum = "UNDER_CONSTRUCTION"
+	GuestUnitFeaturesPrivateHomeExceptionEnumDependentOnSeason    GuestUnitFeaturesPrivateHomeExceptionEnum = "DEPENDENT_ON_SEASON"
+	GuestUnitFeaturesPrivateHomeExceptionEnumDependentOnDayOfWeek GuestUnitFeaturesPrivateHomeExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+)
+
+type GuestUnitFeaturesSuiteExceptionEnum string
+
+const (
+	GuestUnitFeaturesSuiteExceptionEnumExceptionUnspecified GuestUnitFeaturesSuiteExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	GuestUnitFeaturesSuiteExceptionEnumUnderConstruction    GuestUnitFeaturesSuiteExceptionEnum = "UNDER_CONSTRUCTION"
+	GuestUnitFeaturesSuiteExceptionEnumDependentOnSeason    GuestUnitFeaturesSuiteExceptionEnum = "DEPENDENT_ON_SEASON"
+	GuestUnitFeaturesSuiteExceptionEnumDependentOnDayOfWeek GuestUnitFeaturesSuiteExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+)
+
+type GuestUnitFeaturesTierEnum string
+
+const (
+	GuestUnitFeaturesTierEnumUnitTierUnspecified GuestUnitFeaturesTierEnum = "UNIT_TIER_UNSPECIFIED"
+	GuestUnitFeaturesTierEnumStandardUnit        GuestUnitFeaturesTierEnum = "STANDARD_UNIT"
+	GuestUnitFeaturesTierEnumDeluxeUnit          GuestUnitFeaturesTierEnum = "DELUXE_UNIT"
+)
+
+type GuestUnitFeaturesTierExceptionEnum string
+
+const (
+	GuestUnitFeaturesTierExceptionEnumExceptionUnspecified GuestUnitFeaturesTierExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	GuestUnitFeaturesTierExceptionEnumUnderConstruction    GuestUnitFeaturesTierExceptionEnum = "UNDER_CONSTRUCTION"
+	GuestUnitFeaturesTierExceptionEnumDependentOnSeason    GuestUnitFeaturesTierExceptionEnum = "DEPENDENT_ON_SEASON"
+	GuestUnitFeaturesTierExceptionEnumDependentOnDayOfWeek GuestUnitFeaturesTierExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+)
+
+type GuestUnitFeatures struct {
+	BungalowOrVilla                  *bool                                                  `json:"bungalowOrVilla"`
+	BungalowOrVillaException         *GuestUnitFeaturesBungalowOrVillaExceptionEnum         `json:"bungalowOrVillaException"`
+	ConnectingUnitAvailable          *bool                                                  `json:"connectingUnitAvailable"`
+	ConnectingUnitAvailableException *GuestUnitFeaturesConnectingUnitAvailableExceptionEnum `json:"connectingUnitAvailableException"`
+	ExecutiveFloor                   *bool                                                  `json:"executiveFloor"`
+	ExecutiveFloorException          *GuestUnitFeaturesExecutiveFloorExceptionEnum          `json:"executiveFloorException"`
+	MaxAdultOccupantsCount           *int32                                                 `json:"maxAdultOccupantsCount"`
+	MaxAdultOccupantsCountException  *GuestUnitFeaturesMaxAdultOccupantsCountExceptionEnum  `json:"maxAdultOccupantsCountException"`
+	MaxChildOccupantsCount           *int32                                                 `json:"maxChildOccupantsCount"`
+	MaxChildOccupantsCountException  *GuestUnitFeaturesMaxChildOccupantsCountExceptionEnum  `json:"maxChildOccupantsCountException"`
+	MaxOccupantsCount                *int32                                                 `json:"maxOccupantsCount"`
+	MaxOccupantsCountException       *GuestUnitFeaturesMaxOccupantsCountExceptionEnum       `json:"maxOccupantsCountException"`
+	PrivateHome                      *bool                                                  `json:"privateHome"`
+	PrivateHomeException             *GuestUnitFeaturesPrivateHomeExceptionEnum             `json:"privateHomeException"`
+	Suite                            *bool                                                  `json:"suite"`
+	SuiteException                   *GuestUnitFeaturesSuiteExceptionEnum                   `json:"suiteException"`
+	Tier                             *GuestUnitFeaturesTierEnum                             `json:"tier"`
+	TierException                    *GuestUnitFeaturesTierExceptionEnum                    `json:"tierException"`
+	TotalLivingAreas                 *LivingArea                                            `json:"totalLivingAreas"`
+	Views                            *ViewsFromUnit                                         `json:"views"`
+}

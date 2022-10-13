@@ -1,0 +1,8 @@
+from dataclasses import dataclass, field
+from typing import Enum
+
+class IntegrationTypeEnum(str, Enum):
+    SEND_FINDINGS_TO_SECURITY_HUB = "SEND_FINDINGS_TO_SECURITY_HUB"
+    RECEIVE_FINDINGS_FROM_SECURITY_HUB = "RECEIVE_FINDINGS_FROM_SECURITY_HUB"
+    UPDATE_FINDINGS_IN_SECURITY_HUB = "UPDATE_FINDINGS_IN_SECURITY_HUB"
+

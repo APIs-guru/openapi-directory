@@ -1,0 +1,12 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from dataclasses_json import dataclass_json
+
+
+@dataclass_json
+@dataclass
+class DocumentDefaultVersionDescription:
+    default_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DefaultVersion' }})
+    default_version_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DefaultVersionName' }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    

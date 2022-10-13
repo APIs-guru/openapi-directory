@@ -1,0 +1,1 @@
+from .globalpageload import *

@@ -1,0 +1,17 @@
+package shared
+
+type GoogleAnalyticsAdminV1alphaAudienceSequenceFilterAudienceSequenceStepScopeEnum string
+
+const (
+	GoogleAnalyticsAdminV1alphaAudienceSequenceFilterAudienceSequenceStepScopeEnumAudienceFilterScopeUnspecified       GoogleAnalyticsAdminV1alphaAudienceSequenceFilterAudienceSequenceStepScopeEnum = "AUDIENCE_FILTER_SCOPE_UNSPECIFIED"
+	GoogleAnalyticsAdminV1alphaAudienceSequenceFilterAudienceSequenceStepScopeEnumAudienceFilterScopeWithinSameEvent   GoogleAnalyticsAdminV1alphaAudienceSequenceFilterAudienceSequenceStepScopeEnum = "AUDIENCE_FILTER_SCOPE_WITHIN_SAME_EVENT"
+	GoogleAnalyticsAdminV1alphaAudienceSequenceFilterAudienceSequenceStepScopeEnumAudienceFilterScopeWithinSameSession GoogleAnalyticsAdminV1alphaAudienceSequenceFilterAudienceSequenceStepScopeEnum = "AUDIENCE_FILTER_SCOPE_WITHIN_SAME_SESSION"
+	GoogleAnalyticsAdminV1alphaAudienceSequenceFilterAudienceSequenceStepScopeEnumAudienceFilterScopeAcrossAllSessions GoogleAnalyticsAdminV1alphaAudienceSequenceFilterAudienceSequenceStepScopeEnum = "AUDIENCE_FILTER_SCOPE_ACROSS_ALL_SESSIONS"
+)
+
+type GoogleAnalyticsAdminV1alphaAudienceSequenceFilterAudienceSequenceStep struct {
+	ConstraintDuration *string                                                                         `json:"constraintDuration"`
+	FilterExpression   *GoogleAnalyticsAdminV1alphaAudienceFilterExpression                            `json:"filterExpression"`
+	ImmediatelyFollows *bool                                                                           `json:"immediatelyFollows"`
+	Scope              *GoogleAnalyticsAdminV1alphaAudienceSequenceFilterAudienceSequenceStepScopeEnum `json:"scope"`
+}

@@ -1,0 +1,15 @@
+package shared
+
+type GoogleCloudDialogflowV2SetSuggestionFeatureConfigRequestParticipantRoleEnum string
+
+const (
+	GoogleCloudDialogflowV2SetSuggestionFeatureConfigRequestParticipantRoleEnumRoleUnspecified GoogleCloudDialogflowV2SetSuggestionFeatureConfigRequestParticipantRoleEnum = "ROLE_UNSPECIFIED"
+	GoogleCloudDialogflowV2SetSuggestionFeatureConfigRequestParticipantRoleEnumHumanAgent      GoogleCloudDialogflowV2SetSuggestionFeatureConfigRequestParticipantRoleEnum = "HUMAN_AGENT"
+	GoogleCloudDialogflowV2SetSuggestionFeatureConfigRequestParticipantRoleEnumAutomatedAgent  GoogleCloudDialogflowV2SetSuggestionFeatureConfigRequestParticipantRoleEnum = "AUTOMATED_AGENT"
+	GoogleCloudDialogflowV2SetSuggestionFeatureConfigRequestParticipantRoleEnumEndUser         GoogleCloudDialogflowV2SetSuggestionFeatureConfigRequestParticipantRoleEnum = "END_USER"
+)
+
+type GoogleCloudDialogflowV2SetSuggestionFeatureConfigRequest struct {
+	ParticipantRole         *GoogleCloudDialogflowV2SetSuggestionFeatureConfigRequestParticipantRoleEnum `json:"participantRole"`
+	SuggestionFeatureConfig *GoogleCloudDialogflowV2HumanAgentAssistantConfigSuggestionFeatureConfig     `json:"suggestionFeatureConfig"`
+}

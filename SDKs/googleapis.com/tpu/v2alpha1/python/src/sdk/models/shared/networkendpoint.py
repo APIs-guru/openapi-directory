@@ -1,0 +1,13 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from dataclasses_json import dataclass_json
+from . import accessconfig
+
+
+@dataclass_json
+@dataclass
+class NetworkEndpoint:
+    access_config: Optional[accessconfig.AccessConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accessConfig' }})
+    ip_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ipAddress' }})
+    port: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'port' }})
+    

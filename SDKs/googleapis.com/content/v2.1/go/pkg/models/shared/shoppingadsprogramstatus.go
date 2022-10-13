@@ -1,0 +1,15 @@
+package shared
+
+type ShoppingAdsProgramStatusGlobalStateEnum string
+
+const (
+	ShoppingAdsProgramStatusGlobalStateEnumProgramStateUnspecified ShoppingAdsProgramStatusGlobalStateEnum = "PROGRAM_STATE_UNSPECIFIED"
+	ShoppingAdsProgramStatusGlobalStateEnumNotEnabled              ShoppingAdsProgramStatusGlobalStateEnum = "NOT_ENABLED"
+	ShoppingAdsProgramStatusGlobalStateEnumNoOffersUploaded        ShoppingAdsProgramStatusGlobalStateEnum = "NO_OFFERS_UPLOADED"
+	ShoppingAdsProgramStatusGlobalStateEnumEnabled                 ShoppingAdsProgramStatusGlobalStateEnum = "ENABLED"
+)
+
+type ShoppingAdsProgramStatus struct {
+	GlobalState    *ShoppingAdsProgramStatusGlobalStateEnum `json:"globalState"`
+	RegionStatuses []ShoppingAdsProgramStatusRegionStatus   `json:"regionStatuses"`
+}

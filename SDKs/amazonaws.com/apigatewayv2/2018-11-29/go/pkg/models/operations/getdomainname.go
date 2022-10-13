@@ -1,0 +1,32 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type GetDomainNamePathParams struct {
+	DomainName string `pathParam:"style=simple,explode=false,name=domainName"`
+}
+
+type GetDomainNameHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type GetDomainNameRequest struct {
+	PathParams GetDomainNamePathParams
+	Headers    GetDomainNameHeaders
+}
+
+type GetDomainNameResponse struct {
+	ContentType              string
+	GetDomainNameResponse    *shared.GetDomainNameResponse
+	NotFoundException        *interface{}
+	StatusCode               int64
+	TooManyRequestsException *interface{}
+}

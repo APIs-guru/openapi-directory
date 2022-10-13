@@ -1,0 +1,38 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from sdk.models import shared
+
+
+@dataclass
+class OrderAPIChangeShippingDetailsQueryParams:
+    order_id: int = field(default=None, metadata={'query_param': { 'field_name': 'orderId', 'style': 'form', 'explode': True }})
+    
+
+@dataclass
+class OrderAPIChangeShippingDetailsHeaders:
+    x_auth_key: str = field(default=None, metadata={'header': { 'field_name': 'x-auth-key' }})
+    x_auth_secret: str = field(default=None, metadata={'header': { 'field_name': 'x-auth-secret' }})
+    
+
+@dataclass
+class OrderAPIChangeShippingDetailsRequests:
+    application_xml: bytes = field(default=None, metadata={'request': { 'media_type': 'application/xml' }})
+    order_shipping_details_api_model: Optional[shared.OrderShippingDetailsAPIModel] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    order_shipping_details_api_model1: Optional[shared.OrderShippingDetailsAPIModel] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    order_shipping_details_api_model2: Optional[shared.OrderShippingDetailsAPIModel] = field(default=None, metadata={'request': { 'media_type': 'text/json' }})
+    text_html: bytes = field(default=None, metadata={'request': { 'media_type': 'text/html' }})
+    text_xml: bytes = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
+    
+
+@dataclass
+class OrderAPIChangeShippingDetailsRequest:
+    query_params: OrderAPIChangeShippingDetailsQueryParams = field(default=None)
+    headers: OrderAPIChangeShippingDetailsHeaders = field(default=None)
+    request: OrderAPIChangeShippingDetailsRequests = field(default=None)
+    
+
+@dataclass
+class OrderAPIChangeShippingDetailsResponse:
+    content_type: str = field(default=None)
+    status_code: int = field(default=None)
+    

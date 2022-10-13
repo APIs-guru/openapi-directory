@@ -1,0 +1,33 @@
+package operations
+
+type DeleteAuthorizerPathParams struct {
+	AuthorizerName string `pathParam:"style=simple,explode=false,name=authorizerName"`
+}
+
+type DeleteAuthorizerHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type DeleteAuthorizerRequest struct {
+	PathParams DeleteAuthorizerPathParams
+	Headers    DeleteAuthorizerHeaders
+}
+
+type DeleteAuthorizerResponse struct {
+	ContentType                 string
+	DeleteAuthorizerResponse    map[string]interface{}
+	DeleteConflictException     *interface{}
+	InternalFailureException    *interface{}
+	InvalidRequestException     *interface{}
+	ResourceNotFoundException   *interface{}
+	ServiceUnavailableException *interface{}
+	StatusCode                  int64
+	ThrottlingException         *interface{}
+	UnauthorizedException       *interface{}
+}

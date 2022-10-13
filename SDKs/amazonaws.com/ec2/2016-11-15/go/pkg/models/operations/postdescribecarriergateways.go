@@ -1,0 +1,42 @@
+package operations
+
+type PostDescribeCarrierGatewaysActionEnum string
+
+const (
+	PostDescribeCarrierGatewaysActionEnumDescribeCarrierGateways PostDescribeCarrierGatewaysActionEnum = "DescribeCarrierGateways"
+)
+
+type PostDescribeCarrierGatewaysVersionEnum string
+
+const (
+	PostDescribeCarrierGatewaysVersionEnumTwoThousandAndSixteen1115 PostDescribeCarrierGatewaysVersionEnum = "2016-11-15"
+)
+
+type PostDescribeCarrierGatewaysQueryParams struct {
+	Action     PostDescribeCarrierGatewaysActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	MaxResults *string                                `queryParam:"style=form,explode=true,name=MaxResults"`
+	NextToken  *string                                `queryParam:"style=form,explode=true,name=NextToken"`
+	Version    PostDescribeCarrierGatewaysVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+}
+
+type PostDescribeCarrierGatewaysHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type PostDescribeCarrierGatewaysRequest struct {
+	QueryParams PostDescribeCarrierGatewaysQueryParams
+	Headers     PostDescribeCarrierGatewaysHeaders
+	Request     []byte `request:"mediaType=text/xml"`
+}
+
+type PostDescribeCarrierGatewaysResponse struct {
+	Body        []byte
+	ContentType string
+	StatusCode  int64
+}

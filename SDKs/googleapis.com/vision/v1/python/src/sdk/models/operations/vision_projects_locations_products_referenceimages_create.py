@@ -1,0 +1,58 @@
+from dataclasses import dataclass, field
+from typing import Enum,Optional
+from sdk.models import shared
+
+
+@dataclass
+class VisionProjectsLocationsProductsReferenceImagesCreatePathParams:
+    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    
+
+@dataclass
+class VisionProjectsLocationsProductsReferenceImagesCreateQueryParams:
+    dollar_xgafv: Optional[shared.XgafvEnum] = field(default=None, metadata={'query_param': { 'field_name': '$.xgafv', 'style': 'form', 'explode': True }})
+    access_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'access_token', 'style': 'form', 'explode': True }})
+    alt: Optional[shared.AltEnum] = field(default=None, metadata={'query_param': { 'field_name': 'alt', 'style': 'form', 'explode': True }})
+    callback: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'callback', 'style': 'form', 'explode': True }})
+    fields: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fields', 'style': 'form', 'explode': True }})
+    key: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'key', 'style': 'form', 'explode': True }})
+    oauth_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'oauth_token', 'style': 'form', 'explode': True }})
+    pretty_print: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'prettyPrint', 'style': 'form', 'explode': True }})
+    quota_user: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'quotaUser', 'style': 'form', 'explode': True }})
+    reference_image_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'referenceImageId', 'style': 'form', 'explode': True }})
+    upload_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'uploadType', 'style': 'form', 'explode': True }})
+    upload_protocol: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'upload_protocol', 'style': 'form', 'explode': True }})
+    
+
+@dataclass
+class VisionProjectsLocationsProductsReferenceImagesCreateSecurityOption1:
+    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    
+
+@dataclass
+class VisionProjectsLocationsProductsReferenceImagesCreateSecurityOption2:
+    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    
+
+@dataclass
+class VisionProjectsLocationsProductsReferenceImagesCreateSecurity:
+    option1: Optional[VisionProjectsLocationsProductsReferenceImagesCreateSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
+    option2: Optional[VisionProjectsLocationsProductsReferenceImagesCreateSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    
+
+@dataclass
+class VisionProjectsLocationsProductsReferenceImagesCreateRequest:
+    path_params: VisionProjectsLocationsProductsReferenceImagesCreatePathParams = field(default=None)
+    query_params: VisionProjectsLocationsProductsReferenceImagesCreateQueryParams = field(default=None)
+    request: Optional[shared.ReferenceImage] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    security: VisionProjectsLocationsProductsReferenceImagesCreateSecurity = field(default=None)
+    
+
+@dataclass
+class VisionProjectsLocationsProductsReferenceImagesCreateResponse:
+    content_type: str = field(default=None)
+    reference_image: Optional[shared.ReferenceImage] = field(default=None)
+    status_code: int = field(default=None)
+    

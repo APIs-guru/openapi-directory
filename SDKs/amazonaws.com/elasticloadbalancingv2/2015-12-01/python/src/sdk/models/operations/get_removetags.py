@@ -1,0 +1,41 @@
+from dataclasses import dataclass, field
+from typing import Enum,List,Optional
+
+class GetRemoveTagsActionEnum(str, Enum):
+    REMOVE_TAGS = "RemoveTags"
+
+class GetRemoveTagsVersionEnum(str, Enum):
+    TWO_THOUSAND_AND_FIFTEEN_12_01 = "2015-12-01"
+
+
+@dataclass
+class GetRemoveTagsQueryParams:
+    action: GetRemoveTagsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    resource_arns: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'ResourceArns', 'style': 'form', 'explode': True }})
+    tag_keys: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'TagKeys', 'style': 'form', 'explode': True }})
+    version: GetRemoveTagsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    
+
+@dataclass
+class GetRemoveTagsHeaders:
+    x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm' }})
+    x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256' }})
+    x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential' }})
+    x_amz_date: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Date' }})
+    x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token' }})
+    x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature' }})
+    x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders' }})
+    
+
+@dataclass
+class GetRemoveTagsRequest:
+    query_params: GetRemoveTagsQueryParams = field(default=None)
+    headers: GetRemoveTagsHeaders = field(default=None)
+    
+
+@dataclass
+class GetRemoveTagsResponse:
+    body: bytes = field(default=None)
+    content_type: str = field(default=None)
+    status_code: int = field(default=None)
+    

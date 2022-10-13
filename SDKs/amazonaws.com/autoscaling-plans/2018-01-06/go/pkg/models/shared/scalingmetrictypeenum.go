@@ -1,0 +1,19 @@
+package shared
+
+type ScalingMetricTypeEnum string
+
+const (
+	ScalingMetricTypeEnumAsgAverageCPUUtilization                 ScalingMetricTypeEnum = "ASGAverageCPUUtilization"
+	ScalingMetricTypeEnumAsgAverageNetworkIn                      ScalingMetricTypeEnum = "ASGAverageNetworkIn"
+	ScalingMetricTypeEnumAsgAverageNetworkOut                     ScalingMetricTypeEnum = "ASGAverageNetworkOut"
+	ScalingMetricTypeEnumDynamoDbReadCapacityUtilization          ScalingMetricTypeEnum = "DynamoDBReadCapacityUtilization"
+	ScalingMetricTypeEnumDynamoDbWriteCapacityUtilization         ScalingMetricTypeEnum = "DynamoDBWriteCapacityUtilization"
+	ScalingMetricTypeEnumEcsServiceAverageCPUUtilization          ScalingMetricTypeEnum = "ECSServiceAverageCPUUtilization"
+	ScalingMetricTypeEnumEcsServiceAverageMemoryUtilization       ScalingMetricTypeEnum = "ECSServiceAverageMemoryUtilization"
+	ScalingMetricTypeEnumAlbRequestCountPerTarget                 ScalingMetricTypeEnum = "ALBRequestCountPerTarget"
+	ScalingMetricTypeEnumRdsReaderAverageCPUUtilization           ScalingMetricTypeEnum = "RDSReaderAverageCPUUtilization"
+	ScalingMetricTypeEnumRdsReaderAverageDatabaseConnections      ScalingMetricTypeEnum = "RDSReaderAverageDatabaseConnections"
+	ScalingMetricTypeEnumEc2SpotFleetRequestAverageCPUUtilization ScalingMetricTypeEnum = "EC2SpotFleetRequestAverageCPUUtilization"
+	ScalingMetricTypeEnumEc2SpotFleetRequestAverageNetworkIn      ScalingMetricTypeEnum = "EC2SpotFleetRequestAverageNetworkIn"
+	ScalingMetricTypeEnumEc2SpotFleetRequestAverageNetworkOut     ScalingMetricTypeEnum = "EC2SpotFleetRequestAverageNetworkOut"
+)

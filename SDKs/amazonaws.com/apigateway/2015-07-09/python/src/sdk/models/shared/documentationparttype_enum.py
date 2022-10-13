@@ -1,0 +1,17 @@
+from dataclasses import dataclass, field
+from typing import Enum
+
+class DocumentationPartTypeEnum(str, Enum):
+    API = "API"
+    AUTHORIZER = "AUTHORIZER"
+    MODEL = "MODEL"
+    RESOURCE = "RESOURCE"
+    METHOD = "METHOD"
+    PATH_PARAMETER = "PATH_PARAMETER"
+    QUERY_PARAMETER = "QUERY_PARAMETER"
+    REQUEST_HEADER = "REQUEST_HEADER"
+    REQUEST_BODY = "REQUEST_BODY"
+    RESPONSE = "RESPONSE"
+    RESPONSE_HEADER = "RESPONSE_HEADER"
+    RESPONSE_BODY = "RESPONSE_BODY"
+

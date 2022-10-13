@@ -1,0 +1,9 @@
+package shared
+
+type ServiceParticipantConversationEnumStateEnum string
+
+const (
+	ServiceParticipantConversationEnumStateEnumInactive ServiceParticipantConversationEnumStateEnum = "inactive"
+	ServiceParticipantConversationEnumStateEnumActive   ServiceParticipantConversationEnumStateEnum = "active"
+	ServiceParticipantConversationEnumStateEnumClosed   ServiceParticipantConversationEnumStateEnum = "closed"
+)

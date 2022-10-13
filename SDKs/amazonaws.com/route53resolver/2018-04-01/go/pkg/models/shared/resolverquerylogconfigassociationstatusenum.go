@@ -1,0 +1,11 @@
+package shared
+
+type ResolverQueryLogConfigAssociationStatusEnum string
+
+const (
+	ResolverQueryLogConfigAssociationStatusEnumCreating     ResolverQueryLogConfigAssociationStatusEnum = "CREATING"
+	ResolverQueryLogConfigAssociationStatusEnumActive       ResolverQueryLogConfigAssociationStatusEnum = "ACTIVE"
+	ResolverQueryLogConfigAssociationStatusEnumActionNeeded ResolverQueryLogConfigAssociationStatusEnum = "ACTION_NEEDED"
+	ResolverQueryLogConfigAssociationStatusEnumDeleting     ResolverQueryLogConfigAssociationStatusEnum = "DELETING"
+	ResolverQueryLogConfigAssociationStatusEnumFailed       ResolverQueryLogConfigAssociationStatusEnum = "FAILED"
+)

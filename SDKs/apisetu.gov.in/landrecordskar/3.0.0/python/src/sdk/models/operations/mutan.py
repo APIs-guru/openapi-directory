@@ -1,0 +1,152 @@
+from dataclasses import dataclass, field
+from typing import Any,Enum,Optional
+from dataclasses_json import dataclass_json
+
+
+@dataclass_json
+@dataclass
+class MutanRequestBodyCertificateParameters:
+    document_number: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DocumentNumber' }})
+    
+class MutanRequestBodyFormatEnum(str, Enum):
+    XML = "xml"
+    PDF = "pdf"
+
+
+@dataclass_json
+@dataclass
+class MutanRequestBody:
+    certificate_parameters: Optional[MutanRequestBodyCertificateParameters] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'certificateParameters' }})
+    consent_artifact: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'consentArtifact' }})
+    format: MutanRequestBodyFormatEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'format' }})
+    txn_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'txnId' }})
+    
+
+@dataclass
+class MutanSecurity:
+    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    client_id: shared.SchemeClientID = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    
+
+@dataclass
+class MutanRequest:
+    request: Optional[MutanRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    security: MutanSecurity = field(default=None)
+    
+class Mutan400ApplicationJSONErrorEnum(str, Enum):
+    MISSING_PARAMETER = "missing_parameter"
+    INVALID_PARAMETER = "invalid_parameter"
+    INVALID_FORMAT = "invalid_format"
+    INVALID_TXNID = "invalid_txnid"
+    INVALID_CONSENTID = "invalid_consentid"
+
+class Mutan400ApplicationJSONErrorDescriptionEnum(str, Enum):
+    PLEASE_PROVIDE_ALL_MANDATORY_PARAMETERS = "Please provide all mandatory parameters"
+    BAD_REQUEST = "Bad request"
+    THE_FORMAT_PARAMETER_IS_INVALID = "The format parameter is invalid"
+    THE_TXN_ID_PARAMETER_MUST_BE_IN_UUID_FORMAT = "The txnId parameter must be in UUID format"
+    THE_CONSENT_ID_PARAMETER_MUST_BE_IN_UUID_FORMAT = "The consentId parameter must be in UUID format"
+
+
+@dataclass_json
+@dataclass
+class Mutan400ApplicationJSON:
+    error: Optional[Mutan400ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error_description: Optional[Mutan400ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    
+class Mutan401ApplicationJSONErrorEnum(str, Enum):
+    INVALID_AUTHENTICATION = "invalid_authentication"
+    INVALID_AUTHORIZATION = "invalid_authorization"
+
+class Mutan401ApplicationJSONErrorDescriptionEnum(str, Enum):
+    AUTHENTICATION_FAILED = "Authentication failed"
+    YOU_ARE_NOT_AUTHORIZED_TO_USE_THIS_API = "You are not authorized to use this API"
+
+
+@dataclass_json
+@dataclass
+class Mutan401ApplicationJSON:
+    error: Optional[Mutan401ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error_description: Optional[Mutan401ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    
+class Mutan404ApplicationJSONErrorEnum(str, Enum):
+    RECORD_NOT_FOUND = "record_not_found"
+    URL_NOT_FOUND = "url_not_found"
+
+class Mutan404ApplicationJSONErrorDescriptionEnum(str, Enum):
+    NO_RECORD_FOUND = "No record found"
+    YOUR_API_URL_OR_PATH_IS_INCORRECT = "Your API url or path is incorrect"
+
+
+@dataclass_json
+@dataclass
+class Mutan404ApplicationJSON:
+    error: Optional[Mutan404ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error_description: Optional[Mutan404ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    
+class Mutan500ApplicationJSONErrorEnum(str, Enum):
+    INTERNAL_SERVER_ERROR = "internal_server_error"
+
+class Mutan500ApplicationJSONErrorDescriptionEnum(str, Enum):
+    INTERNAL_SERVER_ERROR = "Internal server error"
+
+
+@dataclass_json
+@dataclass
+class Mutan500ApplicationJSON:
+    error: Optional[Mutan500ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error_description: Optional[Mutan500ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    
+class Mutan502ApplicationJSONErrorEnum(str, Enum):
+    BAD_GATEWY = "bad_gatewy"
+
+class Mutan502ApplicationJSONErrorDescriptionEnum(str, Enum):
+    PUBLISHER_SERVICE_RETURNED_AN_INVALID_RESPONSE = "Publisher service returned an invalid response"
+
+
+@dataclass_json
+@dataclass
+class Mutan502ApplicationJSON:
+    error: Optional[Mutan502ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error_description: Optional[Mutan502ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    
+class Mutan503ApplicationJSONErrorEnum(str, Enum):
+    SERVICE_UNAVAILABLE = "service_unavailable"
+
+class Mutan503ApplicationJSONErrorDescriptionEnum(str, Enum):
+    PUBLISHER_SERVICE_IS_TEMPORARILY_UNAVAILABLE = "Publisher service is temporarily unavailable"
+
+
+@dataclass_json
+@dataclass
+class Mutan503ApplicationJSON:
+    error: Optional[Mutan503ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error_description: Optional[Mutan503ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    
+class Mutan504ApplicationJSONErrorEnum(str, Enum):
+    GATEWAY_TIMEOUT = "gateway_timeout"
+
+class Mutan504ApplicationJSONErrorDescriptionEnum(str, Enum):
+    PUBLISHER_SERVICE_DID_NOT_RESPOND_IN_TIME = "Publisher service did not respond in time"
+
+
+@dataclass_json
+@dataclass
+class Mutan504ApplicationJSON:
+    error: Optional[Mutan504ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error_description: Optional[Mutan504ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    
+
+@dataclass
+class MutanResponse:
+    body: bytes = field(default=None)
+    content_type: str = field(default=None)
+    status_code: int = field(default=None)
+    mutan_400_application_json_object: Optional[Mutan400ApplicationJSON] = field(default=None)
+    mutan_401_application_json_object: Optional[Mutan401ApplicationJSON] = field(default=None)
+    mutan_404_application_json_object: Optional[Mutan404ApplicationJSON] = field(default=None)
+    mutan_500_application_json_object: Optional[Mutan500ApplicationJSON] = field(default=None)
+    mutan_502_application_json_object: Optional[Mutan502ApplicationJSON] = field(default=None)
+    mutan_503_application_json_object: Optional[Mutan503ApplicationJSON] = field(default=None)
+    mutan_504_application_json_object: Optional[Mutan504ApplicationJSON] = field(default=None)
+    

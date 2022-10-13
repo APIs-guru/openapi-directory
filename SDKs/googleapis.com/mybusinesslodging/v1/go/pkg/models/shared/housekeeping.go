@@ -1,0 +1,37 @@
+package shared
+
+type HousekeepingDailyHousekeepingExceptionEnum string
+
+const (
+	HousekeepingDailyHousekeepingExceptionEnumExceptionUnspecified HousekeepingDailyHousekeepingExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	HousekeepingDailyHousekeepingExceptionEnumUnderConstruction    HousekeepingDailyHousekeepingExceptionEnum = "UNDER_CONSTRUCTION"
+	HousekeepingDailyHousekeepingExceptionEnumDependentOnSeason    HousekeepingDailyHousekeepingExceptionEnum = "DEPENDENT_ON_SEASON"
+	HousekeepingDailyHousekeepingExceptionEnumDependentOnDayOfWeek HousekeepingDailyHousekeepingExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+)
+
+type HousekeepingHousekeepingAvailableExceptionEnum string
+
+const (
+	HousekeepingHousekeepingAvailableExceptionEnumExceptionUnspecified HousekeepingHousekeepingAvailableExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	HousekeepingHousekeepingAvailableExceptionEnumUnderConstruction    HousekeepingHousekeepingAvailableExceptionEnum = "UNDER_CONSTRUCTION"
+	HousekeepingHousekeepingAvailableExceptionEnumDependentOnSeason    HousekeepingHousekeepingAvailableExceptionEnum = "DEPENDENT_ON_SEASON"
+	HousekeepingHousekeepingAvailableExceptionEnumDependentOnDayOfWeek HousekeepingHousekeepingAvailableExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+)
+
+type HousekeepingTurndownServiceExceptionEnum string
+
+const (
+	HousekeepingTurndownServiceExceptionEnumExceptionUnspecified HousekeepingTurndownServiceExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	HousekeepingTurndownServiceExceptionEnumUnderConstruction    HousekeepingTurndownServiceExceptionEnum = "UNDER_CONSTRUCTION"
+	HousekeepingTurndownServiceExceptionEnumDependentOnSeason    HousekeepingTurndownServiceExceptionEnum = "DEPENDENT_ON_SEASON"
+	HousekeepingTurndownServiceExceptionEnumDependentOnDayOfWeek HousekeepingTurndownServiceExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+)
+
+type Housekeeping struct {
+	DailyHousekeeping              *bool                                           `json:"dailyHousekeeping"`
+	DailyHousekeepingException     *HousekeepingDailyHousekeepingExceptionEnum     `json:"dailyHousekeepingException"`
+	HousekeepingAvailable          *bool                                           `json:"housekeepingAvailable"`
+	HousekeepingAvailableException *HousekeepingHousekeepingAvailableExceptionEnum `json:"housekeepingAvailableException"`
+	TurndownService                *bool                                           `json:"turndownService"`
+	TurndownServiceException       *HousekeepingTurndownServiceExceptionEnum       `json:"turndownServiceException"`
+}

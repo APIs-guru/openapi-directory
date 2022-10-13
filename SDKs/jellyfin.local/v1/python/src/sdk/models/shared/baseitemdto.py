@@ -1,0 +1,203 @@
+from dataclasses import dataclass, field
+from datetime import datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Enum,List,Optional
+from dataclasses_json import dataclass_json
+from . import dayofweek_enum
+from . import nameguidpair
+from . import nameguidpair
+from . import programaudio_enum
+from . import channeltype_enum
+from . import chapterinfo
+from . import baseitemdto
+from . import externalurl
+from . import nameguidpair
+from . import imageorientation_enum
+from . import isotype_enum
+from . import locationtype_enum
+from . import metadatafield_enum
+from . import mediasourceinfo
+from . import mediastream
+from . import baseitemperson
+from . import playaccess_enum
+from . import mediaurl
+from . import nameguidpair
+from . import useritemdatadto
+from . import video3dformat_enum
+from . import videotype_enum
+
+
+@dataclass_json
+@dataclass
+class BaseItemDtoImageBlurHashes:
+    art: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Art' }})
+    backdrop: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Backdrop' }})
+    banner: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Banner' }})
+    box: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Box' }})
+    box_rear: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BoxRear' }})
+    chapter: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Chapter' }})
+    disc: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Disc' }})
+    logo: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Logo' }})
+    menu: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Menu' }})
+    primary: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Primary' }})
+    profile: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Profile' }})
+    screenshot: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Screenshot' }})
+    thumb: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Thumb' }})
+    
+
+@dataclass_json
+@dataclass
+class BaseItemDto:
+    air_days: Optional[List[dayofweek_enum.DayOfWeekEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AirDays' }})
+    air_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AirTime' }})
+    airs_after_season_number: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AirsAfterSeasonNumber' }})
+    airs_before_episode_number: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AirsBeforeEpisodeNumber' }})
+    airs_before_season_number: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AirsBeforeSeasonNumber' }})
+    album: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Album' }})
+    album_artist: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AlbumArtist' }})
+    album_artists: Optional[List[nameguidpair.NameGUIDPair]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AlbumArtists' }})
+    album_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AlbumCount' }})
+    album_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AlbumId' }})
+    album_primary_image_tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AlbumPrimaryImageTag' }})
+    altitude: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Altitude' }})
+    aperture: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Aperture' }})
+    artist_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ArtistCount' }})
+    artist_items: Optional[List[nameguidpair.NameGUIDPair]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ArtistItems' }})
+    artists: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Artists' }})
+    aspect_ratio: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AspectRatio' }})
+    audio: Optional[programaudio_enum.ProgramAudioEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Audio' }})
+    backdrop_image_tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BackdropImageTags' }})
+    camera_make: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CameraMake' }})
+    camera_model: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CameraModel' }})
+    can_delete: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CanDelete' }})
+    can_download: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CanDownload' }})
+    channel_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ChannelId' }})
+    channel_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ChannelName' }})
+    channel_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ChannelNumber' }})
+    channel_primary_image_tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ChannelPrimaryImageTag' }})
+    channel_type: Optional[channeltype_enum.ChannelTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ChannelType' }})
+    chapters: Optional[List[chapterinfo.ChapterInfo]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Chapters' }})
+    child_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ChildCount' }})
+    collection_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CollectionType' }})
+    community_rating: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CommunityRating' }})
+    completion_percentage: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CompletionPercentage' }})
+    container: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Container' }})
+    critic_rating: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CriticRating' }})
+    cumulative_run_time_ticks: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CumulativeRunTimeTicks' }})
+    current_program: Optional[baseitemdto.BaseItemDto] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CurrentProgram' }})
+    custom_rating: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CustomRating' }})
+    date_created: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DateCreated', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    date_last_media_added: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DateLastMediaAdded', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    display_order: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DisplayOrder' }})
+    display_preferences_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DisplayPreferencesId' }})
+    enable_media_source_display: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EnableMediaSourceDisplay' }})
+    end_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EndDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    episode_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EpisodeCount' }})
+    episode_title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EpisodeTitle' }})
+    etag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Etag' }})
+    exposure_time: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ExposureTime' }})
+    external_urls: Optional[List[externalurl.ExternalURL]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ExternalUrls' }})
+    extra_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ExtraType' }})
+    focal_length: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FocalLength' }})
+    forced_sort_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ForcedSortName' }})
+    genre_items: Optional[List[nameguidpair.NameGUIDPair]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GenreItems' }})
+    genres: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Genres' }})
+    has_subtitles: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'HasSubtitles' }})
+    height: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Height' }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Id' }})
+    image_blur_hashes: Optional[BaseItemDtoImageBlurHashes] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ImageBlurHashes' }})
+    image_orientation: Optional[imageorientation_enum.ImageOrientationEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ImageOrientation' }})
+    image_tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ImageTags' }})
+    index_number: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IndexNumber' }})
+    index_number_end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IndexNumberEnd' }})
+    is_folder: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IsFolder' }})
+    is_hd: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IsHD' }})
+    is_kids: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IsKids' }})
+    is_live: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IsLive' }})
+    is_movie: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IsMovie' }})
+    is_news: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IsNews' }})
+    is_place_holder: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IsPlaceHolder' }})
+    is_premiere: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IsPremiere' }})
+    is_repeat: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IsRepeat' }})
+    is_series: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IsSeries' }})
+    is_sports: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IsSports' }})
+    iso_speed_rating: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IsoSpeedRating' }})
+    iso_type: Optional[isotype_enum.IsoTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IsoType' }})
+    latitude: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Latitude' }})
+    local_trailer_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LocalTrailerCount' }})
+    location_type: Optional[locationtype_enum.LocationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LocationType' }})
+    lock_data: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LockData' }})
+    locked_fields: Optional[List[metadatafield_enum.MetadataFieldEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LockedFields' }})
+    longitude: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Longitude' }})
+    media_source_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MediaSourceCount' }})
+    media_sources: Optional[List[mediasourceinfo.MediaSourceInfo]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MediaSources' }})
+    media_streams: Optional[List[mediastream.MediaStream]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MediaStreams' }})
+    media_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MediaType' }})
+    movie_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MovieCount' }})
+    music_video_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MusicVideoCount' }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Number' }})
+    official_rating: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OfficialRating' }})
+    original_title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OriginalTitle' }})
+    overview: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Overview' }})
+    parent_art_image_tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ParentArtImageTag' }})
+    parent_art_item_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ParentArtItemId' }})
+    parent_backdrop_image_tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ParentBackdropImageTags' }})
+    parent_backdrop_item_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ParentBackdropItemId' }})
+    parent_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ParentId' }})
+    parent_index_number: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ParentIndexNumber' }})
+    parent_logo_image_tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ParentLogoImageTag' }})
+    parent_logo_item_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ParentLogoItemId' }})
+    parent_primary_image_item_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ParentPrimaryImageItemId' }})
+    parent_primary_image_tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ParentPrimaryImageTag' }})
+    parent_thumb_image_tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ParentThumbImageTag' }})
+    parent_thumb_item_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ParentThumbItemId' }})
+    part_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PartCount' }})
+    path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Path' }})
+    people: Optional[List[baseitemperson.BaseItemPerson]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'People' }})
+    play_access: Optional[playaccess_enum.PlayAccessEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PlayAccess' }})
+    playlist_item_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PlaylistItemId' }})
+    preferred_metadata_country_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PreferredMetadataCountryCode' }})
+    preferred_metadata_language: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PreferredMetadataLanguage' }})
+    premiere_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PremiereDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    primary_image_aspect_ratio: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PrimaryImageAspectRatio' }})
+    production_locations: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProductionLocations' }})
+    production_year: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProductionYear' }})
+    program_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProgramCount' }})
+    program_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProgramId' }})
+    provider_ids: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProviderIds' }})
+    recursive_item_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RecursiveItemCount' }})
+    remote_trailers: Optional[List[mediaurl.MediaURL]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RemoteTrailers' }})
+    run_time_ticks: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RunTimeTicks' }})
+    screenshot_image_tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ScreenshotImageTags' }})
+    season_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SeasonId' }})
+    season_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SeasonName' }})
+    series_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SeriesCount' }})
+    series_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SeriesId' }})
+    series_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SeriesName' }})
+    series_primary_image_tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SeriesPrimaryImageTag' }})
+    series_studio: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SeriesStudio' }})
+    series_thumb_image_tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SeriesThumbImageTag' }})
+    series_timer_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SeriesTimerId' }})
+    server_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ServerId' }})
+    shutter_speed: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ShutterSpeed' }})
+    software: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Software' }})
+    song_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SongCount' }})
+    sort_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SortName' }})
+    source_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SourceType' }})
+    special_feature_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SpecialFeatureCount' }})
+    start_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StartDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    status: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
+    studios: Optional[List[nameguidpair.NameGUIDPair]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Studios' }})
+    supports_sync: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SupportsSync' }})
+    taglines: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Taglines' }})
+    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
+    timer_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TimerId' }})
+    trailer_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TrailerCount' }})
+    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    user_data: Optional[useritemdatadto.UserItemDataDto] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UserData' }})
+    video3_d_format: Optional[video3dformat_enum.Video3DFormatEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Video3DFormat' }})
+    video_type: Optional[videotype_enum.VideoTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'VideoType' }})
+    width: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Width' }})
+    

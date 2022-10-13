@@ -1,0 +1,38 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type GetElectionsSearchOfficeEnum string
+
+const (
+	GetElectionsSearchOfficeEnumHouse     GetElectionsSearchOfficeEnum = "house"
+	GetElectionsSearchOfficeEnumSenate    GetElectionsSearchOfficeEnum = "senate"
+	GetElectionsSearchOfficeEnumPresident GetElectionsSearchOfficeEnum = "president"
+)
+
+type GetElectionsSearchQueryParams struct {
+	APIKey        string                         `queryParam:"style=form,explode=true,name=api_key"`
+	Cycle         []int32                        `queryParam:"style=form,explode=true,name=cycle"`
+	District      []string                       `queryParam:"style=form,explode=true,name=district"`
+	Office        []GetElectionsSearchOfficeEnum `queryParam:"style=form,explode=true,name=office"`
+	Page          *int32                         `queryParam:"style=form,explode=true,name=page"`
+	PerPage       *int32                         `queryParam:"style=form,explode=true,name=per_page"`
+	Sort          []string                       `queryParam:"style=form,explode=true,name=sort"`
+	SortHideNull  *bool                          `queryParam:"style=form,explode=true,name=sort_hide_null"`
+	SortNullOnly  *bool                          `queryParam:"style=form,explode=true,name=sort_null_only"`
+	SortNullsLast *bool                          `queryParam:"style=form,explode=true,name=sort_nulls_last"`
+	State         []string                       `queryParam:"style=form,explode=true,name=state"`
+	Zip           []int32                        `queryParam:"style=form,explode=true,name=zip"`
+}
+
+type GetElectionsSearchRequest struct {
+	QueryParams GetElectionsSearchQueryParams
+}
+
+type GetElectionsSearchResponse struct {
+	ContentType       string
+	ElectionsListPage *shared.ElectionsListPage
+	StatusCode        int64
+}

@@ -1,0 +1,11 @@
+from dataclasses import dataclass, field
+from typing import Enum
+
+class ActionStatusEnum(str, Enum):
+    UNKNOWN = "Unknown"
+    IN_PROGRESS = "InProgress"
+    COMPLETED = "Completed"
+    FAILED = "Failed"
+    STOPPING = "Stopping"
+    STOPPED = "Stopped"
+

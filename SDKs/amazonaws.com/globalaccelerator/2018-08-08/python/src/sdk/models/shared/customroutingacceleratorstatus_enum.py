@@ -1,0 +1,7 @@
+from dataclasses import dataclass, field
+from typing import Enum
+
+class CustomRoutingAcceleratorStatusEnum(str, Enum):
+    DEPLOYED = "DEPLOYED"
+    IN_PROGRESS = "IN_PROGRESS"
+

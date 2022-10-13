@@ -1,0 +1,7862 @@
+import warnings
+import requests
+from typing import Any,List,Optional
+from sdk.models import operations, shared
+from . import utils
+
+
+SERVERS = [
+	"https://secure.agco-ats.com",
+]
+
+
+class SDK:
+    client = requests.Session()
+    server_url = SERVERS[0]
+
+    def config_server_url(self, server_url: str, params: dict[str, str]):
+        if not params is None:
+            self.server_url = utils.replace_parameters(server_url, params)
+        else:
+            self.server_url = server_url
+    
+    
+    def activities_delete_activity(self, request: operations.ActivitiesDeleteActivityRequest) -> operations.ActivitiesDeleteActivityResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/activities/{activityID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ActivitiesDeleteActivityResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def activities_get_activities(self, request: operations.ActivitiesGetActivitiesRequest) -> operations.ActivitiesGetActivitiesResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/activities"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ActivitiesGetActivitiesResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseBuildSystemSharedDtoActivity])
+                res.api_paged_response_build_system_shared_dto_activity_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseBuildSystemSharedDtoActivity])
+                res.api_paged_response_build_system_shared_dto_activity_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def activities_get_activity(self, request: operations.ActivitiesGetActivityRequest) -> operations.ActivitiesGetActivityResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/activities/{activityID}", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ActivitiesGetActivityResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.BuildSystemSharedDtoActivity])
+                res.build_system_shared_dto_activity = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.BuildSystemSharedDtoActivity])
+                res.build_system_shared_dto_activity = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def activity_runs_get_activity_run(self, request: operations.ActivityRunsGetActivityRunRequest) -> operations.ActivityRunsGetActivityRunResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/activityRuns/{activityRunID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ActivityRunsGetActivityRunResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.BuildSystemSharedDtoActivityRun])
+                res.build_system_shared_dto_activity_run = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.BuildSystemSharedDtoActivityRun])
+                res.build_system_shared_dto_activity_run = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def activity_runs_get_activity_run_status(self, request: operations.ActivityRunsGetActivityRunStatusRequest) -> operations.ActivityRunsGetActivityRunStatusResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/activityRuns/{activityRunID}/status", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ActivityRunsGetActivityRunStatusResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.BuildSystemSharedDtoActivityRunStatus])
+                res.build_system_shared_dto_activity_run_status = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.BuildSystemSharedDtoActivityRunStatus])
+                res.build_system_shared_dto_activity_run_status = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def activity_runs_get_activity_runs(self, request: operations.ActivityRunsGetActivityRunsRequest) -> operations.ActivityRunsGetActivityRunsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/activityRuns"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ActivityRunsGetActivityRunsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseBuildSystemSharedDtoActivityRun])
+                res.api_paged_response_build_system_shared_dto_activity_run_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseBuildSystemSharedDtoActivityRun])
+                res.api_paged_response_build_system_shared_dto_activity_run_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def activity_runs_put_activity_run_status(self, request: operations.ActivityRunsPutActivityRunStatusRequest) -> operations.ActivityRunsPutActivityRunStatusResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/activityRuns/{activityRunID}/status", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ActivityRunsPutActivityRunStatusResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def aftermarket_services_get_certs(self) -> operations.AftermarketServicesGetCertsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/AftermarketServices/Certificates"
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AftermarketServicesGetCertsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
+                res.system_object = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
+                res.system_object = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def aftermarket_services_get_connection_status(self) -> operations.AftermarketServicesGetConnectionStatusResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/AftermarketServices/Hello"
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AftermarketServicesGetConnectionStatusResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[bool])
+                res.aftermarket_services_get_connection_status_200_application_json_boolean = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[bool])
+                res.aftermarket_services_get_connection_status_200_text_json_boolean = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def aftermarket_services_get_engine_iqa_codes(self, request: operations.AftermarketServicesGetEngineIqaCodesRequest) -> operations.AftermarketServicesGetEngineIqaCodesResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/AftermarketServices/Engines/{serialNumber}/IQACodes", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AftermarketServicesGetEngineIqaCodesResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[List[str]])
+                res.aftermarket_services_get_engine_iqa_codes_200_application_json_strings = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[List[str]])
+                res.aftermarket_services_get_engine_iqa_codes_200_text_json_strings = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def aftermarket_services_get_production_data(self, request: operations.AftermarketServicesGetProductionDataRequest) -> operations.AftermarketServicesGetProductionDataResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/AftermarketServices/Engines/{serialNumber}/ProductionData", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AftermarketServicesGetProductionDataResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[List[shared.AgcoPowerServicesModelsProductionData]])
+                res.agco_power_services_models_production_data = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[List[shared.AgcoPowerServicesModelsProductionData]])
+                res.agco_power_services_models_production_data = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def aftermarket_services_get_user_status(self, request: operations.AftermarketServicesGetUserStatusRequest) -> operations.AftermarketServicesGetUserStatusResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/AftermarketServices/UserStatuses"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AftermarketServicesGetUserStatusResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.AgcoPowerServicesModelsUserStatus])
+                res.agco_power_services_models_user_status = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.AgcoPowerServicesModelsUserStatus])
+                res.agco_power_services_models_user_status = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def aftermarket_services_put_ecu(self, request: operations.AftermarketServicesPutEcuRequest) -> operations.AftermarketServicesPutEcuResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/AftermarketServices/ECUs/{serialNumber}", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AftermarketServicesPutEcuResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.AgcoPowerServicesModelsEcu])
+                res.agco_power_services_models_ecu = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.AgcoPowerServicesModelsEcu])
+                res.agco_power_services_models_ecu = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def aftermarket_services_update_user_status(self, request: operations.AftermarketServicesUpdateUserStatusRequest) -> operations.AftermarketServicesUpdateUserStatusResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/AftermarketServices/UserStatuses"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AftermarketServicesUpdateUserStatusResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[bool])
+                res.aftermarket_services_update_user_status_200_application_json_boolean = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[bool])
+                res.aftermarket_services_update_user_status_200_text_json_boolean = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def agents_delete_agent(self, request: operations.AgentsDeleteAgentRequest) -> operations.AgentsDeleteAgentResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/agents/{agentID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AgentsDeleteAgentResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def agents_get_agent_activity_run(self, request: operations.AgentsGetAgentActivityRunRequest) -> operations.AgentsGetAgentActivityRunResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/agents/{agentID}/ActivityRun", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AgentsGetAgentActivityRunResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.BuildSystemSharedDtoActivityRun])
+                res.build_system_shared_dto_activity_run = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.BuildSystemSharedDtoActivityRun])
+                res.build_system_shared_dto_activity_run = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def agents_get_agent_async(self, request: operations.AgentsGetAgentAsyncRequest) -> operations.AgentsGetAgentAsyncResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/agents/{agentID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AgentsGetAgentAsyncResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.BuildSystemSharedDtoAgent])
+                res.build_system_shared_dto_agent = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.BuildSystemSharedDtoAgent])
+                res.build_system_shared_dto_agent = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def agents_get_agents(self, request: operations.AgentsGetAgentsRequest) -> operations.AgentsGetAgentsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/agents"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AgentsGetAgentsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseBuildSystemSharedDtoAgent])
+                res.api_paged_response_build_system_shared_dto_agent_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseBuildSystemSharedDtoAgent])
+                res.api_paged_response_build_system_shared_dto_agent_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def agents_get_current_agent_activity_run(self) -> operations.AgentsGetCurrentAgentActivityRunResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/agents/Current/ActivityRun"
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AgentsGetCurrentAgentActivityRunResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.BuildSystemSharedDtoActivityRun])
+                res.build_system_shared_dto_activity_run = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.BuildSystemSharedDtoActivityRun])
+                res.build_system_shared_dto_activity_run = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def agents_get_current_agent_async(self) -> operations.AgentsGetCurrentAgentAsyncResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/agents/Current"
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AgentsGetCurrentAgentAsyncResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.BuildSystemSharedDtoAgent])
+                res.build_system_shared_dto_agent = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.BuildSystemSharedDtoAgent])
+                res.build_system_shared_dto_agent = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def agents_put_agent_status(self, request: operations.AgentsPutAgentStatusRequest) -> operations.AgentsPutAgentStatusResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/agents/{agentID}/Status", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AgentsPutAgentStatusResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def authentication_default(self, request: operations.AuthenticationDefaultRequest) -> operations.AuthenticationDefaultResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Authentication"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AuthenticationDefaultResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAuthenticatedUser])
+                res.api_models_authenticated_user = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAuthenticatedUser])
+                res.api_models_authenticated_user = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def authentication_is_alive(self) -> operations.AuthenticationIsAliveResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Authentication/IsAlive"
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AuthenticationIsAliveResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+
+        return res
+
+    
+    
+    def authentication_put_manage_tokens(self, request: operations.AuthenticationPutManageTokensRequest) -> operations.AuthenticationPutManageTokensResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/AuthenticatedUsers/{UserID}/Tokens", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AuthenticationPutManageTokensResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+
+        return res
+
+    
+    
+    def authentication_request_password_reset(self, request: operations.AuthenticationRequestPasswordResetRequest) -> operations.AuthenticationRequestPasswordResetResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Authentication/RequestPasswordReset"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AuthenticationRequestPasswordResetResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+
+        return res
+
+    
+    
+    def authentication_reset_pasword(self, request: operations.AuthenticationResetPaswordRequest) -> operations.AuthenticationResetPaswordResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Authentication/ResetPasword"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AuthenticationResetPaswordResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+
+        return res
+
+    
+    
+    def authorization_categories_add_user(self, request: operations.AuthorizationCategoriesAddUserRequest) -> operations.AuthorizationCategoriesAddUserResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/AuthorizationCategories/{id}/Users/{userID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("POST", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AuthorizationCategoriesAddUserResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def authorization_categories_delete(self, request: operations.AuthorizationCategoriesDeleteRequest) -> operations.AuthorizationCategoriesDeleteResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/AuthorizationCategories/{id}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AuthorizationCategoriesDeleteResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def authorization_categories_get(self, request: operations.AuthorizationCategoriesGetRequest) -> operations.AuthorizationCategoriesGetResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/AuthorizationCategories"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AuthorizationCategoriesGetResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseAuthorizationCodesSharedModelsCategory])
+                res.api_i_paged_response_authorization_codes_shared_models_category_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseAuthorizationCodesSharedModelsCategory])
+                res.api_i_paged_response_authorization_codes_shared_models_category_ = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def authorization_categories_get_users(self, request: operations.AuthorizationCategoriesGetUsersRequest) -> operations.AuthorizationCategoriesGetUsersResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/AuthorizationCategories/Users"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AuthorizationCategoriesGetUsersResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseAuthorizationCodesSharedModelsCategoryUserReport])
+                res.api_i_paged_response_authorization_codes_shared_models_category_user_report_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseAuthorizationCodesSharedModelsCategoryUserReport])
+                res.api_i_paged_response_authorization_codes_shared_models_category_user_report_ = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def authorization_categories_post(self, request: operations.AuthorizationCategoriesPostRequest) -> operations.AuthorizationCategoriesPostResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/AuthorizationCategories"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AuthorizationCategoriesPostResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.authorization_categories_post_200_application_json_string = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.authorization_categories_post_200_text_json_string = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def authorization_categories_put(self, request: operations.AuthorizationCategoriesPutRequest) -> operations.AuthorizationCategoriesPutResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/AuthorizationCategories/{id}", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AuthorizationCategoriesPutResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def authorization_categories_remove_user(self, request: operations.AuthorizationCategoriesRemoveUserRequest) -> operations.AuthorizationCategoriesRemoveUserResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/AuthorizationCategories/{id}/Users/{userID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AuthorizationCategoriesRemoveUserResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def authorization_code_definitions_add_category_to_definition(self, request: operations.AuthorizationCodeDefinitionsAddCategoryToDefinitionRequest) -> operations.AuthorizationCodeDefinitionsAddCategoryToDefinitionResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/AuthorizationCodeDefinitions/{ID}/Categories/{categoryID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("POST", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AuthorizationCodeDefinitionsAddCategoryToDefinitionResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def authorization_code_definitions_delete_authorization_code_definition(self, request: operations.AuthorizationCodeDefinitionsDeleteAuthorizationCodeDefinitionRequest) -> operations.AuthorizationCodeDefinitionsDeleteAuthorizationCodeDefinitionResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/AuthorizationCodeDefinitions/{id}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AuthorizationCodeDefinitionsDeleteAuthorizationCodeDefinitionResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def authorization_code_definitions_get_authorization_code_definition(self, request: operations.AuthorizationCodeDefinitionsGetAuthorizationCodeDefinitionRequest) -> operations.AuthorizationCodeDefinitionsGetAuthorizationCodeDefinitionResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/AuthorizationCodeDefinitions"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AuthorizationCodeDefinitionsGetAuthorizationCodeDefinitionResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseAuthorizationCodesSharedModelsAuthorizationCodeDefinition])
+                res.api_i_paged_response_authorization_codes_shared_models_authorization_code_definition_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseAuthorizationCodesSharedModelsAuthorizationCodeDefinition])
+                res.api_i_paged_response_authorization_codes_shared_models_authorization_code_definition_ = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def authorization_code_definitions_remove_category_from_definition(self, request: operations.AuthorizationCodeDefinitionsRemoveCategoryFromDefinitionRequest) -> operations.AuthorizationCodeDefinitionsRemoveCategoryFromDefinitionResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/AuthorizationCodeDefinitions/{ID}/Categories/{categoryID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AuthorizationCodeDefinitionsRemoveCategoryFromDefinitionResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def authorization_codes_delete_authorization_code(self, request: operations.AuthorizationCodesDeleteAuthorizationCodeRequest) -> operations.AuthorizationCodesDeleteAuthorizationCodeResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/AuthorizationCodes/{id}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AuthorizationCodesDeleteAuthorizationCodeResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def authorization_codes_get_authorization_code(self, request: operations.AuthorizationCodesGetAuthorizationCodeRequest) -> operations.AuthorizationCodesGetAuthorizationCodeResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/AuthorizationCodes/{id}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AuthorizationCodesGetAuthorizationCodeResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.AuthorizationCodesSharedModelsAuthorizationCode])
+                res.authorization_codes_shared_models_authorization_code = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.AuthorizationCodesSharedModelsAuthorizationCode])
+                res.authorization_codes_shared_models_authorization_code = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def authorization_codes_get_authorization_codes(self, request: operations.AuthorizationCodesGetAuthorizationCodesRequest) -> operations.AuthorizationCodesGetAuthorizationCodesResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/AuthorizationCodes"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AuthorizationCodesGetAuthorizationCodesResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseAuthorizationCodesSharedModelsAuthorizationCode])
+                res.api_i_paged_response_authorization_codes_shared_models_authorization_code_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseAuthorizationCodesSharedModelsAuthorizationCode])
+                res.api_i_paged_response_authorization_codes_shared_models_authorization_code_ = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def authorization_codes_get_contact_information(self, request: operations.AuthorizationCodesGetContactInformationRequest) -> operations.AuthorizationCodesGetContactInformationResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/AuthorizationCodes/{id}/ContactInformation", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AuthorizationCodesGetContactInformationResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.AuthorizationCodesSharedModelsAuthorizationContactInformation])
+                res.authorization_codes_shared_models_authorization_contact_information = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.AuthorizationCodesSharedModelsAuthorizationContactInformation])
+                res.authorization_codes_shared_models_authorization_contact_information = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def authorization_codes_validate_authorization_code(self, request: operations.AuthorizationCodesValidateAuthorizationCodeRequest) -> operations.AuthorizationCodesValidateAuthorizationCodeResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/AuthorizationCodes/{id}/Validate", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AuthorizationCodesValidateAuthorizationCodeResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.AuthorizationCodesSharedModelsCodeValidationModel])
+                res.authorization_codes_shared_models_code_validation_model = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.AuthorizationCodesSharedModelsCodeValidationModel])
+                res.authorization_codes_shared_models_code_validation_model = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def authorization_contact_information_get(self, request: operations.AuthorizationContactInformationGetRequest) -> operations.AuthorizationContactInformationGetResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/AuthorizationContactInformation"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AuthorizationContactInformationGetResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseAuthorizationCodesSharedModelsAuthorizationContactInformation])
+                res.api_i_paged_response_authorization_codes_shared_models_authorization_contact_information_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseAuthorizationCodesSharedModelsAuthorizationContactInformation])
+                res.api_i_paged_response_authorization_codes_shared_models_authorization_contact_information_ = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def authorization_contact_information_post(self, request: operations.AuthorizationContactInformationPostRequest) -> operations.AuthorizationContactInformationPostResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/AuthorizationContactInformation"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AuthorizationContactInformationPostResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.authorization_contact_information_post_200_application_json_int32_integer = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.authorization_contact_information_post_200_text_json_int32_integer = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def brands_brands(self) -> operations.BrandsBrandsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Brands"
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.BrandsBrandsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[List[str]])
+                res.brands_brands_200_application_json_strings = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[List[str]])
+                res.brands_brands_200_text_json_strings = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def bundles_delete_bundle(self, request: operations.BundlesDeleteBundleRequest) -> operations.BundlesDeleteBundleResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Bundles/{ID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.BundlesDeleteBundleResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def bundles_get_bundle(self, request: operations.BundlesGetBundleRequest) -> operations.BundlesGetBundleResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Bundles/{ID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.BundlesGetBundleResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.UpdateSystemModelsBundle])
+                res.update_system_models_bundle = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.UpdateSystemModelsBundle])
+                res.update_system_models_bundle = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def bundles_get_bundles(self, request: operations.BundlesGetBundlesRequest) -> operations.BundlesGetBundlesResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Bundles"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.BundlesGetBundlesResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsBundle])
+                res.api_paged_response_update_system_models_bundle_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsBundle])
+                res.api_paged_response_update_system_models_bundle_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def bundles_post_bundle(self, request: operations.BundlesPostBundleRequest) -> operations.BundlesPostBundleResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Bundles"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.BundlesPostBundleResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.bundles_post_bundle_200_application_json_string = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.bundles_post_bundle_200_text_json_string = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def bundles_put_bundle(self, request: operations.BundlesPutBundleRequest) -> operations.BundlesPutBundleResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Bundles/{ID}", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.BundlesPutBundleResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def clients_get(self, request: operations.ClientsGetRequest) -> operations.ClientsGetResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Clients"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ClientsGetResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsClient])
+                res.api_paged_response_update_system_models_client_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsClient])
+                res.api_paged_response_update_system_models_client_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def clients_get_available_subscriptions(self, request: operations.ClientsGetAvailableSubscriptionsRequest) -> operations.ClientsGetAvailableSubscriptionsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Clients/{ID}/AvailableUpdateGroupSubscriptions", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ClientsGetAvailableSubscriptionsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsAvailableUpdateGroupSubscription])
+                res.api_paged_response_update_system_models_available_update_group_subscription_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsAvailableUpdateGroupSubscription])
+                res.api_paged_response_update_system_models_available_update_group_subscription_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def clients_get_subscriptions(self, request: operations.ClientsGetSubscriptionsRequest) -> operations.ClientsGetSubscriptionsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Clients/{ID}/UpdateGroupSubscriptions", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ClientsGetSubscriptionsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsUpdateGroupSubscription])
+                res.api_paged_response_update_system_models_update_group_subscription_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsUpdateGroupSubscription])
+                res.api_paged_response_update_system_models_update_group_subscription_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def clients_put(self, request: operations.ClientsPutRequest) -> operations.ClientsPutResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Clients/{ID}", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ClientsPutResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def content_definitions_delete_content_definition(self, request: operations.ContentDefinitionsDeleteContentDefinitionRequest) -> operations.ContentDefinitionsDeleteContentDefinitionResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/ContentDefinitions/{contentDefinitionID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ContentDefinitionsDeleteContentDefinitionResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def content_definitions_delete_content_definition_attribute(self, request: operations.ContentDefinitionsDeleteContentDefinitionAttributeRequest) -> operations.ContentDefinitionsDeleteContentDefinitionAttributeResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/ContentDefinitionAttributes/{contentDefinitionAttributeID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ContentDefinitionsDeleteContentDefinitionAttributeResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def content_definitions_get_content_definition(self, request: operations.ContentDefinitionsGetContentDefinitionRequest) -> operations.ContentDefinitionsGetContentDefinitionResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/ContentDefinitions/{contentDefinitionID}", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ContentDefinitionsGetContentDefinitionResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.ContentSubmissionSharedBusinessEntitiesContentDefinition])
+                res.content_submission_shared_business_entities_content_definition = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.ContentSubmissionSharedBusinessEntitiesContentDefinition])
+                res.content_submission_shared_business_entities_content_definition = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def content_definitions_get_content_definition_attributes(self, request: operations.ContentDefinitionsGetContentDefinitionAttributesRequest) -> operations.ContentDefinitionsGetContentDefinitionAttributesResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/ContentDefinitions/{contentDefinitionID}/Attributes", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ContentDefinitionsGetContentDefinitionAttributesResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseContentSubmissionSharedBusinessEntitiesContentDefinitionAttribute])
+                res.api_paged_response_content_submission_shared_business_entities_content_definition_attribute_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseContentSubmissionSharedBusinessEntitiesContentDefinitionAttribute])
+                res.api_paged_response_content_submission_shared_business_entities_content_definition_attribute_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def content_definitions_get_content_definitions(self, request: operations.ContentDefinitionsGetContentDefinitionsRequest) -> operations.ContentDefinitionsGetContentDefinitionsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/ContentDefinitions"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ContentDefinitionsGetContentDefinitionsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseContentSubmissionSharedBusinessEntitiesContentDefinition])
+                res.api_paged_response_content_submission_shared_business_entities_content_definition_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseContentSubmissionSharedBusinessEntitiesContentDefinition])
+                res.api_paged_response_content_submission_shared_business_entities_content_definition_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def content_definitions_post_content_definition_attribute(self, request: operations.ContentDefinitionsPostContentDefinitionAttributeRequest) -> operations.ContentDefinitionsPostContentDefinitionAttributeResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/ContentDefinitions/{contentDefinitionID}/Attributes", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ContentDefinitionsPostContentDefinitionAttributeResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.content_definitions_post_content_definition_attribute_200_application_json_int32_integer = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.content_definitions_post_content_definition_attribute_200_text_json_int32_integer = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def content_definitions_put_content_definition_attribute_async(self, request: operations.ContentDefinitionsPutContentDefinitionAttributeAsyncRequest) -> operations.ContentDefinitionsPutContentDefinitionAttributeAsyncResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/ContentDefinitionAttributes/{contentDefinitionAttributeID}", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ContentDefinitionsPutContentDefinitionAttributeAsyncResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def content_release_delete_content_release_versionn(self, request: operations.ContentReleaseDeleteContentReleaseVersionnRequest) -> operations.ContentReleaseDeleteContentReleaseVersionnResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/ContentReleases/{ContentReleaseId}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ContentReleaseDeleteContentReleaseVersionnResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def content_release_get_content_release_version(self, request: operations.ContentReleaseGetContentReleaseVersionRequest) -> operations.ContentReleaseGetContentReleaseVersionResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/ContentReleases"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ContentReleaseGetContentReleaseVersionResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseContentSubmissionSharedBusinessEntitiesContentReleaseVersion])
+                res.api_paged_response_content_submission_shared_business_entities_content_release_version_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseContentSubmissionSharedBusinessEntitiesContentReleaseVersion])
+                res.api_paged_response_content_submission_shared_business_entities_content_release_version_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def content_release_post_content_release(self, request: operations.ContentReleasePostContentReleaseRequest) -> operations.ContentReleasePostContentReleaseResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/ContentReleases"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ContentReleasePostContentReleaseResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.content_release_post_content_release_200_application_json_int32_integer = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.content_release_post_content_release_200_text_json_int32_integer = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def content_release_put_content_definition(self, request: operations.ContentReleasePutContentDefinitionRequest) -> operations.ContentReleasePutContentDefinitionResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/ContentReleases/{ContentReleaseId}", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ContentReleasePutContentDefinitionResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def content_submission_types_delete_content_submission_type(self, request: operations.ContentSubmissionTypesDeleteContentSubmissionTypeRequest) -> operations.ContentSubmissionTypesDeleteContentSubmissionTypeResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/ContentSubmissionTypes/{id}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ContentSubmissionTypesDeleteContentSubmissionTypeResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def content_submission_types_get_content_submission_type(self, request: operations.ContentSubmissionTypesGetContentSubmissionTypeRequest) -> operations.ContentSubmissionTypesGetContentSubmissionTypeResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/ContentSubmissionTypes/{id}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ContentSubmissionTypesGetContentSubmissionTypeResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.ContentSubmissionSharedBusinessEntitiesContentSubmissionType])
+                res.content_submission_shared_business_entities_content_submission_type = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.ContentSubmissionSharedBusinessEntitiesContentSubmissionType])
+                res.content_submission_shared_business_entities_content_submission_type = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def content_submission_types_get_content_submission_types(self, request: operations.ContentSubmissionTypesGetContentSubmissionTypesRequest) -> operations.ContentSubmissionTypesGetContentSubmissionTypesResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/ContentSubmissionTypes"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ContentSubmissionTypesGetContentSubmissionTypesResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[List[shared.ContentSubmissionSharedBusinessEntitiesContentSubmissionType]])
+                res.content_submission_shared_business_entities_content_submission_types = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[List[shared.ContentSubmissionSharedBusinessEntitiesContentSubmissionType]])
+                res.content_submission_shared_business_entities_content_submission_types = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def content_submission_types_post_content_submission_type(self, request: operations.ContentSubmissionTypesPostContentSubmissionTypeRequest) -> operations.ContentSubmissionTypesPostContentSubmissionTypeResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/ContentSubmissionTypes"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ContentSubmissionTypesPostContentSubmissionTypeResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.content_submission_types_post_content_submission_type_200_application_json_int32_integer = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.content_submission_types_post_content_submission_type_200_text_json_int32_integer = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def content_submission_types_put_content_submission_type(self, request: operations.ContentSubmissionTypesPutContentSubmissionTypeRequest) -> operations.ContentSubmissionTypesPutContentSubmissionTypeResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/ContentSubmissionTypes/{id}", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ContentSubmissionTypesPutContentSubmissionTypeResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def content_submissions_delete_content_submission(self, request: operations.ContentSubmissionsDeleteContentSubmissionRequest) -> operations.ContentSubmissionsDeleteContentSubmissionResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/ContentSubmissions/{contentSubmissionID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ContentSubmissionsDeleteContentSubmissionResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def content_submissions_delete_content_submission_attribute(self, request: operations.ContentSubmissionsDeleteContentSubmissionAttributeRequest) -> operations.ContentSubmissionsDeleteContentSubmissionAttributeResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/ContentSubmissionAttributes/{contentSubmissionAttributeID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ContentSubmissionsDeleteContentSubmissionAttributeResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def content_submissions_get_content_submission(self, request: operations.ContentSubmissionsGetContentSubmissionRequest) -> operations.ContentSubmissionsGetContentSubmissionResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/ContentSubmissions/{contentSubmissionID}", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ContentSubmissionsGetContentSubmissionResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.ContentSubmissionSharedBusinessEntitiesContentSubmission])
+                res.content_submission_shared_business_entities_content_submission = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.ContentSubmissionSharedBusinessEntitiesContentSubmission])
+                res.content_submission_shared_business_entities_content_submission = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def content_submissions_get_content_submission_attributes(self, request: operations.ContentSubmissionsGetContentSubmissionAttributesRequest) -> operations.ContentSubmissionsGetContentSubmissionAttributesResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/ContentSubmissions/{contentSubmissionID}/Attributes", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ContentSubmissionsGetContentSubmissionAttributesResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseContentSubmissionSharedBusinessEntitiesContentSubmissionAttribute])
+                res.api_paged_response_content_submission_shared_business_entities_content_submission_attribute_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseContentSubmissionSharedBusinessEntitiesContentSubmissionAttribute])
+                res.api_paged_response_content_submission_shared_business_entities_content_submission_attribute_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def content_submissions_get_content_submissions(self, request: operations.ContentSubmissionsGetContentSubmissionsRequest) -> operations.ContentSubmissionsGetContentSubmissionsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/ContentSubmissions"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ContentSubmissionsGetContentSubmissionsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseContentSubmissionSharedBusinessEntitiesContentSubmission])
+                res.api_paged_response_content_submission_shared_business_entities_content_submission_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseContentSubmissionSharedBusinessEntitiesContentSubmission])
+                res.api_paged_response_content_submission_shared_business_entities_content_submission_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def content_submissions_post_content_submission_attribute(self, request: operations.ContentSubmissionsPostContentSubmissionAttributeRequest) -> operations.ContentSubmissionsPostContentSubmissionAttributeResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/ContentSubmissions/{contentSubmissionID}/Attributes", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ContentSubmissionsPostContentSubmissionAttributeResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.content_submissions_post_content_submission_attribute_200_application_json_int32_integer = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.content_submissions_post_content_submission_attribute_200_text_json_int32_integer = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def content_submissions_put_content_submission_attribute_async(self, request: operations.ContentSubmissionsPutContentSubmissionAttributeAsyncRequest) -> operations.ContentSubmissionsPutContentSubmissionAttributeAsyncResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/ContentSubmissionAttributes/{contentSubmissionAttributeID}", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ContentSubmissionsPutContentSubmissionAttributeAsyncResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def dealer_by_country_get_countries(self, request: operations.DealerByCountryGetCountriesRequest) -> operations.DealerByCountryGetCountriesResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/DealerByCountry"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.DealerByCountryGetCountriesResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseDealerDbModelsDealersPerCountry])
+                res.api_paged_response_dealer_db_models_dealers_per_country_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseDealerDbModelsDealersPerCountry])
+                res.api_paged_response_dealer_db_models_dealers_per_country_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def dealers_get_dealerby_dealer_code(self, request: operations.DealersGetDealerbyDealerCodeRequest) -> operations.DealersGetDealerbyDealerCodeResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Dealers/{DealerCode}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.DealersGetDealerbyDealerCodeResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.DealerDbModelsDealer])
+                res.dealer_db_models_dealer = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.DealerDbModelsDealer])
+                res.dealer_db_models_dealer = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def dealers_get_dealers(self, request: operations.DealersGetDealersRequest) -> operations.DealersGetDealersResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Dealers"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.DealersGetDealersResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseDealerDbModelsDealer])
+                res.api_paged_response_dealer_db_models_dealer_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseDealerDbModelsDealer])
+                res.api_paged_response_dealer_db_models_dealer_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def files_delete_file(self, request: operations.FilesDeleteFileRequest) -> operations.FilesDeleteFileResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Files/{ID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.FilesDeleteFileResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def files_get_file(self, request: operations.FilesGetFileRequest) -> operations.FilesGetFileResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Files/{ID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.FilesGetFileResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.GlobalResourcesSharedModelsFileDownload])
+                res.global_resources_shared_models_file_download = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.GlobalResourcesSharedModelsFileDownload])
+                res.global_resources_shared_models_file_download = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def files_get_file_contents(self, request: operations.FilesGetFileContentsRequest) -> operations.FilesGetFileContentsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Files/{ID}/FileContents", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.FilesGetFileContentsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
+                res.system_object = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
+                res.system_object = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def files_get_files(self, request: operations.FilesGetFilesRequest) -> operations.FilesGetFilesResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Files"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.FilesGetFilesResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseGlobalResourcesSharedModelsFileDownload])
+                res.api_i_paged_response_global_resources_shared_models_file_download_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseGlobalResourcesSharedModelsFileDownload])
+                res.api_i_paged_response_global_resources_shared_models_file_download_ = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def files_post_file(self, request: operations.FilesPostFileRequest) -> operations.FilesPostFileResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Files"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.FilesPostFileResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.files_post_file_200_application_json_string = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.files_post_file_200_text_json_string = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def files_put_file(self, request: operations.FilesPutFileRequest) -> operations.FilesPutFileResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Files/{ID}", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.FilesPutFileResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def files_put_file_contents(self, request: operations.FilesPutFileContentsRequest) -> operations.FilesPutFileContentsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Files/{ID}/FileContents", request.path_params)
+        
+        client = self.client
+
+        r = client.request("PUT", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.FilesPutFileContentsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
+                res.system_object = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
+                res.system_object = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def get_api_v2_authorization_code_definitions_id_(self, request: operations.GetAPIV2AuthorizationCodeDefinitionsIDRequest) -> operations.GetAPIV2AuthorizationCodeDefinitionsIDResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/AuthorizationCodeDefinitions/{id}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.GetAPIV2AuthorizationCodeDefinitionsIDResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.AuthorizationCodesSharedModelsAuthorizationCodeDefinition])
+                res.authorization_codes_shared_models_authorization_code_definition = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.AuthorizationCodesSharedModelsAuthorizationCodeDefinition])
+                res.authorization_codes_shared_models_authorization_code_definition = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def get_api_v2_clients_id_(self, request: operations.GetAPIV2ClientsIDRequest) -> operations.GetAPIV2ClientsIDResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Clients/{ID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.GetAPIV2ClientsIDResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.UpdateSystemModelsClient])
+                res.update_system_models_client = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.UpdateSystemModelsClient])
+                res.update_system_models_client = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def get_api_v2_content_releases_content_release_id_(self, request: operations.GetAPIV2ContentReleasesContentReleaseIDRequest) -> operations.GetAPIV2ContentReleasesContentReleaseIDResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/ContentReleases/{ContentReleaseId}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.GetAPIV2ContentReleasesContentReleaseIDResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.ContentSubmissionSharedBusinessEntitiesContentReleaseVersion])
+                res.content_submission_shared_business_entities_content_release_version = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.ContentSubmissionSharedBusinessEntitiesContentReleaseVersion])
+                res.content_submission_shared_business_entities_content_release_version = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def get_api_v2_licenses_id_(self, request: operations.GetAPIV2LicensesIDRequest) -> operations.GetAPIV2LicensesIDResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Licenses/{ID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.GetAPIV2LicensesIDResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.DealerDbModelsLicense])
+                res.dealer_db_models_license = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.DealerDbModelsLicense])
+                res.dealer_db_models_license = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def get_api_v2_package_types_id_(self, request: operations.GetAPIV2PackageTypesIDRequest) -> operations.GetAPIV2PackageTypesIDResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/PackageTypes/{ID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.GetAPIV2PackageTypesIDResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.UpdateSystemModelsPackageType])
+                res.update_system_models_package_type = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.UpdateSystemModelsPackageType])
+                res.update_system_models_package_type = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def get_api_v2_update_groups_id_(self, request: operations.GetAPIV2UpdateGroupsIDRequest) -> operations.GetAPIV2UpdateGroupsIDResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/UpdateGroups/{ID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.GetAPIV2UpdateGroupsIDResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.UpdateSystemModelsUpdateGroup])
+                res.update_system_models_update_group = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.UpdateSystemModelsUpdateGroup])
+                res.update_system_models_update_group = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def get_api_v2_users_current_permissions(self, request: operations.GetAPIV2UsersCurrentPermissionsRequest) -> operations.GetAPIV2UsersCurrentPermissionsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Users/Current/Permissions"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.GetAPIV2UsersCurrentPermissionsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseAPIModelsUserEffectivePermission])
+                res.api_paged_response_api_models_user_effective_permission_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseAPIModelsUserEffectivePermission])
+                res.api_paged_response_api_models_user_effective_permission_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def get_api_v2_users_id_(self, request: operations.GetAPIV2UsersIDRequest) -> operations.GetAPIV2UsersIDResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Users/{id}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.GetAPIV2UsersIDResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsUser])
+                res.api_models_user = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsUser])
+                res.api_models_user = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def get_api_v2_vouchers_voucher_code_(self, request: operations.GetAPIV2VouchersVoucherCodeRequest) -> operations.GetAPIV2VouchersVoucherCodeResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Vouchers/{VoucherCode}", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.GetAPIV2VouchersVoucherCodeResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.DealerDbModelsVoucher])
+                res.dealer_db_models_voucher = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.DealerDbModelsVoucher])
+                res.dealer_db_models_voucher = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def global_image_categories_get_file(self, request: operations.GlobalImageCategoriesGetFileRequest) -> operations.GlobalImageCategoriesGetFileResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/GlobalImageCategories/{ID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.GlobalImageCategoriesGetFileResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.GlobalResourcesSharedModelsGlobalImageCategory])
+                res.global_resources_shared_models_global_image_category = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.GlobalResourcesSharedModelsGlobalImageCategory])
+                res.global_resources_shared_models_global_image_category = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def global_image_categories_get_files(self, request: operations.GlobalImageCategoriesGetFilesRequest) -> operations.GlobalImageCategoriesGetFilesResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/GlobalImageCategories"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.GlobalImageCategoriesGetFilesResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseGlobalResourcesSharedModelsGlobalImageCategory])
+                res.api_i_paged_response_global_resources_shared_models_global_image_category_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseGlobalResourcesSharedModelsGlobalImageCategory])
+                res.api_i_paged_response_global_resources_shared_models_global_image_category_ = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def global_image_categories_post_file(self, request: operations.GlobalImageCategoriesPostFileRequest) -> operations.GlobalImageCategoriesPostFileResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/GlobalImageCategories"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.GlobalImageCategoriesPostFileResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.global_image_categories_post_file_200_application_json_string = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.global_image_categories_post_file_200_text_json_string = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def global_images_delete_file(self, request: operations.GlobalImagesDeleteFileRequest) -> operations.GlobalImagesDeleteFileResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/GlobalImages/{ID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.GlobalImagesDeleteFileResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def global_images_get_global_image(self, request: operations.GlobalImagesGetGlobalImageRequest) -> operations.GlobalImagesGetGlobalImageResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/GlobalImages/{ID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.GlobalImagesGetGlobalImageResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.GlobalResourcesSharedModelsGlobalImage])
+                res.global_resources_shared_models_global_image = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.GlobalResourcesSharedModelsGlobalImage])
+                res.global_resources_shared_models_global_image = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def global_images_get_global_image_contents(self, request: operations.GlobalImagesGetGlobalImageContentsRequest) -> operations.GlobalImagesGetGlobalImageContentsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/GlobalImages/{ID}/ImageContents", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.GlobalImagesGetGlobalImageContentsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
+                res.system_object = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
+                res.system_object = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def global_images_get_global_images(self, request: operations.GlobalImagesGetGlobalImagesRequest) -> operations.GlobalImagesGetGlobalImagesResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/GlobalImages"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.GlobalImagesGetGlobalImagesResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseGlobalResourcesSharedModelsGlobalImage])
+                res.api_i_paged_response_global_resources_shared_models_global_image_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseGlobalResourcesSharedModelsGlobalImage])
+                res.api_i_paged_response_global_resources_shared_models_global_image_ = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def global_images_put_global_image_contents(self, request: operations.GlobalImagesPutGlobalImageContentsRequest) -> operations.GlobalImagesPutGlobalImageContentsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/GlobalImages/{ID}/ImageContents", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("PUT", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.GlobalImagesPutGlobalImageContentsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
+                res.system_object = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
+                res.system_object = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def job_runs_delete_job_run(self, request: operations.JobRunsDeleteJobRunRequest) -> operations.JobRunsDeleteJobRunResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/jobRuns/{jobRunID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.JobRunsDeleteJobRunResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def job_runs_get_job_run(self, request: operations.JobRunsGetJobRunRequest) -> operations.JobRunsGetJobRunResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/jobRuns/{jobRunID}", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.JobRunsGetJobRunResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.BuildSystemSharedDtoJobRun])
+                res.build_system_shared_dto_job_run = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.BuildSystemSharedDtoJobRun])
+                res.build_system_shared_dto_job_run = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def job_runs_get_job_runs(self, request: operations.JobRunsGetJobRunsRequest) -> operations.JobRunsGetJobRunsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/jobRuns"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.JobRunsGetJobRunsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseBuildSystemSharedDtoJobRun])
+                res.api_paged_response_build_system_shared_dto_job_run_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseBuildSystemSharedDtoJobRun])
+                res.api_paged_response_build_system_shared_dto_job_run_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def jobs_delete_job(self, request: operations.JobsDeleteJobRequest) -> operations.JobsDeleteJobResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/jobs/{jobID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.JobsDeleteJobResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def jobs_get_job(self, request: operations.JobsGetJobRequest) -> operations.JobsGetJobResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/jobs/{jobID}", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.JobsGetJobResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.BuildSystemSharedDtoJob])
+                res.build_system_shared_dto_job = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.BuildSystemSharedDtoJob])
+                res.build_system_shared_dto_job = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def jobs_get_jobs(self, request: operations.JobsGetJobsRequest) -> operations.JobsGetJobsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/jobs"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.JobsGetJobsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseBuildSystemSharedDtoJob])
+                res.api_paged_response_build_system_shared_dto_job_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseBuildSystemSharedDtoJob])
+                res.api_paged_response_build_system_shared_dto_job_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def languages_create_language(self, request: operations.LanguagesCreateLanguageRequest) -> operations.LanguagesCreateLanguageResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Languages"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.LanguagesCreateLanguageResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.languages_create_language_200_application_json_int32_integer = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.languages_create_language_200_text_json_int32_integer = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def languages_delete_language(self, request: operations.LanguagesDeleteLanguageRequest) -> operations.LanguagesDeleteLanguageResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Languages/{LocaleID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.LanguagesDeleteLanguageResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def languages_get_language(self, request: operations.LanguagesGetLanguageRequest) -> operations.LanguagesGetLanguageResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Languages/{LocaleID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.LanguagesGetLanguageResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.GlobalResourcesSharedModelsLanguage])
+                res.global_resources_shared_models_language = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.GlobalResourcesSharedModelsLanguage])
+                res.global_resources_shared_models_language = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def languages_get_languages(self, request: operations.LanguagesGetLanguagesRequest) -> operations.LanguagesGetLanguagesResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Languages"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.LanguagesGetLanguagesResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseGlobalResourcesSharedModelsLanguage])
+                res.api_i_paged_response_global_resources_shared_models_language_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseGlobalResourcesSharedModelsLanguage])
+                res.api_i_paged_response_global_resources_shared_models_language_ = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def languages_update_language(self, request: operations.LanguagesUpdateLanguageRequest) -> operations.LanguagesUpdateLanguageResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Languages/{LocaleID}", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.LanguagesUpdateLanguageResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def license_activations_post(self, request: operations.LicenseActivationsPostRequest) -> operations.LicenseActivationsPostResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/LicenseActivations"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.LicenseActivationsPostResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.DealerDbModelsLicenseActivation])
+                res.dealer_db_models_license_activation = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.DealerDbModelsLicenseActivation])
+                res.dealer_db_models_license_activation = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def license_activations_post_register_edt_lite(self, request: operations.LicenseActivationsPostRegisterEdtLiteRequest) -> operations.LicenseActivationsPostRegisterEdtLiteResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/LicenseActivations/RegisterEDTLite"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.LicenseActivationsPostRegisterEdtLiteResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[bool])
+                res.license_activations_post_register_edt_lite_200_application_json_boolean = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[bool])
+                res.license_activations_post_register_edt_lite_200_text_json_boolean = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def license_activations_put(self, request: operations.LicenseActivationsPutRequest) -> operations.LicenseActivationsPutResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/LicenseActivations/{ID}", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.LicenseActivationsPutResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.DealerDbModelsLicenseActivation])
+                res.dealer_db_models_license_activation = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.DealerDbModelsLicenseActivation])
+                res.dealer_db_models_license_activation = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def license_activations_put_confirm(self, request: operations.LicenseActivationsPutConfirmRequest) -> operations.LicenseActivationsPutConfirmResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/LicenseActivations/{ID}/Confirm", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.LicenseActivationsPutConfirmResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def licenses_get(self, request: operations.LicensesGetRequest) -> operations.LicensesGetResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Licenses"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.LicensesGetResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseDealerDbModelsLicense])
+                res.api_paged_response_dealer_db_models_license_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseDealerDbModelsLicense])
+                res.api_paged_response_dealer_db_models_license_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def logs_get_log(self, request: operations.LogsGetLogRequest) -> operations.LogsGetLogResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Logs/{ID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.LogsGetLogResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsLog])
+                res.api_models_log = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsLog])
+                res.api_models_log = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def logs_get_logs(self, request: operations.LogsGetLogsRequest) -> operations.LogsGetLogsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Logs"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.LogsGetLogsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseAPIModelsLog])
+                res.api_paged_response_api_models_log_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseAPIModelsLog])
+                res.api_paged_response_api_models_log_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def logs_post_log(self, request: operations.LogsPostLogRequest) -> operations.LogsPostLogResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Logs"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("POST", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.LogsPostLogResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.logs_post_log_200_application_json_string = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.logs_post_log_200_text_json_string = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def notifications_post_mail(self, request: operations.NotificationsPostMailRequest) -> operations.NotificationsPostMailResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Notifications"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.NotificationsPostMailResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def package_reports_default(self, request: operations.PackageReportsDefaultRequest) -> operations.PackageReportsDefaultResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Clients/{ClientID}/PackageReports", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.PackageReportsDefaultResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[List[shared.UpdateSystemModelsPackageReport]])
+                res.update_system_models_package_reports = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[List[shared.UpdateSystemModelsPackageReport]])
+                res.update_system_models_package_reports = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def package_types_add_package_type_user(self, request: operations.PackageTypesAddPackageTypeUserRequest) -> operations.PackageTypesAddPackageTypeUserResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/PackageTypes/{id}/Users/{userID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("POST", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.PackageTypesAddPackageTypeUserResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def package_types_delete(self, request: operations.PackageTypesDeleteRequest) -> operations.PackageTypesDeleteResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/PackageTypes/{ID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.PackageTypesDeleteResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def package_types_get(self, request: operations.PackageTypesGetRequest) -> operations.PackageTypesGetResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/PackageTypes"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.PackageTypesGetResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsPackageType])
+                res.api_paged_response_update_system_models_package_type_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsPackageType])
+                res.api_paged_response_update_system_models_package_type_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def package_types_post(self, request: operations.PackageTypesPostRequest) -> operations.PackageTypesPostResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/PackageTypes"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.PackageTypesPostResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.package_types_post_200_application_json_string = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.package_types_post_200_text_json_string = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def package_types_put(self, request: operations.PackageTypesPutRequest) -> operations.PackageTypesPutResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/PackageTypes/{ID}", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.PackageTypesPutResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def package_types_remove_package_type_user(self, request: operations.PackageTypesRemovePackageTypeUserRequest) -> operations.PackageTypesRemovePackageTypeUserResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/PackageTypes/{id}/Users/{userID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.PackageTypesRemovePackageTypeUserResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def package_typeto_bundles_delete(self, request: operations.PackageTypetoBundlesDeleteRequest) -> operations.PackageTypetoBundlesDeleteResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/PackageTypetoBundles"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("DELETE", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.PackageTypetoBundlesDeleteResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def package_typeto_bundles_get(self, request: operations.PackageTypetoBundlesGetRequest) -> operations.PackageTypetoBundlesGetResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/PackageTypetoBundles"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.PackageTypetoBundlesGetResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsPackageTypeIDtoBundle])
+                res.api_paged_response_update_system_models_package_type_i_dto_bundle_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsPackageTypeIDtoBundle])
+                res.api_paged_response_update_system_models_package_type_i_dto_bundle_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def package_typeto_bundles_post(self, request: operations.PackageTypetoBundlesPostRequest) -> operations.PackageTypetoBundlesPostResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/PackageTypetoBundles"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.PackageTypetoBundlesPostResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def package_typeto_bundles_put(self, request: operations.PackageTypetoBundlesPutRequest) -> operations.PackageTypetoBundlesPutResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/PackageTypetoBundles"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.PackageTypetoBundlesPutResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def packages_delete_package(self, request: operations.PackagesDeletePackageRequest) -> operations.PackagesDeletePackageResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Packages/{ID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.PackagesDeletePackageResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def packages_get_package(self, request: operations.PackagesGetPackageRequest) -> operations.PackagesGetPackageResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Packages/{ID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.PackagesGetPackageResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.UpdateSystemModelsPackage])
+                res.update_system_models_package = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.UpdateSystemModelsPackage])
+                res.update_system_models_package = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def packages_get_packages(self, request: operations.PackagesGetPackagesRequest) -> operations.PackagesGetPackagesResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Packages"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.PackagesGetPackagesResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsPackage])
+                res.api_paged_response_update_system_models_package_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsPackage])
+                res.api_paged_response_update_system_models_package_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def packages_post_package(self, request: operations.PackagesPostPackageRequest) -> operations.PackagesPostPackageResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Packages"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.PackagesPostPackageResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.packages_post_package_200_application_json_string = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.packages_post_package_200_text_json_string = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def packages_put_package(self, request: operations.PackagesPutPackageRequest) -> operations.PackagesPutPackageResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Packages/{ID}", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.PackagesPutPackageResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def permissions_delete_permission(self, request: operations.PermissionsDeletePermissionRequest) -> operations.PermissionsDeletePermissionResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Permissions/{id}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.PermissionsDeletePermissionResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+
+        return res
+
+    
+    
+    def permissions_get_permission(self, request: operations.PermissionsGetPermissionRequest) -> operations.PermissionsGetPermissionResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Permissions/{id}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.PermissionsGetPermissionResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsPermission])
+                res.api_models_permission = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsPermission])
+                res.api_models_permission = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def permissions_get_permissions(self, request: operations.PermissionsGetPermissionsRequest) -> operations.PermissionsGetPermissionsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Permissions"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.PermissionsGetPermissionsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseAPIModelsPermission])
+                res.api_paged_response_api_models_permission_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseAPIModelsPermission])
+                res.api_paged_response_api_models_permission_ = out
+
+        return res
+
+    
+    
+    def permissions_post_permission(self, request: operations.PermissionsPostPermissionRequest) -> operations.PermissionsPostPermissionResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Permissions"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.PermissionsPostPermissionResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.permissions_post_permission_200_application_json_int32_integer = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.permissions_post_permission_200_text_json_int32_integer = out
+
+        return res
+
+    
+    
+    def permissions_put_permission(self, request: operations.PermissionsPutPermissionRequest) -> operations.PermissionsPutPermissionResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Permissions/{id}", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.PermissionsPutPermissionResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+
+        return res
+
+    
+    
+    def priority_packages_delete_priority_packages(self, request: operations.PriorityPackagesDeletePriorityPackagesRequest) -> operations.PriorityPackagesDeletePriorityPackagesResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/PriorityPackages/{ID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.PriorityPackagesDeletePriorityPackagesResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def priority_packages_get_priority_package(self, request: operations.PriorityPackagesGetPriorityPackageRequest) -> operations.PriorityPackagesGetPriorityPackageResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/PriorityPackages/{ID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.PriorityPackagesGetPriorityPackageResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.UpdateSystemModelsPriorityPackage])
+                res.update_system_models_priority_package = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.UpdateSystemModelsPriorityPackage])
+                res.update_system_models_priority_package = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def priority_packages_get_priority_packages(self, request: operations.PriorityPackagesGetPriorityPackagesRequest) -> operations.PriorityPackagesGetPriorityPackagesResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/PriorityPackages"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.PriorityPackagesGetPriorityPackagesResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsPriorityPackage])
+                res.api_paged_response_update_system_models_priority_package_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsPriorityPackage])
+                res.api_paged_response_update_system_models_priority_package_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def priority_packages_post_priority_packages(self, request: operations.PriorityPackagesPostPriorityPackagesRequest) -> operations.PriorityPackagesPostPriorityPackagesResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/PriorityPackages"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.PriorityPackagesPostPriorityPackagesResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.priority_packages_post_priority_packages_200_application_json_string = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.priority_packages_post_priority_packages_200_text_json_string = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def release_delete_release_bundle(self, request: operations.ReleaseDeleteReleaseBundleRequest) -> operations.ReleaseDeleteReleaseBundleResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Releases/{ReleaseId}/Bundle/{BundleId}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ReleaseDeleteReleaseBundleResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def release_get_release(self, request: operations.ReleaseGetReleaseRequest) -> operations.ReleaseGetReleaseResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Releases/{ReleaseId}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ReleaseGetReleaseResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.ContentSubmissionSharedBusinessEntitiesRelease])
+                res.content_submission_shared_business_entities_release = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.ContentSubmissionSharedBusinessEntitiesRelease])
+                res.content_submission_shared_business_entities_release = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def release_get_releases(self, request: operations.ReleaseGetReleasesRequest) -> operations.ReleaseGetReleasesResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Releases"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ReleaseGetReleasesResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseContentSubmissionSharedBusinessEntitiesRelease])
+                res.api_paged_response_content_submission_shared_business_entities_release_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseContentSubmissionSharedBusinessEntitiesRelease])
+                res.api_paged_response_content_submission_shared_business_entities_release_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def release_post_release(self, request: operations.ReleasePostReleaseRequest) -> operations.ReleasePostReleaseResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Releases"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ReleasePostReleaseResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.release_post_release_200_application_json_int32_integer = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.release_post_release_200_text_json_int32_integer = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def release_post_release_bundle(self, request: operations.ReleasePostReleaseBundleRequest) -> operations.ReleasePostReleaseBundleResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Releases/{ReleaseId}/Bundle/{BundleId}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("POST", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ReleasePostReleaseBundleResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def release_put_content_definition(self, request: operations.ReleasePutContentDefinitionRequest) -> operations.ReleasePutContentDefinitionResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Releases/{releaseId}", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ReleasePutContentDefinitionResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def reporting_bundle_status_summary(self, request: operations.ReportingBundleStatusSummaryRequest) -> operations.ReportingBundleStatusSummaryResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Reporting/BundleStatusSummary"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ReportingBundleStatusSummaryResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsPackageStatusSummary])
+                res.api_paged_response_update_system_models_package_status_summary_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsPackageStatusSummary])
+                res.api_paged_response_update_system_models_package_status_summary_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def reporting_bundles_in_update_group(self, request: operations.ReportingBundlesInUpdateGroupRequest) -> operations.ReportingBundlesInUpdateGroupResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Reporting/BundlesInUpdateGroup"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ReportingBundlesInUpdateGroupResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsBundle])
+                res.api_paged_response_update_system_models_bundle_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsBundle])
+                res.api_paged_response_update_system_models_bundle_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def reporting_client_info(self, request: operations.ReportingClientInfoRequest) -> operations.ReportingClientInfoResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Reporting/ClientInfo"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ReportingClientInfoResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.UpdateSystemModelsClientInfo])
+                res.update_system_models_client_info = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.UpdateSystemModelsClientInfo])
+                res.update_system_models_client_info = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def reporting_current_packages_in_update_group(self, request: operations.ReportingCurrentPackagesInUpdateGroupRequest) -> operations.ReportingCurrentPackagesInUpdateGroupResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Reporting/CurrentPackagesInUpdateGroup"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ReportingCurrentPackagesInUpdateGroupResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[List[shared.UpdateSystemModelsPackage]])
+                res.update_system_models_packages = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[List[shared.UpdateSystemModelsPackage]])
+                res.update_system_models_packages = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def reporting_get_client(self, request: operations.ReportingGetClientRequest) -> operations.ReportingGetClientResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Reporting/GetClient"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ReportingGetClientResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.UpdateSystemModelsClient])
+                res.update_system_models_client = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.UpdateSystemModelsClient])
+                res.update_system_models_client = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def reporting_get_subscriptions(self, request: operations.ReportingGetSubscriptionsRequest) -> operations.ReportingGetSubscriptionsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Reporting/GetSubscriptions"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ReportingGetSubscriptionsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsUpdateGroupClientRelationship])
+                res.api_paged_response_update_system_models_update_group_client_relationship_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsUpdateGroupClientRelationship])
+                res.api_paged_response_update_system_models_update_group_client_relationship_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def reporting_package_status_summary(self, request: operations.ReportingPackageStatusSummaryRequest) -> operations.ReportingPackageStatusSummaryResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Reporting/PackageStatusSummary"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ReportingPackageStatusSummaryResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.UpdateSystemModelsPackageStatusSummary])
+                res.update_system_models_package_status_summary = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.UpdateSystemModelsPackageStatusSummary])
+                res.update_system_models_package_status_summary = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def reporting_registered_clients(self, request: operations.ReportingRegisteredClientsRequest) -> operations.ReportingRegisteredClientsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Reporting/RegisteredClients"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ReportingRegisteredClientsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsClientStatusUpdateSystemModelsPagedClientStatusMetadata])
+                res.api_paged_response_update_system_models_client_status_update_system_models_paged_client_status_metadata_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsClientStatusUpdateSystemModelsPagedClientStatusMetadata])
+                res.api_paged_response_update_system_models_client_status_update_system_models_paged_client_status_metadata_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def reporting_update_groups(self, request: operations.ReportingUpdateGroupsRequest) -> operations.ReportingUpdateGroupsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Reporting/UpdateGroups"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ReportingUpdateGroupsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsUpdateGroup])
+                res.api_paged_response_update_system_models_update_group_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsUpdateGroup])
+                res.api_paged_response_update_system_models_update_group_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def reporting_update_metrics(self, request: operations.ReportingUpdateMetricsRequest) -> operations.ReportingUpdateMetricsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Reporting/UpdateMetrics"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ReportingUpdateMetricsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.UpdateSystemModelsUpdateMetricsData])
+                res.update_system_models_update_metrics_data = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.UpdateSystemModelsUpdateMetricsData])
+                res.update_system_models_update_metrics_data = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def roles_delete_role(self, request: operations.RolesDeleteRoleRequest) -> operations.RolesDeleteRoleResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Roles/{id}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.RolesDeleteRoleResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+
+        return res
+
+    
+    
+    def roles_get_role(self, request: operations.RolesGetRoleRequest) -> operations.RolesGetRoleResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Roles/{id}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.RolesGetRoleResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsRole])
+                res.api_models_role = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsRole])
+                res.api_models_role = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def roles_get_role_permissions(self, request: operations.RolesGetRolePermissionsRequest) -> operations.RolesGetRolePermissionsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Roles/{id}/Permissions", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.RolesGetRolePermissionsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseAPIModelsPermission])
+                res.api_paged_response_api_models_permission_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseAPIModelsPermission])
+                res.api_paged_response_api_models_permission_ = out
+
+        return res
+
+    
+    
+    def roles_get_roles(self, request: operations.RolesGetRolesRequest) -> operations.RolesGetRolesResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Roles"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.RolesGetRolesResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseAPIModelsRole])
+                res.api_paged_response_api_models_role_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseAPIModelsRole])
+                res.api_paged_response_api_models_role_ = out
+
+        return res
+
+    
+    
+    def roles_post_role(self, request: operations.RolesPostRoleRequest) -> operations.RolesPostRoleResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Roles"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.RolesPostRoleResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.roles_post_role_200_application_json_int32_integer = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.roles_post_role_200_text_json_int32_integer = out
+
+        return res
+
+    
+    
+    def roles_put_role(self, request: operations.RolesPutRoleRequest) -> operations.RolesPutRoleResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Roles/{id}", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.RolesPutRoleResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+
+        return res
+
+    
+    
+    def steps_get_step(self, request: operations.StepsGetStepRequest) -> operations.StepsGetStepResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/steps/{stepID}", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.StepsGetStepResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.BuildSystemSharedDtoStep])
+                res.build_system_shared_dto_step = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.BuildSystemSharedDtoStep])
+                res.build_system_shared_dto_step = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def steps_get_steps(self, request: operations.StepsGetStepsRequest) -> operations.StepsGetStepsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/steps"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.StepsGetStepsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseBuildSystemSharedDtoStep])
+                res.api_paged_response_build_system_shared_dto_step_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseBuildSystemSharedDtoStep])
+                res.api_paged_response_build_system_shared_dto_step_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def string_definitions_get_definition(self, request: operations.StringDefinitionsGetDefinitionRequest) -> operations.StringDefinitionsGetDefinitionResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/StringDefinitions/{ID}", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.StringDefinitionsGetDefinitionResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.GlobalResourcesSharedModelsStringDefinition])
+                res.global_resources_shared_models_string_definition = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.GlobalResourcesSharedModelsStringDefinition])
+                res.global_resources_shared_models_string_definition = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def string_definitions_get_definitions(self, request: operations.StringDefinitionsGetDefinitionsRequest) -> operations.StringDefinitionsGetDefinitionsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/StringDefinitions"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.StringDefinitionsGetDefinitionsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseGlobalResourcesSharedModelsStringDefinition])
+                res.api_i_paged_response_global_resources_shared_models_string_definition_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseGlobalResourcesSharedModelsStringDefinition])
+                res.api_i_paged_response_global_resources_shared_models_string_definition_ = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def string_translations_get_translation(self, request: operations.StringTranslationsGetTranslationRequest) -> operations.StringTranslationsGetTranslationResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/StringTranslations/{stringId}/{languageId}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.StringTranslationsGetTranslationResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.GlobalResourcesSharedModelsStringTranslation])
+                res.global_resources_shared_models_string_translation = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.GlobalResourcesSharedModelsStringTranslation])
+                res.global_resources_shared_models_string_translation = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def string_translations_get_translations(self, request: operations.StringTranslationsGetTranslationsRequest) -> operations.StringTranslationsGetTranslationsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/StringTranslations"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.StringTranslationsGetTranslationsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseGlobalResourcesSharedModelsStringTranslation])
+                res.api_i_paged_response_global_resources_shared_models_string_translation_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseGlobalResourcesSharedModelsStringTranslation])
+                res.api_i_paged_response_global_resources_shared_models_string_translation_ = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def string_translations_update_translation(self, request: operations.StringTranslationsUpdateTranslationRequest) -> operations.StringTranslationsUpdateTranslationResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/StringTranslations/{stringId}/{languageId}", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.StringTranslationsUpdateTranslationResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def translation_keys_create_translation_key(self, request: operations.TranslationKeysCreateTranslationKeyRequest) -> operations.TranslationKeysCreateTranslationKeyResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/TranslationKeys"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.TranslationKeysCreateTranslationKeyResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.translation_keys_create_translation_key_200_application_json_int32_integer = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.translation_keys_create_translation_key_200_text_json_int32_integer = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def translation_keys_get(self, request: operations.TranslationKeysGetRequest) -> operations.TranslationKeysGetResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/TranslationKeys"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.TranslationKeysGetResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseOasSupportSharedModelsTranslationKey])
+                res.api_i_paged_response_oas_support_shared_models_translation_key_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseOasSupportSharedModelsTranslationKey])
+                res.api_i_paged_response_oas_support_shared_models_translation_key_ = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def translation_keys_get_translation_key(self, request: operations.TranslationKeysGetTranslationKeyRequest) -> operations.TranslationKeysGetTranslationKeyResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/TranslationKeys/{ID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.TranslationKeysGetTranslationKeyResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.OasSupportSharedModelsTranslationKey])
+                res.oas_support_shared_models_translation_key = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.OasSupportSharedModelsTranslationKey])
+                res.oas_support_shared_models_translation_key = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def translation_keys_update_translation_key(self, request: operations.TranslationKeysUpdateTranslationKeyRequest) -> operations.TranslationKeysUpdateTranslationKeyResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/TranslationKeys/{ID}", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.TranslationKeysUpdateTranslationKeyResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def translation_requests_create_translation_request(self, request: operations.TranslationRequestsCreateTranslationRequestRequest) -> operations.TranslationRequestsCreateTranslationRequestResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/TranslationRequests"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.TranslationRequestsCreateTranslationRequestResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.translation_requests_create_translation_request_200_application_json_int32_integer = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.translation_requests_create_translation_request_200_text_json_int32_integer = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def translation_requests_get_translation_request(self, request: operations.TranslationRequestsGetTranslationRequestRequest) -> operations.TranslationRequestsGetTranslationRequestResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/TranslationRequests/{Id}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.TranslationRequestsGetTranslationRequestResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.GlobalResourcesSharedModelsTranslationRequest])
+                res.global_resources_shared_models_translation_request = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.GlobalResourcesSharedModelsTranslationRequest])
+                res.global_resources_shared_models_translation_request = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def translation_requests_get_translation_requests(self, request: operations.TranslationRequestsGetTranslationRequestsRequest) -> operations.TranslationRequestsGetTranslationRequestsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/TranslationRequests"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.TranslationRequestsGetTranslationRequestsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseGlobalResourcesSharedModelsTranslationRequest])
+                res.api_i_paged_response_global_resources_shared_models_translation_request_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseGlobalResourcesSharedModelsTranslationRequest])
+                res.api_i_paged_response_global_resources_shared_models_translation_request_ = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def translation_requests_update_translation_request(self, request: operations.TranslationRequestsUpdateTranslationRequestRequest) -> operations.TranslationRequestsUpdateTranslationRequestResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/TranslationRequests/{Id}", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.TranslationRequestsUpdateTranslationRequestResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def translation_sets_delete_translation_set_attribute(self, request: operations.TranslationSetsDeleteTranslationSetAttributeRequest) -> operations.TranslationSetsDeleteTranslationSetAttributeResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/TranslationSetAttributes/{ID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.TranslationSetsDeleteTranslationSetAttributeResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def translation_sets_get_source_strings(self, request: operations.TranslationSetsGetSourceStringsRequest) -> operations.TranslationSetsGetSourceStringsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/TranslationSets/{ID}/SourceStrings", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.TranslationSetsGetSourceStringsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseGlobalResourcesSharedModelsTranslationSetSourceString])
+                res.api_i_paged_response_global_resources_shared_models_translation_set_source_string_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseGlobalResourcesSharedModelsTranslationSetSourceString])
+                res.api_i_paged_response_global_resources_shared_models_translation_set_source_string_ = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def translation_sets_get_statistics(self, request: operations.TranslationSetsGetStatisticsRequest) -> operations.TranslationSetsGetStatisticsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/TranslationSets/{ID}/Statistics", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.TranslationSetsGetStatisticsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.GlobalResourcesSharedModelsTranslationSetStatistics])
+                res.global_resources_shared_models_translation_set_statistics = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.GlobalResourcesSharedModelsTranslationSetStatistics])
+                res.global_resources_shared_models_translation_set_statistics = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def translation_sets_get_translation_set(self, request: operations.TranslationSetsGetTranslationSetRequest) -> operations.TranslationSetsGetTranslationSetResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/TranslationSets/{ID}", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.TranslationSetsGetTranslationSetResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.GlobalResourcesSharedModelsTranslationSet])
+                res.global_resources_shared_models_translation_set = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.GlobalResourcesSharedModelsTranslationSet])
+                res.global_resources_shared_models_translation_set = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def translation_sets_get_translation_set_attributes(self, request: operations.TranslationSetsGetTranslationSetAttributesRequest) -> operations.TranslationSetsGetTranslationSetAttributesResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/TranslationSets/{ID}/Attributes", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.TranslationSetsGetTranslationSetAttributesResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseGlobalResourcesSharedModelsTranslationSetAttribute])
+                res.api_i_paged_response_global_resources_shared_models_translation_set_attribute_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseGlobalResourcesSharedModelsTranslationSetAttribute])
+                res.api_i_paged_response_global_resources_shared_models_translation_set_attribute_ = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def translation_sets_get_translation_set_strings(self, request: operations.TranslationSetsGetTranslationSetStringsRequest) -> operations.TranslationSetsGetTranslationSetStringsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/TranslationSets/{ID}/Strings", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.TranslationSetsGetTranslationSetStringsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseGlobalResourcesSharedModelsTranslationSetString])
+                res.api_i_paged_response_global_resources_shared_models_translation_set_string_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseGlobalResourcesSharedModelsTranslationSetString])
+                res.api_i_paged_response_global_resources_shared_models_translation_set_string_ = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def translation_sets_get_translation_sets(self, request: operations.TranslationSetsGetTranslationSetsRequest) -> operations.TranslationSetsGetTranslationSetsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/TranslationSets"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.TranslationSetsGetTranslationSetsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseGlobalResourcesSharedModelsTranslationSet])
+                res.api_i_paged_response_global_resources_shared_models_translation_set_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIIPagedResponseGlobalResourcesSharedModelsTranslationSet])
+                res.api_i_paged_response_global_resources_shared_models_translation_set_ = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def translation_sets_post_translation_set_attribute(self, request: operations.TranslationSetsPostTranslationSetAttributeRequest) -> operations.TranslationSetsPostTranslationSetAttributeResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/TranslationSets/{ID}/Attributes", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.TranslationSetsPostTranslationSetAttributeResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.translation_sets_post_translation_set_attribute_200_application_json_int32_integer = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.translation_sets_post_translation_set_attribute_200_text_json_int32_integer = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def translation_sets_update_translation_set_attribute(self, request: operations.TranslationSetsUpdateTranslationSetAttributeRequest) -> operations.TranslationSetsUpdateTranslationSetAttributeResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/TranslationSetAttributes/{ID}", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.TranslationSetsUpdateTranslationSetAttributeResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def update_group_client_relationships_get_subscription(self, request: operations.UpdateGroupClientRelationshipsGetSubscriptionRequest) -> operations.UpdateGroupClientRelationshipsGetSubscriptionResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/UpdateGroupClientRelationships/{RelationshipID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UpdateGroupClientRelationshipsGetSubscriptionResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.UpdateSystemModelsUpdateGroupClientRelationship])
+                res.update_system_models_update_group_client_relationship = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.UpdateSystemModelsUpdateGroupClientRelationship])
+                res.update_system_models_update_group_client_relationship = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def update_group_client_relationships_get_subscriptions(self, request: operations.UpdateGroupClientRelationshipsGetSubscriptionsRequest) -> operations.UpdateGroupClientRelationshipsGetSubscriptionsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/UpdateGroupClientRelationships"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UpdateGroupClientRelationshipsGetSubscriptionsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsUpdateGroupClientRelationship])
+                res.api_paged_response_update_system_models_update_group_client_relationship_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsUpdateGroupClientRelationship])
+                res.api_paged_response_update_system_models_update_group_client_relationship_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def update_group_client_relationships_post_subscription(self, request: operations.UpdateGroupClientRelationshipsPostSubscriptionRequest) -> operations.UpdateGroupClientRelationshipsPostSubscriptionResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/UpdateGroupClientRelationships"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UpdateGroupClientRelationshipsPostSubscriptionResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.update_group_client_relationships_post_subscription_200_application_json_string = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.update_group_client_relationships_post_subscription_200_text_json_string = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def update_group_client_relationships_put_subscription(self, request: operations.UpdateGroupClientRelationshipsPutSubscriptionRequest) -> operations.UpdateGroupClientRelationshipsPutSubscriptionResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/UpdateGroupClientRelationships/{RelationshipID}", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UpdateGroupClientRelationshipsPutSubscriptionResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def update_group_client_relationships_put_subscription_by_client_id_update_group_id(self, request: operations.UpdateGroupClientRelationshipsPutSubscriptionByClientIDUpdateGroupIDRequest) -> operations.UpdateGroupClientRelationshipsPutSubscriptionByClientIDUpdateGroupIDResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/UpdateGroupClientRelationships"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("PUT", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UpdateGroupClientRelationshipsPutSubscriptionByClientIDUpdateGroupIDResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def update_group_subscriptions_delete_update_group_subscription(self, request: operations.UpdateGroupSubscriptionsDeleteUpdateGroupSubscriptionRequest) -> operations.UpdateGroupSubscriptionsDeleteUpdateGroupSubscriptionResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/UpdateGroupSubscriptions/{UpdateGroupSubscriptionID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UpdateGroupSubscriptionsDeleteUpdateGroupSubscriptionResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def update_group_subscriptions_get_update_group_subscription(self, request: operations.UpdateGroupSubscriptionsGetUpdateGroupSubscriptionRequest) -> operations.UpdateGroupSubscriptionsGetUpdateGroupSubscriptionResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/UpdateGroupSubscriptions/{UpdateGroupSubscriptionID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UpdateGroupSubscriptionsGetUpdateGroupSubscriptionResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.UpdateSystemModelsUpdateGroupSubscription])
+                res.update_system_models_update_group_subscription = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.UpdateSystemModelsUpdateGroupSubscription])
+                res.update_system_models_update_group_subscription = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def update_group_subscriptions_get_update_group_subscriptions(self, request: operations.UpdateGroupSubscriptionsGetUpdateGroupSubscriptionsRequest) -> operations.UpdateGroupSubscriptionsGetUpdateGroupSubscriptionsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/UpdateGroupSubscriptions"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UpdateGroupSubscriptionsGetUpdateGroupSubscriptionsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsUpdateGroupSubscription])
+                res.api_paged_response_update_system_models_update_group_subscription_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsUpdateGroupSubscription])
+                res.api_paged_response_update_system_models_update_group_subscription_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def update_group_subscriptions_post_update_group_subscription(self, request: operations.UpdateGroupSubscriptionsPostUpdateGroupSubscriptionRequest) -> operations.UpdateGroupSubscriptionsPostUpdateGroupSubscriptionResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/UpdateGroupSubscriptions"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UpdateGroupSubscriptionsPostUpdateGroupSubscriptionResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.update_group_subscriptions_post_update_group_subscription_200_application_json_int32_integer = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.update_group_subscriptions_post_update_group_subscription_200_text_json_int32_integer = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def update_group_subscriptions_put_update_group_subscription(self, request: operations.UpdateGroupSubscriptionsPutUpdateGroupSubscriptionRequest) -> operations.UpdateGroupSubscriptionsPutUpdateGroupSubscriptionResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/UpdateGroupSubscriptions/{UpdateGroupSubscriptionID}", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UpdateGroupSubscriptionsPutUpdateGroupSubscriptionResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def update_groups_add_update_group_user(self, request: operations.UpdateGroupsAddUpdateGroupUserRequest) -> operations.UpdateGroupsAddUpdateGroupUserResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/UpdateGroups/{id}/Users/{userID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("POST", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UpdateGroupsAddUpdateGroupUserResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def update_groups_delete(self, request: operations.UpdateGroupsDeleteRequest) -> operations.UpdateGroupsDeleteResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/UpdateGroups/{ID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UpdateGroupsDeleteResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def update_groups_get(self, request: operations.UpdateGroupsGetRequest) -> operations.UpdateGroupsGetResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/UpdateGroups"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UpdateGroupsGetResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsUpdateGroup])
+                res.api_paged_response_update_system_models_update_group_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsUpdateGroup])
+                res.api_paged_response_update_system_models_update_group_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def update_groups_get_update_group_bundles(self, request: operations.UpdateGroupsGetUpdateGroupBundlesRequest) -> operations.UpdateGroupsGetUpdateGroupBundlesResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/UpdateGroups/{ID}/Bundles", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UpdateGroupsGetUpdateGroupBundlesResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsBundle])
+                res.api_paged_response_update_system_models_bundle_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseUpdateSystemModelsBundle])
+                res.api_paged_response_update_system_models_bundle_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def update_groups_post(self, request: operations.UpdateGroupsPostRequest) -> operations.UpdateGroupsPostResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/UpdateGroups"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UpdateGroupsPostResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.update_groups_post_200_application_json_string = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.update_groups_post_200_text_json_string = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def update_groups_put(self, request: operations.UpdateGroupsPutRequest) -> operations.UpdateGroupsPutResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/UpdateGroups/{ID}", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UpdateGroupsPutResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def update_groups_remove_update_group_user(self, request: operations.UpdateGroupsRemoveUpdateGroupUserRequest) -> operations.UpdateGroupsRemoveUpdateGroupUserResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/UpdateGroups/{id}/Users/{userID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UpdateGroupsRemoveUpdateGroupUserResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def update_system_get_cached_files(self, request: operations.UpdateSystemGetCachedFilesRequest) -> operations.UpdateSystemGetCachedFilesResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Clients/{ClientID}/CachedFiles", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UpdateSystemGetCachedFilesResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[List[str]])
+                res.update_system_get_cached_files_200_application_json_strings = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[List[str]])
+                res.update_system_get_cached_files_200_text_json_strings = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def update_system_get_checkin(self, request: operations.UpdateSystemGetCheckinRequest) -> operations.UpdateSystemGetCheckinResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/UpdateSystem"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UpdateSystemGetCheckinResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.UpdateSystemModelsCheckinResult])
+                res.update_system_models_checkin_result = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.UpdateSystemModelsCheckinResult])
+                res.update_system_models_checkin_result = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def user_content_definitions_delete_user_content_definition(self, request: operations.UserContentDefinitionsDeleteUserContentDefinitionRequest) -> operations.UserContentDefinitionsDeleteUserContentDefinitionResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/UserContentDefinitions/{userContentDefinitionID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UserContentDefinitionsDeleteUserContentDefinitionResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def user_content_definitions_get_user_content_definition(self, request: operations.UserContentDefinitionsGetUserContentDefinitionRequest) -> operations.UserContentDefinitionsGetUserContentDefinitionResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/UserContentDefinitions/{userContentDefinitionID}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UserContentDefinitionsGetUserContentDefinitionResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.ContentSubmissionSharedBusinessEntitiesUserContentDefinition])
+                res.content_submission_shared_business_entities_user_content_definition = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.ContentSubmissionSharedBusinessEntitiesUserContentDefinition])
+                res.content_submission_shared_business_entities_user_content_definition = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def user_content_definitions_get_user_content_definitions(self, request: operations.UserContentDefinitionsGetUserContentDefinitionsRequest) -> operations.UserContentDefinitionsGetUserContentDefinitionsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/UserContentDefinitions"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UserContentDefinitionsGetUserContentDefinitionsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseContentSubmissionSharedBusinessEntitiesUserContentDefinition])
+                res.api_paged_response_content_submission_shared_business_entities_user_content_definition_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseContentSubmissionSharedBusinessEntitiesUserContentDefinition])
+                res.api_paged_response_content_submission_shared_business_entities_user_content_definition_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def user_content_definitions_post_user_content_definition(self, request: operations.UserContentDefinitionsPostUserContentDefinitionRequest) -> operations.UserContentDefinitionsPostUserContentDefinitionResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/UserContentDefinitions"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UserContentDefinitionsPostUserContentDefinitionResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.user_content_definitions_post_user_content_definition_200_application_json_int32_integer = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.user_content_definitions_post_user_content_definition_200_text_json_int32_integer = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def user_permissions_get_current_user_roles(self, request: operations.UserPermissionsGetCurrentUserRolesRequest) -> operations.UserPermissionsGetCurrentUserRolesResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Users/Current/Roles"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UserPermissionsGetCurrentUserRolesResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseAPIModelsRole])
+                res.api_paged_response_api_models_role_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseAPIModelsRole])
+                res.api_paged_response_api_models_role_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def user_permissions_get_permissions(self, request: operations.UserPermissionsGetPermissionsRequest) -> operations.UserPermissionsGetPermissionsResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Users/{id}/Permissions", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UserPermissionsGetPermissionsResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseAPIModelsUserEffectivePermission])
+                res.api_paged_response_api_models_user_effective_permission_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseAPIModelsUserEffectivePermission])
+                res.api_paged_response_api_models_user_effective_permission_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def user_permissions_get_roles(self, request: operations.UserPermissionsGetRolesRequest) -> operations.UserPermissionsGetRolesResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Users/{id}/Roles", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UserPermissionsGetRolesResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseAPIModelsRole])
+                res.api_paged_response_api_models_role_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseAPIModelsRole])
+                res.api_paged_response_api_models_role_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def user_permissions_get_users(self, request: operations.UserPermissionsGetUsersRequest) -> operations.UserPermissionsGetUsersResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Roles/{id}/Users", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UserPermissionsGetUsersResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseAPIModelsUser])
+                res.api_paged_response_api_models_user_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseAPIModelsUser])
+                res.api_paged_response_api_models_user_ = out
+        else:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    
+    def users_delete(self, request: operations.UsersDeleteRequest) -> operations.UsersDeleteResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Users/{id}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UsersDeleteResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+
+        return res
+
+    
+    
+    def users_get(self, request: operations.UsersGetRequest) -> operations.UsersGetResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Users"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UsersGetResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseAPIModelsUser])
+                res.api_paged_response_api_models_user_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseAPIModelsUser])
+                res.api_paged_response_api_models_user_ = out
+
+        return res
+
+    
+    
+    def users_get_current_user(self) -> operations.UsersGetCurrentUserResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Users/Current"
+        
+        client = self.client
+
+        r = client.request("GET", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UsersGetCurrentUserResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsUser])
+                res.api_models_user = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsUser])
+                res.api_models_user = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def users_post(self, request: operations.UsersPostRequest) -> operations.UsersPostResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Users"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UsersPostResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsUser])
+                res.api_models_user = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsUser])
+                res.api_models_user = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def users_put(self, request: operations.UsersPutRequest) -> operations.UsersPutResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Users/{id}", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UsersPutResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+
+        return res
+
+    
+    
+    def users_put_current_user(self, request: operations.UsersPutCurrentUserRequest) -> operations.UsersPutCurrentUserResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Users/Current"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UsersPutCurrentUserResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+
+        return res
+
+    
+    
+    def voucher_history_get_voucher_history(self, request: operations.VoucherHistoryGetVoucherHistoryRequest) -> operations.VoucherHistoryGetVoucherHistoryResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/VoucherHistory"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.VoucherHistoryGetVoucherHistoryResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseDealerDbModelsVoucherHistory])
+                res.api_paged_response_dealer_db_models_voucher_history_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseDealerDbModelsVoucherHistory])
+                res.api_paged_response_dealer_db_models_voucher_history_ = out
+
+        return res
+
+    
+    
+    def vouchers_delete(self, request: operations.VouchersDeleteRequest) -> operations.VouchersDeleteResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Vouchers/{VoucherCode}", request.path_params)
+        
+        client = self.client
+
+        r = client.request("DELETE", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.VouchersDeleteResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+
+        return res
+
+    
+    
+    def vouchers_get(self, request: operations.VouchersGetRequest) -> operations.VouchersGetResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Vouchers"
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.VouchersGetResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseDealerDbModelsVoucher])
+                res.api_paged_response_dealer_db_models_voucher_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseDealerDbModelsVoucher])
+                res.api_paged_response_dealer_db_models_voucher_ = out
+
+        return res
+
+    
+    
+    def vouchers_get_voucher_history(self, request: operations.VouchersGetVoucherHistoryRequest) -> operations.VouchersGetVoucherHistoryResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Vouchers/{VoucherCode}/VoucherHistory", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = self.client
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.VouchersGetVoucherHistoryResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseDealerDbModelsVoucherHistory])
+                res.api_paged_response_dealer_db_models_voucher_history_ = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIPagedResponseDealerDbModelsVoucherHistory])
+                res.api_paged_response_dealer_db_models_voucher_history_ = out
+
+        return res
+
+    
+    
+    def vouchers_post(self, request: operations.VouchersPostRequest) -> operations.VouchersPostResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/api/v2/Vouchers"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.VouchersPostResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.vouchers_post_200_application_json_string = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.vouchers_post_200_text_json_string = out
+
+        return res
+
+    
+    
+    def vouchers_put(self, request: operations.VouchersPutRequest) -> operations.VouchersPutResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/api/v2/Vouchers/{VoucherCode}", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.VouchersPutResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+
+        return res
+
+    

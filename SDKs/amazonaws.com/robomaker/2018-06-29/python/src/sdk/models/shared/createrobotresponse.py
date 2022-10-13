@@ -1,0 +1,19 @@
+from dataclasses import dataclass, field
+from datetime import datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Enum,Optional
+from dataclasses_json import dataclass_json
+from . import architecture_enum
+
+
+@dataclass_json
+@dataclass
+class CreateRobotResponse:
+    architecture: Optional[architecture_enum.ArchitectureEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'architecture' }})
+    arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'arn' }})
+    created_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createdAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    greengrass_group_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'greengrassGroupId' }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    

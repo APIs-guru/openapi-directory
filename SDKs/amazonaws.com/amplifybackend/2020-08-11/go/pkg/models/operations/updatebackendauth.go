@@ -1,0 +1,48 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type UpdateBackendAuthPathParams struct {
+	AppID                  string `pathParam:"style=simple,explode=false,name=appId"`
+	BackendEnvironmentName string `pathParam:"style=simple,explode=false,name=backendEnvironmentName"`
+}
+
+type UpdateBackendAuthHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type UpdateBackendAuthRequestBodyResourceConfig struct {
+	AuthResources       *shared.AuthResourcesEnum                   `json:"AuthResources"`
+	IdentityPoolConfigs *shared.UpdateBackendAuthIdentityPoolConfig `json:"IdentityPoolConfigs"`
+	Service             *shared.ServiceEnum                         `json:"Service"`
+	UserPoolConfigs     *shared.UpdateBackendAuthUserPoolConfig     `json:"UserPoolConfigs"`
+}
+
+type UpdateBackendAuthRequestBody struct {
+	ResourceConfig UpdateBackendAuthRequestBodyResourceConfig `json:"resourceConfig"`
+	ResourceName   string                                     `json:"resourceName"`
+}
+
+type UpdateBackendAuthRequest struct {
+	PathParams UpdateBackendAuthPathParams
+	Headers    UpdateBackendAuthHeaders
+	Request    UpdateBackendAuthRequestBody `request:"mediaType=application/json"`
+}
+
+type UpdateBackendAuthResponse struct {
+	BadRequestException       *interface{}
+	ContentType               string
+	GatewayTimeoutException   *interface{}
+	NotFoundException         *interface{}
+	StatusCode                int64
+	TooManyRequestsException  *interface{}
+	UpdateBackendAuthResponse *shared.UpdateBackendAuthResponse
+}

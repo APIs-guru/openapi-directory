@@ -1,0 +1,10 @@
+package shared
+
+type InteractionChannelEnumChannelStatusEnum string
+
+const (
+	InteractionChannelEnumChannelStatusEnumSetup  InteractionChannelEnumChannelStatusEnum = "setup"
+	InteractionChannelEnumChannelStatusEnumActive InteractionChannelEnumChannelStatusEnum = "active"
+	InteractionChannelEnumChannelStatusEnumFailed InteractionChannelEnumChannelStatusEnum = "failed"
+	InteractionChannelEnumChannelStatusEnumClosed InteractionChannelEnumChannelStatusEnum = "closed"
+)

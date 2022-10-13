@@ -1,0 +1,32 @@
+from dataclasses import dataclass, field
+from typing import Enum
+
+class StandardUnitEnum(str, Enum):
+    SECONDS = "Seconds"
+    MICROSECONDS = "Microseconds"
+    MILLISECONDS = "Milliseconds"
+    BYTES = "Bytes"
+    KILOBYTES = "Kilobytes"
+    MEGABYTES = "Megabytes"
+    GIGABYTES = "Gigabytes"
+    TERABYTES = "Terabytes"
+    BITS = "Bits"
+    KILOBITS = "Kilobits"
+    MEGABITS = "Megabits"
+    GIGABITS = "Gigabits"
+    TERABITS = "Terabits"
+    PERCENT = "Percent"
+    COUNT = "Count"
+    BYTES_SECOND = "Bytes/Second"
+    KILOBYTES_SECOND = "Kilobytes/Second"
+    MEGABYTES_SECOND = "Megabytes/Second"
+    GIGABYTES_SECOND = "Gigabytes/Second"
+    TERABYTES_SECOND = "Terabytes/Second"
+    BITS_SECOND = "Bits/Second"
+    KILOBITS_SECOND = "Kilobits/Second"
+    MEGABITS_SECOND = "Megabits/Second"
+    GIGABITS_SECOND = "Gigabits/Second"
+    TERABITS_SECOND = "Terabits/Second"
+    COUNT_SECOND = "Count/Second"
+    NONE = "None"
+

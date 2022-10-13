@@ -1,0 +1,21 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from sdk.models import shared
+
+
+@dataclass
+class RemoveRadiusConfigHeaders:
+    x_sds_auth_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Sds-Auth-Token' }})
+    
+
+@dataclass
+class RemoveRadiusConfigRequest:
+    headers: RemoveRadiusConfigHeaders = field(default=None)
+    
+
+@dataclass
+class RemoveRadiusConfigResponse:
+    content_type: str = field(default=None)
+    error_response: Optional[shared.ErrorResponse] = field(default=None)
+    status_code: int = field(default=None)
+    

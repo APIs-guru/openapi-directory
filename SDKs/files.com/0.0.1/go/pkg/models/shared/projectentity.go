@@ -1,0 +1,14 @@
+package shared
+
+type ProjectEntityGlobalAccessEnum string
+
+const (
+	ProjectEntityGlobalAccessEnumNone           ProjectEntityGlobalAccessEnum = "none"
+	ProjectEntityGlobalAccessEnumAnyoneWithRead ProjectEntityGlobalAccessEnum = "anyone_with_read"
+	ProjectEntityGlobalAccessEnumAnyoneWithFull ProjectEntityGlobalAccessEnum = "anyone_with_full"
+)
+
+type ProjectEntity struct {
+	GlobalAccess *ProjectEntityGlobalAccessEnum `json:"global_access"`
+	ID           *int32                         `json:"id"`
+}

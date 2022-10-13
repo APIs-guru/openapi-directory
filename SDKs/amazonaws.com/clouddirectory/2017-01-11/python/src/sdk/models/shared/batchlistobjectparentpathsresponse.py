@@ -1,0 +1,12 @@
+from dataclasses import dataclass, field
+from typing import List,Optional
+from dataclasses_json import dataclass_json
+from . import pathtoobjectidentifiers
+
+
+@dataclass_json
+@dataclass
+class BatchListObjectParentPathsResponse:
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    path_to_object_identifiers_list: Optional[List[pathtoobjectidentifiers.PathToObjectIdentifiers]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PathToObjectIdentifiersList' }})
+    

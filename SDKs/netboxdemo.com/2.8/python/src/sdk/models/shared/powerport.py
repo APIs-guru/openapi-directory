@@ -1,0 +1,177 @@
+from dataclasses import dataclass, field
+from typing import Enum,List,Optional
+from dataclasses_json import dataclass_json
+from . import nestedcable
+from . import nesteddevice
+
+class PowerPortConnectionStatusLabelEnum(str, Enum):
+    NOT_CONNECTED = "Not Connected"
+    CONNECTED = "Connected"
+
+
+@dataclass_json
+@dataclass
+class PowerPortConnectionStatusConnectionStatus:
+    label: PowerPortConnectionStatusLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
+    value: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    
+class PowerPortTypeLabelEnum(str, Enum):
+    C6 = "C6"
+    C8 = "C8"
+    C14 = "C14"
+    C16 = "C16"
+    C20 = "C20"
+    P_PLUS_N_PLUS_E_4_H = "P+N+E 4H"
+    P_PLUS_N_PLUS_E_6_H = "P+N+E 6H"
+    P_PLUS_N_PLUS_E_9_H = "P+N+E 9H"
+    TWO_P_PLUS_E_4_H = "2P+E 4H"
+    TWO_P_PLUS_E_6_H = "2P+E 6H"
+    TWO_P_PLUS_E_9_H = "2P+E 9H"
+    THREE_P_PLUS_E_4_H = "3P+E 4H"
+    THREE_P_PLUS_E_6_H = "3P+E 6H"
+    THREE_P_PLUS_E_9_H = "3P+E 9H"
+    THREE_P_PLUS_N_PLUS_E_4_H = "3P+N+E 4H"
+    THREE_P_PLUS_N_PLUS_E_6_H = "3P+N+E 6H"
+    THREE_P_PLUS_N_PLUS_E_9_H = "3P+N+E 9H"
+    NEMA_1_15_P = "NEMA 1-15P"
+    NEMA_5_15_P = "NEMA 5-15P"
+    NEMA_5_20_P = "NEMA 5-20P"
+    NEMA_5_30_P = "NEMA 5-30P"
+    NEMA_5_50_P = "NEMA 5-50P"
+    NEMA_6_15_P = "NEMA 6-15P"
+    NEMA_6_20_P = "NEMA 6-20P"
+    NEMA_6_30_P = "NEMA 6-30P"
+    NEMA_6_50_P = "NEMA 6-50P"
+    NEMA_10_30_P = "NEMA 10-30P"
+    NEMA_10_50_P = "NEMA 10-50P"
+    NEMA_14_20_P = "NEMA 14-20P"
+    NEMA_14_30_P = "NEMA 14-30P"
+    NEMA_14_50_P = "NEMA 14-50P"
+    NEMA_14_60_P = "NEMA 14-60P"
+    NEMA_L1_15_P = "NEMA L1-15P"
+    NEMA_L5_15_P = "NEMA L5-15P"
+    NEMA_L5_20_P = "NEMA L5-20P"
+    NEMA_L5_30_P = "NEMA L5-30P"
+    NEMA_L5_50_P = "NEMA L5-50P"
+    NEMA_L6_15_P = "NEMA L6-15P"
+    NEMA_L6_20_P = "NEMA L6-20P"
+    NEMA_L6_30_P = "NEMA L6-30P"
+    NEMA_L6_50_P = "NEMA L6-50P"
+    NEMA_L10_30_P = "NEMA L10-30P"
+    NEMA_L14_20_P = "NEMA L14-20P"
+    NEMA_L14_30_P = "NEMA L14-30P"
+    NEMA_L14_50_P = "NEMA L14-50P"
+    NEMA_L14_60_P = "NEMA L14-60P"
+    NEMA_L21_20_P = "NEMA L21-20P"
+    NEMA_L21_30_P = "NEMA L21-30P"
+    CS6361_C = "CS6361C"
+    CS6365_C = "CS6365C"
+    CS8165_C = "CS8165C"
+    CS8265_C = "CS8265C"
+    CS8365_C = "CS8365C"
+    CS8465_C = "CS8465C"
+    ITA_TYPE_E_CEE_7_5_ = "ITA Type E (CEE 7/5)"
+    ITA_TYPE_F_CEE_7_4_ = "ITA Type F (CEE 7/4)"
+    ITA_TYPE_E_F_CEE_7_7_ = "ITA Type E/F (CEE 7/7)"
+    ITA_TYPE_G_BS_1363_ = "ITA Type G (BS 1363)"
+    ITA_TYPE_H = "ITA Type H"
+    ITA_TYPE_I = "ITA Type I"
+    ITA_TYPE_J = "ITA Type J"
+    ITA_TYPE_K = "ITA Type K"
+    ITA_TYPE_L_CEI_23_50_ = "ITA Type L (CEI 23-50)"
+    ITA_TYPE_M_BS_546_ = "ITA Type M (BS 546)"
+    ITA_TYPE_N = "ITA Type N"
+    ITA_TYPE_O = "ITA Type O"
+
+class PowerPortTypeValueEnum(str, Enum):
+    IEC_60320_C6 = "iec-60320-c6"
+    IEC_60320_C8 = "iec-60320-c8"
+    IEC_60320_C14 = "iec-60320-c14"
+    IEC_60320_C16 = "iec-60320-c16"
+    IEC_60320_C20 = "iec-60320-c20"
+    IEC_60309_P_N_E_4H = "iec-60309-p-n-e-4h"
+    IEC_60309_P_N_E_6H = "iec-60309-p-n-e-6h"
+    IEC_60309_P_N_E_9H = "iec-60309-p-n-e-9h"
+    IEC_60309_2P_E_4H = "iec-60309-2p-e-4h"
+    IEC_60309_2P_E_6H = "iec-60309-2p-e-6h"
+    IEC_60309_2P_E_9H = "iec-60309-2p-e-9h"
+    IEC_60309_3P_E_4H = "iec-60309-3p-e-4h"
+    IEC_60309_3P_E_6H = "iec-60309-3p-e-6h"
+    IEC_60309_3P_E_9H = "iec-60309-3p-e-9h"
+    IEC_60309_3P_N_E_4H = "iec-60309-3p-n-e-4h"
+    IEC_60309_3P_N_E_6H = "iec-60309-3p-n-e-6h"
+    IEC_60309_3P_N_E_9H = "iec-60309-3p-n-e-9h"
+    NEMA_1_15P = "nema-1-15p"
+    NEMA_5_15P = "nema-5-15p"
+    NEMA_5_20P = "nema-5-20p"
+    NEMA_5_30P = "nema-5-30p"
+    NEMA_5_50P = "nema-5-50p"
+    NEMA_6_15P = "nema-6-15p"
+    NEMA_6_20P = "nema-6-20p"
+    NEMA_6_30P = "nema-6-30p"
+    NEMA_6_50P = "nema-6-50p"
+    NEMA_10_30P = "nema-10-30p"
+    NEMA_10_50P = "nema-10-50p"
+    NEMA_14_20P = "nema-14-20p"
+    NEMA_14_30P = "nema-14-30p"
+    NEMA_14_50P = "nema-14-50p"
+    NEMA_14_60P = "nema-14-60p"
+    NEMA_L1_15P = "nema-l1-15p"
+    NEMA_L5_15P = "nema-l5-15p"
+    NEMA_L5_20P = "nema-l5-20p"
+    NEMA_L5_30P = "nema-l5-30p"
+    NEMA_L5_50P = "nema-l5-50p"
+    NEMA_L6_15P = "nema-l6-15p"
+    NEMA_L6_20P = "nema-l6-20p"
+    NEMA_L6_30P = "nema-l6-30p"
+    NEMA_L6_50P = "nema-l6-50p"
+    NEMA_L10_30P = "nema-l10-30p"
+    NEMA_L14_20P = "nema-l14-20p"
+    NEMA_L14_30P = "nema-l14-30p"
+    NEMA_L14_50P = "nema-l14-50p"
+    NEMA_L14_60P = "nema-l14-60p"
+    NEMA_L21_20P = "nema-l21-20p"
+    NEMA_L21_30P = "nema-l21-30p"
+    CS6361C = "cs6361c"
+    CS6365C = "cs6365c"
+    CS8165C = "cs8165c"
+    CS8265C = "cs8265c"
+    CS8365C = "cs8365c"
+    CS8465C = "cs8465c"
+    ITA_E = "ita-e"
+    ITA_F = "ita-f"
+    ITA_EF = "ita-ef"
+    ITA_G = "ita-g"
+    ITA_H = "ita-h"
+    ITA_I = "ita-i"
+    ITA_J = "ita-j"
+    ITA_K = "ita-k"
+    ITA_L = "ita-l"
+    ITA_M = "ita-m"
+    ITA_N = "ita-n"
+    ITA_O = "ita-o"
+
+
+@dataclass_json
+@dataclass
+class PowerPortTypeType:
+    label: PowerPortTypeLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
+    value: PowerPortTypeValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    
+
+@dataclass_json
+@dataclass
+class PowerPort:
+    allocated_draw: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allocated_draw' }})
+    cable: Optional[nestedcable.NestedCable] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cable' }})
+    connected_endpoint: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connected_endpoint' }})
+    connected_endpoint_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connected_endpoint_type' }})
+    connection_status: Optional[PowerPortConnectionStatusConnectionStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connection_status' }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
+    device: nesteddevice.NestedDevice = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device' }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
+    maximum_draw: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maximum_draw' }})
+    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    type: Optional[PowerPortTypeType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    

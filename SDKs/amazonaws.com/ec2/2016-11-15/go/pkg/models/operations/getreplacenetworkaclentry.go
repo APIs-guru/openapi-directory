@@ -1,0 +1,65 @@
+package operations
+
+type GetReplaceNetworkACLEntryActionEnum string
+
+const (
+	GetReplaceNetworkACLEntryActionEnumReplaceNetworkACLEntry GetReplaceNetworkACLEntryActionEnum = "ReplaceNetworkAclEntry"
+)
+
+type GetReplaceNetworkACLEntryIcmp struct {
+	Code *int64 `queryParam:"name=Code"`
+	Type *int64 `queryParam:"name=Type"`
+}
+
+type GetReplaceNetworkACLEntryPortRange struct {
+	From *int64 `queryParam:"name=From"`
+	To   *int64 `queryParam:"name=To"`
+}
+
+type GetReplaceNetworkACLEntryRuleActionEnum string
+
+const (
+	GetReplaceNetworkACLEntryRuleActionEnumAllow GetReplaceNetworkACLEntryRuleActionEnum = "allow"
+	GetReplaceNetworkACLEntryRuleActionEnumDeny  GetReplaceNetworkACLEntryRuleActionEnum = "deny"
+)
+
+type GetReplaceNetworkACLEntryVersionEnum string
+
+const (
+	GetReplaceNetworkACLEntryVersionEnumTwoThousandAndSixteen1115 GetReplaceNetworkACLEntryVersionEnum = "2016-11-15"
+)
+
+type GetReplaceNetworkACLEntryQueryParams struct {
+	Action        GetReplaceNetworkACLEntryActionEnum     `queryParam:"style=form,explode=true,name=Action"`
+	CidrBlock     *string                                 `queryParam:"style=form,explode=true,name=CidrBlock"`
+	DryRun        *bool                                   `queryParam:"style=form,explode=true,name=DryRun"`
+	Egress        bool                                    `queryParam:"style=form,explode=true,name=Egress"`
+	Icmp          *GetReplaceNetworkACLEntryIcmp          `queryParam:"style=form,explode=true,name=Icmp"`
+	Ipv6CidrBlock *string                                 `queryParam:"style=form,explode=true,name=Ipv6CidrBlock"`
+	NetworkACLID  string                                  `queryParam:"style=form,explode=true,name=NetworkAclId"`
+	PortRange     *GetReplaceNetworkACLEntryPortRange     `queryParam:"style=form,explode=true,name=PortRange"`
+	Protocol      string                                  `queryParam:"style=form,explode=true,name=Protocol"`
+	RuleAction    GetReplaceNetworkACLEntryRuleActionEnum `queryParam:"style=form,explode=true,name=RuleAction"`
+	RuleNumber    int64                                   `queryParam:"style=form,explode=true,name=RuleNumber"`
+	Version       GetReplaceNetworkACLEntryVersionEnum    `queryParam:"style=form,explode=true,name=Version"`
+}
+
+type GetReplaceNetworkACLEntryHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type GetReplaceNetworkACLEntryRequest struct {
+	QueryParams GetReplaceNetworkACLEntryQueryParams
+	Headers     GetReplaceNetworkACLEntryHeaders
+}
+
+type GetReplaceNetworkACLEntryResponse struct {
+	ContentType string
+	StatusCode  int64
+}

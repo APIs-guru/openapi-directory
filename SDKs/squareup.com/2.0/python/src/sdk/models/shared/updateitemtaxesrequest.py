@@ -1,0 +1,12 @@
+from dataclasses import dataclass, field
+from typing import List,Optional
+from dataclasses_json import dataclass_json
+
+
+@dataclass_json
+@dataclass
+class UpdateItemTaxesRequest:
+    item_ids: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'item_ids' }})
+    taxes_to_disable: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taxes_to_disable' }})
+    taxes_to_enable: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taxes_to_enable' }})
+    

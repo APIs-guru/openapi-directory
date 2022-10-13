@@ -1,0 +1,11 @@
+package shared
+
+type ServiceConversationMessageReceiptEnumDeliveryStatusEnum string
+
+const (
+	ServiceConversationMessageReceiptEnumDeliveryStatusEnumRead        ServiceConversationMessageReceiptEnumDeliveryStatusEnum = "read"
+	ServiceConversationMessageReceiptEnumDeliveryStatusEnumFailed      ServiceConversationMessageReceiptEnumDeliveryStatusEnum = "failed"
+	ServiceConversationMessageReceiptEnumDeliveryStatusEnumDelivered   ServiceConversationMessageReceiptEnumDeliveryStatusEnum = "delivered"
+	ServiceConversationMessageReceiptEnumDeliveryStatusEnumUndelivered ServiceConversationMessageReceiptEnumDeliveryStatusEnum = "undelivered"
+	ServiceConversationMessageReceiptEnumDeliveryStatusEnumSent        ServiceConversationMessageReceiptEnumDeliveryStatusEnum = "sent"
+)

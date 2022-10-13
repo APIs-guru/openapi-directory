@@ -1,0 +1,11 @@
+from dataclasses import dataclass, field
+from typing import Enum
+
+class StreamingSessionStreamStatusCodeEnum(str, Enum):
+    STREAM_CREATE_IN_PROGRESS = "STREAM_CREATE_IN_PROGRESS"
+    STREAM_READY = "STREAM_READY"
+    STREAM_DELETE_IN_PROGRESS = "STREAM_DELETE_IN_PROGRESS"
+    STREAM_DELETED = "STREAM_DELETED"
+    INTERNAL_ERROR = "INTERNAL_ERROR"
+    NETWORK_CONNECTION_ERROR = "NETWORK_CONNECTION_ERROR"
+

@@ -1,0 +1,17 @@
+package shared
+
+type ClusterStateReplicationStateEnum string
+
+const (
+	ClusterStateReplicationStateEnumStateNotKnown        ClusterStateReplicationStateEnum = "STATE_NOT_KNOWN"
+	ClusterStateReplicationStateEnumInitializing         ClusterStateReplicationStateEnum = "INITIALIZING"
+	ClusterStateReplicationStateEnumPlannedMaintenance   ClusterStateReplicationStateEnum = "PLANNED_MAINTENANCE"
+	ClusterStateReplicationStateEnumUnplannedMaintenance ClusterStateReplicationStateEnum = "UNPLANNED_MAINTENANCE"
+	ClusterStateReplicationStateEnumReady                ClusterStateReplicationStateEnum = "READY"
+	ClusterStateReplicationStateEnumReadyOptimizing      ClusterStateReplicationStateEnum = "READY_OPTIMIZING"
+)
+
+type ClusterState struct {
+	EncryptionInfo   []EncryptionInfo                  `json:"encryptionInfo"`
+	ReplicationState *ClusterStateReplicationStateEnum `json:"replicationState"`
+}

@@ -1,0 +1,20 @@
+package shared
+
+type ZendeskConnectorOperatorEnum string
+
+const (
+	ZendeskConnectorOperatorEnumProjection          ZendeskConnectorOperatorEnum = "PROJECTION"
+	ZendeskConnectorOperatorEnumGreaterThan         ZendeskConnectorOperatorEnum = "GREATER_THAN"
+	ZendeskConnectorOperatorEnumAddition            ZendeskConnectorOperatorEnum = "ADDITION"
+	ZendeskConnectorOperatorEnumMultiplication      ZendeskConnectorOperatorEnum = "MULTIPLICATION"
+	ZendeskConnectorOperatorEnumDivision            ZendeskConnectorOperatorEnum = "DIVISION"
+	ZendeskConnectorOperatorEnumSubtraction         ZendeskConnectorOperatorEnum = "SUBTRACTION"
+	ZendeskConnectorOperatorEnumMaskAll             ZendeskConnectorOperatorEnum = "MASK_ALL"
+	ZendeskConnectorOperatorEnumMaskFirstN          ZendeskConnectorOperatorEnum = "MASK_FIRST_N"
+	ZendeskConnectorOperatorEnumMaskLastN           ZendeskConnectorOperatorEnum = "MASK_LAST_N"
+	ZendeskConnectorOperatorEnumValidateNonNull     ZendeskConnectorOperatorEnum = "VALIDATE_NON_NULL"
+	ZendeskConnectorOperatorEnumValidateNonZero     ZendeskConnectorOperatorEnum = "VALIDATE_NON_ZERO"
+	ZendeskConnectorOperatorEnumValidateNonNegative ZendeskConnectorOperatorEnum = "VALIDATE_NON_NEGATIVE"
+	ZendeskConnectorOperatorEnumValidateNumeric     ZendeskConnectorOperatorEnum = "VALIDATE_NUMERIC"
+	ZendeskConnectorOperatorEnumNoOp                ZendeskConnectorOperatorEnum = "NO_OP"
+)

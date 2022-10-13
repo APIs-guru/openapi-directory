@@ -1,0 +1,28 @@
+package shared
+
+type GenerateDefaultLineItemRequestLineItemTypeEnum string
+
+const (
+	GenerateDefaultLineItemRequestLineItemTypeEnumLineItemTypeUnspecified                     GenerateDefaultLineItemRequestLineItemTypeEnum = "LINE_ITEM_TYPE_UNSPECIFIED"
+	GenerateDefaultLineItemRequestLineItemTypeEnumLineItemTypeDisplayDefault                  GenerateDefaultLineItemRequestLineItemTypeEnum = "LINE_ITEM_TYPE_DISPLAY_DEFAULT"
+	GenerateDefaultLineItemRequestLineItemTypeEnumLineItemTypeDisplayMobileAppInstall         GenerateDefaultLineItemRequestLineItemTypeEnum = "LINE_ITEM_TYPE_DISPLAY_MOBILE_APP_INSTALL"
+	GenerateDefaultLineItemRequestLineItemTypeEnumLineItemTypeVideoDefault                    GenerateDefaultLineItemRequestLineItemTypeEnum = "LINE_ITEM_TYPE_VIDEO_DEFAULT"
+	GenerateDefaultLineItemRequestLineItemTypeEnumLineItemTypeVideoMobileAppInstall           GenerateDefaultLineItemRequestLineItemTypeEnum = "LINE_ITEM_TYPE_VIDEO_MOBILE_APP_INSTALL"
+	GenerateDefaultLineItemRequestLineItemTypeEnumLineItemTypeDisplayMobileAppInventory       GenerateDefaultLineItemRequestLineItemTypeEnum = "LINE_ITEM_TYPE_DISPLAY_MOBILE_APP_INVENTORY"
+	GenerateDefaultLineItemRequestLineItemTypeEnumLineItemTypeVideoMobileAppInventory         GenerateDefaultLineItemRequestLineItemTypeEnum = "LINE_ITEM_TYPE_VIDEO_MOBILE_APP_INVENTORY"
+	GenerateDefaultLineItemRequestLineItemTypeEnumLineItemTypeAudioDefault                    GenerateDefaultLineItemRequestLineItemTypeEnum = "LINE_ITEM_TYPE_AUDIO_DEFAULT"
+	GenerateDefaultLineItemRequestLineItemTypeEnumLineItemTypeVideoOverTheTop                 GenerateDefaultLineItemRequestLineItemTypeEnum = "LINE_ITEM_TYPE_VIDEO_OVER_THE_TOP"
+	GenerateDefaultLineItemRequestLineItemTypeEnumLineItemTypeYoutubeAndPartnersAction        GenerateDefaultLineItemRequestLineItemTypeEnum = "LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_ACTION"
+	GenerateDefaultLineItemRequestLineItemTypeEnumLineItemTypeYoutubeAndPartnersNonSkippable  GenerateDefaultLineItemRequestLineItemTypeEnum = "LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_NON_SKIPPABLE"
+	GenerateDefaultLineItemRequestLineItemTypeEnumLineItemTypeYoutubeAndPartnersVideoSequence GenerateDefaultLineItemRequestLineItemTypeEnum = "LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_VIDEO_SEQUENCE"
+	GenerateDefaultLineItemRequestLineItemTypeEnumLineItemTypeYoutubeAndPartnersAudio         GenerateDefaultLineItemRequestLineItemTypeEnum = "LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_AUDIO"
+	GenerateDefaultLineItemRequestLineItemTypeEnumLineItemTypeYoutubeAndPartnersReach         GenerateDefaultLineItemRequestLineItemTypeEnum = "LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_REACH"
+	GenerateDefaultLineItemRequestLineItemTypeEnumLineItemTypeYoutubeAndPartnersSimple        GenerateDefaultLineItemRequestLineItemTypeEnum = "LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_SIMPLE"
+)
+
+type GenerateDefaultLineItemRequest struct {
+	DisplayName      *string                                         `json:"displayName"`
+	InsertionOrderID *string                                         `json:"insertionOrderId"`
+	LineItemType     *GenerateDefaultLineItemRequestLineItemTypeEnum `json:"lineItemType"`
+	MobileApp        *MobileApp                                      `json:"mobileApp"`
+}

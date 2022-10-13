@@ -1,0 +1,12 @@
+package shared
+
+type IncomingPhoneNumberLocalEnumEmergencyAddressStatusEnum string
+
+const (
+	IncomingPhoneNumberLocalEnumEmergencyAddressStatusEnumRegistered            IncomingPhoneNumberLocalEnumEmergencyAddressStatusEnum = "registered"
+	IncomingPhoneNumberLocalEnumEmergencyAddressStatusEnumUnregistered          IncomingPhoneNumberLocalEnumEmergencyAddressStatusEnum = "unregistered"
+	IncomingPhoneNumberLocalEnumEmergencyAddressStatusEnumPendingRegistration   IncomingPhoneNumberLocalEnumEmergencyAddressStatusEnum = "pending-registration"
+	IncomingPhoneNumberLocalEnumEmergencyAddressStatusEnumRegistrationFailure   IncomingPhoneNumberLocalEnumEmergencyAddressStatusEnum = "registration-failure"
+	IncomingPhoneNumberLocalEnumEmergencyAddressStatusEnumPendingUnregistration IncomingPhoneNumberLocalEnumEmergencyAddressStatusEnum = "pending-unregistration"
+	IncomingPhoneNumberLocalEnumEmergencyAddressStatusEnumUnregistrationFailure IncomingPhoneNumberLocalEnumEmergencyAddressStatusEnum = "unregistration-failure"
+)

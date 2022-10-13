@@ -1,0 +1,11 @@
+from dataclasses import dataclass, field
+from typing import Enum
+
+class SigningAlgorithmEnum(str, Enum):
+    SHA256_WITHECDSA = "SHA256WITHECDSA"
+    SHA384_WITHECDSA = "SHA384WITHECDSA"
+    SHA512_WITHECDSA = "SHA512WITHECDSA"
+    SHA256_WITHRSA = "SHA256WITHRSA"
+    SHA384_WITHRSA = "SHA384WITHRSA"
+    SHA512_WITHRSA = "SHA512WITHRSA"
+

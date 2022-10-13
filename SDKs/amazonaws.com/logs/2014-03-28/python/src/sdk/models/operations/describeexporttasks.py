@@ -1,0 +1,34 @@
+from dataclasses import dataclass, field
+from typing import Any,Enum,Optional
+from sdk.models import shared
+
+class DescribeExportTasksXAmzTargetEnum(str, Enum):
+    LOGS_20140328_DESCRIBE_EXPORT_TASKS = "Logs_20140328.DescribeExportTasks"
+
+
+@dataclass
+class DescribeExportTasksHeaders:
+    x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm' }})
+    x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256' }})
+    x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential' }})
+    x_amz_date: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Date' }})
+    x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token' }})
+    x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature' }})
+    x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders' }})
+    x_amz_target: DescribeExportTasksXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target' }})
+    
+
+@dataclass
+class DescribeExportTasksRequest:
+    headers: DescribeExportTasksHeaders = field(default=None)
+    request: shared.DescribeExportTasksRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    
+
+@dataclass
+class DescribeExportTasksResponse:
+    content_type: str = field(default=None)
+    describe_export_tasks_response: Optional[shared.DescribeExportTasksResponse] = field(default=None)
+    invalid_parameter_exception: Optional[Any] = field(default=None)
+    service_unavailable_exception: Optional[Any] = field(default=None)
+    status_code: int = field(default=None)
+    

@@ -1,0 +1,9 @@
+package shared
+
+type InteractionChannelParticipantEnumStatusEnum string
+
+const (
+	InteractionChannelParticipantEnumStatusEnumClose  InteractionChannelParticipantEnumStatusEnum = "close"
+	InteractionChannelParticipantEnumStatusEnumClosed InteractionChannelParticipantEnumStatusEnum = "closed"
+	InteractionChannelParticipantEnumStatusEnumWrapup InteractionChannelParticipantEnumStatusEnum = "wrapup"
+)

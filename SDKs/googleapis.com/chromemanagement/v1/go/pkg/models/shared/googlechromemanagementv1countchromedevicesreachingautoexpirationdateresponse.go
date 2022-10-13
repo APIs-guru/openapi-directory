@@ -1,0 +1,5 @@
+package shared
+
+type GoogleChromeManagementV1CountChromeDevicesReachingAutoExpirationDateResponse struct {
+	DeviceAueCountReports []GoogleChromeManagementV1DeviceAueCountReport `json:"deviceAueCountReports"`
+}

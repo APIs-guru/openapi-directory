@@ -1,0 +1,17 @@
+package shared
+
+type StreamingSessionStatusCodeEnum string
+
+const (
+	StreamingSessionStatusCodeEnumStreamingSessionReady            StreamingSessionStatusCodeEnum = "STREAMING_SESSION_READY"
+	StreamingSessionStatusCodeEnumStreamingSessionDeleted          StreamingSessionStatusCodeEnum = "STREAMING_SESSION_DELETED"
+	StreamingSessionStatusCodeEnumStreamingSessionCreateInProgress StreamingSessionStatusCodeEnum = "STREAMING_SESSION_CREATE_IN_PROGRESS"
+	StreamingSessionStatusCodeEnumStreamingSessionDeleteInProgress StreamingSessionStatusCodeEnum = "STREAMING_SESSION_DELETE_IN_PROGRESS"
+	StreamingSessionStatusCodeEnumInternalError                    StreamingSessionStatusCodeEnum = "INTERNAL_ERROR"
+	StreamingSessionStatusCodeEnumInsufficientCapacity             StreamingSessionStatusCodeEnum = "INSUFFICIENT_CAPACITY"
+	StreamingSessionStatusCodeEnumActiveDirectoryDomainJoinError   StreamingSessionStatusCodeEnum = "ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR"
+	StreamingSessionStatusCodeEnumNetworkConnectionError           StreamingSessionStatusCodeEnum = "NETWORK_CONNECTION_ERROR"
+	StreamingSessionStatusCodeEnumInitializationScriptError        StreamingSessionStatusCodeEnum = "INITIALIZATION_SCRIPT_ERROR"
+	StreamingSessionStatusCodeEnumDecryptStreamingImageError       StreamingSessionStatusCodeEnum = "DECRYPT_STREAMING_IMAGE_ERROR"
+	StreamingSessionStatusCodeEnumNetworkInterfaceError            StreamingSessionStatusCodeEnum = "NETWORK_INTERFACE_ERROR"
+)

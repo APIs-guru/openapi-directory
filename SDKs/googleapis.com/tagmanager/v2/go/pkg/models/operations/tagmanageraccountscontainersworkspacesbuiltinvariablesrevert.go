@@ -1,0 +1,159 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertPathParams struct {
+	Path string `pathParam:"style=simple,explode=false,name=path"`
+}
+
+type TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum string
+
+const (
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumBuiltInVariableTypeUnspecified                      TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "builtInVariableTypeUnspecified"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumPageURL                                             TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "pageUrl"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumPageHostname                                        TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "pageHostname"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumPagePath                                            TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "pagePath"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumReferrer                                            TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "referrer"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumEvent                                               TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "event"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumClickElement                                        TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "clickElement"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumClickClasses                                        TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "clickClasses"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumClickID                                             TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "clickId"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumClickTarget                                         TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "clickTarget"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumClickURL                                            TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "clickUrl"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumClickText                                           TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "clickText"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFirstPartyServingURL                                TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "firstPartyServingUrl"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFormElement                                         TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "formElement"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFormClasses                                         TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "formClasses"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFormID                                              TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "formId"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFormTarget                                          TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "formTarget"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFormURL                                             TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "formUrl"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFormText                                            TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "formText"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumErrorMessage                                        TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "errorMessage"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumErrorURL                                            TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "errorUrl"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumErrorLine                                           TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "errorLine"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumNewHistoryURL                                       TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "newHistoryUrl"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumOldHistoryURL                                       TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "oldHistoryUrl"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumNewHistoryFragment                                  TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "newHistoryFragment"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumOldHistoryFragment                                  TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "oldHistoryFragment"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumNewHistoryState                                     TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "newHistoryState"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumOldHistoryState                                     TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "oldHistoryState"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumHistorySource                                       TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "historySource"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumContainerVersion                                    TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "containerVersion"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumDebugMode                                           TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "debugMode"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumRandomNumber                                        TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "randomNumber"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumContainerID                                         TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "containerId"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumAppID                                               TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "appId"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumAppName                                             TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "appName"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumAppVersionCode                                      TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "appVersionCode"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumAppVersionName                                      TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "appVersionName"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumLanguage                                            TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "language"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumOsVersion                                           TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "osVersion"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumPlatform                                            TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "platform"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumSdkVersion                                          TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "sdkVersion"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumDeviceName                                          TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "deviceName"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumResolution                                          TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "resolution"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumAdvertiserID                                        TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "advertiserId"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumAdvertisingTrackingEnabled                          TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "advertisingTrackingEnabled"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumHtmlid                                              TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "htmlId"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumEnvironmentName                                     TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "environmentName"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumAmpBrowserLanguage                                  TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "ampBrowserLanguage"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumAmpCanonicalPath                                    TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "ampCanonicalPath"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumAmpCanonicalURL                                     TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "ampCanonicalUrl"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumAmpCanonicalHost                                    TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "ampCanonicalHost"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumAmpReferrer                                         TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "ampReferrer"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumAmpTitle                                            TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "ampTitle"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumAmpClientID                                         TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "ampClientId"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumAmpClientTimezone                                   TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "ampClientTimezone"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumAmpClientTimestamp                                  TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "ampClientTimestamp"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumAmpClientScreenWidth                                TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "ampClientScreenWidth"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumAmpClientScreenHeight                               TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "ampClientScreenHeight"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumAmpClientScrollX                                    TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "ampClientScrollX"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumAmpClientScrollY                                    TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "ampClientScrollY"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumAmpClientMaxScrollX                                 TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "ampClientMaxScrollX"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumAmpClientMaxScrollY                                 TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "ampClientMaxScrollY"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumAmpTotalEngagedTime                                 TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "ampTotalEngagedTime"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumAmpPageViewID                                       TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "ampPageViewId"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumAmpPageLoadTime                                     TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "ampPageLoadTime"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumAmpPageDownloadTime                                 TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "ampPageDownloadTime"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumAmpGtmEvent                                         TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "ampGtmEvent"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumEventName                                           TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "eventName"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFirebaseEventParameterCampaign                      TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "firebaseEventParameterCampaign"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFirebaseEventParameterCampaignAclid                 TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "firebaseEventParameterCampaignAclid"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFirebaseEventParameterCampaignAnid                  TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "firebaseEventParameterCampaignAnid"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFirebaseEventParameterCampaignClickTimestamp        TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "firebaseEventParameterCampaignClickTimestamp"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFirebaseEventParameterCampaignContent               TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "firebaseEventParameterCampaignContent"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFirebaseEventParameterCampaignCp1                   TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "firebaseEventParameterCampaignCp1"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFirebaseEventParameterCampaignGclid                 TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "firebaseEventParameterCampaignGclid"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFirebaseEventParameterCampaignSource                TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "firebaseEventParameterCampaignSource"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFirebaseEventParameterCampaignTerm                  TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "firebaseEventParameterCampaignTerm"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFirebaseEventParameterCurrency                      TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "firebaseEventParameterCurrency"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFirebaseEventParameterDynamicLinkAcceptTime         TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "firebaseEventParameterDynamicLinkAcceptTime"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFirebaseEventParameterDynamicLinkLinkid             TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "firebaseEventParameterDynamicLinkLinkid"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFirebaseEventParameterNotificationMessageDeviceTime TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "firebaseEventParameterNotificationMessageDeviceTime"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFirebaseEventParameterNotificationMessageID         TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "firebaseEventParameterNotificationMessageId"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFirebaseEventParameterNotificationMessageName       TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "firebaseEventParameterNotificationMessageName"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFirebaseEventParameterNotificationMessageTime       TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "firebaseEventParameterNotificationMessageTime"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFirebaseEventParameterNotificationTopic             TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "firebaseEventParameterNotificationTopic"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFirebaseEventParameterPreviousAppVersion            TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "firebaseEventParameterPreviousAppVersion"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFirebaseEventParameterPreviousOsVersion             TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "firebaseEventParameterPreviousOsVersion"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFirebaseEventParameterPrice                         TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "firebaseEventParameterPrice"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFirebaseEventParameterProductID                     TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "firebaseEventParameterProductId"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFirebaseEventParameterQuantity                      TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "firebaseEventParameterQuantity"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumFirebaseEventParameterValue                         TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "firebaseEventParameterValue"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumVideoProvider                                       TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "videoProvider"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumVideoURL                                            TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "videoUrl"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumVideoTitle                                          TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "videoTitle"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumVideoDuration                                       TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "videoDuration"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumVideoPercent                                        TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "videoPercent"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumVideoVisible                                        TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "videoVisible"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumVideoStatus                                         TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "videoStatus"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumVideoCurrentTime                                    TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "videoCurrentTime"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumScrollDepthThreshold                                TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "scrollDepthThreshold"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumScrollDepthUnits                                    TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "scrollDepthUnits"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumScrollDepthDirection                                TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "scrollDepthDirection"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumElementVisibilityRatio                              TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "elementVisibilityRatio"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumElementVisibilityTime                               TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "elementVisibilityTime"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumElementVisibilityFirstTime                          TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "elementVisibilityFirstTime"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumElementVisibilityRecentTime                         TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "elementVisibilityRecentTime"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumRequestPath                                         TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "requestPath"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumRequestMethod                                       TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "requestMethod"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumClientName                                          TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "clientName"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumQueryString                                         TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "queryString"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumServerPageLocationURL                               TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "serverPageLocationUrl"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumServerPageLocationPath                              TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "serverPageLocationPath"
+	TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnumServerPageLocationHostname                          TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum = "serverPageLocationHostname"
+)
+
+type TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertQueryParams struct {
+	DollarXgafv    *shared.XgafvEnum                                                     `queryParam:"style=form,explode=true,name=$.xgafv"`
+	AccessToken    *string                                                               `queryParam:"style=form,explode=true,name=access_token"`
+	Alt            *shared.AltEnum                                                       `queryParam:"style=form,explode=true,name=alt"`
+	Callback       *string                                                               `queryParam:"style=form,explode=true,name=callback"`
+	Fields         *string                                                               `queryParam:"style=form,explode=true,name=fields"`
+	Key            *string                                                               `queryParam:"style=form,explode=true,name=key"`
+	OauthToken     *string                                                               `queryParam:"style=form,explode=true,name=oauth_token"`
+	PrettyPrint    *bool                                                                 `queryParam:"style=form,explode=true,name=prettyPrint"`
+	QuotaUser      *string                                                               `queryParam:"style=form,explode=true,name=quotaUser"`
+	Type           *TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertTypeEnum `queryParam:"style=form,explode=true,name=type"`
+	UploadType     *string                                                               `queryParam:"style=form,explode=true,name=uploadType"`
+	UploadProtocol *string                                                               `queryParam:"style=form,explode=true,name=upload_protocol"`
+}
+
+type TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertSecurity struct {
+	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
+	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+}
+
+type TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertRequest struct {
+	PathParams  TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertPathParams
+	QueryParams TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertQueryParams
+	Security    TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertSecurity
+}
+
+type TagmanagerAccountsContainersWorkspacesBuiltInVariablesRevertResponse struct {
+	ContentType                   string
+	RevertBuiltInVariableResponse *shared.RevertBuiltInVariableResponse
+	StatusCode                    int64
+}

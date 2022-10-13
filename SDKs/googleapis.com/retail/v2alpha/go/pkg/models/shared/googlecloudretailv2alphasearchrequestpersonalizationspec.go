@@ -1,0 +1,13 @@
+package shared
+
+type GoogleCloudRetailV2alphaSearchRequestPersonalizationSpecModeEnum string
+
+const (
+	GoogleCloudRetailV2alphaSearchRequestPersonalizationSpecModeEnumModeUnspecified GoogleCloudRetailV2alphaSearchRequestPersonalizationSpecModeEnum = "MODE_UNSPECIFIED"
+	GoogleCloudRetailV2alphaSearchRequestPersonalizationSpecModeEnumAuto            GoogleCloudRetailV2alphaSearchRequestPersonalizationSpecModeEnum = "AUTO"
+	GoogleCloudRetailV2alphaSearchRequestPersonalizationSpecModeEnumDisabled        GoogleCloudRetailV2alphaSearchRequestPersonalizationSpecModeEnum = "DISABLED"
+)
+
+type GoogleCloudRetailV2alphaSearchRequestPersonalizationSpec struct {
+	Mode *GoogleCloudRetailV2alphaSearchRequestPersonalizationSpecModeEnum `json:"mode"`
+}

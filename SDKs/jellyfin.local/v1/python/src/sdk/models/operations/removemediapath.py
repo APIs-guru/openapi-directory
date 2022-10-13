@@ -1,0 +1,27 @@
+from dataclasses import dataclass, field
+from typing import Optional
+
+
+@dataclass
+class RemoveMediaPathQueryParams:
+    name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'name', 'style': 'form', 'explode': True }})
+    path: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'path', 'style': 'form', 'explode': True }})
+    refresh_library: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'refreshLibrary', 'style': 'form', 'explode': True }})
+    
+
+@dataclass
+class RemoveMediaPathSecurity:
+    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    
+
+@dataclass
+class RemoveMediaPathRequest:
+    query_params: RemoveMediaPathQueryParams = field(default=None)
+    security: RemoveMediaPathSecurity = field(default=None)
+    
+
+@dataclass
+class RemoveMediaPathResponse:
+    content_type: str = field(default=None)
+    status_code: int = field(default=None)
+    

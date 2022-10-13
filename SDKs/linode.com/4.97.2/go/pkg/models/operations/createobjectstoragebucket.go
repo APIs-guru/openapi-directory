@@ -1,0 +1,55 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+var CreateObjectStorageBucketServers = []string{
+	"https://api.linode.com/v4",
+}
+
+type CreateObjectStorageBucketRequestBodyACLEnum string
+
+const (
+	CreateObjectStorageBucketRequestBodyACLEnumPrivate           CreateObjectStorageBucketRequestBodyACLEnum = "private"
+	CreateObjectStorageBucketRequestBodyACLEnumPublicRead        CreateObjectStorageBucketRequestBodyACLEnum = "public-read"
+	CreateObjectStorageBucketRequestBodyACLEnumAuthenticatedRead CreateObjectStorageBucketRequestBodyACLEnum = "authenticated-read"
+	CreateObjectStorageBucketRequestBodyACLEnumPublicReadWrite   CreateObjectStorageBucketRequestBodyACLEnum = "public-read-write"
+)
+
+type CreateObjectStorageBucketRequestBody struct {
+	ACL         *CreateObjectStorageBucketRequestBodyACLEnum `json:"acl"`
+	Cluster     string                                       `json:"cluster"`
+	CorsEnabled *bool                                        `json:"cors_enabled"`
+	Label       string                                       `json:"label"`
+}
+
+type CreateObjectStorageBucketSecurityOption1 struct {
+	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+}
+
+type CreateObjectStorageBucketSecurityOption2 struct {
+	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
+}
+
+type CreateObjectStorageBucketSecurity struct {
+	Option1 *CreateObjectStorageBucketSecurityOption1 `security:"option"`
+	Option2 *CreateObjectStorageBucketSecurityOption2 `security:"option"`
+}
+
+type CreateObjectStorageBucketRequest struct {
+	ServerURL *string
+	Request   *CreateObjectStorageBucketRequestBody `request:"mediaType=application/json"`
+	Security  CreateObjectStorageBucketSecurity
+}
+
+type CreateObjectStorageBucketDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors"`
+}
+
+type CreateObjectStorageBucketResponse struct {
+	ContentType                                           string
+	ObjectStorageBucket                                   *shared.ObjectStorageBucket
+	StatusCode                                            int64
+	CreateObjectStorageBucketDefaultApplicationJSONObject *CreateObjectStorageBucketDefaultApplicationJSON
+}

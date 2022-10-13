@@ -1,0 +1,32 @@
+from dataclasses import dataclass, field
+from typing import Any,Optional
+from sdk.models import shared
+CREATE_INTERACTION_SERVERS = [
+	"https://flex-api.twilio.com",
+]
+
+
+@dataclass
+class CreateInteractionRequestBodyCreateInteractionRequest:
+    channel: Any = field(default=None, metadata={'form': { 'field_name': 'Channel' }})
+    routing: Any = field(default=None, metadata={'form': { 'field_name': 'Routing' }})
+    
+
+@dataclass
+class CreateInteractionSecurity:
+    account_sid_auth_token: shared.SchemeAccountSidAuthToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    
+
+@dataclass
+class CreateInteractionRequest:
+    server_url: Optional[str] = field(default=None)
+    request: Optional[CreateInteractionRequestBodyCreateInteractionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    security: CreateInteractionSecurity = field(default=None)
+    
+
+@dataclass
+class CreateInteractionResponse:
+    content_type: str = field(default=None)
+    status_code: int = field(default=None)
+    flex_v1_interaction: Optional[shared.FlexV1Interaction] = field(default=None)
+    

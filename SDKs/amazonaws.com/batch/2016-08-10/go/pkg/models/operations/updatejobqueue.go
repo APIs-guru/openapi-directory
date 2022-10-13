@@ -1,0 +1,42 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type UpdateJobQueueHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type UpdateJobQueueRequestBodyStateEnum string
+
+const (
+	UpdateJobQueueRequestBodyStateEnumEnabled  UpdateJobQueueRequestBodyStateEnum = "ENABLED"
+	UpdateJobQueueRequestBodyStateEnumDisabled UpdateJobQueueRequestBodyStateEnum = "DISABLED"
+)
+
+type UpdateJobQueueRequestBody struct {
+	ComputeEnvironmentOrder []shared.ComputeEnvironmentOrder    `json:"computeEnvironmentOrder"`
+	JobQueue                string                              `json:"jobQueue"`
+	Priority                *int64                              `json:"priority"`
+	State                   *UpdateJobQueueRequestBodyStateEnum `json:"state"`
+}
+
+type UpdateJobQueueRequest struct {
+	Headers UpdateJobQueueHeaders
+	Request UpdateJobQueueRequestBody `request:"mediaType=application/json"`
+}
+
+type UpdateJobQueueResponse struct {
+	ClientException        *interface{}
+	ContentType            string
+	ServerException        *interface{}
+	StatusCode             int64
+	UpdateJobQueueResponse *shared.UpdateJobQueueResponse
+}

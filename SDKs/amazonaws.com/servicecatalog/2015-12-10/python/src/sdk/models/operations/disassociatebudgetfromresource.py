@@ -1,0 +1,33 @@
+from dataclasses import dataclass, field
+from typing import Any,Enum,Optional
+from sdk.models import shared
+
+class DisassociateBudgetFromResourceXAmzTargetEnum(str, Enum):
+    AWS242_SERVICE_CATALOG_SERVICE_DISASSOCIATE_BUDGET_FROM_RESOURCE = "AWS242ServiceCatalogService.DisassociateBudgetFromResource"
+
+
+@dataclass
+class DisassociateBudgetFromResourceHeaders:
+    x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm' }})
+    x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256' }})
+    x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential' }})
+    x_amz_date: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Date' }})
+    x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token' }})
+    x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature' }})
+    x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders' }})
+    x_amz_target: DisassociateBudgetFromResourceXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target' }})
+    
+
+@dataclass
+class DisassociateBudgetFromResourceRequest:
+    headers: DisassociateBudgetFromResourceHeaders = field(default=None)
+    request: shared.DisassociateBudgetFromResourceInput = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    
+
+@dataclass
+class DisassociateBudgetFromResourceResponse:
+    content_type: str = field(default=None)
+    disassociate_budget_from_resource_output: Optional[dict[str, Any]] = field(default=None)
+    resource_not_found_exception: Optional[Any] = field(default=None)
+    status_code: int = field(default=None)
+    

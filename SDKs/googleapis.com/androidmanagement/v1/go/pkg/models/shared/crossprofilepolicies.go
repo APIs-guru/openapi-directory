@@ -1,0 +1,32 @@
+package shared
+
+type CrossProfilePoliciesCrossProfileCopyPasteEnum string
+
+const (
+	CrossProfilePoliciesCrossProfileCopyPasteEnumCrossProfileCopyPasteUnspecified CrossProfilePoliciesCrossProfileCopyPasteEnum = "CROSS_PROFILE_COPY_PASTE_UNSPECIFIED"
+	CrossProfilePoliciesCrossProfileCopyPasteEnumCopyFromWorkToPersonalDisallowed CrossProfilePoliciesCrossProfileCopyPasteEnum = "COPY_FROM_WORK_TO_PERSONAL_DISALLOWED"
+	CrossProfilePoliciesCrossProfileCopyPasteEnumCrossProfileCopyPasteAllowed     CrossProfilePoliciesCrossProfileCopyPasteEnum = "CROSS_PROFILE_COPY_PASTE_ALLOWED"
+)
+
+type CrossProfilePoliciesCrossProfileDataSharingEnum string
+
+const (
+	CrossProfilePoliciesCrossProfileDataSharingEnumCrossProfileDataSharingUnspecified      CrossProfilePoliciesCrossProfileDataSharingEnum = "CROSS_PROFILE_DATA_SHARING_UNSPECIFIED"
+	CrossProfilePoliciesCrossProfileDataSharingEnumCrossProfileDataSharingDisallowed       CrossProfilePoliciesCrossProfileDataSharingEnum = "CROSS_PROFILE_DATA_SHARING_DISALLOWED"
+	CrossProfilePoliciesCrossProfileDataSharingEnumDataSharingFromWorkToPersonalDisallowed CrossProfilePoliciesCrossProfileDataSharingEnum = "DATA_SHARING_FROM_WORK_TO_PERSONAL_DISALLOWED"
+	CrossProfilePoliciesCrossProfileDataSharingEnumCrossProfileDataSharingAllowed          CrossProfilePoliciesCrossProfileDataSharingEnum = "CROSS_PROFILE_DATA_SHARING_ALLOWED"
+)
+
+type CrossProfilePoliciesShowWorkContactsInPersonalProfileEnum string
+
+const (
+	CrossProfilePoliciesShowWorkContactsInPersonalProfileEnumShowWorkContactsInPersonalProfileUnspecified CrossProfilePoliciesShowWorkContactsInPersonalProfileEnum = "SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_UNSPECIFIED"
+	CrossProfilePoliciesShowWorkContactsInPersonalProfileEnumShowWorkContactsInPersonalProfileDisallowed  CrossProfilePoliciesShowWorkContactsInPersonalProfileEnum = "SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_DISALLOWED"
+	CrossProfilePoliciesShowWorkContactsInPersonalProfileEnumShowWorkContactsInPersonalProfileAllowed     CrossProfilePoliciesShowWorkContactsInPersonalProfileEnum = "SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_ALLOWED"
+)
+
+type CrossProfilePolicies struct {
+	CrossProfileCopyPaste             *CrossProfilePoliciesCrossProfileCopyPasteEnum             `json:"crossProfileCopyPaste"`
+	CrossProfileDataSharing           *CrossProfilePoliciesCrossProfileDataSharingEnum           `json:"crossProfileDataSharing"`
+	ShowWorkContactsInPersonalProfile *CrossProfilePoliciesShowWorkContactsInPersonalProfileEnum `json:"showWorkContactsInPersonalProfile"`
+}

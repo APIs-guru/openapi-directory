@@ -1,0 +1,13 @@
+package shared
+
+type FundingEventTypeEnum string
+
+const (
+	FundingEventTypeEnumPayorFundingDetected            FundingEventTypeEnum = "PAYOR_FUNDING_DETECTED"
+	FundingEventTypeEnumPayorFundingRequested           FundingEventTypeEnum = "PAYOR_FUNDING_REQUESTED"
+	FundingEventTypeEnumPayorFundingReturnReceived      FundingEventTypeEnum = "PAYOR_FUNDING_RETURN_RECEIVED"
+	FundingEventTypeEnumFundingReturnDetected           FundingEventTypeEnum = "FUNDING_RETURN_DETECTED"
+	FundingEventTypeEnumPayorFundingRequestSubmitted    FundingEventTypeEnum = "PAYOR_FUNDING_REQUEST_SUBMITTED"
+	FundingEventTypeEnumPayorFundingEntryDetailReceived FundingEventTypeEnum = "PAYOR_FUNDING_ENTRY_DETAIL_RECEIVED"
+	FundingEventTypeEnumFundingDeallocated              FundingEventTypeEnum = "FUNDING_DEALLOCATED"
+)

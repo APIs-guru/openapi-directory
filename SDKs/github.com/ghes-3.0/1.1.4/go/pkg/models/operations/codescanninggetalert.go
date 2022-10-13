@@ -1,0 +1,29 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type CodeScanningGetAlertPathParams struct {
+	AlertNumber int64  `pathParam:"style=simple,explode=false,name=alert_number"`
+	Owner       string `pathParam:"style=simple,explode=false,name=owner"`
+	Repo        string `pathParam:"style=simple,explode=false,name=repo"`
+}
+
+type CodeScanningGetAlertRequest struct {
+	PathParams CodeScanningGetAlertPathParams
+}
+
+type CodeScanningGetAlert503ApplicationJSON struct {
+	Code             *string `json:"code"`
+	DocumentationURL *string `json:"documentation_url"`
+	Message          *string `json:"message"`
+}
+
+type CodeScanningGetAlertResponse struct {
+	ContentType                                  string
+	StatusCode                                   int64
+	BasicError                                   *shared.BasicError
+	CodeScanningAlert                            *shared.CodeScanningAlert
+	CodeScanningGetAlert503ApplicationJSONObject *CodeScanningGetAlert503ApplicationJSON
+}

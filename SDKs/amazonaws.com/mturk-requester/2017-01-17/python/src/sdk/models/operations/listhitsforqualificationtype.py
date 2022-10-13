@@ -1,0 +1,41 @@
+from dataclasses import dataclass, field
+from typing import Any,Enum,List,Optional
+from sdk.models import shared
+
+
+@dataclass
+class ListHiTsForQualificationTypeQueryParams:
+    max_results: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
+    next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
+    
+class ListHiTsForQualificationTypeXAmzTargetEnum(str, Enum):
+    M_TURK_REQUESTER_SERVICE_V20170117_LIST_HI_TS_FOR_QUALIFICATION_TYPE = "MTurkRequesterServiceV20170117.ListHITsForQualificationType"
+
+
+@dataclass
+class ListHiTsForQualificationTypeHeaders:
+    x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm' }})
+    x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256' }})
+    x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential' }})
+    x_amz_date: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Date' }})
+    x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token' }})
+    x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature' }})
+    x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders' }})
+    x_amz_target: ListHiTsForQualificationTypeXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target' }})
+    
+
+@dataclass
+class ListHiTsForQualificationTypeRequest:
+    query_params: ListHiTsForQualificationTypeQueryParams = field(default=None)
+    headers: ListHiTsForQualificationTypeHeaders = field(default=None)
+    request: shared.ListHiTsForQualificationTypeRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    
+
+@dataclass
+class ListHiTsForQualificationTypeResponse:
+    content_type: str = field(default=None)
+    list_hi_ts_for_qualification_type_response: Optional[shared.ListHiTsForQualificationTypeResponse] = field(default=None)
+    request_error: Optional[Any] = field(default=None)
+    service_fault: Optional[Any] = field(default=None)
+    status_code: int = field(default=None)
+    

@@ -1,0 +1,31 @@
+package shared
+
+type ParentEntityFilterFileTypeEnum string
+
+const (
+	ParentEntityFilterFileTypeEnumFileTypeUnspecified    ParentEntityFilterFileTypeEnum = "FILE_TYPE_UNSPECIFIED"
+	ParentEntityFilterFileTypeEnumFileTypeCampaign       ParentEntityFilterFileTypeEnum = "FILE_TYPE_CAMPAIGN"
+	ParentEntityFilterFileTypeEnumFileTypeMediaProduct   ParentEntityFilterFileTypeEnum = "FILE_TYPE_MEDIA_PRODUCT"
+	ParentEntityFilterFileTypeEnumFileTypeInsertionOrder ParentEntityFilterFileTypeEnum = "FILE_TYPE_INSERTION_ORDER"
+	ParentEntityFilterFileTypeEnumFileTypeLineItem       ParentEntityFilterFileTypeEnum = "FILE_TYPE_LINE_ITEM"
+	ParentEntityFilterFileTypeEnumFileTypeAdGroup        ParentEntityFilterFileTypeEnum = "FILE_TYPE_AD_GROUP"
+	ParentEntityFilterFileTypeEnumFileTypeAd             ParentEntityFilterFileTypeEnum = "FILE_TYPE_AD"
+)
+
+type ParentEntityFilterFilterTypeEnum string
+
+const (
+	ParentEntityFilterFilterTypeEnumFilterTypeUnspecified      ParentEntityFilterFilterTypeEnum = "FILTER_TYPE_UNSPECIFIED"
+	ParentEntityFilterFilterTypeEnumFilterTypeNone             ParentEntityFilterFilterTypeEnum = "FILTER_TYPE_NONE"
+	ParentEntityFilterFilterTypeEnumFilterTypeAdvertiserID     ParentEntityFilterFilterTypeEnum = "FILTER_TYPE_ADVERTISER_ID"
+	ParentEntityFilterFilterTypeEnumFilterTypeCampaignID       ParentEntityFilterFilterTypeEnum = "FILTER_TYPE_CAMPAIGN_ID"
+	ParentEntityFilterFilterTypeEnumFilterTypeMediaProductID   ParentEntityFilterFilterTypeEnum = "FILTER_TYPE_MEDIA_PRODUCT_ID"
+	ParentEntityFilterFilterTypeEnumFilterTypeInsertionOrderID ParentEntityFilterFilterTypeEnum = "FILTER_TYPE_INSERTION_ORDER_ID"
+	ParentEntityFilterFilterTypeEnumFilterTypeLineItemID       ParentEntityFilterFilterTypeEnum = "FILTER_TYPE_LINE_ITEM_ID"
+)
+
+type ParentEntityFilter struct {
+	FileType   []ParentEntityFilterFileTypeEnum  `json:"fileType"`
+	FilterIds  []string                          `json:"filterIds"`
+	FilterType *ParentEntityFilterFilterTypeEnum `json:"filterType"`
+}

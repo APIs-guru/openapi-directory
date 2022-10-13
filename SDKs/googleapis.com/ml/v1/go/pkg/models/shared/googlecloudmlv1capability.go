@@ -1,0 +1,31 @@
+package shared
+
+type GoogleCloudMlV1CapabilityAvailableAcceleratorsEnum string
+
+const (
+	GoogleCloudMlV1CapabilityAvailableAcceleratorsEnumAcceleratorTypeUnspecified GoogleCloudMlV1CapabilityAvailableAcceleratorsEnum = "ACCELERATOR_TYPE_UNSPECIFIED"
+	GoogleCloudMlV1CapabilityAvailableAcceleratorsEnumNvidiaTeslaK80             GoogleCloudMlV1CapabilityAvailableAcceleratorsEnum = "NVIDIA_TESLA_K80"
+	GoogleCloudMlV1CapabilityAvailableAcceleratorsEnumNvidiaTeslaP100            GoogleCloudMlV1CapabilityAvailableAcceleratorsEnum = "NVIDIA_TESLA_P100"
+	GoogleCloudMlV1CapabilityAvailableAcceleratorsEnumNvidiaTeslaV100            GoogleCloudMlV1CapabilityAvailableAcceleratorsEnum = "NVIDIA_TESLA_V100"
+	GoogleCloudMlV1CapabilityAvailableAcceleratorsEnumNvidiaTeslaP4              GoogleCloudMlV1CapabilityAvailableAcceleratorsEnum = "NVIDIA_TESLA_P4"
+	GoogleCloudMlV1CapabilityAvailableAcceleratorsEnumNvidiaTeslaT4              GoogleCloudMlV1CapabilityAvailableAcceleratorsEnum = "NVIDIA_TESLA_T4"
+	GoogleCloudMlV1CapabilityAvailableAcceleratorsEnumNvidiaTeslaA100            GoogleCloudMlV1CapabilityAvailableAcceleratorsEnum = "NVIDIA_TESLA_A100"
+	GoogleCloudMlV1CapabilityAvailableAcceleratorsEnumTpuV2                      GoogleCloudMlV1CapabilityAvailableAcceleratorsEnum = "TPU_V2"
+	GoogleCloudMlV1CapabilityAvailableAcceleratorsEnumTpuV3                      GoogleCloudMlV1CapabilityAvailableAcceleratorsEnum = "TPU_V3"
+	GoogleCloudMlV1CapabilityAvailableAcceleratorsEnumTpuV2Pod                   GoogleCloudMlV1CapabilityAvailableAcceleratorsEnum = "TPU_V2_POD"
+	GoogleCloudMlV1CapabilityAvailableAcceleratorsEnumTpuV3Pod                   GoogleCloudMlV1CapabilityAvailableAcceleratorsEnum = "TPU_V3_POD"
+)
+
+type GoogleCloudMlV1CapabilityTypeEnum string
+
+const (
+	GoogleCloudMlV1CapabilityTypeEnumTypeUnspecified  GoogleCloudMlV1CapabilityTypeEnum = "TYPE_UNSPECIFIED"
+	GoogleCloudMlV1CapabilityTypeEnumTraining         GoogleCloudMlV1CapabilityTypeEnum = "TRAINING"
+	GoogleCloudMlV1CapabilityTypeEnumBatchPrediction  GoogleCloudMlV1CapabilityTypeEnum = "BATCH_PREDICTION"
+	GoogleCloudMlV1CapabilityTypeEnumOnlinePrediction GoogleCloudMlV1CapabilityTypeEnum = "ONLINE_PREDICTION"
+)
+
+type GoogleCloudMlV1Capability struct {
+	AvailableAccelerators []GoogleCloudMlV1CapabilityAvailableAcceleratorsEnum `json:"availableAccelerators"`
+	Type                  *GoogleCloudMlV1CapabilityTypeEnum                   `json:"type"`
+}

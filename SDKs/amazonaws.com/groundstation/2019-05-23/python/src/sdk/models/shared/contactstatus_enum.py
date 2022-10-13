@@ -1,0 +1,18 @@
+from dataclasses import dataclass, field
+from typing import Enum
+
+class ContactStatusEnum(str, Enum):
+    AVAILABLE = "AVAILABLE"
+    AWS_CANCELLED = "AWS_CANCELLED"
+    AWS_FAILED = "AWS_FAILED"
+    CANCELLED = "CANCELLED"
+    CANCELLING = "CANCELLING"
+    COMPLETED = "COMPLETED"
+    FAILED = "FAILED"
+    FAILED_TO_SCHEDULE = "FAILED_TO_SCHEDULE"
+    PASS = "PASS"
+    POSTPASS = "POSTPASS"
+    PREPASS = "PREPASS"
+    SCHEDULED = "SCHEDULED"
+    SCHEDULING = "SCHEDULING"
+

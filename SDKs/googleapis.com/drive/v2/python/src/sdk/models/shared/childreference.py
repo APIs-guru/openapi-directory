@@ -1,0 +1,13 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from dataclasses_json import dataclass_json
+
+
+@dataclass_json
+@dataclass
+class ChildReference:
+    child_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'childLink' }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
+    self_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'selfLink' }})
+    

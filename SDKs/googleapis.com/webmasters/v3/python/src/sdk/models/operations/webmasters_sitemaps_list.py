@@ -1,0 +1,53 @@
+from dataclasses import dataclass, field
+from typing import Enum,List,Optional
+from sdk.models import shared
+
+
+@dataclass
+class WebmastersSitemapsListPathParams:
+    site_url: str = field(default=None, metadata={'path_param': { 'field_name': 'siteUrl', 'style': 'simple', 'explode': False }})
+    
+
+@dataclass
+class WebmastersSitemapsListQueryParams:
+    alt: Optional[shared.AltEnum] = field(default=None, metadata={'query_param': { 'field_name': 'alt', 'style': 'form', 'explode': True }})
+    fields: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fields', 'style': 'form', 'explode': True }})
+    key: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'key', 'style': 'form', 'explode': True }})
+    oauth_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'oauth_token', 'style': 'form', 'explode': True }})
+    pretty_print: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'prettyPrint', 'style': 'form', 'explode': True }})
+    quota_user: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'quotaUser', 'style': 'form', 'explode': True }})
+    sitemap_index: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'sitemapIndex', 'style': 'form', 'explode': True }})
+    user_ip: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'userIp', 'style': 'form', 'explode': True }})
+    
+
+@dataclass
+class WebmastersSitemapsListSecurityOption1:
+    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    
+
+@dataclass
+class WebmastersSitemapsListSecurityOption2:
+    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    
+
+@dataclass
+class WebmastersSitemapsListSecurity:
+    option1: Optional[WebmastersSitemapsListSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
+    option2: Optional[WebmastersSitemapsListSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    
+
+@dataclass
+class WebmastersSitemapsListRequest:
+    path_params: WebmastersSitemapsListPathParams = field(default=None)
+    query_params: WebmastersSitemapsListQueryParams = field(default=None)
+    security: WebmastersSitemapsListSecurity = field(default=None)
+    
+
+@dataclass
+class WebmastersSitemapsListResponse:
+    content_type: str = field(default=None)
+    sitemaps_list_response: Optional[shared.SitemapsListResponse] = field(default=None)
+    status_code: int = field(default=None)
+    

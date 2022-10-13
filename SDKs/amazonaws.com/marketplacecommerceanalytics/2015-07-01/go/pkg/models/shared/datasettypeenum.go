@@ -1,0 +1,31 @@
+package shared
+
+type DataSetTypeEnum string
+
+const (
+	DataSetTypeEnumCustomerSubscriberHourlyMonthlySubscriptions DataSetTypeEnum = "customer_subscriber_hourly_monthly_subscriptions"
+	DataSetTypeEnumCustomerSubscriberAnnualSubscriptions        DataSetTypeEnum = "customer_subscriber_annual_subscriptions"
+	DataSetTypeEnumDailyBusinessUsageByInstanceType             DataSetTypeEnum = "daily_business_usage_by_instance_type"
+	DataSetTypeEnumDailyBusinessFees                            DataSetTypeEnum = "daily_business_fees"
+	DataSetTypeEnumDailyBusinessFreeTrialConversions            DataSetTypeEnum = "daily_business_free_trial_conversions"
+	DataSetTypeEnumDailyBusinessNewInstances                    DataSetTypeEnum = "daily_business_new_instances"
+	DataSetTypeEnumDailyBusinessNewProductSubscribers           DataSetTypeEnum = "daily_business_new_product_subscribers"
+	DataSetTypeEnumDailyBusinessCanceledProductSubscribers      DataSetTypeEnum = "daily_business_canceled_product_subscribers"
+	DataSetTypeEnumMonthlyRevenueBillingAndRevenueData          DataSetTypeEnum = "monthly_revenue_billing_and_revenue_data"
+	DataSetTypeEnumMonthlyRevenueAnnualSubscriptions            DataSetTypeEnum = "monthly_revenue_annual_subscriptions"
+	DataSetTypeEnumMonthlyRevenueFieldDemonstrationUsage        DataSetTypeEnum = "monthly_revenue_field_demonstration_usage"
+	DataSetTypeEnumMonthlyRevenueFlexiblePaymentSchedule        DataSetTypeEnum = "monthly_revenue_flexible_payment_schedule"
+	DataSetTypeEnumDisbursedAmountByProduct                     DataSetTypeEnum = "disbursed_amount_by_product"
+	DataSetTypeEnumDisbursedAmountByProductWithUncollectedFunds DataSetTypeEnum = "disbursed_amount_by_product_with_uncollected_funds"
+	DataSetTypeEnumDisbursedAmountByInstanceHours               DataSetTypeEnum = "disbursed_amount_by_instance_hours"
+	DataSetTypeEnumDisbursedAmountByCustomerGeo                 DataSetTypeEnum = "disbursed_amount_by_customer_geo"
+	DataSetTypeEnumDisbursedAmountByAgeOfUncollectedFunds       DataSetTypeEnum = "disbursed_amount_by_age_of_uncollected_funds"
+	DataSetTypeEnumDisbursedAmountByAgeOfDisbursedFunds         DataSetTypeEnum = "disbursed_amount_by_age_of_disbursed_funds"
+	DataSetTypeEnumDisbursedAmountByAgeOfPastDueFunds           DataSetTypeEnum = "disbursed_amount_by_age_of_past_due_funds"
+	DataSetTypeEnumDisbursedAmountByUncollectedFundsBreakdown   DataSetTypeEnum = "disbursed_amount_by_uncollected_funds_breakdown"
+	DataSetTypeEnumCustomerProfileByIndustry                    DataSetTypeEnum = "customer_profile_by_industry"
+	DataSetTypeEnumCustomerProfileByRevenue                     DataSetTypeEnum = "customer_profile_by_revenue"
+	DataSetTypeEnumCustomerProfileByGeography                   DataSetTypeEnum = "customer_profile_by_geography"
+	DataSetTypeEnumSalesCompensationBilledRevenue               DataSetTypeEnum = "sales_compensation_billed_revenue"
+	DataSetTypeEnumUsSalesAndUseTaxRecords                      DataSetTypeEnum = "us_sales_and_use_tax_records"
+)

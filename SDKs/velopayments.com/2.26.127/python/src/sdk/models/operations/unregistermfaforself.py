@@ -1,0 +1,24 @@
+from dataclasses import dataclass, field
+from typing import Any,Optional
+from sdk.models import shared
+
+
+@dataclass
+class UnregisterMfaForSelfHeaders:
+    authorization: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Authorization' }})
+    
+
+@dataclass
+class UnregisterMfaForSelfRequest:
+    headers: UnregisterMfaForSelfHeaders = field(default=None)
+    request: shared.SelfMfaTypeUnregisterRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    
+
+@dataclass
+class UnregisterMfaForSelfResponse:
+    content_type: str = field(default=None)
+    status_code: int = field(default=None)
+    inline_response_400: Optional[Any] = field(default=None)
+    inline_response_401: Optional[Any] = field(default=None)
+    inline_response_403: Optional[Any] = field(default=None)
+    

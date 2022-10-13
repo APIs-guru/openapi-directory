@@ -1,0 +1,8 @@
+package shared
+
+type EnvironmentAccountConnectionRequesterAccountTypeEnum string
+
+const (
+	EnvironmentAccountConnectionRequesterAccountTypeEnumManagementAccount  EnvironmentAccountConnectionRequesterAccountTypeEnum = "MANAGEMENT_ACCOUNT"
+	EnvironmentAccountConnectionRequesterAccountTypeEnumEnvironmentAccount EnvironmentAccountConnectionRequesterAccountTypeEnum = "ENVIRONMENT_ACCOUNT"
+)

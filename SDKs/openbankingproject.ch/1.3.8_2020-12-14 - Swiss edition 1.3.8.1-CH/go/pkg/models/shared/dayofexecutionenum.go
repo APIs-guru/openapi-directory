@@ -1,0 +1,37 @@
+package shared
+
+type DayOfExecutionEnum string
+
+const (
+	DayOfExecutionEnumOne         DayOfExecutionEnum = "1"
+	DayOfExecutionEnumTwo         DayOfExecutionEnum = "2"
+	DayOfExecutionEnumThree       DayOfExecutionEnum = "3"
+	DayOfExecutionEnumFour        DayOfExecutionEnum = "4"
+	DayOfExecutionEnumFive        DayOfExecutionEnum = "5"
+	DayOfExecutionEnumSix         DayOfExecutionEnum = "6"
+	DayOfExecutionEnumSeven       DayOfExecutionEnum = "7"
+	DayOfExecutionEnumEight       DayOfExecutionEnum = "8"
+	DayOfExecutionEnumNine        DayOfExecutionEnum = "9"
+	DayOfExecutionEnumTen         DayOfExecutionEnum = "10"
+	DayOfExecutionEnumEleven      DayOfExecutionEnum = "11"
+	DayOfExecutionEnumTwelve      DayOfExecutionEnum = "12"
+	DayOfExecutionEnumThirteen    DayOfExecutionEnum = "13"
+	DayOfExecutionEnumFourteen    DayOfExecutionEnum = "14"
+	DayOfExecutionEnumFifteen     DayOfExecutionEnum = "15"
+	DayOfExecutionEnumSixteen     DayOfExecutionEnum = "16"
+	DayOfExecutionEnumSeventeen   DayOfExecutionEnum = "17"
+	DayOfExecutionEnumEighteen    DayOfExecutionEnum = "18"
+	DayOfExecutionEnumNineteen    DayOfExecutionEnum = "19"
+	DayOfExecutionEnumTwenty      DayOfExecutionEnum = "20"
+	DayOfExecutionEnumTwentyOne   DayOfExecutionEnum = "21"
+	DayOfExecutionEnumTwentyTwo   DayOfExecutionEnum = "22"
+	DayOfExecutionEnumTwentyThree DayOfExecutionEnum = "23"
+	DayOfExecutionEnumTwentyFour  DayOfExecutionEnum = "24"
+	DayOfExecutionEnumTwentyFive  DayOfExecutionEnum = "25"
+	DayOfExecutionEnumTwentySix   DayOfExecutionEnum = "26"
+	DayOfExecutionEnumTwentySeven DayOfExecutionEnum = "27"
+	DayOfExecutionEnumTwentyEight DayOfExecutionEnum = "28"
+	DayOfExecutionEnumTwentyNine  DayOfExecutionEnum = "29"
+	DayOfExecutionEnumThirty      DayOfExecutionEnum = "30"
+	DayOfExecutionEnumThirtyOne   DayOfExecutionEnum = "31"
+)

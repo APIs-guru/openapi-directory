@@ -1,0 +1,31 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from sdk.models import shared
+FETCH_BRAND_REGISTRATIONS_SERVERS = [
+	"https://messaging.twilio.com",
+]
+
+
+@dataclass
+class FetchBrandRegistrationsPathParams:
+    sid: str = field(default=None, metadata={'path_param': { 'field_name': 'Sid', 'style': 'simple', 'explode': False }})
+    
+
+@dataclass
+class FetchBrandRegistrationsSecurity:
+    account_sid_auth_token: shared.SchemeAccountSidAuthToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    
+
+@dataclass
+class FetchBrandRegistrationsRequest:
+    server_url: Optional[str] = field(default=None)
+    path_params: FetchBrandRegistrationsPathParams = field(default=None)
+    security: FetchBrandRegistrationsSecurity = field(default=None)
+    
+
+@dataclass
+class FetchBrandRegistrationsResponse:
+    content_type: str = field(default=None)
+    status_code: int = field(default=None)
+    messaging_v1_brand_registrations: Optional[shared.MessagingV1BrandRegistrations] = field(default=None)
+    

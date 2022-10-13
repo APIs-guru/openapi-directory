@@ -1,0 +1,29 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from sdk.models import shared
+
+
+@dataclass
+class ImagesGetRecipePhotosPathParams:
+    recipe_id: int = field(default=None, metadata={'path_param': { 'field_name': 'recipeId', 'style': 'simple', 'explode': False }})
+    
+
+@dataclass
+class ImagesGetRecipePhotosQueryParams:
+    pg: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'pg', 'style': 'form', 'explode': True }})
+    rpp: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'rpp', 'style': 'form', 'explode': True }})
+    
+
+@dataclass
+class ImagesGetRecipePhotosRequest:
+    path_params: ImagesGetRecipePhotosPathParams = field(default=None)
+    query_params: ImagesGetRecipePhotosQueryParams = field(default=None)
+    
+
+@dataclass
+class ImagesGetRecipePhotosResponse:
+    api2_controllers_web_api_images_controller_recipe_photos_response: Optional[shared.Api2ControllersWebAPIImagesControllerRecipePhotosResponse] = field(default=None)
+    body: bytes = field(default=None)
+    content_type: str = field(default=None)
+    status_code: int = field(default=None)
+    

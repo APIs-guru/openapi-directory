@@ -1,0 +1,18 @@
+package shared
+
+type DataSourceTypeEnum string
+
+const (
+	DataSourceTypeEnumCiscoSwitchDataSource        DataSourceTypeEnum = "CiscoSwitchDataSource"
+	DataSourceTypeEnumDellSwitchDataSource         DataSourceTypeEnum = "DellSwitchDataSource"
+	DataSourceTypeEnumAristaSwitchDataSource       DataSourceTypeEnum = "AristaSwitchDataSource"
+	DataSourceTypeEnumBrocadeSwitchDataSource      DataSourceTypeEnum = "BrocadeSwitchDataSource"
+	DataSourceTypeEnumJuniperSwitchDataSource      DataSourceTypeEnum = "JuniperSwitchDataSource"
+	DataSourceTypeEnumVCenterDataSource            DataSourceTypeEnum = "VCenterDataSource"
+	DataSourceTypeEnumNsxvManagerDataSource        DataSourceTypeEnum = "NSXVManagerDataSource"
+	DataSourceTypeEnumUcsManagerDataSource         DataSourceTypeEnum = "UCSManagerDataSource"
+	DataSourceTypeEnumHpvcManagerDataSource        DataSourceTypeEnum = "HPVCManagerDataSource"
+	DataSourceTypeEnumHpOneViewDataSource          DataSourceTypeEnum = "HPOneViewDataSource"
+	DataSourceTypeEnumPanFirewallDataSource        DataSourceTypeEnum = "PanFirewallDataSource"
+	DataSourceTypeEnumCheckpointFirewallDataSource DataSourceTypeEnum = "CheckpointFirewallDataSource"
+)

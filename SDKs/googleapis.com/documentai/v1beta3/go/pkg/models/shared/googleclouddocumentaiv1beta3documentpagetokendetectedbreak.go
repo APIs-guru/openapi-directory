@@ -1,0 +1,14 @@
+package shared
+
+type GoogleCloudDocumentaiV1beta3DocumentPageTokenDetectedBreakTypeEnum string
+
+const (
+	GoogleCloudDocumentaiV1beta3DocumentPageTokenDetectedBreakTypeEnumTypeUnspecified GoogleCloudDocumentaiV1beta3DocumentPageTokenDetectedBreakTypeEnum = "TYPE_UNSPECIFIED"
+	GoogleCloudDocumentaiV1beta3DocumentPageTokenDetectedBreakTypeEnumSpace           GoogleCloudDocumentaiV1beta3DocumentPageTokenDetectedBreakTypeEnum = "SPACE"
+	GoogleCloudDocumentaiV1beta3DocumentPageTokenDetectedBreakTypeEnumWideSpace       GoogleCloudDocumentaiV1beta3DocumentPageTokenDetectedBreakTypeEnum = "WIDE_SPACE"
+	GoogleCloudDocumentaiV1beta3DocumentPageTokenDetectedBreakTypeEnumHyphen          GoogleCloudDocumentaiV1beta3DocumentPageTokenDetectedBreakTypeEnum = "HYPHEN"
+)
+
+type GoogleCloudDocumentaiV1beta3DocumentPageTokenDetectedBreak struct {
+	Type *GoogleCloudDocumentaiV1beta3DocumentPageTokenDetectedBreakTypeEnum `json:"type"`
+}

@@ -1,0 +1,12 @@
+from dataclasses import dataclass, field
+from typing import List,Optional
+from sdk.models import shared
+
+
+@dataclass
+class GetSurveysResponse:
+    body: bytes = field(default=None)
+    content_type: str = field(default=None)
+    status_code: int = field(default=None)
+    survey_details: Optional[List[shared.SurveyDetail]] = field(default=None)
+    

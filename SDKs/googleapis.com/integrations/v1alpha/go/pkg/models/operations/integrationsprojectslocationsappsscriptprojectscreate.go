@@ -1,0 +1,41 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type IntegrationsProjectsLocationsAppsScriptProjectsCreatePathParams struct {
+	Parent string `pathParam:"style=simple,explode=false,name=parent"`
+}
+
+type IntegrationsProjectsLocationsAppsScriptProjectsCreateQueryParams struct {
+	DollarXgafv    *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
+	AccessToken    *string           `queryParam:"style=form,explode=true,name=access_token"`
+	Alt            *shared.AltEnum   `queryParam:"style=form,explode=true,name=alt"`
+	Callback       *string           `queryParam:"style=form,explode=true,name=callback"`
+	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`
+	Key            *string           `queryParam:"style=form,explode=true,name=key"`
+	OauthToken     *string           `queryParam:"style=form,explode=true,name=oauth_token"`
+	PrettyPrint    *bool             `queryParam:"style=form,explode=true,name=prettyPrint"`
+	QuotaUser      *string           `queryParam:"style=form,explode=true,name=quotaUser"`
+	UploadType     *string           `queryParam:"style=form,explode=true,name=uploadType"`
+	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
+}
+
+type IntegrationsProjectsLocationsAppsScriptProjectsCreateSecurity struct {
+	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
+	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+}
+
+type IntegrationsProjectsLocationsAppsScriptProjectsCreateRequest struct {
+	PathParams  IntegrationsProjectsLocationsAppsScriptProjectsCreatePathParams
+	QueryParams IntegrationsProjectsLocationsAppsScriptProjectsCreateQueryParams
+	Request     *shared.GoogleCloudIntegrationsV1alphaCreateAppsScriptProjectRequest `request:"mediaType=application/json"`
+	Security    IntegrationsProjectsLocationsAppsScriptProjectsCreateSecurity
+}
+
+type IntegrationsProjectsLocationsAppsScriptProjectsCreateResponse struct {
+	ContentType                                                   string
+	GoogleCloudIntegrationsV1alphaCreateAppsScriptProjectResponse *shared.GoogleCloudIntegrationsV1alphaCreateAppsScriptProjectResponse
+	StatusCode                                                    int64
+}

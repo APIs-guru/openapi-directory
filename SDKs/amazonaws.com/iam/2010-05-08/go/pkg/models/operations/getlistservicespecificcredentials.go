@@ -1,0 +1,41 @@
+package operations
+
+type GetListServiceSpecificCredentialsActionEnum string
+
+const (
+	GetListServiceSpecificCredentialsActionEnumListServiceSpecificCredentials GetListServiceSpecificCredentialsActionEnum = "ListServiceSpecificCredentials"
+)
+
+type GetListServiceSpecificCredentialsVersionEnum string
+
+const (
+	GetListServiceSpecificCredentialsVersionEnumTwoThousandAndTen0508 GetListServiceSpecificCredentialsVersionEnum = "2010-05-08"
+)
+
+type GetListServiceSpecificCredentialsQueryParams struct {
+	Action      GetListServiceSpecificCredentialsActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	ServiceName *string                                      `queryParam:"style=form,explode=true,name=ServiceName"`
+	UserName    *string                                      `queryParam:"style=form,explode=true,name=UserName"`
+	Version     GetListServiceSpecificCredentialsVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+}
+
+type GetListServiceSpecificCredentialsHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type GetListServiceSpecificCredentialsRequest struct {
+	QueryParams GetListServiceSpecificCredentialsQueryParams
+	Headers     GetListServiceSpecificCredentialsHeaders
+}
+
+type GetListServiceSpecificCredentialsResponse struct {
+	Body        []byte
+	ContentType string
+	StatusCode  int64
+}

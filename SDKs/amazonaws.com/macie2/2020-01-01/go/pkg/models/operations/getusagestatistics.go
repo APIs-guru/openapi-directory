@@ -1,0 +1,59 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type GetUsageStatisticsQueryParams struct {
+	MaxResults *string `queryParam:"style=form,explode=true,name=maxResults"`
+	NextToken  *string `queryParam:"style=form,explode=true,name=nextToken"`
+}
+
+type GetUsageStatisticsHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type GetUsageStatisticsRequestBodySortBy struct {
+	Key     *shared.UsageStatisticsSortKeyEnum `json:"key"`
+	OrderBy *shared.OrderByEnum                `json:"orderBy"`
+}
+
+type GetUsageStatisticsRequestBodyTimeRangeEnum string
+
+const (
+	GetUsageStatisticsRequestBodyTimeRangeEnumMonthToDate GetUsageStatisticsRequestBodyTimeRangeEnum = "MONTH_TO_DATE"
+	GetUsageStatisticsRequestBodyTimeRangeEnumPast30Days  GetUsageStatisticsRequestBodyTimeRangeEnum = "PAST_30_DAYS"
+)
+
+type GetUsageStatisticsRequestBody struct {
+	FilterBy   []shared.UsageStatisticsFilter              `json:"filterBy"`
+	MaxResults *int64                                      `json:"maxResults"`
+	NextToken  *string                                     `json:"nextToken"`
+	SortBy     *GetUsageStatisticsRequestBodySortBy        `json:"sortBy"`
+	TimeRange  *GetUsageStatisticsRequestBodyTimeRangeEnum `json:"timeRange"`
+}
+
+type GetUsageStatisticsRequest struct {
+	QueryParams GetUsageStatisticsQueryParams
+	Headers     GetUsageStatisticsHeaders
+	Request     GetUsageStatisticsRequestBody `request:"mediaType=application/json"`
+}
+
+type GetUsageStatisticsResponse struct {
+	AccessDeniedException         *interface{}
+	ConflictException             *interface{}
+	ContentType                   string
+	GetUsageStatisticsResponse    *shared.GetUsageStatisticsResponse
+	InternalServerException       *interface{}
+	ResourceNotFoundException     *interface{}
+	ServiceQuotaExceededException *interface{}
+	StatusCode                    int64
+	ThrottlingException           *interface{}
+	ValidationException           *interface{}
+}

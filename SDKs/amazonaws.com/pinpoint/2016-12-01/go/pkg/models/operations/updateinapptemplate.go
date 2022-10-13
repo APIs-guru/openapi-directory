@@ -1,0 +1,56 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type UpdateInAppTemplatePathParams struct {
+	TemplateName string `pathParam:"style=simple,explode=false,name=template-name"`
+}
+
+type UpdateInAppTemplateQueryParams struct {
+	CreateNewVersion *bool   `queryParam:"style=form,explode=true,name=create-new-version"`
+	Version          *string `queryParam:"style=form,explode=true,name=version"`
+}
+
+type UpdateInAppTemplateHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type UpdateInAppTemplateRequestBodyInAppTemplateRequest struct {
+	Content             []shared.InAppMessageContent `json:"Content"`
+	CustomConfig        map[string]string            `json:"CustomConfig"`
+	Layout              *shared.LayoutEnum           `json:"Layout"`
+	TemplateDescription *string                      `json:"TemplateDescription"`
+	Tags                map[string]string            `json:"tags"`
+}
+
+type UpdateInAppTemplateRequestBody struct {
+	InAppTemplateRequest UpdateInAppTemplateRequestBodyInAppTemplateRequest `json:"InAppTemplateRequest"`
+}
+
+type UpdateInAppTemplateRequest struct {
+	PathParams  UpdateInAppTemplatePathParams
+	QueryParams UpdateInAppTemplateQueryParams
+	Headers     UpdateInAppTemplateHeaders
+	Request     UpdateInAppTemplateRequestBody `request:"mediaType=application/json"`
+}
+
+type UpdateInAppTemplateResponse struct {
+	BadRequestException          *interface{}
+	ContentType                  string
+	ForbiddenException           *interface{}
+	InternalServerErrorException *interface{}
+	MethodNotAllowedException    *interface{}
+	NotFoundException            *interface{}
+	PayloadTooLargeException     *interface{}
+	StatusCode                   int64
+	TooManyRequestsException     *interface{}
+	UpdateInAppTemplateResponse  *shared.UpdateInAppTemplateResponse
+}

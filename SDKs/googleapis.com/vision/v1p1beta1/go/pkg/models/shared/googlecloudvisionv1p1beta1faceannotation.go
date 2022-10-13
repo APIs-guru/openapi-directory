@@ -1,0 +1,96 @@
+package shared
+
+type GoogleCloudVisionV1p1beta1FaceAnnotationAngerLikelihoodEnum string
+
+const (
+	GoogleCloudVisionV1p1beta1FaceAnnotationAngerLikelihoodEnumUnknown      GoogleCloudVisionV1p1beta1FaceAnnotationAngerLikelihoodEnum = "UNKNOWN"
+	GoogleCloudVisionV1p1beta1FaceAnnotationAngerLikelihoodEnumVeryUnlikely GoogleCloudVisionV1p1beta1FaceAnnotationAngerLikelihoodEnum = "VERY_UNLIKELY"
+	GoogleCloudVisionV1p1beta1FaceAnnotationAngerLikelihoodEnumUnlikely     GoogleCloudVisionV1p1beta1FaceAnnotationAngerLikelihoodEnum = "UNLIKELY"
+	GoogleCloudVisionV1p1beta1FaceAnnotationAngerLikelihoodEnumPossible     GoogleCloudVisionV1p1beta1FaceAnnotationAngerLikelihoodEnum = "POSSIBLE"
+	GoogleCloudVisionV1p1beta1FaceAnnotationAngerLikelihoodEnumLikely       GoogleCloudVisionV1p1beta1FaceAnnotationAngerLikelihoodEnum = "LIKELY"
+	GoogleCloudVisionV1p1beta1FaceAnnotationAngerLikelihoodEnumVeryLikely   GoogleCloudVisionV1p1beta1FaceAnnotationAngerLikelihoodEnum = "VERY_LIKELY"
+)
+
+type GoogleCloudVisionV1p1beta1FaceAnnotationBlurredLikelihoodEnum string
+
+const (
+	GoogleCloudVisionV1p1beta1FaceAnnotationBlurredLikelihoodEnumUnknown      GoogleCloudVisionV1p1beta1FaceAnnotationBlurredLikelihoodEnum = "UNKNOWN"
+	GoogleCloudVisionV1p1beta1FaceAnnotationBlurredLikelihoodEnumVeryUnlikely GoogleCloudVisionV1p1beta1FaceAnnotationBlurredLikelihoodEnum = "VERY_UNLIKELY"
+	GoogleCloudVisionV1p1beta1FaceAnnotationBlurredLikelihoodEnumUnlikely     GoogleCloudVisionV1p1beta1FaceAnnotationBlurredLikelihoodEnum = "UNLIKELY"
+	GoogleCloudVisionV1p1beta1FaceAnnotationBlurredLikelihoodEnumPossible     GoogleCloudVisionV1p1beta1FaceAnnotationBlurredLikelihoodEnum = "POSSIBLE"
+	GoogleCloudVisionV1p1beta1FaceAnnotationBlurredLikelihoodEnumLikely       GoogleCloudVisionV1p1beta1FaceAnnotationBlurredLikelihoodEnum = "LIKELY"
+	GoogleCloudVisionV1p1beta1FaceAnnotationBlurredLikelihoodEnumVeryLikely   GoogleCloudVisionV1p1beta1FaceAnnotationBlurredLikelihoodEnum = "VERY_LIKELY"
+)
+
+type GoogleCloudVisionV1p1beta1FaceAnnotationHeadwearLikelihoodEnum string
+
+const (
+	GoogleCloudVisionV1p1beta1FaceAnnotationHeadwearLikelihoodEnumUnknown      GoogleCloudVisionV1p1beta1FaceAnnotationHeadwearLikelihoodEnum = "UNKNOWN"
+	GoogleCloudVisionV1p1beta1FaceAnnotationHeadwearLikelihoodEnumVeryUnlikely GoogleCloudVisionV1p1beta1FaceAnnotationHeadwearLikelihoodEnum = "VERY_UNLIKELY"
+	GoogleCloudVisionV1p1beta1FaceAnnotationHeadwearLikelihoodEnumUnlikely     GoogleCloudVisionV1p1beta1FaceAnnotationHeadwearLikelihoodEnum = "UNLIKELY"
+	GoogleCloudVisionV1p1beta1FaceAnnotationHeadwearLikelihoodEnumPossible     GoogleCloudVisionV1p1beta1FaceAnnotationHeadwearLikelihoodEnum = "POSSIBLE"
+	GoogleCloudVisionV1p1beta1FaceAnnotationHeadwearLikelihoodEnumLikely       GoogleCloudVisionV1p1beta1FaceAnnotationHeadwearLikelihoodEnum = "LIKELY"
+	GoogleCloudVisionV1p1beta1FaceAnnotationHeadwearLikelihoodEnumVeryLikely   GoogleCloudVisionV1p1beta1FaceAnnotationHeadwearLikelihoodEnum = "VERY_LIKELY"
+)
+
+type GoogleCloudVisionV1p1beta1FaceAnnotationJoyLikelihoodEnum string
+
+const (
+	GoogleCloudVisionV1p1beta1FaceAnnotationJoyLikelihoodEnumUnknown      GoogleCloudVisionV1p1beta1FaceAnnotationJoyLikelihoodEnum = "UNKNOWN"
+	GoogleCloudVisionV1p1beta1FaceAnnotationJoyLikelihoodEnumVeryUnlikely GoogleCloudVisionV1p1beta1FaceAnnotationJoyLikelihoodEnum = "VERY_UNLIKELY"
+	GoogleCloudVisionV1p1beta1FaceAnnotationJoyLikelihoodEnumUnlikely     GoogleCloudVisionV1p1beta1FaceAnnotationJoyLikelihoodEnum = "UNLIKELY"
+	GoogleCloudVisionV1p1beta1FaceAnnotationJoyLikelihoodEnumPossible     GoogleCloudVisionV1p1beta1FaceAnnotationJoyLikelihoodEnum = "POSSIBLE"
+	GoogleCloudVisionV1p1beta1FaceAnnotationJoyLikelihoodEnumLikely       GoogleCloudVisionV1p1beta1FaceAnnotationJoyLikelihoodEnum = "LIKELY"
+	GoogleCloudVisionV1p1beta1FaceAnnotationJoyLikelihoodEnumVeryLikely   GoogleCloudVisionV1p1beta1FaceAnnotationJoyLikelihoodEnum = "VERY_LIKELY"
+)
+
+type GoogleCloudVisionV1p1beta1FaceAnnotationSorrowLikelihoodEnum string
+
+const (
+	GoogleCloudVisionV1p1beta1FaceAnnotationSorrowLikelihoodEnumUnknown      GoogleCloudVisionV1p1beta1FaceAnnotationSorrowLikelihoodEnum = "UNKNOWN"
+	GoogleCloudVisionV1p1beta1FaceAnnotationSorrowLikelihoodEnumVeryUnlikely GoogleCloudVisionV1p1beta1FaceAnnotationSorrowLikelihoodEnum = "VERY_UNLIKELY"
+	GoogleCloudVisionV1p1beta1FaceAnnotationSorrowLikelihoodEnumUnlikely     GoogleCloudVisionV1p1beta1FaceAnnotationSorrowLikelihoodEnum = "UNLIKELY"
+	GoogleCloudVisionV1p1beta1FaceAnnotationSorrowLikelihoodEnumPossible     GoogleCloudVisionV1p1beta1FaceAnnotationSorrowLikelihoodEnum = "POSSIBLE"
+	GoogleCloudVisionV1p1beta1FaceAnnotationSorrowLikelihoodEnumLikely       GoogleCloudVisionV1p1beta1FaceAnnotationSorrowLikelihoodEnum = "LIKELY"
+	GoogleCloudVisionV1p1beta1FaceAnnotationSorrowLikelihoodEnumVeryLikely   GoogleCloudVisionV1p1beta1FaceAnnotationSorrowLikelihoodEnum = "VERY_LIKELY"
+)
+
+type GoogleCloudVisionV1p1beta1FaceAnnotationSurpriseLikelihoodEnum string
+
+const (
+	GoogleCloudVisionV1p1beta1FaceAnnotationSurpriseLikelihoodEnumUnknown      GoogleCloudVisionV1p1beta1FaceAnnotationSurpriseLikelihoodEnum = "UNKNOWN"
+	GoogleCloudVisionV1p1beta1FaceAnnotationSurpriseLikelihoodEnumVeryUnlikely GoogleCloudVisionV1p1beta1FaceAnnotationSurpriseLikelihoodEnum = "VERY_UNLIKELY"
+	GoogleCloudVisionV1p1beta1FaceAnnotationSurpriseLikelihoodEnumUnlikely     GoogleCloudVisionV1p1beta1FaceAnnotationSurpriseLikelihoodEnum = "UNLIKELY"
+	GoogleCloudVisionV1p1beta1FaceAnnotationSurpriseLikelihoodEnumPossible     GoogleCloudVisionV1p1beta1FaceAnnotationSurpriseLikelihoodEnum = "POSSIBLE"
+	GoogleCloudVisionV1p1beta1FaceAnnotationSurpriseLikelihoodEnumLikely       GoogleCloudVisionV1p1beta1FaceAnnotationSurpriseLikelihoodEnum = "LIKELY"
+	GoogleCloudVisionV1p1beta1FaceAnnotationSurpriseLikelihoodEnumVeryLikely   GoogleCloudVisionV1p1beta1FaceAnnotationSurpriseLikelihoodEnum = "VERY_LIKELY"
+)
+
+type GoogleCloudVisionV1p1beta1FaceAnnotationUnderExposedLikelihoodEnum string
+
+const (
+	GoogleCloudVisionV1p1beta1FaceAnnotationUnderExposedLikelihoodEnumUnknown      GoogleCloudVisionV1p1beta1FaceAnnotationUnderExposedLikelihoodEnum = "UNKNOWN"
+	GoogleCloudVisionV1p1beta1FaceAnnotationUnderExposedLikelihoodEnumVeryUnlikely GoogleCloudVisionV1p1beta1FaceAnnotationUnderExposedLikelihoodEnum = "VERY_UNLIKELY"
+	GoogleCloudVisionV1p1beta1FaceAnnotationUnderExposedLikelihoodEnumUnlikely     GoogleCloudVisionV1p1beta1FaceAnnotationUnderExposedLikelihoodEnum = "UNLIKELY"
+	GoogleCloudVisionV1p1beta1FaceAnnotationUnderExposedLikelihoodEnumPossible     GoogleCloudVisionV1p1beta1FaceAnnotationUnderExposedLikelihoodEnum = "POSSIBLE"
+	GoogleCloudVisionV1p1beta1FaceAnnotationUnderExposedLikelihoodEnumLikely       GoogleCloudVisionV1p1beta1FaceAnnotationUnderExposedLikelihoodEnum = "LIKELY"
+	GoogleCloudVisionV1p1beta1FaceAnnotationUnderExposedLikelihoodEnumVeryLikely   GoogleCloudVisionV1p1beta1FaceAnnotationUnderExposedLikelihoodEnum = "VERY_LIKELY"
+)
+
+type GoogleCloudVisionV1p1beta1FaceAnnotation struct {
+	AngerLikelihood        *GoogleCloudVisionV1p1beta1FaceAnnotationAngerLikelihoodEnum        `json:"angerLikelihood"`
+	BlurredLikelihood      *GoogleCloudVisionV1p1beta1FaceAnnotationBlurredLikelihoodEnum      `json:"blurredLikelihood"`
+	BoundingPoly           *GoogleCloudVisionV1p1beta1BoundingPoly                             `json:"boundingPoly"`
+	DetectionConfidence    *float32                                                            `json:"detectionConfidence"`
+	FdBoundingPoly         *GoogleCloudVisionV1p1beta1BoundingPoly                             `json:"fdBoundingPoly"`
+	HeadwearLikelihood     *GoogleCloudVisionV1p1beta1FaceAnnotationHeadwearLikelihoodEnum     `json:"headwearLikelihood"`
+	JoyLikelihood          *GoogleCloudVisionV1p1beta1FaceAnnotationJoyLikelihoodEnum          `json:"joyLikelihood"`
+	LandmarkingConfidence  *float32                                                            `json:"landmarkingConfidence"`
+	Landmarks              []GoogleCloudVisionV1p1beta1FaceAnnotationLandmark                  `json:"landmarks"`
+	PanAngle               *float32                                                            `json:"panAngle"`
+	RollAngle              *float32                                                            `json:"rollAngle"`
+	SorrowLikelihood       *GoogleCloudVisionV1p1beta1FaceAnnotationSorrowLikelihoodEnum       `json:"sorrowLikelihood"`
+	SurpriseLikelihood     *GoogleCloudVisionV1p1beta1FaceAnnotationSurpriseLikelihoodEnum     `json:"surpriseLikelihood"`
+	TiltAngle              *float32                                                            `json:"tiltAngle"`
+	UnderExposedLikelihood *GoogleCloudVisionV1p1beta1FaceAnnotationUnderExposedLikelihoodEnum `json:"underExposedLikelihood"`
+}

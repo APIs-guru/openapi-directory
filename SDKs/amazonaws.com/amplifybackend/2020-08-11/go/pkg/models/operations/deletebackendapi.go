@@ -1,0 +1,50 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type DeleteBackendAPIPathParams struct {
+	AppID                  string `pathParam:"style=simple,explode=false,name=appId"`
+	BackendEnvironmentName string `pathParam:"style=simple,explode=false,name=backendEnvironmentName"`
+}
+
+type DeleteBackendAPIHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type DeleteBackendAPIRequestBodyResourceConfig struct {
+	AdditionalAuthTypes []shared.BackendAPIAuthType          `json:"AdditionalAuthTypes"`
+	APIName             *string                              `json:"ApiName"`
+	ConflictResolution  *shared.BackendAPIConflictResolution `json:"ConflictResolution"`
+	DefaultAuthType     *shared.BackendAPIAuthType           `json:"DefaultAuthType"`
+	Service             *string                              `json:"Service"`
+	TransformSchema     *string                              `json:"TransformSchema"`
+}
+
+type DeleteBackendAPIRequestBody struct {
+	ResourceConfig *DeleteBackendAPIRequestBodyResourceConfig `json:"resourceConfig"`
+	ResourceName   string                                     `json:"resourceName"`
+}
+
+type DeleteBackendAPIRequest struct {
+	PathParams DeleteBackendAPIPathParams
+	Headers    DeleteBackendAPIHeaders
+	Request    DeleteBackendAPIRequestBody `request:"mediaType=application/json"`
+}
+
+type DeleteBackendAPIResponse struct {
+	BadRequestException      *interface{}
+	ContentType              string
+	DeleteBackendAPIResponse *shared.DeleteBackendAPIResponse
+	GatewayTimeoutException  *interface{}
+	NotFoundException        *interface{}
+	StatusCode               int64
+	TooManyRequestsException *interface{}
+}

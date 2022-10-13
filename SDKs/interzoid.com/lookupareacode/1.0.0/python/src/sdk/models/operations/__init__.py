@@ -1,0 +1,1 @@
+from .getareacode import *

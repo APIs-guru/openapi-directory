@@ -1,0 +1,5 @@
+package shared
+
+type GetServiceQuotaIncreaseRequestFromTemplateResponse struct {
+	ServiceQuotaIncreaseRequestInTemplate *ServiceQuotaIncreaseRequestInTemplate `json:"ServiceQuotaIncreaseRequestInTemplate"`
+}

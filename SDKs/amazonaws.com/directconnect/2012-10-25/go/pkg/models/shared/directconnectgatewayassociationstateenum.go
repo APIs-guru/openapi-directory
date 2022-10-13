@@ -1,0 +1,11 @@
+package shared
+
+type DirectConnectGatewayAssociationStateEnum string
+
+const (
+	DirectConnectGatewayAssociationStateEnumAssociating    DirectConnectGatewayAssociationStateEnum = "associating"
+	DirectConnectGatewayAssociationStateEnumAssociated     DirectConnectGatewayAssociationStateEnum = "associated"
+	DirectConnectGatewayAssociationStateEnumDisassociating DirectConnectGatewayAssociationStateEnum = "disassociating"
+	DirectConnectGatewayAssociationStateEnumDisassociated  DirectConnectGatewayAssociationStateEnum = "disassociated"
+	DirectConnectGatewayAssociationStateEnumUpdating       DirectConnectGatewayAssociationStateEnum = "updating"
+)

@@ -1,0 +1,9 @@
+from dataclasses import dataclass, field
+from typing import Enum
+
+class StartTimerFailedCauseEnum(str, Enum):
+    TIMER_ID_ALREADY_IN_USE = "TIMER_ID_ALREADY_IN_USE"
+    OPEN_TIMERS_LIMIT_EXCEEDED = "OPEN_TIMERS_LIMIT_EXCEEDED"
+    TIMER_CREATION_RATE_EXCEEDED = "TIMER_CREATION_RATE_EXCEEDED"
+    OPERATION_NOT_PERMITTED = "OPERATION_NOT_PERMITTED"
+

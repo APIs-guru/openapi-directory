@@ -1,0 +1,27 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from sdk.models import shared
+
+
+@dataclass
+class GetDellSwitchSnmpConfigPathParams:
+    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    
+
+@dataclass
+class GetDellSwitchSnmpConfigSecurity:
+    api_key_auth: shared.SchemeAPIKeyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    
+
+@dataclass
+class GetDellSwitchSnmpConfigRequest:
+    path_params: GetDellSwitchSnmpConfigPathParams = field(default=None)
+    security: GetDellSwitchSnmpConfigSecurity = field(default=None)
+    
+
+@dataclass
+class GetDellSwitchSnmpConfigResponse:
+    content_type: str = field(default=None)
+    snmp_config: Optional[shared.SnmpConfig] = field(default=None)
+    status_code: int = field(default=None)
+    

@@ -1,0 +1,6 @@
+package shared
+
+type DeployModelRequest struct {
+	ImageClassificationModelDeploymentMetadata  *ImageClassificationModelDeploymentMetadata  `json:"imageClassificationModelDeploymentMetadata"`
+	ImageObjectDetectionModelDeploymentMetadata *ImageObjectDetectionModelDeploymentMetadata `json:"imageObjectDetectionModelDeploymentMetadata"`
+}

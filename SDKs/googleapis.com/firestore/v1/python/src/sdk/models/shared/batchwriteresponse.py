@@ -1,0 +1,13 @@
+from dataclasses import dataclass, field
+from typing import List,Optional
+from dataclasses_json import dataclass_json
+from . import status
+from . import writeresult
+
+
+@dataclass_json
+@dataclass
+class BatchWriteResponse:
+    status: Optional[List[status.Status]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    write_results: Optional[List[writeresult.WriteResult]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'writeResults' }})
+    

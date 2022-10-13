@@ -1,0 +1,7 @@
+package shared
+
+type DescribeSchemasMessage struct {
+	EndpointArn string  `json:"EndpointArn"`
+	Marker      *string `json:"Marker"`
+	MaxRecords  *int64  `json:"MaxRecords"`
+}

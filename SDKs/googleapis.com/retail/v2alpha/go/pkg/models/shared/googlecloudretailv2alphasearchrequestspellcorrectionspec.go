@@ -1,0 +1,13 @@
+package shared
+
+type GoogleCloudRetailV2alphaSearchRequestSpellCorrectionSpecModeEnum string
+
+const (
+	GoogleCloudRetailV2alphaSearchRequestSpellCorrectionSpecModeEnumModeUnspecified GoogleCloudRetailV2alphaSearchRequestSpellCorrectionSpecModeEnum = "MODE_UNSPECIFIED"
+	GoogleCloudRetailV2alphaSearchRequestSpellCorrectionSpecModeEnumSuggestionOnly  GoogleCloudRetailV2alphaSearchRequestSpellCorrectionSpecModeEnum = "SUGGESTION_ONLY"
+	GoogleCloudRetailV2alphaSearchRequestSpellCorrectionSpecModeEnumAuto            GoogleCloudRetailV2alphaSearchRequestSpellCorrectionSpecModeEnum = "AUTO"
+)
+
+type GoogleCloudRetailV2alphaSearchRequestSpellCorrectionSpec struct {
+	Mode *GoogleCloudRetailV2alphaSearchRequestSpellCorrectionSpecModeEnum `json:"mode"`
+}

@@ -1,0 +1,16 @@
+package shared
+
+type AudioContentTypeAssignedTargetingOptionDetailsAudioContentTypeEnum string
+
+const (
+	AudioContentTypeAssignedTargetingOptionDetailsAudioContentTypeEnumAudioContentTypeUnspecified AudioContentTypeAssignedTargetingOptionDetailsAudioContentTypeEnum = "AUDIO_CONTENT_TYPE_UNSPECIFIED"
+	AudioContentTypeAssignedTargetingOptionDetailsAudioContentTypeEnumAudioContentTypeUnknown     AudioContentTypeAssignedTargetingOptionDetailsAudioContentTypeEnum = "AUDIO_CONTENT_TYPE_UNKNOWN"
+	AudioContentTypeAssignedTargetingOptionDetailsAudioContentTypeEnumAudioContentTypeMusic       AudioContentTypeAssignedTargetingOptionDetailsAudioContentTypeEnum = "AUDIO_CONTENT_TYPE_MUSIC"
+	AudioContentTypeAssignedTargetingOptionDetailsAudioContentTypeEnumAudioContentTypeBroadcast   AudioContentTypeAssignedTargetingOptionDetailsAudioContentTypeEnum = "AUDIO_CONTENT_TYPE_BROADCAST"
+	AudioContentTypeAssignedTargetingOptionDetailsAudioContentTypeEnumAudioContentTypePodcast     AudioContentTypeAssignedTargetingOptionDetailsAudioContentTypeEnum = "AUDIO_CONTENT_TYPE_PODCAST"
+)
+
+type AudioContentTypeAssignedTargetingOptionDetails struct {
+	AudioContentType  *AudioContentTypeAssignedTargetingOptionDetailsAudioContentTypeEnum `json:"audioContentType"`
+	TargetingOptionID *string                                                             `json:"targetingOptionId"`
+}

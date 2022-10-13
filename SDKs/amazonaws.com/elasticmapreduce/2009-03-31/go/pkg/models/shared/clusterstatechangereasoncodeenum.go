@@ -1,0 +1,14 @@
+package shared
+
+type ClusterStateChangeReasonCodeEnum string
+
+const (
+	ClusterStateChangeReasonCodeEnumInternalError        ClusterStateChangeReasonCodeEnum = "INTERNAL_ERROR"
+	ClusterStateChangeReasonCodeEnumValidationError      ClusterStateChangeReasonCodeEnum = "VALIDATION_ERROR"
+	ClusterStateChangeReasonCodeEnumInstanceFailure      ClusterStateChangeReasonCodeEnum = "INSTANCE_FAILURE"
+	ClusterStateChangeReasonCodeEnumInstanceFleetTimeout ClusterStateChangeReasonCodeEnum = "INSTANCE_FLEET_TIMEOUT"
+	ClusterStateChangeReasonCodeEnumBootstrapFailure     ClusterStateChangeReasonCodeEnum = "BOOTSTRAP_FAILURE"
+	ClusterStateChangeReasonCodeEnumUserRequest          ClusterStateChangeReasonCodeEnum = "USER_REQUEST"
+	ClusterStateChangeReasonCodeEnumStepFailure          ClusterStateChangeReasonCodeEnum = "STEP_FAILURE"
+	ClusterStateChangeReasonCodeEnumAllStepsCompleted    ClusterStateChangeReasonCodeEnum = "ALL_STEPS_COMPLETED"
+)

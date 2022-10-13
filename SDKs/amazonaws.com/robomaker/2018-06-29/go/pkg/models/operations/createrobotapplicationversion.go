@@ -1,0 +1,38 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type CreateRobotApplicationVersionHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type CreateRobotApplicationVersionRequestBody struct {
+	Application       string   `json:"application"`
+	CurrentRevisionID *string  `json:"currentRevisionId"`
+	ImageDigest       *string  `json:"imageDigest"`
+	S3Etags           []string `json:"s3Etags"`
+}
+
+type CreateRobotApplicationVersionRequest struct {
+	Headers CreateRobotApplicationVersionHeaders
+	Request CreateRobotApplicationVersionRequestBody `request:"mediaType=application/json"`
+}
+
+type CreateRobotApplicationVersionResponse struct {
+	ContentType                           string
+	CreateRobotApplicationVersionResponse *shared.CreateRobotApplicationVersionResponse
+	IdempotentParameterMismatchException  *interface{}
+	InternalServerException               *interface{}
+	InvalidParameterException             *interface{}
+	LimitExceededException                *interface{}
+	StatusCode                            int64
+	ThrottlingException                   *interface{}
+}

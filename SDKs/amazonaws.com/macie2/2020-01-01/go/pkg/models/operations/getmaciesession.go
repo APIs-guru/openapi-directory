@@ -1,0 +1,32 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type GetMacieSessionHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type GetMacieSessionRequest struct {
+	Headers GetMacieSessionHeaders
+}
+
+type GetMacieSessionResponse struct {
+	AccessDeniedException         *interface{}
+	ConflictException             *interface{}
+	ContentType                   string
+	GetMacieSessionResponse       *shared.GetMacieSessionResponse
+	InternalServerException       *interface{}
+	ResourceNotFoundException     *interface{}
+	ServiceQuotaExceededException *interface{}
+	StatusCode                    int64
+	ThrottlingException           *interface{}
+	ValidationException           *interface{}
+}

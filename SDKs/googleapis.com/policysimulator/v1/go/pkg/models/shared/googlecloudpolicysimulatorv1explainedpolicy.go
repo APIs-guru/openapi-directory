@@ -1,0 +1,27 @@
+package shared
+
+type GoogleCloudPolicysimulatorV1ExplainedPolicyAccessEnum string
+
+const (
+	GoogleCloudPolicysimulatorV1ExplainedPolicyAccessEnumAccessStateUnspecified GoogleCloudPolicysimulatorV1ExplainedPolicyAccessEnum = "ACCESS_STATE_UNSPECIFIED"
+	GoogleCloudPolicysimulatorV1ExplainedPolicyAccessEnumGranted                GoogleCloudPolicysimulatorV1ExplainedPolicyAccessEnum = "GRANTED"
+	GoogleCloudPolicysimulatorV1ExplainedPolicyAccessEnumNotGranted             GoogleCloudPolicysimulatorV1ExplainedPolicyAccessEnum = "NOT_GRANTED"
+	GoogleCloudPolicysimulatorV1ExplainedPolicyAccessEnumUnknownConditional     GoogleCloudPolicysimulatorV1ExplainedPolicyAccessEnum = "UNKNOWN_CONDITIONAL"
+	GoogleCloudPolicysimulatorV1ExplainedPolicyAccessEnumUnknownInfoDenied      GoogleCloudPolicysimulatorV1ExplainedPolicyAccessEnum = "UNKNOWN_INFO_DENIED"
+)
+
+type GoogleCloudPolicysimulatorV1ExplainedPolicyRelevanceEnum string
+
+const (
+	GoogleCloudPolicysimulatorV1ExplainedPolicyRelevanceEnumHeuristicRelevanceUnspecified GoogleCloudPolicysimulatorV1ExplainedPolicyRelevanceEnum = "HEURISTIC_RELEVANCE_UNSPECIFIED"
+	GoogleCloudPolicysimulatorV1ExplainedPolicyRelevanceEnumNormal                        GoogleCloudPolicysimulatorV1ExplainedPolicyRelevanceEnum = "NORMAL"
+	GoogleCloudPolicysimulatorV1ExplainedPolicyRelevanceEnumHigh                          GoogleCloudPolicysimulatorV1ExplainedPolicyRelevanceEnum = "HIGH"
+)
+
+type GoogleCloudPolicysimulatorV1ExplainedPolicy struct {
+	Access              *GoogleCloudPolicysimulatorV1ExplainedPolicyAccessEnum    `json:"access"`
+	BindingExplanations []GoogleCloudPolicysimulatorV1BindingExplanation          `json:"bindingExplanations"`
+	FullResourceName    *string                                                   `json:"fullResourceName"`
+	Policy              *GoogleIamV1Policy                                        `json:"policy"`
+	Relevance           *GoogleCloudPolicysimulatorV1ExplainedPolicyRelevanceEnum `json:"relevance"`
+}

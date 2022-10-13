@@ -1,0 +1,48 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type UpdatePipelineNotificationsPathParams struct {
+	ID string `pathParam:"style=simple,explode=false,name=Id"`
+}
+
+type UpdatePipelineNotificationsHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type UpdatePipelineNotificationsRequestBodyNotifications struct {
+	Completed   *string `json:"Completed"`
+	Error       *string `json:"Error"`
+	Progressing *string `json:"Progressing"`
+	Warning     *string `json:"Warning"`
+}
+
+type UpdatePipelineNotificationsRequestBody struct {
+	Notifications UpdatePipelineNotificationsRequestBodyNotifications `json:"Notifications"`
+}
+
+type UpdatePipelineNotificationsRequest struct {
+	PathParams UpdatePipelineNotificationsPathParams
+	Headers    UpdatePipelineNotificationsHeaders
+	Request    UpdatePipelineNotificationsRequestBody `request:"mediaType=application/json"`
+}
+
+type UpdatePipelineNotificationsResponse struct {
+	AccessDeniedException               *interface{}
+	ContentType                         string
+	IncompatibleVersionException        *interface{}
+	InternalServiceException            *interface{}
+	ResourceInUseException              *interface{}
+	ResourceNotFoundException           *interface{}
+	StatusCode                          int64
+	UpdatePipelineNotificationsResponse *shared.UpdatePipelineNotificationsResponse
+	ValidationException                 *interface{}
+}

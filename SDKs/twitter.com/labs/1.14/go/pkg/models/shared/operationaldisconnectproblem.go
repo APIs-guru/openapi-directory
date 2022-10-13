@@ -1,0 +1,22 @@
+package shared
+
+type OperationalDisconnectProblemDisconnectTypeEnum string
+
+const (
+	OperationalDisconnectProblemDisconnectTypeEnumOperationalDisconnect          OperationalDisconnectProblemDisconnectTypeEnum = "OperationalDisconnect"
+	OperationalDisconnectProblemDisconnectTypeEnumUpstreamOperationalDisconnect  OperationalDisconnectProblemDisconnectTypeEnum = "UpstreamOperationalDisconnect"
+	OperationalDisconnectProblemDisconnectTypeEnumForceDisconnect                OperationalDisconnectProblemDisconnectTypeEnum = "ForceDisconnect"
+	OperationalDisconnectProblemDisconnectTypeEnumUpstreamUncleanDisconnect      OperationalDisconnectProblemDisconnectTypeEnum = "UpstreamUncleanDisconnect"
+	OperationalDisconnectProblemDisconnectTypeEnumSlowReader                     OperationalDisconnectProblemDisconnectTypeEnum = "SlowReader"
+	OperationalDisconnectProblemDisconnectTypeEnumInternalError                  OperationalDisconnectProblemDisconnectTypeEnum = "InternalError"
+	OperationalDisconnectProblemDisconnectTypeEnumPackageUpgraded                OperationalDisconnectProblemDisconnectTypeEnum = "PackageUpgraded"
+	OperationalDisconnectProblemDisconnectTypeEnumPackageDowngraded              OperationalDisconnectProblemDisconnectTypeEnum = "PackageDowngraded"
+	OperationalDisconnectProblemDisconnectTypeEnumClientApplicationStateDegraded OperationalDisconnectProblemDisconnectTypeEnum = "ClientApplicationStateDegraded"
+)
+
+type OperationalDisconnectProblem struct {
+	Detail         string                                          `json:"detail"`
+	DisconnectType *OperationalDisconnectProblemDisconnectTypeEnum `json:"disconnect_type"`
+	Title          string                                          `json:"title"`
+	Type           string                                          `json:"type"`
+}

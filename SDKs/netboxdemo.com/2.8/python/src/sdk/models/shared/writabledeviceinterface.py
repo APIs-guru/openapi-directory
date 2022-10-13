@@ -1,0 +1,108 @@
+from dataclasses import dataclass, field
+from typing import Enum,List,Optional
+from dataclasses_json import dataclass_json
+from . import nestedcable
+
+class WritableDeviceInterfaceModeModeEnum(str, Enum):
+    ACCESS = "access"
+    TAGGED = "tagged"
+    TAGGED_ALL = "tagged-all"
+
+class WritableDeviceInterfaceTypeTypeEnum(str, Enum):
+    VIRTUAL = "virtual"
+    LAG = "lag"
+    ONE_HUNDREDBASE_TX = "100base-tx"
+    ONE_THOUSANDBASE_T = "1000base-t"
+    TWO_5GBASE_T = "2.5gbase-t"
+    FIVEGBASE_T = "5gbase-t"
+    TENGBASE_T = "10gbase-t"
+    TENGBASE_CX4 = "10gbase-cx4"
+    ONE_THOUSANDBASE_X_GBIC = "1000base-x-gbic"
+    ONE_THOUSANDBASE_X_SFP = "1000base-x-sfp"
+    TENGBASE_X_SFPP = "10gbase-x-sfpp"
+    TENGBASE_X_XFP = "10gbase-x-xfp"
+    TENGBASE_X_XENPAK = "10gbase-x-xenpak"
+    TENGBASE_X_X2 = "10gbase-x-x2"
+    TWENTY_FIVEGBASE_X_SFP28 = "25gbase-x-sfp28"
+    FORTYGBASE_X_QSFPP = "40gbase-x-qsfpp"
+    FIFTYGBASE_X_SFP28 = "50gbase-x-sfp28"
+    ONE_HUNDREDGBASE_X_CFP = "100gbase-x-cfp"
+    ONE_HUNDREDGBASE_X_CFP2 = "100gbase-x-cfp2"
+    TWO_HUNDREDGBASE_X_CFP2 = "200gbase-x-cfp2"
+    ONE_HUNDREDGBASE_X_CFP4 = "100gbase-x-cfp4"
+    ONE_HUNDREDGBASE_X_CPAK = "100gbase-x-cpak"
+    ONE_HUNDREDGBASE_X_QSFP28 = "100gbase-x-qsfp28"
+    TWO_HUNDREDGBASE_X_QSFP56 = "200gbase-x-qsfp56"
+    FOUR_HUNDREDGBASE_X_QSFPDD = "400gbase-x-qsfpdd"
+    FOUR_HUNDREDGBASE_X_OSFP = "400gbase-x-osfp"
+    IEEE802_11A = "ieee802.11a"
+    IEEE802_11G = "ieee802.11g"
+    IEEE802_11N = "ieee802.11n"
+    IEEE802_11AC = "ieee802.11ac"
+    IEEE802_11AD = "ieee802.11ad"
+    IEEE802_11AX = "ieee802.11ax"
+    GSM = "gsm"
+    CDMA = "cdma"
+    LTE = "lte"
+    SONET_OC3 = "sonet-oc3"
+    SONET_OC12 = "sonet-oc12"
+    SONET_OC48 = "sonet-oc48"
+    SONET_OC192 = "sonet-oc192"
+    SONET_OC768 = "sonet-oc768"
+    SONET_OC1920 = "sonet-oc1920"
+    SONET_OC3840 = "sonet-oc3840"
+    ONEGFC_SFP = "1gfc-sfp"
+    TWOGFC_SFP = "2gfc-sfp"
+    FOURGFC_SFP = "4gfc-sfp"
+    EIGHTGFC_SFPP = "8gfc-sfpp"
+    SIXTEENGFC_SFPP = "16gfc-sfpp"
+    THIRTY_TWOGFC_SFP28 = "32gfc-sfp28"
+    ONE_HUNDRED_AND_TWENTY_EIGHTGFC_SFP28 = "128gfc-sfp28"
+    INFINIBAND_SDR = "infiniband-sdr"
+    INFINIBAND_DDR = "infiniband-ddr"
+    INFINIBAND_QDR = "infiniband-qdr"
+    INFINIBAND_FDR10 = "infiniband-fdr10"
+    INFINIBAND_FDR = "infiniband-fdr"
+    INFINIBAND_EDR = "infiniband-edr"
+    INFINIBAND_HDR = "infiniband-hdr"
+    INFINIBAND_NDR = "infiniband-ndr"
+    INFINIBAND_XDR = "infiniband-xdr"
+    T1 = "t1"
+    E1 = "e1"
+    T3 = "t3"
+    E3 = "e3"
+    CISCO_STACKWISE = "cisco-stackwise"
+    CISCO_STACKWISE_PLUS = "cisco-stackwise-plus"
+    CISCO_FLEXSTACK = "cisco-flexstack"
+    CISCO_FLEXSTACK_PLUS = "cisco-flexstack-plus"
+    JUNIPER_VCP = "juniper-vcp"
+    EXTREME_SUMMITSTACK = "extreme-summitstack"
+    EXTREME_SUMMITSTACK_128 = "extreme-summitstack-128"
+    EXTREME_SUMMITSTACK_256 = "extreme-summitstack-256"
+    EXTREME_SUMMITSTACK_512 = "extreme-summitstack-512"
+    OTHER = "other"
+
+
+@dataclass_json
+@dataclass
+class WritableDeviceInterface:
+    cable: Optional[nestedcable.NestedCable] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cable' }})
+    connected_endpoint: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connected_endpoint' }})
+    connected_endpoint_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connected_endpoint_type' }})
+    connection_status: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connection_status' }})
+    count_ipaddresses: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'count_ipaddresses' }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
+    device: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device' }})
+    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enabled' }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
+    lag: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lag' }})
+    mac_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mac_address' }})
+    mgmt_only: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mgmt_only' }})
+    mode: Optional[WritableDeviceInterfaceModeModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mode' }})
+    mtu: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mtu' }})
+    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    tagged_vlans: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tagged_vlans' }})
+    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    type: WritableDeviceInterfaceTypeTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    untagged_vlan: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'untagged_vlan' }})
+    

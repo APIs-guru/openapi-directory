@@ -1,0 +1,10 @@
+package shared
+
+type AssessmentRunNotificationSnsStatusCodeEnum string
+
+const (
+	AssessmentRunNotificationSnsStatusCodeEnumSuccess           AssessmentRunNotificationSnsStatusCodeEnum = "SUCCESS"
+	AssessmentRunNotificationSnsStatusCodeEnumTopicDoesNotExist AssessmentRunNotificationSnsStatusCodeEnum = "TOPIC_DOES_NOT_EXIST"
+	AssessmentRunNotificationSnsStatusCodeEnumAccessDenied      AssessmentRunNotificationSnsStatusCodeEnum = "ACCESS_DENIED"
+	AssessmentRunNotificationSnsStatusCodeEnumInternalError     AssessmentRunNotificationSnsStatusCodeEnum = "INTERNAL_ERROR"
+)

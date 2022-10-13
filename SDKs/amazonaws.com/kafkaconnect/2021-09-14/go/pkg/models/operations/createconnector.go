@@ -1,0 +1,75 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type CreateConnectorHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type CreateConnectorRequestBodyCapacity struct {
+	AutoScaling         *shared.AutoScaling         `json:"autoScaling"`
+	ProvisionedCapacity *shared.ProvisionedCapacity `json:"provisionedCapacity"`
+}
+
+type CreateConnectorRequestBodyKafkaCluster struct {
+	ApacheKafkaCluster *shared.ApacheKafkaCluster `json:"apacheKafkaCluster"`
+}
+
+type CreateConnectorRequestBodyKafkaClusterClientAuthentication struct {
+	AuthenticationType *shared.KafkaClusterClientAuthenticationTypeEnum `json:"authenticationType"`
+}
+
+type CreateConnectorRequestBodyKafkaClusterEncryptionInTransit struct {
+	EncryptionType *shared.KafkaClusterEncryptionInTransitTypeEnum `json:"encryptionType"`
+}
+
+type CreateConnectorRequestBodyLogDelivery struct {
+	WorkerLogDelivery *shared.WorkerLogDelivery `json:"workerLogDelivery"`
+}
+
+type CreateConnectorRequestBodyWorkerConfiguration struct {
+	Revision               *int64  `json:"revision"`
+	WorkerConfigurationArn *string `json:"workerConfigurationArn"`
+}
+
+type CreateConnectorRequestBody struct {
+	Capacity                         CreateConnectorRequestBodyCapacity                         `json:"capacity"`
+	ConnectorConfiguration           map[string]string                                          `json:"connectorConfiguration"`
+	ConnectorDescription             *string                                                    `json:"connectorDescription"`
+	ConnectorName                    string                                                     `json:"connectorName"`
+	KafkaCluster                     CreateConnectorRequestBodyKafkaCluster                     `json:"kafkaCluster"`
+	KafkaClusterClientAuthentication CreateConnectorRequestBodyKafkaClusterClientAuthentication `json:"kafkaClusterClientAuthentication"`
+	KafkaClusterEncryptionInTransit  CreateConnectorRequestBodyKafkaClusterEncryptionInTransit  `json:"kafkaClusterEncryptionInTransit"`
+	KafkaConnectVersion              string                                                     `json:"kafkaConnectVersion"`
+	LogDelivery                      *CreateConnectorRequestBodyLogDelivery                     `json:"logDelivery"`
+	Plugins                          []shared.Plugin                                            `json:"plugins"`
+	ServiceExecutionRoleArn          string                                                     `json:"serviceExecutionRoleArn"`
+	WorkerConfiguration              *CreateConnectorRequestBodyWorkerConfiguration             `json:"workerConfiguration"`
+}
+
+type CreateConnectorRequest struct {
+	Headers CreateConnectorHeaders
+	Request CreateConnectorRequestBody `request:"mediaType=application/json"`
+}
+
+type CreateConnectorResponse struct {
+	BadRequestException          *interface{}
+	ConflictException            *interface{}
+	ContentType                  string
+	CreateConnectorResponse      *shared.CreateConnectorResponse
+	ForbiddenException           *interface{}
+	InternalServerErrorException *interface{}
+	NotFoundException            *interface{}
+	ServiceUnavailableException  *interface{}
+	StatusCode                   int64
+	TooManyRequestsException     *interface{}
+	UnauthorizedException        *interface{}
+}

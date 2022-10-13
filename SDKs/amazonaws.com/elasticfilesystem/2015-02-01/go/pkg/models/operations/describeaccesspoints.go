@@ -1,0 +1,37 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type DescribeAccessPointsQueryParams struct {
+	AccessPointID *string `queryParam:"style=form,explode=true,name=AccessPointId"`
+	FileSystemID  *string `queryParam:"style=form,explode=true,name=FileSystemId"`
+	MaxResults    *int64  `queryParam:"style=form,explode=true,name=MaxResults"`
+	NextToken     *string `queryParam:"style=form,explode=true,name=NextToken"`
+}
+
+type DescribeAccessPointsHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type DescribeAccessPointsRequest struct {
+	QueryParams DescribeAccessPointsQueryParams
+	Headers     DescribeAccessPointsHeaders
+}
+
+type DescribeAccessPointsResponse struct {
+	AccessPointNotFound          *interface{}
+	BadRequest                   *interface{}
+	ContentType                  string
+	DescribeAccessPointsResponse *shared.DescribeAccessPointsResponse
+	FileSystemNotFound           *interface{}
+	InternalServerError          *interface{}
+	StatusCode                   int64
+}

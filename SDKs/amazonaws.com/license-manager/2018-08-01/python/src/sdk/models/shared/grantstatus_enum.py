@@ -1,0 +1,14 @@
+from dataclasses import dataclass, field
+from typing import Enum
+
+class GrantStatusEnum(str, Enum):
+    PENDING_WORKFLOW = "PENDING_WORKFLOW"
+    PENDING_ACCEPT = "PENDING_ACCEPT"
+    REJECTED = "REJECTED"
+    ACTIVE = "ACTIVE"
+    FAILED_WORKFLOW = "FAILED_WORKFLOW"
+    DELETED = "DELETED"
+    PENDING_DELETE = "PENDING_DELETE"
+    DISABLED = "DISABLED"
+    WORKFLOW_COMPLETED = "WORKFLOW_COMPLETED"
+

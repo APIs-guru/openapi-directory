@@ -1,0 +1,28 @@
+from dataclasses import dataclass, field
+from typing import Enum,Optional
+from dataclasses_json import dataclass_json
+
+class ExportFlavorEnum(str, Enum):
+    LINUX = "Linux"
+    WINDOWS = "Windows"
+
+class ExportPlatformEnum(str, Enum):
+    CORE_ML = "CoreML"
+    TENSOR_FLOW = "TensorFlow"
+    DOCKER_FILE = "DockerFile"
+    ONNX = "ONNX"
+
+class ExportStatusEnum(str, Enum):
+    EXPORTING = "Exporting"
+    FAILED = "Failed"
+    DONE = "Done"
+
+
+@dataclass_json
+@dataclass
+class Export:
+    download_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'downloadUri' }})
+    flavor: Optional[ExportFlavorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'flavor' }})
+    platform: Optional[ExportPlatformEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'platform' }})
+    status: Optional[ExportStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    

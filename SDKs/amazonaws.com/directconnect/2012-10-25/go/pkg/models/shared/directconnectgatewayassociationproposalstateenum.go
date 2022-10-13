@@ -1,0 +1,9 @@
+package shared
+
+type DirectConnectGatewayAssociationProposalStateEnum string
+
+const (
+	DirectConnectGatewayAssociationProposalStateEnumRequested DirectConnectGatewayAssociationProposalStateEnum = "requested"
+	DirectConnectGatewayAssociationProposalStateEnumAccepted  DirectConnectGatewayAssociationProposalStateEnum = "accepted"
+	DirectConnectGatewayAssociationProposalStateEnumDeleted   DirectConnectGatewayAssociationProposalStateEnum = "deleted"
+)

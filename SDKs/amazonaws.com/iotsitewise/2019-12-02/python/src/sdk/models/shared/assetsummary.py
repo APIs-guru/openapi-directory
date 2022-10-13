@@ -1,0 +1,22 @@
+from dataclasses import dataclass, field
+from datetime import datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List
+from dataclasses_json import dataclass_json
+from . import assethierarchy
+from . import assetstatus
+
+
+@dataclass_json
+@dataclass
+class AssetSummary:
+    arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'arn' }})
+    asset_model_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'assetModelId' }})
+    creation_date: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creationDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    hierarchies: List[assethierarchy.AssetHierarchy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hierarchies' }})
+    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
+    last_update_date: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastUpdateDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    status: assetstatus.AssetStatus = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    

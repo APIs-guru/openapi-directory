@@ -1,0 +1,42 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type UpdateRateBasedRuleXAmzTargetEnum string
+
+const (
+	UpdateRateBasedRuleXAmzTargetEnumAwswafRegional20161128UpdateRateBasedRule UpdateRateBasedRuleXAmzTargetEnum = "AWSWAF_Regional_20161128.UpdateRateBasedRule"
+)
+
+type UpdateRateBasedRuleHeaders struct {
+	XAmzAlgorithm     *string                           `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                           `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                           `header:"name=X-Amz-Credential"`
+	XAmzDate          *string                           `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string                           `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string                           `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                           `header:"name=X-Amz-SignedHeaders"`
+	XAmzTarget        UpdateRateBasedRuleXAmzTargetEnum `header:"name=X-Amz-Target"`
+}
+
+type UpdateRateBasedRuleRequest struct {
+	Headers UpdateRateBasedRuleHeaders
+	Request shared.UpdateRateBasedRuleRequest `request:"mediaType=application/json"`
+}
+
+type UpdateRateBasedRuleResponse struct {
+	ContentType                      string
+	StatusCode                       int64
+	UpdateRateBasedRuleResponse      *shared.UpdateRateBasedRuleResponse
+	WafInternalErrorException        *interface{}
+	WafInvalidAccountException       *interface{}
+	WafInvalidOperationException     *interface{}
+	WafInvalidParameterException     *interface{}
+	WafLimitsExceededException       *interface{}
+	WafNonexistentContainerException *interface{}
+	WafNonexistentItemException      *interface{}
+	WafReferencedItemException       *interface{}
+	WafStaleDataException            *interface{}
+}

@@ -1,0 +1,81 @@
+package shared
+
+type WritablePowerPortTemplateTypeTypeEnum string
+
+const (
+	WritablePowerPortTemplateTypeTypeEnumIec60320C6     WritablePowerPortTemplateTypeTypeEnum = "iec-60320-c6"
+	WritablePowerPortTemplateTypeTypeEnumIec60320C8     WritablePowerPortTemplateTypeTypeEnum = "iec-60320-c8"
+	WritablePowerPortTemplateTypeTypeEnumIec60320C14    WritablePowerPortTemplateTypeTypeEnum = "iec-60320-c14"
+	WritablePowerPortTemplateTypeTypeEnumIec60320C16    WritablePowerPortTemplateTypeTypeEnum = "iec-60320-c16"
+	WritablePowerPortTemplateTypeTypeEnumIec60320C20    WritablePowerPortTemplateTypeTypeEnum = "iec-60320-c20"
+	WritablePowerPortTemplateTypeTypeEnumIec60309Pne4h  WritablePowerPortTemplateTypeTypeEnum = "iec-60309-p-n-e-4h"
+	WritablePowerPortTemplateTypeTypeEnumIec60309Pne6h  WritablePowerPortTemplateTypeTypeEnum = "iec-60309-p-n-e-6h"
+	WritablePowerPortTemplateTypeTypeEnumIec60309Pne9h  WritablePowerPortTemplateTypeTypeEnum = "iec-60309-p-n-e-9h"
+	WritablePowerPortTemplateTypeTypeEnumIec603092pE4h  WritablePowerPortTemplateTypeTypeEnum = "iec-60309-2p-e-4h"
+	WritablePowerPortTemplateTypeTypeEnumIec603092pE6h  WritablePowerPortTemplateTypeTypeEnum = "iec-60309-2p-e-6h"
+	WritablePowerPortTemplateTypeTypeEnumIec603092pE9h  WritablePowerPortTemplateTypeTypeEnum = "iec-60309-2p-e-9h"
+	WritablePowerPortTemplateTypeTypeEnumIec603093pE4h  WritablePowerPortTemplateTypeTypeEnum = "iec-60309-3p-e-4h"
+	WritablePowerPortTemplateTypeTypeEnumIec603093pE6h  WritablePowerPortTemplateTypeTypeEnum = "iec-60309-3p-e-6h"
+	WritablePowerPortTemplateTypeTypeEnumIec603093pE9h  WritablePowerPortTemplateTypeTypeEnum = "iec-60309-3p-e-9h"
+	WritablePowerPortTemplateTypeTypeEnumIec603093pNe4h WritablePowerPortTemplateTypeTypeEnum = "iec-60309-3p-n-e-4h"
+	WritablePowerPortTemplateTypeTypeEnumIec603093pNe6h WritablePowerPortTemplateTypeTypeEnum = "iec-60309-3p-n-e-6h"
+	WritablePowerPortTemplateTypeTypeEnumIec603093pNe9h WritablePowerPortTemplateTypeTypeEnum = "iec-60309-3p-n-e-9h"
+	WritablePowerPortTemplateTypeTypeEnumNema115p       WritablePowerPortTemplateTypeTypeEnum = "nema-1-15p"
+	WritablePowerPortTemplateTypeTypeEnumNema515p       WritablePowerPortTemplateTypeTypeEnum = "nema-5-15p"
+	WritablePowerPortTemplateTypeTypeEnumNema520p       WritablePowerPortTemplateTypeTypeEnum = "nema-5-20p"
+	WritablePowerPortTemplateTypeTypeEnumNema530p       WritablePowerPortTemplateTypeTypeEnum = "nema-5-30p"
+	WritablePowerPortTemplateTypeTypeEnumNema550p       WritablePowerPortTemplateTypeTypeEnum = "nema-5-50p"
+	WritablePowerPortTemplateTypeTypeEnumNema615p       WritablePowerPortTemplateTypeTypeEnum = "nema-6-15p"
+	WritablePowerPortTemplateTypeTypeEnumNema620p       WritablePowerPortTemplateTypeTypeEnum = "nema-6-20p"
+	WritablePowerPortTemplateTypeTypeEnumNema630p       WritablePowerPortTemplateTypeTypeEnum = "nema-6-30p"
+	WritablePowerPortTemplateTypeTypeEnumNema650p       WritablePowerPortTemplateTypeTypeEnum = "nema-6-50p"
+	WritablePowerPortTemplateTypeTypeEnumNema1030p      WritablePowerPortTemplateTypeTypeEnum = "nema-10-30p"
+	WritablePowerPortTemplateTypeTypeEnumNema1050p      WritablePowerPortTemplateTypeTypeEnum = "nema-10-50p"
+	WritablePowerPortTemplateTypeTypeEnumNema1420p      WritablePowerPortTemplateTypeTypeEnum = "nema-14-20p"
+	WritablePowerPortTemplateTypeTypeEnumNema1430p      WritablePowerPortTemplateTypeTypeEnum = "nema-14-30p"
+	WritablePowerPortTemplateTypeTypeEnumNema1450p      WritablePowerPortTemplateTypeTypeEnum = "nema-14-50p"
+	WritablePowerPortTemplateTypeTypeEnumNema1460p      WritablePowerPortTemplateTypeTypeEnum = "nema-14-60p"
+	WritablePowerPortTemplateTypeTypeEnumNemaL115p      WritablePowerPortTemplateTypeTypeEnum = "nema-l1-15p"
+	WritablePowerPortTemplateTypeTypeEnumNemaL515p      WritablePowerPortTemplateTypeTypeEnum = "nema-l5-15p"
+	WritablePowerPortTemplateTypeTypeEnumNemaL520p      WritablePowerPortTemplateTypeTypeEnum = "nema-l5-20p"
+	WritablePowerPortTemplateTypeTypeEnumNemaL530p      WritablePowerPortTemplateTypeTypeEnum = "nema-l5-30p"
+	WritablePowerPortTemplateTypeTypeEnumNemaL550p      WritablePowerPortTemplateTypeTypeEnum = "nema-l5-50p"
+	WritablePowerPortTemplateTypeTypeEnumNemaL615p      WritablePowerPortTemplateTypeTypeEnum = "nema-l6-15p"
+	WritablePowerPortTemplateTypeTypeEnumNemaL620p      WritablePowerPortTemplateTypeTypeEnum = "nema-l6-20p"
+	WritablePowerPortTemplateTypeTypeEnumNemaL630p      WritablePowerPortTemplateTypeTypeEnum = "nema-l6-30p"
+	WritablePowerPortTemplateTypeTypeEnumNemaL650p      WritablePowerPortTemplateTypeTypeEnum = "nema-l6-50p"
+	WritablePowerPortTemplateTypeTypeEnumNemaL1030p     WritablePowerPortTemplateTypeTypeEnum = "nema-l10-30p"
+	WritablePowerPortTemplateTypeTypeEnumNemaL1420p     WritablePowerPortTemplateTypeTypeEnum = "nema-l14-20p"
+	WritablePowerPortTemplateTypeTypeEnumNemaL1430p     WritablePowerPortTemplateTypeTypeEnum = "nema-l14-30p"
+	WritablePowerPortTemplateTypeTypeEnumNemaL1450p     WritablePowerPortTemplateTypeTypeEnum = "nema-l14-50p"
+	WritablePowerPortTemplateTypeTypeEnumNemaL1460p     WritablePowerPortTemplateTypeTypeEnum = "nema-l14-60p"
+	WritablePowerPortTemplateTypeTypeEnumNemaL2120p     WritablePowerPortTemplateTypeTypeEnum = "nema-l21-20p"
+	WritablePowerPortTemplateTypeTypeEnumNemaL2130p     WritablePowerPortTemplateTypeTypeEnum = "nema-l21-30p"
+	WritablePowerPortTemplateTypeTypeEnumCs6361c        WritablePowerPortTemplateTypeTypeEnum = "cs6361c"
+	WritablePowerPortTemplateTypeTypeEnumCs6365c        WritablePowerPortTemplateTypeTypeEnum = "cs6365c"
+	WritablePowerPortTemplateTypeTypeEnumCs8165c        WritablePowerPortTemplateTypeTypeEnum = "cs8165c"
+	WritablePowerPortTemplateTypeTypeEnumCs8265c        WritablePowerPortTemplateTypeTypeEnum = "cs8265c"
+	WritablePowerPortTemplateTypeTypeEnumCs8365c        WritablePowerPortTemplateTypeTypeEnum = "cs8365c"
+	WritablePowerPortTemplateTypeTypeEnumCs8465c        WritablePowerPortTemplateTypeTypeEnum = "cs8465c"
+	WritablePowerPortTemplateTypeTypeEnumItaE           WritablePowerPortTemplateTypeTypeEnum = "ita-e"
+	WritablePowerPortTemplateTypeTypeEnumItaF           WritablePowerPortTemplateTypeTypeEnum = "ita-f"
+	WritablePowerPortTemplateTypeTypeEnumItaEf          WritablePowerPortTemplateTypeTypeEnum = "ita-ef"
+	WritablePowerPortTemplateTypeTypeEnumItaG           WritablePowerPortTemplateTypeTypeEnum = "ita-g"
+	WritablePowerPortTemplateTypeTypeEnumItaH           WritablePowerPortTemplateTypeTypeEnum = "ita-h"
+	WritablePowerPortTemplateTypeTypeEnumItaI           WritablePowerPortTemplateTypeTypeEnum = "ita-i"
+	WritablePowerPortTemplateTypeTypeEnumItaJ           WritablePowerPortTemplateTypeTypeEnum = "ita-j"
+	WritablePowerPortTemplateTypeTypeEnumItaK           WritablePowerPortTemplateTypeTypeEnum = "ita-k"
+	WritablePowerPortTemplateTypeTypeEnumItaL           WritablePowerPortTemplateTypeTypeEnum = "ita-l"
+	WritablePowerPortTemplateTypeTypeEnumItaM           WritablePowerPortTemplateTypeTypeEnum = "ita-m"
+	WritablePowerPortTemplateTypeTypeEnumItaN           WritablePowerPortTemplateTypeTypeEnum = "ita-n"
+	WritablePowerPortTemplateTypeTypeEnumItaO           WritablePowerPortTemplateTypeTypeEnum = "ita-o"
+)
+
+type WritablePowerPortTemplate struct {
+	AllocatedDraw *int64                                 `json:"allocated_draw"`
+	DeviceType    int64                                  `json:"device_type"`
+	ID            *int64                                 `json:"id"`
+	MaximumDraw   *int64                                 `json:"maximum_draw"`
+	Name          string                                 `json:"name"`
+	Type          *WritablePowerPortTemplateTypeTypeEnum `json:"type"`
+}

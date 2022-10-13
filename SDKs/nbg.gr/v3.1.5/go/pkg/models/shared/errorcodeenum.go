@@ -1,0 +1,35 @@
+package shared
+
+type ErrorCodeEnum string
+
+const (
+	ErrorCodeEnumUkObieFieldExpected                         ErrorCodeEnum = "UK.OBIE.Field.Expected"
+	ErrorCodeEnumUkObieFieldInvalid                          ErrorCodeEnum = "UK.OBIE.Field.Invalid"
+	ErrorCodeEnumUkObieFieldInvalidDate                      ErrorCodeEnum = "UK.OBIE.Field.InvalidDate"
+	ErrorCodeEnumUkObieFieldMissing                          ErrorCodeEnum = "UK.OBIE.Field.Missing"
+	ErrorCodeEnumUkObieFieldUnexpected                       ErrorCodeEnum = "UK.OBIE.Field.Unexpected"
+	ErrorCodeEnumUkObieHeaderInvalid                         ErrorCodeEnum = "UK.OBIE.Header.Invalid"
+	ErrorCodeEnumUkObieHeaderMissing                         ErrorCodeEnum = "UK.OBIE.Header.Missing"
+	ErrorCodeEnumUkObieResourceConsentMismatch               ErrorCodeEnum = "UK.OBIE.Resource.ConsentMismatch"
+	ErrorCodeEnumUkObieResourceInvalidConsentStatus          ErrorCodeEnum = "UK.OBIE.Resource.InvalidConsentStatus"
+	ErrorCodeEnumUkObieResourceInvalidFormat                 ErrorCodeEnum = "UK.OBIE.Resource.InvalidFormat"
+	ErrorCodeEnumUkObieResourceNotFound                      ErrorCodeEnum = "UK.OBIE.Resource.NotFound"
+	ErrorCodeEnumUkObieRulesAfterCutOffDateTime              ErrorCodeEnum = "UK.OBIE.Rules.AfterCutOffDateTime"
+	ErrorCodeEnumUkObieRulesDuplicateReference               ErrorCodeEnum = "UK.OBIE.Rules.DuplicateReference"
+	ErrorCodeEnumUkObieSignatureInvalid                      ErrorCodeEnum = "UK.OBIE.Signature.Invalid"
+	ErrorCodeEnumUkObieSignatureInvalidClaim                 ErrorCodeEnum = "UK.OBIE.Signature.InvalidClaim"
+	ErrorCodeEnumUkObieSignatureMissingClaim                 ErrorCodeEnum = "UK.OBIE.Signature.MissingClaim"
+	ErrorCodeEnumUkObieSignatureMalformed                    ErrorCodeEnum = "UK.OBIE.Signature.Malformed"
+	ErrorCodeEnumUkObieSignatureMissing                      ErrorCodeEnum = "UK.OBIE.Signature.Missing"
+	ErrorCodeEnumUkObieSignatureUnexpected                   ErrorCodeEnum = "UK.OBIE.Signature.Unexpected"
+	ErrorCodeEnumUkObieUnsupportedAccountIdentifier          ErrorCodeEnum = "UK.OBIE.Unsupported.AccountIdentifier"
+	ErrorCodeEnumUkObieUnsupportedAccountSecondaryIdentifier ErrorCodeEnum = "UK.OBIE.Unsupported.AccountSecondaryIdentifier"
+	ErrorCodeEnumUkObieUnsupportedCurrency                   ErrorCodeEnum = "UK.OBIE.Unsupported.Currency"
+	ErrorCodeEnumUkObieUnsupportedEventType                  ErrorCodeEnum = "UK.OBIE.Unsupported.EventType"
+	ErrorCodeEnumUkObieUnsupportedFrequency                  ErrorCodeEnum = "UK.OBIE.Unsupported.Frequency"
+	ErrorCodeEnumUkObieUnsupportedLocalInstrument            ErrorCodeEnum = "UK.OBIE.Unsupported.LocalInstrument"
+	ErrorCodeEnumUkObieUnsupportedScheme                     ErrorCodeEnum = "UK.OBIE.Unsupported.Scheme"
+	ErrorCodeEnumUkObieReauthenticate                        ErrorCodeEnum = "UK.OBIE.Reauthenticate"
+	ErrorCodeEnumUkObieRulesResourceAlreadyExists            ErrorCodeEnum = "UK.OBIE.Rules.ResourceAlreadyExists"
+	ErrorCodeEnumUkObieUnexpectedError                       ErrorCodeEnum = "UK.OBIE.UnexpectedError"
+)

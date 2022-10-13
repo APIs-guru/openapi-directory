@@ -1,0 +1,56 @@
+from dataclasses import dataclass, field
+from typing import Any,Enum,List,Optional
+from dataclasses_json import dataclass_json
+
+
+@dataclass
+class UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesPathParams:
+    network_id: str = field(default=None, metadata={'path_param': { 'field_name': 'networkId', 'style': 'simple', 'explode': False }})
+    number: str = field(default=None, metadata={'path_param': { 'field_name': 'number', 'style': 'simple', 'explode': False }})
+    
+class UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesRequestBodyDeviceTypePoliciesDevicePolicyEnum(str, Enum):
+    ALLOWED = "Allowed"
+    BLOCKED = "Blocked"
+    GROUP_POLICY = "Group policy"
+
+class UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesRequestBodyDeviceTypePoliciesDeviceTypeEnum(str, Enum):
+    ANDROID = "Android"
+    BLACK_BERRY = "BlackBerry"
+    CHROME_OS = "Chrome OS"
+    I_PAD = "iPad"
+    I_PHONE = "iPhone"
+    I_POD = "iPod"
+    MAC_OS_X = "Mac OS X"
+    WINDOWS = "Windows"
+    WINDOWS_PHONE = "Windows Phone"
+    B_AND_N_NOOK = "B&N Nook"
+    OTHER_OS = "Other OS"
+
+
+@dataclass_json
+@dataclass
+class UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesRequestBodyDeviceTypePolicies:
+    device_policy: UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesRequestBodyDeviceTypePoliciesDevicePolicyEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'devicePolicy' }})
+    device_type: UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesRequestBodyDeviceTypePoliciesDeviceTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deviceType' }})
+    group_policy_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'groupPolicyId' }})
+    
+
+@dataclass_json
+@dataclass
+class UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesRequestBody:
+    device_type_policies: Optional[List[UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesRequestBodyDeviceTypePolicies]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deviceTypePolicies' }})
+    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enabled' }})
+    
+
+@dataclass
+class UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesRequest:
+    path_params: UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesPathParams = field(default=None)
+    request: Optional[UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    
+
+@dataclass
+class UpdateNetworkWirelessSsidDeviceTypeGroupPoliciesResponse:
+    content_type: str = field(default=None)
+    status_code: int = field(default=None)
+    update_network_wireless_ssid_device_type_group_policies_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
+    

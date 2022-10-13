@@ -1,0 +1,59 @@
+from dataclasses import dataclass, field
+from typing import Enum,Optional
+from dataclasses_json import dataclass_json
+
+class RelationshipOccurrenceTypeEnum(str, Enum):
+    RELATIONSHIP_TYPE_UNSPECIFIED = "RELATIONSHIP_TYPE_UNSPECIFIED"
+    DESCRIBES = "DESCRIBES"
+    DESCRIBED_BY = "DESCRIBED_BY"
+    CONTAINS = "CONTAINS"
+    CONTAINED_BY = "CONTAINED_BY"
+    DEPENDS_ON = "DEPENDS_ON"
+    DEPENDENCY_OF = "DEPENDENCY_OF"
+    DEPENDENCY_MANIFEST_OF = "DEPENDENCY_MANIFEST_OF"
+    BUILD_DEPENDENCY_OF = "BUILD_DEPENDENCY_OF"
+    DEV_DEPENDENCY_OF = "DEV_DEPENDENCY_OF"
+    OPTIONAL_DEPENDENCY_OF = "OPTIONAL_DEPENDENCY_OF"
+    PROVIDED_DEPENDENCY_OF = "PROVIDED_DEPENDENCY_OF"
+    TEST_DEPENDENCY_OF = "TEST_DEPENDENCY_OF"
+    RUNTIME_DEPENDENCY_OF = "RUNTIME_DEPENDENCY_OF"
+    EXAMPLE_OF = "EXAMPLE_OF"
+    GENERATES = "GENERATES"
+    GENERATED_FROM = "GENERATED_FROM"
+    ANCESTOR_OF = "ANCESTOR_OF"
+    DESCENDANT_OF = "DESCENDANT_OF"
+    VARIANT_OF = "VARIANT_OF"
+    DISTRIBUTION_ARTIFACT = "DISTRIBUTION_ARTIFACT"
+    PATCH_FOR = "PATCH_FOR"
+    PATCH_APPLIED = "PATCH_APPLIED"
+    COPY_OF = "COPY_OF"
+    FILE_ADDED = "FILE_ADDED"
+    FILE_DELETED = "FILE_DELETED"
+    FILE_MODIFIED = "FILE_MODIFIED"
+    EXPANDED_FROM_ARCHIVE = "EXPANDED_FROM_ARCHIVE"
+    DYNAMIC_LINK = "DYNAMIC_LINK"
+    STATIC_LINK = "STATIC_LINK"
+    DATA_FILE_OF = "DATA_FILE_OF"
+    TEST_CASE_OF = "TEST_CASE_OF"
+    BUILD_TOOL_OF = "BUILD_TOOL_OF"
+    DEV_TOOL_OF = "DEV_TOOL_OF"
+    TEST_OF = "TEST_OF"
+    TEST_TOOL_OF = "TEST_TOOL_OF"
+    DOCUMENTATION_OF = "DOCUMENTATION_OF"
+    OPTIONAL_COMPONENT_OF = "OPTIONAL_COMPONENT_OF"
+    METAFILE_OF = "METAFILE_OF"
+    PACKAGE_OF = "PACKAGE_OF"
+    AMENDS = "AMENDS"
+    PREREQUISITE_FOR = "PREREQUISITE_FOR"
+    HAS_PREREQUISITE = "HAS_PREREQUISITE"
+    OTHER = "OTHER"
+
+
+@dataclass_json
+@dataclass
+class RelationshipOccurrence:
+    comment: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comment' }})
+    source: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
+    target: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'target' }})
+    type: Optional[RelationshipOccurrenceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    

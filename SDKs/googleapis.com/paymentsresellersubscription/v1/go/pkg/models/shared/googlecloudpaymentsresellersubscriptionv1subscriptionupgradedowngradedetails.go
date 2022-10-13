@@ -1,0 +1,14 @@
+package shared
+
+type GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetailsBillingCycleSpecEnum string
+
+const (
+	GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetailsBillingCycleSpecEnumBillingCycleSpecUnspecified                   GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetailsBillingCycleSpecEnum = "BILLING_CYCLE_SPEC_UNSPECIFIED"
+	GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetailsBillingCycleSpecEnumBillingCycleSpecAlignWithPreviousSubscription GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetailsBillingCycleSpecEnum = "BILLING_CYCLE_SPEC_ALIGN_WITH_PREVIOUS_SUBSCRIPTION"
+	GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetailsBillingCycleSpecEnumBillingCycleSpecStartImmediately              GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetailsBillingCycleSpecEnum = "BILLING_CYCLE_SPEC_START_IMMEDIATELY"
+)
+
+type GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetails struct {
+	BillingCycleSpec       *GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetailsBillingCycleSpecEnum `json:"billingCycleSpec"`
+	PreviousSubscriptionID *string                                                                                           `json:"previousSubscriptionId"`
+}

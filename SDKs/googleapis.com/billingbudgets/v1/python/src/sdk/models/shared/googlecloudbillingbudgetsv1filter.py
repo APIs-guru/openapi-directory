@@ -1,0 +1,30 @@
+from dataclasses import dataclass, field
+from typing import Any,Enum,List,Optional
+from dataclasses_json import dataclass_json
+from . import googlecloudbillingbudgetsv1customperiod
+
+class GoogleCloudBillingBudgetsV1FilterCalendarPeriodEnum(str, Enum):
+    CALENDAR_PERIOD_UNSPECIFIED = "CALENDAR_PERIOD_UNSPECIFIED"
+    MONTH = "MONTH"
+    QUARTER = "QUARTER"
+    YEAR = "YEAR"
+
+class GoogleCloudBillingBudgetsV1FilterCreditTypesTreatmentEnum(str, Enum):
+    CREDIT_TYPES_TREATMENT_UNSPECIFIED = "CREDIT_TYPES_TREATMENT_UNSPECIFIED"
+    INCLUDE_ALL_CREDITS = "INCLUDE_ALL_CREDITS"
+    EXCLUDE_ALL_CREDITS = "EXCLUDE_ALL_CREDITS"
+    INCLUDE_SPECIFIED_CREDITS = "INCLUDE_SPECIFIED_CREDITS"
+
+
+@dataclass_json
+@dataclass
+class GoogleCloudBillingBudgetsV1Filter:
+    calendar_period: Optional[GoogleCloudBillingBudgetsV1FilterCalendarPeriodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'calendarPeriod' }})
+    credit_types: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creditTypes' }})
+    credit_types_treatment: Optional[GoogleCloudBillingBudgetsV1FilterCreditTypesTreatmentEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creditTypesTreatment' }})
+    custom_period: Optional[googlecloudbillingbudgetsv1customperiod.GoogleCloudBillingBudgetsV1CustomPeriod] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customPeriod' }})
+    labels: Optional[dict[str, List[Any]]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
+    projects: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'projects' }})
+    services: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'services' }})
+    subaccounts: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subaccounts' }})
+    

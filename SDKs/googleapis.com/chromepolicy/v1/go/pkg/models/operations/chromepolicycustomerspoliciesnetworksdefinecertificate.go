@@ -1,0 +1,41 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type ChromepolicyCustomersPoliciesNetworksDefineCertificatePathParams struct {
+	Customer string `pathParam:"style=simple,explode=false,name=customer"`
+}
+
+type ChromepolicyCustomersPoliciesNetworksDefineCertificateQueryParams struct {
+	DollarXgafv    *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
+	AccessToken    *string           `queryParam:"style=form,explode=true,name=access_token"`
+	Alt            *shared.AltEnum   `queryParam:"style=form,explode=true,name=alt"`
+	Callback       *string           `queryParam:"style=form,explode=true,name=callback"`
+	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`
+	Key            *string           `queryParam:"style=form,explode=true,name=key"`
+	OauthToken     *string           `queryParam:"style=form,explode=true,name=oauth_token"`
+	PrettyPrint    *bool             `queryParam:"style=form,explode=true,name=prettyPrint"`
+	QuotaUser      *string           `queryParam:"style=form,explode=true,name=quotaUser"`
+	UploadType     *string           `queryParam:"style=form,explode=true,name=uploadType"`
+	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
+}
+
+type ChromepolicyCustomersPoliciesNetworksDefineCertificateSecurity struct {
+	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
+	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+}
+
+type ChromepolicyCustomersPoliciesNetworksDefineCertificateRequest struct {
+	PathParams  ChromepolicyCustomersPoliciesNetworksDefineCertificatePathParams
+	QueryParams ChromepolicyCustomersPoliciesNetworksDefineCertificateQueryParams
+	Request     *shared.GoogleChromePolicyV1DefineCertificateRequest `request:"mediaType=application/json"`
+	Security    ChromepolicyCustomersPoliciesNetworksDefineCertificateSecurity
+}
+
+type ChromepolicyCustomersPoliciesNetworksDefineCertificateResponse struct {
+	ContentType                                   string
+	GoogleChromePolicyV1DefineCertificateResponse *shared.GoogleChromePolicyV1DefineCertificateResponse
+	StatusCode                                    int64
+}

@@ -1,0 +1,23 @@
+from dataclasses import dataclass, field
+from typing import Enum
+
+class RelationshipTypeEnum(str, Enum):
+    EVERY = "EVERY"
+    WITH_DOSAGE = "WITH_DOSAGE"
+    ADMINISTERED_VIA = "ADMINISTERED_VIA"
+    FOR = "FOR"
+    NEGATIVE = "NEGATIVE"
+    OVERLAP = "OVERLAP"
+    DOSAGE = "DOSAGE"
+    ROUTE_OR_MODE = "ROUTE_OR_MODE"
+    FORM = "FORM"
+    FREQUENCY = "FREQUENCY"
+    DURATION = "DURATION"
+    STRENGTH = "STRENGTH"
+    RATE = "RATE"
+    ACUITY = "ACUITY"
+    TEST_VALUE = "TEST_VALUE"
+    TEST_UNITS = "TEST_UNITS"
+    DIRECTION = "DIRECTION"
+    SYSTEM_ORGAN_SITE = "SYSTEM_ORGAN_SITE"
+

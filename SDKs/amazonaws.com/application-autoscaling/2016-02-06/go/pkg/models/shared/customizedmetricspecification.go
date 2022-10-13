@@ -1,0 +1,9 @@
+package shared
+
+type CustomizedMetricSpecification struct {
+	Dimensions []MetricDimension   `json:"Dimensions"`
+	MetricName string              `json:"MetricName"`
+	Namespace  string              `json:"Namespace"`
+	Statistic  MetricStatisticEnum `json:"Statistic"`
+	Unit       *string             `json:"Unit"`
+}

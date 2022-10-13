@@ -1,0 +1,45 @@
+package shared
+
+import (
+	"time"
+)
+
+type SupersimV1FleetIPCommandsMethodEnum string
+
+const (
+	SupersimV1FleetIPCommandsMethodEnumHead   SupersimV1FleetIPCommandsMethodEnum = "HEAD"
+	SupersimV1FleetIPCommandsMethodEnumGet    SupersimV1FleetIPCommandsMethodEnum = "GET"
+	SupersimV1FleetIPCommandsMethodEnumPost   SupersimV1FleetIPCommandsMethodEnum = "POST"
+	SupersimV1FleetIPCommandsMethodEnumPatch  SupersimV1FleetIPCommandsMethodEnum = "PATCH"
+	SupersimV1FleetIPCommandsMethodEnumPut    SupersimV1FleetIPCommandsMethodEnum = "PUT"
+	SupersimV1FleetIPCommandsMethodEnumDelete SupersimV1FleetIPCommandsMethodEnum = "DELETE"
+)
+
+type SupersimV1FleetSmsCommandsMethodEnum string
+
+const (
+	SupersimV1FleetSmsCommandsMethodEnumHead   SupersimV1FleetSmsCommandsMethodEnum = "HEAD"
+	SupersimV1FleetSmsCommandsMethodEnumGet    SupersimV1FleetSmsCommandsMethodEnum = "GET"
+	SupersimV1FleetSmsCommandsMethodEnumPost   SupersimV1FleetSmsCommandsMethodEnum = "POST"
+	SupersimV1FleetSmsCommandsMethodEnumPatch  SupersimV1FleetSmsCommandsMethodEnum = "PATCH"
+	SupersimV1FleetSmsCommandsMethodEnumPut    SupersimV1FleetSmsCommandsMethodEnum = "PUT"
+	SupersimV1FleetSmsCommandsMethodEnumDelete SupersimV1FleetSmsCommandsMethodEnum = "DELETE"
+)
+
+type SupersimV1Fleet struct {
+	AccountSid              *string                               `json:"account_sid"`
+	DataEnabled             *bool                                 `json:"data_enabled"`
+	DataLimit               *int64                                `json:"data_limit"`
+	DataMetering            *FleetEnumDataMeteringEnum            `json:"data_metering"`
+	DateCreated             *time.Time                            `json:"date_created"`
+	DateUpdated             *time.Time                            `json:"date_updated"`
+	IPCommandsMethod        *SupersimV1FleetIPCommandsMethodEnum  `json:"ip_commands_method"`
+	IPCommandsURL           *string                               `json:"ip_commands_url"`
+	NetworkAccessProfileSid *string                               `json:"network_access_profile_sid"`
+	Sid                     *string                               `json:"sid"`
+	SmsCommandsEnabled      *bool                                 `json:"sms_commands_enabled"`
+	SmsCommandsMethod       *SupersimV1FleetSmsCommandsMethodEnum `json:"sms_commands_method"`
+	SmsCommandsURL          *string                               `json:"sms_commands_url"`
+	UniqueName              *string                               `json:"unique_name"`
+	URL                     *string                               `json:"url"`
+}

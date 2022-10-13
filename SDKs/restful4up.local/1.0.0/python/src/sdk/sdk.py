@@ -1,0 +1,176 @@
+import warnings
+import requests
+from sdk.models import operations
+from . import utils
+
+
+SERVERS = [
+	"http://restful4up.local",
+	"https://restful4up.local/v1",
+]
+
+
+class SDK:
+    client = requests.Session()
+    server_url = SERVERS[0]
+
+    def config_server_url(self, server_url: str, params: dict[str, str]):
+        if not params is None:
+            self.server_url = utils.replace_parameters(server_url, params)
+        else:
+            self.server_url = server_url
+    
+    
+    def apply_yara_rules(self, request: operations.ApplyYaraRulesRequest) -> operations.ApplyYaraRulesResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/apply-yara-rules"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ApplyYaraRulesResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+        elif r.status_code == 400:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+        elif r.status_code == 500:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def clean(self) -> operations.CleanResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/clean"
+        
+        client = self.client
+
+        r = client.request("HEAD", url)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.CleanResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 204:
+            pass
+        elif r.status_code == 500:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def emulation_output(self, request: operations.EmulationOutputRequest) -> operations.EmulationOutputResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/emulation-output"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.EmulationOutputResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+        elif r.status_code == 400:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+        elif r.status_code == 500:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def generate_partial_yara_rule(self, request: operations.GeneratePartialYaraRuleRequest) -> operations.GeneratePartialYaraRuleResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/generate-partial-yara-rules"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.GeneratePartialYaraRuleResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+        elif r.status_code == 400:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+        elif r.status_code == 500:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    
+    def unpack(self, request: operations.UnpackRequest) -> operations.UnpackResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/unpack"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.UnpackResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "*/*"):
+                res.unpack_200_wildcard_binary_string = r.content
+        elif r.status_code == 400:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+        elif r.status_code == 500:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    

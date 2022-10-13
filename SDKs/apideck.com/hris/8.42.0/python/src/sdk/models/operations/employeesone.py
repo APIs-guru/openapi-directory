@@ -1,0 +1,52 @@
+from dataclasses import dataclass, field
+from typing import Any,Optional
+from sdk.models import shared
+
+
+@dataclass
+class EmployeesOnePathParams:
+    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    
+
+@dataclass
+class EmployeesOneQueryParams:
+    raw: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'raw', 'style': 'form', 'explode': True }})
+    
+
+@dataclass
+class EmployeesOneHeaders:
+    x_apideck_app_id: str = field(default=None, metadata={'header': { 'field_name': 'x-apideck-app-id' }})
+    x_apideck_consumer_id: str = field(default=None, metadata={'header': { 'field_name': 'x-apideck-consumer-id' }})
+    x_apideck_service_id: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'x-apideck-service-id' }})
+    
+
+@dataclass
+class EmployeesOneSecurity:
+    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    
+
+@dataclass
+class EmployeesOneRequest:
+    path_params: EmployeesOnePathParams = field(default=None)
+    query_params: EmployeesOneQueryParams = field(default=None)
+    headers: EmployeesOneHeaders = field(default=None)
+    security: EmployeesOneSecurity = field(default=None)
+    
+
+@dataclass
+class EmployeesOneResponses:
+    bad_request_response: Optional[Any] = field(default=None)
+    get_employee_response: Optional[shared.GetEmployeeResponse] = field(default=None)
+    not_found_response: Optional[Any] = field(default=None)
+    payment_required_response: Optional[Any] = field(default=None)
+    unauthorized_response: Optional[Any] = field(default=None)
+    unexpected_error_response: Optional[Any] = field(default=None)
+    unprocessable_response: Optional[Any] = field(default=None)
+    
+
+@dataclass
+class EmployeesOneResponse:
+    content_type: str = field(default=None)
+    responses: dict[int, dict[str, EmployeesOneResponses]] = field(default=None)
+    status_code: int = field(default=None)
+    

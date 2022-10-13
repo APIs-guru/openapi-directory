@@ -1,0 +1,22 @@
+package operations
+
+type GetPatientsIDAttachmentsNameSizePathParams struct {
+	ID   string `pathParam:"style=simple,explode=false,name=id"`
+	Name string `pathParam:"style=simple,explode=false,name=name"`
+}
+
+type GetPatientsIDAttachmentsNameSizeHeaders struct {
+	IfNoneMatch *string `header:"name=If-None-Match"`
+}
+
+type GetPatientsIDAttachmentsNameSizeRequest struct {
+	PathParams GetPatientsIDAttachmentsNameSizePathParams
+	Headers    GetPatientsIDAttachmentsNameSizeHeaders
+}
+
+type GetPatientsIDAttachmentsNameSizeResponse struct {
+	Body        []byte
+	ContentType string
+	Headers     map[string][]string
+	StatusCode  int64
+}

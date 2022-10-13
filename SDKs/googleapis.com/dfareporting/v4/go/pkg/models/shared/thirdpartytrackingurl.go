@@ -1,0 +1,30 @@
+package shared
+
+type ThirdPartyTrackingURLThirdPartyURLTypeEnum string
+
+const (
+	ThirdPartyTrackingURLThirdPartyURLTypeEnumImpression                ThirdPartyTrackingURLThirdPartyURLTypeEnum = "IMPRESSION"
+	ThirdPartyTrackingURLThirdPartyURLTypeEnumClickTracking             ThirdPartyTrackingURLThirdPartyURLTypeEnum = "CLICK_TRACKING"
+	ThirdPartyTrackingURLThirdPartyURLTypeEnumVideoStart                ThirdPartyTrackingURLThirdPartyURLTypeEnum = "VIDEO_START"
+	ThirdPartyTrackingURLThirdPartyURLTypeEnumVideoFirstQuartile        ThirdPartyTrackingURLThirdPartyURLTypeEnum = "VIDEO_FIRST_QUARTILE"
+	ThirdPartyTrackingURLThirdPartyURLTypeEnumVideoMidpoint             ThirdPartyTrackingURLThirdPartyURLTypeEnum = "VIDEO_MIDPOINT"
+	ThirdPartyTrackingURLThirdPartyURLTypeEnumVideoThirdQuartile        ThirdPartyTrackingURLThirdPartyURLTypeEnum = "VIDEO_THIRD_QUARTILE"
+	ThirdPartyTrackingURLThirdPartyURLTypeEnumVideoComplete             ThirdPartyTrackingURLThirdPartyURLTypeEnum = "VIDEO_COMPLETE"
+	ThirdPartyTrackingURLThirdPartyURLTypeEnumVideoMute                 ThirdPartyTrackingURLThirdPartyURLTypeEnum = "VIDEO_MUTE"
+	ThirdPartyTrackingURLThirdPartyURLTypeEnumVideoPause                ThirdPartyTrackingURLThirdPartyURLTypeEnum = "VIDEO_PAUSE"
+	ThirdPartyTrackingURLThirdPartyURLTypeEnumVideoRewind               ThirdPartyTrackingURLThirdPartyURLTypeEnum = "VIDEO_REWIND"
+	ThirdPartyTrackingURLThirdPartyURLTypeEnumVideoFullscreen           ThirdPartyTrackingURLThirdPartyURLTypeEnum = "VIDEO_FULLSCREEN"
+	ThirdPartyTrackingURLThirdPartyURLTypeEnumVideoStop                 ThirdPartyTrackingURLThirdPartyURLTypeEnum = "VIDEO_STOP"
+	ThirdPartyTrackingURLThirdPartyURLTypeEnumVideoCustom               ThirdPartyTrackingURLThirdPartyURLTypeEnum = "VIDEO_CUSTOM"
+	ThirdPartyTrackingURLThirdPartyURLTypeEnumSurvey                    ThirdPartyTrackingURLThirdPartyURLTypeEnum = "SURVEY"
+	ThirdPartyTrackingURLThirdPartyURLTypeEnumRichMediaImpression       ThirdPartyTrackingURLThirdPartyURLTypeEnum = "RICH_MEDIA_IMPRESSION"
+	ThirdPartyTrackingURLThirdPartyURLTypeEnumRichMediaRmImpression     ThirdPartyTrackingURLThirdPartyURLTypeEnum = "RICH_MEDIA_RM_IMPRESSION"
+	ThirdPartyTrackingURLThirdPartyURLTypeEnumRichMediaBackupImpression ThirdPartyTrackingURLThirdPartyURLTypeEnum = "RICH_MEDIA_BACKUP_IMPRESSION"
+	ThirdPartyTrackingURLThirdPartyURLTypeEnumVideoSkip                 ThirdPartyTrackingURLThirdPartyURLTypeEnum = "VIDEO_SKIP"
+	ThirdPartyTrackingURLThirdPartyURLTypeEnumVideoProgress             ThirdPartyTrackingURLThirdPartyURLTypeEnum = "VIDEO_PROGRESS"
+)
+
+type ThirdPartyTrackingURL struct {
+	ThirdPartyURLType *ThirdPartyTrackingURLThirdPartyURLTypeEnum `json:"thirdPartyUrlType"`
+	URL               *string                                     `json:"url"`
+}

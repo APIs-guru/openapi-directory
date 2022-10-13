@@ -1,0 +1,13 @@
+from dataclasses import dataclass, field
+from typing import List,Optional
+from dataclasses_json import dataclass_json
+from . import accesskey
+from . import operation
+
+
+@dataclass_json
+@dataclass
+class CreateBucketAccessKeyResult:
+    access_key: Optional[accesskey.AccessKey] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accessKey' }})
+    operations: Optional[List[operation.Operation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operations' }})
+    

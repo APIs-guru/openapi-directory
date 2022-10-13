@@ -1,0 +1,34 @@
+from dataclasses import dataclass, field
+from typing import Any,Enum,Optional
+from sdk.models import shared
+
+class RejectDomainTransferFromAnotherAwsAccountXAmzTargetEnum(str, Enum):
+    ROUTE53_DOMAINS_V20140515_REJECT_DOMAIN_TRANSFER_FROM_ANOTHER_AWS_ACCOUNT = "Route53Domains_v20140515.RejectDomainTransferFromAnotherAwsAccount"
+
+
+@dataclass
+class RejectDomainTransferFromAnotherAwsAccountHeaders:
+    x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm' }})
+    x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256' }})
+    x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential' }})
+    x_amz_date: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Date' }})
+    x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token' }})
+    x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature' }})
+    x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders' }})
+    x_amz_target: RejectDomainTransferFromAnotherAwsAccountXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target' }})
+    
+
+@dataclass
+class RejectDomainTransferFromAnotherAwsAccountRequest:
+    headers: RejectDomainTransferFromAnotherAwsAccountHeaders = field(default=None)
+    request: shared.RejectDomainTransferFromAnotherAwsAccountRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    
+
+@dataclass
+class RejectDomainTransferFromAnotherAwsAccountResponse:
+    content_type: str = field(default=None)
+    invalid_input: Optional[Any] = field(default=None)
+    operation_limit_exceeded: Optional[Any] = field(default=None)
+    reject_domain_transfer_from_another_aws_account_response: Optional[shared.RejectDomainTransferFromAnotherAwsAccountResponse] = field(default=None)
+    status_code: int = field(default=None)
+    

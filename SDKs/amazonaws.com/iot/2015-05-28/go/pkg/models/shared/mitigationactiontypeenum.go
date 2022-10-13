@@ -1,0 +1,12 @@
+package shared
+
+type MitigationActionTypeEnum string
+
+const (
+	MitigationActionTypeEnumUpdateDeviceCertificate     MitigationActionTypeEnum = "UPDATE_DEVICE_CERTIFICATE"
+	MitigationActionTypeEnumUpdateCaCertificate         MitigationActionTypeEnum = "UPDATE_CA_CERTIFICATE"
+	MitigationActionTypeEnumAddThingsToThingGroup       MitigationActionTypeEnum = "ADD_THINGS_TO_THING_GROUP"
+	MitigationActionTypeEnumReplaceDefaultPolicyVersion MitigationActionTypeEnum = "REPLACE_DEFAULT_POLICY_VERSION"
+	MitigationActionTypeEnumEnableIotLogging            MitigationActionTypeEnum = "ENABLE_IOT_LOGGING"
+	MitigationActionTypeEnumPublishFindingToSns         MitigationActionTypeEnum = "PUBLISH_FINDING_TO_SNS"
+)

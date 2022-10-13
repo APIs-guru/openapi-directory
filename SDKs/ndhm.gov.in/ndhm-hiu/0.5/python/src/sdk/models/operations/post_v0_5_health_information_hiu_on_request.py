@@ -1,0 +1,34 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from sdk.models import shared
+POST_V0_5_HEALTH_INFORMATION_HIU_ON_REQUEST_SERVERS = [
+	"https://dev.ndhm.gov.in/hiu",
+]
+
+
+@dataclass
+class PostV05HealthInformationHiuOnRequestHeaders:
+    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization' }})
+    x_hiu_id: str = field(default=None, metadata={'header': { 'field_name': 'X-HIU-ID' }})
+    
+
+@dataclass
+class PostV05HealthInformationHiuOnRequestRequests:
+    application_xml: bytes = field(default=None, metadata={'request': { 'media_type': 'application/xml' }})
+    hiu_health_information_request_response: Optional[shared.HiuHealthInformationRequestResponse] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    
+
+@dataclass
+class PostV05HealthInformationHiuOnRequestRequest:
+    server_url: Optional[str] = field(default=None)
+    headers: PostV05HealthInformationHiuOnRequestHeaders = field(default=None)
+    request: PostV05HealthInformationHiuOnRequestRequests = field(default=None)
+    
+
+@dataclass
+class PostV05HealthInformationHiuOnRequestResponse:
+    body: bytes = field(default=None)
+    content_type: str = field(default=None)
+    error_response: Optional[shared.ErrorResponse] = field(default=None)
+    status_code: int = field(default=None)
+    

@@ -1,0 +1,27 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type TrendingGifsQueryParams struct {
+	Limit  *int32  `queryParam:"style=form,explode=true,name=limit"`
+	Offset *int32  `queryParam:"style=form,explode=true,name=offset"`
+	Rating *string `queryParam:"style=form,explode=true,name=rating"`
+}
+
+type TrendingGifsRequest struct {
+	QueryParams TrendingGifsQueryParams
+}
+
+type TrendingGifs200ApplicationJSON struct {
+	Data       []shared.Gif       `json:"data"`
+	Meta       *shared.Meta       `json:"meta"`
+	Pagination *shared.Pagination `json:"pagination"`
+}
+
+type TrendingGifsResponse struct {
+	ContentType                          string
+	StatusCode                           int64
+	TrendingGifs200ApplicationJSONObject *TrendingGifs200ApplicationJSON
+}

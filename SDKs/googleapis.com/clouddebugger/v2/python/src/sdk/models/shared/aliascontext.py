@@ -1,0 +1,17 @@
+from dataclasses import dataclass, field
+from typing import Enum,Optional
+from dataclasses_json import dataclass_json
+
+class AliasContextKindEnum(str, Enum):
+    ANY = "ANY"
+    FIXED = "FIXED"
+    MOVABLE = "MOVABLE"
+    OTHER = "OTHER"
+
+
+@dataclass_json
+@dataclass
+class AliasContext:
+    kind: Optional[AliasContextKindEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    

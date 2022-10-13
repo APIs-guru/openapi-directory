@@ -1,0 +1,6 @@
+from dataclasses import dataclass, field
+from typing import Enum
+
+class FilterTypeEnum(str, Enum):
+    SIMPLE_PATTERN = "SIMPLE_PATTERN"
+

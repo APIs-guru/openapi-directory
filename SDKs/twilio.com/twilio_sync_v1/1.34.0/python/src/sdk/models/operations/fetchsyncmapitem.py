@@ -1,0 +1,38 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from sdk.models import shared
+FETCH_SYNC_MAP_ITEM_SERVERS = [
+	"https://sync.twilio.com",
+]
+
+
+@dataclass
+class FetchSyncMapItemPathParams:
+    key: str = field(default=None, metadata={'path_param': { 'field_name': 'Key', 'style': 'simple', 'explode': False }})
+    map_sid: str = field(default=None, metadata={'path_param': { 'field_name': 'MapSid', 'style': 'simple', 'explode': False }})
+    service_sid: str = field(default=None, metadata={'path_param': { 'field_name': 'ServiceSid', 'style': 'simple', 'explode': False }})
+    
+
+@dataclass
+class FetchSyncMapItemSecurity:
+    account_sid_auth_token: shared.SchemeAccountSidAuthToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    
+
+@dataclass
+class FetchSyncMapItemRequest:
+    server_url: Optional[str] = field(default=None)
+    path_params: FetchSyncMapItemPathParams = field(default=None)
+    security: FetchSyncMapItemSecurity = field(default=None)
+    
+
+@dataclass
+class FetchSyncMapItemResponses:
+    sync_v1_service_sync_map_sync_map_item: Optional[shared.SyncV1ServiceSyncMapSyncMapItem] = field(default=None)
+    
+
+@dataclass
+class FetchSyncMapItemResponse:
+    content_type: str = field(default=None)
+    responses: dict[int, dict[str, FetchSyncMapItemResponses]] = field(default=None)
+    status_code: int = field(default=None)
+    

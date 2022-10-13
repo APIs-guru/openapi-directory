@@ -1,0 +1,5 @@
+package shared
+
+type GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetails struct {
+	IntroductoryPricingSpecs []GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsIntroductoryPricingSpec `json:"introductoryPricingSpecs"`
+}

@@ -1,0 +1,34 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type ListConfigurationSetsQueryParams struct {
+	NextToken *string `queryParam:"style=form,explode=true,name=NextToken"`
+	PageSize  *string `queryParam:"style=form,explode=true,name=PageSize"`
+}
+
+type ListConfigurationSetsHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type ListConfigurationSetsRequest struct {
+	QueryParams ListConfigurationSetsQueryParams
+	Headers     ListConfigurationSetsHeaders
+}
+
+type ListConfigurationSetsResponse struct {
+	BadRequestException           *interface{}
+	ContentType                   string
+	InternalServiceErrorException *interface{}
+	ListConfigurationSetsResponse *shared.ListConfigurationSetsResponse
+	StatusCode                    int64
+	TooManyRequestsException      *interface{}
+}

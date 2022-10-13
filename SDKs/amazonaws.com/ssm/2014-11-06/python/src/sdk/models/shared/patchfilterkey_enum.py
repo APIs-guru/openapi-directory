@@ -1,0 +1,24 @@
+from dataclasses import dataclass, field
+from typing import Enum
+
+class PatchFilterKeyEnum(str, Enum):
+    ARCH = "ARCH"
+    ADVISORY_ID = "ADVISORY_ID"
+    BUGZILLA_ID = "BUGZILLA_ID"
+    PATCH_SET = "PATCH_SET"
+    PRODUCT = "PRODUCT"
+    PRODUCT_FAMILY = "PRODUCT_FAMILY"
+    CLASSIFICATION = "CLASSIFICATION"
+    CVE_ID = "CVE_ID"
+    EPOCH = "EPOCH"
+    MSRC_SEVERITY = "MSRC_SEVERITY"
+    NAME = "NAME"
+    PATCH_ID = "PATCH_ID"
+    SECTION = "SECTION"
+    PRIORITY = "PRIORITY"
+    REPOSITORY = "REPOSITORY"
+    RELEASE = "RELEASE"
+    SEVERITY = "SEVERITY"
+    SECURITY = "SECURITY"
+    VERSION = "VERSION"
+

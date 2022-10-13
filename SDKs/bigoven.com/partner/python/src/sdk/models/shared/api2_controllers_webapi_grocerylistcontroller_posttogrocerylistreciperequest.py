@@ -1,0 +1,14 @@
+from dataclasses import dataclass, field
+from typing import List,Optional
+from dataclasses_json import dataclass_json
+
+
+@dataclass_json
+@dataclass
+class Api2ControllersWebAPIGroceryListControllerPostToGroceryListRecipeRequest:
+    department: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'department' }, 'form': { 'field_name': 'department' }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }, 'form': { 'field_name': 'name' }})
+    notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notes' }, 'form': { 'field_name': 'notes' }})
+    quantity: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'quantity' }, 'form': { 'field_name': 'quantity' }})
+    unit: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unit' }, 'form': { 'field_name': 'unit' }})
+    

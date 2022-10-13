@@ -1,0 +1,34 @@
+from dataclasses import dataclass, field
+from typing import Any,Enum,Optional
+from sdk.models import shared
+
+class StopQueryExecutionXAmzTargetEnum(str, Enum):
+    AMAZON_ATHENA_STOP_QUERY_EXECUTION = "AmazonAthena.StopQueryExecution"
+
+
+@dataclass
+class StopQueryExecutionHeaders:
+    x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm' }})
+    x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256' }})
+    x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential' }})
+    x_amz_date: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Date' }})
+    x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token' }})
+    x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature' }})
+    x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders' }})
+    x_amz_target: StopQueryExecutionXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target' }})
+    
+
+@dataclass
+class StopQueryExecutionRequest:
+    headers: StopQueryExecutionHeaders = field(default=None)
+    request: shared.StopQueryExecutionInput = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    
+
+@dataclass
+class StopQueryExecutionResponse:
+    content_type: str = field(default=None)
+    internal_server_exception: Optional[Any] = field(default=None)
+    invalid_request_exception: Optional[Any] = field(default=None)
+    status_code: int = field(default=None)
+    stop_query_execution_output: Optional[dict[str, Any]] = field(default=None)
+    

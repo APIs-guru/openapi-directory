@@ -1,0 +1,16 @@
+package shared
+
+type GoogleCloudFunctionsV2StateMessageSeverityEnum string
+
+const (
+	GoogleCloudFunctionsV2StateMessageSeverityEnumSeverityUnspecified GoogleCloudFunctionsV2StateMessageSeverityEnum = "SEVERITY_UNSPECIFIED"
+	GoogleCloudFunctionsV2StateMessageSeverityEnumError               GoogleCloudFunctionsV2StateMessageSeverityEnum = "ERROR"
+	GoogleCloudFunctionsV2StateMessageSeverityEnumWarning             GoogleCloudFunctionsV2StateMessageSeverityEnum = "WARNING"
+	GoogleCloudFunctionsV2StateMessageSeverityEnumInfo                GoogleCloudFunctionsV2StateMessageSeverityEnum = "INFO"
+)
+
+type GoogleCloudFunctionsV2StateMessage struct {
+	Message  *string                                         `json:"message"`
+	Severity *GoogleCloudFunctionsV2StateMessageSeverityEnum `json:"severity"`
+	Type     *string                                         `json:"type"`
+}

@@ -1,0 +1,52 @@
+from dataclasses import dataclass, field
+from typing import Any,Optional
+from dataclasses_json import dataclass_json
+
+
+@dataclass_json
+@dataclass
+class OnlineSettingsViewModel:
+    availability_form: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'availabilityForm' }})
+    book_ahead_unit: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bookAheadUnit' }})
+    book_ahead_value: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bookAheadValue' }})
+    book_in_advance: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bookInAdvance' }})
+    book_with_account: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bookWithAccount' }})
+    booking_confirmation_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bookingConfirmationMessage' }})
+    booking_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bookingMessage' }})
+    booking_policy: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bookingPolicy' }})
+    booking_timer_mins: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bookingTimerMins' }})
+    business_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'businessId' }})
+    company_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'companyId' }})
+    customer_bookings_per_day: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customerBookingsPerDay' }})
+    customer_verification: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customerVerification' }})
+    default_service: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultService' }})
+    default_to_customer_timezone: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultToCustomerTimezone' }})
+    disable_authorization: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'disableAuthorization' }})
+    enable_world_timezones: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enableWorldTimezones' }})
+    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enabled' }})
+    family_members_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'familyMembersEnabled' }})
+    first_available: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'firstAvailable' }})
+    form_flow: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'formFlow' }})
+    hide_bread_crumb_nav: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hideBreadCrumbNav' }})
+    hide_continue_booking: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hideContinueBooking' }})
+    hide_location_nav: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hideLocationNav' }})
+    hide_nav_bar: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hideNavBar' }})
+    hide_service_groups_nav: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hideServiceGroupsNav' }})
+    hide_services_nav: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hideServicesNav' }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
+    late_cancel_action: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lateCancelAction' }})
+    late_cancel_hours: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lateCancelHours' }})
+    late_reschedule_action: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lateRescheduleAction' }})
+    late_reschedule_hours: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lateRescheduleHours' }})
+    live_mode: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'liveMode' }})
+    object_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'objectName' }})
+    resource_any_label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceAnyLabel' }})
+    resource_label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceLabel' }})
+    resource_selection: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceSelection' }})
+    return_to_availability: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'returnToAvailability' }})
+    return_to_service: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'returnToService' }})
+    service_label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serviceLabel' }})
+    show_business_logo: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'showBusinessLogo' }})
+    show_on_sched_logo: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'showOnSchedLogo' }})
+    show_service_groups: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'showServiceGroups' }})
+    

@@ -1,0 +1,29 @@
+from dataclasses import dataclass, field
+from typing import List,Optional
+from dataclasses_json import dataclass_json
+from . import shipmentcancellation
+from . import order
+from . import packagespecification
+from . import purchasedrate
+from . import contact
+from . import contact
+from . import contact
+
+
+@dataclass_json
+@dataclass
+class Shipment:
+    cancellation: Optional[shipmentcancellation.ShipmentCancellation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cancellation' }})
+    creation_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creationDate' }})
+    label_custom_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labelCustomMessage' }})
+    label_download_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labelDownloadUrl' }})
+    label_size: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labelSize' }})
+    orders: Optional[List[order.Order]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'orders' }})
+    package_specification: Optional[packagespecification.PackageSpecification] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'packageSpecification' }})
+    rate: Optional[purchasedrate.PurchasedRate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rate' }})
+    return_to: Optional[contact.Contact] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'returnTo' }})
+    ship_from: Optional[contact.Contact] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shipFrom' }})
+    ship_to: Optional[contact.Contact] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shipTo' }})
+    shipment_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shipmentId' }})
+    shipment_tracking_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shipmentTrackingNumber' }})
+    

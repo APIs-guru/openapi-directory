@@ -1,0 +1,15 @@
+package shared
+
+type RestoreDatabaseEncryptionConfigEncryptionTypeEnum string
+
+const (
+	RestoreDatabaseEncryptionConfigEncryptionTypeEnumEncryptionTypeUnspecified          RestoreDatabaseEncryptionConfigEncryptionTypeEnum = "ENCRYPTION_TYPE_UNSPECIFIED"
+	RestoreDatabaseEncryptionConfigEncryptionTypeEnumUseConfigDefaultOrBackupEncryption RestoreDatabaseEncryptionConfigEncryptionTypeEnum = "USE_CONFIG_DEFAULT_OR_BACKUP_ENCRYPTION"
+	RestoreDatabaseEncryptionConfigEncryptionTypeEnumGoogleDefaultEncryption            RestoreDatabaseEncryptionConfigEncryptionTypeEnum = "GOOGLE_DEFAULT_ENCRYPTION"
+	RestoreDatabaseEncryptionConfigEncryptionTypeEnumCustomerManagedEncryption          RestoreDatabaseEncryptionConfigEncryptionTypeEnum = "CUSTOMER_MANAGED_ENCRYPTION"
+)
+
+type RestoreDatabaseEncryptionConfig struct {
+	EncryptionType *RestoreDatabaseEncryptionConfigEncryptionTypeEnum `json:"encryptionType"`
+	KmsKeyName     *string                                            `json:"kmsKeyName"`
+}

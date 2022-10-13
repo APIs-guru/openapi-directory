@@ -1,0 +1,42 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type UpdateExperimentTemplatePathParams struct {
+	ID string `pathParam:"style=simple,explode=false,name=id"`
+}
+
+type UpdateExperimentTemplateHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type UpdateExperimentTemplateRequestBody struct {
+	Actions        map[string]shared.UpdateExperimentTemplateActionInputItem `json:"actions"`
+	Description    *string                                                   `json:"description"`
+	RoleArn        *string                                                   `json:"roleArn"`
+	StopConditions []shared.UpdateExperimentTemplateStopConditionInput       `json:"stopConditions"`
+	Targets        map[string]shared.UpdateExperimentTemplateTargetInput     `json:"targets"`
+}
+
+type UpdateExperimentTemplateRequest struct {
+	PathParams UpdateExperimentTemplatePathParams
+	Headers    UpdateExperimentTemplateHeaders
+	Request    UpdateExperimentTemplateRequestBody `request:"mediaType=application/json"`
+}
+
+type UpdateExperimentTemplateResponse struct {
+	ContentType                      string
+	ResourceNotFoundException        *interface{}
+	ServiceQuotaExceededException    *interface{}
+	StatusCode                       int64
+	UpdateExperimentTemplateResponse *shared.UpdateExperimentTemplateResponse
+	ValidationException              *interface{}
+}

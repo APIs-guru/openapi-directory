@@ -1,0 +1,10 @@
+from dataclasses import dataclass, field
+from dataclasses_json import dataclass_json
+
+
+@dataclass_json
+@dataclass
+class GetGroupRequest:
+    group_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GroupName' }})
+    user_pool_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UserPoolId' }})
+    

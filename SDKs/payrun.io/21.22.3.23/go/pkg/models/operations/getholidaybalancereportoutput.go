@@ -1,0 +1,31 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+	"time"
+)
+
+type GetHolidayBalanceReportOutputQueryParams struct {
+	EmployeeCodes  *string   `queryParam:"style=form,explode=true,name=EmployeeCodes"`
+	EmployerKey    string    `queryParam:"style=form,explode=true,name=EmployerKey"`
+	HolidayYearEnd time.Time `queryParam:"style=form,explode=true,name=HolidayYearEnd"`
+	MaxIndex       *string   `queryParam:"style=form,explode=true,name=MaxIndex"`
+	StartIndex     *string   `queryParam:"style=form,explode=true,name=StartIndex"`
+}
+
+type GetHolidayBalanceReportOutputHeaders struct {
+	APIVersion    string `header:"name=Api-Version"`
+	Authorization string `header:"name=Authorization"`
+}
+
+type GetHolidayBalanceReportOutputRequest struct {
+	QueryParams GetHolidayBalanceReportOutputQueryParams
+	Headers     GetHolidayBalanceReportOutputHeaders
+}
+
+type GetHolidayBalanceReportOutputResponse struct {
+	ContentType                                                 string
+	ErrorModel                                                  *shared.ErrorModel
+	GetHolidayBalanceReportOutput200ApplicationJSONBinaryString []byte
+	StatusCode                                                  int64
+}

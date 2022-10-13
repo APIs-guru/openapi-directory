@@ -1,0 +1,61 @@
+from dataclasses import dataclass, field
+from datetime import datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Enum,List,Optional
+from dataclasses_json import dataclass_json
+
+class SubscriptionPlanFeaturesEnum(str, Enum):
+    API = "Api"
+    TEAMS = "Teams"
+    CLIENTS = "Clients"
+    SHOP = "Shop"
+    PAYMENT_LINKS = "PaymentLinks"
+    CNAME = "Cname"
+
+class SubscriptionPlanRecurrenceEnum(str, Enum):
+    MONTHLY = "Monthly"
+    YEARLY = "Yearly"
+
+class SubscriptionPlanStatusEnum(str, Enum):
+    ACTIVE_TRIAL = "ActiveTrial"
+    EXPIRED_TRIAL = "ExpiredTrial"
+    ACTIVE = "Active"
+    CANCELED = "Canceled"
+    FRAUDLENT = "Fraudlent"
+
+class SubscriptionPlanSystemCancelationReasonEnum(str, Enum):
+    FAIL_TO_CAPTURE_FEE = "FailToCaptureFee"
+    FRAUD = "Fraud"
+
+
+@dataclass_json
+@dataclass
+class SubscriptionPlan:
+    cancellated_on: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CancellatedOn', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    coupon_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CouponCode' }})
+    currency_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CurrencyCode' }})
+    external_identifier: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ExternalIdentifier' }})
+    features: Optional[List[SubscriptionPlanFeaturesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Features' }})
+    has_due_payment: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'HasDuePayment' }})
+    has_due_payment_since: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'HasDuePaymentSince', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Id' }})
+    identifier: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Identifier' }})
+    is_active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IsActive' }})
+    is_lifetime: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IsLifetime' }})
+    last_payment_on: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LastPaymentOn', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    max_clients: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxClients' }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    on_hold: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OnHold' }})
+    order_identifier: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OrderIdentifier' }})
+    price: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Price' }})
+    recurrence: Optional[SubscriptionPlanRecurrenceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Recurrence' }})
+    sale_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SaleId' }})
+    status: Optional[SubscriptionPlanStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
+    system_cancelation_reason: Optional[SubscriptionPlanSystemCancelationReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SystemCancelationReason' }})
+    trial_ends_on: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TrialEndsOn', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    trial_number_of_days: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TrialNumberOfDays' }})
+    trial_starts_on: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TrialStartsOn', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    user_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UserId' }})
+    version: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Version' }})
+    

@@ -1,0 +1,65 @@
+from dataclasses import dataclass, field
+from typing import Any,List,Optional
+from dataclasses_json import dataclass_json
+
+
+@dataclass
+class PostBenefitsDocumentUploadSecurity:
+    apikey: shared.SchemeApikey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    
+
+@dataclass
+class PostBenefitsDocumentUploadRequest:
+    security: PostBenefitsDocumentUploadSecurity = field(default=None)
+    
+
+@dataclass_json
+@dataclass
+class PostBenefitsDocumentUpload202ApplicationJSON:
+    data: Any = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
+    
+
+@dataclass_json
+@dataclass
+class PostBenefitsDocumentUpload401ApplicationJSON:
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Message' }})
+    
+
+@dataclass_json
+@dataclass
+class PostBenefitsDocumentUpload403ApplicationJSON:
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Message' }})
+    
+
+@dataclass_json
+@dataclass
+class PostBenefitsDocumentUpload422ApplicationJSON:
+    errors: List[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
+    
+
+@dataclass_json
+@dataclass
+class PostBenefitsDocumentUpload429ApplicationJSON:
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Message' }})
+    
+
+@dataclass_json
+@dataclass
+class PostBenefitsDocumentUpload500ApplicationJSON:
+    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
+    detail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detail' }})
+    status: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+    
+
+@dataclass
+class PostBenefitsDocumentUploadResponse:
+    content_type: str = field(default=None)
+    status_code: int = field(default=None)
+    post_benefits_document_upload_202_application_json_object: Optional[PostBenefitsDocumentUpload202ApplicationJSON] = field(default=None)
+    post_benefits_document_upload_401_application_json_object: Optional[PostBenefitsDocumentUpload401ApplicationJSON] = field(default=None)
+    post_benefits_document_upload_403_application_json_object: Optional[PostBenefitsDocumentUpload403ApplicationJSON] = field(default=None)
+    post_benefits_document_upload_422_application_json_object: Optional[PostBenefitsDocumentUpload422ApplicationJSON] = field(default=None)
+    post_benefits_document_upload_429_application_json_object: Optional[PostBenefitsDocumentUpload429ApplicationJSON] = field(default=None)
+    post_benefits_document_upload_500_application_json_object: Optional[PostBenefitsDocumentUpload500ApplicationJSON] = field(default=None)
+    

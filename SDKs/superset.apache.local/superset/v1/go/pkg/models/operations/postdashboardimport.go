@@ -1,0 +1,55 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type PostDashboardImportRequestBodyFormData struct {
+	Content  []byte `multipartForm:"content"`
+	FormData string `multipartForm:"name=formData"`
+}
+
+type PostDashboardImportRequestBody struct {
+	FormData  *PostDashboardImportRequestBodyFormData `multipartForm:"file"`
+	Overwrite *bool                                   `multipartForm:"name=overwrite"`
+	Passwords *string                                 `multipartForm:"name=passwords"`
+}
+
+type PostDashboardImportSecurity struct {
+	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
+}
+
+type PostDashboardImportRequest struct {
+	Request  PostDashboardImportRequestBody `request:"mediaType=multipart/form-data"`
+	Security PostDashboardImportSecurity
+}
+
+type PostDashboardImport200ApplicationJSON struct {
+	Message *string `json:"message"`
+}
+
+type PostDashboardImport400ApplicationJSON struct {
+	Message *string `json:"message"`
+}
+
+type PostDashboardImport401ApplicationJSON struct {
+	Message *string `json:"message"`
+}
+
+type PostDashboardImport422ApplicationJSON struct {
+	Message *string `json:"message"`
+}
+
+type PostDashboardImport500ApplicationJSON struct {
+	Message *string `json:"message"`
+}
+
+type PostDashboardImportResponse struct {
+	ContentType                                 string
+	PostDashboardImport200ApplicationJSONObject *PostDashboardImport200ApplicationJSON
+	PostDashboardImport400ApplicationJSONObject *PostDashboardImport400ApplicationJSON
+	PostDashboardImport401ApplicationJSONObject *PostDashboardImport401ApplicationJSON
+	PostDashboardImport422ApplicationJSONObject *PostDashboardImport422ApplicationJSON
+	PostDashboardImport500ApplicationJSONObject *PostDashboardImport500ApplicationJSON
+	StatusCode                                  int64
+}

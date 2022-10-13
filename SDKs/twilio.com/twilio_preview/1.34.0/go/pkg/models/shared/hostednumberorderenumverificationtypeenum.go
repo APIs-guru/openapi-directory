@@ -1,0 +1,8 @@
+package shared
+
+type HostedNumberOrderEnumVerificationTypeEnum string
+
+const (
+	HostedNumberOrderEnumVerificationTypeEnumPhoneCall HostedNumberOrderEnumVerificationTypeEnum = "phone-call"
+	HostedNumberOrderEnumVerificationTypeEnumPhoneBill HostedNumberOrderEnumVerificationTypeEnum = "phone-bill"
+)

@@ -1,0 +1,40 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type GetDisksXAmzTargetEnum string
+
+const (
+	GetDisksXAmzTargetEnumLightsail20161128GetDisks GetDisksXAmzTargetEnum = "Lightsail_20161128.GetDisks"
+)
+
+type GetDisksHeaders struct {
+	XAmzAlgorithm     *string                `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                `header:"name=X-Amz-Credential"`
+	XAmzDate          *string                `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string                `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string                `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                `header:"name=X-Amz-SignedHeaders"`
+	XAmzTarget        GetDisksXAmzTargetEnum `header:"name=X-Amz-Target"`
+}
+
+type GetDisksRequest struct {
+	Headers GetDisksHeaders
+	Request shared.GetDisksRequest `request:"mediaType=application/json"`
+}
+
+type GetDisksResponse struct {
+	AccessDeniedException           *interface{}
+	AccountSetupInProgressException *interface{}
+	ContentType                     string
+	GetDisksResult                  *shared.GetDisksResult
+	InvalidInputException           *interface{}
+	NotFoundException               *interface{}
+	OperationFailureException       *interface{}
+	ServiceException                *interface{}
+	StatusCode                      int64
+	UnauthenticatedException        *interface{}
+}

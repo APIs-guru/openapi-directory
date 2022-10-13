@@ -1,0 +1,28 @@
+package operations
+
+type PrepareTransactionRequestBodyVariationEnum string
+
+const (
+	PrepareTransactionRequestBodyVariationEnumGsb        PrepareTransactionRequestBodyVariationEnum = "gsb"
+	PrepareTransactionRequestBodyVariationEnumErzeugung  PrepareTransactionRequestBodyVariationEnum = "erzeugung"
+	PrepareTransactionRequestBodyVariationEnumEigenstrom PrepareTransactionRequestBodyVariationEnum = "eigenstrom"
+	PrepareTransactionRequestBodyVariationEnumCo2        PrepareTransactionRequestBodyVariationEnum = "co2"
+	PrepareTransactionRequestBodyVariationEnumBaeume     PrepareTransactionRequestBodyVariationEnum = "baeume"
+)
+
+type PrepareTransactionRequestBody struct {
+	Account   *string                                     `json:"account"`
+	Signature *string                                     `json:"signature"`
+	To        *string                                     `json:"to"`
+	Value     *int64                                      `json:"value"`
+	Variation *PrepareTransactionRequestBodyVariationEnum `json:"variation"`
+}
+
+type PrepareTransactionRequest struct {
+	Request PrepareTransactionRequestBody `request:"mediaType=application/json"`
+}
+
+type PrepareTransactionResponse struct {
+	ContentType string
+	StatusCode  int64
+}

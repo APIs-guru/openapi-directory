@@ -1,0 +1,92 @@
+from dataclasses import dataclass, field
+from typing import Enum,List,Optional
+from sdk.models import shared
+
+
+@dataclass
+class BigtableadminProjectsInstancesListPathParams:
+    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    
+
+@dataclass
+class BigtableadminProjectsInstancesListQueryParams:
+    dollar_xgafv: Optional[shared.XgafvEnum] = field(default=None, metadata={'query_param': { 'field_name': '$.xgafv', 'style': 'form', 'explode': True }})
+    access_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'access_token', 'style': 'form', 'explode': True }})
+    alt: Optional[shared.AltEnum] = field(default=None, metadata={'query_param': { 'field_name': 'alt', 'style': 'form', 'explode': True }})
+    callback: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'callback', 'style': 'form', 'explode': True }})
+    fields: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fields', 'style': 'form', 'explode': True }})
+    key: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'key', 'style': 'form', 'explode': True }})
+    oauth_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'oauth_token', 'style': 'form', 'explode': True }})
+    page_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'pageToken', 'style': 'form', 'explode': True }})
+    pretty_print: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'prettyPrint', 'style': 'form', 'explode': True }})
+    quota_user: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'quotaUser', 'style': 'form', 'explode': True }})
+    upload_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'uploadType', 'style': 'form', 'explode': True }})
+    upload_protocol: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'upload_protocol', 'style': 'form', 'explode': True }})
+    
+
+@dataclass
+class BigtableadminProjectsInstancesListSecurityOption1:
+    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    
+
+@dataclass
+class BigtableadminProjectsInstancesListSecurityOption2:
+    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    
+
+@dataclass
+class BigtableadminProjectsInstancesListSecurityOption3:
+    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    
+
+@dataclass
+class BigtableadminProjectsInstancesListSecurityOption4:
+    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    
+
+@dataclass
+class BigtableadminProjectsInstancesListSecurityOption5:
+    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    
+
+@dataclass
+class BigtableadminProjectsInstancesListSecurityOption6:
+    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    
+
+@dataclass
+class BigtableadminProjectsInstancesListSecurityOption7:
+    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    
+
+@dataclass
+class BigtableadminProjectsInstancesListSecurity:
+    option1: Optional[BigtableadminProjectsInstancesListSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
+    option2: Optional[BigtableadminProjectsInstancesListSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    option3: Optional[BigtableadminProjectsInstancesListSecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
+    option4: Optional[BigtableadminProjectsInstancesListSecurityOption4] = field(default=None, metadata={'security': { 'option': True }})
+    option5: Optional[BigtableadminProjectsInstancesListSecurityOption5] = field(default=None, metadata={'security': { 'option': True }})
+    option6: Optional[BigtableadminProjectsInstancesListSecurityOption6] = field(default=None, metadata={'security': { 'option': True }})
+    option7: Optional[BigtableadminProjectsInstancesListSecurityOption7] = field(default=None, metadata={'security': { 'option': True }})
+    
+
+@dataclass
+class BigtableadminProjectsInstancesListRequest:
+    path_params: BigtableadminProjectsInstancesListPathParams = field(default=None)
+    query_params: BigtableadminProjectsInstancesListQueryParams = field(default=None)
+    security: BigtableadminProjectsInstancesListSecurity = field(default=None)
+    
+
+@dataclass
+class BigtableadminProjectsInstancesListResponse:
+    content_type: str = field(default=None)
+    list_instances_response: Optional[shared.ListInstancesResponse] = field(default=None)
+    status_code: int = field(default=None)
+    

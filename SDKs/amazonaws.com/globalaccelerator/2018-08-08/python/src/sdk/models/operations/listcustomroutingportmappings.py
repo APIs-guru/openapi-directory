@@ -1,0 +1,44 @@
+from dataclasses import dataclass, field
+from typing import Any,Enum,List,Optional
+from sdk.models import shared
+
+
+@dataclass
+class ListCustomRoutingPortMappingsQueryParams:
+    max_results: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
+    next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
+    
+class ListCustomRoutingPortMappingsXAmzTargetEnum(str, Enum):
+    GLOBAL_ACCELERATOR_V20180706_LIST_CUSTOM_ROUTING_PORT_MAPPINGS = "GlobalAccelerator_V20180706.ListCustomRoutingPortMappings"
+
+
+@dataclass
+class ListCustomRoutingPortMappingsHeaders:
+    x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm' }})
+    x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256' }})
+    x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential' }})
+    x_amz_date: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Date' }})
+    x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token' }})
+    x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature' }})
+    x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders' }})
+    x_amz_target: ListCustomRoutingPortMappingsXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target' }})
+    
+
+@dataclass
+class ListCustomRoutingPortMappingsRequest:
+    query_params: ListCustomRoutingPortMappingsQueryParams = field(default=None)
+    headers: ListCustomRoutingPortMappingsHeaders = field(default=None)
+    request: shared.ListCustomRoutingPortMappingsRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    
+
+@dataclass
+class ListCustomRoutingPortMappingsResponse:
+    accelerator_not_found_exception: Optional[Any] = field(default=None)
+    content_type: str = field(default=None)
+    endpoint_group_not_found_exception: Optional[Any] = field(default=None)
+    internal_service_error_exception: Optional[Any] = field(default=None)
+    invalid_argument_exception: Optional[Any] = field(default=None)
+    invalid_next_token_exception: Optional[Any] = field(default=None)
+    list_custom_routing_port_mappings_response: Optional[shared.ListCustomRoutingPortMappingsResponse] = field(default=None)
+    status_code: int = field(default=None)
+    

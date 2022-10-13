@@ -1,0 +1,36 @@
+package operations
+
+type UpdateStreamHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type UpdateStreamRequestBody struct {
+	CurrentVersion string  `json:"CurrentVersion"`
+	DeviceName     *string `json:"DeviceName"`
+	MediaType      *string `json:"MediaType"`
+	StreamArn      *string `json:"StreamARN"`
+	StreamName     *string `json:"StreamName"`
+}
+
+type UpdateStreamRequest struct {
+	Headers UpdateStreamHeaders
+	Request UpdateStreamRequestBody `request:"mediaType=application/json"`
+}
+
+type UpdateStreamResponse struct {
+	ClientLimitExceededException *interface{}
+	ContentType                  string
+	InvalidArgumentException     *interface{}
+	NotAuthorizedException       *interface{}
+	ResourceInUseException       *interface{}
+	ResourceNotFoundException    *interface{}
+	StatusCode                   int64
+	UpdateStreamOutput           map[string]interface{}
+	VersionMismatchException     *interface{}
+}

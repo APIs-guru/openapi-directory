@@ -1,0 +1,19 @@
+package shared
+
+type BatchReadExceptionTypeEnum string
+
+const (
+	BatchReadExceptionTypeEnumValidationException             BatchReadExceptionTypeEnum = "ValidationException"
+	BatchReadExceptionTypeEnumInvalidArnException             BatchReadExceptionTypeEnum = "InvalidArnException"
+	BatchReadExceptionTypeEnumResourceNotFoundException       BatchReadExceptionTypeEnum = "ResourceNotFoundException"
+	BatchReadExceptionTypeEnumInvalidNextTokenException       BatchReadExceptionTypeEnum = "InvalidNextTokenException"
+	BatchReadExceptionTypeEnumAccessDeniedException           BatchReadExceptionTypeEnum = "AccessDeniedException"
+	BatchReadExceptionTypeEnumNotNodeException                BatchReadExceptionTypeEnum = "NotNodeException"
+	BatchReadExceptionTypeEnumFacetValidationException        BatchReadExceptionTypeEnum = "FacetValidationException"
+	BatchReadExceptionTypeEnumCannotListParentOfRootException BatchReadExceptionTypeEnum = "CannotListParentOfRootException"
+	BatchReadExceptionTypeEnumNotIndexException               BatchReadExceptionTypeEnum = "NotIndexException"
+	BatchReadExceptionTypeEnumNotPolicyException              BatchReadExceptionTypeEnum = "NotPolicyException"
+	BatchReadExceptionTypeEnumDirectoryNotEnabledException    BatchReadExceptionTypeEnum = "DirectoryNotEnabledException"
+	BatchReadExceptionTypeEnumLimitExceededException          BatchReadExceptionTypeEnum = "LimitExceededException"
+	BatchReadExceptionTypeEnumInternalServiceException        BatchReadExceptionTypeEnum = "InternalServiceException"
+)

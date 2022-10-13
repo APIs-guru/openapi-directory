@@ -1,0 +1,12 @@
+package shared
+
+type AuditMitigationActionsExecutionStatusEnum string
+
+const (
+	AuditMitigationActionsExecutionStatusEnumInProgress AuditMitigationActionsExecutionStatusEnum = "IN_PROGRESS"
+	AuditMitigationActionsExecutionStatusEnumCompleted  AuditMitigationActionsExecutionStatusEnum = "COMPLETED"
+	AuditMitigationActionsExecutionStatusEnumFailed     AuditMitigationActionsExecutionStatusEnum = "FAILED"
+	AuditMitigationActionsExecutionStatusEnumCanceled   AuditMitigationActionsExecutionStatusEnum = "CANCELED"
+	AuditMitigationActionsExecutionStatusEnumSkipped    AuditMitigationActionsExecutionStatusEnum = "SKIPPED"
+	AuditMitigationActionsExecutionStatusEnumPending    AuditMitigationActionsExecutionStatusEnum = "PENDING"
+)

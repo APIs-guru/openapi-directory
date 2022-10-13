@@ -1,0 +1,10 @@
+package shared
+
+type GoogleCloudRetailV2SearchResponseSearchResult struct {
+	ID                    *string                     `json:"id"`
+	MatchingVariantCount  *int32                      `json:"matchingVariantCount"`
+	MatchingVariantFields map[string]string           `json:"matchingVariantFields"`
+	PersonalLabels        []string                    `json:"personalLabels"`
+	Product               *GoogleCloudRetailV2Product `json:"product"`
+	VariantRollupValues   map[string]interface{}      `json:"variantRollupValues"`
+}

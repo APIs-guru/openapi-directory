@@ -1,0 +1,11 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from dataclasses_json import dataclass_json
+from . import experimenttemplate
+
+
+@dataclass_json
+@dataclass
+class CreateExperimentTemplateResponse:
+    experiment_template: Optional[experimenttemplate.ExperimentTemplate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'experimentTemplate' }})
+    

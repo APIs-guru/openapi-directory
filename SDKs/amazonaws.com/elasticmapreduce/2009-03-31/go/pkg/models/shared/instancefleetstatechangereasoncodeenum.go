@@ -1,0 +1,10 @@
+package shared
+
+type InstanceFleetStateChangeReasonCodeEnum string
+
+const (
+	InstanceFleetStateChangeReasonCodeEnumInternalError     InstanceFleetStateChangeReasonCodeEnum = "INTERNAL_ERROR"
+	InstanceFleetStateChangeReasonCodeEnumValidationError   InstanceFleetStateChangeReasonCodeEnum = "VALIDATION_ERROR"
+	InstanceFleetStateChangeReasonCodeEnumInstanceFailure   InstanceFleetStateChangeReasonCodeEnum = "INSTANCE_FAILURE"
+	InstanceFleetStateChangeReasonCodeEnumClusterTerminated InstanceFleetStateChangeReasonCodeEnum = "CLUSTER_TERMINATED"
+)

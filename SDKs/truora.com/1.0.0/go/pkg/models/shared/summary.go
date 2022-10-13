@@ -1,0 +1,31 @@
+package shared
+
+import (
+	"time"
+)
+
+type SummaryGenderEnum string
+
+const (
+	SummaryGenderEnumMale   SummaryGenderEnum = "male"
+	SummaryGenderEnumFemale SummaryGenderEnum = "female"
+)
+
+type SummaryIdentityStatusEnum string
+
+const (
+	SummaryIdentityStatusEnumFound    SummaryIdentityStatusEnum = "found"
+	SummaryIdentityStatusEnumNotFound SummaryIdentityStatusEnum = "not_found"
+	SummaryIdentityStatusEnumDead     SummaryIdentityStatusEnum = "dead"
+)
+
+type Summary struct {
+	DateOfBirth    *time.Time                 `json:"date_of_birth"`
+	DeathDate      *time.Time                 `json:"death_date"`
+	DriversLicense *string                    `json:"drivers_license"`
+	Gender         *SummaryGenderEnum         `json:"gender"`
+	IdentityStatus *SummaryIdentityStatusEnum `json:"identity_status"`
+	NamesFound     []NameFound                `json:"names_found"`
+	Nss            *string                    `json:"nss"`
+	Rfc            *string                    `json:"rfc"`
+}

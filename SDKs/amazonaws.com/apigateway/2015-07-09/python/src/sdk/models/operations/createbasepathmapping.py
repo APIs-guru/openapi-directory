@@ -1,0 +1,49 @@
+from dataclasses import dataclass, field
+from typing import Any,Optional
+from dataclasses_json import dataclass_json
+from sdk.models import shared
+
+
+@dataclass
+class CreateBasePathMappingPathParams:
+    domain_name: str = field(default=None, metadata={'path_param': { 'field_name': 'domain_name', 'style': 'simple', 'explode': False }})
+    
+
+@dataclass
+class CreateBasePathMappingHeaders:
+    x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm' }})
+    x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256' }})
+    x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential' }})
+    x_amz_date: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Date' }})
+    x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token' }})
+    x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature' }})
+    x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders' }})
+    
+
+@dataclass_json
+@dataclass
+class CreateBasePathMappingRequestBody:
+    base_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'basePath' }})
+    rest_api_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'restApiId' }})
+    stage: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stage' }})
+    
+
+@dataclass
+class CreateBasePathMappingRequest:
+    path_params: CreateBasePathMappingPathParams = field(default=None)
+    headers: CreateBasePathMappingHeaders = field(default=None)
+    request: CreateBasePathMappingRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    
+
+@dataclass
+class CreateBasePathMappingResponse:
+    bad_request_exception: Optional[Any] = field(default=None)
+    base_path_mapping: Optional[shared.BasePathMapping] = field(default=None)
+    conflict_exception: Optional[Any] = field(default=None)
+    content_type: str = field(default=None)
+    limit_exceeded_exception: Optional[Any] = field(default=None)
+    not_found_exception: Optional[Any] = field(default=None)
+    status_code: int = field(default=None)
+    too_many_requests_exception: Optional[Any] = field(default=None)
+    unauthorized_exception: Optional[Any] = field(default=None)
+    

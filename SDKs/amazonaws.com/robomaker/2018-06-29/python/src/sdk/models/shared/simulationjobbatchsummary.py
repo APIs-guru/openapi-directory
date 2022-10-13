@@ -1,0 +1,20 @@
+from dataclasses import dataclass, field
+from datetime import datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Enum,Optional
+from dataclasses_json import dataclass_json
+from . import simulationjobbatchstatus_enum
+
+
+@dataclass_json
+@dataclass
+class SimulationJobBatchSummary:
+    arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'arn' }})
+    created_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createdAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    created_request_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createdRequestCount' }})
+    failed_request_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'failedRequestCount' }})
+    last_updated_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastUpdatedAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    pending_request_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pendingRequestCount' }})
+    status: Optional[simulationjobbatchstatus_enum.SimulationJobBatchStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    

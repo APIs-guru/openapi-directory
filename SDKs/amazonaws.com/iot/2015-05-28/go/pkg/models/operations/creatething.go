@@ -1,0 +1,49 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type CreateThingPathParams struct {
+	ThingName string `pathParam:"style=simple,explode=false,name=thingName"`
+}
+
+type CreateThingHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type CreateThingRequestBodyAttributePayload struct {
+	Attributes map[string]string `json:"attributes"`
+	Merge      *bool             `json:"merge"`
+}
+
+type CreateThingRequestBody struct {
+	AttributePayload *CreateThingRequestBodyAttributePayload `json:"attributePayload"`
+	BillingGroupName *string                                 `json:"billingGroupName"`
+	ThingTypeName    *string                                 `json:"thingTypeName"`
+}
+
+type CreateThingRequest struct {
+	PathParams CreateThingPathParams
+	Headers    CreateThingHeaders
+	Request    CreateThingRequestBody `request:"mediaType=application/json"`
+}
+
+type CreateThingResponse struct {
+	ContentType                    string
+	CreateThingResponse            *shared.CreateThingResponse
+	InternalFailureException       *interface{}
+	InvalidRequestException        *interface{}
+	ResourceAlreadyExistsException *interface{}
+	ResourceNotFoundException      *interface{}
+	ServiceUnavailableException    *interface{}
+	StatusCode                     int64
+	ThrottlingException            *interface{}
+	UnauthorizedException          *interface{}
+}

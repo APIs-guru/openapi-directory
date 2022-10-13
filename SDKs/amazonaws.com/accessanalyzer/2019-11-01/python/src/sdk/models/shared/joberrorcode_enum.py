@@ -1,0 +1,9 @@
+from dataclasses import dataclass, field
+from typing import Enum
+
+class JobErrorCodeEnum(str, Enum):
+    AUTHORIZATION_ERROR = "AUTHORIZATION_ERROR"
+    RESOURCE_NOT_FOUND_ERROR = "RESOURCE_NOT_FOUND_ERROR"
+    SERVICE_QUOTA_EXCEEDED_ERROR = "SERVICE_QUOTA_EXCEEDED_ERROR"
+    SERVICE_ERROR = "SERVICE_ERROR"
+

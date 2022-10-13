@@ -1,0 +1,49 @@
+package shared
+
+type NetworkReportSpecSortConditionDimensionEnum string
+
+const (
+	NetworkReportSpecSortConditionDimensionEnumDimensionUnspecified NetworkReportSpecSortConditionDimensionEnum = "DIMENSION_UNSPECIFIED"
+	NetworkReportSpecSortConditionDimensionEnumDate                 NetworkReportSpecSortConditionDimensionEnum = "DATE"
+	NetworkReportSpecSortConditionDimensionEnumMonth                NetworkReportSpecSortConditionDimensionEnum = "MONTH"
+	NetworkReportSpecSortConditionDimensionEnumWeek                 NetworkReportSpecSortConditionDimensionEnum = "WEEK"
+	NetworkReportSpecSortConditionDimensionEnumAdUnit               NetworkReportSpecSortConditionDimensionEnum = "AD_UNIT"
+	NetworkReportSpecSortConditionDimensionEnumApp                  NetworkReportSpecSortConditionDimensionEnum = "APP"
+	NetworkReportSpecSortConditionDimensionEnumAdType               NetworkReportSpecSortConditionDimensionEnum = "AD_TYPE"
+	NetworkReportSpecSortConditionDimensionEnumCountry              NetworkReportSpecSortConditionDimensionEnum = "COUNTRY"
+	NetworkReportSpecSortConditionDimensionEnumFormat               NetworkReportSpecSortConditionDimensionEnum = "FORMAT"
+	NetworkReportSpecSortConditionDimensionEnumPlatform             NetworkReportSpecSortConditionDimensionEnum = "PLATFORM"
+	NetworkReportSpecSortConditionDimensionEnumMobileOsVersion      NetworkReportSpecSortConditionDimensionEnum = "MOBILE_OS_VERSION"
+	NetworkReportSpecSortConditionDimensionEnumGmaSdkVersion        NetworkReportSpecSortConditionDimensionEnum = "GMA_SDK_VERSION"
+	NetworkReportSpecSortConditionDimensionEnumAppVersionName       NetworkReportSpecSortConditionDimensionEnum = "APP_VERSION_NAME"
+	NetworkReportSpecSortConditionDimensionEnumServingRestriction   NetworkReportSpecSortConditionDimensionEnum = "SERVING_RESTRICTION"
+)
+
+type NetworkReportSpecSortConditionMetricEnum string
+
+const (
+	NetworkReportSpecSortConditionMetricEnumMetricUnspecified NetworkReportSpecSortConditionMetricEnum = "METRIC_UNSPECIFIED"
+	NetworkReportSpecSortConditionMetricEnumAdRequests        NetworkReportSpecSortConditionMetricEnum = "AD_REQUESTS"
+	NetworkReportSpecSortConditionMetricEnumClicks            NetworkReportSpecSortConditionMetricEnum = "CLICKS"
+	NetworkReportSpecSortConditionMetricEnumEstimatedEarnings NetworkReportSpecSortConditionMetricEnum = "ESTIMATED_EARNINGS"
+	NetworkReportSpecSortConditionMetricEnumImpressions       NetworkReportSpecSortConditionMetricEnum = "IMPRESSIONS"
+	NetworkReportSpecSortConditionMetricEnumImpressionCtr     NetworkReportSpecSortConditionMetricEnum = "IMPRESSION_CTR"
+	NetworkReportSpecSortConditionMetricEnumImpressionRpm     NetworkReportSpecSortConditionMetricEnum = "IMPRESSION_RPM"
+	NetworkReportSpecSortConditionMetricEnumMatchedRequests   NetworkReportSpecSortConditionMetricEnum = "MATCHED_REQUESTS"
+	NetworkReportSpecSortConditionMetricEnumMatchRate         NetworkReportSpecSortConditionMetricEnum = "MATCH_RATE"
+	NetworkReportSpecSortConditionMetricEnumShowRate          NetworkReportSpecSortConditionMetricEnum = "SHOW_RATE"
+)
+
+type NetworkReportSpecSortConditionOrderEnum string
+
+const (
+	NetworkReportSpecSortConditionOrderEnumSortOrderUnspecified NetworkReportSpecSortConditionOrderEnum = "SORT_ORDER_UNSPECIFIED"
+	NetworkReportSpecSortConditionOrderEnumAscending            NetworkReportSpecSortConditionOrderEnum = "ASCENDING"
+	NetworkReportSpecSortConditionOrderEnumDescending           NetworkReportSpecSortConditionOrderEnum = "DESCENDING"
+)
+
+type NetworkReportSpecSortCondition struct {
+	Dimension *NetworkReportSpecSortConditionDimensionEnum `json:"dimension"`
+	Metric    *NetworkReportSpecSortConditionMetricEnum    `json:"metric"`
+	Order     *NetworkReportSpecSortConditionOrderEnum     `json:"order"`
+}

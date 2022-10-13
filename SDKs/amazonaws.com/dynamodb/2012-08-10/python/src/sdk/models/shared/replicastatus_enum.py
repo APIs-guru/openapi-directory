@@ -1,0 +1,12 @@
+from dataclasses import dataclass, field
+from typing import Enum
+
+class ReplicaStatusEnum(str, Enum):
+    CREATING = "CREATING"
+    CREATION_FAILED = "CREATION_FAILED"
+    UPDATING = "UPDATING"
+    DELETING = "DELETING"
+    ACTIVE = "ACTIVE"
+    REGION_DISABLED = "REGION_DISABLED"
+    INACCESSIBLE_ENCRYPTION_CREDENTIALS = "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
+

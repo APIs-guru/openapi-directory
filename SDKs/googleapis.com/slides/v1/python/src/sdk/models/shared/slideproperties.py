@@ -1,0 +1,14 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from dataclasses_json import dataclass_json
+from . import page
+
+
+@dataclass_json
+@dataclass
+class SlideProperties:
+    is_skipped: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isSkipped' }})
+    layout_object_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'layoutObjectId' }})
+    master_object_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'masterObjectId' }})
+    notes_page: Optional[page.Page] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notesPage' }})
+    

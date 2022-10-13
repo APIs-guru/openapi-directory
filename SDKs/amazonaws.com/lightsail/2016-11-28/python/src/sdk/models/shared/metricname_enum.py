@@ -1,0 +1,30 @@
+from dataclasses import dataclass, field
+from typing import Enum
+
+class MetricNameEnum(str, Enum):
+    CPU_UTILIZATION = "CPUUtilization"
+    NETWORK_IN = "NetworkIn"
+    NETWORK_OUT = "NetworkOut"
+    STATUS_CHECK_FAILED = "StatusCheckFailed"
+    STATUS_CHECK_FAILED_INSTANCE = "StatusCheckFailed_Instance"
+    STATUS_CHECK_FAILED_SYSTEM = "StatusCheckFailed_System"
+    CLIENT_TLS_NEGOTIATION_ERROR_COUNT = "ClientTLSNegotiationErrorCount"
+    HEALTHY_HOST_COUNT = "HealthyHostCount"
+    UNHEALTHY_HOST_COUNT = "UnhealthyHostCount"
+    HTTP_CODE_LB_4_XX_COUNT = "HTTPCode_LB_4XX_Count"
+    HTTP_CODE_LB_5_XX_COUNT = "HTTPCode_LB_5XX_Count"
+    HTTP_CODE_INSTANCE_2_XX_COUNT = "HTTPCode_Instance_2XX_Count"
+    HTTP_CODE_INSTANCE_3_XX_COUNT = "HTTPCode_Instance_3XX_Count"
+    HTTP_CODE_INSTANCE_4_XX_COUNT = "HTTPCode_Instance_4XX_Count"
+    HTTP_CODE_INSTANCE_5_XX_COUNT = "HTTPCode_Instance_5XX_Count"
+    INSTANCE_RESPONSE_TIME = "InstanceResponseTime"
+    REJECTED_CONNECTION_COUNT = "RejectedConnectionCount"
+    REQUEST_COUNT = "RequestCount"
+    DATABASE_CONNECTIONS = "DatabaseConnections"
+    DISK_QUEUE_DEPTH = "DiskQueueDepth"
+    FREE_STORAGE_SPACE = "FreeStorageSpace"
+    NETWORK_RECEIVE_THROUGHPUT = "NetworkReceiveThroughput"
+    NETWORK_TRANSMIT_THROUGHPUT = "NetworkTransmitThroughput"
+    BURST_CAPACITY_TIME = "BurstCapacityTime"
+    BURST_CAPACITY_PERCENTAGE = "BurstCapacityPercentage"
+

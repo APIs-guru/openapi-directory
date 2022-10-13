@@ -1,0 +1,22 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from sdk.models import shared
+
+
+@dataclass
+class VirtualizationVirtualMachinesPartialUpdatePathParams:
+    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    
+
+@dataclass
+class VirtualizationVirtualMachinesPartialUpdateRequest:
+    path_params: VirtualizationVirtualMachinesPartialUpdatePathParams = field(default=None)
+    request: shared.WritableVirtualMachine = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    
+
+@dataclass
+class VirtualizationVirtualMachinesPartialUpdateResponse:
+    content_type: str = field(default=None)
+    status_code: int = field(default=None)
+    virtual_machine: Optional[shared.VirtualMachine] = field(default=None)
+    

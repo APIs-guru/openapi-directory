@@ -1,0 +1,15 @@
+package shared
+
+type OrganizationResourceStatusEnum string
+
+const (
+	OrganizationResourceStatusEnumCreateSuccessful OrganizationResourceStatusEnum = "CREATE_SUCCESSFUL"
+	OrganizationResourceStatusEnumCreateInProgress OrganizationResourceStatusEnum = "CREATE_IN_PROGRESS"
+	OrganizationResourceStatusEnumCreateFailed     OrganizationResourceStatusEnum = "CREATE_FAILED"
+	OrganizationResourceStatusEnumDeleteSuccessful OrganizationResourceStatusEnum = "DELETE_SUCCESSFUL"
+	OrganizationResourceStatusEnumDeleteFailed     OrganizationResourceStatusEnum = "DELETE_FAILED"
+	OrganizationResourceStatusEnumDeleteInProgress OrganizationResourceStatusEnum = "DELETE_IN_PROGRESS"
+	OrganizationResourceStatusEnumUpdateSuccessful OrganizationResourceStatusEnum = "UPDATE_SUCCESSFUL"
+	OrganizationResourceStatusEnumUpdateInProgress OrganizationResourceStatusEnum = "UPDATE_IN_PROGRESS"
+	OrganizationResourceStatusEnumUpdateFailed     OrganizationResourceStatusEnum = "UPDATE_FAILED"
+)

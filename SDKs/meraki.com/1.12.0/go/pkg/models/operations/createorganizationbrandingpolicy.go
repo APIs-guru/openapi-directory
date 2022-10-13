@@ -1,0 +1,146 @@
+package operations
+
+type CreateOrganizationBrandingPolicyPathParams struct {
+	OrganizationID string `pathParam:"style=simple,explode=false,name=organizationId"`
+}
+
+type CreateOrganizationBrandingPolicyRequestBodyAdminSettingsAppliesToEnum string
+
+const (
+	CreateOrganizationBrandingPolicyRequestBodyAdminSettingsAppliesToEnumAllOrganizationAdmins     CreateOrganizationBrandingPolicyRequestBodyAdminSettingsAppliesToEnum = "All organization admins"
+	CreateOrganizationBrandingPolicyRequestBodyAdminSettingsAppliesToEnumAllEnterpriseAdmins       CreateOrganizationBrandingPolicyRequestBodyAdminSettingsAppliesToEnum = "All enterprise admins"
+	CreateOrganizationBrandingPolicyRequestBodyAdminSettingsAppliesToEnumAllNetworkAdmins          CreateOrganizationBrandingPolicyRequestBodyAdminSettingsAppliesToEnum = "All network admins"
+	CreateOrganizationBrandingPolicyRequestBodyAdminSettingsAppliesToEnumAllAdminsOfNetworks       CreateOrganizationBrandingPolicyRequestBodyAdminSettingsAppliesToEnum = "All admins of networks..."
+	CreateOrganizationBrandingPolicyRequestBodyAdminSettingsAppliesToEnumAllAdminsOfNetworksTagged CreateOrganizationBrandingPolicyRequestBodyAdminSettingsAppliesToEnum = "All admins of networks tagged..."
+	CreateOrganizationBrandingPolicyRequestBodyAdminSettingsAppliesToEnumSpecificAdmins            CreateOrganizationBrandingPolicyRequestBodyAdminSettingsAppliesToEnum = "Specific admins..."
+	CreateOrganizationBrandingPolicyRequestBodyAdminSettingsAppliesToEnumAllAdmins                 CreateOrganizationBrandingPolicyRequestBodyAdminSettingsAppliesToEnum = "All admins"
+	CreateOrganizationBrandingPolicyRequestBodyAdminSettingsAppliesToEnumAllSamlAdmins             CreateOrganizationBrandingPolicyRequestBodyAdminSettingsAppliesToEnum = "All SAML admins"
+)
+
+type CreateOrganizationBrandingPolicyRequestBodyAdminSettings struct {
+	AppliesTo *CreateOrganizationBrandingPolicyRequestBodyAdminSettingsAppliesToEnum `json:"appliesTo"`
+	Values    []string                                                               `json:"values"`
+}
+
+type CreateOrganizationBrandingPolicyRequestBodyHelpSettingsAPIDocsSubtabEnum string
+
+const (
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsAPIDocsSubtabEnumDefaultOrInherit CreateOrganizationBrandingPolicyRequestBodyHelpSettingsAPIDocsSubtabEnum = "default or inherit"
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsAPIDocsSubtabEnumHide             CreateOrganizationBrandingPolicyRequestBodyHelpSettingsAPIDocsSubtabEnum = "hide"
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsAPIDocsSubtabEnumShow             CreateOrganizationBrandingPolicyRequestBodyHelpSettingsAPIDocsSubtabEnum = "show"
+)
+
+type CreateOrganizationBrandingPolicyRequestBodyHelpSettingsCasesSubtabEnum string
+
+const (
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsCasesSubtabEnumDefaultOrInherit CreateOrganizationBrandingPolicyRequestBodyHelpSettingsCasesSubtabEnum = "default or inherit"
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsCasesSubtabEnumHide             CreateOrganizationBrandingPolicyRequestBodyHelpSettingsCasesSubtabEnum = "hide"
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsCasesSubtabEnumShow             CreateOrganizationBrandingPolicyRequestBodyHelpSettingsCasesSubtabEnum = "show"
+)
+
+type CreateOrganizationBrandingPolicyRequestBodyHelpSettingsCommunitySubtabEnum string
+
+const (
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsCommunitySubtabEnumDefaultOrInherit CreateOrganizationBrandingPolicyRequestBodyHelpSettingsCommunitySubtabEnum = "default or inherit"
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsCommunitySubtabEnumHide             CreateOrganizationBrandingPolicyRequestBodyHelpSettingsCommunitySubtabEnum = "hide"
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsCommunitySubtabEnumShow             CreateOrganizationBrandingPolicyRequestBodyHelpSettingsCommunitySubtabEnum = "show"
+)
+
+type CreateOrganizationBrandingPolicyRequestBodyHelpSettingsDataProtectionRequestsSubtabEnum string
+
+const (
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsDataProtectionRequestsSubtabEnumDefaultOrInherit CreateOrganizationBrandingPolicyRequestBodyHelpSettingsDataProtectionRequestsSubtabEnum = "default or inherit"
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsDataProtectionRequestsSubtabEnumHide             CreateOrganizationBrandingPolicyRequestBodyHelpSettingsDataProtectionRequestsSubtabEnum = "hide"
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsDataProtectionRequestsSubtabEnumShow             CreateOrganizationBrandingPolicyRequestBodyHelpSettingsDataProtectionRequestsSubtabEnum = "show"
+)
+
+type CreateOrganizationBrandingPolicyRequestBodyHelpSettingsFirewallInfoSubtabEnum string
+
+const (
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsFirewallInfoSubtabEnumDefaultOrInherit CreateOrganizationBrandingPolicyRequestBodyHelpSettingsFirewallInfoSubtabEnum = "default or inherit"
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsFirewallInfoSubtabEnumHide             CreateOrganizationBrandingPolicyRequestBodyHelpSettingsFirewallInfoSubtabEnum = "hide"
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsFirewallInfoSubtabEnumShow             CreateOrganizationBrandingPolicyRequestBodyHelpSettingsFirewallInfoSubtabEnum = "show"
+)
+
+type CreateOrganizationBrandingPolicyRequestBodyHelpSettingsGetHelpSubtabEnum string
+
+const (
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsGetHelpSubtabEnumDefaultOrInherit CreateOrganizationBrandingPolicyRequestBodyHelpSettingsGetHelpSubtabEnum = "default or inherit"
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsGetHelpSubtabEnumHide             CreateOrganizationBrandingPolicyRequestBodyHelpSettingsGetHelpSubtabEnum = "hide"
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsGetHelpSubtabEnumShow             CreateOrganizationBrandingPolicyRequestBodyHelpSettingsGetHelpSubtabEnum = "show"
+)
+
+type CreateOrganizationBrandingPolicyRequestBodyHelpSettingsHardwareReplacementsSubtabEnum string
+
+const (
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsHardwareReplacementsSubtabEnumDefaultOrInherit CreateOrganizationBrandingPolicyRequestBodyHelpSettingsHardwareReplacementsSubtabEnum = "default or inherit"
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsHardwareReplacementsSubtabEnumHide             CreateOrganizationBrandingPolicyRequestBodyHelpSettingsHardwareReplacementsSubtabEnum = "hide"
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsHardwareReplacementsSubtabEnumShow             CreateOrganizationBrandingPolicyRequestBodyHelpSettingsHardwareReplacementsSubtabEnum = "show"
+)
+
+type CreateOrganizationBrandingPolicyRequestBodyHelpSettingsHelpTabEnum string
+
+const (
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsHelpTabEnumDefaultOrInherit CreateOrganizationBrandingPolicyRequestBodyHelpSettingsHelpTabEnum = "default or inherit"
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsHelpTabEnumHide             CreateOrganizationBrandingPolicyRequestBodyHelpSettingsHelpTabEnum = "hide"
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsHelpTabEnumShow             CreateOrganizationBrandingPolicyRequestBodyHelpSettingsHelpTabEnum = "show"
+)
+
+type CreateOrganizationBrandingPolicyRequestBodyHelpSettingsNewFeaturesSubtabEnum string
+
+const (
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsNewFeaturesSubtabEnumDefaultOrInherit CreateOrganizationBrandingPolicyRequestBodyHelpSettingsNewFeaturesSubtabEnum = "default or inherit"
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsNewFeaturesSubtabEnumHide             CreateOrganizationBrandingPolicyRequestBodyHelpSettingsNewFeaturesSubtabEnum = "hide"
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsNewFeaturesSubtabEnumShow             CreateOrganizationBrandingPolicyRequestBodyHelpSettingsNewFeaturesSubtabEnum = "show"
+)
+
+type CreateOrganizationBrandingPolicyRequestBodyHelpSettingsSmForumsEnum string
+
+const (
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsSmForumsEnumDefaultOrInherit CreateOrganizationBrandingPolicyRequestBodyHelpSettingsSmForumsEnum = "default or inherit"
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsSmForumsEnumHide             CreateOrganizationBrandingPolicyRequestBodyHelpSettingsSmForumsEnum = "hide"
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsSmForumsEnumShow             CreateOrganizationBrandingPolicyRequestBodyHelpSettingsSmForumsEnum = "show"
+)
+
+type CreateOrganizationBrandingPolicyRequestBodyHelpSettingsUniversalSearchKnowledgeBaseSearchEnum string
+
+const (
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsUniversalSearchKnowledgeBaseSearchEnumDefaultOrInherit CreateOrganizationBrandingPolicyRequestBodyHelpSettingsUniversalSearchKnowledgeBaseSearchEnum = "default or inherit"
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsUniversalSearchKnowledgeBaseSearchEnumHide             CreateOrganizationBrandingPolicyRequestBodyHelpSettingsUniversalSearchKnowledgeBaseSearchEnum = "hide"
+	CreateOrganizationBrandingPolicyRequestBodyHelpSettingsUniversalSearchKnowledgeBaseSearchEnumShow             CreateOrganizationBrandingPolicyRequestBodyHelpSettingsUniversalSearchKnowledgeBaseSearchEnum = "show"
+)
+
+type CreateOrganizationBrandingPolicyRequestBodyHelpSettings struct {
+	APIDocsSubtab                      *CreateOrganizationBrandingPolicyRequestBodyHelpSettingsAPIDocsSubtabEnum                      `json:"apiDocsSubtab"`
+	CasesSubtab                        *CreateOrganizationBrandingPolicyRequestBodyHelpSettingsCasesSubtabEnum                        `json:"casesSubtab"`
+	CiscoMerakiProductDocumentation    *string                                                                                        `json:"ciscoMerakiProductDocumentation"`
+	CommunitySubtab                    *CreateOrganizationBrandingPolicyRequestBodyHelpSettingsCommunitySubtabEnum                    `json:"communitySubtab"`
+	DataProtectionRequestsSubtab       *CreateOrganizationBrandingPolicyRequestBodyHelpSettingsDataProtectionRequestsSubtabEnum       `json:"dataProtectionRequestsSubtab"`
+	FirewallInfoSubtab                 *CreateOrganizationBrandingPolicyRequestBodyHelpSettingsFirewallInfoSubtabEnum                 `json:"firewallInfoSubtab"`
+	GetHelpSubtab                      *CreateOrganizationBrandingPolicyRequestBodyHelpSettingsGetHelpSubtabEnum                      `json:"getHelpSubtab"`
+	GetHelpSubtabKnowledgeBaseSearch   *string                                                                                        `json:"getHelpSubtabKnowledgeBaseSearch"`
+	HardwareReplacementsSubtab         *CreateOrganizationBrandingPolicyRequestBodyHelpSettingsHardwareReplacementsSubtabEnum         `json:"hardwareReplacementsSubtab"`
+	HelpTab                            *CreateOrganizationBrandingPolicyRequestBodyHelpSettingsHelpTabEnum                            `json:"helpTab"`
+	NewFeaturesSubtab                  *CreateOrganizationBrandingPolicyRequestBodyHelpSettingsNewFeaturesSubtabEnum                  `json:"newFeaturesSubtab"`
+	SmForums                           *CreateOrganizationBrandingPolicyRequestBodyHelpSettingsSmForumsEnum                           `json:"smForums"`
+	SupportContactInfo                 *string                                                                                        `json:"supportContactInfo"`
+	UniversalSearchKnowledgeBaseSearch *CreateOrganizationBrandingPolicyRequestBodyHelpSettingsUniversalSearchKnowledgeBaseSearchEnum `json:"universalSearchKnowledgeBaseSearch"`
+}
+
+type CreateOrganizationBrandingPolicyRequestBody struct {
+	AdminSettings CreateOrganizationBrandingPolicyRequestBodyAdminSettings `json:"adminSettings"`
+	Enabled       bool                                                     `json:"enabled"`
+	HelpSettings  *CreateOrganizationBrandingPolicyRequestBodyHelpSettings `json:"helpSettings"`
+	Name          string                                                   `json:"name"`
+}
+
+type CreateOrganizationBrandingPolicyRequest struct {
+	PathParams CreateOrganizationBrandingPolicyPathParams
+	Request    CreateOrganizationBrandingPolicyRequestBody `request:"mediaType=application/json"`
+}
+
+type CreateOrganizationBrandingPolicyResponse struct {
+	ContentType                                              string
+	StatusCode                                               int64
+	CreateOrganizationBrandingPolicy201ApplicationJSONObject map[string]interface{}
+}

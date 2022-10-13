@@ -1,0 +1,36 @@
+from dataclasses import dataclass, field
+from typing import Enum,List,Optional
+from dataclasses_json import dataclass_json
+from . import planningleveldatadto
+from . import planninglevelinforequest
+
+class PlanningLevelRequestMethodEnum(str, Enum):
+    AUTO_BEST_PICK = "AutoBestPick"
+    BOX_JENKINS_PARAMETERIZED = "BoxJenkinsParameterized"
+    BOX_JENKINS = "BoxJenkins"
+    CROSTON_PARAMETERIZED = "CrostonParameterized"
+    CROSTON = "Croston"
+    DOUBLE_EXPONENTIAL_SMOOTHING_PARAMETERIZED = "DoubleExponentialSmoothingParameterized"
+    DOUBLE_EXPONENTIAL_SMOOTHING = "DoubleExponentialSmoothing"
+    HOLT_WINTERS_PARAMETERIZED = "HoltWintersParameterized"
+    HOLT_WINTERS = "HoltWinters"
+    SINGLE_EXPONENTIAL_SMOOTHING_PARAMETERIZED = "SingleExponentialSmoothingParameterized"
+    SINGLE_EXPONENTIAL_SMOOTHING = "SingleExponentialSmoothing"
+    I_CUE1_PARAMETERIZED = "iCUE1Parameterized"
+    I_CUE1 = "iCUE1"
+    I_CU_EGAMMA = "iCUEgamma"
+    SIMPLE_MOVING_AVERAGE = "SimpleMovingAverage"
+    EXTERNAL = "External"
+    I_CU_EBETA = "iCUEbeta"
+
+
+@dataclass_json
+@dataclass
+class PlanningLevelRequest:
+    data: Optional[List[planningleveldatadto.PlanningLevelDataDto]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
+    method: PlanningLevelRequestMethodEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'method' }})
+    override: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'override' }})
+    params: Optional[planninglevelinforequest.PlanningLevelInfoRequest] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'params' }})
+    planning_level_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'planningLevelId' }})
+    start_date: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startDate' }})
+    

@@ -1,0 +1,12 @@
+from dataclasses import dataclass, field
+from dataclasses_json import dataclass_json
+from . import referencedatasource
+
+
+@dataclass_json
+@dataclass
+class AddApplicationReferenceDataSourceRequest:
+    application_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ApplicationName' }})
+    current_application_version_id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CurrentApplicationVersionId' }})
+    reference_data_source: referencedatasource.ReferenceDataSource = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReferenceDataSource' }})
+    

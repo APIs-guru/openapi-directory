@@ -1,0 +1,15 @@
+package shared
+
+type VideoPlayerSizeTargetingOptionDetailsVideoPlayerSizeEnum string
+
+const (
+	VideoPlayerSizeTargetingOptionDetailsVideoPlayerSizeEnumVideoPlayerSizeUnspecified VideoPlayerSizeTargetingOptionDetailsVideoPlayerSizeEnum = "VIDEO_PLAYER_SIZE_UNSPECIFIED"
+	VideoPlayerSizeTargetingOptionDetailsVideoPlayerSizeEnumVideoPlayerSizeSmall       VideoPlayerSizeTargetingOptionDetailsVideoPlayerSizeEnum = "VIDEO_PLAYER_SIZE_SMALL"
+	VideoPlayerSizeTargetingOptionDetailsVideoPlayerSizeEnumVideoPlayerSizeLarge       VideoPlayerSizeTargetingOptionDetailsVideoPlayerSizeEnum = "VIDEO_PLAYER_SIZE_LARGE"
+	VideoPlayerSizeTargetingOptionDetailsVideoPlayerSizeEnumVideoPlayerSizeHd          VideoPlayerSizeTargetingOptionDetailsVideoPlayerSizeEnum = "VIDEO_PLAYER_SIZE_HD"
+	VideoPlayerSizeTargetingOptionDetailsVideoPlayerSizeEnumVideoPlayerSizeUnknown     VideoPlayerSizeTargetingOptionDetailsVideoPlayerSizeEnum = "VIDEO_PLAYER_SIZE_UNKNOWN"
+)
+
+type VideoPlayerSizeTargetingOptionDetails struct {
+	VideoPlayerSize *VideoPlayerSizeTargetingOptionDetailsVideoPlayerSizeEnum `json:"videoPlayerSize"`
+}

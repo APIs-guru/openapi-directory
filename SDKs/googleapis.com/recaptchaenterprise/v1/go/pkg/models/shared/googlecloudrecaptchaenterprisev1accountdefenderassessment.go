@@ -1,0 +1,15 @@
+package shared
+
+type GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessmentLabelsEnum string
+
+const (
+	GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessmentLabelsEnumAccountDefenderLabelUnspecified GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessmentLabelsEnum = "ACCOUNT_DEFENDER_LABEL_UNSPECIFIED"
+	GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessmentLabelsEnumProfileMatch                    GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessmentLabelsEnum = "PROFILE_MATCH"
+	GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessmentLabelsEnumSuspiciousLoginActivity         GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessmentLabelsEnum = "SUSPICIOUS_LOGIN_ACTIVITY"
+	GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessmentLabelsEnumSuspiciousAccountCreation       GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessmentLabelsEnum = "SUSPICIOUS_ACCOUNT_CREATION"
+	GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessmentLabelsEnumRelatedAccountsNumberHigh       GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessmentLabelsEnum = "RELATED_ACCOUNTS_NUMBER_HIGH"
+)
+
+type GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessment struct {
+	Labels []GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessmentLabelsEnum `json:"labels"`
+}

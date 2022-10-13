@@ -1,0 +1,41 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type UntagResourceXAmzTargetEnum string
+
+const (
+	UntagResourceXAmzTargetEnumCodeCommit20150413UntagResource UntagResourceXAmzTargetEnum = "CodeCommit_20150413.UntagResource"
+)
+
+type UntagResourceHeaders struct {
+	XAmzAlgorithm     *string                     `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                     `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                     `header:"name=X-Amz-Credential"`
+	XAmzDate          *string                     `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string                     `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string                     `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                     `header:"name=X-Amz-SignedHeaders"`
+	XAmzTarget        UntagResourceXAmzTargetEnum `header:"name=X-Amz-Target"`
+}
+
+type UntagResourceRequest struct {
+	Headers UntagResourceHeaders
+	Request shared.UntagResourceInput `request:"mediaType=application/json"`
+}
+
+type UntagResourceResponse struct {
+	ContentType                     string
+	InvalidRepositoryNameException  *interface{}
+	InvalidResourceArnException     *interface{}
+	InvalidSystemTagUsageException  *interface{}
+	InvalidTagKeysListException     *interface{}
+	RepositoryDoesNotExistException *interface{}
+	ResourceArnRequiredException    *interface{}
+	StatusCode                      int64
+	TagKeysListRequiredException    *interface{}
+	TagPolicyException              *interface{}
+	TooManyTagsException            *interface{}
+}

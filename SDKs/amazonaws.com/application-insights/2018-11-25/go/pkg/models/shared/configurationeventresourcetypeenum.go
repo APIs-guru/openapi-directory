@@ -1,0 +1,10 @@
+package shared
+
+type ConfigurationEventResourceTypeEnum string
+
+const (
+	ConfigurationEventResourceTypeEnumCloudwatchAlarm ConfigurationEventResourceTypeEnum = "CLOUDWATCH_ALARM"
+	ConfigurationEventResourceTypeEnumCloudwatchLog   ConfigurationEventResourceTypeEnum = "CLOUDWATCH_LOG"
+	ConfigurationEventResourceTypeEnumCloudformation  ConfigurationEventResourceTypeEnum = "CLOUDFORMATION"
+	ConfigurationEventResourceTypeEnumSsmAssociation  ConfigurationEventResourceTypeEnum = "SSM_ASSOCIATION"
+)

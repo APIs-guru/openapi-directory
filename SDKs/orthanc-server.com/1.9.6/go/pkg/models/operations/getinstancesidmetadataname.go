@@ -1,0 +1,22 @@
+package operations
+
+type GetInstancesIDMetadataNamePathParams struct {
+	ID   string `pathParam:"style=simple,explode=false,name=id"`
+	Name string `pathParam:"style=simple,explode=false,name=name"`
+}
+
+type GetInstancesIDMetadataNameHeaders struct {
+	IfNoneMatch *string `header:"name=If-None-Match"`
+}
+
+type GetInstancesIDMetadataNameRequest struct {
+	PathParams GetInstancesIDMetadataNamePathParams
+	Headers    GetInstancesIDMetadataNameHeaders
+}
+
+type GetInstancesIDMetadataNameResponse struct {
+	Body        []byte
+	ContentType string
+	Headers     map[string][]string
+	StatusCode  int64
+}

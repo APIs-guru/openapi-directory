@@ -1,0 +1,5 @@
+package shared
+
+type GetRecommenderConfigurationsResponse struct {
+	ListRecommenderConfigurationsResponse ListRecommenderConfigurationsResponse `json:"ListRecommenderConfigurationsResponse"`
+}

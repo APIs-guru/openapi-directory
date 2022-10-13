@@ -1,0 +1,6 @@
+package shared
+
+type DeploymentCommand struct {
+	Args map[string][]string       `json:"Args"`
+	Name DeploymentCommandNameEnum `json:"Name"`
+}

@@ -1,0 +1,16 @@
+from dataclasses import dataclass, field
+from typing import Enum
+
+class InstanceGroupStateEnum(str, Enum):
+    PROVISIONING = "PROVISIONING"
+    BOOTSTRAPPING = "BOOTSTRAPPING"
+    RUNNING = "RUNNING"
+    RECONFIGURING = "RECONFIGURING"
+    RESIZING = "RESIZING"
+    SUSPENDED = "SUSPENDED"
+    TERMINATING = "TERMINATING"
+    TERMINATED = "TERMINATED"
+    ARRESTED = "ARRESTED"
+    SHUTTING_DOWN = "SHUTTING_DOWN"
+    ENDED = "ENDED"
+

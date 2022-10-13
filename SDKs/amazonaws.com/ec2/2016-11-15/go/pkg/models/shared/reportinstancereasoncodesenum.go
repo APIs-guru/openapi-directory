@@ -1,0 +1,15 @@
+package shared
+
+type ReportInstanceReasonCodesEnum string
+
+const (
+	ReportInstanceReasonCodesEnumInstanceStuckInState     ReportInstanceReasonCodesEnum = "instance-stuck-in-state"
+	ReportInstanceReasonCodesEnumUnresponsive             ReportInstanceReasonCodesEnum = "unresponsive"
+	ReportInstanceReasonCodesEnumNotAcceptingCredentials  ReportInstanceReasonCodesEnum = "not-accepting-credentials"
+	ReportInstanceReasonCodesEnumPasswordNotAvailable     ReportInstanceReasonCodesEnum = "password-not-available"
+	ReportInstanceReasonCodesEnumPerformanceNetwork       ReportInstanceReasonCodesEnum = "performance-network"
+	ReportInstanceReasonCodesEnumPerformanceInstanceStore ReportInstanceReasonCodesEnum = "performance-instance-store"
+	ReportInstanceReasonCodesEnumPerformanceEbsVolume     ReportInstanceReasonCodesEnum = "performance-ebs-volume"
+	ReportInstanceReasonCodesEnumPerformanceOther         ReportInstanceReasonCodesEnum = "performance-other"
+	ReportInstanceReasonCodesEnumOther                    ReportInstanceReasonCodesEnum = "other"
+)

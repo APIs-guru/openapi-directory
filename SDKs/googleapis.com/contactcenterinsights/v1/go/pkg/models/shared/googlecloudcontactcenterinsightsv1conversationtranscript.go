@@ -1,0 +1,5 @@
+package shared
+
+type GoogleCloudContactcenterinsightsV1ConversationTranscript struct {
+	TranscriptSegments []GoogleCloudContactcenterinsightsV1ConversationTranscriptTranscriptSegment `json:"transcriptSegments"`
+}

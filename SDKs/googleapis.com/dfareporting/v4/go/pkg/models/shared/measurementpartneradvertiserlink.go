@@ -1,0 +1,28 @@
+package shared
+
+type MeasurementPartnerAdvertiserLinkLinkStatusEnum string
+
+const (
+	MeasurementPartnerAdvertiserLinkLinkStatusEnumMeasurementPartnerUnlinked            MeasurementPartnerAdvertiserLinkLinkStatusEnum = "MEASUREMENT_PARTNER_UNLINKED"
+	MeasurementPartnerAdvertiserLinkLinkStatusEnumMeasurementPartnerLinked              MeasurementPartnerAdvertiserLinkLinkStatusEnum = "MEASUREMENT_PARTNER_LINKED"
+	MeasurementPartnerAdvertiserLinkLinkStatusEnumMeasurementPartnerLinkPending         MeasurementPartnerAdvertiserLinkLinkStatusEnum = "MEASUREMENT_PARTNER_LINK_PENDING"
+	MeasurementPartnerAdvertiserLinkLinkStatusEnumMeasurementPartnerLinkFailure         MeasurementPartnerAdvertiserLinkLinkStatusEnum = "MEASUREMENT_PARTNER_LINK_FAILURE"
+	MeasurementPartnerAdvertiserLinkLinkStatusEnumMeasurementPartnerLinkOptOut          MeasurementPartnerAdvertiserLinkLinkStatusEnum = "MEASUREMENT_PARTNER_LINK_OPT_OUT"
+	MeasurementPartnerAdvertiserLinkLinkStatusEnumMeasurementPartnerLinkOptOutPending   MeasurementPartnerAdvertiserLinkLinkStatusEnum = "MEASUREMENT_PARTNER_LINK_OPT_OUT_PENDING"
+	MeasurementPartnerAdvertiserLinkLinkStatusEnumMeasurementPartnerLinkWrappingPending MeasurementPartnerAdvertiserLinkLinkStatusEnum = "MEASUREMENT_PARTNER_LINK_WRAPPING_PENDING"
+	MeasurementPartnerAdvertiserLinkLinkStatusEnumMeasurementPartnerModeChangePending   MeasurementPartnerAdvertiserLinkLinkStatusEnum = "MEASUREMENT_PARTNER_MODE_CHANGE_PENDING"
+)
+
+type MeasurementPartnerAdvertiserLinkMeasurementPartnerEnum string
+
+const (
+	MeasurementPartnerAdvertiserLinkMeasurementPartnerEnumNone              MeasurementPartnerAdvertiserLinkMeasurementPartnerEnum = "NONE"
+	MeasurementPartnerAdvertiserLinkMeasurementPartnerEnumIntegralAdScience MeasurementPartnerAdvertiserLinkMeasurementPartnerEnum = "INTEGRAL_AD_SCIENCE"
+	MeasurementPartnerAdvertiserLinkMeasurementPartnerEnumDoubleVerify      MeasurementPartnerAdvertiserLinkMeasurementPartnerEnum = "DOUBLE_VERIFY"
+)
+
+type MeasurementPartnerAdvertiserLink struct {
+	LinkStatus          *MeasurementPartnerAdvertiserLinkLinkStatusEnum         `json:"linkStatus"`
+	MeasurementPartner  *MeasurementPartnerAdvertiserLinkMeasurementPartnerEnum `json:"measurementPartner"`
+	PartnerAdvertiserID *string                                                 `json:"partnerAdvertiserId"`
+}

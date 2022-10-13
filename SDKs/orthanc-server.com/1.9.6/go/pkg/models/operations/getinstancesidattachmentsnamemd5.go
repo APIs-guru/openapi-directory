@@ -1,0 +1,22 @@
+package operations
+
+type GetInstancesIDAttachmentsNameMd5PathParams struct {
+	ID   string `pathParam:"style=simple,explode=false,name=id"`
+	Name string `pathParam:"style=simple,explode=false,name=name"`
+}
+
+type GetInstancesIDAttachmentsNameMd5Headers struct {
+	IfNoneMatch *string `header:"name=If-None-Match"`
+}
+
+type GetInstancesIDAttachmentsNameMd5Request struct {
+	PathParams GetInstancesIDAttachmentsNameMd5PathParams
+	Headers    GetInstancesIDAttachmentsNameMd5Headers
+}
+
+type GetInstancesIDAttachmentsNameMd5Response struct {
+	Body        []byte
+	ContentType string
+	Headers     map[string][]string
+	StatusCode  int64
+}

@@ -1,0 +1,5 @@
+from .smartdevicemanagement_enterprises_devices_executecommand import *
+from .smartdevicemanagement_enterprises_devices_list import *
+from .smartdevicemanagement_enterprises_structures_list import *
+from .smartdevicemanagement_enterprises_structures_rooms_get import *
+from .smartdevicemanagement_enterprises_structures_rooms_list import *

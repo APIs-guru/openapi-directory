@@ -1,0 +1,21 @@
+package operations
+
+type GetInstancesIDPathParams struct {
+	ID string `pathParam:"style=simple,explode=false,name=id"`
+}
+
+type GetInstancesIDQueryParams struct {
+	Full  *bool `queryParam:"style=form,explode=true,name=full"`
+	Short *bool `queryParam:"style=form,explode=true,name=short"`
+}
+
+type GetInstancesIDRequest struct {
+	PathParams  GetInstancesIDPathParams
+	QueryParams GetInstancesIDQueryParams
+}
+
+type GetInstancesIDResponse struct {
+	ContentType                         string
+	GetInstancesID200ApplicationJSONAny *interface{}
+	StatusCode                          int64
+}

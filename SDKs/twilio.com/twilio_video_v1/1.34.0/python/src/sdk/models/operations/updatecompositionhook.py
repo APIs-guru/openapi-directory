@@ -1,0 +1,37 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from sdk.models import shared
+UPDATE_COMPOSITION_HOOK_SERVERS = [
+	"https://video.twilio.com",
+]
+
+
+@dataclass
+class UpdateCompositionHookPathParams:
+    sid: str = field(default=None, metadata={'path_param': { 'field_name': 'Sid', 'style': 'simple', 'explode': False }})
+    
+
+@dataclass
+class UpdateCompositionHookSecurity:
+    account_sid_auth_token: shared.SchemeAccountSidAuthToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    
+
+@dataclass
+class UpdateCompositionHookRequest:
+    server_url: Optional[str] = field(default=None)
+    path_params: UpdateCompositionHookPathParams = field(default=None)
+    request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    security: UpdateCompositionHookSecurity = field(default=None)
+    
+
+@dataclass
+class UpdateCompositionHookResponses:
+    video_v1_composition_hook: Optional[shared.VideoV1CompositionHook] = field(default=None)
+    
+
+@dataclass
+class UpdateCompositionHookResponse:
+    content_type: str = field(default=None)
+    responses: dict[int, dict[str, UpdateCompositionHookResponses]] = field(default=None)
+    status_code: int = field(default=None)
+    

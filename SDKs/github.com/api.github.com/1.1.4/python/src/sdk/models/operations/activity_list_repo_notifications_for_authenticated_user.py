@@ -1,0 +1,34 @@
+from dataclasses import dataclass, field
+from typing import List,Optional
+from sdk.models import shared
+
+
+@dataclass
+class ActivityListRepoNotificationsForAuthenticatedUserPathParams:
+    owner: str = field(default=None, metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
+    repo: str = field(default=None, metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
+    
+
+@dataclass
+class ActivityListRepoNotificationsForAuthenticatedUserQueryParams:
+    all: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'all', 'style': 'form', 'explode': True }})
+    before: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'before', 'style': 'form', 'explode': True }})
+    page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
+    participating: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'participating', 'style': 'form', 'explode': True }})
+    per_page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'per_page', 'style': 'form', 'explode': True }})
+    since: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'since', 'style': 'form', 'explode': True }})
+    
+
+@dataclass
+class ActivityListRepoNotificationsForAuthenticatedUserRequest:
+    path_params: ActivityListRepoNotificationsForAuthenticatedUserPathParams = field(default=None)
+    query_params: ActivityListRepoNotificationsForAuthenticatedUserQueryParams = field(default=None)
+    
+
+@dataclass
+class ActivityListRepoNotificationsForAuthenticatedUserResponse:
+    content_type: str = field(default=None)
+    headers: dict[str, List[str]] = field(default=None)
+    status_code: int = field(default=None)
+    threads: Optional[List[shared.Thread]] = field(default=None)
+    

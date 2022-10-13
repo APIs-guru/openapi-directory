@@ -1,0 +1,16 @@
+from dataclasses import dataclass, field
+from typing import Enum
+
+class ImageBuilderStateEnum(str, Enum):
+    PENDING = "PENDING"
+    UPDATING_AGENT = "UPDATING_AGENT"
+    RUNNING = "RUNNING"
+    STOPPING = "STOPPING"
+    STOPPED = "STOPPED"
+    REBOOTING = "REBOOTING"
+    SNAPSHOTTING = "SNAPSHOTTING"
+    DELETING = "DELETING"
+    FAILED = "FAILED"
+    UPDATING = "UPDATING"
+    PENDING_QUALIFICATION = "PENDING_QUALIFICATION"
+

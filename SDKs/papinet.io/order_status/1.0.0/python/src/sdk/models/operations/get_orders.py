@@ -1,0 +1,28 @@
+from dataclasses import dataclass, field
+from typing import Enum,List,Optional
+from sdk.models import shared
+
+class GetOrdersOrderStatusEnum(str, Enum):
+    ACTIVE = "Active"
+    CANCELLED = "Cancelled"
+    COMPLETED = "Completed"
+
+
+@dataclass
+class GetOrdersQueryParams:
+    limit: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'limit', 'style': 'form', 'explode': True }})
+    offset: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'offset', 'style': 'form', 'explode': True }})
+    order_status: Optional[GetOrdersOrderStatusEnum] = field(default=None, metadata={'query_param': { 'field_name': 'orderStatus', 'style': 'form', 'explode': True }})
+    
+
+@dataclass
+class GetOrdersRequest:
+    query_params: GetOrdersQueryParams = field(default=None)
+    
+
+@dataclass
+class GetOrdersResponse:
+    content_type: str = field(default=None)
+    list_of_orders: Optional[shared.ListOfOrders] = field(default=None)
+    status_code: int = field(default=None)
+    

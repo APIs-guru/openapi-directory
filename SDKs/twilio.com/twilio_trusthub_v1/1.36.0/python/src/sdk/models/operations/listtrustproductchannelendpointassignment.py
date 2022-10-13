@@ -1,0 +1,59 @@
+from dataclasses import dataclass, field
+from typing import List,Optional
+from dataclasses_json import dataclass_json
+from sdk.models import shared
+LIST_TRUST_PRODUCT_CHANNEL_ENDPOINT_ASSIGNMENT_SERVERS = [
+	"https://trusthub.twilio.com",
+]
+
+
+@dataclass
+class ListTrustProductChannelEndpointAssignmentPathParams:
+    trust_product_sid: str = field(default=None, metadata={'path_param': { 'field_name': 'TrustProductSid', 'style': 'simple', 'explode': False }})
+    
+
+@dataclass
+class ListTrustProductChannelEndpointAssignmentQueryParams:
+    channel_endpoint_sid: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ChannelEndpointSid', 'style': 'form', 'explode': True }})
+    channel_endpoint_sids: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ChannelEndpointSids', 'style': 'form', 'explode': True }})
+    page_size: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'PageSize', 'style': 'form', 'explode': True }})
+    
+
+@dataclass
+class ListTrustProductChannelEndpointAssignmentSecurity:
+    account_sid_auth_token: shared.SchemeAccountSidAuthToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    
+
+@dataclass
+class ListTrustProductChannelEndpointAssignmentRequest:
+    server_url: Optional[str] = field(default=None)
+    path_params: ListTrustProductChannelEndpointAssignmentPathParams = field(default=None)
+    query_params: ListTrustProductChannelEndpointAssignmentQueryParams = field(default=None)
+    security: ListTrustProductChannelEndpointAssignmentSecurity = field(default=None)
+    
+
+@dataclass_json
+@dataclass
+class ListTrustProductChannelEndpointAssignment200ApplicationJSONMeta:
+    first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
+    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
+    next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
+    page: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'page' }})
+    page_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'page_size' }})
+    previous_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'previous_page_url' }})
+    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    
+
+@dataclass_json
+@dataclass
+class ListTrustProductChannelEndpointAssignment200ApplicationJSONListTrustProductChannelEndpointAssignmentResponse:
+    meta: Optional[ListTrustProductChannelEndpointAssignment200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    results: Optional[List[shared.TrusthubV1TrustProductTrustProductChannelEndpointAssignment]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
+    
+
+@dataclass
+class ListTrustProductChannelEndpointAssignmentResponse:
+    content_type: str = field(default=None)
+    list_trust_product_channel_endpoint_assignment_response: Optional[ListTrustProductChannelEndpointAssignment200ApplicationJSONListTrustProductChannelEndpointAssignmentResponse] = field(default=None)
+    status_code: int = field(default=None)
+    

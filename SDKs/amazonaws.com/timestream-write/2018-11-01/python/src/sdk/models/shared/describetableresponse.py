@@ -1,0 +1,11 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from dataclasses_json import dataclass_json
+from . import table
+
+
+@dataclass_json
+@dataclass
+class DescribeTableResponse:
+    table: Optional[table.Table] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Table' }})
+    

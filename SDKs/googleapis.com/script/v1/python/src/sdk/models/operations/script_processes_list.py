@@ -1,0 +1,79 @@
+from dataclasses import dataclass, field
+from typing import Enum,List,Optional
+from sdk.models import shared
+
+class ScriptProcessesListUserProcessFilterStatusesEnum(str, Enum):
+    PROCESS_STATUS_UNSPECIFIED = "PROCESS_STATUS_UNSPECIFIED"
+    RUNNING = "RUNNING"
+    PAUSED = "PAUSED"
+    COMPLETED = "COMPLETED"
+    CANCELED = "CANCELED"
+    FAILED = "FAILED"
+    TIMED_OUT = "TIMED_OUT"
+    UNKNOWN = "UNKNOWN"
+    DELAYED = "DELAYED"
+
+class ScriptProcessesListUserProcessFilterTypesEnum(str, Enum):
+    PROCESS_TYPE_UNSPECIFIED = "PROCESS_TYPE_UNSPECIFIED"
+    ADD_ON = "ADD_ON"
+    EXECUTION_API = "EXECUTION_API"
+    TIME_DRIVEN = "TIME_DRIVEN"
+    TRIGGER = "TRIGGER"
+    WEBAPP = "WEBAPP"
+    EDITOR = "EDITOR"
+    SIMPLE_TRIGGER = "SIMPLE_TRIGGER"
+    MENU = "MENU"
+    BATCH_TASK = "BATCH_TASK"
+
+class ScriptProcessesListUserProcessFilterUserAccessLevelsEnum(str, Enum):
+    USER_ACCESS_LEVEL_UNSPECIFIED = "USER_ACCESS_LEVEL_UNSPECIFIED"
+    NONE = "NONE"
+    READ = "READ"
+    WRITE = "WRITE"
+    OWNER = "OWNER"
+
+
+@dataclass
+class ScriptProcessesListQueryParams:
+    dollar_xgafv: Optional[shared.XgafvEnum] = field(default=None, metadata={'query_param': { 'field_name': '$.xgafv', 'style': 'form', 'explode': True }})
+    access_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'access_token', 'style': 'form', 'explode': True }})
+    alt: Optional[shared.AltEnum] = field(default=None, metadata={'query_param': { 'field_name': 'alt', 'style': 'form', 'explode': True }})
+    callback: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'callback', 'style': 'form', 'explode': True }})
+    fields: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fields', 'style': 'form', 'explode': True }})
+    key: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'key', 'style': 'form', 'explode': True }})
+    oauth_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'oauth_token', 'style': 'form', 'explode': True }})
+    page_size: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'pageSize', 'style': 'form', 'explode': True }})
+    page_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'pageToken', 'style': 'form', 'explode': True }})
+    pretty_print: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'prettyPrint', 'style': 'form', 'explode': True }})
+    quota_user: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'quotaUser', 'style': 'form', 'explode': True }})
+    upload_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'uploadType', 'style': 'form', 'explode': True }})
+    upload_protocol: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'upload_protocol', 'style': 'form', 'explode': True }})
+    user_process_filter_deployment_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'userProcessFilter.deploymentId', 'style': 'form', 'explode': True }})
+    user_process_filter_end_time: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'userProcessFilter.endTime', 'style': 'form', 'explode': True }})
+    user_process_filter_function_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'userProcessFilter.functionName', 'style': 'form', 'explode': True }})
+    user_process_filter_project_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'userProcessFilter.projectName', 'style': 'form', 'explode': True }})
+    user_process_filter_script_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'userProcessFilter.scriptId', 'style': 'form', 'explode': True }})
+    user_process_filter_start_time: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'userProcessFilter.startTime', 'style': 'form', 'explode': True }})
+    user_process_filter_statuses: Optional[List[ScriptProcessesListUserProcessFilterStatusesEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'userProcessFilter.statuses', 'style': 'form', 'explode': True }})
+    user_process_filter_types: Optional[List[ScriptProcessesListUserProcessFilterTypesEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'userProcessFilter.types', 'style': 'form', 'explode': True }})
+    user_process_filter_user_access_levels: Optional[List[ScriptProcessesListUserProcessFilterUserAccessLevelsEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'userProcessFilter.userAccessLevels', 'style': 'form', 'explode': True }})
+    
+
+@dataclass
+class ScriptProcessesListSecurity:
+    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    
+
+@dataclass
+class ScriptProcessesListRequest:
+    query_params: ScriptProcessesListQueryParams = field(default=None)
+    security: ScriptProcessesListSecurity = field(default=None)
+    
+
+@dataclass
+class ScriptProcessesListResponse:
+    content_type: str = field(default=None)
+    list_user_processes_response: Optional[shared.ListUserProcessesResponse] = field(default=None)
+    status_code: int = field(default=None)
+    

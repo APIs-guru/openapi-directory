@@ -1,0 +1,43 @@
+from dataclasses import dataclass, field
+from typing import Enum,Optional
+
+class GetCreateOptionGroupActionEnum(str, Enum):
+    CREATE_OPTION_GROUP = "CreateOptionGroup"
+
+class GetCreateOptionGroupVersionEnum(str, Enum):
+    TWO_THOUSAND_AND_THIRTEEN_01_10 = "2013-01-10"
+
+
+@dataclass
+class GetCreateOptionGroupQueryParams:
+    action: GetCreateOptionGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    engine_name: str = field(default=None, metadata={'query_param': { 'field_name': 'EngineName', 'style': 'form', 'explode': True }})
+    major_engine_version: str = field(default=None, metadata={'query_param': { 'field_name': 'MajorEngineVersion', 'style': 'form', 'explode': True }})
+    option_group_description: str = field(default=None, metadata={'query_param': { 'field_name': 'OptionGroupDescription', 'style': 'form', 'explode': True }})
+    option_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'OptionGroupName', 'style': 'form', 'explode': True }})
+    version: GetCreateOptionGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    
+
+@dataclass
+class GetCreateOptionGroupHeaders:
+    x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm' }})
+    x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256' }})
+    x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential' }})
+    x_amz_date: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Date' }})
+    x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token' }})
+    x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature' }})
+    x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders' }})
+    
+
+@dataclass
+class GetCreateOptionGroupRequest:
+    query_params: GetCreateOptionGroupQueryParams = field(default=None)
+    headers: GetCreateOptionGroupHeaders = field(default=None)
+    
+
+@dataclass
+class GetCreateOptionGroupResponse:
+    body: bytes = field(default=None)
+    content_type: str = field(default=None)
+    status_code: int = field(default=None)
+    

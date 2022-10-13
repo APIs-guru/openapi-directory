@@ -1,0 +1,34 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from sdk.models import shared
+POST_V0_5_CONSENT_REQUESTS_ON_STATUS_SERVERS = [
+	"https://dev.ndhm.gov.in/hiu",
+]
+
+
+@dataclass
+class PostV05ConsentRequestsOnStatusHeaders:
+    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization' }})
+    x_hiu_id: str = field(default=None, metadata={'header': { 'field_name': 'X-HIU-ID' }})
+    
+
+@dataclass
+class PostV05ConsentRequestsOnStatusRequests:
+    application_xml: bytes = field(default=None, metadata={'request': { 'media_type': 'application/xml' }})
+    hiu_consent_request_status: Optional[shared.HiuConsentRequestStatus] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    
+
+@dataclass
+class PostV05ConsentRequestsOnStatusRequest:
+    server_url: Optional[str] = field(default=None)
+    headers: PostV05ConsentRequestsOnStatusHeaders = field(default=None)
+    request: PostV05ConsentRequestsOnStatusRequests = field(default=None)
+    
+
+@dataclass
+class PostV05ConsentRequestsOnStatusResponse:
+    body: bytes = field(default=None)
+    content_type: str = field(default=None)
+    error_response: Optional[shared.ErrorResponse] = field(default=None)
+    status_code: int = field(default=None)
+    

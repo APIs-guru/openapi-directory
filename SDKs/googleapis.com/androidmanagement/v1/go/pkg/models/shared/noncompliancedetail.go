@@ -1,0 +1,55 @@
+package shared
+
+type NonComplianceDetailInstallationFailureReasonEnum string
+
+const (
+	NonComplianceDetailInstallationFailureReasonEnumInstallationFailureReasonUnspecified NonComplianceDetailInstallationFailureReasonEnum = "INSTALLATION_FAILURE_REASON_UNSPECIFIED"
+	NonComplianceDetailInstallationFailureReasonEnumInstallationFailureReasonUnknown     NonComplianceDetailInstallationFailureReasonEnum = "INSTALLATION_FAILURE_REASON_UNKNOWN"
+	NonComplianceDetailInstallationFailureReasonEnumInProgress                           NonComplianceDetailInstallationFailureReasonEnum = "IN_PROGRESS"
+	NonComplianceDetailInstallationFailureReasonEnumNotFound                             NonComplianceDetailInstallationFailureReasonEnum = "NOT_FOUND"
+	NonComplianceDetailInstallationFailureReasonEnumNotCompatibleWithDevice              NonComplianceDetailInstallationFailureReasonEnum = "NOT_COMPATIBLE_WITH_DEVICE"
+	NonComplianceDetailInstallationFailureReasonEnumNotApproved                          NonComplianceDetailInstallationFailureReasonEnum = "NOT_APPROVED"
+	NonComplianceDetailInstallationFailureReasonEnumPermissionsNotAccepted               NonComplianceDetailInstallationFailureReasonEnum = "PERMISSIONS_NOT_ACCEPTED"
+	NonComplianceDetailInstallationFailureReasonEnumNotAvailableInCountry                NonComplianceDetailInstallationFailureReasonEnum = "NOT_AVAILABLE_IN_COUNTRY"
+	NonComplianceDetailInstallationFailureReasonEnumNoLicensesRemaining                  NonComplianceDetailInstallationFailureReasonEnum = "NO_LICENSES_REMAINING"
+	NonComplianceDetailInstallationFailureReasonEnumNotEnrolled                          NonComplianceDetailInstallationFailureReasonEnum = "NOT_ENROLLED"
+	NonComplianceDetailInstallationFailureReasonEnumUserInvalid                          NonComplianceDetailInstallationFailureReasonEnum = "USER_INVALID"
+)
+
+type NonComplianceDetailNonComplianceReasonEnum string
+
+const (
+	NonComplianceDetailNonComplianceReasonEnumNonComplianceReasonUnspecified NonComplianceDetailNonComplianceReasonEnum = "NON_COMPLIANCE_REASON_UNSPECIFIED"
+	NonComplianceDetailNonComplianceReasonEnumAPILevel                       NonComplianceDetailNonComplianceReasonEnum = "API_LEVEL"
+	NonComplianceDetailNonComplianceReasonEnumManagementMode                 NonComplianceDetailNonComplianceReasonEnum = "MANAGEMENT_MODE"
+	NonComplianceDetailNonComplianceReasonEnumUserAction                     NonComplianceDetailNonComplianceReasonEnum = "USER_ACTION"
+	NonComplianceDetailNonComplianceReasonEnumInvalidValue                   NonComplianceDetailNonComplianceReasonEnum = "INVALID_VALUE"
+	NonComplianceDetailNonComplianceReasonEnumAppNotInstalled                NonComplianceDetailNonComplianceReasonEnum = "APP_NOT_INSTALLED"
+	NonComplianceDetailNonComplianceReasonEnumUnsupported                    NonComplianceDetailNonComplianceReasonEnum = "UNSUPPORTED"
+	NonComplianceDetailNonComplianceReasonEnumAppInstalled                   NonComplianceDetailNonComplianceReasonEnum = "APP_INSTALLED"
+	NonComplianceDetailNonComplianceReasonEnumPending                        NonComplianceDetailNonComplianceReasonEnum = "PENDING"
+	NonComplianceDetailNonComplianceReasonEnumAppIncompatible                NonComplianceDetailNonComplianceReasonEnum = "APP_INCOMPATIBLE"
+	NonComplianceDetailNonComplianceReasonEnumAppNotUpdated                  NonComplianceDetailNonComplianceReasonEnum = "APP_NOT_UPDATED"
+)
+
+type NonComplianceDetailSpecificNonComplianceReasonEnum string
+
+const (
+	NonComplianceDetailSpecificNonComplianceReasonEnumSpecificNonComplianceReasonUnspecified              NonComplianceDetailSpecificNonComplianceReasonEnum = "SPECIFIC_NON_COMPLIANCE_REASON_UNSPECIFIED"
+	NonComplianceDetailSpecificNonComplianceReasonEnumPasswordPoliciesUserCredentialsConfirmationRequired NonComplianceDetailSpecificNonComplianceReasonEnum = "PASSWORD_POLICIES_USER_CREDENTIALS_CONFIRMATION_REQUIRED"
+	NonComplianceDetailSpecificNonComplianceReasonEnumPasswordPoliciesPasswordExpired                     NonComplianceDetailSpecificNonComplianceReasonEnum = "PASSWORD_POLICIES_PASSWORD_EXPIRED"
+	NonComplianceDetailSpecificNonComplianceReasonEnumPasswordPoliciesPasswordNotSufficient               NonComplianceDetailSpecificNonComplianceReasonEnum = "PASSWORD_POLICIES_PASSWORD_NOT_SUFFICIENT"
+	NonComplianceDetailSpecificNonComplianceReasonEnumOncWifiInvalidValue                                 NonComplianceDetailSpecificNonComplianceReasonEnum = "ONC_WIFI_INVALID_VALUE"
+	NonComplianceDetailSpecificNonComplianceReasonEnumOncWifiAPILevel                                     NonComplianceDetailSpecificNonComplianceReasonEnum = "ONC_WIFI_API_LEVEL"
+)
+
+type NonComplianceDetail struct {
+	CurrentValue                 *interface{}                                        `json:"currentValue"`
+	FieldPath                    *string                                             `json:"fieldPath"`
+	InstallationFailureReason    *NonComplianceDetailInstallationFailureReasonEnum   `json:"installationFailureReason"`
+	NonComplianceReason          *NonComplianceDetailNonComplianceReasonEnum         `json:"nonComplianceReason"`
+	PackageName                  *string                                             `json:"packageName"`
+	SettingName                  *string                                             `json:"settingName"`
+	SpecificNonComplianceContext *SpecificNonComplianceContext                       `json:"specificNonComplianceContext"`
+	SpecificNonComplianceReason  *NonComplianceDetailSpecificNonComplianceReasonEnum `json:"specificNonComplianceReason"`
+}

@@ -1,0 +1,13 @@
+from dataclasses import dataclass, field
+from typing import Enum
+
+class DomainStatusEnum(str, Enum):
+    PENDING_VERIFICATION = "PENDING_VERIFICATION"
+    IN_PROGRESS = "IN_PROGRESS"
+    AVAILABLE = "AVAILABLE"
+    PENDING_DEPLOYMENT = "PENDING_DEPLOYMENT"
+    FAILED = "FAILED"
+    CREATING = "CREATING"
+    REQUESTING_CERTIFICATE = "REQUESTING_CERTIFICATE"
+    UPDATING = "UPDATING"
+

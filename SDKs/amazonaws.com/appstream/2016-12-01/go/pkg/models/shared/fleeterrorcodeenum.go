@@ -1,0 +1,36 @@
+package shared
+
+type FleetErrorCodeEnum string
+
+const (
+	FleetErrorCodeEnumIamServiceRoleMissingEniDescribeAction            FleetErrorCodeEnum = "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION"
+	FleetErrorCodeEnumIamServiceRoleMissingEniCreateAction              FleetErrorCodeEnum = "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION"
+	FleetErrorCodeEnumIamServiceRoleMissingEniDeleteAction              FleetErrorCodeEnum = "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION"
+	FleetErrorCodeEnumNetworkInterfaceLimitExceeded                     FleetErrorCodeEnum = "NETWORK_INTERFACE_LIMIT_EXCEEDED"
+	FleetErrorCodeEnumInternalServiceError                              FleetErrorCodeEnum = "INTERNAL_SERVICE_ERROR"
+	FleetErrorCodeEnumIamServiceRoleIsMissing                           FleetErrorCodeEnum = "IAM_SERVICE_ROLE_IS_MISSING"
+	FleetErrorCodeEnumMachineRoleIsMissing                              FleetErrorCodeEnum = "MACHINE_ROLE_IS_MISSING"
+	FleetErrorCodeEnumStsDisabledInRegion                               FleetErrorCodeEnum = "STS_DISABLED_IN_REGION"
+	FleetErrorCodeEnumSubnetHasInsufficientIPAddresses                  FleetErrorCodeEnum = "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES"
+	FleetErrorCodeEnumIamServiceRoleMissingDescribeSubnetAction         FleetErrorCodeEnum = "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION"
+	FleetErrorCodeEnumSubnetNotFound                                    FleetErrorCodeEnum = "SUBNET_NOT_FOUND"
+	FleetErrorCodeEnumImageNotFound                                     FleetErrorCodeEnum = "IMAGE_NOT_FOUND"
+	FleetErrorCodeEnumInvalidSubnetConfiguration                        FleetErrorCodeEnum = "INVALID_SUBNET_CONFIGURATION"
+	FleetErrorCodeEnumSecurityGroupsNotFound                            FleetErrorCodeEnum = "SECURITY_GROUPS_NOT_FOUND"
+	FleetErrorCodeEnumIgwNotAttached                                    FleetErrorCodeEnum = "IGW_NOT_ATTACHED"
+	FleetErrorCodeEnumIamServiceRoleMissingDescribeSecurityGroupsAction FleetErrorCodeEnum = "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION"
+	FleetErrorCodeEnumFleetStopped                                      FleetErrorCodeEnum = "FLEET_STOPPED"
+	FleetErrorCodeEnumFleetInstanceProvisioningFailure                  FleetErrorCodeEnum = "FLEET_INSTANCE_PROVISIONING_FAILURE"
+	FleetErrorCodeEnumDomainJoinErrorFileNotFound                       FleetErrorCodeEnum = "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND"
+	FleetErrorCodeEnumDomainJoinErrorAccessDenied                       FleetErrorCodeEnum = "DOMAIN_JOIN_ERROR_ACCESS_DENIED"
+	FleetErrorCodeEnumDomainJoinErrorLogonFailure                       FleetErrorCodeEnum = "DOMAIN_JOIN_ERROR_LOGON_FAILURE"
+	FleetErrorCodeEnumDomainJoinErrorInvalidParameter                   FleetErrorCodeEnum = "DOMAIN_JOIN_ERROR_INVALID_PARAMETER"
+	FleetErrorCodeEnumDomainJoinErrorMoreData                           FleetErrorCodeEnum = "DOMAIN_JOIN_ERROR_MORE_DATA"
+	FleetErrorCodeEnumDomainJoinErrorNoSuchDomain                       FleetErrorCodeEnum = "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN"
+	FleetErrorCodeEnumDomainJoinErrorNotSupported                       FleetErrorCodeEnum = "DOMAIN_JOIN_ERROR_NOT_SUPPORTED"
+	FleetErrorCodeEnumDomainJoinNerrInvalidWorkgroupName                FleetErrorCodeEnum = "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME"
+	FleetErrorCodeEnumDomainJoinNerrWorkstationNotStarted               FleetErrorCodeEnum = "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED"
+	FleetErrorCodeEnumDomainJoinErrorDsMachineAccountQuotaExceeded      FleetErrorCodeEnum = "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED"
+	FleetErrorCodeEnumDomainJoinNerrPasswordExpired                     FleetErrorCodeEnum = "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED"
+	FleetErrorCodeEnumDomainJoinInternalServiceError                    FleetErrorCodeEnum = "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+)

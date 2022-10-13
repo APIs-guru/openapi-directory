@@ -1,0 +1,13 @@
+from dataclasses import dataclass, field
+from typing import List,Optional
+from dataclasses_json import dataclass_json
+from . import deploymentupdatelabelentry
+
+
+@dataclass_json
+@dataclass
+class DeploymentUpdate:
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
+    labels: Optional[List[deploymentupdatelabelentry.DeploymentUpdateLabelEntry]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
+    manifest: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'manifest' }})
+    

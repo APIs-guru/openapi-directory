@@ -1,0 +1,28 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from sdk.models import shared
+
+
+@dataclass
+class DeleteVideoPrivacyUserPathParams:
+    user_id: float = field(default=None, metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
+    video_id: float = field(default=None, metadata={'path_param': { 'field_name': 'video_id', 'style': 'simple', 'explode': False }})
+    
+
+@dataclass
+class DeleteVideoPrivacyUserSecurity:
+    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    
+
+@dataclass
+class DeleteVideoPrivacyUserRequest:
+    path_params: DeleteVideoPrivacyUserPathParams = field(default=None)
+    security: DeleteVideoPrivacyUserSecurity = field(default=None)
+    
+
+@dataclass
+class DeleteVideoPrivacyUserResponse:
+    content_type: str = field(default=None)
+    status_code: int = field(default=None)
+    legacy_error: Optional[shared.LegacyError] = field(default=None)
+    

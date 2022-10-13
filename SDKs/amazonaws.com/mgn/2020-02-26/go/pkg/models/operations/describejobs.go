@@ -1,0 +1,46 @@
+package operations
+
+import (
+	"openapi/pkg/models/shared"
+)
+
+type DescribeJobsQueryParams struct {
+	MaxResults *string `queryParam:"style=form,explode=true,name=maxResults"`
+	NextToken  *string `queryParam:"style=form,explode=true,name=nextToken"`
+}
+
+type DescribeJobsHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type DescribeJobsRequestBodyFilters struct {
+	FromDate *string  `json:"fromDate"`
+	JobIDs   []string `json:"jobIDs"`
+	ToDate   *string  `json:"toDate"`
+}
+
+type DescribeJobsRequestBody struct {
+	Filters    DescribeJobsRequestBodyFilters `json:"filters"`
+	MaxResults *int64                         `json:"maxResults"`
+	NextToken  *string                        `json:"nextToken"`
+}
+
+type DescribeJobsRequest struct {
+	QueryParams DescribeJobsQueryParams
+	Headers     DescribeJobsHeaders
+	Request     DescribeJobsRequestBody `request:"mediaType=application/json"`
+}
+
+type DescribeJobsResponse struct {
+	ContentType                   string
+	DescribeJobsResponse          *shared.DescribeJobsResponse
+	StatusCode                    int64
+	UninitializedAccountException *interface{}
+	ValidationException           *interface{}
+}

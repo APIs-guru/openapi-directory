@@ -1,0 +1,16 @@
+package shared
+
+type FeedFeedTypeEnum string
+
+const (
+	FeedFeedTypeEnumFeedTypeUnspecified FeedFeedTypeEnum = "FEED_TYPE_UNSPECIFIED"
+	FeedFeedTypeEnumDomainRosterChanges FeedFeedTypeEnum = "DOMAIN_ROSTER_CHANGES"
+	FeedFeedTypeEnumCourseRosterChanges FeedFeedTypeEnum = "COURSE_ROSTER_CHANGES"
+	FeedFeedTypeEnumCourseWorkChanges   FeedFeedTypeEnum = "COURSE_WORK_CHANGES"
+)
+
+type Feed struct {
+	CourseRosterChangesInfo *CourseRosterChangesInfo `json:"courseRosterChangesInfo"`
+	CourseWorkChangesInfo   *CourseWorkChangesInfo   `json:"courseWorkChangesInfo"`
+	FeedType                *FeedFeedTypeEnum        `json:"feedType"`
+}

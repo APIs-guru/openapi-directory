@@ -1,0 +1,40 @@
+package operations
+
+type PostDescribeDbLogFilesActionEnum string
+
+const (
+	PostDescribeDbLogFilesActionEnumDescribeDbLogFiles PostDescribeDbLogFilesActionEnum = "DescribeDBLogFiles"
+)
+
+type PostDescribeDbLogFilesVersionEnum string
+
+const (
+	PostDescribeDbLogFilesVersionEnumTwoThousandAndFourteen0901 PostDescribeDbLogFilesVersionEnum = "2014-09-01"
+)
+
+type PostDescribeDbLogFilesQueryParams struct {
+	Action  PostDescribeDbLogFilesActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostDescribeDbLogFilesVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+}
+
+type PostDescribeDbLogFilesHeaders struct {
+	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"name=X-Amz-Credential"`
+	XAmzDate          *string `header:"name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+}
+
+type PostDescribeDbLogFilesRequest struct {
+	QueryParams PostDescribeDbLogFilesQueryParams
+	Headers     PostDescribeDbLogFilesHeaders
+	Request     []byte `request:"mediaType=text/xml"`
+}
+
+type PostDescribeDbLogFilesResponse struct {
+	Body        []byte
+	ContentType string
+	StatusCode  int64
+}

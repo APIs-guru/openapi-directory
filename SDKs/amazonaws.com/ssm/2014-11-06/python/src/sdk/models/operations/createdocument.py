@@ -1,0 +1,38 @@
+from dataclasses import dataclass, field
+from typing import Any,Enum,Optional
+from sdk.models import shared
+
+class CreateDocumentXAmzTargetEnum(str, Enum):
+    AMAZON_SSM_CREATE_DOCUMENT = "AmazonSSM.CreateDocument"
+
+
+@dataclass
+class CreateDocumentHeaders:
+    x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm' }})
+    x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256' }})
+    x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential' }})
+    x_amz_date: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Date' }})
+    x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token' }})
+    x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature' }})
+    x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders' }})
+    x_amz_target: CreateDocumentXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target' }})
+    
+
+@dataclass
+class CreateDocumentRequest:
+    headers: CreateDocumentHeaders = field(default=None)
+    request: shared.CreateDocumentRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    
+
+@dataclass
+class CreateDocumentResponse:
+    content_type: str = field(default=None)
+    create_document_result: Optional[shared.CreateDocumentResult] = field(default=None)
+    document_already_exists: Optional[Any] = field(default=None)
+    document_limit_exceeded: Optional[Any] = field(default=None)
+    internal_server_error: Optional[Any] = field(default=None)
+    invalid_document_content: Optional[Any] = field(default=None)
+    invalid_document_schema_version: Optional[Any] = field(default=None)
+    max_document_size_exceeded: Optional[Any] = field(default=None)
+    status_code: int = field(default=None)
+    

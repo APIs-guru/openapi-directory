@@ -1,0 +1,23 @@
+package shared
+
+type FindingTypeStatsFindingTypeEnum string
+
+const (
+	FindingTypeStatsFindingTypeEnumFindingTypeUnspecified          FindingTypeStatsFindingTypeEnum = "FINDING_TYPE_UNSPECIFIED"
+	FindingTypeStatsFindingTypeEnumMixedContent                    FindingTypeStatsFindingTypeEnum = "MIXED_CONTENT"
+	FindingTypeStatsFindingTypeEnumOutdatedLibrary                 FindingTypeStatsFindingTypeEnum = "OUTDATED_LIBRARY"
+	FindingTypeStatsFindingTypeEnumRosettaFlash                    FindingTypeStatsFindingTypeEnum = "ROSETTA_FLASH"
+	FindingTypeStatsFindingTypeEnumXSSCallback                     FindingTypeStatsFindingTypeEnum = "XSS_CALLBACK"
+	FindingTypeStatsFindingTypeEnumXSSError                        FindingTypeStatsFindingTypeEnum = "XSS_ERROR"
+	FindingTypeStatsFindingTypeEnumClearTextPassword               FindingTypeStatsFindingTypeEnum = "CLEAR_TEXT_PASSWORD"
+	FindingTypeStatsFindingTypeEnumInvalidContentType              FindingTypeStatsFindingTypeEnum = "INVALID_CONTENT_TYPE"
+	FindingTypeStatsFindingTypeEnumXSSAngularCallback              FindingTypeStatsFindingTypeEnum = "XSS_ANGULAR_CALLBACK"
+	FindingTypeStatsFindingTypeEnumInvalidHeader                   FindingTypeStatsFindingTypeEnum = "INVALID_HEADER"
+	FindingTypeStatsFindingTypeEnumMisspelledSecurityHeaderName    FindingTypeStatsFindingTypeEnum = "MISSPELLED_SECURITY_HEADER_NAME"
+	FindingTypeStatsFindingTypeEnumMismatchingSecurityHeaderValues FindingTypeStatsFindingTypeEnum = "MISMATCHING_SECURITY_HEADER_VALUES"
+)
+
+type FindingTypeStats struct {
+	FindingCount *int32                           `json:"findingCount"`
+	FindingType  *FindingTypeStatsFindingTypeEnum `json:"findingType"`
+}

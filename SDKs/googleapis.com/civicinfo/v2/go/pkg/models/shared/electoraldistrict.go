@@ -1,0 +1,26 @@
+package shared
+
+type ElectoralDistrictScopeEnum string
+
+const (
+	ElectoralDistrictScopeEnumStatewide     ElectoralDistrictScopeEnum = "statewide"
+	ElectoralDistrictScopeEnumCongressional ElectoralDistrictScopeEnum = "congressional"
+	ElectoralDistrictScopeEnumStateUpper    ElectoralDistrictScopeEnum = "stateUpper"
+	ElectoralDistrictScopeEnumStateLower    ElectoralDistrictScopeEnum = "stateLower"
+	ElectoralDistrictScopeEnumCountywide    ElectoralDistrictScopeEnum = "countywide"
+	ElectoralDistrictScopeEnumJudicial      ElectoralDistrictScopeEnum = "judicial"
+	ElectoralDistrictScopeEnumSchoolBoard   ElectoralDistrictScopeEnum = "schoolBoard"
+	ElectoralDistrictScopeEnumCitywide      ElectoralDistrictScopeEnum = "citywide"
+	ElectoralDistrictScopeEnumSpecial       ElectoralDistrictScopeEnum = "special"
+	ElectoralDistrictScopeEnumCountyCouncil ElectoralDistrictScopeEnum = "countyCouncil"
+	ElectoralDistrictScopeEnumTownship      ElectoralDistrictScopeEnum = "township"
+	ElectoralDistrictScopeEnumWard          ElectoralDistrictScopeEnum = "ward"
+	ElectoralDistrictScopeEnumCityCouncil   ElectoralDistrictScopeEnum = "cityCouncil"
+	ElectoralDistrictScopeEnumNational      ElectoralDistrictScopeEnum = "national"
+)
+
+type ElectoralDistrict struct {
+	ID    *string                     `json:"id"`
+	Name  *string                     `json:"name"`
+	Scope *ElectoralDistrictScopeEnum `json:"scope"`
+}

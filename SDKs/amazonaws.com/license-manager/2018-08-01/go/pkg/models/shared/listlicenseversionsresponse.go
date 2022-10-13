@@ -1,0 +1,6 @@
+package shared
+
+type ListLicenseVersionsResponse struct {
+	Licenses  []License `json:"Licenses"`
+	NextToken *string   `json:"NextToken"`
+}

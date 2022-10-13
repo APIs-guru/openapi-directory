@@ -1,0 +1,11 @@
+from dataclasses import dataclass, field
+from typing import List
+from dataclasses_json import dataclass_json
+from . import callbackcompletionbatchrequest
+
+
+@dataclass_json
+@dataclass
+class BatchInputCallbackCompletionBatchRequest:
+    inputs: List[callbackcompletionbatchrequest.CallbackCompletionBatchRequest] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inputs' }})
+    

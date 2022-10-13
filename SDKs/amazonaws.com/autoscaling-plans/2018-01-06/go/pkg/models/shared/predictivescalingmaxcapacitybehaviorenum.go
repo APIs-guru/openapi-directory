@@ -1,0 +1,9 @@
+package shared
+
+type PredictiveScalingMaxCapacityBehaviorEnum string
+
+const (
+	PredictiveScalingMaxCapacityBehaviorEnumSetForecastCapacityToMaxCapacity    PredictiveScalingMaxCapacityBehaviorEnum = "SetForecastCapacityToMaxCapacity"
+	PredictiveScalingMaxCapacityBehaviorEnumSetMaxCapacityToForecastCapacity    PredictiveScalingMaxCapacityBehaviorEnum = "SetMaxCapacityToForecastCapacity"
+	PredictiveScalingMaxCapacityBehaviorEnumSetMaxCapacityAboveForecastCapacity PredictiveScalingMaxCapacityBehaviorEnum = "SetMaxCapacityAboveForecastCapacity"
+)

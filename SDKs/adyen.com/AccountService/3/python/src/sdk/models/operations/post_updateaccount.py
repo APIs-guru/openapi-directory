@@ -1,0 +1,33 @@
+from dataclasses import dataclass, field
+from typing import Any,Optional
+
+
+@dataclass
+class PostUpdateAccountSecurityOption1:
+    basic_auth: shared.SchemeBasicAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    
+
+@dataclass
+class PostUpdateAccountSecurityOption2:
+    api_key_auth: shared.SchemeAPIKeyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    
+
+@dataclass
+class PostUpdateAccountSecurity:
+    option1: Optional[PostUpdateAccountSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
+    option2: Optional[PostUpdateAccountSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    
+
+@dataclass
+class PostUpdateAccountRequest:
+    request: Optional[Any] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    security: PostUpdateAccountSecurity = field(default=None)
+    
+
+@dataclass
+class PostUpdateAccountResponse:
+    content_type: str = field(default=None)
+    service_error: Optional[Any] = field(default=None)
+    status_code: int = field(default=None)
+    update_account_response: Optional[Any] = field(default=None)
+    

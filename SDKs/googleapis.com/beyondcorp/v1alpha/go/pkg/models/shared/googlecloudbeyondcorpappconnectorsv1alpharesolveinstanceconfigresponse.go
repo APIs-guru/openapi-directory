@@ -1,0 +1,5 @@
+package shared
+
+type GoogleCloudBeyondcorpAppconnectorsV1alphaResolveInstanceConfigResponse struct {
+	InstanceConfig *GoogleCloudBeyondcorpAppconnectorsV1alphaAppConnectorInstanceConfig `json:"instanceConfig"`
+}

@@ -1,0 +1,22 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from sdk.models import shared
+
+
+@dataclass
+class GetArtifactVersionPathParams:
+    artifact_id: str = field(default=None, metadata={'path_param': { 'field_name': 'artifactId', 'style': 'simple', 'explode': False }})
+    version: int = field(default=None, metadata={'path_param': { 'field_name': 'version', 'style': 'simple', 'explode': False }})
+    
+
+@dataclass
+class GetArtifactVersionRequest:
+    path_params: GetArtifactVersionPathParams = field(default=None)
+    
+
+@dataclass
+class GetArtifactVersionResponse:
+    content_type: str = field(default=None)
+    error: Optional[shared.Error] = field(default=None)
+    status_code: int = field(default=None)
+    
