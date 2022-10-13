@@ -514,7 +514,7 @@ components:
     GoogleCloudPaymentsResellerSubscriptionV1CancelSubscriptionRequest:
       properties:
         cancelImmediately:
-          description: Optional. If true, the subscription will be cancelled immediately. Otherwise, the subscription will be cancelled at renewal_time, and therefore no prorated refund will be issued for the rest of the cycle.
+          description: Optional. If true, Google will cancel the subscription immediately, and issue a prorated refund for the remainder of the billing cycle. Otherwise, Google defers the cancelation at renewal_time, and therefore, will not issue a refund.
           type: boolean
         cancellationReason:
           description: Specifies the reason for the cancellation.
@@ -868,6 +868,7 @@ components:
             - STATE_CANCELLED
             - STATE_IN_GRACE_PERIOD
             - STATE_CANCEL_AT_END_OF_CYCLE
+            - STATE_SUSPENDED
           readOnly: true
           type: string
         updateTime:
